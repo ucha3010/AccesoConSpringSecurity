@@ -28,7 +28,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-  		classpath:com/damian/config/persistance-context.xml
+  		classpath:com/damian/config/persistence-context.xml
   		classpath:com/damian/config/service-context.xml
   		classpath:com/damian/config/security-context.xml
   	</param-value>

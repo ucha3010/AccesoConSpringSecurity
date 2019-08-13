@@ -25,6 +25,8 @@
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+<!-- 				para que se utilice JPA para actualizar las tablas -->
+<!-- 				<prop key="hibernate.hbm2dll.auto">update</prop> -->
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="javax.persistence.validation.group.pre-persist">com.damian.valid.PersistenceGroup</prop>
 				<prop key="javax.persistence.validation.group.pre-update">com.damian.valid.PersistenceGroup</prop>
