@@ -45,7 +45,7 @@ public class Usuario implements Serializable {
 	private String clave;
 
 	@NotEmpty(message=Constantes.NOT_EMPTY, groups= {PersistenceGroup.class, SpringFormGroup.class})
-	@OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "usuario")
 	private List<Roles> roles = new ArrayList<Roles>();
 
 	@Column(name = "habilitado")
