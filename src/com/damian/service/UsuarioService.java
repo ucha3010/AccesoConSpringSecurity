@@ -19,6 +19,10 @@ public class UsuarioService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	public Usuario findById(int id) {
+		return usuarioDAO.findById(id);
+	}
 
 	public void save(Usuario usuario) {
 		usuario.setFechaCreacion(new Timestamp(new Date().getTime()));
@@ -30,6 +34,15 @@ public class UsuarioService {
 
 	public List<Usuario> findAll() {
 		return usuarioDAO.findAll();
+	}
+	
+	public void update(Usuario usuario) {
+		usuarioDAO.update(usuario);
+	}
+	
+	public void delete(int idUsr) {
+		Usuario usuario = findById(idUsr);
+		usuarioDAO.delete(usuario);
 	}
 
 }

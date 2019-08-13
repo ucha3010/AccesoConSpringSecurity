@@ -2,16 +2,17 @@ package com.damian.dao;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.damian.pojo.Roles;
 import com.damian.pojo.Usuario;
 
 @Repository
@@ -24,47 +25,86 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
+	
+	public CriteriaBuilder getCriteriaBuilder() {
+		return sessionFactory.getCurrentSession().getCriteriaBuilder();
+	}
+	
+	public Session getOpenSession() {
+		return sessionFactory.openSession();
+	}
+	
+	@Override
+	public Usuario findById(int id) {
+		
+		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
+		Session session = getOpenSession();
+		CriteriaQuery<Usuario> criteriaQuery = criteriaBuilder.createQuery(Usuario.class);
+		Root<Usuario> root = criteriaQuery.from(Usuario.class);
+		criteriaQuery.select(root);
+		Predicate pEqUsuario = criteriaBuilder.equal(root.get("idUsr"), id);
+		criteriaQuery.where(pEqUsuario);
+		List<Usuario> usuarios = session.createQuery(criteriaQuery).getResultList();
+		if(usuarios != null && usuarios.size() > 0) {
+			return usuarios.get(0);
+		} else {
+			return null;
+		}
 
-	@SuppressWarnings("unchecked")
+//		Criteria crit = getSession().createCriteria(Usuario.class);
+//		crit.add(Restrictions.eq("idUsr", id));
+//		return (Usuario) crit.uniqueResult();
+	}
+
 	@Override
 	public Usuario findByUsername(String usuario) {
 		
-		Criteria crit = getSession().createCriteria(Usuario.class)
-				.add(Restrictions.eqOrIsNull("usuario", usuario));
-		
-		Usuario user = (Usuario) crit.uniqueResult();
-		
-		if(user != null) {
-			Criteria crit2 = getSession().createCriteria(Roles.class)
-					.setFetchMode("usuario", FetchMode.JOIN)
-					.add(Restrictions.eq("usuario.usuario", usuario))
-					.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-			user.setRoles((List<Roles>) crit.list());
+		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
+		Session session = getOpenSession();
+		CriteriaQuery<Usuario> criteriaQuery = criteriaBuilder.createQuery(Usuario.class);
+		Root<Usuario> root = criteriaQuery.from(Usuario.class);
+		criteriaQuery.select(root);
+		Predicate pEqUsuario = criteriaBuilder.equal(root.get("usuario"), usuario);
+		criteriaQuery.where(pEqUsuario);
+		List<Usuario> usuarios = session.createQuery(criteriaQuery).getResultList();
+		if(usuarios != null && usuarios.size() > 0) {
+			return usuarios.get(0);
+		} else {
+			return null;
 		}
 		
-		return user;
+//		Criteria crit = getSession().createCriteria(Usuario.class)
+//				.add(Restrictions.eqOrIsNull("usuario", usuario));		
+//		return (Usuario) crit.uniqueResult();
+	}
+
+	@Override
+	public List<Usuario> findAll() {
 		
-//		List<Usuario> users = new ArrayList<Usuario>();
-//
-//		users = getSession()
-//			.createQuery("from usuario where usuario like ?")
-//			.setParameter(0, usuario).list();
-//
-//		if (users.size() > 0) {
-//			return users.get(0);
-//		} else {
-//			return null;
-//		}
+		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
+		Session session = getOpenSession();
+		CriteriaQuery<Usuario> criteriaQuery = criteriaBuilder.createQuery(Usuario.class);
+		Root<Usuario> root = criteriaQuery.from(Usuario.class);
+		criteriaQuery.select(root);
+		List<Usuario> usuarios = session.createQuery(criteriaQuery).getResultList();
+		return usuarios;
+		
+//		return getSession().createQuery("from Usuario").list();
 	}
 
 	@Override
 	public void save(Usuario usuario) {
 		getSession().save(usuario);
 	}
-
+	
 	@Override
-	public List<Usuario> findAll() {
-		return getSession().createQuery("from Usuario").list();
+	public void update(Usuario usuario) {
+		getSession().update(usuario);
+	}
+	
+	@Override
+	public void delete(Usuario usuario) {
+		getSession().delete(usuario);
 	}
 
 }
