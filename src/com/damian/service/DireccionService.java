@@ -21,7 +21,7 @@ public class DireccionService {
 
 	public void save(Admin admin, Direccion direccion) {
 		
-		direccion.setAdmin(admin);
+//		direccion.setAdmin(admin);
 		direccionDao.save(direccion);
 		
 	}

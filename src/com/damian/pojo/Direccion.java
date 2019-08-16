@@ -1,5 +1,8 @@
 package com.damian.pojo;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,17 +13,27 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "direccion")
-public class Direccion {
+public class Direccion implements Serializable {
 
+	/**
+	 * Clase Direccion
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idDir")
 	private int idDir;
+
+	@Column(name = "calle")
 	private String calle;
+
+	@Column(name = "cp")
 	private String cp;
 	
 	@ManyToOne
-	@JoinColumn(name = "idAd")
-	private Admin admin;
+	@JoinColumn(name = "idUsr")
+	private Usuario usuario;
 
 	public Direccion() {
 
@@ -53,14 +66,6 @@ public class Direccion {
 
 	public void setCp(String cp) {
 		this.cp = cp;
-	}
-	
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
 	}
 
 	@Override

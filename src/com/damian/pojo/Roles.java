@@ -1,14 +1,16 @@
 package com.damian.pojo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,29 +18,35 @@ import javax.persistence.Table;
 public class Roles implements Serializable {
 	
 	/**
-	 * 
+	 * Clase Roles
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 130820142307L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idRoles")
+	@Column(name = "idRoles", unique = true, nullable = false)
 	private int idRoles;
 
 	@Column(name = "rol")
 	private String rol;
-	
-	@ManyToOne()
-	@JoinColumn(name = "idUsr")
-	private Usuario usuario;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.roles")
+	private List<UsuarioRoles> usuarioRoles = new ArrayList<UsuarioRoles>();
 	
 	public Roles() {		
 	}
 
-	public Roles(int idRoles, String rol, Usuario usuario) {
+	public Roles(int idRoles, String rol) {
+		super();
 		this.idRoles = idRoles;
 		this.rol = rol;
-		this.usuario = usuario;
+	}
+
+	public Roles(int idRoles, String rol, List<UsuarioRoles> usuarioRoles) {
+		super();
+		this.idRoles = idRoles;
+		this.rol = rol;
+		this.usuarioRoles = usuarioRoles;
 	}
 
 	public int getIdRoles() {
@@ -57,17 +65,17 @@ public class Roles implements Serializable {
 		this.rol = rol;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public List<UsuarioRoles> getUsuarioRoles() {
+		return usuarioRoles;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setUsuarioRoles(List<UsuarioRoles> usuarioRoles) {
+		this.usuarioRoles = usuarioRoles;
 	}
 
 	@Override
 	public String toString() {
-		return "Roles [idRoles=" + idRoles + ", rol=" + rol + ", usuario=" + usuario.getIdUsr() + "]";
+		return "Roles [idRoles=" + idRoles + ", rol=" + rol + "]";
 	}
 
 }

@@ -5,8 +5,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,13 +26,13 @@ import com.damian.valid.SpringFormGroup;
 public class Usuario implements Serializable {
 	
 	/**
-	 * 
+	 * Clase Usuario
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 130820142307L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idUsr")
+	@Column(name = "idUsr", unique = true, nullable = false)
 	private int idUsr;
 	
 	@NotEmpty(message=Constantes.NOT_EMPTY, groups= {PersistenceGroup.class, SpringFormGroup.class})
@@ -44,8 +46,12 @@ public class Usuario implements Serializable {
 	private String clave;
 
 	@NotEmpty(message=Constantes.NOT_EMPTY, groups= {PersistenceGroup.class, SpringFormGroup.class})
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.usuario", cascade=CascadeType.ALL)
+	private List<UsuarioRoles> usuarioRoles = new ArrayList<UsuarioRoles>();
+
+	@NotEmpty(message=Constantes.NOT_EMPTY, groups= {PersistenceGroup.class, SpringFormGroup.class})
 	@OneToMany(mappedBy = "usuario")
-	private List<Roles> roles = new ArrayList<Roles>();
+	private List<Direccion> direcciones = new ArrayList<Direccion>();
 
 	@Column(name = "habilitado")
 	private boolean habilitado;
@@ -54,20 +60,26 @@ public class Usuario implements Serializable {
 	private Timestamp fechaCreacion;
 	
 	public Usuario() {
-		
 	}
 
-	public Usuario(int idUsr, String usuario, String clave, List<Roles> roles, boolean habilitado,
-			Timestamp fechaCreacion) {
+	public Usuario(int idUsr, String usuario, String clave, boolean habilitado, Timestamp fechaCreacion) {
 		this.idUsr = idUsr;
 		this.usuario = usuario;
 		this.clave = clave;
-		this.roles = roles;
 		this.habilitado = habilitado;
 		this.fechaCreacion = fechaCreacion;
 	}
 
-
+	public Usuario(int idUsr, String usuario, String clave, List<UsuarioRoles> usuarioRoles, List<Direccion> direcciones,
+			boolean habilitado, Timestamp fechaCreacion) {
+		this.idUsr = idUsr;
+		this.usuario = usuario;
+		this.clave = clave;
+		this.usuarioRoles = usuarioRoles;
+		this.direcciones = direcciones;
+		this.habilitado = habilitado;
+		this.fechaCreacion = fechaCreacion;
+	}
 
 	public int getIdUsr() {
 		return idUsr;
@@ -93,12 +105,12 @@ public class Usuario implements Serializable {
 		this.clave = clave;
 	}
 
-	public List<Roles> getRoles() {
-		return roles;
+	public List<UsuarioRoles> getUsuarioRoles() {
+		return usuarioRoles;
 	}
 
-	public void setRoles(List<Roles> roles) {
-		this.roles = roles;
+	public void setUsuarioRoles(List<UsuarioRoles> usuarioRoles) {
+		this.usuarioRoles = usuarioRoles;
 	}
 
 	public boolean isHabilitado() {
@@ -117,12 +129,18 @@ public class Usuario implements Serializable {
 		this.fechaCreacion = fechaCreacion;
 	}
 
+	public List<Direccion> getDirecciones() {
+		return direcciones;
+	}
+
+	public void setDirecciones(List<Direccion> direcciones) {
+		this.direcciones = direcciones;
+	}
+
 	@Override
 	public String toString() {
-		return "Usuario [idUsr=" + idUsr + ", usuario=" + usuario + ", clave=" + clave + ", roles=" + roles
-				+ ", habilitado=" + habilitado + ", fechaCreacion=" + fechaCreacion + "]";
+		return "Usuario [idUsr=" + idUsr + ", usuario=" + usuario + ", clave=" + clave + ", habilitado=" + habilitado
+				+ ", fechaCreacion=" + fechaCreacion + "]";
 	}
 	
-	
-
 }

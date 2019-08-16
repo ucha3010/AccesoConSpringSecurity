@@ -13,11 +13,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.damian.dao.UsuarioDAO;
-import com.damian.pojo.Roles;
 import com.damian.pojo.Usuario;
+import com.damian.pojo.UsuarioRoles;
 
 @Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
+	
+	/**
+	 * Clase CustomUserDetailsService
+	 */
 
 	@Autowired
 	private UsuarioDAO usuarioDao;
@@ -29,8 +33,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 		Usuario usuario = usuarioDao.findByUsername(username);
 		
 		if(usuario != null) {
-			for(Roles rol: usuario.getRoles()) {
-				authorities.add(new SimpleGrantedAuthority(rol.getRol()));
+			for(UsuarioRoles usuarioRoles: usuario.getUsuarioRoles()) {				
+				authorities.add(new SimpleGrantedAuthority(usuarioRoles.getPk().getRoles().getRol()));
 			}
 			User user = new User(usuario.getUsuario(), usuario.getClave(), authorities);
 			return user;

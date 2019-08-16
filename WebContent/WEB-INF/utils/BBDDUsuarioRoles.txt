@@ -1,0 +1,26 @@
+CREATE TABLE `usuario` (
+  `idUsr` int(10) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(50) NOT NULL,
+  `clave` varchar(256) NOT NULL,
+  `habilitado` tinyint(4) NOT NULL,
+  `fechaCreacion` datetime NOT NULL,
+  PRIMARY KEY (`idUsr`)
+) ENGINE = InnoDB;
+
+CREATE TABLE `roles` (
+  `idRoles` int(10) NOT NULL AUTO_INCREMENT,
+  `rol` varchar(50) NOT NULL,
+  PRIMARY KEY (`idRoles`)
+) ENGINE = InnoDB;
+
+CREATE TABLE `usuario_roles` (
+  `idUsr` INT(10) NOT NULL,
+  `idRoles` INT(10) NOT NULL,
+  `fechaCreacion` DATE NOT NULL,
+  `creadoPor` VARCHAR(10) NOT NULL,
+  PRIMARY KEY (`idUsr`,`idRoles`),
+  CONSTRAINT `FK_idRoles` FOREIGN KEY (`idRoles`) 
+             REFERENCES `roles` (`idRoles`),
+  CONSTRAINT `FK_idUsr` FOREIGN KEY (`idUsr`) 
+             REFERENCES `usuario` (`idUsr`)
+) ENGINE = InnoDB;

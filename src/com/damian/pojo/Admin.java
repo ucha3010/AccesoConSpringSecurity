@@ -1,13 +1,11 @@
 package com.damian.pojo;
 
 import java.sql.Timestamp;
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,8 +23,8 @@ public class Admin {
 	
 	private Timestamp fechaCreacion;
 	
-	@OneToMany(mappedBy = "admin")
-	private Set<Direccion> direcciones;
+//	@OneToMany(mappedBy = "admin")
+//	private Set<Direccion> direcciones;
 	
 	public Admin() {
 		
@@ -70,13 +68,13 @@ public class Admin {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public Set<Direccion> getDirecciones() {
-		return direcciones;
-	}
-
-	public void setDirecciones(Set<Direccion> direcciones) {
-		this.direcciones = direcciones;
-	}
+//	public Set<Direccion> getDirecciones() {
+//		return direcciones;
+//	}
+//
+//	public void setDirecciones(Set<Direccion> direcciones) {
+//		this.direcciones = direcciones;
+//	}
 
 	@Override
 	public String toString() {
