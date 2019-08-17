@@ -19,7 +19,7 @@ public class Direccion implements Serializable {
 	 * Clase Direccion
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idDir")
@@ -30,10 +30,10 @@ public class Direccion implements Serializable {
 
 	@Column(name = "cp")
 	private String cp;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "idUsr")
-	private Usuario usuario;
+	@JoinColumn(name = "idDatosPers")
+	private DatosPersonales datosPersonales;
 
 	public Direccion() {
 
@@ -42,6 +42,13 @@ public class Direccion implements Serializable {
 	public Direccion(String calle, String cp) {
 		this.calle = calle;
 		this.cp = cp;
+	}
+
+	public Direccion(int idDir, String calle, String cp, DatosPersonales datosPersonales) {
+		this.idDir = idDir;
+		this.calle = calle;
+		this.cp = cp;
+		this.datosPersonales = datosPersonales;
 	}
 
 	public int getIdDir() {
@@ -68,9 +75,17 @@ public class Direccion implements Serializable {
 		this.cp = cp;
 	}
 
+	public DatosPersonales getDatosPersonales() {
+		return datosPersonales;
+	}
+
+	public void setDatosPersonales(DatosPersonales datosPersonales) {
+		this.datosPersonales = datosPersonales;
+	}
+
 	@Override
 	public String toString() {
 		return "Direccion [idDir=" + idDir + ", calle=" + calle + ", cp=" + cp + "]";
 	}
-	
+
 }

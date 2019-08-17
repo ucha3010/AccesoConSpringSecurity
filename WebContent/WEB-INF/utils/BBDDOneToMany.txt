@@ -1,0 +1,16 @@
+CREATE TABLE `datospersonales` (
+  `idDatosPers` int(11) NOT NULL AUTO_INCREMENT,
+  `dni` varchar(15) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  PRIMARY KEY (`idDatosPers`)
+) ENGINE=InnoDB;
+
+CREATE TABLE `direccion` (
+  `idDir` int(11) NOT NULL AUTO_INCREMENT,
+  `calle` varchar(45) NOT NULL,
+  `cp` varchar(45) NOT NULL,
+  `idDatosPers` int(11) NOT NULL,
+  PRIMARY KEY (`idDir`),
+  KEY `FK_idDatosPers` (`idDatosPers`) USING BTREE,
+  CONSTRAINT `direccion_ibfk_1` FOREIGN KEY (`idDatosPers`) REFERENCES `datospersonales` (`idDatosPers`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB;

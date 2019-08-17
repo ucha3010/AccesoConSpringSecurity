@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -22,9 +23,9 @@ import com.damian.valid.PersistenceGroup;
 import com.damian.valid.SpringFormGroup;
 
 @Entity
-@Table(name="usuario")
+@Table(name = "usuario")
 public class Usuario implements Serializable {
-	
+
 	/**
 	 * Clase Usuario
 	 */
@@ -34,31 +35,31 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idUsr", unique = true, nullable = false)
 	private int idUsr;
-	
-	@NotEmpty(message=Constantes.NOT_EMPTY, groups= {PersistenceGroup.class, SpringFormGroup.class})
-	@Size(min=3, max=50, message=Constantes.NOT_SIZE_USER)
+
+	@NotEmpty(message = Constantes.NOT_EMPTY, groups = { PersistenceGroup.class, SpringFormGroup.class })
+	@Size(min = 3, max = 50, message = Constantes.NOT_SIZE_USER)
 	@Column(name = "usuario")
 	private String usuario;
 
-	@NotEmpty(message=Constantes.NOT_EMPTY, groups= {PersistenceGroup.class, SpringFormGroup.class})
-	@Size(min=8, max=20, message=Constantes.NOT_SIZE, groups= {SpringFormGroup.class})
+	@NotEmpty(message = Constantes.NOT_EMPTY, groups = { PersistenceGroup.class, SpringFormGroup.class })
+	@Size(min = 8, max = 20, message = Constantes.NOT_SIZE, groups = { SpringFormGroup.class })
 	@Column(name = "clave")
 	private String clave;
 
-	@NotEmpty(message=Constantes.NOT_EMPTY, groups= {PersistenceGroup.class, SpringFormGroup.class})
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.usuario", cascade=CascadeType.ALL)
+	//para relaciones many to many
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.usuario", cascade = CascadeType.ALL)
 	private List<UsuarioRoles> usuarioRoles = new ArrayList<UsuarioRoles>();
 
-	@NotEmpty(message=Constantes.NOT_EMPTY, groups= {PersistenceGroup.class, SpringFormGroup.class})
-	@OneToMany(mappedBy = "usuario")
-	private List<Direccion> direcciones = new ArrayList<Direccion>();
+	//para relaciones one to one
+	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private DatosPersonales datosPersonales;
 
 	@Column(name = "habilitado")
 	private boolean habilitado;
 
 	@Column(name = "fechaCreacion")
 	private Timestamp fechaCreacion;
-	
+
 	public Usuario() {
 	}
 
@@ -70,13 +71,12 @@ public class Usuario implements Serializable {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public Usuario(int idUsr, String usuario, String clave, List<UsuarioRoles> usuarioRoles, List<Direccion> direcciones,
-			boolean habilitado, Timestamp fechaCreacion) {
+	public Usuario(int idUsr, String usuario, String clave, List<UsuarioRoles> usuarioRoles, boolean habilitado,
+			Timestamp fechaCreacion) {
 		this.idUsr = idUsr;
 		this.usuario = usuario;
 		this.clave = clave;
 		this.usuarioRoles = usuarioRoles;
-		this.direcciones = direcciones;
 		this.habilitado = habilitado;
 		this.fechaCreacion = fechaCreacion;
 	}
@@ -129,12 +129,12 @@ public class Usuario implements Serializable {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public List<Direccion> getDirecciones() {
-		return direcciones;
+	public DatosPersonales getDatosPersonales() {
+		return datosPersonales;
 	}
 
-	public void setDirecciones(List<Direccion> direcciones) {
-		this.direcciones = direcciones;
+	public void setDatosPersonales(DatosPersonales datosPersonales) {
+		this.datosPersonales = datosPersonales;
 	}
 
 	@Override
@@ -142,5 +142,5 @@ public class Usuario implements Serializable {
 		return "Usuario [idUsr=" + idUsr + ", usuario=" + usuario + ", clave=" + clave + ", habilitado=" + habilitado
 				+ ", fechaCreacion=" + fechaCreacion + "]";
 	}
-	
+
 }

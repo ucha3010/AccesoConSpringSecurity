@@ -1,0 +1,19 @@
+CREATE TABLE `usuario` (
+  `idUsr` int(10) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(50) NOT NULL,
+  `clave` varchar(256) NOT NULL,
+  `habilitado` tinyint(4) NOT NULL,
+  `fechaCreacion` datetime NOT NULL,
+  `idDP` int(11) NOT NULL,
+  PRIMARY KEY (`idUsr`)
+) ENGINE = InnoDB;
+
+CREATE TABLE `datospersonales` (
+  `idDatosPers` int(11) NOT NULL AUTO_INCREMENT,
+  `dni` varchar(15) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `FK_idUsr` int(11) NOT NULL,
+  PRIMARY KEY (`idDatosPers`),
+  UNIQUE KEY `idUsr` (`FK_idUsr`),
+  CONSTRAINT `datospersonales_ibfk_1` FOREIGN KEY (`FK_idUsr`) REFERENCES `usuario` (`idUsr`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB;
