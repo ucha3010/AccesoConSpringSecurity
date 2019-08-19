@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>About</title>
+	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />

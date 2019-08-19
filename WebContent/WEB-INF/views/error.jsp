@@ -6,13 +6,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Manejador de errores</title>
+	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
 
 	<h1>error.jsp</h1>
 	
-	Ha ocurrido un error...
+	<h2>Ha ocurrido un error</h2>
+	<br>
+	<c:out value="${errorLog}" />
 
 </body>
 </html>
