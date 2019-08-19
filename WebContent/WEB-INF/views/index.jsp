@@ -17,6 +17,7 @@
 	<a href='<c:url value="/index2"/>'>Index2</a><br/>
 	<br/>
 	Atributos del Model: <c:out value="${mensaje}" /><br/>
+	Atributos en Session (estoy): <c:out value="${sessionScope.estoy}" /><br/>
 	Atributos en Session (resultado): <c:out value="${sessionScope.resultado}" /><br/>
 	Atributos en Session (nombre): <c:out value="${sessionScope.nombre}" /><br/>
 	Atributos en Session (valor): <c:out value="${sessionScope.valor}" /><br/>

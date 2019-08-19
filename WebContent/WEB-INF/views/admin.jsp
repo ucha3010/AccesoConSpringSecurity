@@ -24,6 +24,7 @@ jQuery(document).ready(function(){
 	<a href='<c:url value="/about"/>'>Acerca de</a><br/>
 	<br/>
 	Atributos del Model: <c:out value="${mensaje}" /><br/>
+	Atributos en Session (estoy): <c:out value="${sessionScope.estoy}" /><br/>
 	Atributos en Session (resultado): <c:out value="${sessionScope.resultado}" /><br/>
 	Atributos en Session (nombre): <c:out value="${sessionScope.nombre}" /><br/>
 	<br/>

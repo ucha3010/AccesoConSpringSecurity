@@ -9,28 +9,32 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.pojo.Admin;
-import com.damian.service.AdminService;
+import com.damian.service.impl.AdminServiceImpl;
 
 @Controller
-//@SessionAttributes({ "resultado", "nombre" })
+@SessionAttributes({"resultado","nombre","valor","estoy"}) //los atributos que pueden mantenerse en sesión y verse en distintas páginas
 public class AdminController {
 
 	@Autowired
-	private AdminService adminService;
+	private AdminServiceImpl adminService;
 
 	@RequestMapping("/admin")
-	public String showAdmin(Model model, @ModelAttribute("resultado") String resultado) {
+	public ModelAndView showAdmin(ModelAndView model, @ModelAttribute("resultado") String resultado) {
 
 		List<Admin> admins = adminService.findAll();
-		model.addAttribute("admin", new Admin());
-		model.addAttribute("resultado", resultado);
-		model.addAttribute("nombre", "En admin meto nombre");
-		model.addAttribute("admins", admins);
+		model.addObject("admin", new Admin());
+		model.addObject("resultado", resultado);
+		model.addObject("nombre", "En admin meto nombre");
+		model.addObject("admins", admins);
+		model.addObject("estoy", "admin");
+		model.setViewName("admin");
 
-		return "admin";
+		return model;
 	}
 
 	@RequestMapping(value = "/admin/save", method = RequestMethod.POST)

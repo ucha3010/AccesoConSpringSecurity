@@ -1,4 +1,4 @@
-package com.damian.dao;
+package com.damian.dao.impl;
 
 import java.util.List;
 
@@ -12,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.damian.dao.DireccionDao;
 import com.damian.pojo.Admin;
 import com.damian.pojo.Direccion;
 

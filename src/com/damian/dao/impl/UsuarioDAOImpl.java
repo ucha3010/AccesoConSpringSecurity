@@ -1,4 +1,4 @@
-package com.damian.dao;
+package com.damian.dao.impl;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.damian.dao.UsuarioDAO;
 import com.damian.pojo.Usuario;
 
 @Repository

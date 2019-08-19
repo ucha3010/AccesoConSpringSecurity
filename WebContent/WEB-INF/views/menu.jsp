@@ -17,7 +17,9 @@
 
 		<sec:authorize access="!isAuthenticated()">
 		<div id="botonVerde">
-		Acceder
+			<a title="paginaprincipal" href='<c:url value="/private/${sessionScope.estoy}"/>'>
+				Acceder
+			</a>
 		</div>
 		Por favor inicia sesión
 		</sec:authorize>

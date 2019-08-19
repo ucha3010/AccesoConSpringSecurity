@@ -11,18 +11,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.pojo.Admin;
 import com.damian.pojo.Direccion;
-import com.damian.service.AdminService;
-import com.damian.service.DireccionService;
+import com.damian.service.impl.AdminServiceImpl;
+import com.damian.service.impl.DireccionServiceImpl;
 
 @Controller
 @SessionAttributes("admin")
 public class DireccionController {
 
 	@Autowired
-	private AdminService adminService;
+	private AdminServiceImpl adminService;
 
 	@Autowired
-	private DireccionService direccionService;
+	private DireccionServiceImpl direccionService;
 	
 	@RequestMapping("/direccion/{idAd}")
 	public String getAll(Model model,

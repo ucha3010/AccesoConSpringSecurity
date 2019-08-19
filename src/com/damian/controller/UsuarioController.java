@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.damian.pojo.Usuario;
-import com.damian.service.UsuarioService;
+import com.damian.service.impl.UsuarioServiceImpl;
 import com.damian.valid.SpringFormGroup;
 
 
@@ -17,7 +17,7 @@ import com.damian.valid.SpringFormGroup;
 public class UsuarioController {
 
 	@Autowired
-	private UsuarioService usuarioService;
+	private UsuarioServiceImpl usuarioService;
 	
 	@RequestMapping("/usuario")
 	public String showForm(Model model) {
