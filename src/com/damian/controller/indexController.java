@@ -24,7 +24,7 @@ public class indexController {
 	public ModelAndView showIndex(ModelAndView model) {
 		return indexService.manageIndex(model);
 	}
-	@RequestMapping("/private/")
+	@RequestMapping("/private/index")
 	public ModelAndView showPrivateIndex(ModelAndView model) {
 		return indexService.manageIndex(model);
 	}

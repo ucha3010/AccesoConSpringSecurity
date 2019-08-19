@@ -1,48 +1,102 @@
 @charset "ISO-8859-1";
+
 #menu {
-	position: fixed;
+	position: -webkit-sticky;
+	position: sticky;
 	left: 0;
 	top: 0;
-	background-color: green;
+/* 	background-color: green; */
 	width: 100%;
 	display: block;
-	height: 55px;
-	padding: 10px;
+	height: 80px;
+	border-top: 3px solid #F48024;
 }
+
 #logo {
-	display: block;
-	width: 25%;
+	width: 10%;
 	float: left;
-	text-align: center;
 	cursor: pointer;
-	background-color: white;
+	padding-left: 2%;
 }
+
+#logoImg {
+	width: 216px;
+	height: 80px;
+}
+
 #datosUsuario {
-	display: block;
 	width: 50%;
 	float: right;
-	background-color: white;
-	padding-right: 30px;
-	text-align: right;
+/* 	background-color: #999933; */
+	padding: 22px 30px;
+	
 }
+
+#boton039091 {
+	cursor: pointer;
+	float: right;
+	margin-left: 10px;
+	color: #fff;
+	background-color: #039091;
+	border: 1px solid #F48024;
+	border-radius: 8px;
+	display: inline-block;
+	padding: 8px 10px;
+	text-align: center;
+}
+
+#boton0095ff {
+	cursor: pointer;
+	float: right;
+	margin-left: 10px;
+	color: #fff;
+	background-color: #0095ff;
+	border: 1px solid #F48024;
+	border-radius: 8px;
+	display: inline-block;
+	padding: 8px 10px;
+	text-align: center;
+}
+
 #botonVerde {
-	padding: 8px 10px;
 	cursor: pointer;
-	text-align: center;
-	display: block;
 	float: right;
-	background-color: #11ff00;
-	border-radius: 5px;
 	margin-left: 10px;
+	color: #fff;
+	background-color: #008000;
+	border: 1px solid #F48024;
+	border-radius: 8px;
+	display: inline-block;
+	padding: 8px 10px;
+	text-align: center;
 }
+
 #botonAzul {
-	padding: 8px 10px;
 	cursor: pointer;
-	text-align: center;
-	display: block;
 	float: right;
-	background-color: #1100ff;
-	border-radius: 5px;
 	margin-left: 10px;
-	color: white;
+	color: #fff;
+	background-color: #1f45e0;
+	border: 1px solid #F48024;
+	border-radius: 8px;
+	display: inline-block;
+	padding: 8px 10px;
+	text-align: center;
+}
+
+#botonNegro {
+	cursor: pointer;
+	float: right;
+	margin-left: 10px;
+	color: #fff;
+	background-color: #000;
+	border: 1px solid #F48024;
+	border-radius: 8px;
+	display: inline-block;
+	padding: 8px 10px;
+	text-align: center;
+}
+
+a:link, a:visited, a:active {
+	text-decoration: none;
 }
