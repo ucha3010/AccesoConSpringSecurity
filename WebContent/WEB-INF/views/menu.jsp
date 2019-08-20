@@ -22,11 +22,26 @@
 	<div class="datosUsuario">
 		<sec:authorize access="!isAuthenticated()">
 			<a id="boton0095ff" href='<c:url value="/usuario"/>'>
-				<fmt:message key="label.new.user" />
+				<fmt:message key="label.New.user" />
 			</a>
 			<a id="boton039091" title="paginaprincipal"	href='<c:url value="/private/${sessionScope.estoy}"/>'>
-				<fmt:message key="label.login" />
+				<fmt:message key="label.Login" />
 			</a>
+<div class="idioma">
+	<form>
+<%-- 			<fmt:message key="label.select_language" />:  --%>
+		<select id="language" name="language" onchange="submit();">
+			<option value="es_ES"
+				<c:if test="${language=='es_ES'}">selected</c:if>>
+				<fmt:message key="label.Spanish" />
+			</option>
+			<option value="en_US"
+				<c:if test="${language=='en_US'}">selected</c:if>>
+				<fmt:message key="label.English" />
+			</option>
+		</select>
+	</form>
+</div>
 		</sec:authorize>
 
 		<sec:authorize access="isRememberMe()">
@@ -34,12 +49,27 @@
 			<c:set var="username" value="${principal.username}" />
 			<%-- 			<c:out value="${username}"/>			 --%>
 			<a id="botonNegro" href="<c:url value='/logout' />">
-				<fmt:message key="label.logout" />
+				<fmt:message key="label.Logout" />
 			</a>
 			<a title="${username}" href='<c:url value="/usuario/${username}"/>'>
 				<img src='<c:url value="/resources/imgs/usuario.png"/>'
 				alt="${username}" id="usuarioImg">
 			</a>
+<div class="idioma">
+	<form>
+<%-- 			<fmt:message key="label.select_language" />:  --%>
+		<select id="language" name="language" onchange="submit();">
+			<option value="es_ES"
+				<c:if test="${language=='es_ES'}">selected</c:if>>
+				<fmt:message key="label.Spanish" />
+			</option>
+			<option value="en_US"
+				<c:if test="${language=='en_US'}">selected</c:if>>
+				<fmt:message key="label.English" />
+			</option>
+		</select>
+	</form>
+</div>
 		</sec:authorize>
 
 		<sec:authorize access="isFullyAuthenticated()">
@@ -47,46 +77,46 @@
 			<c:set var="username" value="${principal}" />
 			<%-- 			<c:out value="${username}"/>			 --%>
 			<a id="botonNegro" href="<c:url value='/logout' />">
-				<fmt:message key="label.logout" />
+				<fmt:message key="label.Logout" />
 			</a>
 			<a title="${username}" href='<c:url value="/usuario/${username}"/>'>
 				<img src='<c:url value="/resources/imgs/usuario.png"/>'
 				alt="${username}" id="usuarioImg">
 			</a>
+<div class="idioma">
+	<form>
+<%-- 			<fmt:message key="label.select_language" />:  --%>
+		<select id="language" name="language" onchange="submit();">
+			<option value="es_ES"
+				<c:if test="${language=='es_ES'}">selected</c:if>>
+				<fmt:message key="label.Spanish" />
+			</option>
+			<option value="en_US"
+				<c:if test="${language=='en_US'}">selected</c:if>>
+				<fmt:message key="label.English" />
+			</option>
+		</select>
+	</form>
+</div>
 		</sec:authorize>
 	</div>
 	<div class="botones">
 		<sec:authorize access="isRememberMe()">
 			<sec:authorize access="hasRole('ROL_ADMIN')">
-				<a id="botonVerde" href='<c:url value="/usuario"/>'><fmt:message key="label.users" /></a>
+				<a id="botonVerde" href='<c:url value="/usuario"/>'><fmt:message key="label.Users" /></a>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROL_USUARIO')">
-				<a id="botonAzul" href='<c:url value="/cliente"/>'><fmt:message key="label.customers" /></a>
+				<a id="botonAzul" href='<c:url value="/cliente"/>'><fmt:message key="label.Customers" /></a>
 			</sec:authorize>
 		</sec:authorize>
 
 		<sec:authorize access="isFullyAuthenticated()">
 			<sec:authorize access="hasRole('ROL_ADMIN')">
-				<a id="botonVerde" href='<c:url value="/usuario"/>'><fmt:message key="label.users" /></a>
+				<a id="botonVerde" href='<c:url value="/usuario"/>'><fmt:message key="label.Users" /></a>
 			</sec:authorize>
 			<sec:authorize access="hasRole('ROL_USUARIO')">
-				<a id="botonAzul" href='<c:url value="/cliente"/>'><fmt:message key="label.customers" /></a>
+				<a id="botonAzul" href='<c:url value="/cliente"/>'><fmt:message key="label.Customers" /></a>
 			</sec:authorize>
 		</sec:authorize>
-	</div>
-	<div class="idioma">
-		<form>
-<%-- 			<fmt:message key="label.select_language" />:  --%>
-			<select id="language" name="language" onchange="submit();">
-				<option value="es_ES"
-					<c:if test="${language=='es_ES'}">selected</c:if>>
-					<fmt:message key="label.spanish" />
-				</option>
-				<option value="en_US"
-					<c:if test="${language=='en_US'}">selected</c:if>>
-					<fmt:message key="label.english" />
-				</option>
-			</select>
-		</form>
 	</div>
 </div>

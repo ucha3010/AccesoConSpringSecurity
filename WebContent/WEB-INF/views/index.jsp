@@ -39,13 +39,13 @@
 
      <fmt:message key="msg.greeting" /><br />
 
-     <h3><fmt:message key="label.numbers" /></h3>
+     <h3><fmt:message key="label.Numbers" /></h3>
      
      <c:set var="numero" value="125678.4309" />
      
-     <fmt:message key="label.number" />: <fmt:formatNumber value="${numero}" type="number"/><br />
-     <fmt:message key="label.currency" />: <fmt:formatNumber value="${numero}" type="currency"/><br />
-     <fmt:message key="label.percent" />: <fmt:formatNumber value="${numero}" type="percent"/><br />
+     <fmt:message key="label.Number" />: <fmt:formatNumber value="${numero}" type="number"/><br />
+     <fmt:message key="label.Currency" />: <fmt:formatNumber value="${numero}" type="currency"/><br />
+     <fmt:message key="label.Percent" />: <fmt:formatNumber value="${numero}" type="percent"/><br />
 
 </body>
 </html>
