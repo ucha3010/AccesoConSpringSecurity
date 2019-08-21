@@ -11,37 +11,54 @@
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="com.damian.utils.multilanguage" />
 
-<div class="menu">
+<div class="row" id="margin-header">
 
-	<div class="logo">
+	<div class="col-xs-12 col-md-2">
 		<a title="Company" href='<c:url value="/"/>'> <img
 			src='<c:url value="/resources/imgs/logo.jpg"/>'
 			alt="Logo de la empresa" id="logoImg">
 		</a>
 	</div>
-	<div class="datosUsuario">
+	<div class="col-xs-12 col-md-4">
+		<sec:authorize access="isRememberMe()">
+			<sec:authorize access="hasRole('ROL_ADMIN')">
+				<a id="botonVerde" href='<c:url value="/usuario"/>'><fmt:message key="label.Users" /></a>
+			</sec:authorize>
+			<sec:authorize access="hasRole('ROL_USUARIO')">
+				<a id="botonAzul" href='<c:url value="/cliente"/>'><fmt:message key="label.Customers" /></a>
+			</sec:authorize>
+		</sec:authorize>
+
+		<sec:authorize access="isFullyAuthenticated()">
+			<sec:authorize access="hasRole('ROL_ADMIN')">
+				<a id="botonVerde" href='<c:url value="/usuario"/>'><fmt:message key="label.Users" /></a>
+			</sec:authorize>
+			<sec:authorize access="hasRole('ROL_USUARIO')">
+				<a id="botonAzul" href='<c:url value="/cliente"/>'><fmt:message key="label.Customers" /></a>
+			</sec:authorize>
+		</sec:authorize>
+	</div>
+	<div class="col-xs-2 col-md-2">
+		<form>
+			<select class="browser-default custom-select" name="language"
+				onchange="submit();">
+				<option value="es_ES"
+					<c:if test="${language=='es_ES'}">selected</c:if>>
+					<fmt:message key="label.Spanish" />
+				</option>
+				<option value="en_US"
+					<c:if test="${language=='en_US'}">selected</c:if>>
+					<fmt:message key="label.English" />
+				</option>
+			</select>
+		</form>	
+	</div>
+	<div class="col-xs-10 col-md-4">
 		<sec:authorize access="!isAuthenticated()">
-			<a id="boton0095ff" href='<c:url value="/usuario"/>'>
-				<fmt:message key="label.New.user" />
-			</a>
-			<a id="boton039091" title="paginaprincipal"	href='<c:url value="/private/${sessionScope.estoy}"/>'>
-				<fmt:message key="label.Login" />
-			</a>
-<div class="idioma">
-	<form>
-<%-- 			<fmt:message key="label.select_language" />:  --%>
-		<select id="language" name="language" onchange="submit();">
-			<option value="es_ES"
-				<c:if test="${language=='es_ES'}">selected</c:if>>
-				<fmt:message key="label.Spanish" />
-			</option>
-			<option value="en_US"
-				<c:if test="${language=='en_US'}">selected</c:if>>
-				<fmt:message key="label.English" />
-			</option>
-		</select>
-	</form>
-</div>
+
+			<button type="button" class="btn btn-info float-right ml-1" onclick='location.href="<c:url value='/usuario'/>"'><fmt:message key="label.New.user" /></button>
+			<button type="button" class="btn btn-success float-right ml-1" onclick='location.href="<c:url value='/private/${sessionScope.estoy}'/>"'><fmt:message key="label.Login" /></button>
+
 		</sec:authorize>
 
 		<sec:authorize access="isRememberMe()">
@@ -55,21 +72,7 @@
 				<img src='<c:url value="/resources/imgs/usuario.png"/>'
 				alt="${username}" id="usuarioImg">
 			</a>
-<div class="idioma">
-	<form>
-<%-- 			<fmt:message key="label.select_language" />:  --%>
-		<select id="language" name="language" onchange="submit();">
-			<option value="es_ES"
-				<c:if test="${language=='es_ES'}">selected</c:if>>
-				<fmt:message key="label.Spanish" />
-			</option>
-			<option value="en_US"
-				<c:if test="${language=='en_US'}">selected</c:if>>
-				<fmt:message key="label.English" />
-			</option>
-		</select>
-	</form>
-</div>
+
 		</sec:authorize>
 
 		<sec:authorize access="isFullyAuthenticated()">
@@ -83,40 +86,7 @@
 				<img src='<c:url value="/resources/imgs/usuario.png"/>'
 				alt="${username}" id="usuarioImg">
 			</a>
-<div class="idioma">
-	<form>
-<%-- 			<fmt:message key="label.select_language" />:  --%>
-		<select id="language" name="language" onchange="submit();">
-			<option value="es_ES"
-				<c:if test="${language=='es_ES'}">selected</c:if>>
-				<fmt:message key="label.Spanish" />
-			</option>
-			<option value="en_US"
-				<c:if test="${language=='en_US'}">selected</c:if>>
-				<fmt:message key="label.English" />
-			</option>
-		</select>
-	</form>
-</div>
-		</sec:authorize>
-	</div>
-	<div class="botones">
-		<sec:authorize access="isRememberMe()">
-			<sec:authorize access="hasRole('ROL_ADMIN')">
-				<a id="botonVerde" href='<c:url value="/usuario"/>'><fmt:message key="label.Users" /></a>
-			</sec:authorize>
-			<sec:authorize access="hasRole('ROL_USUARIO')">
-				<a id="botonAzul" href='<c:url value="/cliente"/>'><fmt:message key="label.Customers" /></a>
-			</sec:authorize>
-		</sec:authorize>
 
-		<sec:authorize access="isFullyAuthenticated()">
-			<sec:authorize access="hasRole('ROL_ADMIN')">
-				<a id="botonVerde" href='<c:url value="/usuario"/>'><fmt:message key="label.Users" /></a>
-			</sec:authorize>
-			<sec:authorize access="hasRole('ROL_USUARIO')">
-				<a id="botonAzul" href='<c:url value="/cliente"/>'><fmt:message key="label.Customers" /></a>
-			</sec:authorize>
 		</sec:authorize>
 	</div>
 </div>

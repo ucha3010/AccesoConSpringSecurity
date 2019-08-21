@@ -1,6 +1,11 @@
 @charset "UTF-8";
 
-.menu {
+#margin-header{
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: 15px;
+}
+.menu-dam {
 	position: -webkit-sticky;
 	position: sticky;
 	left: 0;
@@ -12,7 +17,7 @@
 	border-top: 3px solid #F48024;
 }
 
-.logo {
+.logo-dam {
 	width: 30%;
 	float: left;
 	cursor: pointer;
@@ -24,7 +29,7 @@
 	height: 80px;
 }
 
-.botones {
+.botones-dam {
 	width: 30%;
 	float: left;
 /* 	background-color: #339933; */
@@ -33,7 +38,7 @@
 	
 }
 
-.datosUsuario {
+.datosUsuario-dam {
 	width: 38%;
 	float: right;
 /* 	background-color: #999933; */
@@ -119,7 +124,7 @@ a:link, a:visited, a:active {
 }
 
 
-.idioma {
+.idioma-dam {
 	float: right;
 	position: relative;
 	border-radius: 5px;
@@ -128,7 +133,7 @@ a:link, a:visited, a:active {
 	overflow: hidden;
 }
   
-.idioma:before {
+.idioma-dam:before {
     content: '';
     position: absolute;
     right: 5px;
@@ -142,7 +147,7 @@ a:link, a:visited, a:active {
     pointer-events: none;
 }
   
-.idioma form select {
+.idioma-dam form select {
     padding: 5px 8px;
     width: 100%;
     border: none;
