@@ -9,10 +9,10 @@
 <fmt:setBundle basename="com.damian.utils.multilanguage" />
 <html>
 <head>
+	<title>Company</title>
+	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	
-	<title>Company</title>
 	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 </head>
