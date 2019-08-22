@@ -1,5 +1,14 @@
 @charset "UTF-8";
 
+/*Genéricos**********************************************/
+.border-color-dam {
+	border: 1px solid #F48024;
+	display: inline-block;	
+}
+
+
+
+/*Menu*************************************************/
 .margin-header{
 	margin-left: 1%;
 	margin-right: 1%;
@@ -10,114 +19,14 @@
 	position: sticky;
 	left: 0;
 	top: 0;
-/* 	background-color: green; */
 	width: 97%;
-/* 	display: block; */
 	height: 80px;
 	border-top: 3px solid #F48024;
-}
-
-.logo-dam {
-	width: 30%;
-	float: left;
-	cursor: pointer;
-	padding-left: 2%;
 }
 
 #logoImg {
 	width: 216px;
 	height: 80px;
-}
-
-.botones-dam {
-	width: 30%;
-	float: left;
-/* 	background-color: #339933; */
-	padding-top: 22px;
-	padding-bottom: 22px;
-	
-}
-
-.datosUsuario-dam {
-	width: 38%;
-	float: right;
-/* 	background-color: #999933; */
-	padding-top: 22px;
-	padding-bottom: 22px;
-}
-
-.border-color-dam {
-	border: 1px solid #F48024;
-	display: inline-block;	
-}
-
-#boton039091 {
-	cursor: pointer;
-	float: right;
-	margin-left: 10px;
-	color: #fff;
-	background-color: #039091;
-	border: 1px solid #F48024;
-	border-radius: 8px;
-	display: inline-block;
-	padding: 8px 10px;
-	text-align: center;
-}
-
-#boton0095ff {
-	cursor: pointer;
-	float: right;
-	margin-left: 10px;
-	color: #fff;
-	background-color: #0095ff;
-	border: 1px solid #F48024;
-	border-radius: 8px;
-	display: inline-block;
-	padding: 8px 10px;
-	text-align: center;
-}
-
-#botonVerde {
-	cursor: pointer;
-	float: right;
-	margin-left: 10px;
-	color: #fff;
-	background-color: #008000;
-	border: 1px solid #F48024;
-	border-radius: 8px;
-	display: inline-block;
-	padding: 8px 10px;
-	text-align: center;
-}
-
-#botonAzul {
-	cursor: pointer;
-	float: right;
-	margin-left: 10px;
-	color: #fff;
-	background-color: #1f45e0;
-	border: 1px solid #F48024;
-	border-radius: 8px;
-	display: inline-block;
-	padding: 8px 10px;
-	text-align: center;
-}
-
-#botonNegro {
-	cursor: pointer;
-	float: right;
-	margin-left: 10px;
-	color: #fff;
-	background-color: #000;
-	border: 1px solid #F48024;
-	border-radius: 8px;
-	display: inline-block;
-	padding: 8px 10px;
-	text-align: center;
-}
-
-a:link, a:visited, a:active {
-	text-decoration: none;
 }
 
 #usuarioImg {
@@ -128,36 +37,20 @@ a:link, a:visited, a:active {
 	margin: 0 0 0 10px;
 }
 
+.fondo-008000 {
+	background-color: #008000;
+	color: #fff;
+}
 
-.idioma-dam {
-	float: right;
-	position: relative;
-	border-radius: 5px;
-	border: 1px solid #F48024;
-	width: 120px;
-	overflow: hidden;
+.fondo-1f45e0 {
+	background-color: #1f45e0;
+	color: #fff;
 }
-  
-.idioma-dam:before {
-    content: '';
-    position: absolute;
-    right: 5px;
-    top: 7px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 7px 5px 0 5px;
-    border-color: #000000 transparent transparent transparent;
-    z-index: 5;
-    pointer-events: none;
-}
-  
-.idioma-dam form select {
-    padding: 5px 8px;
-    width: 100%;
-    border: none;
-    box-shadow: none;
-	background-color: #ffe6e6;
-    background-image: none;
-    appearance: none;
+
+
+
+/*Login*************************************************/
+.fondo-candado {
+ background-image: url("../imgs/candado-difuminado.png");
+ background-repeat: no-repeat;
 }

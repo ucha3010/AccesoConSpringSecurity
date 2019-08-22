@@ -24,6 +24,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Usuario findById(int id) {
 		return usuarioDAO.findById(id);
 	}
+	
+	public Usuario findByUsername(String usuario) {
+		return usuarioDAO.findByUsername(usuario);
+	}
 
 	public void save(Usuario usuario) {
 		usuario.setFechaCreacion(new Timestamp(new Date().getTime()));

@@ -1,46 +1,52 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%-- language maneja el idioma actual --%>
-<c:set var="language"
-	value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
-	scope="session" />
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="com.damian.utils.multilanguage" />
 
 <div class="menu-dam margin-header d-inline-block">
-	<div class="row">	
+	<div class="row">
+		
 		<div class="col-xs-12 col-md-2">
-			<a title="Company" href='<c:url value="/"/>'> <img
-				src='<c:url value="/resources/imgs/logo.jpg"/>'
-				alt="Logo de la empresa" id="logoImg">
+			<a title="Company" href='<c:url value="/"/>'>
+				<img src='<c:url value="/resources/imgs/logo.jpg"/>' alt="Logo de la empresa" id="logoImg">
 			</a>
 		</div>
+		
 		<div class="col-xs-12 col-md-4 pt-2">
 			<sec:authorize access="isRememberMe()">
 				<sec:authorize access="hasRole('ROL_ADMIN')">
-					<a id="botonVerde" href='<c:url value="/usuario"/>'><fmt:message key="label.Users" /></a>
+				<button type="button" class="btn fondo-1f45e0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/usuario"/>"'>
+					<fmt:message key="label.Users" />
+				</button>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROL_USUARIO')">
-					<a id="botonAzul" href='<c:url value="/cliente"/>'><fmt:message key="label.Customers" /></a>
+				<button type="button" class="btn fondo-008000 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/cliente'/>"'>
+					<fmt:message key="label.Customers" />
+				</button>
 				</sec:authorize>
 			</sec:authorize>
 	
 			<sec:authorize access="isFullyAuthenticated()">
 				<sec:authorize access="hasRole('ROL_ADMIN')">
-					<a id="botonVerde" href='<c:url value="/usuario"/>'><fmt:message key="label.Users" /></a>
+				<button type="button" class="btn fondo-1f45e0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/usuario"/>"'>
+					<fmt:message key="label.Users" />
+				</button>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROL_USUARIO')">
-					<a id="botonAzul" href='<c:url value="/cliente"/>'><fmt:message key="label.Customers" /></a>
+				<button type="button" class="btn fondo-008000 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/cliente'/>"'>
+					<fmt:message key="label.Customers" />
+				</button>
 				</sec:authorize>
 			</sec:authorize>
-		</div>	
+		</div>
+		
 		<div class="col-xs-12 col-md-6 pt-2">
 			<sec:authorize access="!isAuthenticated()">
-				<button type="button" class="btn btn-info float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario'/>"'>
+				<button type="button" class="btn btn-info float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/0'/>"'>
 					<fmt:message key="label.New.user" />
 				</button>
 				<button type="button" class="btn btn-success float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/private/${sessionScope.estoy}'/>"'>
@@ -54,7 +60,7 @@
 				<button type="button" class="btn btn-dark float-right ml-1 btn-sm border-color-dam" onclick='location.href="<c:url value='/logout' />"'>
 					<fmt:message key="label.Logout" />
 				</button>
-				<a title="${username}" href='<c:url value="/usuario/${username}"/>'>
+				<a title="${username}" href='<c:url value="/usuario/username/${username}"/>'>
 					<img src='<c:url value="/resources/imgs/usuario.png"/>'
 					alt="${username}" id="usuarioImg">
 				</a>
@@ -66,7 +72,7 @@
 				<button type="button" class="btn btn-dark float-right ml-1 btn-sm border-color-dam" onclick='location.href="<c:url value='/logout' />"'>
 					<fmt:message key="label.Logout" />
 				</button>
-				<a title="${username}" href='<c:url value="/usuario/${username}"/>'>
+				<a title="${username}" href='<c:url value="/usuario/username/${username}"/>'>
 					<img src='<c:url value="/resources/imgs/usuario.png"/>'
 					alt="${username}" id="usuarioImg">
 				</a>
