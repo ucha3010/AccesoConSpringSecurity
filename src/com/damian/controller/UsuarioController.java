@@ -19,13 +19,12 @@ import com.damian.valid.SpringFormGroup;
 
 @Controller
 @SessionAttributes({"resultado","estoy"}) //los atributos que pueden mantenerse en sesión y verse en distintas páginas
-@RequestMapping("/usuario")
 public class UsuarioController {
 
 	@Autowired
 	private UsuarioServiceImpl usuarioService;
 	
-	@RequestMapping("/")
+	@RequestMapping("/usuario")
 	public ModelAndView getAll(ModelAndView modelAndView) {
 		modelAndView.addObject("usuarios", usuarioService.findAll());
 		modelAndView.addObject("estoy", "usuario");
@@ -33,7 +32,7 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping("/{idUsr}")
+	@RequestMapping("/usuario/{idUsr}")
 	public ModelAndView getUser(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
 		Usuario usuario = new Usuario();
 		if(idUsr > 0) {
@@ -45,7 +44,7 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping("/username/{username}")
+	@RequestMapping("/usuario/username/{username}")
 	public ModelAndView getUserByUsername(ModelAndView modelAndView, @PathVariable("username") String username) {
 		modelAndView.addObject("usuario", usuarioService.findByUsername(username));
 		modelAndView.addObject("estoy", "username/" + username);
@@ -53,7 +52,7 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping("/save")
+	@RequestMapping("/usuario/save")
 	public String saveUser(@ModelAttribute("usuario") @Validated(value=SpringFormGroup.class) Usuario usuario, BindingResult result, Model model, RedirectAttributes ra) {		
 		if(result.hasErrors()) {
 			return"usuario";
@@ -63,7 +62,7 @@ public class UsuarioController {
 		return "redirect:/usuario";
 	}
 
-	@RequestMapping("/{idUsr}/delete")
+	@RequestMapping("/usuario/{idUsr}/delete")
 	public String deleteUser(@PathVariable("idUsr") int idUsr, RedirectAttributes ra) {
 		
 		usuarioService.delete(idUsr);

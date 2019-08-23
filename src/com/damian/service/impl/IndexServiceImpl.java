@@ -10,20 +10,15 @@ public class IndexServiceImpl implements IndexService {
 
 	@Override
 	public ModelAndView manageIndex(ModelAndView model) {
-		
-		model.addObject("resultado", "Resultado desde Session");
 		model.addObject("estoy", "index");
 		model.setViewName("index");
-		
 		return model;
 	}
 
 	@Override
 	public ModelAndView manageAbout(ModelAndView model, String estoy) {
-		model.addObject("nombre", estoy);
 		model.addObject("estoy", "about");
 		model.setViewName("about");
-		
 		return model;
 	}
 

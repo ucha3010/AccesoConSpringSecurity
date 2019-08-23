@@ -44,8 +44,8 @@ jQuery(document).ready(function(){
 			<tr>
 				<td>Permisos</td>
 				<td>
-					<sf:input path="permiso" type="text"/>
-					<sf:errors path="permiso" cssStyle="color:red"/>
+					<sf:input path="fechaCreacion" type="text"/>
+					<sf:errors path="fechaCreacion" cssStyle="color:red"/>
 				</td>
 			</tr>
 			<tr>

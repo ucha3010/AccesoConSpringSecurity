@@ -94,3 +94,5 @@
 		</div>
 	</div>
 </div>
+<!-- 	dejo un espacio entre el menú y la página en sí -->
+<div class="py-4"></div>
