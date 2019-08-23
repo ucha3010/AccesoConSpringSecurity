@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.9.0.1
+-- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-08-2019 a las 14:09:02
--- Versión del servidor: 10.1.13-MariaDB
--- Versión de PHP: 5.6.20
+-- Tiempo de generación: 23-08-2019 a las 15:12:56
+-- Versión del servidor: 10.3.16-MariaDB
+-- Versión de PHP: 7.1.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -60,6 +62,11 @@ INSERT INTO `admin` (`idAd`, `nombre`, `cargo`, `fechaCreacion`) VALUES
 
 CREATE TABLE `datospersonales` (
   `idDatosPers` int(11) NOT NULL,
+  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `sexo` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `fechaNacimiento` date NOT NULL,
+  `nacionalidad` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `dni` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `FK_idUsr` int(11) NOT NULL
@@ -69,11 +76,11 @@ CREATE TABLE `datospersonales` (
 -- Volcado de datos para la tabla `datospersonales`
 --
 
-INSERT INTO `datospersonales` (`idDatosPers`, `dni`, `email`, `FK_idUsr`) VALUES
-(1, '123456789A', 'pepe@pepe.com', 1),
-(2, '123456789B', 'juan@juan.com', 2),
-(3, '123456789C', 'roberto@roberto.com', 3),
-(4, '123456789D', 'damian@damian.com', 4);
+INSERT INTO `datospersonales` (`idDatosPers`, `nombre`, `apellido`, `sexo`, `fechaNacimiento`, `nacionalidad`, `dni`, `email`, `FK_idUsr`) VALUES
+(1, 'José', 'Martínez', 'Masculino', '1967-07-11', 'España', '123456789A', 'pepe@pepe.com', 1),
+(2, 'Juan', 'Álvarez', 'masculino', '1984-10-24', 'España', '123456789B', 'juan@juan.com', 2),
+(3, 'Roberto', 'Do Santos', 'masculino', '1980-07-28', 'Portugal', '123456789C', 'roberto@roberto.com', 3),
+(4, 'Damián', 'Usheff', 'masculino', '1976-10-30', 'Argentina', '123456789D', 'damian@damian.com', 4);
 
 -- --------------------------------------------------------
 
@@ -227,21 +234,25 @@ ALTER TABLE `usuario_roles`
 --
 ALTER TABLE `admin`
   MODIFY `idAd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
 --
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
   MODIFY `idDir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
   MODIFY `idRoles` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `idUsr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -264,6 +275,7 @@ ALTER TABLE `direccion`
 ALTER TABLE `usuario_roles`
   ADD CONSTRAINT `FK_idRoles` FOREIGN KEY (`idRoles`) REFERENCES `roles` (`idRoles`),
   ADD CONSTRAINT `FK_idUsr` FOREIGN KEY (`idUsr`) REFERENCES `usuario` (`idUsr`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
