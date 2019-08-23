@@ -59,3 +59,10 @@
  background-image: url("../imgs/candado-difuminado.png");
  background-repeat: no-repeat;
 }
+
+
+/*Usuarios**********************************************/
+.EditarImg {
+	width: 35px;
+	height: 35px;	
+}

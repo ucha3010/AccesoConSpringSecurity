@@ -34,6 +34,7 @@
 	      <th scope="col"><fmt:message key="label.Birthdate" /></th>
 	      <th scope="col"><fmt:message key="label.Nationality" /></th>
 	      <th scope="col"><fmt:message key="label.Email" /></th>
+	      <th scope="col"><fmt:message key="label.Roles" /></th>
 	      <th scope="col" colspan="3"><fmt:message key="label.Extras" /></th>
 	    </tr>
 	  </thead>
@@ -50,6 +51,12 @@
 					<td><fmt:formatDate value="${usuario.datosPersonales.fechaNacimiento}" pattern="dd/MM/yyyy"/></td>		
 					<td><c:out value="${usuario.datosPersonales.nacionalidad}" /></td>
 					<td><c:out value="${usuario.datosPersonales.email}" /></td>
+					<c:set var="userRoles" value="${usuario.usuarioRoles}" scope="page" />
+					<td>
+					<c:forEach items="${userRoles}" var="roles">
+						<c:out value="${roles.pk.roles.rol}" /><br/>
+					</c:forEach>
+					</td>
 					<td>
 						<button type="button" class="btn btn-info ml-1 btn-sm" onclick='location.href="<c:url value='/direccion/${usuario.idUsr}' />"'>
 							<fmt:message key="label.Addresses" />
@@ -57,12 +64,12 @@
 					</td>
 					<td>
 						<button type="button" class="btn btn-default" onclick='location.href="<c:url value='/usuario/${usuario.idUsr}' />"'>
-						  <span class="glyphicon glyphicon-penci"></span>
+						  <img src='<c:url value="/resources/imgs/editar.png"/>' alt="Editar" class="EditarImg">
 						</button>
 					</td>
 					<td>
 						<button type="button" class="btn btn-default" onclick='location.href="<c:url value='/usuario/${usuario.idUsr}/delete' />"'>
-						  <span class="glyphicon glyphicon-trash"></span>
+						  <img src='<c:url value="/resources/imgs/borrar.png"/>' alt="Borrar" class="EditarImg">
 						</button>
 					</td>
 							
@@ -71,17 +78,6 @@
 	  </tbody>
 	</table>
 	
-	
-<!-- 	<div class="container-fluid"> -->
-<%-- 		<c:out value="${resultado}"></c:out><br/><br/> --%>
-		
-<%-- 		<c:forEach items="${usuarios}" var="usuario"> --%>
-<%-- 			<c:out value="${usuario}" /><br/> --%>
-<%-- 			<c:out value="${usuario.idUsr}" /> --%>
-<!-- 			<br/> -->
-<%-- 		</c:forEach> --%>
-	
-<!-- 	</div> -->
 	<script type="text/javascript" src="<c:url value='/resources/js/jquery.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js'/>"></script>
 </body>

@@ -22,7 +22,6 @@ import com.damian.valid.SpringFormGroup;
 public class DatosPersonales {
 
 	@Id
-	// @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idDatosPers")
 	private int idDatosPers;
 	
