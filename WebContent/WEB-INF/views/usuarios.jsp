@@ -15,27 +15,28 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
 	
 	<h2><c:out value="${resultado}"/></h2>
-	
-	<table class="table table-striped table-margin-dam">
+<div class="tableFixHead">
+	<table id="tablaOrdenar" class="table table-striped table-margin-dam">
 	  <thead>
 	    <tr>
-	      <th scope="col"><fmt:message key="label.Username" /></th>
-	      <th scope="col"><fmt:message key="label.Enabled" /></th>
-	      <th scope="col"><fmt:message key="label.Creation.date" /></th>
-	      <th scope="col"><fmt:message key="label.idcard" /></th>
-	      <th scope="col"><fmt:message key="label.Name" /></th>
-	      <th scope="col"><fmt:message key="label.Lastname" /></th>
-	      <th scope="col"><fmt:message key="label.Sex" /></th>
-	      <th scope="col"><fmt:message key="label.Birthdate" /></th>
-	      <th scope="col"><fmt:message key="label.Nationality" /></th>
-	      <th scope="col"><fmt:message key="label.Email" /></th>
-	      <th scope="col"><fmt:message key="label.Roles" /></th>
-	      <th scope="col" colspan="3"><fmt:message key="label.Extras" /></th>
+	      <th onclick="sortTable(0)"><fmt:message key="label.Username" /></th>
+	      <th onclick="sortTable(1)"><fmt:message key="label.Enabled" /></th>
+	      <th onclick="sortTable(2)"><fmt:message key="label.Creation.date" /></th>
+	      <th onclick="sortTable(3)"><fmt:message key="label.idcard" /></th>
+	      <th onclick="sortTable(4)"><fmt:message key="label.Name" /></th>
+	      <th onclick="sortTable(5)"><fmt:message key="label.Lastname" /></th>
+	      <th onclick="sortTable(6)"><fmt:message key="label.Sex" /></th>
+	      <th onclick="sortTable(7)"><fmt:message key="label.Birthdate" /></th>
+	      <th onclick="sortTable(8)"><fmt:message key="label.Nationality" /></th>
+	      <th onclick="sortTable(9)"><fmt:message key="label.Email" /></th>
+	      <th onclick="sortTable(10)"><fmt:message key="label.Roles" /></th>
+	      <th colspan="3"><fmt:message key="label.Extras" /></th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -77,8 +78,9 @@
 			</c:forEach>
 	  </tbody>
 	</table>
-	
-	<script type="text/javascript" src="<c:url value='/resources/js/jquery.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js'/>"></script>
+	</div>
+
+	<script type="text/javascript" src="<c:url value='/resources/js/tabla_ordenar.js'/>"></script>
+<%-- 	<script type="text/javascript" src="<c:url value='/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js'/>"></script> --%>
 </body>
 </html>

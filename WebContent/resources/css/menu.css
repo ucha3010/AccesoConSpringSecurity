@@ -11,6 +11,24 @@
 	margin: 2rem;
 }
 
+th:hover {
+	cursor: pointer;
+}
+
+.tableFixHead thead th { 
+	position: sticky; 
+	top: 5rem; 
+	background-color: #fff;
+}
+
+
+.bg-color-white-dam{
+	background-color: #fff;
+}
+
+button:hover{
+	opacity: 0.8;
+}
 
 
 /*Menu*************************************************/
@@ -25,13 +43,24 @@
 	left: 0;
 	top: 0;
 	width: 97%;
-	height: 80px;
+	height: 5rem;
 	border-top: 3px solid #F48024;
+	box-shadow: 0px 1px .5px #F48024;
+}
+
+.border-int-dam{
+	padding: 1.5rem;
+	
 }
 
 #logoImg {
-	width: 216px;
-	height: 80px;
+	width: 13rem;
+	height: 4.5rem;
+	opacity: 1.0;
+}
+
+#logoImg:hover {
+	opacity: 0.5;
 }
 
 #usuarioImg {

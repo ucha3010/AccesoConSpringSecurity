@@ -7,7 +7,7 @@
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="com.damian.utils.multilanguage" />
 
-<div class="menu-dam margin-header d-inline-block">
+<div class="menu-dam margin-header d-inline-block bg-color-white-dam">
 	<div class="row">
 		
 		<div class="col-xs-12 col-md-2">
@@ -16,7 +16,7 @@
 			</a>
 		</div>
 		
-		<div class="col-xs-12 col-md-4 pt-2">
+		<div class="col-xs-12 col-md-4 pt-2 border-int-dam">
 			<sec:authorize access="isRememberMe()">
 				<sec:authorize access="hasRole('ROL_ADMIN')">
 				<button type="button" class="btn fondo-1f45e0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/usuario"/>"'>
@@ -44,7 +44,7 @@
 			</sec:authorize>
 		</div>
 		
-		<div class="col-xs-12 col-md-6 pt-2">
+		<div class="col-xs-12 col-md-6 pt-2 border-int-dam">
 			<sec:authorize access="!isAuthenticated()">
 				<button type="button" class="btn btn-info float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/0'/>"'>
 					<fmt:message key="label.New.user" />
@@ -95,4 +95,4 @@
 	</div>
 </div>
 <!-- 	dejo un espacio entre el menú y la página en sí -->
-<div class="py-4"></div>
+<div class="py-4 bg-color-white-dam"></div>
