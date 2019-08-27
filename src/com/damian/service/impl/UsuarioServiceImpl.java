@@ -1,6 +1,7 @@
 package com.damian.service.impl;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.damian.dao.UsuarioDAO;
 import com.damian.pojo.Usuario;
+import com.damian.pojo.UsuarioRoles;
 import com.damian.service.UsuarioService;
 
 @Service
@@ -48,6 +50,20 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public void delete(int idUsr) {
 		Usuario usuario = findById(idUsr);
 		usuarioDAO.delete(usuario);
+	}
+
+	public List<Usuario> findCustomers() {
+		List<Usuario> usuarios = usuarioDAO.findAll();
+		List<Usuario> clientes = new ArrayList<>();
+		for(Usuario usuario : usuarios) {
+			List<UsuarioRoles> roles = usuario.getUsuarioRoles();
+			for(UsuarioRoles rol: roles) {
+				if(rol.getRoles().getRol().equalsIgnoreCase("ROL_CLIENTE")) {
+					clientes.add(usuario);
+				}
+			}
+		}
+		return clientes;
 	}
 
 }

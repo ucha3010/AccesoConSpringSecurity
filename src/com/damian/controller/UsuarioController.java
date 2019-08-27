@@ -70,6 +70,14 @@ public class UsuarioController {
 		
 		return "redirect:/usuarios";
 
+	}
+	
+	@RequestMapping("/usuario/cliente")
+	public ModelAndView getCustomers(ModelAndView modelAndView) {
+		modelAndView.addObject("usuarios", usuarioService.findCustomers());
+		modelAndView.addObject("estoy", "usuario");
+		modelAndView.setViewName("usuarios");
+		return modelAndView;
 	}	
 
 }

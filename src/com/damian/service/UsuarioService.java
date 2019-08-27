@@ -15,5 +15,7 @@ public interface UsuarioService {
 	void update(Usuario usuario);
 	
 	void delete(int idUsr);
+	
+	List<Usuario> findCustomers();
 
 }

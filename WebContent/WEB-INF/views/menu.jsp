@@ -24,7 +24,7 @@
 				</button>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROL_USUARIO')">
-				<button type="button" class="btn fondo-008000 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/cliente'/>"'>
+				<button type="button" class="btn fondo-008000 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/cliente'/>"'>
 					<fmt:message key="label.Customers" />
 				</button>
 				</sec:authorize>
@@ -37,7 +37,7 @@
 				</button>
 				</sec:authorize>
 				<sec:authorize access="hasRole('ROL_USUARIO')">
-				<button type="button" class="btn fondo-008000 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/cliente'/>"'>
+				<button type="button" class="btn fondo-008000 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/cliente'/>"'>
 					<fmt:message key="label.Customers" />
 				</button>
 				</sec:authorize>
@@ -95,4 +95,4 @@
 	</div>
 </div>
 <!-- 	dejo un espacio entre el menú y la página en sí -->
-<div class="py-4 bg-color-white-dam"></div>
+<div class="py-4 bg-color-white-dam border border-light border-bottom"></div>

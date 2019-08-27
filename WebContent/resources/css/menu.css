@@ -6,28 +6,16 @@
 	display: inline-block;	
 }
 
-.table-margin-dam {
-	width: 93.5%;
-	margin: 2rem;
-}
-
-th:hover {
-	cursor: pointer;
-}
-
-.tableFixHead thead th { 
-	position: sticky; 
-	top: 5rem; 
+.bg-color-white-dam {
 	background-color: #fff;
 }
 
-
-.bg-color-white-dam{
-	background-color: #fff;
+.bg-color-black-dam {
+	background-color: #000;
 }
 
 button:hover{
-	opacity: 0.8;
+	opacity: 0.7;
 }
 
 
@@ -43,19 +31,18 @@ button:hover{
 	left: 0;
 	top: 0;
 	width: 97%;
-	height: 5rem;
+	height: 5.1rem;
 	border-top: 3px solid #F48024;
-	box-shadow: 0px 1px .5px #F48024;
 }
 
 .border-int-dam{
-	padding: 1.5rem;
+	margin-top: 1rem;
+	padding: 2rem;
 	
 }
 
 #logoImg {
-	width: 13rem;
-	height: 4.5rem;
+	height: 5rem;
 	opacity: 1.0;
 }
 
@@ -90,8 +77,3 @@ button:hover{
 }
 
 
-/*Usuarios**********************************************/
-.EditarImg {
-	width: 35px;
-	height: 35px;	
-}

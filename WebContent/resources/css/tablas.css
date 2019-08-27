@@ -1,17 +1,28 @@
-table {
-  border-spacing: 0;
-  width: 100%;
-  border: 1px solid #ddd;
+.divTabla {
+    overflow:scroll;
+    height:45rem;
 }
 
-th, td {
-  text-align: left;
-  padding: 16px;
+.divTabla thead th { 
+	position: sticky; 
+	top: -0.1rem; 
+	background-color: #fff;
+	vertical-align: middle !important;
 }
 
-tr:nth-child(even) {
-  background-color: #f2f2f2
+.divTabla tbody td{	
+	vertical-align: middle !important;
 }
 
-.tableFixHead          { overflow-y: auto; height: 100px; }
-.tableFixHead thead th { position: sticky; top: 0; }
+th:hover {
+	cursor: pointer;
+}
+
+.tamanio_imagen {
+	width: 1.5rem;
+	height: 1.5rem;	
+}
+
+.sin_padding{
+	padding: 0 !important;
+}

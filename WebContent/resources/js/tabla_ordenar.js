@@ -1,5 +1,5 @@
 function sortTable(col) {
-	var table, rows, switching, i, x, y, shouldSwitch;
+	var table, rows, switching, i, x, y, shouldSwitch, fecha1, fecha2;
 	table = document.getElementById("tablaOrdenar");
 	switching = true;
 	/*
@@ -22,11 +22,21 @@ function sortTable(col) {
 			 */
 			x = rows[i].getElementsByTagName("TD")[col];
 			y = rows[i + 1].getElementsByTagName("TD")[col];
-			// check if the two rows should switch place:
-			if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-				// if so, mark as a switch and break the loop:
-				shouldSwitch = true;
-				break;
+			if(x.innerHTML.substr(2,1) === '/'){
+				fecha1 = x.innerHTML.substr(6,4) + x.innerHTML.substr(3,2) + x.innerHTML.substr(0,2);
+				fecha2 = y.innerHTML.substr(6,4) + y.innerHTML.substr(3,2) + y.innerHTML.substr(0,2);
+				if (fecha1 > fecha2) {
+					// if so, mark as a switch and break the loop:
+					shouldSwitch = true;
+					break;
+				}				
+			} else {
+				// check if the two rows should switch place:
+				if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+					// if so, mark as a switch and break the loop:
+					shouldSwitch = true;
+					break;
+				}
 			}
 		}
 		if (shouldSwitch) {
