@@ -22,7 +22,7 @@ function sortTable(col) {
 			 */
 			x = rows[i].getElementsByTagName("TD")[col];
 			y = rows[i + 1].getElementsByTagName("TD")[col];
-			if(x.innerHTML.substr(2,1) === '/'){
+			if(x.innerHTML.substr(2,1) === '/' && x.innerHTML.substr(5,1) === '/'){
 				fecha1 = x.innerHTML.substr(6,4) + x.innerHTML.substr(3,2) + x.innerHTML.substr(0,2);
 				fecha2 = y.innerHTML.substr(6,4) + y.innerHTML.substr(3,2) + y.innerHTML.substr(0,2);
 				if (fecha1 > fecha2) {
