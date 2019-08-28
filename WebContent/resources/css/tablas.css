@@ -1,6 +1,43 @@
-.divTabla {
-    overflow:scroll;
-    height:45rem;
+@media (min-height: 1024px) {
+	.divTabla {
+	    overflow:scroll;
+	    height:860px;
+	}
+}
+
+@media (max-height: 1023px) and (min-height: 960px) {
+	.divTabla {
+	    overflow:scroll;
+	    height:800px;
+	}
+}
+
+@media (max-height: 959px) and (min-height: 864px) {
+	.divTabla {
+	    overflow:scroll;
+	    height:700px;
+	}
+}
+
+@media (max-height: 863px) and (min-height: 768px) {
+	.divTabla {
+	    overflow:scroll;
+	    height:600px;
+	}
+}
+
+@media (max-height: 767px) and (min-height: 720px) {
+	.divTabla {
+	    overflow:scroll;
+	    height:560px;
+	}
+}
+
+@media (max-height: 719px) {
+	.divTabla {
+	    overflow:scroll;
+	    height:430px;
+	}
 }
 
 .divTabla thead th { 
@@ -8,10 +45,14 @@
 	top: -0.1rem; 
 	background-color: #fff;
 	vertical-align: middle !important;
+	padding-top: 0;
+	padding-bottom: 0;
 }
 
 .divTabla tbody td{	
 	vertical-align: middle !important;
+	padding-top: 0;
+	padding-bottom: 0;	
 }
 
 th:hover {
@@ -26,3 +67,4 @@ th:hover {
 .sin_padding{
 	padding: 0 !important;
 }
+

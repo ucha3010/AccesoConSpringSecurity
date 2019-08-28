@@ -95,4 +95,4 @@
 	</div>
 </div>
 <!-- 	dejo un espacio entre el menú y la página en sí -->
-<div class="py-4 bg-color-white-dam border border-light border-bottom"></div>
+<div class="py-24px-dam bg-color-white-dam border border-light border-bottom"></div>

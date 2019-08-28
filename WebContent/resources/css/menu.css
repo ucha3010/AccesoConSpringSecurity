@@ -31,8 +31,9 @@ button:hover{
 	left: 0;
 	top: 0;
 	width: 97%;
-	height: 5.1rem;
+	height: 90px;
 	border-top: 3px solid #F48024;
+	z-index: 100;
 }
 
 .border-int-dam{
@@ -66,6 +67,11 @@ button:hover{
 .fondo-1f45e0 {
 	background-color: #1f45e0;
 	color: #fff;
+}
+
+.py-24px-dam{
+	padding-bottom: 24px!important;
+	padding-top: 24px!important;
 }
 
 
