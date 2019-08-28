@@ -69,6 +69,11 @@ button:hover{
 	color: #fff;
 }
 
+.fondo-c0c0c0 {
+	background-color: #c0c0c0;
+	color: #000;
+}
+
 .py-24px-dam{
 	padding-bottom: 24px!important;
 	padding-top: 24px!important;
