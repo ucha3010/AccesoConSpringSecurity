@@ -66,79 +66,173 @@ jQuery(document).ready(function(){
 <hr>
 <br>
 	<form>
-		<div class="form-group">
-			<label for="exampleFormControlInput1">Email address</label> <input
-				type="text" class="form-control" id="exampleFormControlInput1">
-		</div>
-		<div class="form-group">
-			<label for="exampleFormControlSelect1">Example select</label> <select
-				class="form-control" id="exampleFormControlSelect1">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="exampleFormControlSelect2">Example multiple
-				select</label> <select multiple class="form-control"
-				id="exampleFormControlSelect2">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="exampleFormControlTextarea1">Example textarea</label>
-			<textarea class="form-control" id="exampleFormControlTextarea1"
-				rows="3"></textarea>
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="input">Usuario</label> <input type="text"
+				class="form-control" id="input">
 		</div>
 		<div class="form-row">
-			<div class="form-group col-md-6">
-				<label for="inputEmail4">Email</label> <input type="text"
-					class="form-control" id="inputEmail4">
+			<div class="form-group col-xs-12 col-sm-6 col-md-4">
+				<label for="inputPassword4">Contraseña</label> <input type="password"
+					class="form-control" id="inputPassword4">
 			</div>
-			<div class="form-group col-md-6">
-				<label for="inputPassword4">Password</label> <input type="password"
+			<div class="form-group col-xs-12 col-sm-6 col-md-4">
+				<label for="inputPassword4">Repetir contraseña</label> <input type="password"
 					class="form-control" id="inputPassword4">
 			</div>
 		</div>
-		<div class="form-group">
-			<label for="inputAddress">Address</label> <input type="text"
-				class="form-control" id="inputAddress">
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="input">Nombre</label> <input type="text"
+				class="form-control" id="input">
 		</div>
-		<div class="form-group">
-			<label for="inputAddress2">Address 2</label> <input type="text"
-				class="form-control" id="inputAddress2">
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="input">Primer apellido</label> <input type="text"
+				class="form-control" id="input">
 		</div>
-		<div class="form-row">
-			<div class="form-group col-md-6">
-				<label for="inputCity">City</label> <input type="text"
-					class="form-control" id="inputCity">
-			</div>
-			<div class="form-group col-md-4">
-				<label for="inputState">State</label> <select id="inputState"
-					class="form-control">
-					<option selected>Choose...</option>
-					<option>...</option>
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="input">Segundo apellido</label> <input type="text"
+				class="form-control" id="input">
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+			<input type="radio" id="customRadioInline1" name="customRadioInline1"
+				class="custom-control-input"> <label
+				class="custom-control-label" for="customRadioInline1">Hombre</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+			<input type="radio" id="customRadioInline2" name="customRadioInline1"
+				class="custom-control-input"> <label
+				class="custom-control-label" for="customRadioInline2">Mujer</label>
+		</div>
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="input">Fecha de nacimiento ******************</label> <input type="text"
+				class="form-control" id="input">
+		</div>
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="input">DNI</label> <input type="text"
+				class="form-control" id="input">
+		</div>
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="input">Email</label> <input type="text"
+				class="form-control" id="input">
+		</div>
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="exampleFormControlSelect2">Roles (presione Ctrl para múltiples opciones)</label>
+			<select multiple class="form-control" id="exampleFormControlSelect2">
+				<option>ROL_CLIENTE</option>
+				<option>ROL_USUARIO</option>
+				<option>ROL_ADMIN</option>
+				<option>ROL_ROOT</option>
+			</select>
+		</div>
+		
+		<div class="form-row">		
+			<div class="form-group col-xs-12 col-sm-2">
+				<label for="exampleFormControlSelect1">Tipo vía</label> <select
+					class="form-control" id="exampleFormControlSelect1">
+					<option>Calle</option>
+					<option>Avenida</option>
+					<option>Pasaje</option>
+					<option>Carretera</option>
+					<option>Plaza</option>
 				</select>
 			</div>
-			<div class="form-group col-md-2">
-				<label for="inputZip">Zip</label> <input type="text"
-					class="form-control" id="inputZip">
+			<div class="form-group col-xs-12 col-sm-8">
+				<label for="input">Nombre vía</label> <input type="text"
+					class="form-control" id="input">
 			</div>
+			<div class="form-group col-xs-12 col-sm-2">
+				<label for="input">Número</label> <input type="text"
+					class="form-control" id="input">
+			</div>		
+		</div>
+		<div class="form-group col-xs-12 col-sm-6">
+			<label for="input">Resto dirección</label> <input type="text"
+				class="form-control" id="input">
+		</div>		
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="input">Ciudad</label> <input type="text"
+				class="form-control" id="input">
+		</div>
+		
+		<div class="form-row">
+			<div class="form-group col-xs-12 col-sm-4">
+				<label for="input">Código Postal</label> <input type="text"
+					class="form-control" id="input">
+			</div>	
+			<div class="form-group col-xs-12 col-sm-4">
+				<label for="exampleFormControlSelect1">Provincia</label> <select
+					class="form-control" id="exampleFormControlSelect1">
+					<option>Madrid</option>
+					<option>Barcelona</option>
+					<option>Toledo</option>
+					<option>Valencia</option>
+					<option>Córdoba</option>
+				</select>
+			</div>
+			<div class="form-group col-xs-12 col-sm-4">
+				<label for="exampleFormControlSelect1">País</label> <select
+					class="form-control" id="exampleFormControlSelect1">
+					<option>España</option>
+					<option>Francia</option>
+					<option>Portugal</option>
+					<option>Italia</option>
+					<option>Reino unido</option>
+				</select>
+			</div>	
+		</div>	
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="input">Teléfono</label> <input type="text"
+				class="form-control" id="input">
+		</div>
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="input">Nombre comercial</label> <input type="text"
+				class="form-control" id="input">
+		</div>
+		
+		<div class="custom-control custom-radio custom-control-inline">
+			<input type="radio" id="radioSociedad1" name="radioSociedad1"
+				class="custom-control-input"> <label
+				class="custom-control-label" for="radioSociedad1">SL</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+			<input type="radio" id="radioSociedad2" name="radioSociedad1"
+				class="custom-control-input"> <label
+				class="custom-control-label" for="radioSociedad2">SA</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+			<input type="radio" id="radioSociedad3" name="radioSociedad1"
+				class="custom-control-input"> <label
+				class="custom-control-label" for="radioSociedad3">Sociedad colectiva</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+			<input type="radio" id="radioSociedad4" name="radioSociedad1"
+				class="custom-control-input"> <label
+				class="custom-control-label" for="radioSociedad4">Sociedad comanditaria</label>
+		</div>
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="input">Actividad</label> <input type="text"
+				class="form-control" id="input">
+		</div>
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="input">Página web</label> <input type="text"
+				class="form-control" id="input">
+		</div>
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="input">Fax</label> <input type="text"
+				class="form-control" id="input">
+		</div>
+		<div class="form-group col-xs-12 col-sm-6">
+			<label for="exampleFormControlTextarea1">Más información</label>
+			<textarea class="form-control" id="exampleFormControlTextarea1"
+				rows="3"></textarea>
 		</div>
 		<div class="form-group">
 			<div class="form-check">
 				<input class="form-check-input" type="checkbox" id="gridCheck">
-				<label class="form-check-label" for="gridCheck"> Check me
-					out </label>
+				<label class="form-check-label" for="gridCheck"> Acepto los términos y condiciones</label>
 			</div>
-		</div>
-		<button type="submit" class="btn btn-primary">Sign in</button>
+		</div>		
+		
+		<button type="submit" class="btn btn-primary">Aceptar</button>
 	</form>
 </body>
 </html>
