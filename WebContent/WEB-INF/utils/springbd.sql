@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-08-2019 a las 20:59:24
+-- Tiempo de generación: 31-08-2019 a las 18:56:54
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -61,12 +61,15 @@ INSERT INTO `admin` (`idAd`, `nombre`, `cargo`, `fechaCreacion`) VALUES
 CREATE TABLE `datospersonales` (
   `idDatosPers` int(11) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `apellido` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `sexo` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaNacimiento` date NOT NULL,
-  `nacionalidad` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `dni` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido1` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido2` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `sexo` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fechaNacimiento` date DEFAULT NULL,
+  `nacionalidad` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `dni` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `observaciones` text COLLATE utf8_spanish_ci,
   `FK_idUsr` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -74,15 +77,15 @@ CREATE TABLE `datospersonales` (
 -- Volcado de datos para la tabla `datospersonales`
 --
 
-INSERT INTO `datospersonales` (`idDatosPers`, `nombre`, `apellido`, `sexo`, `fechaNacimiento`, `nacionalidad`, `dni`, `email`, `FK_idUsr`) VALUES
-(1, 'José', 'Martínez', 'Masculino', '1967-07-11', 'España', '123456789A', 'pepe@pepe.com', 1),
-(2, 'Juan', 'Álvarez', 'masculino', '1984-10-24', 'España', '123456789B', 'juan@juan.com', 2),
-(3, 'Roberto', 'Do Santos', 'masculino', '1980-07-28', 'Portugal', '123456789C', 'roberto@roberto.com', 3),
-(4, 'Damián', 'Usheff', 'masculino', '1976-10-30', 'Argentina', '123456789D', 'damian@damian.com', 4),
-(5, 'Carlos Alberto', 'Velazquez de la Tarragona', 'masculino', '1975-08-01', 'España', '123456789E', 'carlos.alberto.velazquez.delatarragona@telefonicaladron.com', 5),
-(13, 'Alexandra', 'Huertas', 'femenino', '1994-08-22', 'España', '123456789M', 'alex@gmail.com', 13),
-(14, 'Alicia', 'Cruz', 'femenino', '2005-10-27', 'España', '123456789N', 'ali@gmail.com', 14),
-(15, 'Miguel Ángel', 'Cruz', 'masculino', '2010-10-27', 'España', '123456789O', 'miki@gmail.com', 15);
+INSERT INTO `datospersonales` (`idDatosPers`, `nombre`, `apellido1`, `apellido2`, `sexo`, `fechaNacimiento`, `nacionalidad`, `dni`, `email`, `telefono`, `observaciones`, `FK_idUsr`) VALUES
+(1, 'José', 'Martínez', 'Suárez', 'Masculino', '1967-07-11', 'España', '123456789A', 'pepe@pepe.com', '666555444', 'El usuario principal con el cual hacer pruebas', 1),
+(2, 'Juan', 'Álvarez', NULL, 'masculino', '1984-10-24', 'España', '123456789B', 'juan@juan.com', NULL, NULL, 2),
+(3, 'Roberto', 'Do Santos', NULL, 'masculino', '1980-07-28', 'Portugal', '123456789C', 'roberto@roberto.com', NULL, NULL, 3),
+(4, 'Damián', 'Usheff', NULL, 'masculino', '1976-10-30', 'Argentina', '123456789D', 'damian@damian.com', NULL, NULL, 4),
+(5, 'Carlos Alberto', 'Velazquez de la Tarragona', NULL, 'masculino', '1975-08-01', 'España', '123456789E', 'carlos.alberto.velazquez.delatarragona@telefonicaladron.com', NULL, NULL, 5),
+(13, 'Alexandra', 'Huertas', NULL, 'femenino', '1994-08-22', 'España', '123456789M', 'alex@gmail.com', NULL, NULL, 13),
+(14, 'Alicia', 'Cruz', NULL, 'femenino', '2005-10-27', 'España', '123456789N', 'ali@gmail.com', NULL, NULL, 14),
+(15, 'Miguel Ángel', 'Cruz', NULL, 'masculino', '2010-10-27', 'España', '123456789O', 'miki@gmail.com', NULL, NULL, 15);
 
 -- --------------------------------------------------------
 
@@ -92,8 +95,14 @@ INSERT INTO `datospersonales` (`idDatosPers`, `nombre`, `apellido`, `sexo`, `fec
 
 CREATE TABLE `direccion` (
   `idDir` int(11) NOT NULL,
-  `calle` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `cp` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
+  `tipoVia` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreVia` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `numero` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `resto` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cp` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `provincia` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `ciudad` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pais` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
   `idDatosPers` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -101,13 +110,65 @@ CREATE TABLE `direccion` (
 -- Volcado de datos para la tabla `direccion`
 --
 
-INSERT INTO `direccion` (`idDir`, `calle`, `cp`, `idDatosPers`) VALUES
-(7, 'Calle Menor 2', '28005', 1),
-(8, 'Calle Martín 50', '25005', 3),
-(11, 'Ana de Austria 53', '28050', 4),
-(12, 'Niceto Alcalá Zamora 28', '28050', 4),
-(13, 'Hidalgo', '99009', 1),
-(14, 'Silvano', '28043', 2);
+INSERT INTO `direccion` (`idDir`, `tipoVia`, `nombreVia`, `numero`, `resto`, `cp`, `provincia`, `ciudad`, `pais`, `idDatosPers`) VALUES
+(7, 'Calle', 'Menor', '2', NULL, '28005', 'Madrid', 'Madrid', 'España', 1),
+(8, 'Calle', 'Martín', '50', NULL, '25005', 'Madrid', 'Madrid', 'España', 3),
+(11, 'Calle', 'Ana de Austria', '50', NULL, '28050', 'Madrid', 'Madrid', 'España', 4),
+(12, 'Avenida', 'Niceto Alcalá Zamora', '200', 'Urbanización El sol naciente', '28050', 'Madrid', 'Madrid', 'España', 4),
+(13, 'Plaza', 'Hidalgo', '3', NULL, '99009', 'Vallladolid', 'Valladolid', 'España', 1),
+(14, 'Pasaje', 'Silvano', 'sin número', NULL, '49251', 'Córdoba', 'El barrial', 'España', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `direccionempresa`
+--
+
+CREATE TABLE `direccionempresa` (
+  `idDirEmp` int(10) NOT NULL,
+  `tipoVia` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreVia` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `numero` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `resto` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cp` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `provincia` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `ciudad` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pais` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `idEmp` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `direccionempresa`
+--
+
+INSERT INTO `direccionempresa` (`idDirEmp`, `tipoVia`, `nombreVia`, `numero`, `resto`, `cp`, `provincia`, `ciudad`, `pais`, `idEmp`) VALUES
+(1, 'Calle', 'Mayor', '6', 'local', '28001', 'Madrid', 'Madrid', 'España', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empresa`
+--
+
+CREATE TABLE `empresa` (
+  `idEmp` int(10) NOT NULL,
+  `nombreComercial` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tipoSociedad` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `actividad` text COLLATE utf8_spanish_ci,
+  `cif` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `paginaWeb` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fax` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `observaciones` text COLLATE utf8_spanish_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `empresa`
+--
+
+INSERT INTO `empresa` (`idEmp`, `nombreComercial`, `tipoSociedad`, `actividad`, `cif`, `email`, `paginaWeb`, `telefono`, `fax`, `observaciones`) VALUES
+(1, 'Empresa primera', 'SL', 'Venta de producto principal', 'B12345678', 'empresa.primera@gmail.com', 'www.empresaprimera.com', '912222222', '912222223', NULL);
 
 -- --------------------------------------------------------
 
@@ -164,6 +225,26 @@ INSERT INTO `usuario` (`idUsr`, `usuario`, `clave`, `habilitado`, `fechaCreacion
 (13, 'Alexandra', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2019-08-27 00:00:00', 13),
 (14, 'Alicia', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2019-08-27 00:00:00', 14),
 (15, 'Miguel', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2019-08-27 00:00:00', 15);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario_empresa`
+--
+
+CREATE TABLE `usuario_empresa` (
+  `idUsr` int(10) NOT NULL,
+  `idEmp` int(10) NOT NULL,
+  `fechaCreacion` date NOT NULL,
+  `creadoPor` varchar(10) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `usuario_empresa`
+--
+
+INSERT INTO `usuario_empresa` (`idUsr`, `idEmp`, `fechaCreacion`, `creadoPor`) VALUES
+(1, 1, '2019-08-31', 'DAMIAN');
 
 -- --------------------------------------------------------
 
@@ -226,6 +307,19 @@ ALTER TABLE `direccion`
   ADD KEY `FK_idDatosPers` (`idDatosPers`) USING BTREE;
 
 --
+-- Indices de la tabla `direccionempresa`
+--
+ALTER TABLE `direccionempresa`
+  ADD PRIMARY KEY (`idDirEmp`),
+  ADD KEY `FK_idEmp` (`idEmp`) USING BTREE;
+
+--
+-- Indices de la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  ADD PRIMARY KEY (`idEmp`);
+
+--
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
@@ -236,6 +330,13 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`idUsr`);
+
+--
+-- Indices de la tabla `usuario_empresa`
+--
+ALTER TABLE `usuario_empresa`
+  ADD PRIMARY KEY (`idUsr`,`idEmp`),
+  ADD KEY `FK_idEmp` (`idEmp`);
 
 --
 -- Indices de la tabla `usuario_roles`
@@ -264,6 +365,16 @@ ALTER TABLE `datospersonales`
 ALTER TABLE `direccion`
   MODIFY `idDir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
+-- AUTO_INCREMENT de la tabla `direccionempresa`
+--
+ALTER TABLE `direccionempresa`
+  MODIFY `idDirEmp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `empresa`
+--
+ALTER TABLE `empresa`
+  MODIFY `idEmp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
@@ -288,6 +399,19 @@ ALTER TABLE `datospersonales`
 --
 ALTER TABLE `direccion`
   ADD CONSTRAINT `direccion_ibfk_1` FOREIGN KEY (`idDatosPers`) REFERENCES `datospersonales` (`idDatosPers`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `direccionempresa`
+--
+ALTER TABLE `direccionempresa`
+  ADD CONSTRAINT `direccionEmpresa_ibfk_1` FOREIGN KEY (`idEmp`) REFERENCES `empresa` (`idEmp`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `usuario_empresa`
+--
+ALTER TABLE `usuario_empresa`
+  ADD CONSTRAINT `FK_idEmp` FOREIGN KEY (`idEmp`) REFERENCES `empresa` (`idEmp`),
+  ADD CONSTRAINT `FK_idUsrEmp` FOREIGN KEY (`idUsr`) REFERENCES `usuario` (`idUsr`);
 
 --
 -- Filtros para la tabla `usuario_roles`
