@@ -37,13 +37,11 @@ public class Roles implements Serializable {
 	}
 
 	public Roles(int idRoles, String rol) {
-		super();
 		this.idRoles = idRoles;
 		this.rol = rol;
 	}
 
 	public Roles(int idRoles, String rol, List<UsuarioRoles> usuarioRoles) {
-		super();
 		this.idRoles = idRoles;
 		this.rol = rol;
 		this.usuarioRoles = usuarioRoles;

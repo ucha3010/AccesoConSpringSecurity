@@ -50,6 +50,10 @@ public class Usuario implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.usuario", cascade = CascadeType.ALL)
 	private List<UsuarioRoles> usuarioRoles = new ArrayList<UsuarioRoles>();
 
+	//para relaciones many to many
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.usuario", cascade = CascadeType.ALL)
+	private List<UsuarioEmpresa> usuarioEmpresa = new ArrayList<UsuarioEmpresa>();
+
 	//para relaciones one to one
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private DatosPersonales datosPersonales;
@@ -71,12 +75,15 @@ public class Usuario implements Serializable {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public Usuario(int idUsr, String usuario, String clave, List<UsuarioRoles> usuarioRoles, boolean habilitado,
+	public Usuario(int idUsr, String usuario, String clave, List<UsuarioRoles> usuarioRoles,
+			List<UsuarioEmpresa> usuarioEmpresa, DatosPersonales datosPersonales, boolean habilitado,
 			Timestamp fechaCreacion) {
 		this.idUsr = idUsr;
 		this.usuario = usuario;
 		this.clave = clave;
 		this.usuarioRoles = usuarioRoles;
+		this.usuarioEmpresa = usuarioEmpresa;
+		this.datosPersonales = datosPersonales;
 		this.habilitado = habilitado;
 		this.fechaCreacion = fechaCreacion;
 	}
@@ -111,6 +118,14 @@ public class Usuario implements Serializable {
 
 	public void setUsuarioRoles(List<UsuarioRoles> usuarioRoles) {
 		this.usuarioRoles = usuarioRoles;
+	}
+
+	public List<UsuarioEmpresa> getUsuarioEmpresa() {
+		return usuarioEmpresa;
+	}
+
+	public void setUsuarioEmpresa(List<UsuarioEmpresa> usuarioEmpresa) {
+		this.usuarioEmpresa = usuarioEmpresa;
 	}
 
 	public boolean isHabilitado() {

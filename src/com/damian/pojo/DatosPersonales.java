@@ -1,5 +1,6 @@
 package com.damian.pojo;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,12 @@ import com.damian.valid.SpringFormGroup;
 
 @Entity
 @Table(name = "datospersonales")
-public class DatosPersonales {
+public class DatosPersonales implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 130820142307L;
 
 	@Id
 	@Column(name = "idDatosPers")
@@ -28,8 +34,11 @@ public class DatosPersonales {
 	@Column(name = "nombre")
 	private String nombre;
 	
-	@Column(name = "apellido")
-	private String apellido;
+	@Column(name = "apellido1")
+	private String apellido1;
+	
+	@Column(name = "apellido2")
+	private String apellido2;
 	
 	@Column(name = "sexo")
 	private String sexo;
@@ -46,6 +55,12 @@ public class DatosPersonales {
 	@Column(name = "email")
 	private String email;
 
+	@Column(name = "telefono")
+	private String telefono;
+
+	@Column(name = "observaciones")	
+	private String observaciones;
+
 	@OneToOne
 	@JoinColumn(name = "FK_idUsr")
 	private Usuario usuario;
@@ -57,30 +72,36 @@ public class DatosPersonales {
 	public DatosPersonales() {
 	}
 
-	public DatosPersonales(int idDatosPers, String nombre, String apellido, String sexo, Timestamp fechaNacimiento,
-			String nacionalidad, String dni, String email) {
-		super();
+	public DatosPersonales(int idDatosPers, String nombre, String apellido1, String apellido2, String sexo,
+			Timestamp fechaNacimiento, String nacionalidad, String dni, String email, String telefono,
+			String observaciones) {
 		this.idDatosPers = idDatosPers;
 		this.nombre = nombre;
-		this.apellido = apellido;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
 		this.sexo = sexo;
 		this.fechaNacimiento = fechaNacimiento;
 		this.nacionalidad = nacionalidad;
 		this.dni = dni;
 		this.email = email;
+		this.telefono = telefono;
+		this.observaciones = observaciones;
 	}
 
-	public DatosPersonales(int idDatosPers, String nombre, String apellido, String sexo, Timestamp fechaNacimiento,
-			String nacionalidad, String dni, String email, Usuario usuario, List<Direccion> direcciones) {
-		super();
+	public DatosPersonales(int idDatosPers, String nombre, String apellido1, String apellido2, String sexo,
+			Timestamp fechaNacimiento, String nacionalidad, String dni, String email, String telefono,
+			String observaciones, Usuario usuario, List<Direccion> direcciones) {
 		this.idDatosPers = idDatosPers;
 		this.nombre = nombre;
-		this.apellido = apellido;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
 		this.sexo = sexo;
 		this.fechaNacimiento = fechaNacimiento;
 		this.nacionalidad = nacionalidad;
 		this.dni = dni;
 		this.email = email;
+		this.telefono = telefono;
+		this.observaciones = observaciones;
 		this.usuario = usuario;
 		this.direcciones = direcciones;
 	}
@@ -101,12 +122,20 @@ public class DatosPersonales {
 		this.nombre = nombre;
 	}
 
-	public String getApellido() {
-		return apellido;
+	public String getApellido1() {
+		return apellido1;
 	}
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setApellido1(String apellido1) {
+		this.apellido1 = apellido1;
+	}
+
+	public String getApellido2() {
+		return apellido2;
+	}
+
+	public void setApellido2(String apellido2) {
+		this.apellido2 = apellido2;
 	}
 
 	public String getSexo() {
@@ -149,6 +178,22 @@ public class DatosPersonales {
 		this.email = email;
 	}
 
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -167,11 +212,10 @@ public class DatosPersonales {
 
 	@Override
 	public String toString() {
-		return "DatosPersonales [idDatosPers=" + idDatosPers + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", sexo=" + sexo + ", fechaNacimiento=" + fechaNacimiento + ", nacionalidad=" + nacionalidad
-				+ ", dni=" + dni + ", email=" + email + ", direcciones=" + direcciones + "]";
+		return "DatosPersonales [idDatosPers=" + idDatosPers + ", nombre=" + nombre + ", apellido1=" + apellido1
+				+ ", apellido2=" + apellido2 + ", sexo=" + sexo + ", fechaNacimiento=" + fechaNacimiento
+				+ ", nacionalidad=" + nacionalidad + ", dni=" + dni + ", email=" + email + ", telefono=" + telefono
+				+ ", observaciones=" + observaciones + ", direcciones=" + direcciones + "]";
 	}
-
-	
 
 }

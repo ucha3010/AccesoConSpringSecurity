@@ -34,23 +34,25 @@
 					<th onclick="sortTable(7)"><fmt:message key="label.Birthdate" /></th>
 					<th onclick="sortTable(8)"><fmt:message key="label.Nationality" /></th>
 					<th onclick="sortTable(9)"><fmt:message key="label.Email" /></th>
+					<th onclick="sortTable(9)"><fmt:message key="label.Phone" /></th>
 					<th onclick="sortTable(10)"><fmt:message key="label.Roles" /></th>
 					<th colspan="3"><fmt:message key="label.Extras" /></th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${usuarios}" var="usuario">
-				    <tr>
+				    <tr title='<c:out value="${usuario.datosPersonales.observaciones}" />'>
 						<td><c:out value="${usuario.usuario}" /></td>
 						<td><c:out value="${usuario.habilitado}" /></td>
 						<td><fmt:formatDate value="${usuario.fechaCreacion}" pattern="dd/MM/yyyy"/></td>	
 						<td><c:out value="${usuario.datosPersonales.dni}" /></td>
 						<td><c:out value="${usuario.datosPersonales.nombre}" /></td>
-						<td><c:out value="${usuario.datosPersonales.apellido}" /></td>	
+						<td><c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /></td>	
 						<td><c:out value="${usuario.datosPersonales.sexo}" /></td>	
 						<td><fmt:formatDate value="${usuario.datosPersonales.fechaNacimiento}" pattern="dd/MM/yyyy"/></td>		
 						<td><c:out value="${usuario.datosPersonales.nacionalidad}" /></td>
 						<td><c:out value="${usuario.datosPersonales.email}" /></td>
+						<td><c:out value="${usuario.datosPersonales.telefono}" /></td>
 						<c:set var="userRoles" value="${usuario.usuarioRoles}" scope="page" />
 						<td>
 						<c:forEach items="${userRoles}" var="roles">

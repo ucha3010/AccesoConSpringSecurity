@@ -12,8 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "direccion")
-public class Direccion implements Serializable {
+@Table(name = "direccionempresa")
+
+public class DireccionEmpresa implements Serializable {
 
 	/**
 	 * Clase Direccion
@@ -22,8 +23,8 @@ public class Direccion implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idDir")
-	private int idDir;
+	@Column(name = "idDirEmp")
+	private int idDirEmp;
 
 	@Column(name = "tipoVia")
 	private String tipoVia;
@@ -50,16 +51,16 @@ public class Direccion implements Serializable {
 	private String pais;
 
 	@ManyToOne
-	@JoinColumn(name = "idDatosPers")
-	private DatosPersonales datosPersonales;
-
-	public Direccion() {
-
+	@JoinColumn(name = "idEmp")
+	private Empresa empresa;
+	
+	public DireccionEmpresa() {
+		
 	}
 
-	public Direccion(int idDir, String tipoVia, String nombreVia, String numero, String resto, String cp,
-			String provincia, String ciudad, String pais) {
-		this.idDir = idDir;
+	public DireccionEmpresa(int idDirEmp, String tipoVia, String nombreVia, String numero, String resto, String cp,
+			String provincia, String ciudad, String pais, Empresa empresa) {
+		this.idDirEmp = idDirEmp;
 		this.tipoVia = tipoVia;
 		this.nombreVia = nombreVia;
 		this.numero = numero;
@@ -68,28 +69,15 @@ public class Direccion implements Serializable {
 		this.provincia = provincia;
 		this.ciudad = ciudad;
 		this.pais = pais;
+		this.empresa = empresa;
 	}
 
-	public Direccion(int idDir, String tipoVia, String nombreVia, String numero, String resto, String cp,
-			String provincia, String ciudad, String pais, DatosPersonales datosPersonales) {
-		this.idDir = idDir;
-		this.tipoVia = tipoVia;
-		this.nombreVia = nombreVia;
-		this.numero = numero;
-		this.resto = resto;
-		this.cp = cp;
-		this.provincia = provincia;
-		this.ciudad = ciudad;
-		this.pais = pais;
-		this.datosPersonales = datosPersonales;
+	public int getIdDirEmp() {
+		return idDirEmp;
 	}
 
-	public int getIdDir() {
-		return idDir;
-	}
-
-	public void setIdDir(int idDir) {
-		this.idDir = idDir;
+	public void setIdDirEmp(int idDirEmp) {
+		this.idDirEmp = idDirEmp;
 	}
 
 	public String getTipoVia() {
@@ -156,19 +144,19 @@ public class Direccion implements Serializable {
 		this.pais = pais;
 	}
 
-	public DatosPersonales getDatosPersonales() {
-		return datosPersonales;
+	public Empresa getEmpresa() {
+		return empresa;
 	}
 
-	public void setDatosPersonales(DatosPersonales datosPersonales) {
-		this.datosPersonales = datosPersonales;
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
 	}
 
 	@Override
 	public String toString() {
-		return "Direccion [idDir=" + idDir + ", tipoVia=" + tipoVia + ", nombreVia=" + nombreVia + ", numero=" + numero
-				+ ", resto=" + resto + ", cp=" + cp + ", provincia=" + provincia + ", ciudad=" + ciudad + ", pais="
-				+ pais + "]";
+		return "DireccionEmpresa [idDirEmp=" + idDirEmp + ", tipoVia=" + tipoVia + ", nombreVia=" + nombreVia
+				+ ", numero=" + numero + ", resto=" + resto + ", cp=" + cp + ", provincia=" + provincia + ", ciudad="
+				+ ciudad + ", pais=" + pais + "]";
 	}
 
 }
