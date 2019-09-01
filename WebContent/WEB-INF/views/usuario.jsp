@@ -20,73 +20,73 @@ jQuery(document).ready(function(){
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
-	<h1>usuario.jsp</h1>
-	<a href='<c:url value="/"/>'>Index</a><br/>
-	<a href='<c:url value="/about"/>'>Acerca de</a><br/>
-	<br/>
-	<br/>
-	<br/>
-	<sf:form method="post" action="${pageContext.request.contextPath}/usuario/save" modelAttribute="usuario">
-		<table>
-			<tr>
-				<td>Usuario</td>
-				<td>
-					<sf:input path="usuario" type="text"/>
-					<sf:errors path="usuario" cssStyle="color:red"/>
-				</td>
-			</tr>
-			<tr>
-				<td>Contraseña</td>
-				<td>
-					<sf:input path="clave" type="text"/>
-					<sf:errors path="clave" cssStyle="color:red"/>
-				</td>
-			</tr>
-			<tr>
-				<td>Permisos</td>
-				<td>
-					<sf:input path="fechaCreacion" type="text"/>
-					<sf:errors path="fechaCreacion" cssStyle="color:red"/>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="submit" value="Guardar cambios" /></td>
-			</tr>			
-		</table>
-	</sf:form>
-	<br/>
-	<c:out value="${resultado}"></c:out><br/><br/>
+<!-- 	<h1>usuario.jsp</h1> -->
+<%-- 	<a href='<c:url value="/"/>'>Index</a><br/> --%>
+<%-- 	<a href='<c:url value="/about"/>'>Acerca de</a><br/> --%>
+<!-- 	<br/> -->
+<!-- 	<br/> -->
+<!-- 	<br/> -->
+<%-- 	<sf:form method="post" action="${pageContext.request.contextPath}/usuario/save" modelAttribute="usuario"> --%>
+<!-- 		<table> -->
+<!-- 			<tr> -->
+<!-- 				<td>Usuario</td> -->
+<!-- 				<td> -->
+<%-- 					<sf:input path="usuario" type="text"/> --%>
+<%-- 					<sf:errors path="usuario" cssStyle="color:red"/> --%>
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td>Contraseña</td> -->
+<!-- 				<td> -->
+<%-- 					<sf:input path="clave" type="text"/> --%>
+<%-- 					<sf:errors path="clave" cssStyle="color:red"/> --%>
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td>Permisos</td> -->
+<!-- 				<td> -->
+<%-- 					<sf:input path="fechaCreacion" type="text"/> --%>
+<%-- 					<sf:errors path="fechaCreacion" cssStyle="color:red"/> --%>
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				<td></td> -->
+<!-- 				<td><input type="submit" value="Guardar cambios" /></td> -->
+<!-- 			</tr>			 -->
+<!-- 		</table> -->
+<%-- 	</sf:form> --%>
+<!-- 	<br/> -->
+<%-- 	<c:out value="${resultado}"></c:out><br/><br/> --%>
 	
-	<c:forEach items="${usuarios}" var="usuario">
-		<c:out value="${usuario}" />
-		<br/>
-	</c:forEach>
+<%-- 	<c:forEach items="${usuarios}" var="usuario"> --%>
+<%-- 		<c:out value="${usuario}" /> --%>
+<!-- 		<br/> -->
+<%-- 	</c:forEach> --%>
 
-<hr>
+<!-- <hr> -->
 <br>
-	<form>
+	<sf:form method="post" action="${pageContext.request.contextPath}/usuario/save" modelAttribute="usuario">
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
-			<label for="input">Usuario</label> <input type="text"
-				class="form-control" id="input">
+			<label for="input">Usuario</label>
+			<sf:input path="usuario" type="text" class="form-control"/> 
 		</div>
 		<div class="form-row">
 			<div class="form-group col-xs-12 col-sm-6 col-md-4">
-				<label for="inputPassword4">Contraseña</label> <input type="password"
-					class="form-control" id="inputPassword4">
+				<label for="inputPassword1">Contraseña</label> 
+				<sf:input path="clave" type="password" class="form-control" id="inputPassword1"/>
 			</div>
 			<div class="form-group col-xs-12 col-sm-6 col-md-4">
-				<label for="inputPassword4">Repetir contraseña</label> <input type="password"
-					class="form-control" id="inputPassword4">
+				<label for="inputPassword2">Repetir contraseña</label> 
+				<input type="password" class="form-control" id="inputPassword2">
 			</div>
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
-			<label for="input">Nombre</label> <input type="text"
-				class="form-control" id="input">
+			<label for="inputNombre">Nombre</label> 
+			<sf:input path="datosPersonales.nombre" type="text" class="form-control" id="inputNombre" />
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
-			<label for="input">Primer apellido</label> <input type="text"
-				class="form-control" id="input">
+			<label for="inputApellido1">Primer apellido</label>
+			<sf:input path="datosPersonales.apellido1" type="text" class="form-control" id="inputApellido1" />
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
 			<label for="input">Segundo apellido</label> <input type="text"
@@ -233,6 +233,6 @@ jQuery(document).ready(function(){
 		</div>		
 		
 		<button type="submit" class="btn btn-primary">Aceptar</button>
-	</form>
+	</sf:form>
 </body>
 </html>

@@ -56,7 +56,7 @@ public class UsuarioController {
 	public String saveUser(@ModelAttribute("usuario") @Validated(value=SpringFormGroup.class) Usuario usuario, BindingResult result, Model model, RedirectAttributes ra) {		
 		if(result.hasErrors()) {
 			return"usuario";
-		}		
+		}
 		usuarioService.save(usuario);
 		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");		
 		return "redirect:/usuario";

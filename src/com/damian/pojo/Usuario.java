@@ -55,7 +55,7 @@ public class Usuario implements Serializable {
 	private List<UsuarioEmpresa> usuarioEmpresa = new ArrayList<UsuarioEmpresa>();
 
 	//para relaciones one to one
-	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private DatosPersonales datosPersonales;
 
 	@Column(name = "habilitado")

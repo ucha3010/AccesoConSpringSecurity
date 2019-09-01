@@ -1,19 +1,27 @@
 CREATE TABLE `usuario` (
-  `idUsr` int(10) NOT NULL AUTO_INCREMENT,
-  `usuario` varchar(50) NOT NULL,
-  `clave` varchar(256) NOT NULL,
+  `idUsr` int(11) NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `clave` varchar(256) COLLATE utf8_spanish_ci NOT NULL,
   `habilitado` tinyint(4) NOT NULL,
   `fechaCreacion` datetime NOT NULL,
-  `idDP` int(11) NOT NULL,
-  PRIMARY KEY (`idUsr`)
-) ENGINE = InnoDB;
+  `datospersonales_idDatosPers` int(11) NOT NULL,
+  PRIMARY KEY (`idUsr`),
+  UNIQUE KEY `fk_idDatosPers` (`datospersonales_idDatosPers`),
+  CONSTRAINT `fk_usuario_datospersonales` FOREIGN KEY (`datospersonales_idDatosPers`) REFERENCES `datospersonales` (`idDatosPers`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
 
 CREATE TABLE `datospersonales` (
   `idDatosPers` int(11) NOT NULL AUTO_INCREMENT,
-  `dni` varchar(15) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `FK_idUsr` int(11) NOT NULL,
-  PRIMARY KEY (`idDatosPers`),
-  UNIQUE KEY `idUsr` (`FK_idUsr`),
-  CONSTRAINT `datospersonales_ibfk_1` FOREIGN KEY (`FK_idUsr`) REFERENCES `usuario` (`idUsr`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB;
+  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido1` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `apellido2` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `sexo` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fechaNacimiento` date DEFAULT NULL,
+  `nacionalidad` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `dni` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `observaciones` text COLLATE utf8_spanish_ci,
+  PRIMARY KEY (`idDatosPers`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;

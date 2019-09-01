@@ -7,16 +7,11 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.damian.valid.PersistenceGroup;
-import com.damian.valid.SpringFormGroup;
 
 @Entity
 @Table(name = "datospersonales")
@@ -28,6 +23,7 @@ public class DatosPersonales implements Serializable {
 	private static final long serialVersionUID = 130820142307L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idDatosPers")
 	private int idDatosPers;
 	
@@ -61,11 +57,6 @@ public class DatosPersonales implements Serializable {
 	@Column(name = "observaciones")	
 	private String observaciones;
 
-	@OneToOne
-	@JoinColumn(name = "FK_idUsr")
-	private Usuario usuario;
-
-	@NotEmpty(message = Constantes.NOT_EMPTY, groups = { PersistenceGroup.class, SpringFormGroup.class })
 	@OneToMany(mappedBy = "datosPersonales")
 	private List<Direccion> direcciones = new ArrayList<Direccion>();
 
@@ -102,7 +93,6 @@ public class DatosPersonales implements Serializable {
 		this.email = email;
 		this.telefono = telefono;
 		this.observaciones = observaciones;
-		this.usuario = usuario;
 		this.direcciones = direcciones;
 	}
 
@@ -192,14 +182,6 @@ public class DatosPersonales implements Serializable {
 
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public List<Direccion> getDirecciones() {
