@@ -89,13 +89,12 @@ jQuery(document).ready(function(){
 			<sf:input path="datosPersonales.apellido1" type="text" class="form-control" id="inputApellido1" />
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
-			<label for="input">Segundo apellido</label> <input type="text"
-				class="form-control" id="input">
+			<label for="inputApellido2">Segundo apellido</label>
+			<sf:input path="datosPersonales.apellido2" type="text" class="form-control" id="inputApellido2" />
 		</div>
 		<div class="custom-control custom-radio custom-control-inline">
-			<input type="radio" id="customRadioInline1" name="customRadioInline1"
-				class="custom-control-input"> <label
-				class="custom-control-label" for="customRadioInline1">Hombre</label>
+			<input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" th:field="datosPersonales.sexo" th:value="Hombre">
+			<label class="custom-control-label" for="Hombre" th:text="${datosPersonales}"></label>
 		</div>
 		<div class="custom-control custom-radio custom-control-inline">
 			<input type="radio" id="customRadioInline2" name="customRadioInline1"
