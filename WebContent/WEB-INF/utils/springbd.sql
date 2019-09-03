@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-09-2019 a las 18:07:40
+-- Tiempo de generación: 04-09-2019 a las 00:00:59
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -69,24 +69,20 @@ CREATE TABLE `datospersonales` (
   `dni` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `observaciones` text COLLATE utf8_spanish_ci
+  `observaciones` text COLLATE utf8_spanish_ci,
+  `usuario_idUsr` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `datospersonales`
 --
 
-INSERT INTO `datospersonales` (`idDatosPers`, `nombre`, `apellido1`, `apellido2`, `sexo`, `fechaNacimiento`, `nacionalidad`, `dni`, `email`, `telefono`, `observaciones`) VALUES
-(1, 'José', 'Martínez', 'Suárez', 'Masculino', '1967-07-11', 'España', '123456789A', 'pepe@pepe.com', '666555444', 'El usuario principal con el cual hacer pruebas'),
-(2, 'Juan', 'Álvarez', NULL, 'masculino', '1984-10-24', 'España', '123456789B', 'juan@juan.com', NULL, NULL),
-(3, 'Roberto', 'Do Santos', NULL, 'masculino', '1980-07-28', 'Portugal', '123456789C', 'roberto@roberto.com', NULL, NULL),
-(4, 'Damián', 'Usheff', NULL, 'masculino', '1976-10-30', 'Argentina', '123456789D', 'damian@damian.com', NULL, NULL),
-(5, 'Carlos Alberto', 'Velazquez de la Tarragona', NULL, 'masculino', '1975-08-01', 'España', '123456789E', 'carlos.alberto.velazquez.delatarragona@telefonicaladron.com', NULL, NULL),
-(13, 'Alexandra', 'Huertas', NULL, 'femenino', '1994-08-22', 'España', '123456789M', 'alex@gmail.com', NULL, NULL),
-(14, 'Alicia', 'Cruz', NULL, 'femenino', '2005-10-27', 'España', '123456789N', 'ali@gmail.com', NULL, NULL),
-(15, 'Miguel Ángel', 'Cruz', NULL, 'masculino', '2010-10-27', 'España', '123456789O', 'miki@gmail.com', NULL, NULL),
-(17, 'Prueba 15:15', 'Apellido 15:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(18, 'Prueba 18:04', 'Apellido 18:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `datospersonales` (`idDatosPers`, `nombre`, `apellido1`, `apellido2`, `sexo`, `fechaNacimiento`, `nacionalidad`, `dni`, `email`, `telefono`, `observaciones`, `usuario_idUsr`) VALUES
+(1, 'José', 'Martínez', 'Suárez', 'Masculino', '1967-07-11', 'España', '123456789A', 'pepe@pepe.com', '666555444', 'El usuario principal con el cual hacer pruebas', 1),
+(2, 'Juan', 'Álvarez', NULL, 'masculino', '1984-10-24', 'España', '123456789B', 'juan@juan.com', NULL, NULL, 2),
+(3, 'Roberto', 'Do Santos', NULL, 'masculino', '1980-07-28', 'Portugal', '123456789C', 'roberto@roberto.com', NULL, NULL, 3),
+(4, 'Damián', 'Usheff', NULL, 'masculino', '1976-10-30', 'Argentina', '123456789D', 'damian@damian.com', NULL, NULL, 4),
+(5, 'Carlos Alberto', 'Velazquez de la Tarragona', NULL, 'masculino', '1975-08-01', 'España', '123456789E', 'carlos.alberto.velazquez.delatarragona@telefonicaladron.com', NULL, NULL, 5);
 
 -- --------------------------------------------------------
 
@@ -113,11 +109,11 @@ CREATE TABLE `direccion` (
 
 INSERT INTO `direccion` (`idDir`, `tipoVia`, `nombreVia`, `numero`, `resto`, `cp`, `provincia`, `ciudad`, `pais`, `idDatosPers`) VALUES
 (7, 'Calle', 'Menor', '2', NULL, '28005', 'Madrid', 'Madrid', 'España', 1),
-(8, 'Calle', 'Martín', '50', NULL, '25005', 'Madrid', 'Madrid', 'España', 3),
 (11, 'Calle', 'Ana de Austria', '50', NULL, '28050', 'Madrid', 'Madrid', 'España', 4),
 (12, 'Avenida', 'Niceto Alcalá Zamora', '200', 'Urbanización El sol naciente', '28050', 'Madrid', 'Madrid', 'España', 4),
 (13, 'Plaza', 'Hidalgo', '3', NULL, '99009', 'Vallladolid', 'Valladolid', 'España', 1),
-(14, 'Pasaje', 'Silvano', 'sin número', NULL, '49251', 'Córdoba', 'El barrial', 'España', 2);
+(14, 'Pasaje', 'Silvano', 'sin número', NULL, '49251', 'Córdoba', 'El barrial', 'España', 2),
+(15, 'Calle', 'Martín', '23', NULL, '28050', 'Madrid', 'Sanchinaroo', 'España', 3);
 
 -- --------------------------------------------------------
 
@@ -216,12 +212,7 @@ INSERT INTO `usuario` (`idUsr`, `usuario`, `clave`, `habilitado`, `fechaCreacion
 (2, 'juan', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2018-08-12 00:00:00', 2),
 (3, 'roberto', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2018-08-13 18:35:04', 3),
 (4, 'Damian', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2018-08-13 18:35:35', 4),
-(5, 'Carlos', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2018-08-15 20:32:19', 5),
-(13, 'Alexandra', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2019-08-27 00:00:00', 13),
-(14, 'Alicia', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2019-08-27 00:00:00', 14),
-(15, 'Miguel', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2019-08-27 00:00:00', 15),
-(18, 'prueba1515', '1c7716bf9a0d08d334079aa901ecda2359b3b7a03d47f2de09b34faacc2fd9bf48589dc6d628c4e1', 1, '2019-09-01 17:48:36', 17),
-(19, 'prueba1804', 'fc23018bfcbaf2e02fb0407578a51bb287f08ee673a07a4b63901b34235ce12d6a7871308ab5b10b', 1, '2019-09-01 18:05:04', 18);
+(5, 'Carlos', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2018-08-15 20:32:19', 5);
 
 -- --------------------------------------------------------
 
@@ -267,10 +258,7 @@ INSERT INTO `usuario_roles` (`idUsr`, `idRoles`, `fechaCreacion`, `creadoPor`) V
 (2, 2, '2019-08-16', 'DAMIAN'),
 (3, 3, '2019-08-27', 'DAMIAN'),
 (4, 3, '2019-08-27', 'DAMIAN'),
-(5, 3, '2019-08-27', 'DAMIAN'),
-(13, 3, '2019-08-27', 'DAMIAN'),
-(14, 3, '2019-08-27', 'DAMIAN'),
-(15, 3, '2019-08-27', 'DAMIAN');
+(5, 3, '2019-08-27', 'DAMIAN');
 
 --
 -- Índices para tablas volcadas
@@ -286,7 +274,8 @@ ALTER TABLE `admin`
 -- Indices de la tabla `datospersonales`
 --
 ALTER TABLE `datospersonales`
-  ADD PRIMARY KEY (`idDatosPers`);
+  ADD PRIMARY KEY (`idDatosPers`),
+  ADD UNIQUE KEY `usuario_idUsr` (`usuario_idUsr`);
 
 --
 -- Indices de la tabla `direccion`
@@ -318,8 +307,7 @@ ALTER TABLE `roles`
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`idUsr`),
-  ADD UNIQUE KEY `fk_idDatosPers` (`datospersonales_idDatosPers`);
+  ADD PRIMARY KEY (`idUsr`);
 
 --
 -- Indices de la tabla `usuario_empresa`
@@ -348,12 +336,12 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de la tabla `datospersonales`
 --
 ALTER TABLE `datospersonales`
-  MODIFY `idDatosPers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idDatosPers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `idDir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idDir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT de la tabla `direccionempresa`
 --
@@ -373,28 +361,28 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idUsr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Restricciones para tablas volcadas
 --
 
 --
+-- Filtros para la tabla `datospersonales`
+--
+ALTER TABLE `datospersonales`
+  ADD CONSTRAINT `fk_datospersonales_usuario` FOREIGN KEY (`usuario_idUsr`) REFERENCES `usuario` (`idUsr`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  ADD CONSTRAINT `direccion_ibfk_1` FOREIGN KEY (`idDatosPers`) REFERENCES `datospersonales` (`idDatosPers`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `direccion_ibfk_1` FOREIGN KEY (`idDatosPers`) REFERENCES `datospersonales` (`idDatosPers`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `direccionempresa`
 --
 ALTER TABLE `direccionempresa`
   ADD CONSTRAINT `direccionEmpresa_ibfk_1` FOREIGN KEY (`idEmp`) REFERENCES `empresa` (`idEmp`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD CONSTRAINT `fk_usuario_datospersonales` FOREIGN KEY (`datospersonales_idDatosPers`) REFERENCES `datospersonales` (`idDatosPers`);
 
 --
 -- Filtros para la tabla `usuario_empresa`
@@ -408,7 +396,7 @@ ALTER TABLE `usuario_empresa`
 --
 ALTER TABLE `usuario_roles`
   ADD CONSTRAINT `FK_idRoles` FOREIGN KEY (`idRoles`) REFERENCES `roles` (`idRoles`),
-  ADD CONSTRAINT `FK_idUsr` FOREIGN KEY (`idUsr`) REFERENCES `usuario` (`idUsr`);
+  ADD CONSTRAINT `FK_idUsr` FOREIGN KEY (`idUsr`) REFERENCES `usuario` (`idUsr`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

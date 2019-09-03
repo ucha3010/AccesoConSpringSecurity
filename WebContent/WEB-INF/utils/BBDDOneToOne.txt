@@ -7,7 +7,7 @@ CREATE TABLE `usuario` (
   `datospersonales_idDatosPers` int(11) NOT NULL,
   PRIMARY KEY (`idUsr`),
   UNIQUE KEY `fk_idDatosPers` (`datospersonales_idDatosPers`),
-  CONSTRAINT `fk_usuario_datospersonales` FOREIGN KEY (`datospersonales_idDatosPers`) REFERENCES `datospersonales` (`idDatosPers`)
+  CONSTRAINT `fk_usuario_datospersonales` FOREIGN KEY (`datospersonales_idDatosPers`) REFERENCES `springbd`.`datospersonales` (`idDatosPers`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 
