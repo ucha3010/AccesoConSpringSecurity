@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.damian.dao.UsuarioDAO;
+import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Usuario;
 
 @Repository
@@ -95,6 +96,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	@Override
 	public void save(Usuario usuario) {
+		DatosPersonales dp = usuario.getDatosPersonales();
+		dp.setUsuario(usuario);
+		usuario.setDatosPersonales(dp);
 		getSession().save(usuario);
 	}
 	
