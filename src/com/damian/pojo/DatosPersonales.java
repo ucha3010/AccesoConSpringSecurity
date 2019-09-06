@@ -10,7 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,7 +26,7 @@ public class DatosPersonales implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idDatosPers")
+	@Column(name = "idDatosPers", unique = true, nullable = false)
 	private int idDatosPers;
 	
 	@Column(name = "nombre")
@@ -56,6 +58,10 @@ public class DatosPersonales implements Serializable {
 
 	@Column(name = "observaciones")	
 	private String observaciones;
+	
+	@OneToOne
+	@JoinColumn(name="datospersonales_idUsr")
+	private Usuario usuario;
 
 	@OneToMany(mappedBy = "datosPersonales")
 	private List<Direccion> direcciones = new ArrayList<Direccion>();
@@ -93,6 +99,7 @@ public class DatosPersonales implements Serializable {
 		this.email = email;
 		this.telefono = telefono;
 		this.observaciones = observaciones;
+		this.usuario = usuario;
 		this.direcciones = direcciones;
 	}
 
@@ -182,6 +189,14 @@ public class DatosPersonales implements Serializable {
 
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public List<Direccion> getDirecciones() {
