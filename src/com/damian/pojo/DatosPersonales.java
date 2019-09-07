@@ -1,8 +1,8 @@
 package com.damian.pojo;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "datospersonales")
@@ -41,8 +43,9 @@ public class DatosPersonales implements Serializable {
 	@Column(name = "sexo")
 	private String sexo;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "fechaNacimiento")
-	private Timestamp fechaNacimiento;
+	private Date fechaNacimiento;
 	
 	@Column(name = "nacionalidad")
 	private String nacionalidad;	
@@ -70,7 +73,7 @@ public class DatosPersonales implements Serializable {
 	}
 
 	public DatosPersonales(int idDatosPers, String nombre, String apellido1, String apellido2, String sexo,
-			Timestamp fechaNacimiento, String nacionalidad, String dni, String email, String telefono,
+			Date fechaNacimiento, String nacionalidad, String dni, String email, String telefono,
 			String observaciones) {
 		this.idDatosPers = idDatosPers;
 		this.nombre = nombre;
@@ -86,7 +89,7 @@ public class DatosPersonales implements Serializable {
 	}
 
 	public DatosPersonales(int idDatosPers, String nombre, String apellido1, String apellido2, String sexo,
-			Timestamp fechaNacimiento, String nacionalidad, String dni, String email, String telefono,
+			Date fechaNacimiento, String nacionalidad, String dni, String email, String telefono,
 			String observaciones, Usuario usuario, List<Direccion> direcciones) {
 		this.idDatosPers = idDatosPers;
 		this.nombre = nombre;
@@ -143,11 +146,11 @@ public class DatosPersonales implements Serializable {
 		this.sexo = sexo;
 	}
 
-	public Timestamp getFechaNacimiento() {
+	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Timestamp fechaNacimiento) {
+	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 

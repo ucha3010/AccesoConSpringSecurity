@@ -1,22 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src='<c:url value="/resources/js/jquery.js" />'></script>
-	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
-	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
-<script type="text/javascript">
-jQuery(document).ready(function(){
-	jQuery(".confirm").on("click", function(){
-		return confirm("Si eliminas este elemento no se podrá recuperar. ¿Continuar?");
-	})
-});
-</script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Insert title here</title>
+	<script type="text/javascript" src='<c:url value="/resources/js/jquery.js" />'></script>
+		<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
+		<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery(".confirm").on("click", function(){
+			return confirm("Si eliminas este elemento no se podrá recuperar. ¿Continuar?");
+		})
+	});
+	</script>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
@@ -73,16 +72,16 @@ jQuery(document).ready(function(){
 		<div class="form-row">
 			<div class="form-group col-xs-12 col-sm-6 col-md-4">
 				<label for="inputPassword1">Contraseña</label> 
-				<sf:input path="clave" type="password" class="form-control" id="inputPassword1"/>
+				<sf:password class="form-control" id="inputPassword1" path="clave"/>
 			</div>
 			<div class="form-group col-xs-12 col-sm-6 col-md-4">
 				<label for="inputPassword2">Repetir contraseña</label> 
-				<input type="password" class="form-control" id="inputPassword2">
+				<sf:password class="form-control" id="inputPassword2" path="clave"/>
 			</div>
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
 			<label for="inputNombre">Nombre</label> 
-			<sf:input path="datosPersonales.nombre" type="text" class="form-control" id="inputNombre" />
+			<sf:input path="datosPersonales.nombre" class="form-control" id="inputNombre" />
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
 			<label for="inputApellido1">Primer apellido</label>
@@ -93,17 +92,20 @@ jQuery(document).ready(function(){
 			<sf:input path="datosPersonales.apellido2" type="text" class="form-control" id="inputApellido2" />
 		</div>
 		<div class="custom-control custom-radio custom-control-inline">
-			<input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" th:field="datosPersonales.sexo" th:value="Hombre">
-			<label class="custom-control-label" for="Hombre" th:text="${datosPersonales}"></label>
+			<sf:radiobutton id="customRadioInline1" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Hombre"/>
+			<label class="custom-control-label" for="customRadioInline1">Hombre</label>
 		</div>
 		<div class="custom-control custom-radio custom-control-inline">
-			<input type="radio" id="customRadioInline2" name="customRadioInline1"
-				class="custom-control-input"> <label
-				class="custom-control-label" for="customRadioInline2">Mujer</label>
+			<sf:radiobutton id="customRadioInline2" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Mujer"/>
+			<label class="custom-control-label" for="customRadioInline2">Mujer</label>
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
-			<label for="input">Fecha de nacimiento ******************</label> <input type="text"
-				class="form-control" id="input">
+		
+			<label for="fechaNacimiento">Fecha de nacimiento</label>
+	    	<sf:input type="date" class="form-control" id="fechaNacimiento" path="datosPersonales.fechaNacimiento" value="2000-01-01"/>
+		
+		
+		
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
 			<label for="input">DNI</label> <input type="text"
