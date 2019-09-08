@@ -1,5 +1,8 @@
 package com.damian.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,10 +11,13 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.damian.pojo.DatosPersonales;
+import com.damian.pojo.Direccion;
 import com.damian.pojo.Usuario;
 import com.damian.service.impl.UsuarioServiceImpl;
 import com.damian.valid.SpringFormGroup;
@@ -37,6 +43,13 @@ public class UsuarioController {
 		Usuario usuario = new Usuario();
 		if(idUsr > 0) {
 			usuario = usuarioService.findById(idUsr);
+		} else {
+			Direccion direccion = new Direccion();
+			List<Direccion> direcciones = new ArrayList<>();
+			direcciones.add(direccion);
+			DatosPersonales datosPersonales = new DatosPersonales();
+			datosPersonales.setDirecciones(direcciones);
+			usuario.setDatosPersonales(datosPersonales);
 		}
 		modelAndView.addObject("usuario", usuario);
 		modelAndView.addObject("estoy", "usuario");
@@ -52,9 +65,10 @@ public class UsuarioController {
 		return modelAndView;
 	}
 	
-	@RequestMapping("/usuario/save")
+	@RequestMapping(value= {"/usuario/save"}, method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute("usuario") @Validated(value=SpringFormGroup.class) Usuario usuario, BindingResult result, Model model, RedirectAttributes ra) {		
 		if(result.hasErrors()) {
+			System.out.println(result.getAllErrors());
 			return"usuario";
 		}
 		usuarioService.save(usuario);

@@ -99,91 +99,36 @@
 			<sf:radiobutton id="customRadioInline2" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Mujer"/>
 			<label class="custom-control-label" for="customRadioInline2">Mujer</label>
 		</div>
-		<div class="form-group col-xs-12 col-sm-6 col-md-4">
-		
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">		
 			<label for="fechaNacimiento">Fecha de nacimiento</label>
 	    	<sf:input type="date" class="form-control" id="fechaNacimiento" path="datosPersonales.fechaNacimiento" value="2000-01-01"/>
-		
-		
-		
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
-			<label for="input">DNI</label> <input type="text"
-				class="form-control" id="input">
+			<label for="dni">DNI</label>
+			<sf:input path="datosPersonales.dni" type="text" class="form-control" id="dni" />
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
-			<label for="input">Email</label> <input type="text"
-				class="form-control" id="input">
+			<label for="email">EMAIL</label>
+			<sf:input path="datosPersonales.email" type="text" class="form-control" id="email" />
 		</div>
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
-			<label for="exampleFormControlSelect2">Roles (presione Ctrl para múltiples opciones)</label>
-			<select multiple class="form-control" id="exampleFormControlSelect2">
-				<option>ROL_CLIENTE</option>
-				<option>ROL_USUARIO</option>
-				<option>ROL_ADMIN</option>
-				<option>ROL_ROOT</option>
-			</select>
-		</div>
-		
-		<div class="form-row">		
-			<div class="form-group col-xs-12 col-sm-2">
-				<label for="exampleFormControlSelect1">Tipo vía</label> <select
-					class="form-control" id="exampleFormControlSelect1">
-					<option>Calle</option>
-					<option>Avenida</option>
-					<option>Pasaje</option>
-					<option>Carretera</option>
-					<option>Plaza</option>
-				</select>
-			</div>
-			<div class="form-group col-xs-12 col-sm-8">
-				<label for="input">Nombre vía</label> <input type="text"
-					class="form-control" id="input">
-			</div>
-			<div class="form-group col-xs-12 col-sm-2">
-				<label for="input">Número</label> <input type="text"
-					class="form-control" id="input">
-			</div>		
-		</div>
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="input">Resto dirección</label> <input type="text"
-				class="form-control" id="input">
-		</div>		
-		<div class="form-group col-xs-12 col-sm-6 col-md-4">
-			<label for="input">Ciudad</label> <input type="text"
-				class="form-control" id="input">
-		</div>
-		
-		<div class="form-row">
-			<div class="form-group col-xs-12 col-sm-4">
-				<label for="input">Código Postal</label> <input type="text"
-					class="form-control" id="input">
-			</div>	
-			<div class="form-group col-xs-12 col-sm-4">
-				<label for="exampleFormControlSelect1">Provincia</label> <select
-					class="form-control" id="exampleFormControlSelect1">
-					<option>Madrid</option>
-					<option>Barcelona</option>
-					<option>Toledo</option>
-					<option>Valencia</option>
-					<option>Córdoba</option>
-				</select>
-			</div>
-			<div class="form-group col-xs-12 col-sm-4">
-				<label for="exampleFormControlSelect1">País</label> <select
-					class="form-control" id="exampleFormControlSelect1">
-					<option>España</option>
-					<option>Francia</option>
-					<option>Portugal</option>
-					<option>Italia</option>
-					<option>Reino unido</option>
-				</select>
-			</div>	
+			<label for="rol">Roles (presione Ctrl para múltiples opciones)</label>
+			<sf:select class="form-control" id="rol" path="usuarioRoles" multiple="true">
+				<sf:option value="ROL_CLIENTE" />
+				<sf:option value="ROL_USUARIO" />
+				<sf:option value="ROL_ADMIN" />
+				<sf:option value="ROL_ROOT" />
+			</sf:select>
 		</div>	
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
-			<label for="input">Teléfono</label> <input type="text"
-				class="form-control" id="input">
+			<label for="telefono">Teléfono</label>
+			<sf:input path="datosPersonales.email" type="text" class="form-control" id="telefono" />
 		</div>
+		
+		
+		
+		
+		
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
 			<label for="input">Nombre comercial</label> <input type="text"
 				class="form-control" id="input">

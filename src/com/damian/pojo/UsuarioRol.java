@@ -14,19 +14,19 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "usuario_roles")
+@Table(name = "usuario_rol")
 @AssociationOverrides({
 		@AssociationOverride(name = "pk.usuario", joinColumns = @JoinColumn(name = "idUsr")),
-		@AssociationOverride(name = "pk.roles", joinColumns = @JoinColumn(name = "idRoles")) })
-public class UsuarioRoles implements java.io.Serializable {
+		@AssociationOverride(name = "pk.rol", joinColumns = @JoinColumn(name = "idRol")) })
+public class UsuarioRol implements java.io.Serializable {
 
 	/**
-	 * Clase UsuarioRoles
+	 * Clase UsuarioRol
 	 */
 	private static final long serialVersionUID = 130820142307L;
 
 	@EmbeddedId
-	private UsuarioRolesId pk = new UsuarioRolesId();
+	private UsuarioRolId pk = new UsuarioRolId();
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fechaCreacion", nullable = false, length = 10)
@@ -35,11 +35,11 @@ public class UsuarioRoles implements java.io.Serializable {
 	@Column(name = "creadoPor", nullable = false, length = 50)
 	private String creadoPor;
 
-	public UsuarioRolesId getPk() {
+	public UsuarioRolId getPk() {
 		return pk;
 	}
 
-	public void setPk(UsuarioRolesId pk) {
+	public void setPk(UsuarioRolId pk) {
 		this.pk = pk;
 	}
 	
@@ -53,12 +53,12 @@ public class UsuarioRoles implements java.io.Serializable {
 	}
 
 	@Transient
-	public Roles getRoles() {
-		return getPk().getRoles();
+	public Rol getRol() {
+		return getPk().getRol();
 	}
 
-	public void setRoles(Roles roles) {
-		getPk().setRoles(roles);
+	public void setRol(Rol rol) {
+		getPk().setRol(rol);
 	}
 
 	public Date getFechaCreacion() {
@@ -83,7 +83,7 @@ public class UsuarioRoles implements java.io.Serializable {
 			return true;
 		if (obj == null || getClass() != obj.getClass())
 			return false;
-		UsuarioRoles other = (UsuarioRoles) obj;
+		UsuarioRol other = (UsuarioRol) obj;
 		if (pk == null) {
 			if (other.pk != null)
 				return false;
@@ -99,7 +99,7 @@ public class UsuarioRoles implements java.io.Serializable {
 
 	@Override
 	public String toString() {
-		return "UsuarioRoles [pk=" + pk + ", fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor + "]";
+		return "UsuarioRol [pk=" + pk + ", fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor + "]";
 	}
 
 }

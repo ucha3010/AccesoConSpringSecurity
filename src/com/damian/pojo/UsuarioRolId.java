@@ -4,10 +4,10 @@ import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class UsuarioRolesId implements java.io.Serializable {
+public class UsuarioRolId implements java.io.Serializable {
 
 	/**
-	 * Clase UsuarioRolesId
+	 * Clase UsuarioRolId
 	 */
 	private static final long serialVersionUID = 130820142307L;
 
@@ -15,7 +15,7 @@ public class UsuarioRolesId implements java.io.Serializable {
 	private Usuario usuario;
 
 	@ManyToOne
-	private Roles roles;
+	private Rol rol;
 	
 	public Usuario getUsuario() {
 		return usuario;
@@ -23,18 +23,18 @@ public class UsuarioRolesId implements java.io.Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public Roles getRoles() {
-		return roles;
+	public Rol getRol() {
+		return rol;
 	}
-	public void setRoles(Roles roles) {
-		this.roles = roles;
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
+		result = prime * result + ((rol == null) ? 0 : rol.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
@@ -47,11 +47,11 @@ public class UsuarioRolesId implements java.io.Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UsuarioRolesId other = (UsuarioRolesId) obj;
-		if (roles == null) {
-			if (other.roles != null)
+		UsuarioRolId other = (UsuarioRolId) obj;
+		if (rol == null) {
+			if (other.rol != null)
 				return false;
-		} else if (!roles.equals(other.roles))
+		} else if (!rol.equals(other.rol))
 			return false;
 		if (usuario == null) {
 			if (other.usuario != null)
@@ -63,7 +63,7 @@ public class UsuarioRolesId implements java.io.Serializable {
 	
 	@Override
 	public String toString() {
-		return "UsuarioRolesId [usuario=" + usuario + ", roles=" + roles + "]";
+		return "UsuarioRolId [usuario=" + usuario + ", rol=" + rol + "]";
 	}
 	
 }

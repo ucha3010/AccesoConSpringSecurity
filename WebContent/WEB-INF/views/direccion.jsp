@@ -48,6 +48,70 @@
 		<c:out value="${direccion}" />
 		<br/>
 	</c:forEach>
+	
+<!-- 	Para hacer esta página!!!!!!!!!!!!!!!! -->
+Arriba muestro detalle del usuario
+y abajo un listado con las direcciones dadas de alta y la posibilidad de dar una nueva dirección de alta
+<!-- **************************************** -->
+	
+	
+<%-- 		<c:forEach var="direccion" items="${usaurio.datosPersonales.direcciones}"> --%>
+<!-- 			<div class="form-row">		 -->
+<!-- 				<div class="form-group col-xs-12 col-sm-2"> -->
+<!-- 					<label for="exampleFormControlSelect1">Tipo vía</label> <select -->
+<!-- 						class="form-control" id="exampleFormControlSelect1"> -->
+<!-- 						<option>Calle</option> -->
+<!-- 						<option>Avenida</option> -->
+<!-- 						<option>Pasaje</option> -->
+<!-- 						<option>Carretera</option> -->
+<!-- 						<option>Plaza</option> -->
+<!-- 					</select> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group col-xs-12 col-sm-8"> -->
+<!-- 					<label for="nombreVia">Nombre vía</label> -->
+<%-- 					<sf:input path="direccion.nombreVia" type="text" class="form-control" id="nombreVia" /> --%>
+<!-- 				</div> -->
+<!-- 				<div class="form-group col-xs-12 col-sm-2"> -->
+<!-- 					<label for="input">Número</label> <input type="text" -->
+<!-- 						class="form-control" id="input"> -->
+<!-- 				</div>		 -->
+<!-- 			</div> -->
+<!-- 			<div class="form-group col-xs-12 col-sm-6"> -->
+<!-- 				<label for="input">Resto dirección</label> <input type="text" -->
+<!-- 					class="form-control" id="input"> -->
+<!-- 			</div>		 -->
+<!-- 			<div class="form-group col-xs-12 col-sm-6 col-md-4"> -->
+<!-- 				<label for="input">Ciudad</label> <input type="text" -->
+<!-- 					class="form-control" id="input"> -->
+<!-- 			</div> -->
+			
+<!-- 			<div class="form-row"> -->
+<!-- 				<div class="form-group col-xs-12 col-sm-4"> -->
+<!-- 					<label for="input">Código Postal</label> <input type="text" -->
+<!-- 						class="form-control" id="input"> -->
+<!-- 				</div>	 -->
+<!-- 				<div class="form-group col-xs-12 col-sm-4"> -->
+<!-- 					<label for="exampleFormControlSelect1">Provincia</label> <select -->
+<!-- 						class="form-control" id="exampleFormControlSelect1"> -->
+<!-- 						<option>Madrid</option> -->
+<!-- 						<option>Barcelona</option> -->
+<!-- 						<option>Toledo</option> -->
+<!-- 						<option>Valencia</option> -->
+<!-- 						<option>Córdoba</option> -->
+<!-- 					</select> -->
+<!-- 				</div> -->
+<!-- 				<div class="form-group col-xs-12 col-sm-4"> -->
+<!-- 					<label for="exampleFormControlSelect1">País</label> <select -->
+<!-- 						class="form-control" id="exampleFormControlSelect1"> -->
+<!-- 						<option>España</option> -->
+<!-- 						<option>Francia</option> -->
+<!-- 						<option>Portugal</option> -->
+<!-- 						<option>Italia</option> -->
+<!-- 						<option>Reino unido</option> -->
+<!-- 					</select> -->
+<!-- 				</div>	 -->
+<!-- 			</div> -->
+<%-- 		</c:forEach> --%>
 
 </body>
 </html>

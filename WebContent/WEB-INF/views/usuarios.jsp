@@ -56,7 +56,7 @@
 						<c:set var="userRoles" value="${usuario.usuarioRoles}" scope="page" />
 						<td>
 						<c:forEach items="${userRoles}" var="roles">
-							<c:out value="${roles.pk.roles.rol}" /><br/>
+							<c:out value="${roles.pk.rol.rol}" /><br/>
 						</c:forEach>
 						</td>
 						<td class="sin_padding">

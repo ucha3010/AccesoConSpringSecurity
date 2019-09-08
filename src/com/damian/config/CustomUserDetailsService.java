@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.damian.dao.UsuarioDAO;
 import com.damian.pojo.Usuario;
-import com.damian.pojo.UsuarioRoles;
+import com.damian.pojo.UsuarioRol;
 
 @Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
@@ -33,8 +33,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 		Usuario usuario = usuarioDao.findByUsername(username);
 		
 		if(usuario != null) {
-			for(UsuarioRoles usuarioRoles: usuario.getUsuarioRoles()) {				
-				authorities.add(new SimpleGrantedAuthority(usuarioRoles.getPk().getRoles().getRol()));
+			for(UsuarioRol usuarioRoles: usuario.getUsuarioRoles()) {				
+				authorities.add(new SimpleGrantedAuthority(usuarioRoles.getPk().getRol().getRol()));
 			}
 			User user = new User(usuario.getUsuario(), usuario.getClave(), authorities);
 			return user;

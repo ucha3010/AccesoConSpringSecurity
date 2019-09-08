@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.damian.dao.UsuarioDAO;
 import com.damian.pojo.Usuario;
-import com.damian.pojo.UsuarioRoles;
+import com.damian.pojo.UsuarioRol;
 import com.damian.service.UsuarioService;
 
 @Service
@@ -56,9 +57,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 		List<Usuario> usuarios = usuarioDAO.findAll();
 		List<Usuario> clientes = new ArrayList<>();
 		for(Usuario usuario : usuarios) {
-			List<UsuarioRoles> roles = usuario.getUsuarioRoles();
-			for(UsuarioRoles rol: roles) {
-				if(rol.getRoles().getRol().equalsIgnoreCase("ROL_CLIENTE")) {
+			Set<UsuarioRol> roles = usuario.getUsuarioRoles();
+			for(UsuarioRol rol: roles) {
+				if(rol.getRol().getRol().equalsIgnoreCase("ROL_CLIENTE")) {
 					clientes.add(usuario);
 				}
 			}
