@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.damian.dao.UsuarioDAO;
-import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Usuario;
 
 @Repository
@@ -40,7 +39,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	public Usuario findById(int id) {
 		
 		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		Session session = getOpenSession();
+		Session session = getSession();
 		CriteriaQuery<Usuario> criteriaQuery = criteriaBuilder.createQuery(Usuario.class);
 		Root<Usuario> root = criteriaQuery.from(Usuario.class);
 		criteriaQuery.select(root);
@@ -96,10 +95,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	@Override
 	public void save(Usuario usuario) {
-		DatosPersonales dp = usuario.getDatosPersonales();
-		dp.setUsuario(usuario);
-		usuario.setDatosPersonales(dp);
-		getSession().save(usuario);
+		if(usuario.getIdUsr() > 0) {
+			getSession().update(usuario);
+		} else {
+			getSession().save(usuario);
+		}
 	}
 	
 	@Override

@@ -31,11 +31,21 @@ function sortTable(col) {
 					break;
 				}				
 			} else {
-				// check if the two rows should switch place:
-				if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-					// if so, mark as a switch and break the loop:
-					shouldSwitch = true;
-					break;
+				if(isNaN(x.innerHTML)){
+					// check if the two rows should switch place:
+					if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+						// if so, mark as a switch and break the loop:
+						shouldSwitch = true;
+						break;
+					}
+				} else {
+					// check if the two rows should switch place:
+					if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+						// if so, mark as a switch and break the loop:
+						shouldSwitch = true;
+						break;
+					}
+					
 				}
 			}
 		}

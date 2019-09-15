@@ -7,46 +7,56 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.damian.pojo.Admin;
+import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
-import com.damian.service.impl.AdminServiceImpl;
-import com.damian.service.impl.DireccionServiceImpl;
+import com.damian.pojo.Usuario;
+import com.damian.service.DatosPersonalesService;
+import com.damian.service.DireccionService;
+import com.damian.service.UsuarioService;
 
 @Controller
 @SessionAttributes("admin")
 public class DireccionController {
 
 	@Autowired
-	private AdminServiceImpl adminService;
+	private UsuarioService usuarioService;
 
 	@Autowired
-	private DireccionServiceImpl direccionService;
-	
-	@RequestMapping("/direccion/{idAd}")
-	public String getAll(Model model,
-			@ModelAttribute("resultado") String resultado,
-			@PathVariable("idAd") int idAd) {
-		
-		Admin admin = adminService.findById(idAd);
-		model.addAttribute("admin", admin);
-		model.addAttribute("direccion", new Direccion());
-		model.addAttribute("resultado", resultado);
-		model.addAttribute("direcciones", direccionService.findAll(idAd));
-		
-		return "direccion";
+	private DireccionService direccionService;
+
+	@Autowired
+	private DatosPersonalesService datosPersonalesService;
+
+	@RequestMapping("/direccion/{idUsr}")
+	public String getAll(Model model, @PathVariable("idUsr") int idUsr) {
+
+		model.addAttribute("usuario", usuarioService.findById(idUsr));
+		model.addAttribute("direcciones", direccionService.findListFromUsuario(idUsr));
+
+		return "direcciones";
 	}
 
-	
+	@RequestMapping("/direccion/formulario/{idDir}")
+	public ModelAndView getUser(ModelAndView modelAndView, @PathVariable("idDir") int idDir) {
+
+		Direccion direccion = direccionService.findById(idDir);
+		modelAndView.addObject("direccion", direccion);
+		modelAndView.addObject("estoy", "direccion");
+		modelAndView.setViewName("direccion");
+		return modelAndView;
+	}
+
 	@RequestMapping("/direccion/save")
-	public String save(Model model, RedirectAttributes ra,	
-			@ModelAttribute("direccion") Direccion direccion,
-			@ModelAttribute("admin") Admin admin) {
-		
-		direccionService.save(admin, direccion);
+	public String save(Model model, RedirectAttributes ra, @ModelAttribute("direccion") Direccion direccion,
+			@ModelAttribute("usuario") Usuario usuario) {
+
+		DatosPersonales datosPersonales = datosPersonalesService.findByUsrId(usuario.getIdUsr());
+		direccionService.save(datosPersonales, direccion);
 		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
-		
-		return "redirect:/direccion/" + admin.getIdAd();
+
+		return "redirect:/direccion/" + usuario.getIdUsr();
 	}
 }

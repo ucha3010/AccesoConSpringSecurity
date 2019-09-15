@@ -9,6 +9,8 @@ public interface UsuarioService {
 	Usuario findById(int id);
 
 	void save(Usuario usuario);
+	
+	void saveChangePassword(Usuario usuario);
 
 	List<Usuario> findAll();
 	

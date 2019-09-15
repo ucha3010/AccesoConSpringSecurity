@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
 import com.damian.pojo.Usuario;
+import com.damian.service.PaisService;
 import com.damian.service.impl.UsuarioServiceImpl;
 import com.damian.valid.SpringFormGroup;
 
@@ -29,6 +30,9 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioServiceImpl usuarioService;
+	
+	@Autowired
+	private PaisService paisService;
 	
 	@RequestMapping("/usuario")
 	public ModelAndView getAll(ModelAndView modelAndView) {
@@ -51,6 +55,7 @@ public class UsuarioController {
 			datosPersonales.setDirecciones(direcciones);
 			usuario.setDatosPersonales(datosPersonales);
 		}
+		modelAndView.addObject("paises", paisService.findAll());
 		modelAndView.addObject("usuario", usuario);
 		modelAndView.addObject("estoy", "usuario");
 		modelAndView.setViewName("usuario");
@@ -82,7 +87,7 @@ public class UsuarioController {
 		usuarioService.delete(idUsr);
 		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
 		
-		return "redirect:/usuarios";
+		return "redirect:/usuario";
 
 	}
 	

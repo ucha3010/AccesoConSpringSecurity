@@ -3,9 +3,7 @@ package com.damian.pojo;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,20 +42,20 @@ public class Usuario implements Serializable {
 	private String usuario;
 
 	@NotEmpty(message = Constantes.NOT_EMPTY, groups = { PersistenceGroup.class, SpringFormGroup.class })
-	@Size(min = 8, max = 20, message = Constantes.NOT_SIZE, groups = { SpringFormGroup.class })
+//	@Size(min = 8, max = 20, message = Constantes.NOT_SIZE, groups = { SpringFormGroup.class })
 	@Column(name = "clave")
 	private String clave;
 
 	//para relaciones many to many
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.usuario", cascade = CascadeType.ALL)
-	private Set<UsuarioRol> usuarioRoles = new HashSet<UsuarioRol>();
+	private List<UsuarioRol> usuarioRoles = new ArrayList<UsuarioRol>();
 
 	//para relaciones many to many
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.usuario", cascade = CascadeType.ALL)
 	private List<UsuarioEmpresa> usuarioEmpresa = new ArrayList<UsuarioEmpresa>();
 
 	//para relaciones one to one
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "usuario", cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL)
 	private DatosPersonales datosPersonales;
 
 	@Column(name = "habilitado")
@@ -77,7 +75,7 @@ public class Usuario implements Serializable {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public Usuario(int idUsr, String usuario, String clave, Set<UsuarioRol> usuarioRoles,
+	public Usuario(int idUsr, String usuario, String clave, List<UsuarioRol> usuarioRoles,
 			List<UsuarioEmpresa> usuarioEmpresa, DatosPersonales datosPersonales, boolean habilitado,
 			Timestamp fechaCreacion) {
 		this.idUsr = idUsr;
@@ -114,11 +112,11 @@ public class Usuario implements Serializable {
 		this.clave = clave;
 	}
 
-	public Set<UsuarioRol> getUsuarioRoles() {
+	public List<UsuarioRol> getUsuarioRoles() {
 		return usuarioRoles;
 	}
 
-	public void setUsuarioRoles(Set<UsuarioRol> usuarioRoles) {
+	public void setUsuarioRoles(List<UsuarioRol> usuarioRoles) {
 		this.usuarioRoles = usuarioRoles;
 	}
 

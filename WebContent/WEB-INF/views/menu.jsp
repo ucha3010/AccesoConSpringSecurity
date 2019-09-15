@@ -62,7 +62,7 @@
 	
 			<sec:authorize access="isRememberMe()">
 				<sec:authentication property="principal" var="principal" />
-				<c:set var="username" value="${principal.username}" />
+				<c:set var="username" value="${principal}" />
 				<button type="button" class="btn btn-dark float-right ml-1 btn-sm border-color-dam" onclick='location.href="<c:url value='/logout' />"'>
 					<fmt:message key="label.Logout" />
 				</button>
