@@ -80,5 +80,10 @@ public class DireccionDaoImpl implements DireccionDao {
 		
 		return direcciones;
 	}
+	
+	@Override
+	public void delete(Direccion direccion) {
+		getSession().delete(direccion);
+	}
 
 }

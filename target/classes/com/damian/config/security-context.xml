@@ -19,13 +19,16 @@
 		<security:intercept-url pattern="/usuario/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/admin" access="isAuthenticated()" />
 		<security:intercept-url pattern="/admin/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
-		<security:intercept-url pattern="/direccion/**" access="hasRole('ROL_ADMIN')" />
+		<security:intercept-url pattern="/direccion/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/direccion/formulario/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/direccion/save" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/direccion/delete/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/**" access="denyAll" />
 		<security:form-login login-page="/login"
 			password-parameter="clave" username-parameter="usuario"
 			authentication-failure-url="/login?error=true" />
 		<security:logout invalidate-session="true" logout-url="/logout" />
-		<security:remember-me token-validity-seconds="10000"
+		<security:remember-me token-validity-seconds="86400"
 			user-service-ref="customUserDetailsService" />
 	</security:http>
 

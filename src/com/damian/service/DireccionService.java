@@ -12,5 +12,7 @@ public interface DireccionService {
 	void save(DatosPersonales datosPersonales, Direccion direccion);
 
 	List<Direccion> findListFromUsuario(int idUsr);
+	
+	void delete(int idDir);
 
 }

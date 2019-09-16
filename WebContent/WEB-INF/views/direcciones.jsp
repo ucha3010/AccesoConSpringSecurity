@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,27 +34,38 @@
 		<table id="tablaOrdenar" class="table table-striped">
 			<thead>
 				<tr>
-					<th colspan="2"></th>
-					<th onclick="sortTable(2)"><fmt:message key="label.Type.road" /></th>
-					<th onclick="sortTable(3)"><fmt:message key="label.Street" /></th>
-					<th onclick="sortTable(4)"><fmt:message key="label.Number" /></th>
-					<th onclick="sortTable(5)"><fmt:message key="label.Rest" /></th>
-					<th onclick="sortTable(6)"><fmt:message key="label.Postal.code" /></th>
-					<th onclick="sortTable(7)"><fmt:message key="label.Province" /></th>
-					<th onclick="sortTable(8)"><fmt:message key="label.City" /></th>
-					<th onclick="sortTable(9)"><fmt:message key="label.Country" /></th>
+					<c:set var="count" value="0" scope="page" />
+					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+						<th colspan="2"></th>
+						<c:set var="count" value="${count + 2}" scope="page"/>
+					</sec:authorize>
+					<th onclick="sortTable(${count})"><fmt:message key="label.Type.road" /></th>
+					<c:set var="count" value="${count + 1}" scope="page"/>
+					<th onclick="sortTable(${count})"><fmt:message key="label.Street" /></th>
+					<c:set var="count" value="${count + 1}" scope="page"/>
+					<th onclick="sortTable(${count})"><fmt:message key="label.Number" /></th>
+					<c:set var="count" value="${count + 1}" scope="page"/>
+					<th onclick="sortTable(${count})"><fmt:message key="label.Rest" /></th>
+					<c:set var="count" value="${count + 1}" scope="page"/>
+					<th onclick="sortTable(${count})"><fmt:message key="label.Postal.code" /></th>
+					<c:set var="count" value="${count + 1}" scope="page"/>
+					<th onclick="sortTable(${count})"><fmt:message key="label.Province" /></th>
+					<c:set var="count" value="${count + 1}" scope="page"/>
+					<th onclick="sortTable(${count})"><fmt:message key="label.City" /></th>
+					<c:set var="count" value="${count + 1}" scope="page"/>
+					<th onclick="sortTable(${count})"><fmt:message key="label.Country" /></th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${direcciones}" var="direccion">
 				    <tr>
 						<td class="sin_padding">
-							<button type="button" class="btn btn-default" onclick='location.href="<c:url value='/direccion/${direccion.idDir}' />"'>
+							<button type="button" class="btn btn-default" onclick='location.href="<c:url value='/direccion/formulario/${direccion.idDir}' />"'>
 							  <img src='<c:url value="/resources/imgs/editar.png"/>' alt="Editar" class="tamanio_imagen">
 							</button>
 						</td>
 						<td class="sin_padding">
-							<button type="button" class="btn btn-default confirm" onclick='location.href="<c:url value='/direccion/${direccion.idDir}/delete' />"'>
+							<button type="button" class="btn btn-default confirm" onclick='location.href="<c:url value='/direccion/delete/${direccion.idDir}' />"'>
 							  <img src='<c:url value="/resources/imgs/borrar.png"/>' alt="Borrar" class="tamanio_imagen">
 							</button>
 						</td>

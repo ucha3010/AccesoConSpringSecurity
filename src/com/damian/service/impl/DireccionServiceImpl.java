@@ -40,4 +40,10 @@ public class DireccionServiceImpl implements DireccionService {
 		return direccionDao.findListFromUsuario(datosPersonales.getIdDatosPers());
 	}
 
+	@Override
+	public void delete(int idDir) {
+		Direccion direccion = findById(idDir);
+		direccionDao.delete(direccion);
+	}
+
 }

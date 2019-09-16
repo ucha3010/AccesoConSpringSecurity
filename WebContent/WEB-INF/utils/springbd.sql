@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-09-2019 a las 23:28:48
+-- Tiempo de generación: 17-09-2019 a las 00:13:06
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -78,22 +78,10 @@ CREATE TABLE `datospersonales` (
 --
 
 INSERT INTO `datospersonales` (`idDatosPers`, `nombre`, `apellido1`, `apellido2`, `sexo`, `fechaNacimiento`, `nacionalidad`, `dni`, `email`, `telefono`, `observaciones`, `datospersonales_idUsr`) VALUES
-(1, 'José', 'Martínez', 'Suárez', 'Masculino', '1967-07-11', 'España', '123456789A', 'pepe@pepe.com', '666555444', 'El usuario principal con el cual hacer pruebas', 1),
-(2, 'Juan', 'Álvarez', NULL, 'masculino', '1984-10-24', 'España', '123456789B', 'juan@juan.com', NULL, NULL, 2),
-(3, 'Roberto', 'Do Santos', NULL, 'masculino', '1980-07-28', 'Portugal', '123456789C', 'roberto@roberto.com', NULL, NULL, 3),
-(4, 'Damián', 'Usheff', NULL, 'masculino', '1976-10-30', 'Argentina', '123456789D', 'damian@damian.com', NULL, NULL, 4),
-(5, 'Carlos Alberto', 'Velazquez de la Tarragona', NULL, 'masculino', '1975-08-01', 'España', '123456789E', 'carlos.alberto.velazquez.delatarragona@telefonicaladron.com', NULL, NULL, 5),
-(8, 'Prueba 15:15', 'Apellido 15:15', 'Segundo 23:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 18),
-(9, 'Prueba 12:13', 'Apellido 12:13', 'Segundo 23:43', 'Mujer', NULL, NULL, NULL, NULL, NULL, NULL, 19),
-(11, 'DamiÃ¡n', 'Usheff', 'Vellianitis', 'Hombre', NULL, NULL, NULL, NULL, NULL, NULL, 21),
-(12, 'DamiÃ¡n', 'Apellido 18:04', 'Segundo 23:43', 'Hombre', NULL, NULL, NULL, NULL, NULL, NULL, 22),
-(13, 'DamiÃ¡n', 'DamiÃ¡n', 'Segundo 23:43', 'Hombre', NULL, NULL, NULL, NULL, NULL, NULL, 23),
-(14, 'Damián', 'Damián', 'Segundo 23:43', 'Hombre', NULL, NULL, NULL, NULL, NULL, NULL, 24),
-(15, 'Prueba 18:21', 'Apellido 18:21', 'ergsgsdgf', 'Mujer', NULL, NULL, NULL, NULL, NULL, NULL, 25),
-(16, 'Prueba 18:04', 'Núñez', 'Agüero', 'Hombre', NULL, NULL, NULL, NULL, NULL, NULL, 26),
-(17, 'Prueba 23:43', 'Apellido 23:43', 'Segundo 23:43', 'Mujer', '2000-05-18', NULL, NULL, NULL, NULL, NULL, 27),
-(18, 'Con', 'Validate', 'Núñezagüero', 'Hombre', '1986-06-29', NULL, NULL, NULL, NULL, NULL, 28),
-(19, 'Prueba 18:21', 'Apellido 23:43', 'ergsgsdgf', 'Hombre', '1996-11-01', NULL, '', '', NULL, NULL, 29);
+(1, 'José', 'Martínez', 'Suárez', 'Hombre', '1967-07-11', 'España', '123456789A', 'pepe@pepe.com', '666555444', 'El usuario principal con el cual hacer pruebas', 1),
+(3, 'Roberto', 'Do Santos', '', 'Hombre', '1980-07-28', 'Portugal', '123456789D', 'roberto@roberto.com', '', '', 3),
+(4, 'Damián', 'Usheff', '', 'Hombre', '1976-10-30', 'Alemania', '123456789D', 'damian@damian.com', '', '', 4),
+(32, 'Damián', 'Usheff', 'Vellianitis', 'Hombre', '1976-10-30', 'Austria', '12345678A', 'damian@damian.com', '698765435', 'Observaciones para ser guardadas en base de datos', 44);
 
 -- --------------------------------------------------------
 
@@ -123,7 +111,6 @@ INSERT INTO `direccion` (`idDir`, `tipoVia`, `nombreVia`, `numero`, `resto`, `cp
 (11, 'Calle', 'Ana de Austria', '50', NULL, '28050', 'Madrid', 'Madrid', 'España', 4),
 (12, 'Avenida', 'Niceto Alcalá Zamora', '200', 'Urbanización El sol naciente', '28050', 'Madrid', 'Madrid', 'España', 4),
 (13, 'Plaza', 'Hidalgo', '3', NULL, '99009', 'Vallladolid', 'Valladolid', 'España', 1),
-(14, 'Pasaje', 'Silvano', 'sin número', NULL, '49251', 'Córdoba', 'El barrial', 'España', 2),
 (15, 'Calle', 'Martín', '23', NULL, '28050', 'Madrid', 'Sanchinaroo', 'España', 3);
 
 -- --------------------------------------------------------
@@ -181,6 +168,42 @@ INSERT INTO `empresa` (`idEmp`, `nombreComercial`, `tipoSociedad`, `actividad`, 
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `paises`
+--
+
+CREATE TABLE `paises` (
+  `idPais` int(11) NOT NULL,
+  `nombreES` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `nombreEN` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `paises`
+--
+
+INSERT INTO `paises` (`idPais`, `nombreES`, `nombreEN`) VALUES
+(1, 'España', 'Spain'),
+(2, 'Alemania', 'Germany'),
+(3, 'Andorra', ''),
+(4, 'Austria', ''),
+(5, 'Bélgica', ''),
+(6, 'Dinamarca', ''),
+(7, 'El Vaticano', ''),
+(8, 'Francia', ''),
+(9, 'Grecia', ''),
+(10, 'Italia', ''),
+(11, 'Noruega', ''),
+(12, 'Países Bajos', ''),
+(13, 'Portugal', ''),
+(14, 'Reino Unido', ''),
+(15, 'San Marino', ''),
+(16, 'Suecia', ''),
+(17, 'Suiza', ''),
+(18, 'Turquía', '');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `rol`
 --
 
@@ -194,9 +217,9 @@ CREATE TABLE `rol` (
 --
 
 INSERT INTO `rol` (`idRol`, `rol`) VALUES
-(1, 'ROL_ADMIN'),
+(1, 'ROL_CLIENTE'),
 (2, 'ROL_USUARIO'),
-(3, 'ROL_CLIENTE'),
+(3, 'ROL_ADMIN'),
 (4, 'ROL_ROOT');
 
 -- --------------------------------------------------------
@@ -218,23 +241,10 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsr`, `usuario`, `clave`, `habilitado`, `fechaCreacion`) VALUES
-(1, 'pepe', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2018-08-12 00:00:00'),
-(2, 'juan', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2018-08-12 00:00:00'),
-(3, 'roberto', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2018-08-13 18:35:04'),
-(4, 'Damian', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2018-08-13 18:35:35'),
-(5, 'Carlos', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2018-08-15 20:32:19'),
-(18, 'prueba1515', '6fcd9959abd9fb8a8839cbf862241965041e55ca00a009c2583a0d8f2ac7a3c90019fea43903b152', 1, '2019-09-07 00:00:23'),
-(19, 'prueba1213', 'f06e01d438c43efc0638047c5676ca50c21f2d16b87fcdd784350e4f1c80a65d8730b9a90930dea9', 1, '2019-09-07 12:14:12'),
-(20, 'prueba1821', '517e2f3e475030e4775a5dff16d2956d23a93dd289adc598bf3f10603715cb0f3b12bf6520a50b1b', 1, '2019-09-07 13:16:34'),
-(21, 'dusheff', '460b2585f2b9a8ffee004d3a58cddd718ee67103f96c16970990f42a58b1676646ba194d19c136c3', 1, '2019-09-07 16:00:08'),
-(22, 'dusheff', '3e0d5c1e5abe1bc2eeae944f495cc8222d277acc9a4cd9659ab8d1ca94bedd7db0c870cc5352ede5', 1, '2019-09-07 16:17:42'),
-(23, 'prueba1515', '5e2bcbf54357e98aeb360e75de42b82a6f410d9f34fc36bf884b6aebce0989cb643f989ac35f88b1', 1, '2019-09-07 16:52:38'),
-(24, 'prueba1515', '531231bded7ccadc5992d5fe120eff0f20544246663b8f6572f7dea3111bbc4a8be7d5abd89e12cd', 1, '2019-09-07 16:57:44'),
-(25, 'prueba1821', 'bd780eb9b528522dd001928201bc42b052544543400befa6498c94bf586319b9c1b97c2483af21f4', 1, '2019-09-07 17:00:51'),
-(26, 'prueba1804', '8325676431201ccb538a21320665f268d052b38e5f7138dbbe19a2cfff0b7ba48a4c2e2058a99916', 1, '2019-09-07 17:01:51'),
-(27, 'prueba2343', '5e53f92f99c245178ac256498b93b35f7be307a3b6edd0f6c156eb78441dd185126c469aab4dfb65', 1, '2019-09-07 17:11:10'),
-(28, 'conValidate', '24aff816937b97005d3189cb202b7046f16b5ad70c771ad8e642a1e164f2c00127b1c6aa66934932', 1, '2019-09-07 17:31:35'),
-(29, 'prueba1515', '00d195ef49ffe885befea39d8fd914af5ac44b1fd7f990cc268653b2e3cc864d784f876a6c3a612b', 1, '2019-09-07 23:43:57');
+(1, 'pepe', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2019-09-15 16:17:35'),
+(3, 'roberto', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2019-09-15 16:17:09'),
+(4, 'Damian', '44e31399fa4840954f1f7b8e14b96052e3622019c8ab4856a62f3d4926cbd645f8206d3884a3d173', 1, '2019-09-15 16:16:47'),
+(44, 'dusheff', 'ef25ba98adf1337503ed37ba779d741bfa56ec94039aa658c5340c2fb630573b1ff38eb811bf54a4', 1, '2019-09-15 16:15:00');
 
 -- --------------------------------------------------------
 
@@ -274,13 +284,12 @@ CREATE TABLE `usuario_rol` (
 --
 
 INSERT INTO `usuario_rol` (`idUsr`, `idRol`, `fechaCreacion`, `creadoPor`) VALUES
-(1, 1, '2019-08-16', 'DAMIAN'),
 (1, 2, '2019-08-16', 'DAMIAN'),
+(1, 3, '2019-08-16', 'DAMIAN'),
 (1, 4, '2019-08-27', 'DAMIAN'),
-(2, 2, '2019-08-16', 'DAMIAN'),
-(3, 3, '2019-08-27', 'DAMIAN'),
-(4, 3, '2019-08-27', 'DAMIAN'),
-(5, 3, '2019-08-27', 'DAMIAN');
+(3, 1, '2019-08-27', 'DAMIAN'),
+(4, 1, '2019-08-27', 'DAMIAN'),
+(44, 1, '2019-09-14', 'DAMIAN');
 
 --
 -- Índices para tablas volcadas
@@ -318,6 +327,12 @@ ALTER TABLE `direccionempresa`
 --
 ALTER TABLE `empresa`
   ADD PRIMARY KEY (`idEmp`);
+
+--
+-- Indices de la tabla `paises`
+--
+ALTER TABLE `paises`
+  ADD PRIMARY KEY (`idPais`);
 
 --
 -- Indices de la tabla `rol`
@@ -358,7 +373,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de la tabla `datospersonales`
 --
 ALTER TABLE `datospersonales`
-  MODIFY `idDatosPers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idDatosPers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT de la tabla `direccion`
 --
@@ -375,6 +390,11 @@ ALTER TABLE `direccionempresa`
 ALTER TABLE `empresa`
   MODIFY `idEmp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT de la tabla `paises`
+--
+ALTER TABLE `paises`
+  MODIFY `idPais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
@@ -383,7 +403,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `idUsr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 --
 -- Restricciones para tablas volcadas
 --

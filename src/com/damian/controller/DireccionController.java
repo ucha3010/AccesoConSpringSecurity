@@ -15,10 +15,11 @@ import com.damian.pojo.Direccion;
 import com.damian.pojo.Usuario;
 import com.damian.service.DatosPersonalesService;
 import com.damian.service.DireccionService;
+import com.damian.service.PaisService;
 import com.damian.service.UsuarioService;
 
 @Controller
-@SessionAttributes("admin")
+@SessionAttributes({"resultado","estoy"})
 public class DireccionController {
 
 	@Autowired
@@ -29,6 +30,9 @@ public class DireccionController {
 
 	@Autowired
 	private DatosPersonalesService datosPersonalesService;
+	
+	@Autowired
+	private PaisService paisService;
 
 	@RequestMapping("/direccion/{idUsr}")
 	public String getAll(Model model, @PathVariable("idUsr") int idUsr) {
@@ -45,6 +49,7 @@ public class DireccionController {
 		Direccion direccion = direccionService.findById(idDir);
 		modelAndView.addObject("direccion", direccion);
 		modelAndView.addObject("estoy", "direccion");
+		modelAndView.addObject("paises", paisService.findAll());
 		modelAndView.setViewName("direccion");
 		return modelAndView;
 	}
@@ -58,5 +63,15 @@ public class DireccionController {
 		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
 
 		return "redirect:/direccion/" + usuario.getIdUsr();
+	}
+
+	@RequestMapping("/direccion/delete/{idDir}")
+	public String deleteUser(@PathVariable("idDir") int idDir, RedirectAttributes ra) {
+		
+		direccionService.delete(idDir);
+		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
+		
+		return "redirect:/usuario";
+
 	}
 }
