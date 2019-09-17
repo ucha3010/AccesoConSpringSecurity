@@ -25,14 +25,20 @@ public class Pais implements Serializable {
 
 	@Column(name = "nombreES")
 	private String nombreES;
+	
+
+
+	@Column(name = "nombreEN")
+	private String nombreEN;
 
 	public Pais() {
 	}
 
 
-	public Pais(int idPais, String nombreES) {
+	public Pais(int idPais, String nombreES, String nombreEN) {
 		this.idPais = idPais;
 		this.nombreES = nombreES;
+		this.nombreEN = nombreEN;
 	}
 
 
@@ -56,11 +62,22 @@ public class Pais implements Serializable {
 	}
 
 
+	public String getNombreEN() {
+		return nombreEN;
+	}
+
+
+	public void setNombreEN(String nombreEN) {
+		this.nombreEN = nombreEN;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + idPais;
+		result = prime * result + ((nombreEN == null) ? 0 : nombreEN.hashCode());
 		result = prime * result + ((nombreES == null) ? 0 : nombreES.hashCode());
 		return result;
 	}
@@ -77,6 +94,11 @@ public class Pais implements Serializable {
 		Pais other = (Pais) obj;
 		if (idPais != other.idPais)
 			return false;
+		if (nombreEN == null) {
+			if (other.nombreEN != null)
+				return false;
+		} else if (!nombreEN.equals(other.nombreEN))
+			return false;
 		if (nombreES == null) {
 			if (other.nombreES != null)
 				return false;
@@ -88,7 +110,7 @@ public class Pais implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Pais [idPais=" + idPais + ", nombreES=" + nombreES + "]";
+		return "Pais [idPais=" + idPais + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + "]";
 	}
 
 }

@@ -43,10 +43,18 @@ public class DireccionController {
 		return "direcciones";
 	}
 
-	@RequestMapping("/direccion/formulario/{idDir}")
-	public ModelAndView getUser(ModelAndView modelAndView, @PathVariable("idDir") int idDir) {
+	@RequestMapping("/direccion/formulario/{idDir}/{idDatosPers}")
+	public ModelAndView getUser(ModelAndView modelAndView, @PathVariable("idDir") int idDir, @PathVariable("idDatosPers") int idDatosPers,
+			@ModelAttribute("usuario") Usuario usuario) {
 
-		Direccion direccion = direccionService.findById(idDir);
+		Direccion direccion;
+		if(idDir > 0) {
+			direccion = direccionService.findById(idDir);
+		} else {
+			direccion = new Direccion();
+			DatosPersonales datosPersonales = datosPersonalesService.findById(idDatosPers);
+			direccion.setDatosPersonales(datosPersonales);
+		}
 		modelAndView.addObject("direccion", direccion);
 		modelAndView.addObject("estoy", "direccion");
 		modelAndView.addObject("paises", paisService.findAll());
@@ -54,15 +62,14 @@ public class DireccionController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/direccion/save")
-	public String save(Model model, RedirectAttributes ra, @ModelAttribute("direccion") Direccion direccion,
-			@ModelAttribute("usuario") Usuario usuario) {
+	@RequestMapping("/direccion/save/{idUsr}")
+	public String save(Model model, RedirectAttributes ra, @ModelAttribute("direccion") Direccion direccion, @PathVariable("idUsr") int idUsr) {
 
-		DatosPersonales datosPersonales = datosPersonalesService.findByUsrId(usuario.getIdUsr());
+		DatosPersonales datosPersonales = datosPersonalesService.findByUsrId(idUsr);
 		direccionService.save(datosPersonales, direccion);
 		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
 
-		return "redirect:/direccion/" + usuario.getIdUsr();
+		return "redirect:/direccion/" + idUsr;
 	}
 
 	@RequestMapping("/direccion/delete/{idDir}")

@@ -27,8 +27,15 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
-	<div class="form-group col-xs-12 col-sm-6">
-		<h1><c:out value="${usuario.datosPersonales.nombre}" /> <c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /></h1>
+	<div class="d-flex">
+		<div class="mr-auto p-2">
+			<h1><c:out value="${usuario.datosPersonales.nombre}" /> <c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /></h1>
+		</div>
+		<div class="p-2">
+			<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/direccion/formulario/0/${usuario.datosPersonales.idDatosPers}'/>"'>
+				<fmt:message key="label.Add.user" />
+			</button>
+		</div>		
 	</div>
 	<div class="divTabla">
 		<table id="tablaOrdenar" class="table table-striped">
@@ -60,7 +67,7 @@
 				<c:forEach items="${direcciones}" var="direccion">
 				    <tr>
 						<td class="sin_padding">
-							<button type="button" class="btn btn-default" onclick='location.href="<c:url value='/direccion/formulario/${direccion.idDir}' />"'>
+							<button type="button" class="btn btn-default" onclick='location.href="<c:url value='/direccion/formulario/${direccion.idDir}/0' />"'>
 							  <img src='<c:url value="/resources/imgs/editar.png"/>' alt="Editar" class="tamanio_imagen">
 							</button>
 						</td>

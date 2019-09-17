@@ -18,15 +18,20 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
-	<div class="form-group col-xs-12 col-sm-6">
-		<h1><c:out value="${direccion.datosPersonales.nombre}" /> <c:out value="${direccion.datosPersonales.apellido1}" /> <c:out value="${direccion.datosPersonales.apellido2}" /></h1>
-	</div>
-	<sf:form method="post" action="${pageContext.request.contextPath}/direccion/save" modelAttribute="direccion">
+	<c:if test="${direccion.idDir != 0}">
+		<div class="form-group col-xs-12 text-center">
+			<h1>
+				<c:out value="${direccion.datosPersonales.nombre}" /> <c:out value="${direccion.datosPersonales.apellido1}" /> <c:out value="${direccion.datosPersonales.apellido2}" />
+				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/direccion/${direccion.datosPersonales.usuario.idUsr}' />"'> Direcciones de <c:out value="${direccion.datosPersonales.nombre}" /></button>
+			</h1>
+		</div>
+	</c:if>
+	<sf:form method="post" action="${pageContext.request.contextPath}/direccion/save/${direccion.datosPersonales.usuario.idUsr}" modelAttribute="direccion">
 		<c:if test="${direccion.idDir != 0}">
 			<sf:hidden path="idDir"/>
 		</c:if>
 		
-		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+		<div class="form-group col-xs-12 col-sm-6">
 			<label for="tipoVia"><fmt:message key="label.Type.road" /></label>
 			<sf:select class="form-control" id="tipoVia" path="tipoVia">
 				<sf:option value="Calle" />
@@ -34,13 +39,7 @@
 				<sf:option value="Paseo" />
 				<sf:option value="Plaza" />
 			</sf:select>
-		</div>	
-		
-<!-- 		<div class="form-group col-xs-12 col-sm-6"> -->
-<%-- 			<label for="tipoVia"><fmt:message key="label.Type.road" /></label> --%>
-<%-- 			<sf:input path="tipoVia" type="text" class="form-control" id="tipoVia"/> --%>
-<%-- 			<sf:errors path="tipoVia" cssStyle="color:red"/> --%>
-<!-- 		</div> -->
+		</div>
 		<div class="form-group col-xs-12 col-sm-6">
 			<label for="nombreVia"><fmt:message key="label.Street" /></label> 
 			<sf:input path="nombreVia" class="form-control" id="nombreVia" />
@@ -65,17 +64,17 @@
 			<label for="ciudad"><fmt:message key="label.City" /></label>
 			<sf:input path="ciudad" type="text" class="form-control" id="ciudad" />
 		</div>
-		<c:set var="columnaPais" value="<fmt:message key="CountryItemColumn" />" scope="page" />
-		<c:out value="${columnaPais}"></c:out>
+		<fmt:message key="Country.item.column" var="itemSelect"/>
+		<fmt:message key="Select.country" var="selectCountry" />
 		<div class="form-group col-xs-12 col-sm-6">
 			<label for="pais"><fmt:message key="label.Country" /></label>
         	<sf:select path="pais" class="form-control" id="pais">
-            	<sf:option value="1" label="<fmt:message key='Select.country' />" />
-            	<sf:options items="${paises}" itemValue="nombreES" itemLabel="nombreES" />
+            	<sf:option value="1" label="${selectCountry}" />
+            	<sf:options items="${paises}" itemValue="${itemSelect}" itemLabel="${itemSelect}" />
         	</sf:select>
 		</div>		
 		
-		<button type="submit" class="btn btn-primary margin-left-5porciento">Aceptar</button>
+		<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
 	</sf:form>
 </body>
 </html>
