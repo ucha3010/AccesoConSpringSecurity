@@ -72,13 +72,13 @@ public class DireccionController {
 		return "redirect:/direccion/" + idUsr;
 	}
 
-	@RequestMapping("/direccion/delete/{idDir}")
-	public String deleteUser(@PathVariable("idDir") int idDir, RedirectAttributes ra) {
+	@RequestMapping("/direccion/delete/{idDir}/{idUsr}")
+	public String deleteUser(@PathVariable("idDir") int idDir, @PathVariable("idUsr") int idUsr, RedirectAttributes ra) {
 		
 		direccionService.delete(idDir);
 		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
 		
-		return "redirect:/usuario";
+		return "redirect:/direccion/" + idUsr;
 
 	}
 }

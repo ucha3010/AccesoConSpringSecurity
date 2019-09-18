@@ -22,7 +22,7 @@
 		<div class="form-group col-xs-12 text-center">
 			<h1>
 				<c:out value="${direccion.datosPersonales.nombre}" /> <c:out value="${direccion.datosPersonales.apellido1}" /> <c:out value="${direccion.datosPersonales.apellido2}" />
-				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/direccion/${direccion.datosPersonales.usuario.idUsr}' />"'> Direcciones de <c:out value="${direccion.datosPersonales.nombre}" /></button>
+				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/direccion/${direccion.datosPersonales.usuario.idUsr}' />"'><fmt:message key="Addresses.of" /> <c:out value="${direccion.datosPersonales.nombre}" /></button>
 			</h1>
 		</div>
 	</c:if>
@@ -75,6 +75,7 @@
 		</div>		
 		
 		<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
+		<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/direccion/${direccion.datosPersonales.usuario.idUsr}' />"'><fmt:message key="Cancel" /></button>
 	</sf:form>
 </body>
 </html>
