@@ -19,7 +19,7 @@ import com.damian.service.PaisService;
 import com.damian.service.UsuarioService;
 
 @Controller
-@SessionAttributes({"resultado","estoy"})
+@SessionAttributes({ "resultado", "estoy" })
 public class DireccionController {
 
 	@Autowired
@@ -30,7 +30,7 @@ public class DireccionController {
 
 	@Autowired
 	private DatosPersonalesService datosPersonalesService;
-	
+
 	@Autowired
 	private PaisService paisService;
 
@@ -44,11 +44,11 @@ public class DireccionController {
 	}
 
 	@RequestMapping("/direccion/formulario/{idDir}/{idDatosPers}")
-	public ModelAndView getUser(ModelAndView modelAndView, @PathVariable("idDir") int idDir, @PathVariable("idDatosPers") int idDatosPers,
-			@ModelAttribute("usuario") Usuario usuario) {
+	public ModelAndView getUser(ModelAndView modelAndView, @PathVariable("idDir") int idDir,
+			@PathVariable("idDatosPers") int idDatosPers, @ModelAttribute("usuario") Usuario usuario) {
 
 		Direccion direccion;
-		if(idDir > 0) {
+		if (idDir > 0) {
 			direccion = direccionService.findById(idDir);
 		} else {
 			direccion = new Direccion();
@@ -63,21 +63,22 @@ public class DireccionController {
 	}
 
 	@RequestMapping("/direccion/save/{idUsr}")
-	public String save(Model model, RedirectAttributes ra, @ModelAttribute("direccion") Direccion direccion, @PathVariable("idUsr") int idUsr) {
+	public String save(Model model, RedirectAttributes ra, @ModelAttribute("direccion") Direccion direccion,
+			@PathVariable("idUsr") int idUsr) {
 
-		DatosPersonales datosPersonales = datosPersonalesService.findByUsrId(idUsr);
-		direccionService.save(datosPersonales, direccion);
+		direccionService.save(idUsr, direccion);
 		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
 
 		return "redirect:/direccion/" + idUsr;
 	}
 
 	@RequestMapping("/direccion/delete/{idDir}/{idUsr}")
-	public String deleteUser(@PathVariable("idDir") int idDir, @PathVariable("idUsr") int idUsr, RedirectAttributes ra) {
-		
+	public String deleteUser(@PathVariable("idDir") int idDir, @PathVariable("idUsr") int idUsr,
+			RedirectAttributes ra) {
+
 		direccionService.delete(idDir);
 		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
-		
+
 		return "redirect:/direccion/" + idUsr;
 
 	}

@@ -10,7 +10,7 @@
 
 <html>
 <head>
-	<title>Usuarios</title>
+	<title><fmt:message key="label.Users" /></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<script type="text/javascript" src='<c:url value="/resources/js/jquery.js" />'></script>
@@ -18,11 +18,14 @@
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/tablas.css'/>" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
-		jQuery(document).ready(function(){
-			jQuery(".confirm").on("click", function(){
-				return confirm("Si eliminas este elemento no se podrá recuperar. ¿Continuar?");
-			})
-		});
+		function confirmDelete(idUsr){
+			if(confirm("<fmt:message key='Delete.message' />")){
+				var url = "<c:url value='/usuario/"+idUsr+"/delete' />";
+				location.href=url;
+				return true;
+			}
+			return false;
+		}
 	</script>
 </head>
 <body>
@@ -67,13 +70,13 @@
 				    <tr title='<c:out value="${usuario.datosPersonales.observaciones}" />'>
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 							<td class="sin_padding">
-								<button type="button" class="btn btn-default" onclick='location.href="<c:url value='/usuario/${usuario.idUsr}' />"'>
+								<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/usuario/${usuario.idUsr}' />"'>
 								  <img src='<c:url value="/resources/imgs/editar.png"/>' alt="Editar" class="tamanio_imagen">
 								</button>
 							</td>
 							<td class="sin_padding">
-								<button type="button" class="btn btn-default confirm" onclick='location.href="<c:url value='/usuario/${usuario.idUsr}/delete' />"'>
-								  <img src='<c:url value="/resources/imgs/borrar.png"/>' alt="Borrar" class="tamanio_imagen">
+								<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${usuario.idUsr})">
+								  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
 								</button>
 							</td>
 						</sec:authorize>

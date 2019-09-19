@@ -69,7 +69,7 @@
 		<div class="form-group col-xs-12 col-sm-6">
 			<label for="pais"><fmt:message key="label.Country" /></label>
         	<sf:select path="pais" class="form-control" id="pais">
-            	<sf:option value="1" label="${selectCountry}" />
+            	<sf:option value="empty" label="${selectCountry}" />
             	<sf:options items="${paises}" itemValue="${itemSelect}" itemLabel="${itemSelect}" />
         	</sf:select>
 		</div>		

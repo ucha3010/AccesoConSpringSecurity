@@ -56,7 +56,11 @@ public class DireccionDaoImpl implements DireccionDao {
 
 	@Override
 	public void save(Direccion direccion) {
-		getSession().save(direccion);		
+		if(direccion.getIdDir() > 0) {
+			getSession().update(direccion);
+		} else {
+			getSession().save(direccion);
+		}	
 	}
 
 	@Override

@@ -23,17 +23,17 @@ import com.damian.service.PaisService;
 import com.damian.service.impl.UsuarioServiceImpl;
 import com.damian.valid.SpringFormGroup;
 
-
 @Controller
-@SessionAttributes({"resultado","estoy"}) //los atributos que pueden mantenerse en sesión y verse en distintas páginas
+@SessionAttributes({ "resultado", "estoy" }) // los atributos que pueden mantenerse en sesión y verse en distintas
+												// páginas
 public class UsuarioController {
 
 	@Autowired
 	private UsuarioServiceImpl usuarioService;
-	
+
 	@Autowired
 	private PaisService paisService;
-	
+
 	@RequestMapping("/usuario")
 	public ModelAndView getAll(ModelAndView modelAndView) {
 		modelAndView.addObject("usuarios", usuarioService.findAll());
@@ -41,11 +41,11 @@ public class UsuarioController {
 		modelAndView.setViewName("usuarios");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping("/usuario/{idUsr}")
 	public ModelAndView getUser(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
 		Usuario usuario = new Usuario();
-		if(idUsr > 0) {
+		if (idUsr > 0) {
 			usuario = usuarioService.findById(idUsr);
 		} else {
 			Direccion direccion = new Direccion();
@@ -61,7 +61,7 @@ public class UsuarioController {
 		modelAndView.setViewName("usuario");
 		return modelAndView;
 	}
-	
+
 	@RequestMapping("/usuario/username/{username}")
 	public ModelAndView getUserByUsername(ModelAndView modelAndView, @PathVariable("username") String username) {
 		modelAndView.addObject("usuario", usuarioService.findByUsername(username));
@@ -69,34 +69,35 @@ public class UsuarioController {
 		modelAndView.setViewName("usuario");
 		return modelAndView;
 	}
-	
-	@RequestMapping(value= {"/usuario/save"}, method = RequestMethod.POST)
-	public String saveUser(@ModelAttribute("usuario") @Validated(value=SpringFormGroup.class) Usuario usuario, BindingResult result, Model model, RedirectAttributes ra) {		
-		if(result.hasErrors()) {
+
+	@RequestMapping(value = { "/usuario/save" }, method = RequestMethod.POST)
+	public String saveUser(@ModelAttribute("usuario") @Validated(value = SpringFormGroup.class) Usuario usuario,
+			BindingResult result, Model model, RedirectAttributes ra) {
+		if (result.hasErrors()) {
 			System.out.println(result.getAllErrors());
-			return"usuario";
+			return "usuario";
 		}
 		usuarioService.save(usuario);
-		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");		
+		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
 		return "redirect:/usuario";
 	}
 
 	@RequestMapping("/usuario/{idUsr}/delete")
 	public String deleteUser(@PathVariable("idUsr") int idUsr, RedirectAttributes ra) {
-		
+
 		usuarioService.delete(idUsr);
 		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
-		
+
 		return "redirect:/usuario";
 
 	}
-	
+
 	@RequestMapping("/usuario/cliente")
 	public ModelAndView getCustomers(ModelAndView modelAndView) {
 		modelAndView.addObject("usuarios", usuarioService.findCustomers());
 		modelAndView.addObject("estoy", "usuario");
 		modelAndView.setViewName("usuarios");
 		return modelAndView;
-	}	
+	}
 
 }

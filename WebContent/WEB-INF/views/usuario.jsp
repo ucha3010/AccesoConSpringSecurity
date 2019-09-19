@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%-- language maneja el idioma actual --%>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="com.damian.utils.multilanguage" />
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -16,7 +21,7 @@
 <br>
 	<sf:form method="post" action="${pageContext.request.contextPath}/usuario/save" modelAttribute="usuario">
 		<div class="form-group col-xs-12 col-sm-6">
-			<label for="input">Usuario</label>
+			<label for="input"><fmt:message key="label.Username" /></label>
 			<sf:input path="usuario" type="text" class="form-control"/>
 			<sf:errors path="usuario" cssStyle="color:red"/>
 		</div>
@@ -40,7 +45,7 @@
 			<sf:hidden path="fechaCreacion"/>
 		</c:if>
 		<div class="form-group col-xs-12 col-sm-6">
-			<label for="inputNombre">Nombre</label> 
+			<label for="inputNombre"><fmt:message key="label.Name" /></label> 
 			<sf:input path="datosPersonales.nombre" class="form-control" id="inputNombre" />
 		</div>
 		<div class="form-group col-xs-12 col-sm-6">
@@ -60,23 +65,23 @@
 			<label class="custom-control-label" for="customRadioInline2">Mujer</label>
 		</div>
 		<div class="form-group col-xs-12 col-sm-6">		
-			<label for="fechaNacimiento">Fecha de nacimiento</label>
+			<label for="fechaNacimiento"><fmt:message key="label.Birthdate" /></label>
 	    	<sf:input type="date" class="form-control" id="fechaNacimiento" path="datosPersonales.fechaNacimiento"/>
 		</div>
 		<div class="form-group col-xs-12 col-sm-6">
-			<label for="nacionalidad">Nacionalidad</label>
+			<label for="nacionalidad"><fmt:message key="label.Nationality" /></label>
         	<sf:select path="datosPersonales.nacionalidad" class="form-control" id="nacionalidad">
-            	<sf:option value="1" label="Seleccione país"/>
+            	<sf:option value="empty" label="Seleccione país"/>
             	<sf:options items="${paises}" itemValue="nombreES" itemLabel="nombreES"/>
         	</sf:select>
 <%-- 			<sf:select path="datosPersonales.nacionalidad" items="${paises}" class="form-control" id="nacionalidad" /> --%>
 		</div>
 		<div class="form-group col-xs-12 col-sm-6">
-			<label for="dni">DNI</label>
+			<label for="dni"><fmt:message key="label.idcard" /></label>
 			<sf:input path="datosPersonales.dni" type="text" class="form-control" id="dni" />
 		</div>
 		<div class="form-group col-xs-12 col-sm-6">
-			<label for="email">Email</label>
+			<label for="email"><fmt:message key="label.Email" /></label>
 			<sf:input path="datosPersonales.email" type="text" class="form-control" id="email" />
 		</div>
 <!-- 		<div class="form-group col-xs-12 col-sm-6 col-md-4"> -->
@@ -89,7 +94,7 @@
 <%-- 			</sf:select> --%>
 <!-- 		</div>	 -->
 		<div class="form-group col-xs-12 col-sm-6">
-			<label for="telefono">Teléfono</label>
+			<label for="telefono"><fmt:message key="label.Phone" /></label>
 			<sf:input path="datosPersonales.telefono" type="text" class="form-control" id="telefono" />
 		</div>
 		<div class="form-group col-xs-12 col-sm-6">
@@ -146,6 +151,7 @@
 		</div>		
 		
 		<button type="submit" class="btn btn-primary margin-left-5porciento">Aceptar</button>
+		<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/usuario"/>"'><fmt:message key="Cancel" /></button>
 	</sf:form>
 </body>
 </html>

@@ -70,13 +70,13 @@
 				<c:forEach items="${direcciones}" var="direccion">
 				    <tr>
 						<td class="sin_padding">
-							<button type="button" class="btn btn-default" onclick='location.href="<c:url value='/direccion/formulario/${direccion.idDir}/0' />"'>
-							  <img src='<c:url value="/resources/imgs/editar.png"/>' alt="Editar" class="tamanio_imagen">
+							<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/direccion/formulario/${direccion.idDir}/0' />"'>
+							  <img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
 							</button>
 						</td>
 						<td class="sin_padding">
-							<button type="button" class="btn btn-default confirm" onclick="return confirmDelete(${direccion.idDir},${usuario.idUsr})" >
-							  <img src='<c:url value="/resources/imgs/borrar.png"/>' alt="Borrar" class="tamanio_imagen">
+							<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${direccion.idDir},${usuario.idUsr})" >
+							  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
 							</button>
 						</td>
 						<td><c:out value="${direccion.tipoVia}" /></td>
