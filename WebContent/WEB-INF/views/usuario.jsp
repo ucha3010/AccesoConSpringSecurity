@@ -11,7 +11,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Usuario</title>
+	<title><fmt:message key="label.User" /></title>
 	<script type="text/javascript" src='<c:url value="/resources/js/jquery.js" />'></script>
 	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
@@ -28,12 +28,12 @@
 		<c:if test="${empty usuario.clave}">
 			<div class="form-row col-xs-12 col-sm-6">
 				<div class="form-group col-xs-12 col-sm-6">
-					<label for="inputPassword1">Contraseña</label> 
+					<label for="inputPassword1"><fmt:message key="label.Password" /></label> 
 					<sf:password class="form-control" id="inputPassword1" path="clave"/>
 					<sf:errors path="clave" cssStyle="color:red"/>
 				</div>
 				<div class="form-group col-xs-12 col-sm-6">
-					<label for="inputPassword2">Repetir contraseña</label> 
+					<label for="inputPassword2"><fmt:message key="label.Password.repeat" /></label> 
 					<input type="password" class="form-control" id="inputPassword2"/>
 				</div>
 			</div>
@@ -49,30 +49,34 @@
 			<sf:input path="datosPersonales.nombre" class="form-control" id="inputNombre" />
 		</div>
 		<div class="form-group col-xs-12 col-sm-6">
-			<label for="inputApellido1">Primer apellido</label>
+			<label for="inputApellido1"><fmt:message key="label.Fist.lastname" /></label>
 			<sf:input path="datosPersonales.apellido1" type="text" class="form-control" id="inputApellido1" />
 		</div>
 		<div class="form-group col-xs-12 col-sm-6">
-			<label for="inputApellido2">Segundo apellido</label>
+			<label for="inputApellido2"><fmt:message key="label.Second.lastname" /></label>
 			<sf:input path="datosPersonales.apellido2" type="text" class="form-control" id="inputApellido2" />
 		</div>
+		<br/>
 		<div class="custom-control custom-radio custom-control-inline margin-left-5porciento">
 			<sf:radiobutton id="customRadioInline1" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Hombre"/>
-			<label class="custom-control-label" for="customRadioInline1">Hombre</label>
+			<label class="custom-control-label" for="customRadioInline1"><fmt:message key="label.Male" /></label>
 		</div>
 		<div class="custom-control custom-radio custom-control-inline">
 			<sf:radiobutton id="customRadioInline2" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Mujer"/>
-			<label class="custom-control-label" for="customRadioInline2">Mujer</label>
+			<label class="custom-control-label" for="customRadioInline2"><fmt:message key="label.Female" /></label>
 		</div>
+		<br/><br/>
 		<div class="form-group col-xs-12 col-sm-6">		
 			<label for="fechaNacimiento"><fmt:message key="label.Birthdate" /></label>
 	    	<sf:input type="date" class="form-control" id="fechaNacimiento" path="datosPersonales.fechaNacimiento"/>
 		</div>
+		<fmt:message key="Country.item.column" var="itemSelect"/>
+		<fmt:message key="Select.country" var="selectCountry" />
 		<div class="form-group col-xs-12 col-sm-6">
 			<label for="nacionalidad"><fmt:message key="label.Nationality" /></label>
         	<sf:select path="datosPersonales.nacionalidad" class="form-control" id="nacionalidad">
-            	<sf:option value="empty" label="Seleccione país"/>
-            	<sf:options items="${paises}" itemValue="nombreES" itemLabel="nombreES"/>
+            	<sf:option value="empty" label="${selectCountry}" />
+            	<sf:options items="${paises}" itemValue="${itemSelect}" itemLabel="${itemSelect}" />
         	</sf:select>
 <%-- 			<sf:select path="datosPersonales.nacionalidad" items="${paises}" class="form-control" id="nacionalidad" /> --%>
 		</div>
@@ -98,7 +102,7 @@
 			<sf:input path="datosPersonales.telefono" type="text" class="form-control" id="telefono" />
 		</div>
 		<div class="form-group col-xs-12 col-sm-6">
-			<label for="observaciones">Observaciones</label>
+			<label for="observaciones"><fmt:message key="label.Observations" /></label>
 			<sf:textarea path="datosPersonales.observaciones" class="form-control" id="observaciones" rows="3" />
 		</div>
 <!-- 		<div class="form-group col-xs-12 col-sm-6 col-md-4"> -->
@@ -146,11 +150,11 @@
 		<div class="form-group margin-left-5porciento">
 			<div class="form-check">
 				<input class="form-check-input" type="checkbox" id="gridCheck">
-				<label class="form-check-label" for="gridCheck"> Acepto los términos y condiciones</label>
+				<label class="form-check-label" for="gridCheck"> <fmt:message key="Accept.terms.and.conditions" /></label>
 			</div>
 		</div>		
 		
-		<button type="submit" class="btn btn-primary margin-left-5porciento">Aceptar</button>
+		<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
 		<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/usuario"/>"'><fmt:message key="Cancel" /></button>
 	</sf:form>
 </body>
