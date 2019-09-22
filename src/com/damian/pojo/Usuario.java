@@ -48,7 +48,7 @@ public class Usuario implements Serializable {
 
 	//para relaciones many to many
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.usuario", cascade = CascadeType.ALL)
-	private List<UsuarioRol> usuarioRoles = new ArrayList<UsuarioRol>();
+	private List<UsuarioRol> usuarioRol = new ArrayList<UsuarioRol>();
 
 	//para relaciones many to many
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.usuario", cascade = CascadeType.ALL)
@@ -75,13 +75,13 @@ public class Usuario implements Serializable {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public Usuario(int idUsr, String usuario, String clave, List<UsuarioRol> usuarioRoles,
+	public Usuario(int idUsr, String usuario, String clave, List<UsuarioRol> usuarioRol,
 			List<UsuarioEmpresa> usuarioEmpresa, DatosPersonales datosPersonales, boolean habilitado,
 			Timestamp fechaCreacion) {
 		this.idUsr = idUsr;
 		this.usuario = usuario;
 		this.clave = clave;
-		this.usuarioRoles = usuarioRoles;
+		this.usuarioRol = usuarioRol;
 		this.usuarioEmpresa = usuarioEmpresa;
 		this.datosPersonales = datosPersonales;
 		this.habilitado = habilitado;
@@ -112,12 +112,12 @@ public class Usuario implements Serializable {
 		this.clave = clave;
 	}
 
-	public List<UsuarioRol> getUsuarioRoles() {
-		return usuarioRoles;
+	public List<UsuarioRol> getUsuarioRol() {
+		return usuarioRol;
 	}
 
-	public void setUsuarioRoles(List<UsuarioRol> usuarioRoles) {
-		this.usuarioRoles = usuarioRoles;
+	public void setUsuarioRol(List<UsuarioRol> usuarioRol) {
+		this.usuarioRol = usuarioRol;
 	}
 
 	public List<UsuarioEmpresa> getUsuarioEmpresa() {

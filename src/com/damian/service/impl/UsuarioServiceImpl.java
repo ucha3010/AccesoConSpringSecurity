@@ -62,18 +62,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 			usuario.setHabilitado(true);
 			String claveUsr = usuario.getClave();
 			usuario.setClave(passwordEncoder.encode(claveUsr));
-			List<UsuarioRol> usuarioRoles = new ArrayList<>();
-			UsuarioRol usuarioRol = new UsuarioRol();
-			UsuarioRolId pk = new UsuarioRolId();
-			List<Rol> roles = rolDAO.findByRolName("ROL_CLIENTE");
-			Rol rol = roles.get(0);
-			pk.setRol(rol);
-			pk.setUsuario(usuario);
-			usuarioRol.setPk(pk);
-			usuarioRol.setFechaCreacion(new Date());
-			usuarioRol.setCreadoPor("DAMIAN");
-			usuarioRoles.add(usuarioRol);
-			usuario.setUsuarioRoles(usuarioRoles);			
+//			List<UsuarioRol> usuarioRoles = new ArrayList<>();
+//			UsuarioRol usuarioRol = new UsuarioRol();
+//			UsuarioRolId pk = new UsuarioRolId();
+//			List<Rol> roles = rolDAO.findByRolName("ROL_CLIENTE");
+//			Rol rol = roles.get(0);
+//			pk.setRol(rol);
+//			pk.setUsuario(usuario);
+//			usuarioRol.setPk(pk);
+//			usuarioRol.setFechaCreacion(new Date());
+//			usuarioRol.setCreadoPor("DAMIAN");
+//			usuarioRoles.add(usuarioRol);
+//			usuario.setUsuarioRol(usuarioRoles);			
 		} else {
 			DatosPersonales dpId = datosPersonalesService.findByUsrId(usuario.getIdUsr());
 			dp.setIdDatosPers(dpId.getIdDatosPers());
@@ -84,7 +84,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 					usuarioRolList.add(ur);
 				}
 			}
-			usuario.setUsuarioRoles(usuarioRolList);
+			usuario.setUsuarioRol(usuarioRolList);
 			List<UsuarioEmpresa> usuarioEmpresas = usuarioEmpresaService.findAll();
 			if(usuarioEmpresas != null) {
 				List<UsuarioEmpresa> usuarioEmpresaList = new ArrayList<>();
@@ -117,7 +117,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 				usuarioRolList.add(ur);
 			}
 		}
-		usuario.setUsuarioRoles(usuarioRolList);
+		usuario.setUsuarioRol(usuarioRolList);
 		dp.setUsuario(usuario);
 		usuario.setDatosPersonales(dp);
 		
@@ -142,7 +142,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		List<Usuario> usuarios = usuarioDAO.findAll();
 		List<Usuario> clientes = new ArrayList<>();
 		for(Usuario usuario : usuarios) {
-			List<UsuarioRol> roles = usuario.getUsuarioRoles();
+			List<UsuarioRol> roles = usuario.getUsuarioRol();
 			for(UsuarioRol rol: roles) {
 				if(rol.getRol().getRol().equalsIgnoreCase("ROL_CLIENTE")) {
 					clientes.add(usuario);

@@ -88,15 +88,20 @@
 			<label for="email"><fmt:message key="label.Email" /></label>
 			<sf:input path="datosPersonales.email" type="text" class="form-control" id="email" />
 		</div>
-<!-- 		<div class="form-group col-xs-12 col-sm-6 col-md-4"> -->
-<!-- 			<label for="rol">Roles (presione Ctrl para múltiples opciones)</label> -->
+		***********************************************************************************************************************************************************
+		<div class="form-group col-xs-12 col-sm-6 col-md-4">
+			<label for="rol">Roles (presione Ctrl para múltiples opciones)</label>
+			
+			<sf:select path="usuarioRol" items="${roles}" multiple="true" itemValue="idRol" itemLabel="rol" />
+			
 <%-- 			<sf:select class="form-control" id="rol" path="usuarioRoles" multiple="true"> --%>
 <%-- 				<sf:option value="ROL_CLIENTE" /> --%>
 <%-- 				<sf:option value="ROL_USUARIO" /> --%>
 <%-- 				<sf:option value="ROL_ADMIN" /> --%>
 <%-- 				<sf:option value="ROL_ROOT" /> --%>
 <%-- 			</sf:select> --%>
-<!-- 		</div>	 -->
+		</div>	
+		***********************************************************************************************************************************************************
 		<div class="form-group col-xs-12 col-sm-6">
 			<label for="telefono"><fmt:message key="label.Phone" /></label>
 			<sf:input path="datosPersonales.telefono" type="text" class="form-control" id="telefono" />

@@ -14,7 +14,9 @@
 			class="org.springframework.context.support.ConversionServiceFactoryBean">
 		<property name="converters">
 			<list>
-				<bean class="com.damian.converter.ArrayStringToUsuarioRolesConverter"/>
+				<bean
+					class="com.damian.converter.ArrayStringToUsuarioRolesConverter"
+					id="stringToUsuario" autowire-candidate="false" />
 			</list>
 		</property>
 	</bean>

@@ -41,7 +41,7 @@
 					</sec:authorize>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Username" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Enabled" /></th>
+					<th onclick="sortTable(${count})"></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Creation.date" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
@@ -60,8 +60,10 @@
 					<th onclick="sortTable(${count})"><fmt:message key="label.Email" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Phone" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Roles" /></th>
+					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+						<c:set var="count" value="${count + 1}" scope="page"/>
+						<th onclick="sortTable(${count})"><fmt:message key="label.Roles" /></th>
+					</sec:authorize>
 					<th><fmt:message key="label.Extras" /></th>
 				</tr>
 			</thead>
@@ -109,12 +111,14 @@
 						<td><c:out value="${usuario.datosPersonales.nacionalidad}" /></td>
 						<td><c:out value="${usuario.datosPersonales.email}" /></td>
 						<td><c:out value="${usuario.datosPersonales.telefono}" /></td>
-						<c:set var="userRoles" value="${usuario.usuarioRoles}" scope="page" />
-						<td>
-						<c:forEach items="${userRoles}" var="roles">
-							<c:out value="${roles.pk.rol.rol}" /><br/>
-						</c:forEach>
-						</td>
+						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+							<c:set var="userRoles" value="${usuario.usuarioRol}" scope="page" />
+							<td><span  class="cursor-pointer">
+							<c:forEach items="${userRoles}" var="roles">
+								<c:out value="${roles.pk.rol.rol}" /><br/>
+							</c:forEach>
+							</span></td>
+						</sec:authorize>
 						<td class="sin_padding">
 							<button type="button" class="btn btn-info ml-1 btn-sm" onclick='location.href="<c:url value='/direccion/${usuario.idUsr}' />"'>
 								<fmt:message key="label.Addresses" />

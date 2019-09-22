@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		Usuario usuario = usuarioDao.findByUsername(username);
 		
 		if(usuario != null) {
-			for(UsuarioRol usuarioRoles: usuario.getUsuarioRoles()) {				
+			for(UsuarioRol usuarioRoles: usuario.getUsuarioRol()) {				
 				authorities.add(new SimpleGrantedAuthority(usuarioRoles.getPk().getRol().getRol()));
 			}
 			User user = new User(usuario.getUsuario(), usuario.getClave(), authorities);
