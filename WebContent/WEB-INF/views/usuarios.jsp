@@ -81,7 +81,25 @@
 							</td>
 						</sec:authorize>
 						<td><c:out value="${usuario.usuario}" /></td>
-						<td><c:out value="${usuario.habilitado}" /></td>
+						
+						<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+							<c:if test="${usuario.habilitado}">
+								<td><img src='<c:url value="/resources/imgs/true.png"/>' class="tamanio_imagen"></td>
+							</c:if>
+							<c:if test="${not usuario.habilitado}">
+								<td><img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen"></td>
+							</c:if>
+						</sec:authorize>
+						
+						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+							<c:if test="${usuario.habilitado}">
+								<td><img src='<c:url value="/resources/imgs/true.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/usuario/available/${usuario.idUsr}' />"'></td>
+							</c:if>
+							<c:if test="${not usuario.habilitado}">
+								<td><img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/usuario/available/${usuario.idUsr}' />"'></td>
+							</c:if>
+						</sec:authorize>
+						
 						<td><fmt:formatDate value="${usuario.fechaCreacion}" pattern="dd/MM/yyyy"/></td>	
 						<td><c:out value="${usuario.datosPersonales.dni}" /></td>
 						<td><c:out value="${usuario.datosPersonales.nombre}" /></td>

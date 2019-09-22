@@ -1,8 +1,5 @@
 package com.damian.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +13,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.damian.pojo.DatosPersonales;
-import com.damian.pojo.Direccion;
 import com.damian.pojo.Usuario;
 import com.damian.service.PaisService;
 import com.damian.service.impl.UsuarioServiceImpl;
@@ -48,12 +43,7 @@ public class UsuarioController {
 		if (idUsr > 0) {
 			usuario = usuarioService.findById(idUsr);
 		} else {
-			Direccion direccion = new Direccion();
-			List<Direccion> direcciones = new ArrayList<>();
-			direcciones.add(direccion);
-			DatosPersonales datosPersonales = new DatosPersonales();
-			datosPersonales.setDirecciones(direcciones);
-			usuario.setDatosPersonales(datosPersonales);
+			usuarioService.fillNewUser(usuario);
 		}
 		modelAndView.addObject("paises", paisService.findAll());
 		modelAndView.addObject("usuario", usuario);
@@ -98,6 +88,15 @@ public class UsuarioController {
 		modelAndView.addObject("estoy", "usuario");
 		modelAndView.setViewName("usuarios");
 		return modelAndView;
+	}
+	
+	@RequestMapping("/usuario/available/{idUsr}")
+	public String changeAvailable(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
+		Usuario usuario = new Usuario();
+		usuario = usuarioService.findById(idUsr);
+		usuario.setHabilitado(!usuario.isHabilitado());
+		usuarioService.save(usuario);
+		return "redirect:/usuario";
 	}
 
 }

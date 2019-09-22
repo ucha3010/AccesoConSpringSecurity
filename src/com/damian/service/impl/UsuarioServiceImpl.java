@@ -12,11 +12,14 @@ import org.springframework.stereotype.Service;
 import com.damian.dao.RolDAO;
 import com.damian.dao.UsuarioDAO;
 import com.damian.pojo.DatosPersonales;
+import com.damian.pojo.Direccion;
 import com.damian.pojo.Rol;
 import com.damian.pojo.Usuario;
+import com.damian.pojo.UsuarioEmpresa;
 import com.damian.pojo.UsuarioRol;
 import com.damian.pojo.UsuarioRolId;
 import com.damian.service.DatosPersonalesService;
+import com.damian.service.UsuarioEmpresaService;
 import com.damian.service.UsuarioRolService;
 import com.damian.service.UsuarioService;
 
@@ -37,6 +40,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	
 	@Autowired
 	private UsuarioRolService usuarioRolService;
+	
+	@Autowired
+	private UsuarioEmpresaService usuarioEmpresaService;
 	
 	public Usuario findById(int id) {
 		return usuarioDAO.findById(id);
@@ -79,6 +85,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 				}
 			}
 			usuario.setUsuarioRoles(usuarioRolList);
+			List<UsuarioEmpresa> usuarioEmpresas = usuarioEmpresaService.findAll();
+			if(usuarioEmpresas != null) {
+				List<UsuarioEmpresa> usuarioEmpresaList = new ArrayList<>();
+				for(UsuarioEmpresa ue:usuarioEmpresas) {
+					if(ue.getPk().getUsuario().getIdUsr() == usuario.getIdUsr()) {
+						usuarioEmpresaList.add(ue);
+					}
+				}
+				usuario.setUsuarioEmpresa(usuarioEmpresaList);
+			}
 		}
 		dp.setUsuario(usuario);
 		usuario.setDatosPersonales(dp);
@@ -134,6 +150,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 			}
 		}
 		return clientes;
+	}
+	
+	public void fillNewUser(Usuario usuario) {
+		Direccion direccion = new Direccion();
+		List<Direccion> direcciones = new ArrayList<>();
+		direcciones.add(direccion);
+		DatosPersonales datosPersonales = new DatosPersonales();
+		datosPersonales.setDirecciones(direcciones);
+		usuario.setDatosPersonales(datosPersonales);		
 	}
 
 }

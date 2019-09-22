@@ -19,5 +19,7 @@ public interface UsuarioService {
 	void delete(int idUsr);
 	
 	List<Usuario> findCustomers();
+	
+	void fillNewUser(Usuario usuario);
 
 }
