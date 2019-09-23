@@ -57,6 +57,7 @@ public class UsuarioController {
 		Usuario usuario = new Usuario();
 		if (idUsr > 0) {
 			usuario = usuarioService.findById(idUsr);
+			usuarioService.fillExistingUser(usuario);
 		} else {
 			usuarioService.fillNewUser(usuario);
 		}

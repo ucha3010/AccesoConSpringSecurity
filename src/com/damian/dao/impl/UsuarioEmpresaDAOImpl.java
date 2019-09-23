@@ -72,7 +72,7 @@ public class UsuarioEmpresaDAOImpl implements UsuarioEmpresaDAO {
 		CriteriaQuery<UsuarioEmpresa> criteriaQuery = criteriaBuilder.createQuery(UsuarioEmpresa.class);
 		Root<UsuarioEmpresa> root = criteriaQuery.from(UsuarioEmpresa.class);
 		criteriaQuery.select(root);
-		Predicate pEqUsuarioEmpresa = criteriaBuilder.equal(root.get("usuario"), idUsr);
+		Predicate pEqUsuarioEmpresa = criteriaBuilder.equal(root.get("pk"), idUsr);
 		criteriaQuery.where(pEqUsuarioEmpresa);
 		List<UsuarioEmpresa> usuarioEmpresas = session.createQuery(criteriaQuery).getResultList();
 		System.out.println(usuarioEmpresas);

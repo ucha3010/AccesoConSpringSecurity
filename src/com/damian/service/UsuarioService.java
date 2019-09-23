@@ -21,5 +21,7 @@ public interface UsuarioService {
 	List<Usuario> findCustomers();
 	
 	void fillNewUser(Usuario usuario);
+	
+	void fillExistingUser(Usuario usuario);
 
 }

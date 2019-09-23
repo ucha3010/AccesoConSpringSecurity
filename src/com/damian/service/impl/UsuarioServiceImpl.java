@@ -9,15 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.damian.dao.RolDAO;
 import com.damian.dao.UsuarioDAO;
+import com.damian.dao.UsuarioRolDAO;
 import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
-import com.damian.pojo.Rol;
 import com.damian.pojo.Usuario;
 import com.damian.pojo.UsuarioEmpresa;
 import com.damian.pojo.UsuarioRol;
-import com.damian.pojo.UsuarioRolId;
 import com.damian.service.DatosPersonalesService;
 import com.damian.service.UsuarioEmpresaService;
 import com.damian.service.UsuarioRolService;
@@ -33,7 +31,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	private RolDAO rolDAO;
+	private UsuarioRolDAO usuarioRolDAO;
 
 	@Autowired
 	private DatosPersonalesService datosPersonalesService;
@@ -159,6 +157,26 @@ public class UsuarioServiceImpl implements UsuarioService {
 		DatosPersonales datosPersonales = new DatosPersonales();
 		datosPersonales.setDirecciones(direcciones);
 		usuario.setDatosPersonales(datosPersonales);		
+	}
+	
+	public void fillExistingUser(Usuario usuario) {
+		//chapuzas hasta que sepa buscar roles y empresas sólo por idUsr
+		List<UsuarioRol> usuarioRolTodos = usuarioRolDAO.findAll();
+		List<UsuarioRol> usuarioRoles = new ArrayList<UsuarioRol>();
+		for(UsuarioRol ur: usuarioRolTodos) {
+			if(ur.getPk().getUsuario().getIdUsr() == usuario.getIdUsr()) {
+				usuarioRoles.add(ur);
+			}
+		}
+		usuario.setUsuarioRol(usuarioRoles);
+		List<UsuarioEmpresa> usuarioEmpresaTodos = usuarioEmpresaService.findAll();
+		List<UsuarioEmpresa> usuarioEmpresas = new ArrayList<UsuarioEmpresa>();
+		for(UsuarioEmpresa ue: usuarioEmpresaTodos) {
+			if(ue.getPk().getUsuario().getIdUsr() == usuario.getIdUsr()) {
+				usuarioEmpresas.add(ue);
+			}
+		}
+		usuario.setUsuarioEmpresa(usuarioEmpresas);
 	}
 
 }
