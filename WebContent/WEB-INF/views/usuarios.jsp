@@ -115,7 +115,7 @@
 							<c:set var="userRoles" value="${usuario.usuarioRol}" scope="page" />
 							<td><span  class="cursor-pointer">
 							<c:forEach items="${userRoles}" var="roles">
-								<c:out value="${roles.pk.rol.rol}" /><br/>
+								<c:out value="${roles.rol.rol}" /><br/>
 							</c:forEach>
 							</span></td>
 						</sec:authorize>

@@ -88,20 +88,32 @@
 			<label for="email"><fmt:message key="label.Email" /></label>
 			<sf:input path="datosPersonales.email" type="text" class="form-control" id="email" />
 		</div>
-		***********************************************************************************************************************************************************
 		<div class="form-group col-xs-12 col-sm-6 col-md-4">
 			<label for="rol">Roles (presione Ctrl para múltiples opciones)</label>
-			
-			<sf:select path="usuarioRol" items="${roles}" multiple="true" itemValue="idRol" itemLabel="rol" />
-			
-<%-- 			<sf:select class="form-control" id="rol" path="usuarioRoles" multiple="true"> --%>
-<%-- 				<sf:option value="ROL_CLIENTE" /> --%>
-<%-- 				<sf:option value="ROL_USUARIO" /> --%>
-<%-- 				<sf:option value="ROL_ADMIN" /> --%>
-<%-- 				<sf:option value="ROL_ROOT" /> --%>
-<%-- 			</sf:select> --%>
+				<sf:select path="usuarioRol">
+				<c:forEach var="item" items="${roles}">
+					<c:set var="seleccionado" value="false" scope="page" />
+					<c:forEach var="ur" items="${usuario.usuarioRol}">
+				        <c:if test="${ur.pk.rol.idRol == item.getIdRol()}">					            
+							<c:set var="seleccionado" value="true" scope="page" />
+				        </c:if>
+				    </c:forEach>
+				    <c:choose>
+				    	<c:when test="${seleccionado}">
+					    	<sf:option selected="true" value="${item.getIdRol()}">
+						    	<c:out value="${item.getRol()}"></c:out>
+				            </sf:option>
+				    	</c:when>
+				    	<c:otherwise>
+				            <sf:option value="${item.getIdRol()}">
+								<c:out value="${item.getRol()}"></c:out>
+				            </sf:option>
+				    	</c:otherwise>
+			        </c:choose>
+				</c:forEach>
+				</sf:select>
+
 		</div>	
-		***********************************************************************************************************************************************************
 		<div class="form-group col-xs-12 col-sm-6">
 			<label for="telefono"><fmt:message key="label.Phone" /></label>
 			<sf:input path="datosPersonales.telefono" type="text" class="form-control" id="telefono" />
