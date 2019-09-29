@@ -26,7 +26,7 @@
 		<security:intercept-url pattern="/**" access="denyAll" />
 		<security:form-login login-page="/login"
 			password-parameter="clave" username-parameter="usuario"
-			authentication-failure-url="/login?error=true" />
+			authentication-failure-url="/login?error" />
 		<security:logout invalidate-session="true" logout-url="/logout" />
 		<security:remember-me token-validity-seconds="86400"
 			user-service-ref="customUserDetailsService" />

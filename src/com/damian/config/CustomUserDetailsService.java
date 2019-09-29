@@ -18,28 +18,30 @@ import com.damian.pojo.UsuarioRol;
 
 @Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
-	
+
 	/**
 	 * Clase CustomUserDetailsService
 	 */
 
 	@Autowired
 	private UsuarioDAO usuarioDao;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
+
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		Usuario usuario = usuarioDao.findByUsername(username);
-		
-		if(usuario != null) {
-			for(UsuarioRol usuarioRoles: usuario.getUsuarioRol()) {				
+
+		if (usuario != null) {
+			for (UsuarioRol usuarioRoles : usuario.getUsuarioRol()) {
 				authorities.add(new SimpleGrantedAuthority(usuarioRoles.getPk().getRol().getRol()));
 			}
-			User user = new User(usuario.getUsuario(), usuario.getClave(), authorities);
+			// si quiero evaluar los parámetros que faltan al crear user, tengo que agregar las excepciones en CustomAuthenticationProvider
+			User user = new User(usuario.getUsuario(), usuario.getClave(), usuario.isHabilitado(), true, true, true,
+					authorities);
 			return user;
 		} else {
-			throw new UsernameNotFoundException("Usuario no encontrado");
+			throw new UsernameNotFoundException("user.not.found");
 		}
 	}
 

@@ -9,7 +9,7 @@
 
 <html>
 <head>
-	<title>Login</title>
+	<title><fmt:message key="label.Login.page" /></title>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -18,15 +18,16 @@
 </head>
 <body class="fondo-candado">
 	<div class="container">
-	<div class="row">
-		<h1 class="pl-4">
-			<fmt:message key="label.Login.page" />
-		</h1>
-	</div>
-	<c:if test="${param.error != null}">
-		<span style="color: red;"><fmt:message
-				key="label.Invalid.credentials" /></span>
-	</c:if>
+		<div class="row">
+			<h1 class="pl-4">
+				<fmt:message key="label.Login.page" />
+			</h1>
+		</div>
+		<c:if test="${not empty error}">
+			<span style="color: red;">
+				<fmt:message key="${error}" />
+			</span>
+		</c:if>
 		<form name='f' action="j_spring_security_check" method='post'>
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
@@ -43,6 +44,7 @@
 						<label class="form-check-label" for="exampleCheck1"><fmt:message key="label.Remember.me" /></label>
 					</div>
 					<button type="submit" class="btn btn-primary" name="submit"><fmt:message key="label.Login" /></button>
+				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/"/>"'><fmt:message key="Cancel" /></button>
 				</div>
 			</div>
 		</form>
