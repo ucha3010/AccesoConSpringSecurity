@@ -31,8 +31,8 @@ public class RolServiceImpl implements RolService {
 		rolDAO.update(rol);
 	}
 	
-	public void delete(int idUsr) {
-		Rol rol = findById(idUsr);
+	public void delete(int idRol) {
+		Rol rol = findById(idRol);
 		rolDAO.delete(rol);
 	}
 

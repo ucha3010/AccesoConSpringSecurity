@@ -1,8 +1,6 @@
 package com.damian.controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.damian.pojo.Rol;
 import com.damian.pojo.Usuario;
-import com.damian.pojo.UsuarioRol;
-import com.damian.pojo.UsuarioRolId;
 import com.damian.service.PaisService;
 import com.damian.service.RolService;
 import com.damian.service.impl.UsuarioServiceImpl;
@@ -44,9 +39,7 @@ public class UsuarioController {
 	@RequestMapping("/usuario")
 	public ModelAndView getAll(ModelAndView modelAndView) {
 		modelAndView.addObject("usuarios", usuarioService.findAll());
-//		***********Roles*********** 
 		modelAndView.addObject("roles", rolService.findAll());
-//		**********************
 		modelAndView.addObject("estoy", "usuario");
 		modelAndView.setViewName("usuarios");
 		return modelAndView;
@@ -61,9 +54,7 @@ public class UsuarioController {
 		} else {
 			usuarioService.fillNewUser(usuario);
 		}
-//		***********Roles*********** 
 		modelAndView.addObject("roles", rolService.findAll());
-//		**********************
 		modelAndView.addObject("paises", paisService.findAll());
 		modelAndView.addObject("usuario", usuario);
 		modelAndView.addObject("estoy", "usuario");
@@ -81,28 +72,17 @@ public class UsuarioController {
 
 	@RequestMapping(value = { "/usuario/save" }, method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute("usuario") @Validated(value = SpringFormGroup.class) Usuario usuario,
-			BindingResult result, Model model,
-			@RequestParam("usuarioRol") String[] usuarioRol) {
+			BindingResult result, Model model, @RequestParam(value = "usuarioRol", required=false) String[] usuarioRol,
+			HttpServletRequest request) {
 		if (result.hasErrors()) {
 			System.out.println(result.getAllErrors());
 //			return "usuario";
 		}
-		List<UsuarioRol> roles = new ArrayList<>();
-		for(String rolId:usuarioRol) {
-			Rol rol = rolService.findById(Integer.parseInt(rolId));
-			UsuarioRolId uri = new UsuarioRolId();
-			uri.setRol(rol);
-			uri.setUsuario(usuario);
-			UsuarioRol ur = new UsuarioRol();
-			ur.setPk(uri);
-			ur.setRol(rol);
-			ur.setUsuario(usuario);
-			ur.setFechaCreacion(new Date());
-			ur.setCreadoPor("DAMI");
-			roles.add(ur);
+		if(usuarioRol == null) {
+			usuarioRol = new String[1];
+			usuarioRol[0] = "1";
 		}
-		usuario.setUsuarioRol(roles);
-		usuarioService.save(usuario);
+		usuarioService.save(usuario, usuarioRol, request);
 		return "redirect:/usuario";
 	}
 
@@ -118,9 +98,7 @@ public class UsuarioController {
 
 	@RequestMapping("/usuario/cliente")
 	public ModelAndView getCustomers(ModelAndView modelAndView) {
-//		***********Roles*********** 
 		modelAndView.addObject("roles", rolService.findAll());
-//		**********************
 		modelAndView.addObject("usuarios", usuarioService.findCustomers());
 		modelAndView.addObject("estoy", "usuario");
 		modelAndView.setViewName("usuarios");
@@ -132,7 +110,7 @@ public class UsuarioController {
 		Usuario usuario = new Usuario();
 		usuario = usuarioService.findById(idUsr);
 		usuario.setHabilitado(!usuario.isHabilitado());
-		usuarioService.save(usuario);
+		usuarioService.save(usuario, null, null);
 		return "redirect:/usuario";
 	}
 

@@ -2,13 +2,15 @@ package com.damian.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.pojo.Usuario;
 
 public interface UsuarioService {
 	
 	Usuario findById(int id);
 
-	void save(Usuario usuario);
+	void save(Usuario usuario, String[] usuarioRol, HttpServletRequest request);
 	
 	void saveChangePassword(Usuario usuario);
 

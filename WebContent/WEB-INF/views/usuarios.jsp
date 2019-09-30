@@ -113,11 +113,11 @@
 						<td><c:out value="${usuario.datosPersonales.telefono}" /></td>
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 							<c:set var="userRoles" value="${usuario.usuarioRol}" scope="page" />
-							<td><span  class="cursor-pointer">
-							<c:forEach items="${userRoles}" var="roles">
-								<c:out value="${roles.rol.rol}" /><br/>
-							</c:forEach>
-							</span></td>
+							<td>
+								<c:forEach items="${userRoles}" var="roles">
+									<c:out value="${roles.rol.rol}" /><br/>
+								</c:forEach>
+							</td>
 						</sec:authorize>
 						<td class="sin_padding">
 							<button type="button" class="btn btn-info ml-1 btn-sm" onclick='location.href="<c:url value='/direccion/${usuario.idUsr}' />"'>

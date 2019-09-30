@@ -88,32 +88,38 @@
 			<label for="email"><fmt:message key="label.Email" /></label>
 			<sf:input path="datosPersonales.email" type="text" class="form-control" id="email" />
 		</div>
-		<div class="form-group col-xs-12 col-sm-6 col-md-4">
-			<label for="rol">Roles (presione Ctrl para múltiples opciones)</label>
-				<sf:select path="usuarioRol">
-				<c:forEach var="item" items="${roles}">
-					<c:set var="seleccionado" value="false" scope="page" />
-					<c:forEach var="ur" items="${usuario.usuarioRol}">
-				        <c:if test="${ur.pk.rol.idRol == item.getIdRol()}">					            
-							<c:set var="seleccionado" value="true" scope="page" />
-				        </c:if>
-				    </c:forEach>
-				    <c:choose>
-				    	<c:when test="${seleccionado}">
-					    	<sf:option selected="true" value="${item.getIdRol()}">
-						    	<c:out value="${item.getRol()}"></c:out>
-				            </sf:option>
-				    	</c:when>
-				    	<c:otherwise>
-				            <sf:option value="${item.getIdRol()}">
-								<c:out value="${item.getRol()}"></c:out>
-				            </sf:option>
-				    	</c:otherwise>
-			        </c:choose>
-				</c:forEach>
-				</sf:select>
-
-		</div>	
+		<sec:authorize access="!hasAnyRole('ROL_ROOT')">
+			<div class="form-group col-xs-12 col-sm-6 col-md-4 invisible">
+		</sec:authorize>
+		<sec:authorize access="hasAnyRole('ROL_ROOT')">
+			<div class="form-group col-xs-12 col-sm-6 col-md-4">
+		</sec:authorize>
+				<label for="rol"><fmt:message key="label.roles.press.ctrl" /></label>
+				<div>
+					<sf:select path="usuarioRol">
+						<c:forEach var="item" items="${roles}">
+							<c:set var="seleccionado" value="false" scope="page" />
+							<c:forEach var="ur" items="${usuario.usuarioRol}">
+						        <c:if test="${ur.pk.rol.idRol == item.getIdRol()}">					            
+									<c:set var="seleccionado" value="true" scope="page" />
+						        </c:if>
+						    </c:forEach>
+						    <c:choose>
+						    	<c:when test="${seleccionado}">
+							    	<sf:option selected="true" value="${item.getIdRol()}">
+								    	<c:out value="${item.getRol()}"></c:out>
+						            </sf:option>
+						    	</c:when>
+						    	<c:otherwise>
+						            <sf:option value="${item.getIdRol()}">
+										<c:out value="${item.getRol()}"></c:out>
+						            </sf:option>
+						    	</c:otherwise>
+					        </c:choose>
+						</c:forEach>
+					</sf:select>
+				</div>
+			</div>	
 		<div class="form-group col-xs-12 col-sm-6">
 			<label for="telefono"><fmt:message key="label.Phone" /></label>
 			<sf:input path="datosPersonales.telefono" type="text" class="form-control" id="telefono" />
