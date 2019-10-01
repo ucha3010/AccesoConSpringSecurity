@@ -43,20 +43,20 @@
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="sortTable(${count})"></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Creation.date" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.idcard" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
+<%-- 					<th onclick="sortTable(${count})"><fmt:message key="label.Creation.date" /></th> --%>
+<%-- 					<c:set var="count" value="${count + 1}" scope="page"/> --%>
+<%-- 					<th onclick="sortTable(${count})"><fmt:message key="label.idcard" /></th> --%>
+<%-- 					<c:set var="count" value="${count + 1}" scope="page"/> --%>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Name" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Lastname" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Sex" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
+<%-- 					<th onclick="sortTable(${count})"><fmt:message key="label.Sex" /></th> --%>
+<%-- 					<c:set var="count" value="${count + 1}" scope="page"/> --%>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Birthdate" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Nationality" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
+<%-- 					<th onclick="sortTable(${count})"><fmt:message key="label.Nationality" /></th> --%>
+<%-- 					<c:set var="count" value="${count + 1}" scope="page"/> --%>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Email" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Phone" /></th>
@@ -69,7 +69,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${usuarios}" var="usuario">
-				    <tr title='<c:out value="${usuario.datosPersonales.observaciones}" />'>
+				    <tr title='<fmt:message key="label.Creation.date" />: <fmt:formatDate value="${usuario.fechaCreacion}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.idcard" />: <c:out value="${usuario.datosPersonales.dni}" />&#xA;<fmt:message key="label.Sex" />: <c:out value="${usuario.datosPersonales.sexo}" />&#xA;<fmt:message key="label.Nationality" />: <c:out value="${usuario.datosPersonales.nacionalidad}" />&#xA;<c:out value="${usuario.datosPersonales.observaciones}" />'>
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 							<td class="sin_padding">
 								<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/usuario/${usuario.idUsr}' />"'>
@@ -102,13 +102,13 @@
 							</c:if>
 						</sec:authorize>
 						
-						<td><fmt:formatDate value="${usuario.fechaCreacion}" pattern="dd/MM/yyyy"/></td>	
-						<td><c:out value="${usuario.datosPersonales.dni}" /></td>
+<%-- 						<td><fmt:formatDate value="${usuario.fechaCreacion}" pattern="dd/MM/yyyy"/></td>	 --%>
+<%-- 						<td><c:out value="${usuario.datosPersonales.dni}" /></td> --%>
 						<td><c:out value="${usuario.datosPersonales.nombre}" /></td>
 						<td><c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /></td>	
-						<td><c:out value="${usuario.datosPersonales.sexo}" /></td>	
+<%-- 						<td><c:out value="${usuario.datosPersonales.sexo}" /></td>	 --%>
 						<td><fmt:formatDate value="${usuario.datosPersonales.fechaNacimiento}" pattern="dd/MM/yyyy"/></td>		
-						<td><c:out value="${usuario.datosPersonales.nacionalidad}" /></td>
+<%-- 						<td><c:out value="${usuario.datosPersonales.nacionalidad}" /></td> --%>
 						<td><c:out value="${usuario.datosPersonales.email}" /></td>
 						<td><c:out value="${usuario.datosPersonales.telefono}" /></td>
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
