@@ -26,6 +26,14 @@
 			}
 			return false;
 		}
+		function confirmReset(idUsr){
+			if(confirm("<fmt:message key='Reset.message' />")){
+				var url = "<c:url value='/usuario/reset/"+idUsr+"' />";
+				location.href=url;
+				return true;
+			}
+			return false;
+		}
 	</script>
 </head>
 <body>
@@ -64,7 +72,7 @@
 						<c:set var="count" value="${count + 1}" scope="page"/>
 						<th onclick="sortTable(${count})"><fmt:message key="label.Roles" /></th>
 					</sec:authorize>
-					<th><fmt:message key="label.Extras" /></th>
+					<th class="width-150"><fmt:message key="label.Extras" /></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -120,9 +128,17 @@
 							</td>
 						</sec:authorize>
 						<td class="sin_padding">
-							<button type="button" class="btn btn-info ml-1 btn-sm" onclick='location.href="<c:url value='/direccion/${usuario.idUsr}' />"'>
-								<fmt:message key="label.Addresses" />
-							</button>
+							<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccion/${usuario.idUsr}' />'>
+								<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="width-35">
+							</a>
+							<a title="<fmt:message key="Companies" />" href='<c:url value='/empresa/${usuario.idUsr}' />'>
+								<img src='<c:url value="/resources/imgs/empresa.png"/>' class="margin-left-5porciento width-35">
+							</a>
+							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+								<button type="button" class="btn btn-default" title="<fmt:message key="Pass.reset" />" onclick="return confirmReset(${usuario.idUsr})">
+									<img src='<c:url value="/resources/imgs/pass_reset.png"/>' class="margin-left-5porciento width-35">
+								</button>
+							</sec:authorize>
 						</td>
 				    </tr>
 				</c:forEach>

@@ -211,4 +211,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuario.setUsuarioEmpresa(usuarioEmpresas);
 	}
 
+	@Override
+	public Usuario reset(int idUsr) {
+		Usuario usuario = findById(idUsr);
+		usuario.setClave(passwordEncoder.encode("Superman1"));		
+		return usuario;
+	}
+
 }

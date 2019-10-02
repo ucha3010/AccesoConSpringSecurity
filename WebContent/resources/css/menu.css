@@ -26,6 +26,14 @@ button:hover{
 	cursor: pointer;
 }
 
+.width-35{
+	width: 35px;
+}
+
+.width-150{
+	width: 150px;
+}
+
 
 /*Menu*************************************************/
 .margin-header{

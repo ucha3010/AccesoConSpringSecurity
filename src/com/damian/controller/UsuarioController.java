@@ -113,5 +113,12 @@ public class UsuarioController {
 		usuarioService.save(usuario, null, null);
 		return "redirect:/usuario";
 	}
+	
+	@RequestMapping("/usuario/reset/{idUsr}")
+	public String passwordReset(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
+		Usuario usuario = usuarioService.reset(idUsr);
+		usuarioService.save(usuario, null, null);
+		return "redirect:/usuario";
+	}
 
 }

@@ -87,6 +87,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		CriteriaQuery<Usuario> criteriaQuery = criteriaBuilder.createQuery(Usuario.class);
 		Root<Usuario> root = criteriaQuery.from(Usuario.class);
 		criteriaQuery.select(root);
+		criteriaQuery.orderBy(criteriaBuilder.asc(root.get("usuario")));
 		List<Usuario> usuarios = session.createQuery(criteriaQuery).getResultList();
 		return usuarios;
 		

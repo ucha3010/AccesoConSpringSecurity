@@ -25,5 +25,7 @@ public interface UsuarioService {
 	void fillNewUser(Usuario usuario);
 	
 	void fillExistingUser(Usuario usuario);
+	
+	Usuario reset(int idUsr);
 
 }
