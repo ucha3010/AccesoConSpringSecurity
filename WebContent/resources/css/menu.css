@@ -34,6 +34,24 @@ button:hover{
 	width: 150px;
 }
 
+.colorFondo1{
+	background-color: #00ff40;	
+}
+
+.colorFondo2{
+	background-color: #ff00ff;	
+}
+
+.colorFondo3{
+	background-color: #0080ff;	
+	color: #fff;	
+}
+
+.colorFondo4{
+	background-color: #c1502e;	
+	color: #fff;
+}
+
 
 /*Menu*************************************************/
 .margin-header{

@@ -123,7 +123,7 @@
 							<c:set var="userRoles" value="${usuario.usuarioRol}" scope="page" />
 							<td>
 								<c:forEach items="${userRoles}" var="roles">
-									<c:out value="${roles.rol.rol}" /><br/>
+									<span class="colorFondo${roles.rol.idRol}"><c:out value="${roles.rol.rol}" /></span><br/>
 								</c:forEach>
 							</td>
 						</sec:authorize>
