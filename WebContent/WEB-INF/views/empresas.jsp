@@ -30,6 +30,16 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
+	<div class="d-flex">
+		<div class="mr-auto p-2">
+			<h1></h1>
+		</div>
+		<div class="p-2">
+			<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/empresa/0'/>"'>
+				<fmt:message key="Add.company" />
+			</button>
+		</div>		
+	</div>
 	<div class="divTabla">
 		<table id="tablaOrdenar" class="table table-striped">
 			<thead>
@@ -72,7 +82,7 @@
 						<td><c:out value="${empresa.telefono}" /></td>
 						<td><c:out value="${empresa.fax}" /></td>
 						<td class="sin_padding">
-							<a title="<fmt:message key="label.Workers" />" href='<c:url value='/usuarioEmpresa/${empresa.idEmp}' />'>
+							<a title="<fmt:message key="label.Workers" />" href='<c:url value='/usuarioEmpresa/empresa/${empresa.idEmp}' />'>
 								<img src='<c:url value="/resources/imgs/usuarios.png"/>' class="width-35">
 							</a>
 						</td>

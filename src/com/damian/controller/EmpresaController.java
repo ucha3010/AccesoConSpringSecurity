@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.pojo.Empresa;
 import com.damian.service.EmpresaService;
-import com.damian.service.PaisService;
 import com.damian.valid.SpringFormGroup;
 
 @Controller
@@ -25,9 +24,6 @@ public class EmpresaController {
 
 	@Autowired
 	private EmpresaService empresaService;
-
-	@Autowired
-	private PaisService paisService;
 
 	@RequestMapping("/empresa")
 	public ModelAndView getAll(ModelAndView modelAndView) {
@@ -42,7 +38,6 @@ public class EmpresaController {
 		if (idEmp > 0) {
 			empresa = empresaService.findById(idEmp);
 		}
-		modelAndView.addObject("paises", paisService.findAll());
 		modelAndView.addObject("empresa", empresa);
 		modelAndView.setViewName("empresa");
 		return modelAndView;

@@ -39,7 +39,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	public Empresa findById(int id) {
 		
 		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		Session session = getOpenSession();
+		Session session = getSession();
 		CriteriaQuery<Empresa> criteriaQuery = criteriaBuilder.createQuery(Empresa.class);
 		Root<Empresa> root = criteriaQuery.from(Empresa.class);
 		criteriaQuery.select(root);
@@ -73,7 +73,11 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 
 	@Override
 	public void save(Empresa empresa) {
-		getSession().save(empresa);
+		if(empresa.getIdEmp() > 0) {
+			getSession().update(empresa);
+		} else {
+			getSession().save(empresa);
+		}
 	}
 	
 	@Override

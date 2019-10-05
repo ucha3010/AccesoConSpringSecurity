@@ -30,16 +30,18 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
-	<div class="d-flex">
-		<div class="mr-auto p-2">
-			<h1><c:out value="${usuario.datosPersonales.nombre}" /> <c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /></h1>
+	<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+		<div class="d-flex">
+			<div class="mr-auto p-2">
+				<h1><c:out value="${usuario.datosPersonales.nombre}" /> <c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /></h1>
+			</div>
+			<div class="p-2">
+				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/direccion/formulario/0/${usuario.datosPersonales.idDatosPers}'/>"'>
+					<fmt:message key="Add.address" />
+				</button>
+			</div>		
 		</div>
-		<div class="p-2">
-			<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/direccion/formulario/0/${usuario.datosPersonales.idDatosPers}'/>"'>
-				<fmt:message key="Add.address" />
-			</button>
-		</div>		
-	</div>
+	</sec:authorize>
 	<div class="divTabla">
 		<table id="tablaOrdenar" class="table table-striped">
 			<thead>
@@ -69,16 +71,18 @@
 			<tbody>
 				<c:forEach items="${direcciones}" var="direccion">
 				    <tr>
-						<td class="sin_padding">
-							<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/direccion/formulario/${direccion.idDir}/0' />"'>
-							  <img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
-							</button>
-						</td>
-						<td class="sin_padding">
-							<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${direccion.idDir},${usuario.idUsr})" >
-							  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-							</button>
-						</td>
+						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+							<td class="sin_padding">
+								<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/direccion/formulario/${direccion.idDir}/0' />"'>
+								  <img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+								</button>
+							</td>
+							<td class="sin_padding">
+								<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${direccion.idDir},${usuario.idUsr})" >
+								  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+								</button>
+							</td>
+						</sec:authorize>
 						<td><c:out value="${direccion.tipoVia}" /></td>
 						<td><c:out value="${direccion.nombreVia}" /></td>	
 						<td><c:out value="${direccion.numero}" /></td>

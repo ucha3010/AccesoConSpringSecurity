@@ -1,10 +1,10 @@
 package com.damian.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -66,32 +66,50 @@ public class UsuarioEmpresaDAOImpl implements UsuarioEmpresaDAO {
 
 	@Override
 	public List<UsuarioEmpresa> findByIdUsr(int idUsr) {
+		
+		List<UsuarioEmpresa> usuarioEmpresas = findAll();
+		List<UsuarioEmpresa> byUsrId = new ArrayList<>();
+		for(UsuarioEmpresa ue: usuarioEmpresas) {
+			if(ue.getUsuario().getIdUsr() == idUsr) {
+				byUsrId.add(ue);
+			}
+		}
+		return byUsrId;
 
-		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		Session session = getOpenSession();
-		CriteriaQuery<UsuarioEmpresa> criteriaQuery = criteriaBuilder.createQuery(UsuarioEmpresa.class);
-		Root<UsuarioEmpresa> root = criteriaQuery.from(UsuarioEmpresa.class);
-		criteriaQuery.select(root);
-		Predicate pEqUsuarioEmpresa = criteriaBuilder.equal(root.get("pk"), idUsr);
-		criteriaQuery.where(pEqUsuarioEmpresa);
-		List<UsuarioEmpresa> usuarioEmpresas = session.createQuery(criteriaQuery).getResultList();
-		System.out.println(usuarioEmpresas);
-		return null;
+//		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
+//		Session session = getOpenSession();
+//		CriteriaQuery<UsuarioEmpresa> criteriaQuery = criteriaBuilder.createQuery(UsuarioEmpresa.class);
+//		Root<UsuarioEmpresa> root = criteriaQuery.from(UsuarioEmpresa.class);
+//		criteriaQuery.select(root);
+//		Predicate pEqUsuarioEmpresa = criteriaBuilder.equal(root.get("pk"), idUsr);
+//		criteriaQuery.where(pEqUsuarioEmpresa);
+//		List<UsuarioEmpresa> usuarioEmpresas = session.createQuery(criteriaQuery).getResultList();
+//		System.out.println(usuarioEmpresas);
+//		return null;
 		
 	}
 
 	@Override
 	public List<UsuarioEmpresa> findByIdEmp(int idEmp) {
+		
+		List<UsuarioEmpresa> usuarioEmpresas = findAll();
+		List<UsuarioEmpresa> byEmpId = new ArrayList<>();
+		for(UsuarioEmpresa ue: usuarioEmpresas) {
+			if(ue.getEmpresa().getIdEmp() == idEmp) {
+				byEmpId.add(ue);
+			}
+		}
+		return byEmpId;
 
-		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		Session session = getOpenSession();
-		CriteriaQuery<UsuarioEmpresa> criteriaQuery = criteriaBuilder.createQuery(UsuarioEmpresa.class);
-		Root<UsuarioEmpresa> root = criteriaQuery.from(UsuarioEmpresa.class);
-		criteriaQuery.select(root);
-		Predicate pEqUsuarioEmpresa = criteriaBuilder.equal(root.get("empresa"), idEmp);
-		criteriaQuery.where(pEqUsuarioEmpresa);
-		List<UsuarioEmpresa> usuarioEmpresas = session.createQuery(criteriaQuery).getResultList();
-		return usuarioEmpresas;
+//		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
+//		Session session = getOpenSession();
+//		CriteriaQuery<UsuarioEmpresa> criteriaQuery = criteriaBuilder.createQuery(UsuarioEmpresa.class);
+//		Root<UsuarioEmpresa> root = criteriaQuery.from(UsuarioEmpresa.class);
+//		criteriaQuery.select(root);
+//		Predicate pEqUsuarioEmpresa = criteriaBuilder.equal(root.get("empresa"), idEmp);
+//		criteriaQuery.where(pEqUsuarioEmpresa);
+//		List<UsuarioEmpresa> usuarioEmpresas = session.createQuery(criteriaQuery).getResultList();
+//		return usuarioEmpresas;
 	}
 
 }

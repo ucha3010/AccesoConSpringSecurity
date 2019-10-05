@@ -13,11 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.damian.valid.PersistenceGroup;
-import com.damian.valid.SpringFormGroup;
-
 @Entity
 @Table(name = "empresa")
 public class Empresa implements Serializable {
@@ -62,7 +57,6 @@ public class Empresa implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.empresa")
 	private List<UsuarioEmpresa> usuarioEmpresa = new ArrayList<UsuarioEmpresa>();
 
-	@NotEmpty(message = Constantes.NOT_EMPTY, groups = { PersistenceGroup.class, SpringFormGroup.class })
 	@OneToMany(mappedBy = "empresa")
 	private List<DireccionEmpresa> direccionesEmpresa = new ArrayList<DireccionEmpresa>();
 	

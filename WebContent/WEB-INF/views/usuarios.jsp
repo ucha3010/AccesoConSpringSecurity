@@ -38,6 +38,18 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
+	<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+		<div class="d-flex">
+			<div class="mr-auto p-2">
+				<h1></h1>
+			</div>
+			<div class="p-2">
+				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/0'/>"'>
+					<fmt:message key="label.Add.user" />
+				</button>
+			</div>		
+		</div>
+	</sec:authorize>
 	<div class="divTabla">
 		<table id="tablaOrdenar" class="table table-striped">
 			<thead>
@@ -51,20 +63,12 @@
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="sortTable(${count})"></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-<%-- 					<th onclick="sortTable(${count})"><fmt:message key="label.Creation.date" /></th> --%>
-<%-- 					<c:set var="count" value="${count + 1}" scope="page"/> --%>
-<%-- 					<th onclick="sortTable(${count})"><fmt:message key="label.idcard" /></th> --%>
-<%-- 					<c:set var="count" value="${count + 1}" scope="page"/> --%>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Name" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Lastname" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-<%-- 					<th onclick="sortTable(${count})"><fmt:message key="label.Sex" /></th> --%>
-<%-- 					<c:set var="count" value="${count + 1}" scope="page"/> --%>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Birthdate" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-<%-- 					<th onclick="sortTable(${count})"><fmt:message key="label.Nationality" /></th> --%>
-<%-- 					<c:set var="count" value="${count + 1}" scope="page"/> --%>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Email" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Phone" /></th>
@@ -110,13 +114,9 @@
 							</c:if>
 						</sec:authorize>
 						
-<%-- 						<td><fmt:formatDate value="${usuario.fechaCreacion}" pattern="dd/MM/yyyy"/></td>	 --%>
-<%-- 						<td><c:out value="${usuario.datosPersonales.dni}" /></td> --%>
 						<td><c:out value="${usuario.datosPersonales.nombre}" /></td>
 						<td><c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /></td>	
-<%-- 						<td><c:out value="${usuario.datosPersonales.sexo}" /></td>	 --%>
 						<td><fmt:formatDate value="${usuario.datosPersonales.fechaNacimiento}" pattern="dd/MM/yyyy"/></td>		
-<%-- 						<td><c:out value="${usuario.datosPersonales.nacionalidad}" /></td> --%>
 						<td><c:out value="${usuario.datosPersonales.email}" /></td>
 						<td><c:out value="${usuario.datosPersonales.telefono}" /></td>
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
@@ -131,7 +131,7 @@
 							<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccion/${usuario.idUsr}' />'>
 								<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="width-35">
 							</a>
-							<a title="<fmt:message key="Companies" />" href='<c:url value='/empresa/${usuario.idUsr}' />'>
+							<a title="<fmt:message key="Companies" />" href='<c:url value='/usuarioEmpresa/usuario/${usuario.idUsr}' />'>
 								<img src='<c:url value="/resources/imgs/empresa.png"/>' class="margin-left-5porciento width-35">
 							</a>
 							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">

@@ -11,7 +11,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Usuario</title>
+	<title><fmt:message key="label.Address" /></title>
 	<script type="text/javascript" src='<c:url value="/resources/js/jquery.js" />'></script>
 	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />

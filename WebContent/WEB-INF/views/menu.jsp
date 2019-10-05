@@ -33,11 +33,6 @@
 						<fmt:message key="label.Customers" />
 					</button>
 				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/-1'/>"'>
-						<fmt:message key="label.Add.user" />
-					</button>
-				</sec:authorize>
 			</sec:authorize>
 	
 			<sec:authorize access="isFullyAuthenticated()">
@@ -54,11 +49,6 @@
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_USUARIO','ROL_ROOT')">
 					<button type="button" class="btn fondo-008000 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/cliente'/>"'>
 						<fmt:message key="label.Customers" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/-1'/>"'>
-						<fmt:message key="label.Add.user" />
 					</button>
 				</sec:authorize>
 			</sec:authorize>

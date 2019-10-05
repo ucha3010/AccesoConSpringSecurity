@@ -1,11 +1,13 @@
 package com.damian.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.damian.dao.EmpresaDAO;
+import com.damian.pojo.DireccionEmpresa;
 import com.damian.pojo.Empresa;
 import com.damian.service.EmpresaService;
 
@@ -20,6 +22,9 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	public void save(Empresa empresa) {
+		if(empresa.getIdEmp()==0) {
+			empresa.setDireccionesEmpresa(new ArrayList<DireccionEmpresa>());
+		}
 		empresaDAO.save(empresa);
 	}
 
@@ -31,8 +36,8 @@ public class EmpresaServiceImpl implements EmpresaService {
 		empresaDAO.update(empresa);
 	}
 	
-	public void delete(int idUsr) {
-		Empresa empresa = findById(idUsr);
+	public void delete(int idEmp) {
+		Empresa empresa = findById(idEmp);
 		empresaDAO.delete(empresa);
 	}
 

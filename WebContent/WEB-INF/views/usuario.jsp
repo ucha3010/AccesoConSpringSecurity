@@ -128,48 +128,6 @@
 			<label for="observaciones"><fmt:message key="label.Observations" /></label>
 			<sf:textarea path="datosPersonales.observaciones" class="form-control" id="observaciones" rows="3" />
 		</div>
-<!-- 		<div class="form-group col-xs-12 col-sm-6 col-md-4"> -->
-<!-- 			<label for="input">Nombre comercial</label> <input type="text" -->
-<!-- 				class="form-control" id="input"> -->
-<!-- 		</div> -->
-		
-<!-- 		<div class="custom-control custom-radio custom-control-inline"> -->
-<!-- 			<input type="radio" id="radioSociedad1" name="radioSociedad1" -->
-<!-- 				class="custom-control-input"> <label -->
-<!-- 				class="custom-control-label" for="radioSociedad1">SL</label> -->
-<!-- 		</div> -->
-<!-- 		<div class="custom-control custom-radio custom-control-inline"> -->
-<!-- 			<input type="radio" id="radioSociedad2" name="radioSociedad1" -->
-<!-- 				class="custom-control-input"> <label -->
-<!-- 				class="custom-control-label" for="radioSociedad2">SA</label> -->
-<!-- 		</div> -->
-<!-- 		<div class="custom-control custom-radio custom-control-inline"> -->
-<!-- 			<input type="radio" id="radioSociedad3" name="radioSociedad1" -->
-<!-- 				class="custom-control-input"> <label -->
-<!-- 				class="custom-control-label" for="radioSociedad3">Sociedad colectiva</label> -->
-<!-- 		</div> -->
-<!-- 		<div class="custom-control custom-radio custom-control-inline"> -->
-<!-- 			<input type="radio" id="radioSociedad4" name="radioSociedad1" -->
-<!-- 				class="custom-control-input"> <label -->
-<!-- 				class="custom-control-label" for="radioSociedad4">Sociedad comanditaria</label> -->
-<!-- 		</div> -->
-<!-- 		<div class="form-group col-xs-12 col-sm-6 col-md-4"> -->
-<!-- 			<label for="input">Actividad</label> <input type="text" -->
-<!-- 				class="form-control" id="input"> -->
-<!-- 		</div> -->
-<!-- 		<div class="form-group col-xs-12 col-sm-6 col-md-4"> -->
-<!-- 			<label for="input">Página web</label> <input type="text" -->
-<!-- 				class="form-control" id="input"> -->
-<!-- 		</div> -->
-<!-- 		<div class="form-group col-xs-12 col-sm-6 col-md-4"> -->
-<!-- 			<label for="input">Fax</label> <input type="text" -->
-<!-- 				class="form-control" id="input"> -->
-<!-- 		</div> -->
-<!-- 		<div class="form-group col-xs-12 col-sm-6"> -->
-<!-- 			<label for="exampleFormControlTextarea1">Más información</label> -->
-<!-- 			<textarea class="form-control" id="exampleFormControlTextarea1" -->
-<!-- 				rows="3"></textarea> -->
-<!-- 		</div> -->
 		<div class="form-group margin-left-5porciento">
 			<div class="form-check">
 				<input class="form-check-input" type="checkbox" id="gridCheck">
