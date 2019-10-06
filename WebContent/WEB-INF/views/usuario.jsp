@@ -78,7 +78,6 @@
             	<sf:option value="empty" label="${selectCountry}" />
             	<sf:options items="${paises}" itemValue="${itemSelect}" itemLabel="${itemSelect}" />
         	</sf:select>
-<%-- 			<sf:select path="datosPersonales.nacionalidad" items="${paises}" class="form-control" id="nacionalidad" /> --%>
 		</div>
 		<div class="form-group col-xs-12 col-sm-6">
 			<label for="dni"><fmt:message key="label.idcard" /></label>
