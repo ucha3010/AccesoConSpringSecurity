@@ -34,21 +34,23 @@
 	<div>
 		<h2><fmt:message key="label.companies.belongs.1" /> <c:out value="${usuario.datosPersonales.nombre}" /> <c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /> <fmt:message key="label.companies.belongs.2" /></h2>
 	</div>
-	<div>
-		<sf:form method="post" action="${pageContext.request.contextPath}/usuarioEmpresa/usuario/save/${usuario.idUsr}" modelAttribute="auxString">
-			<div class="p-4">
-	        	<sf:select path="campo" class="form-control-dam">
-	            	<sf:options items="${empresas}" itemValue="idEmp" itemLabel="nombreComercial" />
-	        	</sf:select>
-				<button type="submit" class="btn fondo-c0c0c0 border-color-dam">
-					<fmt:message key="Add.company" />
-				</button>
-				<c:if test="${error}">
-					<span><fmt:message key="label.Company.already.asigned" /></span>
-				</c:if>
-			</div>
-		</sf:form>	
-	</div>
+	<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+		<div>
+			<sf:form method="post" action="${pageContext.request.contextPath}/usuarioEmpresa/usuario/save/${usuario.idUsr}" modelAttribute="auxString">
+				<div class="p-4">
+		        	<sf:select path="campo" class="form-control-dam">
+		            	<sf:options items="${empresas}" itemValue="idEmp" itemLabel="nombreComercial" />
+		        	</sf:select>
+					<button type="submit" class="btn fondo-c0c0c0 border-color-dam">
+						<fmt:message key="Add.company" />
+					</button>
+					<c:if test="${error}">
+						<span><fmt:message key="label.Company.already.asigned" /></span>
+					</c:if>
+				</div>
+			</sf:form>	
+		</div>
+	</sec:authorize>
 	<div class="divTabla margin-left-5porciento">
 		<table id="tablaOrdenar" class="table-striped">
 			<c:forEach items="${usuarioEmpresas}" var="usuarioEmpresa">

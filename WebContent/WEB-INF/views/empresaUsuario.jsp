@@ -34,24 +34,26 @@
 	<div>
 		<h2><fmt:message key="label.users.belong" /> <c:out value="${empresa.nombreComercial}" /></h2>
 	</div>
-	<div>
-		<sf:form method="post" action="${pageContext.request.contextPath}/usuarioEmpresa/empresa/save/${empresa.idEmp}" modelAttribute="auxString">
-			<div class="p-4">
-	        	<sf:select path="campo" class="form-control-dam">
-	        		<c:forEach items="${usuarios}" var="usuarioFor">
-	        			<c:set var="nombreAp" value="${usuarioFor.datosPersonales.nombre} ${usuarioFor.datosPersonales.apellido1} ${usuarioFor.datosPersonales.apellido2}" scope="page"/>
-	            		<sf:option value="${usuarioFor.idUsr}" label="${nombreAp}"/>
-	            	</c:forEach>
-	        	</sf:select>
-				<button type="submit" class="btn fondo-c0c0c0 border-color-dam">
-					<fmt:message key="label.New.user" />
-				</button>
-				<c:if test="${error}">
-					<span><fmt:message key="label.User.already.asigned" /> (<c:out value="${existia}"></c:out>)</span>
-				</c:if>
-			</div>
-		</sf:form>	
-	</div>
+	<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+		<div>
+			<sf:form method="post" action="${pageContext.request.contextPath}/usuarioEmpresa/empresa/save/${empresa.idEmp}" modelAttribute="auxString">
+				<div class="p-4">
+		        	<sf:select path="campo" class="form-control-dam">
+		        		<c:forEach items="${usuarios}" var="usuarioFor">
+		        			<c:set var="nombreAp" value="${usuarioFor.datosPersonales.nombre} ${usuarioFor.datosPersonales.apellido1} ${usuarioFor.datosPersonales.apellido2}" scope="page"/>
+		            		<sf:option value="${usuarioFor.idUsr}" label="${nombreAp}"/>
+		            	</c:forEach>
+		        	</sf:select>
+					<button type="submit" class="btn fondo-c0c0c0 border-color-dam">
+						<fmt:message key="label.New.user" />
+					</button>
+					<c:if test="${error}">
+						<span><fmt:message key="label.User.already.asigned" /> (<c:out value="${existia}"></c:out>)</span>
+					</c:if>
+				</div>
+			</sf:form>	
+		</div>
+	</sec:authorize>
 	<div class="divTabla margin-left-5porciento">
 		<table id="tablaOrdenar" class="table-striped">
 			<c:forEach items="${usuarioEmpresas}" var="usuarioEmpresa">
