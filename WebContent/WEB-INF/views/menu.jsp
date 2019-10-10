@@ -70,7 +70,7 @@
 				<button type="button" class="btn btn-dark float-right ml-1 btn-sm border-color-dam" onclick='location.href="<c:url value='/logout' />"'>
 					<fmt:message key="label.Logout" />
 				</button>
-				<a title="${username}" href='<c:url value="/usuario/username/${username}"/>'>
+				<a title="${username}" href='<c:url value="/usuario/logged/${idUsrLogged}"/>'>
 					<img src='<c:url value="/resources/imgs/usuario.png"/>'
 					alt="${username}" id="usuarioImg">
 				</a>
@@ -82,7 +82,7 @@
 				<button type="button" class="btn btn-dark float-right ml-1 btn-sm border-color-dam" onclick='location.href="<c:url value='/logout' />"'>
 					<fmt:message key="label.Logout" />
 				</button>
-				<a title="${username}" href='<c:url value="/usuario/username/${username}"/>'>
+				<a title="${username}" href='<c:url value="/usuario/logged/${idUsrLogged}"/>'>
 					<img src='<c:url value="/resources/imgs/usuario.png"/>'
 					alt="${username}" id="usuarioImg">
 				</a>

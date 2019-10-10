@@ -62,6 +62,23 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
+	@RequestMapping("/usuario/logged/{idUsr}")
+	public ModelAndView getLoggedUser(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
+		Usuario usuario = new Usuario();
+		if (idUsr > 0) {
+			usuario = usuarioService.findById(idUsr);
+			usuarioService.fillExistingUser(usuario);
+		} else {
+			usuarioService.fillNewUser(usuario);
+		}
+		modelAndView.addObject("roles", rolService.findAll());
+		modelAndView.addObject("paises", paisService.findAll());
+		modelAndView.addObject("usuario", usuario);
+		modelAndView.addObject("estoy", "usuario");
+		modelAndView.setViewName("usuarioLogged");
+		return modelAndView;
+	}
+
 	@RequestMapping("/usuario/username/{username}")
 	public ModelAndView getUserByUsername(ModelAndView modelAndView, @PathVariable("username") String username) {
 		modelAndView.addObject("usuario", usuarioService.findByUsername(username));
@@ -84,6 +101,19 @@ public class UsuarioController {
 		}
 		usuarioService.save(usuario, usuarioRol, request);
 		return "redirect:/usuario";
+	}
+
+	@RequestMapping(value = { "/usuario/logged/save" }, method = RequestMethod.POST)
+	public String saveLoggedUser(@ModelAttribute("usuario") Usuario usuario,
+			BindingResult result, Model model, @RequestParam(value = "usuarioRol", required=false) String[] usuarioRol,
+			HttpServletRequest request) {
+
+		if(usuarioRol == null) {
+			usuarioRol = new String[1];
+			usuarioRol[0] = "1";
+		}
+		usuarioService.save(usuario, usuarioRol, request);
+		return "redirect:/";
 	}
 
 	@RequestMapping("/usuario/{idUsr}/delete")

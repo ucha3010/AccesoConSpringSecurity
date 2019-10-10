@@ -18,7 +18,7 @@ import com.damian.service.UsuarioEmpresaService;
 import com.damian.service.UsuarioService;
 
 @Controller
-@SessionAttributes({ "resultado", "estoy", "roles" }) // los atributos que pueden mantenerse en sesión y verse en distintas
+@SessionAttributes({ "resultado" }) // los atributos que pueden mantenerse en sesión y verse en distintas
 												// páginas
 public class UsuarioEmpresaController {
 

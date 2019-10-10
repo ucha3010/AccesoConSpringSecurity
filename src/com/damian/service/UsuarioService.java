@@ -27,5 +27,7 @@ public interface UsuarioService {
 	void fillExistingUser(Usuario usuario);
 	
 	Usuario reset(int idUsr);
+	
+	public Usuario findByUsername(String usuario);
 
 }

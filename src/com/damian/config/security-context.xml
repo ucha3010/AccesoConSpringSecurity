@@ -15,6 +15,7 @@
 		<security:intercept-url pattern="/index3" access="isAuthenticated()" />
 		<security:intercept-url pattern="/private/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/usuario" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/usuario/logged/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/usuario/cliente" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/usuario/reset" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/usuario/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />

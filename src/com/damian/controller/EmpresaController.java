@@ -18,7 +18,7 @@ import com.damian.service.EmpresaService;
 import com.damian.valid.SpringFormGroup;
 
 @Controller
-@SessionAttributes({ "resultado", "estoy", "roles" }) // los atributos que pueden mantenerse en sesión y verse en distintas
+@SessionAttributes({ "resultado" }) // los atributos que pueden mantenerse en sesión y verse en distintas
 												// páginas
 public class EmpresaController {
 
