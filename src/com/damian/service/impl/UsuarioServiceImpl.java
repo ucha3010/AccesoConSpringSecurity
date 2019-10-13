@@ -132,14 +132,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}
 	}
 
+	@Override
 	public void saveChangePassword(Usuario usuario) {
 
 		String claveUsr = usuario.getClave();
+		usuario = findById(usuario.getIdUsr());
 		usuario.setClave(passwordEncoder.encode(claveUsr));
-		DatosPersonales dp;
-		dp = usuario.getDatosPersonales();
-		DatosPersonales dpId = datosPersonalesService.findByUsrId(usuario.getIdUsr());
-		dp.setIdDatosPers(dpId.getIdDatosPers());
 		List<UsuarioRol> usuarioRols = usuarioRolService.findAll();
 		List<UsuarioRol> usuarioRolList = new ArrayList<>();
 		for (UsuarioRol ur : usuarioRols) {
@@ -148,8 +146,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 			}
 		}
 		usuario.setUsuarioRol(usuarioRolList);
-		dp.setUsuario(usuario);
-		usuario.setDatosPersonales(dp);
+//		DatosPersonales dp = datosPersonalesService.findByUsrId(usuario.getIdUsr());
+//		dp.setUsuario(usuario);
+//		usuario.setDatosPersonales(dp);
 
 		usuarioDAO.save(usuario);
 

@@ -20,9 +20,22 @@
 	<c:import url="/WEB-INF/views/menu.jsp" />
 <br>
 	<sf:form method="post" action="${pageContext.request.contextPath}/usuario/logged/save" modelAttribute="usuario">
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="input"><fmt:message key="label.Username" /></label>
-			<sf:input path="usuario" type="text" class="form-control" disabled="true"/>
+		<div class="form-row">
+			<div class="col-xs-12 col-sm-6">
+				<label for="input"><fmt:message key="label.Username" /></label>
+				<sf:input path="usuario" type="text" class="form-control" disabled="true"/>
+			</div>
+			<div class="col-sm-2">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<button type="button" class="btn btn-danger margin-left-5porciento" onclick='location.href="<c:url value="/usuario/logged/changePass/${usuario.idUsr}"/>"'>
+					<fmt:message key="label.Change.password" />
+				</button>
+				<br>
+				<c:if test="${not empty sessionScope.resultado}">
+					<fmt:message key="${sessionScope.resultado}" />
+				</c:if>
+			</div>
 		</div>
 		<c:if test="${not empty usuario.clave}">
 			<sf:hidden path="usuario"/>

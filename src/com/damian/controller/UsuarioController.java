@@ -64,18 +64,15 @@ public class UsuarioController {
 
 	@RequestMapping("/usuario/logged/{idUsr}")
 	public ModelAndView getLoggedUser(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
-		Usuario usuario = new Usuario();
-		if (idUsr > 0) {
-			usuario = usuarioService.findById(idUsr);
-			usuarioService.fillExistingUser(usuario);
-		} else {
-			usuarioService.fillNewUser(usuario);
-		}
-		modelAndView.addObject("roles", rolService.findAll());
-		modelAndView.addObject("paises", paisService.findAll());
-		modelAndView.addObject("usuario", usuario);
-		modelAndView.addObject("estoy", "usuario");
+		fillLoggedUser(modelAndView, idUsr);
 		modelAndView.setViewName("usuarioLogged");
+		return modelAndView;
+	}
+
+	@RequestMapping("/usuario/logged/changePass/{idUsr}")
+	public ModelAndView getChangePassword(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
+		fillLoggedUser(modelAndView, idUsr);
+		modelAndView.setViewName("usuarioChangePassword");
 		return modelAndView;
 	}
 
@@ -116,6 +113,15 @@ public class UsuarioController {
 		return "redirect:/";
 	}
 
+	@RequestMapping(value = { "/usuario/logged/changePass/save" }, method = RequestMethod.POST)
+	public String saveChangeUserPass(@ModelAttribute("usuario") Usuario usuario,
+			BindingResult result, Model model, RedirectAttributes ra) {
+
+		usuarioService.saveChangePassword(usuario);
+		ra.addFlashAttribute("resultado", "label.Passwrod.change.success");
+		return "redirect:/usuario/logged/" + usuario.getIdUsr();
+	}
+
 	@RequestMapping("/usuario/{idUsr}/delete")
 	public String deleteUser(@PathVariable("idUsr") int idUsr, RedirectAttributes ra) {
 
@@ -149,6 +155,21 @@ public class UsuarioController {
 		Usuario usuario = usuarioService.reset(idUsr);
 		usuarioService.save(usuario, null, null);
 		return "redirect:/usuario";
+	}
+
+	private void fillLoggedUser(ModelAndView modelAndView, int idUsr) {
+		Usuario usuario = new Usuario();
+		if (idUsr > 0) {
+			usuario = usuarioService.findById(idUsr);
+			usuarioService.fillExistingUser(usuario);
+		} else {
+			modelAndView.setViewName("index");
+			return;
+		}
+		modelAndView.addObject("roles", rolService.findAll());
+		modelAndView.addObject("paises", paisService.findAll());
+		modelAndView.addObject("usuario", usuario);
+		modelAndView.addObject("estoy", "usuario");		
 	}
 
 }
