@@ -11,7 +11,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title><fmt:message key="label.Company" /></title>
+	<title><fmt:message key="Company" /></title>
 	<script type="text/javascript" src='<c:url value="/resources/js/jquery.js" />'></script>
 	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
@@ -22,50 +22,99 @@
 		<c:if test="${empresa.idEmp != 0}">
 			<sf:hidden path="idEmp"/>
 		</c:if>
-		
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="nombreComercial"><fmt:message key="label.Company.name" /></label> 
-			<sf:input path="nombreComercial" class="form-control" id="nombreComercial" />
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="nombreComercial"><fmt:message key="label.Company.name" /></label> 
+				<sf:input path="nombreComercial" class="form-control" id="nombreComercial" />
+			</div>
 		</div>
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="tipoSociedad"><fmt:message key="label.Limited.company" /></label>
-			<sf:select class="form-control" id="tipoSociedad" path="tipoSociedad">
-				<sf:option value="SL" />
-				<sf:option value="SA" />
-				<sf:option value="Cooperativa" />
-			</sf:select>
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="tipoSociedad"><fmt:message key="label.Limited.company" /></label>
+				<sf:select class="form-control" id="tipoSociedad" path="tipoSociedad">
+					<sf:option value="SL" />
+					<sf:option value="SA" />
+					<sf:option value="Cooperativa" />
+				</sf:select>
+			</div>
 		</div>
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="actividad"><fmt:message key="label.Activity" /></label>
-			<sf:input path="actividad" type="text" class="form-control" id="actividad" />
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="actividad"><fmt:message key="label.Activity" /></label>
+				<sf:input path="actividad" type="text" class="form-control" id="actividad" />
+			</div>
 		</div>
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="cif"><fmt:message key="label.vat" /></label>
-			<sf:input path="cif" type="text" class="form-control" id="cif" />
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="cif"><fmt:message key="label.vat" /></label>
+				<sf:input path="cif" type="text" class="form-control" id="cif" />
+			</div>
 		</div>
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="email"><fmt:message key="label.Email" /></label>
-			<sf:input path="email" type="text" class="form-control" id="email" />
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="email"><fmt:message key="label.Email" /></label>
+				<sf:input path="email" type="text" class="form-control" id="email" />
+			</div>
 		</div>
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="paginaWeb"><fmt:message key="label.Web.page" /></label>
-			<sf:input path="paginaWeb" type="text" class="form-control" id="paginaWeb" />
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="paginaWeb"><fmt:message key="label.Web.page" /></label>
+				<sf:input path="paginaWeb" type="text" class="form-control" id="paginaWeb" />
+			</div>
 		</div>
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="telefono"><fmt:message key="label.Phone" /></label>
-			<sf:input path="telefono" type="text" class="form-control" id="telefono" />
-		</div>	
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="fax"><fmt:message key="label.Fax" /></label>
-			<sf:input path="fax" type="text" class="form-control" id="fax" />
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="telefono"><fmt:message key="label.Phone" /></label>
+				<sf:input path="telefono" type="text" class="form-control" id="telefono" />
+			</div>	
 		</div>
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="observaciones"><fmt:message key="label.Observations" /></label>
-			<sf:textarea path="observaciones" type="text" class="form-control" id="observaciones" />
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="fax"><fmt:message key="label.Fax" /></label>
+				<sf:input path="fax" type="text" class="form-control" id="fax" />
+			</div>
 		</div>
-		
-		<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-		<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/empresa' />"'><fmt:message key="Cancel" /></button>
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-6">
+				<label for="observaciones"><fmt:message key="label.Observations" /></label>
+				<sf:textarea path="observaciones" type="text" class="form-control" id="observaciones" />
+			</div>
+		</div>
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
+				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/empresa' />"'><fmt:message key="Cancel" /></button>
+			</div>
+		</div>
 	</sf:form>
 </body>
 </html>

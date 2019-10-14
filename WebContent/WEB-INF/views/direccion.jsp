@@ -30,52 +30,97 @@
 		<c:if test="${direccion.idDir != 0}">
 			<sf:hidden path="idDir"/>
 		</c:if>
-		
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="tipoVia"><fmt:message key="label.Type.road" /></label>
-			<sf:select class="form-control" id="tipoVia" path="tipoVia">
-				<sf:option value="Calle" />
-				<sf:option value="Avenida" />
-				<sf:option value="Paseo" />
-				<sf:option value="Plaza" />
-			</sf:select>
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="tipoVia"><fmt:message key="label.Type.road" /></label>
+				<sf:select class="form-control" id="tipoVia" path="tipoVia">
+					<sf:option value="Calle" />
+					<sf:option value="Avenida" />
+					<sf:option value="Paseo" />
+					<sf:option value="Plaza" />
+				</sf:select>
+			</div>
 		</div>
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="nombreVia"><fmt:message key="label.Street" /></label> 
-			<sf:input path="nombreVia" class="form-control" id="nombreVia" />
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="nombreVia"><fmt:message key="label.Street" /></label> 
+				<sf:input path="nombreVia" class="form-control" id="nombreVia" />
+			</div>
 		</div>
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="numero"><fmt:message key="label.Number" /></label>
-			<sf:input path="numero" type="text" class="form-control" id="numero" />
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="numero"><fmt:message key="label.Number" /></label>
+				<sf:input path="numero" type="text" class="form-control" id="numero" />
+			</div>
 		</div>
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="resto"><fmt:message key="label.Rest" /></label>
-			<sf:input path="resto" type="text" class="form-control" id="resto" />
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="resto"><fmt:message key="label.Rest" /></label>
+				<sf:input path="resto" type="text" class="form-control" id="resto" />
+			</div>
 		</div>
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="cp"><fmt:message key="label.Postal.code" /></label>
-			<sf:input path="cp" type="text" class="form-control" id="cp" />
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="cp"><fmt:message key="label.Postal.code" /></label>
+				<sf:input path="cp" type="text" class="form-control" id="cp" />
+			</div>
 		</div>
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="provincia"><fmt:message key="label.Province" /></label>
-			<sf:input path="provincia" type="text" class="form-control" id="provincia" />
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="provincia"><fmt:message key="label.Province" /></label>
+				<sf:input path="provincia" type="text" class="form-control" id="provincia" />
+			</div>
 		</div>
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="ciudad"><fmt:message key="label.City" /></label>
-			<sf:input path="ciudad" type="text" class="form-control" id="ciudad" />
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="ciudad"><fmt:message key="label.City" /></label>
+				<sf:input path="ciudad" type="text" class="form-control" id="ciudad" />
+			</div>
 		</div>
 		<fmt:message key="Country.item.column" var="itemSelect"/>
 		<fmt:message key="Select.country" var="selectCountry" />
-		<div class="form-group col-xs-12 col-sm-6">
-			<label for="pais"><fmt:message key="label.Country" /></label>
-        	<sf:select path="pais" class="form-control" id="pais">
-            	<sf:option value="empty" label="${selectCountry}" />
-            	<sf:options items="${paises}" itemValue="${itemSelect}" itemLabel="${itemSelect}" />
-        	</sf:select>
-		</div>		
-		
-		<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-		<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/direccion/${direccion.datosPersonales.usuario.idUsr}' />"'><fmt:message key="Cancel" /></button>
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="pais"><fmt:message key="label.Country" /></label>
+	        	<sf:select path="pais" class="form-control" id="pais">
+	            	<sf:option value="empty" label="${selectCountry}" />
+	            	<sf:options items="${paises}" itemValue="${itemSelect}" itemLabel="${itemSelect}" />
+	        	</sf:select>
+			</div>	
+		</div>
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">	
+				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
+				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/direccion/${direccion.datosPersonales.usuario.idUsr}' />"'><fmt:message key="Cancel" /></button>
+			</div>
+		</div>
 	</sf:form>
 </body>
 </html>

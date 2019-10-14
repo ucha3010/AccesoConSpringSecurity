@@ -26,25 +26,32 @@
 			<sf:hidden path="idUsr"/>
 			<sf:hidden path="habilitado"/>
 			<sf:hidden path="fechaCreacion"/>
-		</c:if>
-		<div class="form-group col-xs-12 col-sm-6">
-			<h1><c:out value="${usuario.datosPersonales.nombre}"/></h1>
+		</c:if>		
+		<div class="text-center">
+			<h1><c:out value="${usuario.datosPersonales.nombre}"/> <c:out value="${usuario.datosPersonales.apellido1}"/> <c:out value="${usuario.datosPersonales.apellido2}"/></h1>
 		</div>
-		<div class="form-row">
-			<div class="col-xs-12 col-sm-6">
+		<br>
+		<div class="form-row">	
+			<div class="col-sm-2">
+			</div>
+			<div class="col-xs-12 col-sm-4">
 				<label for="inputPassword1"><fmt:message key="label.Password" /></label> 
 				<sf:password class="form-control" id="inputPassword1" path="clave"/>
 				<sf:errors path="clave" cssStyle="color:red"/>
 			</div>
-			<div class="col-xs-12 col-sm-6">
+			<div class="col-xs-12 col-sm-4">
 				<label for="inputPassword2"><fmt:message key="label.Password.repeat" /></label> 
 				<input type="password" class="form-control" id="inputPassword2"/>
 			</div>
 		</div>
-		<br><br>
-		<div class="form-group col-xs-12 col-sm-6">
-			<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-			<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/usuario/logged/${usuario.idUsr}"/>"'><fmt:message key="Cancel" /></button>
+		<br>
+		<div class="form-row">	
+			<div class="col-sm-5">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<button type="submit" class="btn btn-success margin-left-5porciento"><fmt:message key="Send" /></button>
+				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/usuario/logged/${usuario.idUsr}"/>"'><fmt:message key="Cancel" /></button>
+			</div>
 		</div>
 	</sf:form>
 </body>
