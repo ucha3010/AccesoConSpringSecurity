@@ -10,8 +10,6 @@ public interface RolDAO {
 
 	public List<Rol> findAll();
 	
-	public void update(Rol rol);
-	
 	public void delete(Rol rol);
 
 	public Rol findById(int id);

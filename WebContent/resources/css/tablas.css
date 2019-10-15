@@ -55,6 +55,57 @@
 	padding-bottom: 0;	
 }
 
+@media (min-height: 1024px) {
+	.divTablaSinScroll {
+	    height:860px;
+	}
+}
+
+@media (max-height: 1023px) and (min-height: 960px) {
+	.divTablaSinScroll {
+	    height:800px;
+	}
+}
+
+@media (max-height: 959px) and (min-height: 864px) {
+	.divTablaSinScroll {
+	    height:700px;
+	}
+}
+
+@media (max-height: 863px) and (min-height: 768px) {
+	.divTablaSinScroll {
+	    height:600px;
+	}
+}
+
+@media (max-height: 767px) and (min-height: 720px) {
+	.divTablaSinScroll {
+	    height:560px;
+	}
+}
+
+@media (max-height: 719px) {
+	.divTablaSinScroll {
+	    height:430px;
+	}
+}
+
+.divTablaSinScroll thead th { 
+	position: sticky; 
+	top: -0.1rem; 
+	background-color: #fff;
+	vertical-align: middle !important;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.divTablaSinScroll tbody td{	
+	vertical-align: middle !important;
+	padding-top: 0;
+	padding-bottom: 0;	
+}
+
 th:hover {
 	cursor: pointer;
 }

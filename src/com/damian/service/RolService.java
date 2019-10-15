@@ -12,8 +12,6 @@ public interface RolService {
 
 	List<Rol> findAll();
 	
-	void update(Rol rol);
-	
 	void delete(int idRol);
 	
 	List<Rol> findByRolName(String rolName);

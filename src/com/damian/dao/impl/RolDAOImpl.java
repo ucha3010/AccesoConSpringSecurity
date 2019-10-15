@@ -39,7 +39,7 @@ public class RolDAOImpl implements RolDAO {
 	public Rol findById(int id) {
 		
 		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		Session session = getOpenSession();
+		Session session = getSession();
 		CriteriaQuery<Rol> criteriaQuery = criteriaBuilder.createQuery(Rol.class);
 		Root<Rol> root = criteriaQuery.from(Rol.class);
 		criteriaQuery.select(root);
@@ -73,12 +73,11 @@ public class RolDAOImpl implements RolDAO {
 
 	@Override
 	public void save(Rol rol) {
-		getSession().save(rol);
-	}
-	
-	@Override
-	public void update(Rol rol) {
-		getSession().update(rol);
+		if(rol.getIdRol() > 0) {
+			getSession().update(rol);
+		} else {
+			getSession().save(rol);
+		}
 	}
 	
 	@Override
