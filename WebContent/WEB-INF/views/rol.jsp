@@ -13,12 +13,31 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title><fmt:message key="label.Rol" /></title>
 	<script type="text/javascript" src='<c:url value="/resources/js/jquery.js" />'></script>
+	<script type="text/javascript" src='<c:url value="/resources/js/validaciones.js" />'></script>
 	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		function validarRol(){
+			restablecer();
+		    var nombreRol = document.getElementById('nombreRol');
+		    var nombreRolError = document.getElementById('nombreRolError');
+			if(nombreRol.value==''){
+				nombreRolError.innerHTML = "<fmt:message key='error.field.not.empty' />";
+				nombreRol.style.borderColor="red";
+				return false;
+			}
+			if(nombreRol.value.length < 4 || nombreRol.value.substring(0,4)!='ROL_'){
+				nombreRolError.innerHTML = "<fmt:message key='error.rolname.start' />";
+				nombreRol.style.borderColor="red";
+				return false;
+			}
+			return true;
+		}
+	</script>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
-	<sf:form method="post" action="${pageContext.request.contextPath}/rol/save" modelAttribute="rol">
+	<sf:form method="post" action="${pageContext.request.contextPath}/rol/save" modelAttribute="rol" onsubmit="return validarRol()">
 		<c:if test="${rol.idRol != 0}">
 			<sf:hidden path="idRol"/>
 		</c:if>
@@ -27,7 +46,8 @@
 			</div>
 			<div class="col-xs-12 col-sm-4">
 				<label for="rol"><fmt:message key="Rol.name" /></label> 
-				<sf:input path="rol" class="form-control" id="rol" />
+				<sf:input path="rol" class="form-control" id="nombreRol" />
+				<span id="nombreRolError" name="errorSpan"></span>
 			</div>
 		</div>
 		<br/>
