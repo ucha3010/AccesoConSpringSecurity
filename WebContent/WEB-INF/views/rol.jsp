@@ -13,7 +13,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title><fmt:message key="label.Rol" /></title>
 	<script type="text/javascript" src='<c:url value="/resources/js/jquery.js" />'></script>
-	<script type="text/javascript" src='<c:url value="/resources/js/validaciones.js" />'></script>
 	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
@@ -32,6 +31,16 @@
 				return false;
 			}
 			return true;
+		}
+		function restablecer(){
+			var errorSpan = document.getElementsByName('errorSpan');
+			for (var i = 0; i < errorSpan.length; i++) {
+				errorSpan[i].innerHTML='';
+			}
+			var campos = document.getElementsByClassName("form-control");
+			for (var i = 0; i < campos.length; i++) {
+				campos[i].style.borderColor="#ced4da";
+			}
 		}
 	</script>
 </head>

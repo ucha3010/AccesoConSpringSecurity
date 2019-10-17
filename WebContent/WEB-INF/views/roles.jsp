@@ -30,27 +30,21 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
-	<div class="form-row">		
-		<div class="col-sm-3">
-		</div>
-		<div class="col-xs-12 col-sm-4">
-			<c:if test="${not empty asociado}">
-				<span style="color: red;">
-					<fmt:message key="error.Rol.asociated" />
-				</span>
-			</c:if>
-			<c:if test="${not empty eliminado}">
-				<span style="color: green;">
-					<fmt:message key="Rol.deleted" />
-				</span>
-			</c:if>
-		</div>
-	</div>
-	<br/>
 	<sec:authorize access="hasAnyRole('ROL_ROOT')">
-		<div class="d-flex">
-			<div class="mr-auto p-2">
-				<h1></h1>
+		<div class="d-flex justify-content-between">
+			<div class="p-2">
+			</div>
+			<div class="p-2">
+				<c:if test="${not empty asociado}">
+					<span style="color: red;">
+						<fmt:message key="error.Rol.asociated" />
+					</span>
+				</c:if>
+				<c:if test="${not empty eliminado}">
+					<span style="color: green;">
+						<fmt:message key="Rol.deleted" />
+					</span>
+				</c:if>
 			</div>
 			<div class="p-2">
 				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/rol/0'/>"'>

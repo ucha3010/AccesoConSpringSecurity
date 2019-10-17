@@ -15,6 +15,37 @@
 	<script type="text/javascript" src='<c:url value="/resources/js/jquery.js" />'></script>
 	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		function validar(){
+			var campo = ['nombreVia','cp','ciudad'];
+			restablecer();
+			var validado = true;			
+			for(var i=0; i < campo.length; i++){
+			    var nombreRol = document.getElementById(campo[i]);
+			    var nombreRolError = document.getElementById(campo[i]+'Error');
+				if(nombreRol.value==''){
+					nombreRolError.innerHTML = "<fmt:message key='error.field.not.empty' />";
+					nombreRol.style.borderColor="red";
+					validado = false;
+				}
+			}
+			if(validado){
+				return true;
+			} else {
+				return false;
+			}
+		}
+		function restablecer(){
+			var errorSpan = document.getElementsByName('errorSpan');
+			for (var i = 0; i < errorSpan.length; i++) {
+				errorSpan[i].innerHTML='';
+			}
+			var campos = document.getElementsByClassName("form-control");
+			for (var i = 0; i < campos.length; i++) {
+				campos[i].style.borderColor="#ced4da";
+			}
+		}
+	</script>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
@@ -26,7 +57,7 @@
 			</h1>
 		</div>
 	</c:if>
-	<sf:form method="post" action="${pageContext.request.contextPath}/direccion/save/${direccion.datosPersonales.usuario.idUsr}" modelAttribute="direccion">
+	<sf:form method="post" action="${pageContext.request.contextPath}/direccion/save/${direccion.datosPersonales.usuario.idUsr}" modelAttribute="direccion" onsubmit="return validar()">
 		<c:if test="${direccion.idDir != 0}">
 			<sf:hidden path="idDir"/>
 		</c:if>
@@ -51,6 +82,7 @@
 			<div class="col-xs-12 col-sm-4">
 				<label for="nombreVia"><fmt:message key="label.Street" /></label> 
 				<sf:input path="nombreVia" class="form-control" id="nombreVia" />
+				<span id="nombreViaError" name="errorSpan"></span>
 			</div>
 		</div>
 		<br/>
@@ -78,6 +110,7 @@
 			<div class="col-xs-12 col-sm-4">
 				<label for="cp"><fmt:message key="label.Postal.code" /></label>
 				<sf:input path="cp" type="text" class="form-control" id="cp" />
+				<span id="cpError" name="errorSpan"></span>
 			</div>
 		</div>
 		<br/>
@@ -96,6 +129,7 @@
 			<div class="col-xs-12 col-sm-4">
 				<label for="ciudad"><fmt:message key="label.City" /></label>
 				<sf:input path="ciudad" type="text" class="form-control" id="ciudad" />
+				<span id="ciudadError" name="errorSpan"></span>
 			</div>
 		</div>
 		<fmt:message key="Country.item.column" var="itemSelect"/>
@@ -107,7 +141,7 @@
 			<div class="col-xs-12 col-sm-4">
 				<label for="pais"><fmt:message key="label.Country" /></label>
 	        	<sf:select path="pais" class="form-control" id="pais">
-	            	<sf:option value="empty" label="${selectCountry}" />
+<%-- 	            	<sf:option value="empty" label="${selectCountry}" /> --%>
 	            	<sf:options items="${paises}" itemValue="${itemSelect}" itemLabel="${itemSelect}" />
 	        	</sf:select>
 			</div>	
