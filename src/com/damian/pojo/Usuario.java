@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -37,7 +36,7 @@ public class Usuario implements Serializable {
 	private int idUsr;
 
 	@NotEmpty(message = Constantes.NOT_EMPTY, groups = { PersistenceGroup.class, SpringFormGroup.class })
-	@Size(min = 3, max = 50, message = Constantes.NOT_SIZE_USER)
+//	@Size(min = 3, max = 50, message = Constantes.NOT_SIZE_USER)
 	@Column(name = "usuario")
 	private String usuario;
 

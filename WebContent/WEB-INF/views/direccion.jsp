@@ -80,7 +80,7 @@
 			<div class="col-sm-3">
 			</div>
 			<div class="col-xs-12 col-sm-4">
-				<label for="nombreVia"><fmt:message key="label.Street" /></label> 
+				<label for="nombreVia"><fmt:message key="label.Street" /> *</label> 
 				<sf:input path="nombreVia" class="form-control" id="nombreVia" />
 				<span id="nombreViaError" name="errorSpan"></span>
 			</div>
@@ -108,7 +108,7 @@
 			<div class="col-sm-3">
 			</div>
 			<div class="col-xs-12 col-sm-4">
-				<label for="cp"><fmt:message key="label.Postal.code" /></label>
+				<label for="cp"><fmt:message key="label.Postal.code" /> *</label>
 				<sf:input path="cp" type="text" class="form-control" id="cp" />
 				<span id="cpError" name="errorSpan"></span>
 			</div>
@@ -127,7 +127,7 @@
 			<div class="col-sm-3">
 			</div>
 			<div class="col-xs-12 col-sm-4">
-				<label for="ciudad"><fmt:message key="label.City" /></label>
+				<label for="ciudad"><fmt:message key="label.City" /> *</label>
 				<sf:input path="ciudad" type="text" class="form-control" id="ciudad" />
 				<span id="ciudadError" name="errorSpan"></span>
 			</div>
