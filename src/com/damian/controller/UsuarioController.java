@@ -62,6 +62,17 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
+	@RequestMapping("/usuario/nuevo")
+	public ModelAndView getUser(ModelAndView modelAndView) {
+		Usuario usuario = new Usuario();
+		usuarioService.fillNewUser(usuario);
+		modelAndView.addObject("paises", paisService.findAll());
+		modelAndView.addObject("usuario", usuario);
+		modelAndView.addObject("estoy", "index");
+		modelAndView.setViewName("usuarioNuevo");
+		return modelAndView;
+	}
+
 	@RequestMapping("/usuario/logged/{idUsr}")
 	public ModelAndView getLoggedUser(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
 		fillLoggedUser(modelAndView, idUsr);
@@ -98,6 +109,17 @@ public class UsuarioController {
 		}
 		usuarioService.save(usuario, usuarioRol, request);
 		return "redirect:/usuario";
+	}
+
+	@RequestMapping(value = { "/usuario/nuevo/save" }, method = RequestMethod.POST)
+	public String saveNewUser(@ModelAttribute("usuario") Usuario usuario, Model model,
+			HttpServletRequest request, RedirectAttributes ra) {
+
+		String[] usuarioRol = new String[1];
+		usuarioRol[0] = "1";
+		usuarioService.save(usuario, usuarioRol, request);
+		ra.addFlashAttribute("resultado", "label.user.successfully.created"); // TODO DAMIAN ver esto porque queda mostrándose siempre
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = { "/usuario/logged/save" }, method = RequestMethod.POST)

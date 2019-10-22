@@ -19,11 +19,7 @@
 	<script type="text/javascript">
 		function validar(){
 
-			if(${empty usuario.clave}){
-				var campo = ['inputNombre','inputApellido1','email','username','inputPassword1','inputPassword2'];
-			} else {
-				var campo = ['inputNombre','inputApellido1','email'];
-			}
+			var campo = ['inputNombre','inputApellido1','email','username','inputPassword1','inputPassword2'];
 			restablecer();
 			var validado = true;			
 			for(var i=0; i < campo.length; i++){
@@ -83,7 +79,7 @@
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
 <br>
-	<sf:form method="post" action="${pageContext.request.contextPath}/usuario/save" modelAttribute="usuario" onsubmit="return validar()">
+	<sf:form method="post" action="${pageContext.request.contextPath}/usuario/nuevo/save" modelAttribute="usuario" onsubmit="return validar()">
 		<div class="form-row">		
 			<div class="col-sm-3">
 			</div>
@@ -93,29 +89,21 @@
 				<span id="usernameError" name="errorSpan"></span>
 			</div>
 		</div>
-		<c:if test="${empty usuario.clave}">
-			<br/>
-			<div class="form-row">		
-				<div class="col-sm-3">
-				</div>
-				<div class="form-group col-xs-12 col-sm-4">
-					<label for="inputPassword1"><fmt:message key="label.Password" /> *</label> 
-					<sf:password class="form-control" id="inputPassword1" path="clave"/>
-					<span id="inputPassword1Error" name="errorSpan"></span>
-				</div>
-				<div class="form-group col-xs-12 col-sm-4">
-					<label for="inputPassword2"><fmt:message key="label.Password.repeat" /> *</label> 
-					<input type="password" class="form-control" id="inputPassword2"/>
-					<span id="inputPassword2Error" name="errorSpan"></span>
-				</div>
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
 			</div>
-		</c:if>
-		<c:if test="${not empty usuario.clave}">
-			<sf:hidden path="clave"/>
-			<sf:hidden path="idUsr"/>
-			<sf:hidden path="habilitado"/>
-			<sf:hidden path="fechaCreacion"/>
-		</c:if>
+			<div class="form-group col-xs-12 col-sm-4">
+				<label for="inputPassword1"><fmt:message key="label.Password" /> *</label> 
+				<sf:password class="form-control" id="inputPassword1" path="clave"/>
+				<span id="inputPassword1Error" name="errorSpan"></span>
+			</div>
+			<div class="form-group col-xs-12 col-sm-4">
+				<label for="inputPassword2"><fmt:message key="label.Password.repeat" /> *</label> 
+				<input type="password" class="form-control" id="inputPassword2"/>
+				<span id="inputPassword2Error" name="errorSpan"></span>
+			</div>
+		</div>
 		<br/>
 		<div class="form-row">		
 			<div class="col-sm-3">
@@ -201,43 +189,6 @@
 				<sf:input path="datosPersonales.email" type="text" class="form-control" id="email" />
 				<span id="emailError" name="errorSpan"></span>
 			</div>
-		</div>
-		<sec:authorize access="!hasAnyRole('ROL_ROOT')">
-			<div class="form-row invisible">
-		</sec:authorize>
-		<sec:authorize access="hasAnyRole('ROL_ROOT')">
-			<br/>
-			<div class="form-row">
-		</sec:authorize>
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="rol"><fmt:message key="label.roles.press.ctrl" /></label>
-				<div>
-					<sf:select path="usuarioRol">
-						<c:forEach var="item" items="${roles}">
-							<c:set var="seleccionado" value="false" scope="page" />
-							<c:forEach var="ur" items="${usuario.usuarioRol}">
-						        <c:if test="${ur.pk.rol.idRol == item.getIdRol()}">					            
-									<c:set var="seleccionado" value="true" scope="page" />
-						        </c:if>
-						    </c:forEach>
-						    <c:choose>
-						    	<c:when test="${seleccionado}">
-							    	<sf:option selected="true" value="${item.getIdRol()}">
-								    	<c:out value="${item.getRol()}"></c:out>
-						            </sf:option>
-						    	</c:when>
-						    	<c:otherwise>
-						            <sf:option value="${item.getIdRol()}">
-										<c:out value="${item.getRol()}"></c:out>
-						            </sf:option>
-						    	</c:otherwise>
-					        </c:choose>
-						</c:forEach>
-					</sf:select>
-				</div>
-			</div>
 		</div>	
 		<br/>
 		<div class="form-row">		
@@ -274,7 +225,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-4">
 				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/usuario"/>"'><fmt:message key="Cancel" /></button>
+				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/"/>"'><fmt:message key="Cancel" /></button>
 			</div>
 		</div>
 	</sf:form>

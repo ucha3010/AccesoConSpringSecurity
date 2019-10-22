@@ -99,7 +99,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 				ur.setRol(rol);
 				ur.setUsuario(usuario);
 				ur.setFechaCreacion(new Date());
-				ur.setCreadoPor(context.getAuthentication().getName());
+				if(context != null) {
+					ur.setCreadoPor(context.getAuthentication().getName());
+				} else {
+					ur.setCreadoPor("OWN USER");
+				}
 				roles.add(ur);
 			}
 			usuario.setUsuarioRol(roles);

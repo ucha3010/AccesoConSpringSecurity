@@ -58,7 +58,7 @@
 		
 		<div class="col-xs-12 col-md-6 pt-2 border-int-dam">
 			<sec:authorize access="!isAuthenticated()">
-				<button type="button" class="btn btn-info float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/0'/>"'>
+				<button type="button" class="btn btn-info float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/nuevo'/>"'>
 					<fmt:message key="label.New.user" />
 				</button>
 				<button type="button" class="btn btn-success float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/private/${sessionScope.estoy}'/>"'>

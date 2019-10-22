@@ -17,7 +17,10 @@
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
+	<c:import url="/WEB-INF/views/menu.jsp" />	
+	<c:if test="${not empty sessionScope.resultado}">
+		<fmt:message key="${sessionScope.resultado}" />
+	</c:if>
 	<div class="container-fluid">
 	
 		<div class="row">
