@@ -19,7 +19,7 @@
 	<script type="text/javascript">
 		function validar(){
 
-			if(${empty usuario.clave}){
+			if(${(empty usuario.clave) || (not empty username_existente)}){
 				var campo = ['inputNombre','inputApellido1','email','username','inputPassword1','inputPassword2'];
 			} else {
 				var campo = ['inputNombre','inputApellido1','email'];
@@ -36,7 +36,7 @@
 				}
 			}
 			
-			if(${empty usuario.clave}){
+			if(${(empty usuario.clave) || (not empty username_existente)}){
 	    		var pass1 = document.getElementById('inputPassword1').value;
 		    	var pass2 = document.getElementById('inputPassword2').value;
 		    	if(pass1.length > 0 && pass1 != pass2){
@@ -65,6 +65,7 @@
 			if(validado){
 				return true;
 			} else {
+				document.getElementById('hayError').innerHTML = "<fmt:message key='error.any.field' />";
 				return false;
 			}
 		}
@@ -90,10 +91,15 @@
 			<div class="col-xs-12 col-sm-4">
 				<label for="input"><fmt:message key="label.Username" /> *</label>
 				<sf:input path="usuario" type="text" class="form-control" id="username"/>
+				<c:if test="${not empty username_existente}">
+					<span style="color: orange;">
+						<fmt:message key="error.username.existing" />
+					</span>
+				</c:if>
 				<span id="usernameError" name="errorSpan"></span>
 			</div>
 		</div>
-		<c:if test="${empty usuario.clave}">
+		<c:if test="${(empty usuario.clave) || (not empty username_existente)}">
 			<br/>
 			<div class="form-row">		
 				<div class="col-sm-3">
@@ -110,7 +116,7 @@
 				</div>
 			</div>
 		</c:if>
-		<c:if test="${not empty usuario.clave}">
+		<c:if test="${(not empty usuario.clave) && (empty username_existente)}">
 			<sf:hidden path="clave"/>
 			<sf:hidden path="idUsr"/>
 			<sf:hidden path="habilitado"/>
@@ -275,6 +281,7 @@
 			<div class="col-xs-12 col-sm-4">
 				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
 				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/usuario"/>"'><fmt:message key="Cancel" /></button>
+				<span id="hayError" name="errorSpan" style="color:red"></span>
 			</div>
 		</div>
 	</sf:form>

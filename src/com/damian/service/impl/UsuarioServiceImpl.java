@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.damian.dao.UsuarioDAO;
 import com.damian.dao.UsuarioRolDAO;
+import com.damian.exceptions.RepeatedUsernameException;
 import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
 import com.damian.pojo.Rol;
@@ -58,12 +59,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuarioDAO.findByUsername(usuario);
 	}
 
-	public void save(Usuario usuario, String[] usuarioRol, HttpServletRequest request) {
+	public void save(Usuario usuario, String[] usuarioRol, HttpServletRequest request) throws RepeatedUsernameException {
 
 		DatosPersonales dp;
 		dp = usuario.getDatosPersonales();
 
 		if (usuario.getIdUsr() == 0) {
+			Usuario verifico = findByUsername(usuario.getUsuario());
+			if(verifico != null) {
+				throw new RepeatedUsernameException(usuario.getUsuario());
+			}
 			usuario.setFechaCreacion(new Timestamp(new Date().getTime()));
 			usuario.setHabilitado(true);
 			String claveUsr = usuario.getClave();

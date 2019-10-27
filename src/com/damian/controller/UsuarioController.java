@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.damian.exceptions.RepeatedUsernameException;
 import com.damian.pojo.Usuario;
 import com.damian.service.PaisService;
 import com.damian.service.RolService;
@@ -46,12 +48,14 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/usuario/{idUsr}")
-	public ModelAndView getUser(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
-		Usuario usuario = new Usuario();
+	public ModelAndView getUser(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr, 
+			@ModelAttribute("usuario") Usuario usuario, final BindingResult br) {
+		
+
 		if (idUsr > 0) {
 			usuario = usuarioService.findById(idUsr);
 			usuarioService.fillExistingUser(usuario);
-		} else {
+		} else if(usuario.getUsuario() == null) {
 			usuarioService.fillNewUser(usuario);
 		}
 		modelAndView.addObject("roles", rolService.findAll());
@@ -59,17 +63,6 @@ public class UsuarioController {
 		modelAndView.addObject("usuario", usuario);
 		modelAndView.addObject("estoy", "usuario");
 		modelAndView.setViewName("usuario");
-		return modelAndView;
-	}
-
-	@RequestMapping("/usuario/nuevo")
-	public ModelAndView getUser(ModelAndView modelAndView) {
-		Usuario usuario = new Usuario();
-		usuarioService.fillNewUser(usuario);
-		modelAndView.addObject("paises", paisService.findAll());
-		modelAndView.addObject("usuario", usuario);
-		modelAndView.addObject("estoy", "index");
-		modelAndView.setViewName("usuarioNuevo");
 		return modelAndView;
 	}
 
@@ -98,7 +91,7 @@ public class UsuarioController {
 	@RequestMapping(value = { "/usuario/save" }, method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute("usuario") @Validated(value = SpringFormGroup.class) Usuario usuario,
 			BindingResult result, Model model, @RequestParam(value = "usuarioRol", required=false) String[] usuarioRol,
-			HttpServletRequest request) {
+			HttpServletRequest request, RedirectAttributes ra) {
 		if (result.hasErrors()) {
 			System.out.println(result.getAllErrors());
 //			return "usuario";
@@ -107,19 +100,44 @@ public class UsuarioController {
 			usuarioRol = new String[1];
 			usuarioRol[0] = "1";
 		}
-		usuarioService.save(usuario, usuarioRol, request);
+		try {
+			usuarioService.save(usuario, usuarioRol, request);
+		} catch(RepeatedUsernameException e) {
+			ra.addFlashAttribute("username_existente", "username_existente");
+			ra.addFlashAttribute("usuario", usuario);
+			return "redirect:/usuario/0";
+		}
 		return "redirect:/usuario";
 	}
 
+	@RequestMapping(value = "/usuario/nuevo", method = RequestMethod.GET)
+	public ModelAndView getUser(ModelAndView modelAndView, @ModelAttribute("usuario") Usuario usuario, final BindingResult br, HttpServletRequest request) {
+		if(usuario.getUsuario() == null) {
+			usuarioService.fillNewUser(usuario);
+		}
+		modelAndView.addObject("paises", paisService.findAll());
+		modelAndView.addObject("usuario", usuario);
+		modelAndView.addObject("estoy", "index");
+		modelAndView.setViewName("usuarioNuevo");
+		return modelAndView;
+	}
+
 	@RequestMapping(value = { "/usuario/nuevo/save" }, method = RequestMethod.POST)
-	public String saveNewUser(@ModelAttribute("usuario") Usuario usuario, Model model,
-			HttpServletRequest request, RedirectAttributes ra) {
+	public ModelAndView saveNewUser(@ModelAttribute("usuario") Usuario usuario,
+			final BindingResult br, final ModelMap model,
+			HttpServletRequest request, final RedirectAttributes ra) {
 
 		String[] usuarioRol = new String[1];
 		usuarioRol[0] = "1";
-		usuarioService.save(usuario, usuarioRol, request);
-		ra.addFlashAttribute("resultado", "label.user.successfully.created"); // TODO DAMIAN ver esto porque queda mostrándose siempre
-		return "redirect:/";
+		try {
+			usuarioService.save(usuario, usuarioRol, request);
+		} catch(RepeatedUsernameException e) {
+			ra.addFlashAttribute("usuario", usuario);
+			ra.addFlashAttribute("username_existente", "username_existente");
+			return new ModelAndView("redirect:/usuario/nuevo");
+		}
+		ra.addFlashAttribute("usuario_creado", "usuario_creado");
+		return new ModelAndView("redirect:/");
 	}
 
 	@RequestMapping(value = { "/usuario/logged/save" }, method = RequestMethod.POST)
@@ -131,7 +149,10 @@ public class UsuarioController {
 			usuarioRol = new String[1];
 			usuarioRol[0] = "1";
 		}
-		usuarioService.save(usuario, usuarioRol, request);
+		try {
+			usuarioService.save(usuario, usuarioRol, request);
+		} catch(RepeatedUsernameException e) {
+		}
 		return "redirect:/";
 	}
 
@@ -168,14 +189,20 @@ public class UsuarioController {
 		Usuario usuario = new Usuario();
 		usuario = usuarioService.findById(idUsr);
 		usuario.setHabilitado(!usuario.isHabilitado());
-		usuarioService.save(usuario, null, null);
+		try {
+			usuarioService.save(usuario, null, null);
+		} catch(RepeatedUsernameException e) {
+		}
 		return "redirect:/usuario";
 	}
 	
 	@RequestMapping("/usuario/reset/{idUsr}")
 	public String passwordReset(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
 		Usuario usuario = usuarioService.reset(idUsr);
-		usuarioService.save(usuario, null, null);
+		try {
+			usuarioService.save(usuario, null, null);
+		} catch(RepeatedUsernameException e) {
+		}
 		return "redirect:/usuario";
 	}
 

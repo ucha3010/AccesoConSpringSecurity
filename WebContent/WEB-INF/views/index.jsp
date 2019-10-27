@@ -17,10 +17,20 @@
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />	
-	<c:if test="${not empty sessionScope.resultado}">
-		<fmt:message key="${sessionScope.resultado}" />
-	</c:if>
+	<c:import url="/WEB-INF/views/menu.jsp" />
+	<div class="d-flex justify-content-between">
+		<div class="p-2">
+		</div>
+		<div class="p-2">
+			<c:if test="${not empty usuario_creado}">
+				<span style="color: green;">
+					<fmt:message key="label.user.successfully.created" />
+				</span>
+			</c:if>
+		</div>
+		<div class="p-2">
+		</div>		
+	</div>
 	<div class="container-fluid">
 	
 		<div class="row">

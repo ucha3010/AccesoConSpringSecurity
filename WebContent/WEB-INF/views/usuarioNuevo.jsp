@@ -61,6 +61,7 @@
 			if(validado){
 				return true;
 			} else {
+				document.getElementById('hayError').innerHTML = "<fmt:message key='error.any.field' />";
 				return false;
 			}
 		}
@@ -86,6 +87,11 @@
 			<div class="col-xs-12 col-sm-4">
 				<label for="input"><fmt:message key="label.Username" /> *</label>
 				<sf:input path="usuario" type="text" class="form-control" id="username"/>
+				<c:if test="${not empty username_existente}">
+					<span style="color: orange;">
+						<fmt:message key="error.username.existing" />
+					</span>
+				</c:if>
 				<span id="usernameError" name="errorSpan"></span>
 			</div>
 		</div>
@@ -226,6 +232,7 @@
 			<div class="col-xs-12 col-sm-4">
 				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
 				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/"/>"'><fmt:message key="Cancel" /></button>
+				<span id="hayError" name="errorSpan" style="color:red"></span>
 			</div>
 		</div>
 	</sf:form>

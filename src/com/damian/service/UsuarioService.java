@@ -4,13 +4,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.damian.exceptions.RepeatedUsernameException;
 import com.damian.pojo.Usuario;
 
 public interface UsuarioService {
 	
 	Usuario findById(int id);
 
-	void save(Usuario usuario, String[] usuarioRol, HttpServletRequest request);
+	void save(Usuario usuario, String[] usuarioRol, HttpServletRequest request) throws RepeatedUsernameException;
 	
 	void saveChangePassword(Usuario usuario);
 

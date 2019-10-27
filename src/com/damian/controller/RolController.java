@@ -67,9 +67,9 @@ public class RolController {
 		List<UsuarioRol> usuarioRolList = usuarioRolService.findByIdRol(idRol);
 		if(usuarioRolList == null || usuarioRolList.isEmpty()) {
 			rolService.delete(idRol);
-			ra.addFlashAttribute("eliminado", "Rol eliminado con éxito");
+			ra.addFlashAttribute("eliminado", "eliminado");
 		} else {
-			ra.addFlashAttribute("asociado", "no puede ser borrado");
+			ra.addFlashAttribute("asociado", "asociado");
 		}
 		return "redirect:/rol";
 
