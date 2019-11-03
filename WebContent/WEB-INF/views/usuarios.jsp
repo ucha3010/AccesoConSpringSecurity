@@ -35,8 +35,13 @@
 			}
 			return false;
 		}
-
-		function filtrar() {		
+		function filtrarAdmin(){
+			filtrar(true);
+		}
+		function filtrarCliente(){
+			filtrar(false);
+		}
+		function filtrar(admin) {	
 			const resultado = document.querySelector('#resultado');
 			const texto = normalizado(formulario.value.toLowerCase());
 			resultado.innerHTML = '';
@@ -48,13 +53,17 @@
 					var nombre = normalizado('${usu.datosPersonales.nombre}');
 					var apellidos = normalizado('${usu.datosPersonales.apellido1}'+" "+'${usu.datosPersonales.apellido2}');
 					if(username.toLowerCase().indexOf(texto) !== -1 || nombre.toLowerCase().indexOf(texto) !== -1 || apellidos.toLowerCase().indexOf(texto) !== -1){
-						resultado.innerHTML += "<a href=\"<c:url value='/usuario/filtered/${usu.idUsr}' />\">${usu.usuario} - ${usu.datosPersonales.nombre} ${usu.datosPersonales.apellido1} ${usu.datosPersonales.apellido2}</a>";
+						if(admin){
+							resultado.innerHTML += "<a href=\"<c:url value='/usuario/filtered/${usu.idUsr}' />\">${usu.usuario} - ${usu.datosPersonales.nombre} ${usu.datosPersonales.apellido1} ${usu.datosPersonales.apellido2}</a>";
+						} else {
+							resultado.innerHTML += "<a href=\"<c:url value='/usuario/cliente/filtered/${usu.idUsr}' />\">${usu.usuario} - ${usu.datosPersonales.nombre} ${usu.datosPersonales.apellido1} ${usu.datosPersonales.apellido2}</a>";
+							
+						}
 					}
 				</c:forEach>
 				$(".collapse").collapse('show');
 			}
-		}
-		
+		}		
 	</script>
 	
 </head>
@@ -66,7 +75,7 @@
 				<input type="text" id="formulario" class="form-control">
 				<script>
 					const formulario = document.querySelector('#formulario');
-					formulario.addEventListener('keyup', filtrar);
+					formulario.addEventListener('keyup', filtrarAdmin);
 				</script>
 			</div>
 			<div class="p-2">
@@ -79,6 +88,25 @@
 				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/0'/>"'>
 					<fmt:message key="label.Add.user" />
 				</button>
+			</div>		
+		</div>
+	</sec:authorize>
+	<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+		<div class="d-flex">
+			<div class="p-2">
+				<input type="text" id="formulario" class="form-control">
+				<script>
+					const formulario = document.querySelector('#formulario');
+					formulario.addEventListener('keyup', filtrarCliente);
+				</script>
+			</div>
+			<div class="p-2">
+				<div class="dropdown collapse">
+					<div class="dropdown-content" id="resultado">
+					</div>
+				</div>
+			</div>
+			<div class="ml-auto p-2">
 			</div>		
 		</div>
 	</sec:authorize>

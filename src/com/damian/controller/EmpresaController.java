@@ -19,7 +19,7 @@ import com.damian.valid.SpringFormGroup;
 
 @Controller
 @SessionAttributes({ "resultado" }) // los atributos que pueden mantenerse en sesión y verse en distintas
-												// páginas
+									// páginas
 public class EmpresaController {
 
 	@Autowired
@@ -28,6 +28,13 @@ public class EmpresaController {
 	@RequestMapping("/empresa")
 	public ModelAndView getAll(ModelAndView modelAndView) {
 		modelAndView.addObject("empresas", empresaService.findAll());
+		modelAndView.setViewName("empresas");
+		return modelAndView;
+	}
+
+	@RequestMapping("/empresa/filtered/{idEmp}")
+	public ModelAndView getFiltered(ModelAndView modelAndView, @PathVariable("idEmp") int idEmp) {
+		modelAndView.addObject("empresas", empresaService.findByIdList(idEmp));
 		modelAndView.setViewName("empresas");
 		return modelAndView;
 	}
@@ -48,7 +55,7 @@ public class EmpresaController {
 			BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			System.out.println(result.getAllErrors());
-//			return "empresa";
+			// return "empresa";
 		}
 		empresaService.save(empresa);
 		return "redirect:/empresa";

@@ -67,14 +67,15 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public void save(Usuario usuario, String[] usuarioRol, HttpServletRequest request) throws RepeatedUsernameException {
+	public void save(Usuario usuario, String[] usuarioRol, HttpServletRequest request)
+			throws RepeatedUsernameException {
 
 		DatosPersonales dp;
 		dp = usuario.getDatosPersonales();
 
 		if (usuario.getIdUsr() == 0) {
 			Usuario verifico = findByUsername(usuario.getUsuario());
-			if(verifico != null) {
+			if (verifico != null) {
 				throw new RepeatedUsernameException(usuario.getUsuario());
 			}
 			usuario.setFechaCreacion(new Timestamp(new Date().getTime()));
@@ -112,7 +113,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 				ur.setRol(rol);
 				ur.setUsuario(usuario);
 				ur.setFechaCreacion(new Date());
-				if(context != null) {
+				if (context != null) {
 					ur.setCreadoPor(context.getAuthentication().getName());
 				} else {
 					ur.setCreadoPor("OWN USER");
@@ -163,9 +164,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 			}
 		}
 		usuario.setUsuarioRol(usuarioRolList);
-//		DatosPersonales dp = datosPersonalesService.findByUsrId(usuario.getIdUsr());
-//		dp.setUsuario(usuario);
-//		usuario.setDatosPersonales(dp);
+		// DatosPersonales dp = datosPersonalesService.findByUsrId(usuario.getIdUsr());
+		// dp.setUsuario(usuario);
+		// usuario.setDatosPersonales(dp);
 
 		usuarioDAO.save(usuario);
 
@@ -203,6 +204,13 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
+	public List<Usuario> findFilteredCustomers(int idUsr) {
+		List<Usuario> clientes = new ArrayList<>();
+		clientes.add(findById(idUsr));
+		return clientes;
+	}
+
+	@Override
 	public void fillNewUser(Usuario usuario) {
 		Direccion direccion = new Direccion();
 		List<Direccion> direcciones = new ArrayList<>();
@@ -236,7 +244,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public Usuario reset(int idUsr) {
 		Usuario usuario = findById(idUsr);
-		usuario.setClave(passwordEncoder.encode("Superman1"));		
+		usuario.setClave(passwordEncoder.encode("Superman1"));
 		return usuario;
 	}
 

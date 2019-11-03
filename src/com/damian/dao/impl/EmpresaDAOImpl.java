@@ -19,47 +19,45 @@ import com.damian.pojo.Empresa;
 @Repository
 @Transactional
 public class EmpresaDAOImpl implements EmpresaDAO {
-	
+
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	public CriteriaBuilder getCriteriaBuilder() {
 		return sessionFactory.getCurrentSession().getCriteriaBuilder();
 	}
-	
+
 	public Session getOpenSession() {
 		return sessionFactory.openSession();
 	}
-	
+
 	@Override
 	public Empresa findById(int id) {
-		
-		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		Session session = getSession();
-		CriteriaQuery<Empresa> criteriaQuery = criteriaBuilder.createQuery(Empresa.class);
-		Root<Empresa> root = criteriaQuery.from(Empresa.class);
-		criteriaQuery.select(root);
-		Predicate pEqEmpresa = criteriaBuilder.equal(root.get("idEmp"), id);
-		criteriaQuery.where(pEqEmpresa);
-		List<Empresa> empresas = session.createQuery(criteriaQuery).getResultList();
-		if(empresas != null && empresas.size() > 0) {
+
+		List<Empresa> empresas = findByIdEngine(id);
+		if (empresas != null && empresas.size() > 0) {
 			return empresas.get(0);
 		} else {
 			return null;
 		}
 
-//		Criteria crit = getSession().createCriteria(Empresa.class);
-//		crit.add(Restrictions.eq("idUsr", id));
-//		return (Empresa) crit.uniqueResult();
+		// Criteria crit = getSession().createCriteria(Empresa.class);
+		// crit.add(Restrictions.eq("idUsr", id));
+		// return (Empresa) crit.uniqueResult();
+	}
+
+	@Override
+	public List<Empresa> findByIdList(int id) {
+		return findByIdEngine(id);
 	}
 
 	@Override
 	public List<Empresa> findAll() {
-		
+
 		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
 		Session session = getOpenSession();
 		CriteriaQuery<Empresa> criteriaQuery = criteriaBuilder.createQuery(Empresa.class);
@@ -67,24 +65,24 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		criteriaQuery.select(root);
 		List<Empresa> empresas = session.createQuery(criteriaQuery).getResultList();
 		return empresas;
-		
-//		return getSession().createQuery("from Empresa").list();
+
+		// return getSession().createQuery("from Empresa").list();
 	}
 
 	@Override
 	public void save(Empresa empresa) {
-		if(empresa.getIdEmp() > 0) {
+		if (empresa.getIdEmp() > 0) {
 			getSession().update(empresa);
 		} else {
 			getSession().save(empresa);
 		}
 	}
-	
+
 	@Override
 	public void update(Empresa empresa) {
 		getSession().update(empresa);
 	}
-	
+
 	@Override
 	public void delete(Empresa empresa) {
 		getSession().delete(empresa);
@@ -92,7 +90,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 
 	@Override
 	public List<Empresa> findByEmpresaName(String empresaName) {
-		
+
 		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
 		Session session = getOpenSession();
 		CriteriaQuery<Empresa> criteriaQuery = criteriaBuilder.createQuery(Empresa.class);
@@ -104,4 +102,16 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		return empresas;
 	}
 
+	private List<Empresa> findByIdEngine(int id) {
+
+		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
+		Session session = getSession();
+		CriteriaQuery<Empresa> criteriaQuery = criteriaBuilder.createQuery(Empresa.class);
+		Root<Empresa> root = criteriaQuery.from(Empresa.class);
+		criteriaQuery.select(root);
+		Predicate pEqEmpresa = criteriaBuilder.equal(root.get("idEmp"), id);
+		criteriaQuery.where(pEqEmpresa);
+		List<Empresa> empresas = session.createQuery(criteriaQuery).getResultList();
+		return empresas;
+	}
 }
