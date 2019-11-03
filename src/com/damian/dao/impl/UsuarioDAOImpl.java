@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.damian.dao.UsuarioDAO;
 import com.damian.pojo.Usuario;
+import com.damian.pojo.UsuarioRol;
 
 @Repository
 @Transactional
@@ -38,14 +39,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public Usuario findById(int id) {
 		
-		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		Session session = getSession();
-		CriteriaQuery<Usuario> criteriaQuery = criteriaBuilder.createQuery(Usuario.class);
-		Root<Usuario> root = criteriaQuery.from(Usuario.class);
-		criteriaQuery.select(root);
-		Predicate pEqUsuario = criteriaBuilder.equal(root.get("idUsr"), id);
-		criteriaQuery.where(pEqUsuario);
-		List<Usuario> usuarios = session.createQuery(criteriaQuery).getResultList();
+		List<Usuario> usuarios = findByIdEngine(id);
 		if(usuarios != null && usuarios.size() > 0) {
 			return usuarios.get(0);
 		} else {
@@ -55,6 +49,18 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 //		Criteria crit = getSession().createCriteria(Usuario.class);
 //		crit.add(Restrictions.eq("idUsr", id));
 //		return (Usuario) crit.uniqueResult();
+	}
+	
+
+	@Override
+	public List<Usuario> findByIdList(int id) {
+		List<Usuario> usuarios = findByIdEngine(id);
+		if(usuarios != null && !usuarios.isEmpty()) {
+			List<UsuarioRol> roles = usuarios.get(0).getUsuarioRol();
+			String rol = roles.get(0).getRol().getRol();
+			// para evitar error con Lazy
+		}
+		return usuarios;
 	}
 
 	@Override
@@ -111,6 +117,18 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public void delete(Usuario usuario) {
 		getSession().delete(usuario);
+	}
+	
+	private List<Usuario> findByIdEngine(int id){
+		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
+		Session session = getSession();
+		CriteriaQuery<Usuario> criteriaQuery = criteriaBuilder.createQuery(Usuario.class);
+		Root<Usuario> root = criteriaQuery.from(Usuario.class);
+		criteriaQuery.select(root);
+		Predicate pEqUsuario = criteriaBuilder.equal(root.get("idUsr"), id);
+		criteriaQuery.where(pEqUsuario);
+		List<Usuario> usuarios = session.createQuery(criteriaQuery).getResultList();
+		return usuarios;
 	}
 
 }

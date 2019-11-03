@@ -10,6 +10,8 @@ import com.damian.pojo.Usuario;
 public interface UsuarioService {
 	
 	Usuario findById(int id);
+	
+	List<Usuario> findByIdList(int id);
 
 	void save(Usuario usuario, String[] usuarioRol, HttpServletRequest request) throws RepeatedUsernameException;
 	

@@ -51,14 +51,22 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Autowired
 	private RolService rolService;
 
+	@Override
 	public Usuario findById(int id) {
 		return usuarioDAO.findById(id);
 	}
 
+	@Override
+	public List<Usuario> findByIdList(int id) {
+		return usuarioDAO.findByIdList(id);
+	}
+
+	@Override
 	public Usuario findByUsername(String usuario) {
 		return usuarioDAO.findByUsername(usuario);
 	}
 
+	@Override
 	public void save(Usuario usuario, String[] usuarioRol, HttpServletRequest request) throws RepeatedUsernameException {
 
 		DatosPersonales dp;
@@ -163,19 +171,23 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	}
 
+	@Override
 	public List<Usuario> findAll() {
 		return usuarioDAO.findAll();
 	}
 
+	@Override
 	public void update(Usuario usuario) {
 		usuarioDAO.update(usuario);
 	}
 
+	@Override
 	public void delete(int idUsr) {
 		Usuario usuario = findById(idUsr);
 		usuarioDAO.delete(usuario);
 	}
 
+	@Override
 	public List<Usuario> findCustomers() {
 		List<Usuario> usuarios = usuarioDAO.findAll();
 		List<Usuario> clientes = new ArrayList<>();
@@ -190,6 +202,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return clientes;
 	}
 
+	@Override
 	public void fillNewUser(Usuario usuario) {
 		Direccion direccion = new Direccion();
 		List<Direccion> direcciones = new ArrayList<>();
@@ -199,6 +212,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuario.setDatosPersonales(datosPersonales);
 	}
 
+	@Override
 	public void fillExistingUser(Usuario usuario) {
 		// chapuzas hasta que sepa buscar roles y empresas sólo por idUsr
 		List<UsuarioRol> usuarioRolTodos = usuarioRolDAO.findAll();

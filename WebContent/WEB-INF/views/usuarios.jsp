@@ -14,6 +14,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<script type="text/javascript" src='<c:url value="/resources/js/jquery.js" />'></script>
+	<script type="text/javascript" src='<c:url value="/resources/js/utiles.js" />'></script>
 	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/tablas.css'/>" rel="stylesheet" type="text/css" />
@@ -34,16 +35,47 @@
 			}
 			return false;
 		}
+
+		function filtrar() {		
+			const resultado = document.querySelector('#resultado');
+			const texto = normalizado(formulario.value.toLowerCase());
+			resultado.innerHTML = '';
+			if(texto === ''){
+				$(".collapse").collapse('hide');
+			} else {
+				<c:forEach items="${usuarios}" var="usu" varStatus="status">
+					var username = normalizado('${usu.usuario}');
+					var nombre = normalizado('${usu.datosPersonales.nombre}');
+					var apellidos = normalizado('${usu.datosPersonales.apellido1}'+" "+'${usu.datosPersonales.apellido2}');
+					if(username.toLowerCase().indexOf(texto) !== -1 || nombre.toLowerCase().indexOf(texto) !== -1 || apellidos.toLowerCase().indexOf(texto) !== -1){
+						resultado.innerHTML += "<a href=\"<c:url value='/usuario/filtered/${usu.idUsr}' />\">${usu.usuario} - ${usu.datosPersonales.nombre} ${usu.datosPersonales.apellido1} ${usu.datosPersonales.apellido2}</a>";
+					}
+				</c:forEach>
+				$(".collapse").collapse('show');
+			}
+		}
+		
 	</script>
+	
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
 	<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 		<div class="d-flex">
-			<div class="mr-auto p-2">
-				<h1></h1>
+			<div class="p-2">
+				<input type="text" id="formulario" class="form-control">
+				<script>
+					const formulario = document.querySelector('#formulario');
+					formulario.addEventListener('keyup', filtrar);
+				</script>
 			</div>
 			<div class="p-2">
+				<div class="dropdown collapse">
+					<div class="dropdown-content" id="resultado">
+					</div>
+				</div>
+			</div>
+			<div class="ml-auto p-2">
 				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/0'/>"'>
 					<fmt:message key="label.Add.user" />
 				</button>

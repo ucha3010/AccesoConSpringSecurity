@@ -46,6 +46,15 @@ public class UsuarioController {
 		modelAndView.setViewName("usuarios");
 		return modelAndView;
 	}
+	
+	@RequestMapping("/usuario/filtered/{idUsr}")
+	public ModelAndView getFiltered(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
+		modelAndView.addObject("usuarios", usuarioService.findByIdList(idUsr));
+		modelAndView.addObject("roles", rolService.findAll());
+		modelAndView.addObject("estoy", "usuario");
+		modelAndView.setViewName("usuarios");
+		return modelAndView;
+	}
 
 	@RequestMapping("/usuario/{idUsr}")
 	public ModelAndView getUser(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr, 

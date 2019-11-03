@@ -17,5 +17,7 @@ public interface UsuarioDAO {
 	public void delete(Usuario usuario);
 
 	public Usuario findById(int id);
+	
+	public List<Usuario> findByIdList(int id);
 
 }
