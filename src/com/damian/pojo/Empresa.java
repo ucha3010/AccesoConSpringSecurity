@@ -51,7 +51,7 @@ public class Empresa implements Serializable {
 	@Column(name = "fax")
 	private String fax;
 
-	@Column(name = "observaciones")	
+	@Column(name = "observaciones")
 	private String observaciones;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.empresa")
@@ -59,9 +59,9 @@ public class Empresa implements Serializable {
 
 	@OneToMany(mappedBy = "empresa")
 	private List<DireccionEmpresa> direccionesEmpresa = new ArrayList<DireccionEmpresa>();
-	
+
 	public Empresa() {
-		
+
 	}
 
 	public Empresa(int idEmp, String nombreComercial, String tipoSociedad, String actividad, String cif, String email,
