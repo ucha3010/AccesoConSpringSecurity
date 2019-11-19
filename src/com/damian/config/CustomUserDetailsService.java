@@ -34,7 +34,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		if (usuario != null) {
 			for (UsuarioRol usuarioRoles : usuario.getUsuarioRol()) {
-				authorities.add(new SimpleGrantedAuthority(usuarioRoles.getPk().getRol().getRol()));
+				authorities.add(new SimpleGrantedAuthority(usuarioRoles.getRol().getRol()));
 			}
 			// si quiero evaluar los parámetros que faltan al crear user, tengo que agregar las excepciones en CustomAuthenticationProvider
 			User user = new User(usuario.getUsuario(), usuario.getClave(), usuario.isHabilitado(), true, true, true,

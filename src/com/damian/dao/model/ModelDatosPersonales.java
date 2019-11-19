@@ -1,11 +1,9 @@
-package com.damian.pojo;
+package com.damian.dao.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-public class DatosPersonales implements Serializable {
+public class ModelDatosPersonales implements Serializable {
 
 	/**
 	 * 
@@ -23,10 +21,9 @@ public class DatosPersonales implements Serializable {
 	private String email;
 	private String telefono;
 	private String observaciones;
-	private Usuario usuario;
-	private List<Direccion> direcciones = new ArrayList<Direccion>();
+	private int datospersonales_idUsr;
 
-	public DatosPersonales() {
+	public ModelDatosPersonales() {
 
 	}
 
@@ -42,12 +39,11 @@ public class DatosPersonales implements Serializable {
 	 * @param email
 	 * @param telefono
 	 * @param observaciones
-	 * @param usuario
-	 * @param direcciones
+	 * @param datospersonales_idUsr
 	 */
-	public DatosPersonales(int idDatosPers, String nombre, String apellido1, String apellido2, String sexo,
+	public ModelDatosPersonales(int idDatosPers, String nombre, String apellido1, String apellido2, String sexo,
 			Date fechaNacimiento, String nacionalidad, String dni, String email, String telefono, String observaciones,
-			Usuario usuario, List<Direccion> direcciones) {
+			int datospersonales_idUsr) {
 		this.idDatosPers = idDatosPers;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
@@ -59,8 +55,7 @@ public class DatosPersonales implements Serializable {
 		this.email = email;
 		this.telefono = telefono;
 		this.observaciones = observaciones;
-		this.usuario = usuario;
-		this.direcciones = direcciones;
+		this.datospersonales_idUsr = datospersonales_idUsr;
 	}
 
 	/**
@@ -229,33 +224,18 @@ public class DatosPersonales implements Serializable {
 	}
 
 	/**
-	 * @return the usuario
+	 * @return the datospersonales_idUsr
 	 */
-	public Usuario getUsuario() {
-		return usuario;
+	public int getDatospersonales_idUsr() {
+		return datospersonales_idUsr;
 	}
 
 	/**
-	 * @param usuario
-	 *            the usuario to set
+	 * @param datospersonales_idUsr
+	 *            the datospersonales_idUsr to set
 	 */
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	/**
-	 * @return the direcciones
-	 */
-	public List<Direccion> getDirecciones() {
-		return direcciones;
-	}
-
-	/**
-	 * @param direcciones
-	 *            the direcciones to set
-	 */
-	public void setDirecciones(List<Direccion> direcciones) {
-		this.direcciones = direcciones;
+	public void setDatospersonales_idUsr(int datospersonales_idUsr) {
+		this.datospersonales_idUsr = datospersonales_idUsr;
 	}
 
 	/*
@@ -268,7 +248,7 @@ public class DatosPersonales implements Serializable {
 		return "DatosPersonales [idDatosPers=" + idDatosPers + ", nombre=" + nombre + ", apellido1=" + apellido1
 				+ ", apellido2=" + apellido2 + ", sexo=" + sexo + ", fechaNacimiento=" + fechaNacimiento
 				+ ", nacionalidad=" + nacionalidad + ", dni=" + dni + ", email=" + email + ", telefono=" + telefono
-				+ ", observaciones=" + observaciones + ", usuario=" + usuario + ", direcciones=" + direcciones + "]";
+				+ ", observaciones=" + observaciones + ", datospersonales_idUsr=" + datospersonales_idUsr + "]";
 	}
 
 }

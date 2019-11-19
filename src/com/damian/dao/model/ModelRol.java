@@ -1,10 +1,8 @@
-package com.damian.pojo;
+package com.damian.dao.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Rol implements Serializable {
+public class ModelRol implements Serializable {
 
 	/**
 	 * Clase Roles
@@ -13,21 +11,18 @@ public class Rol implements Serializable {
 
 	private int idRol;
 	private String rol;
-	private List<UsuarioRol> usuarioRol = new ArrayList<UsuarioRol>();
 
-	public Rol() {
+	public ModelRol() {
 
 	}
 
 	/**
 	 * @param idRol
 	 * @param rol
-	 * @param usuarioRol
 	 */
-	public Rol(int idRol, String rol, List<UsuarioRol> usuarioRol) {
+	public ModelRol(int idRol, String rol) {
 		this.idRol = idRol;
 		this.rol = rol;
-		this.usuarioRol = usuarioRol;
 	}
 
 	/**
@@ -60,21 +55,6 @@ public class Rol implements Serializable {
 		this.rol = rol;
 	}
 
-	/**
-	 * @return the usuarioRol
-	 */
-	public List<UsuarioRol> getUsuarioRol() {
-		return usuarioRol;
-	}
-
-	/**
-	 * @param usuarioRol
-	 *            the usuarioRol to set
-	 */
-	public void setUsuarioRol(List<UsuarioRol> usuarioRol) {
-		this.usuarioRol = usuarioRol;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -82,6 +62,6 @@ public class Rol implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Rol [idRol=" + idRol + ", rol=" + rol + ", usuarioRol=" + usuarioRol + "]";
+		return "Rol [idRol=" + idRol + ", rol=" + rol + "]";
 	}
 }

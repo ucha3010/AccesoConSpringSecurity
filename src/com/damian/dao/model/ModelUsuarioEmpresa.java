@@ -1,64 +1,64 @@
-package com.damian.pojo;
+package com.damian.dao.model;
 
 import java.util.Date;
 
-public class UsuarioEmpresa implements java.io.Serializable {
+public class ModelUsuarioEmpresa implements java.io.Serializable {
 
 	/**
 	 * Clase UsuarioEmpresa
 	 */
 	private static final long serialVersionUID = 130820142307L;
 
-	private Usuario usuario;
-	private Empresa empresa;
+	private int idUsr;
+	private int idEmp;
 	private Date fechaCreacion;
 	private String creadoPor;
 
-	public UsuarioEmpresa() {
+	public ModelUsuarioEmpresa() {
 
 	}
 
 	/**
-	 * @param usuario
-	 * @param empresa
+	 * @param idUsr
+	 * @param idEmp
 	 * @param fechaCreacion
 	 * @param creadoPor
 	 */
-	public UsuarioEmpresa(Usuario usuario, Empresa empresa, Date fechaCreacion, String creadoPor) {
-		this.usuario = usuario;
-		this.empresa = empresa;
+	public ModelUsuarioEmpresa(int idUsr, int idEmp, Date fechaCreacion, String creadoPor) {
+		this.idUsr = idUsr;
+		this.idEmp = idEmp;
 		this.fechaCreacion = fechaCreacion;
 		this.creadoPor = creadoPor;
 	}
 
 	/**
-	 * @return the usuario
+	 * @return the idUsr
 	 */
-	public Usuario getUsuario() {
-		return usuario;
+	public int getIdUsr() {
+		return idUsr;
 	}
 
 	/**
-	 * @param usuario
-	 *            the usuario to set
+	 * @param idUsr
+	 *            the idUsr to set
 	 */
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setIdUsr(int idUsr) {
+		this.idUsr = idUsr;
 	}
 
 	/**
-	 * @return the empresa
+	 * @return the idEmp
 	 */
-	public Empresa getEmpresa() {
-		return empresa;
+	public int getIdEmp() {
+		return idEmp;
 	}
 
 	/**
-	 * @param empresa
-	 *            the empresa to set
+	 * @param idEmp
+	 *            the idEmp to set
 	 */
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
+	public void setIdEmp(int idEmp) {
+		this.idEmp = idEmp;
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class UsuarioEmpresa implements java.io.Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "UsuarioEmpresa [fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor + "]";
+		return "ModelUsuarioEmpresa [idUsr=" + idUsr + ", idEmp=" + idEmp + ", fechaCreacion=" + fechaCreacion
+				+ ", creadoPor=" + creadoPor + "]";
 	}
-
 }

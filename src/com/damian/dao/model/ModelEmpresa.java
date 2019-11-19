@@ -1,10 +1,8 @@
-package com.damian.pojo;
+package com.damian.dao.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Empresa implements Serializable {
+public class ModelEmpresa implements Serializable {
 
 	/**
 	 * 
@@ -21,10 +19,8 @@ public class Empresa implements Serializable {
 	private String telefono;
 	private String fax;
 	private String observaciones;
-	private List<UsuarioEmpresa> usuarioEmpresa = new ArrayList<UsuarioEmpresa>();
-	private List<DireccionEmpresa> direccionesEmpresa = new ArrayList<DireccionEmpresa>();
 
-	public Empresa() {
+	public ModelEmpresa() {
 
 	}
 
@@ -39,12 +35,9 @@ public class Empresa implements Serializable {
 	 * @param telefono
 	 * @param fax
 	 * @param observaciones
-	 * @param usuarioEmpresa
-	 * @param direccionesEmpresa
 	 */
-	public Empresa(int idEmp, String nombreComercial, String tipoSociedad, String actividad, String cif, String email,
-			String paginaWeb, String telefono, String fax, String observaciones, List<UsuarioEmpresa> usuarioEmpresa,
-			List<DireccionEmpresa> direccionesEmpresa) {
+	public ModelEmpresa(int idEmp, String nombreComercial, String tipoSociedad, String actividad, String cif,
+			String email, String paginaWeb, String telefono, String fax, String observaciones) {
 		this.idEmp = idEmp;
 		this.nombreComercial = nombreComercial;
 		this.tipoSociedad = tipoSociedad;
@@ -55,8 +48,6 @@ public class Empresa implements Serializable {
 		this.telefono = telefono;
 		this.fax = fax;
 		this.observaciones = observaciones;
-		this.usuarioEmpresa = usuarioEmpresa;
-		this.direccionesEmpresa = direccionesEmpresa;
 	}
 
 	/**
@@ -209,36 +200,6 @@ public class Empresa implements Serializable {
 		this.observaciones = observaciones;
 	}
 
-	/**
-	 * @return the usuarioEmpresa
-	 */
-	public List<UsuarioEmpresa> getUsuarioEmpresa() {
-		return usuarioEmpresa;
-	}
-
-	/**
-	 * @param usuarioEmpresa
-	 *            the usuarioEmpresa to set
-	 */
-	public void setUsuarioEmpresa(List<UsuarioEmpresa> usuarioEmpresa) {
-		this.usuarioEmpresa = usuarioEmpresa;
-	}
-
-	/**
-	 * @return the direccionesEmpresa
-	 */
-	public List<DireccionEmpresa> getDireccionesEmpresa() {
-		return direccionesEmpresa;
-	}
-
-	/**
-	 * @param direccionesEmpresa
-	 *            the direccionesEmpresa to set
-	 */
-	public void setDireccionesEmpresa(List<DireccionEmpresa> direccionesEmpresa) {
-		this.direccionesEmpresa = direccionesEmpresa;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -248,8 +209,7 @@ public class Empresa implements Serializable {
 	public String toString() {
 		return "Empresa [idEmp=" + idEmp + ", nombreComercial=" + nombreComercial + ", tipoSociedad=" + tipoSociedad
 				+ ", actividad=" + actividad + ", cif=" + cif + ", email=" + email + ", paginaWeb=" + paginaWeb
-				+ ", telefono=" + telefono + ", fax=" + fax + ", observaciones=" + observaciones + ", usuarioEmpresa="
-				+ usuarioEmpresa + ", direccionesEmpresa=" + direccionesEmpresa + "]";
+				+ ", telefono=" + telefono + ", fax=" + fax + ", observaciones=" + observaciones + "]";
 	}
 
 }

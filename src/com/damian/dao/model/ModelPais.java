@@ -1,8 +1,8 @@
-package com.damian.pojo;
+package com.damian.dao.model;
 
 import java.io.Serializable;
 
-public class Pais implements Serializable {
+public class ModelPais implements Serializable {
 
 	/**
 	 * 
@@ -13,7 +13,7 @@ public class Pais implements Serializable {
 	private String nombreES;
 	private String nombreEN;
 
-	public Pais() {
+	public ModelPais() {
 
 	}
 
@@ -22,7 +22,7 @@ public class Pais implements Serializable {
 	 * @param nombreES
 	 * @param nombreEN
 	 */
-	public Pais(int idPais, String nombreES, String nombreEN) {
+	public ModelPais(int idPais, String nombreES, String nombreEN) {
 		this.idPais = idPais;
 		this.nombreES = nombreES;
 		this.nombreEN = nombreEN;

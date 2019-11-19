@@ -2,22 +2,6 @@ package com.damian.pojo;
 
 import java.util.Date;
 
-import javax.persistence.AssociationOverride;
-import javax.persistence.AssociationOverrides;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
-@Entity
-@Table(name = "usuario_rol")
-@AssociationOverrides({
-		@AssociationOverride(name = "pk.usuario", joinColumns = @JoinColumn(name = "idUsr")),
-		@AssociationOverride(name = "pk.rol", joinColumns = @JoinColumn(name = "idRol")) })
 public class UsuarioRol implements java.io.Serializable {
 
 	/**
@@ -25,81 +9,96 @@ public class UsuarioRol implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 130820142307L;
 
-	@EmbeddedId
-	private UsuarioRolId pk = new UsuarioRolId();
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "fechaCreacion", nullable = false, length = 10)
+	private Usuario usuario;
+	private Rol rol;
 	private Date fechaCreacion;
-
-	@Column(name = "creadoPor", nullable = false, length = 50)
 	private String creadoPor;
 
-	public UsuarioRolId getPk() {
-		return pk;
+	public UsuarioRol() {
+
 	}
 
-	public void setPk(UsuarioRolId pk) {
-		this.pk = pk;
+	/**
+	 * @param usuario
+	 * @param rol
+	 * @param fechaCreacion
+	 * @param creadoPor
+	 */
+	public UsuarioRol(Usuario usuario, Rol rol, Date fechaCreacion, String creadoPor) {
+		this.usuario = usuario;
+		this.rol = rol;
+		this.fechaCreacion = fechaCreacion;
+		this.creadoPor = creadoPor;
 	}
-	
-	@Transient
+
+	/**
+	 * @return the usuario
+	 */
 	public Usuario getUsuario() {
-		return getPk().getUsuario();
+		return usuario;
 	}
 
+	/**
+	 * @param usuario
+	 *            the usuario to set
+	 */
 	public void setUsuario(Usuario usuario) {
-		getPk().setUsuario(usuario);
+		this.usuario = usuario;
 	}
 
-	@Transient
+	/**
+	 * @return the rol
+	 */
 	public Rol getRol() {
-		return getPk().getRol();
+		return rol;
 	}
 
+	/**
+	 * @param rol
+	 *            the rol to set
+	 */
 	public void setRol(Rol rol) {
-		getPk().setRol(rol);
+		this.rol = rol;
 	}
 
+	/**
+	 * @return the fechaCreacion
+	 */
 	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}
 
+	/**
+	 * @param fechaCreacion
+	 *            the fechaCreacion to set
+	 */
 	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 
+	/**
+	 * @return the creadoPor
+	 */
 	public String getCreadoPor() {
 		return creadoPor;
 	}
 
+	/**
+	 * @param creadoPor
+	 *            the creadoPor to set
+	 */
 	public void setCreadoPor(String creadoPor) {
 		this.creadoPor = creadoPor;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null || getClass() != obj.getClass())
-			return false;
-		UsuarioRol other = (UsuarioRol) obj;
-		if (pk == null) {
-			if (other.pk != null)
-				return false;
-		} else if (!pk.equals(other.pk))
-			return false;
-		return true;
-	}
-
-	@Override
-	public int hashCode() {
-		return (getPk() != null ? getPk().hashCode() : 0);
-	}
-
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "UsuarioRol [pk=" + pk + ", fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor + "]";
+		return "UsuarioRol [fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor + "]";
 	}
 
 }

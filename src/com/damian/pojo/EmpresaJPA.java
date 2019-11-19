@@ -4,45 +4,81 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Empresa implements Serializable {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "empresa")
+public class EmpresaJPA implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 130820142307L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idEmp", unique = true, nullable = false)
 	private int idEmp;
+
+	@Column(name = "nombreComercial")
 	private String nombreComercial;
+
+	@Column(name = "tipoSociedad")
 	private String tipoSociedad;
+
+	@Column(name = "actividad")
 	private String actividad;
+
+	@Column(name = "cif")
 	private String cif;
+
+	@Column(name = "email")
 	private String email;
+
+	@Column(name = "paginaWeb")
 	private String paginaWeb;
+
+	@Column(name = "telefono")
 	private String telefono;
+
+	@Column(name = "fax")
 	private String fax;
+
+	@Column(name = "observaciones")
 	private String observaciones;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.empresa")
 	private List<UsuarioEmpresa> usuarioEmpresa = new ArrayList<UsuarioEmpresa>();
+
+	@OneToMany(mappedBy = "empresa")
 	private List<DireccionEmpresa> direccionesEmpresa = new ArrayList<DireccionEmpresa>();
 
-	public Empresa() {
+	public EmpresaJPA() {
 
 	}
 
-	/**
-	 * @param idEmp
-	 * @param nombreComercial
-	 * @param tipoSociedad
-	 * @param actividad
-	 * @param cif
-	 * @param email
-	 * @param paginaWeb
-	 * @param telefono
-	 * @param fax
-	 * @param observaciones
-	 * @param usuarioEmpresa
-	 * @param direccionesEmpresa
-	 */
-	public Empresa(int idEmp, String nombreComercial, String tipoSociedad, String actividad, String cif, String email,
+	public EmpresaJPA(int idEmp, String nombreComercial, String tipoSociedad, String actividad, String cif, String email,
+			String paginaWeb, String telefono, String fax, String observaciones) {
+		this.idEmp = idEmp;
+		this.nombreComercial = nombreComercial;
+		this.tipoSociedad = tipoSociedad;
+		this.actividad = actividad;
+		this.cif = cif;
+		this.email = email;
+		this.paginaWeb = paginaWeb;
+		this.telefono = telefono;
+		this.fax = fax;
+		this.observaciones = observaciones;
+	}
+
+	public EmpresaJPA(int idEmp, String nombreComercial, String tipoSociedad, String actividad, String cif, String email,
 			String paginaWeb, String telefono, String fax, String observaciones, List<UsuarioEmpresa> usuarioEmpresa,
 			List<DireccionEmpresa> direccionesEmpresa) {
 		this.idEmp = idEmp;
@@ -59,197 +95,107 @@ public class Empresa implements Serializable {
 		this.direccionesEmpresa = direccionesEmpresa;
 	}
 
-	/**
-	 * @return the idEmp
-	 */
 	public int getIdEmp() {
 		return idEmp;
 	}
 
-	/**
-	 * @param idEmp
-	 *            the idEmp to set
-	 */
 	public void setIdEmp(int idEmp) {
 		this.idEmp = idEmp;
 	}
 
-	/**
-	 * @return the nombreComercial
-	 */
 	public String getNombreComercial() {
 		return nombreComercial;
 	}
 
-	/**
-	 * @param nombreComercial
-	 *            the nombreComercial to set
-	 */
 	public void setNombreComercial(String nombreComercial) {
 		this.nombreComercial = nombreComercial;
 	}
 
-	/**
-	 * @return the tipoSociedad
-	 */
 	public String getTipoSociedad() {
 		return tipoSociedad;
 	}
 
-	/**
-	 * @param tipoSociedad
-	 *            the tipoSociedad to set
-	 */
 	public void setTipoSociedad(String tipoSociedad) {
 		this.tipoSociedad = tipoSociedad;
 	}
 
-	/**
-	 * @return the actividad
-	 */
 	public String getActividad() {
 		return actividad;
 	}
 
-	/**
-	 * @param actividad
-	 *            the actividad to set
-	 */
 	public void setActividad(String actividad) {
 		this.actividad = actividad;
 	}
 
-	/**
-	 * @return the cif
-	 */
-	public String getCif() {
-		return cif;
-	}
-
-	/**
-	 * @param cif
-	 *            the cif to set
-	 */
-	public void setCif(String cif) {
-		this.cif = cif;
-	}
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @param email
-	 *            the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	/**
-	 * @return the paginaWeb
-	 */
 	public String getPaginaWeb() {
 		return paginaWeb;
 	}
 
-	/**
-	 * @param paginaWeb
-	 *            the paginaWeb to set
-	 */
 	public void setPaginaWeb(String paginaWeb) {
 		this.paginaWeb = paginaWeb;
 	}
 
-	/**
-	 * @return the telefono
-	 */
 	public String getTelefono() {
 		return telefono;
 	}
 
-	/**
-	 * @param telefono
-	 *            the telefono to set
-	 */
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
 
-	/**
-	 * @return the fax
-	 */
 	public String getFax() {
 		return fax;
 	}
 
-	/**
-	 * @param fax
-	 *            the fax to set
-	 */
 	public void setFax(String fax) {
 		this.fax = fax;
 	}
 
-	/**
-	 * @return the observaciones
-	 */
 	public String getObservaciones() {
 		return observaciones;
 	}
 
-	/**
-	 * @param observaciones
-	 *            the observaciones to set
-	 */
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
 
-	/**
-	 * @return the usuarioEmpresa
-	 */
+	public String getCif() {
+		return cif;
+	}
+
+	public void setCif(String cif) {
+		this.cif = cif;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public List<UsuarioEmpresa> getUsuarioEmpresa() {
 		return usuarioEmpresa;
 	}
 
-	/**
-	 * @param usuarioEmpresa
-	 *            the usuarioEmpresa to set
-	 */
 	public void setUsuarioEmpresa(List<UsuarioEmpresa> usuarioEmpresa) {
 		this.usuarioEmpresa = usuarioEmpresa;
 	}
 
-	/**
-	 * @return the direccionesEmpresa
-	 */
 	public List<DireccionEmpresa> getDireccionesEmpresa() {
 		return direccionesEmpresa;
 	}
 
-	/**
-	 * @param direccionesEmpresa
-	 *            the direccionesEmpresa to set
-	 */
 	public void setDireccionesEmpresa(List<DireccionEmpresa> direccionesEmpresa) {
 		this.direccionesEmpresa = direccionesEmpresa;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Empresa [idEmp=" + idEmp + ", nombreComercial=" + nombreComercial + ", tipoSociedad=" + tipoSociedad
 				+ ", actividad=" + actividad + ", cif=" + cif + ", email=" + email + ", paginaWeb=" + paginaWeb
-				+ ", telefono=" + telefono + ", fax=" + fax + ", observaciones=" + observaciones + ", usuarioEmpresa="
-				+ usuarioEmpresa + ", direccionesEmpresa=" + direccionesEmpresa + "]";
+				+ ", telefono=" + telefono + ", fax=" + fax + ", observaciones=" + observaciones + "]";
 	}
 
 }

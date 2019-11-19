@@ -89,7 +89,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 			if (usuarioEmpresas != null) {
 				List<UsuarioEmpresa> usuarioEmpresaList = new ArrayList<>();
 				for (UsuarioEmpresa ue : usuarioEmpresas) {
-					if (ue.getPk().getUsuario().getIdUsr() == usuario.getIdUsr()) {
+					if (ue.getUsuario().getIdUsr() == usuario.getIdUsr()) {
 						usuarioEmpresaList.add(ue);
 					}
 				}
@@ -109,7 +109,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 				uri.setRol(rol);
 				uri.setUsuario(usuario);
 				UsuarioRol ur = new UsuarioRol();
-				ur.setPk(uri);
 				ur.setRol(rol);
 				ur.setUsuario(usuario);
 				ur.setFechaCreacion(new Date());
@@ -159,7 +158,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		List<UsuarioRol> usuarioRols = usuarioRolService.findAll();
 		List<UsuarioRol> usuarioRolList = new ArrayList<>();
 		for (UsuarioRol ur : usuarioRols) {
-			if (ur.getPk().getUsuario().getIdUsr() == usuario.getIdUsr()) {
+			if (ur.getUsuario().getIdUsr() == usuario.getIdUsr()) {
 				usuarioRolList.add(ur);
 			}
 		}
@@ -226,7 +225,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		List<UsuarioRol> usuarioRolTodos = usuarioRolDAO.findAll();
 		List<UsuarioRol> usuarioRoles = new ArrayList<UsuarioRol>();
 		for (UsuarioRol ur : usuarioRolTodos) {
-			if (ur.getPk().getUsuario().getIdUsr() == usuario.getIdUsr()) {
+			if (ur.getUsuario().getIdUsr() == usuario.getIdUsr()) {
 				usuarioRoles.add(ur);
 			}
 		}
@@ -234,7 +233,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		List<UsuarioEmpresa> usuarioEmpresaTodos = usuarioEmpresaService.findAll();
 		List<UsuarioEmpresa> usuarioEmpresas = new ArrayList<UsuarioEmpresa>();
 		for (UsuarioEmpresa ue : usuarioEmpresaTodos) {
-			if (ue.getPk().getUsuario().getIdUsr() == usuario.getIdUsr()) {
+			if (ue.getUsuario().getIdUsr() == usuario.getIdUsr()) {
 				usuarioEmpresas.add(ue);
 			}
 		}

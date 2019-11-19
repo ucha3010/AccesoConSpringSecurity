@@ -35,7 +35,7 @@ public class UsuarioRolServiceImpl implements UsuarioRolService {
 		List<UsuarioRol> usuarioRolList = findByIdUsr(idUsr);
 		UsuarioRol usuarioRol = null;
 		for (UsuarioRol ur : usuarioRolList) {
-			if (ur.getPk().getRol().getIdRol() == idRol) {
+			if (ur.getRol().getIdRol() == idRol) {
 				usuarioRol = ur;
 			}
 		}

@@ -1,15 +1,15 @@
-package com.damian.pojo;
+package com.damian.dao.model;
 
 import java.io.Serializable;
 
-public class DireccionEmpresa implements Serializable {
+public class ModelDireccion implements Serializable {
 
 	/**
 	 * Clase Direccion
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private int idDirEmp;
+	private int idDir;
 	private String tipoVia;
 	private String nombreVia;
 	private String numero;
@@ -18,14 +18,14 @@ public class DireccionEmpresa implements Serializable {
 	private String provincia;
 	private String ciudad;
 	private String pais;
-	private Empresa empresa;
+	private int idDatosPers;
 
-	public DireccionEmpresa() {
+	public ModelDireccion() {
 
 	}
 
 	/**
-	 * @param idDirEmp
+	 * @param idDir
 	 * @param tipoVia
 	 * @param nombreVia
 	 * @param numero
@@ -34,11 +34,11 @@ public class DireccionEmpresa implements Serializable {
 	 * @param provincia
 	 * @param ciudad
 	 * @param pais
-	 * @param empresa
+	 * @param idDatosPers
 	 */
-	public DireccionEmpresa(int idDirEmp, String tipoVia, String nombreVia, String numero, String resto, String cp,
-			String provincia, String ciudad, String pais, Empresa empresa) {
-		this.idDirEmp = idDirEmp;
+	public ModelDireccion(int idDir, String tipoVia, String nombreVia, String numero, String resto, String cp,
+			String provincia, String ciudad, String pais, int idDatosPers) {
+		this.idDir = idDir;
 		this.tipoVia = tipoVia;
 		this.nombreVia = nombreVia;
 		this.numero = numero;
@@ -47,22 +47,22 @@ public class DireccionEmpresa implements Serializable {
 		this.provincia = provincia;
 		this.ciudad = ciudad;
 		this.pais = pais;
-		this.empresa = empresa;
+		this.idDatosPers = idDatosPers;
 	}
 
 	/**
-	 * @return the idDirEmp
+	 * @return the idDir
 	 */
-	public int getIdDirEmp() {
-		return idDirEmp;
+	public int getIdDir() {
+		return idDir;
 	}
 
 	/**
-	 * @param idDirEmp
-	 *            the idDirEmp to set
+	 * @param idDir
+	 *            the idDir to set
 	 */
-	public void setIdDirEmp(int idDirEmp) {
-		this.idDirEmp = idDirEmp;
+	public void setIdDir(int idDir) {
+		this.idDir = idDir;
 	}
 
 	/**
@@ -186,18 +186,18 @@ public class DireccionEmpresa implements Serializable {
 	}
 
 	/**
-	 * @return the empresa
+	 * @return the idDatosPers
 	 */
-	public Empresa getEmpresa() {
-		return empresa;
+	public int getIdDatosPers() {
+		return idDatosPers;
 	}
 
 	/**
-	 * @param empresa
-	 *            the empresa to set
+	 * @param idDatosPers
+	 *            the idDatosPers to set
 	 */
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
+	public void setIdDatosPers(int idDatosPers) {
+		this.idDatosPers = idDatosPers;
 	}
 
 	/*
@@ -207,9 +207,9 @@ public class DireccionEmpresa implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "DireccionEmpresa [idDirEmp=" + idDirEmp + ", tipoVia=" + tipoVia + ", nombreVia=" + nombreVia
-				+ ", numero=" + numero + ", resto=" + resto + ", cp=" + cp + ", provincia=" + provincia + ", ciudad="
-				+ ciudad + ", pais=" + pais + ", empresa=" + empresa + "]";
+		return "ModelDireccion [idDir=" + idDir + ", tipoVia=" + tipoVia + ", nombreVia=" + nombreVia + ", numero="
+				+ numero + ", resto=" + resto + ", cp=" + cp + ", provincia=" + provincia + ", ciudad=" + ciudad
+				+ ", pais=" + pais + ", idDatosPers=" + idDatosPers + "]";
 	}
 
 }

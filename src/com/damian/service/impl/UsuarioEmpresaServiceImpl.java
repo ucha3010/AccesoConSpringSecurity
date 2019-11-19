@@ -38,7 +38,6 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
 		usuarioEmpresaId.setEmpresa(empresa);
 		usuarioEmpresaId.setUsuario(usuario);
 		UsuarioEmpresa usuarioEmpresa = new UsuarioEmpresa();
-		usuarioEmpresa.setPk(usuarioEmpresaId);
 		usuarioEmpresa.setUsuario(usuario);
 		usuarioEmpresa.setEmpresa(empresa);
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
@@ -63,7 +62,7 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
 		List<UsuarioEmpresa> usuarioEmpresaList = findByIdUsr(idUsr);
 		UsuarioEmpresa usuarioEmpresa = null;
 		for (UsuarioEmpresa ur : usuarioEmpresaList) {
-			if (ur.getPk().getEmpresa().getIdEmp() == idEmp) {
+			if (ur.getEmpresa().getIdEmp() == idEmp) {
 				usuarioEmpresa = ur;
 			}
 		}

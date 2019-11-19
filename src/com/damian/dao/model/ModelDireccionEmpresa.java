@@ -1,8 +1,8 @@
-package com.damian.pojo;
+package com.damian.dao.model;
 
 import java.io.Serializable;
 
-public class DireccionEmpresa implements Serializable {
+public class ModelDireccionEmpresa implements Serializable {
 
 	/**
 	 * Clase Direccion
@@ -18,9 +18,9 @@ public class DireccionEmpresa implements Serializable {
 	private String provincia;
 	private String ciudad;
 	private String pais;
-	private Empresa empresa;
+	private int idEmp;
 
-	public DireccionEmpresa() {
+	public ModelDireccionEmpresa() {
 
 	}
 
@@ -34,10 +34,10 @@ public class DireccionEmpresa implements Serializable {
 	 * @param provincia
 	 * @param ciudad
 	 * @param pais
-	 * @param empresa
+	 * @param idEmp
 	 */
-	public DireccionEmpresa(int idDirEmp, String tipoVia, String nombreVia, String numero, String resto, String cp,
-			String provincia, String ciudad, String pais, Empresa empresa) {
+	public ModelDireccionEmpresa(int idDirEmp, String tipoVia, String nombreVia, String numero, String resto, String cp,
+			String provincia, String ciudad, String pais, int idEmp) {
 		this.idDirEmp = idDirEmp;
 		this.tipoVia = tipoVia;
 		this.nombreVia = nombreVia;
@@ -47,7 +47,7 @@ public class DireccionEmpresa implements Serializable {
 		this.provincia = provincia;
 		this.ciudad = ciudad;
 		this.pais = pais;
-		this.empresa = empresa;
+		this.idEmp = idEmp;
 	}
 
 	/**
@@ -186,18 +186,18 @@ public class DireccionEmpresa implements Serializable {
 	}
 
 	/**
-	 * @return the empresa
+	 * @return the idEmp
 	 */
-	public Empresa getEmpresa() {
-		return empresa;
+	public int getIdEmp() {
+		return idEmp;
 	}
 
 	/**
-	 * @param empresa
-	 *            the empresa to set
+	 * @param idEmp
+	 *            the idEmp to set
 	 */
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
+	public void setIdEmp(int idEmp) {
+		this.idEmp = idEmp;
 	}
 
 	/*
@@ -207,9 +207,9 @@ public class DireccionEmpresa implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "DireccionEmpresa [idDirEmp=" + idDirEmp + ", tipoVia=" + tipoVia + ", nombreVia=" + nombreVia
+		return "ModelDireccionEmpresa [idDirEmp=" + idDirEmp + ", tipoVia=" + tipoVia + ", nombreVia=" + nombreVia
 				+ ", numero=" + numero + ", resto=" + resto + ", cp=" + cp + ", provincia=" + provincia + ", ciudad="
-				+ ciudad + ", pais=" + pais + ", empresa=" + empresa + "]";
+				+ ciudad + ", pais=" + pais + ", idEmp=" + idEmp + "]";
 	}
 
 }
