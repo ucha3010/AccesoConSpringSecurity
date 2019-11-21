@@ -110,18 +110,18 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 	}
 
 	private ModelDireccionEmpresa mapeo(ResultSet rs) throws SQLException {
-		ModelDireccionEmpresa mdp = new ModelDireccionEmpresa();
-		mdp.setIdDirEmp(rs.getInt("idDirEmp"));
-		mdp.setTipoVia(rs.getString("tipoVia"));
-		mdp.setNombreVia(rs.getString("nombreVia"));
-		mdp.setNumero(rs.getString("numero"));
-		mdp.setResto(rs.getString("resto"));
-		mdp.setCp(rs.getString("cp"));
-		mdp.setProvincia(rs.getString("provincia"));
-		mdp.setCiudad(rs.getString("ciudad"));
-		mdp.setPais(rs.getString("pais"));
-		mdp.setIdEmp(rs.getInt("idEmp"));
-		return null;
+		ModelDireccionEmpresa mde = new ModelDireccionEmpresa();
+		mde.setIdDirEmp(rs.getInt("idDirEmp"));
+		mde.setTipoVia(rs.getString("tipoVia"));
+		mde.setNombreVia(rs.getString("nombreVia"));
+		mde.setNumero(rs.getString("numero"));
+		mde.setResto(rs.getString("resto"));
+		mde.setCp(rs.getString("cp"));
+		mde.setProvincia(rs.getString("provincia"));
+		mde.setCiudad(rs.getString("ciudad"));
+		mde.setPais(rs.getString("pais"));
+		mde.setIdEmp(rs.getInt("idEmp"));
+		return mde;
 	}
 
 }

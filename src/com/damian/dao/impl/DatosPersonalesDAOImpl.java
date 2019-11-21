@@ -197,7 +197,7 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 		mdp.setTelefono(rs.getString("telefono"));
 		mdp.setObservaciones(rs.getString("observaciones"));
 		mdp.setDatospersonales_idUsr(rs.getInt("idDatosPers"));
-		return null;
+		return mdp;
 	}
 
 }

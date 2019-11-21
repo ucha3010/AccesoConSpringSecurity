@@ -159,7 +159,7 @@ public class DireccionDaoImpl implements DireccionDao {
 		md.setCiudad(rs.getString("ciudad"));
 		md.setPais(rs.getString("pais"));
 		md.setIdDatosPers(rs.getInt("idDatosPers"));
-		return null;
+		return md;
 	}
 
 }
