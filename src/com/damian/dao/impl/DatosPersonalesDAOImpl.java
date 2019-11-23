@@ -11,14 +11,14 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterDatosPersonales;
 import com.damian.dao.DatosPersonalesDAO;
 import com.damian.dao.model.ModelDatosPersonales;
 import com.damian.pojo.DatosPersonales;
 
-//@Repository
-//@Transactional
+@Repository
 public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 
 	private JdbcTemplate jdbcTemplate;
@@ -26,21 +26,6 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 	public DatosPersonalesDAOImpl(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-
-	// @Autowired
-	// private SessionFactory sessionFactory;
-
-	// public Session getSession() {
-	// return sessionFactory.getCurrentSession();
-	// }
-
-	// public CriteriaBuilder getCriteriaBuilder() {
-	// return sessionFactory.getCurrentSession().getCriteriaBuilder();
-	// }
-
-	// public Session getOpenSession() {
-	// return sessionFactory.openSession();
-	// }
 
 	private final String TABLA = "datospersonales";
 	private final String KEY = "idDatosPers";
@@ -61,27 +46,6 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 			}
 
 		});
-
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getOpenSession();
-		// CriteriaQuery<DatosPersonales> criteriaQuery =
-		// criteriaBuilder.createQuery(DatosPersonales.class);
-		// Root<DatosPersonales> root = criteriaQuery.from(DatosPersonales.class);
-		// criteriaQuery.select(root);
-		// Predicate pEqDatosPersonales = criteriaBuilder.equal(root.get("idDatosPers"),
-		// id);
-		// criteriaQuery.where(pEqDatosPersonales);
-		// List<DatosPersonales> datosPersonaless =
-		// session.createQuery(criteriaQuery).getResultList();
-		// if(datosPersonaless != null && datosPersonaless.size() > 0) {
-		// return datosPersonaless.get(0);
-		// } else {
-		// return null;
-		// }
-
-		// Criteria crit = getSession().createCriteria(DatosPersonales.class);
-		// crit.add(Restrictions.eq("idUsr", id));
-		// return (DatosPersonales) crit.uniqueResult();
 	}
 
 	@Override
@@ -97,18 +61,6 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 		}
 
 		return dpList;
-
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getOpenSession();
-		// CriteriaQuery<DatosPersonales> criteriaQuery =
-		// criteriaBuilder.createQuery(DatosPersonales.class);
-		// Root<DatosPersonales> root = criteriaQuery.from(DatosPersonales.class);
-		// criteriaQuery.select(root);
-		// List<DatosPersonales> datosPersonaless =
-		// session.createQuery(criteriaQuery).getResultList();
-		// return datosPersonaless;
-
-		// return getSession().createQuery("from DatosPersonales").list();
 	}
 
 	@Override
@@ -121,8 +73,6 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 		jdbcTemplate.update(sql, mdp.getNombre(), mdp.getApellido1(), mdp.getApellido2(), mdp.getSexo(),
 				mdp.getFechaNacimiento(), mdp.getNacionalidad(), mdp.getDni(), mdp.getEmail(), mdp.getTelefono(),
 				mdp.getObservaciones(), mdp.getDatospersonales_idUsr());
-
-		// getSession().save(datosPersonales);
 	}
 
 	@Override
@@ -135,8 +85,6 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 		jdbcTemplate.update(sql, mdp.getNombre(), mdp.getApellido1(), mdp.getApellido2(), mdp.getSexo(),
 				mdp.getFechaNacimiento(), mdp.getNacionalidad(), mdp.getDni(), mdp.getEmail(), mdp.getTelefono(),
 				mdp.getObservaciones(), mdp.getDatospersonales_idUsr(), mdp.getIdDatosPers());
-
-		// getSession().update(datosPersonales);
 	}
 
 	@Override
@@ -144,8 +92,6 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, datosPersonales.getIdDatosPers());
-
-		// getSession().delete(datosPersonales);
 	}
 
 	@Override
@@ -164,23 +110,6 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 			}
 
 		});
-
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getOpenSession();
-		// CriteriaQuery<DatosPersonales> criteriaQuery =
-		// criteriaBuilder.createQuery(DatosPersonales.class);
-		// Root<DatosPersonales> root = criteriaQuery.from(DatosPersonales.class);
-		// criteriaQuery.select(root);
-		// Predicate pEqDatosPersonales = criteriaBuilder.equal(root.get("usuario"),
-		// datosUsrId);
-		// criteriaQuery.where(pEqDatosPersonales);
-		// List<DatosPersonales> datosPersonaless =
-		// session.createQuery(criteriaQuery).getResultList();
-		// if(datosPersonaless != null && datosPersonaless.size() > 0) {
-		// return datosPersonaless.get(0);
-		// } else {
-		// return null;
-		// }
 	}
 
 	private ModelDatosPersonales mapeo(ResultSet rs) throws SQLException {

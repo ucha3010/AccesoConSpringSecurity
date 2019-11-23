@@ -9,12 +9,14 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterUsuarioEmpresa;
 import com.damian.dao.UsuarioEmpresaDAO;
 import com.damian.dao.model.ModelUsuarioEmpresa;
 import com.damian.pojo.UsuarioEmpresa;
 
+@Repository
 public class UsuarioEmpresaDAOImpl implements UsuarioEmpresaDAO {
 
 	private JdbcTemplate jdbcTemplate;

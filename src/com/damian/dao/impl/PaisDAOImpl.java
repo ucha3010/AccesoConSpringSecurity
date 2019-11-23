@@ -11,14 +11,14 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterPais;
 import com.damian.dao.PaisDAO;
 import com.damian.dao.model.ModelPais;
 import com.damian.pojo.Pais;
 
-//@Repository
-//@Transactional
+@Repository
 public class PaisDAOImpl implements PaisDAO {
 
 	private JdbcTemplate jdbcTemplate;
@@ -26,21 +26,6 @@ public class PaisDAOImpl implements PaisDAO {
 	public PaisDAOImpl(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-
-	// @Autowired
-	// private SessionFactory sessionFactory;
-	//
-	// public Session getSession() {
-	// return sessionFactory.getCurrentSession();
-	// }
-	//
-	// public CriteriaBuilder getCriteriaBuilder() {
-	// return sessionFactory.getCurrentSession().getCriteriaBuilder();
-	// }
-	//
-	// public Session getOpenSession() {
-	// return sessionFactory.openSession();
-	// }
 
 	private final String TABLA = "paises";
 	private final String KEY = "idPais";
@@ -61,24 +46,6 @@ public class PaisDAOImpl implements PaisDAO {
 			}
 
 		});
-
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getOpenSession();
-		// CriteriaQuery<Pais> criteriaQuery = criteriaBuilder.createQuery(Pais.class);
-		// Root<Pais> root = criteriaQuery.from(Pais.class);
-		// criteriaQuery.select(root);
-		// Predicate pEqPais = criteriaBuilder.equal(root.get("idPais"), id);
-		// criteriaQuery.where(pEqPais);
-		// List<Pais> paiss = session.createQuery(criteriaQuery).getResultList();
-		// if(paiss != null && paiss.size() > 0) {
-		// return paiss.get(0);
-		// } else {
-		// return null;
-		// }
-
-		// Criteria crit = getSession().createCriteria(Pais.class);
-		// crit.add(Restrictions.eq("idUsr", id));
-		// return (Pais) crit.uniqueResult();
 	}
 
 	@Override
@@ -87,16 +54,6 @@ public class PaisDAOImpl implements PaisDAO {
 		String sql = "SELECT * FROM " + TABLA;
 
 		return lista(sql);
-
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getOpenSession();
-		// CriteriaQuery<Pais> criteriaQuery = criteriaBuilder.createQuery(Pais.class);
-		// Root<Pais> root = criteriaQuery.from(Pais.class);
-		// criteriaQuery.select(root);
-		// List<Pais> paiss = session.createQuery(criteriaQuery).getResultList();
-		// return paiss;
-
-		// return getSession().createQuery("from Pais").list();
 	}
 
 	@Override
@@ -105,8 +62,6 @@ public class PaisDAOImpl implements PaisDAO {
 		ModelPais mp = ConverterPais.convert(pais);
 		String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN)" + " VALUES (?, ?)";
 		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN());
-
-		// getSession().save(pais);
 	}
 
 	@Override
@@ -115,8 +70,6 @@ public class PaisDAOImpl implements PaisDAO {
 		ModelPais mp = ConverterPais.convert(pais);
 		String sql = "UPDATE " + TABLA + "SET nombreES=?, nombreEN=? WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getIdPais());
-
-		// getSession().update(pais);
 	}
 
 	@Override
@@ -124,8 +77,6 @@ public class PaisDAOImpl implements PaisDAO {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, pais.getIdPais());
-
-		// getSession().delete(pais);
 	}
 
 	@Override
@@ -134,16 +85,6 @@ public class PaisDAOImpl implements PaisDAO {
 		String sql = "SELECT * FROM " + TABLA + " WHERE nombreES LIKE '" + paisName + "'";
 
 		return lista(sql);
-
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getOpenSession();
-		// CriteriaQuery<Pais> criteriaQuery = criteriaBuilder.createQuery(Pais.class);
-		// Root<Pais> root = criteriaQuery.from(Pais.class);
-		// criteriaQuery.select(root);
-		// Predicate pEqPais = criteriaBuilder.equal(root.get("nombreES"), paisName);
-		// criteriaQuery.where(pEqPais);
-		// List<Pais> paiss = session.createQuery(criteriaQuery).getResultList();
-		// return paiss;
 	}
 
 	private List<Pais> lista(String sql) {

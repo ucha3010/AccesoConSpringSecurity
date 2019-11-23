@@ -20,7 +20,6 @@ import com.damian.dao.model.ModelUsuario;
 import com.damian.pojo.Usuario;
 
 @Repository
-@Transactional
 public class UsuarioDAOImpl implements UsuarioDAO {
 
 	private JdbcTemplate jdbcTemplate;
@@ -28,21 +27,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	public UsuarioDAOImpl(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-
-	// @Autowired
-	// private SessionFactory sessionFactory;
-	//
-	// public Session getSession() {
-	// return sessionFactory.getCurrentSession();
-	// }
-	//
-	// public CriteriaBuilder getCriteriaBuilder() {
-	// return sessionFactory.getCurrentSession().getCriteriaBuilder();
-	// }
-	//
-	// public Session getOpenSession() {
-	// return sessionFactory.openSession();
-	// }
 
 	private final String TABLA = "usuario";
 	private final String KEY = "idUsr";
@@ -63,17 +47,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			}
 
 		});
-
-		// List<Usuario> usuarios = findByIdEngine(id);
-		// if (usuarios != null && usuarios.size() > 0) {
-		// return usuarios.get(0);
-		// } else {
-		// return null;
-		// }
-
-		// Criteria crit = getSession().createCriteria(Usuario.class);
-		// crit.add(Restrictions.eq("idUsr", id));
-		// return (Usuario) crit.uniqueResult();
 	}
 
 	@Override
@@ -81,14 +54,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 		List<Usuario> usuarios = new ArrayList<>();
 		usuarios.add(findById(id));
-
-		// List<Usuario> usuarios = findByIdEngine(id);
-		// if (usuarios != null && !usuarios.isEmpty()) {
-		// List<UsuarioRol> roles = usuarios.get(0).getUsuarioRol();
-		// String rol = roles.get(0).getRol().getRol();
-		// // para evitar error con Lazy
-		// System.out.println(rol);
-		// }
 		return usuarios;
 	}
 
@@ -98,25 +63,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		String sql = "SELECT * FROM " + TABLA + " WHERE usuario LIKE '" + usuario + "'";
 
 		List<Usuario> usuarios = lista(sql);
-
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getOpenSession();
-		// CriteriaQuery<Usuario> criteriaQuery =
-		// criteriaBuilder.createQuery(Usuario.class);
-		// Root<Usuario> root = criteriaQuery.from(Usuario.class);
-		// criteriaQuery.select(root);
-		// Predicate pEqUsuario = criteriaBuilder.equal(root.get("usuario"), usuario);
-		// criteriaQuery.where(pEqUsuario);
-		// List<Usuario> usuarios = session.createQuery(criteriaQuery).getResultList();
 		if (usuarios != null && usuarios.size() > 0) {
 			return usuarios.get(0);
 		} else {
 			return null;
 		}
-
-		// Criteria crit = getSession().createCriteria(Usuario.class)
-		// .add(Restrictions.eqOrIsNull("usuario", usuario));
-		// return (Usuario) crit.uniqueResult();
 	}
 
 	@Override
@@ -125,18 +76,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		String sql = "SELECT * FROM " + TABLA;
 
 		return lista(sql);
-
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getOpenSession();
-		// CriteriaQuery<Usuario> criteriaQuery =
-		// criteriaBuilder.createQuery(Usuario.class);
-		// Root<Usuario> root = criteriaQuery.from(Usuario.class);
-		// criteriaQuery.select(root);
-		// criteriaQuery.orderBy(criteriaBuilder.asc(root.get("usuario")));
-		// List<Usuario> usuarios = session.createQuery(criteriaQuery).getResultList();
-		// return usuarios;
-
-		// return getSession().createQuery("from Usuario").list();
 	}
 
 	@Override
@@ -164,22 +103,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, usuario.getIdUsr());
-
-		// getSession().delete(usuario);
 	}
-
-	// private List<Usuario> findByIdEngine(int id) {
-	// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-	// Session session = getSession();
-	// CriteriaQuery<Usuario> criteriaQuery =
-	// criteriaBuilder.createQuery(Usuario.class);
-	// Root<Usuario> root = criteriaQuery.from(Usuario.class);
-	// criteriaQuery.select(root);
-	// Predicate pEqUsuario = criteriaBuilder.equal(root.get("idUsr"), id);
-	// criteriaQuery.where(pEqUsuario);
-	// List<Usuario> usuarios = session.createQuery(criteriaQuery).getResultList();
-	// return usuarios;
-	// }
 
 	private List<Usuario> lista(String sql) {
 		List<ModelUsuario> muList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelUsuario.class));

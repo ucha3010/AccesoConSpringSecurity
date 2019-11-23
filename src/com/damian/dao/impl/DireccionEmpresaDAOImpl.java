@@ -11,12 +11,14 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterDireccionEmpresa;
 import com.damian.dao.DireccionEmpresaDAO;
 import com.damian.dao.model.ModelDireccionEmpresa;
 import com.damian.pojo.DireccionEmpresa;
 
+@Repository
 public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 
 	private JdbcTemplate jdbcTemplate;

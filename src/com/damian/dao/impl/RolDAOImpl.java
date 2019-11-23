@@ -11,14 +11,14 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterRol;
 import com.damian.dao.RolDAO;
 import com.damian.dao.model.ModelRol;
 import com.damian.pojo.Rol;
 
-//@Repository
-//@Transactional
+@Repository
 public class RolDAOImpl implements RolDAO {
 
 	private JdbcTemplate jdbcTemplate;
@@ -26,21 +26,6 @@ public class RolDAOImpl implements RolDAO {
 	public RolDAOImpl(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-
-	// @Autowired
-	// private SessionFactory sessionFactory;
-	//
-	// public Session getSession() {
-	// return sessionFactory.getCurrentSession();
-	// }
-	//
-	// public CriteriaBuilder getCriteriaBuilder() {
-	// return sessionFactory.getCurrentSession().getCriteriaBuilder();
-	// }
-	//
-	// public Session getOpenSession() {
-	// return sessionFactory.openSession();
-	// }
 
 	private final String TABLA = "rol";
 	private final String KEY = "idRol";
@@ -61,24 +46,6 @@ public class RolDAOImpl implements RolDAO {
 			}
 
 		});
-
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getSession();
-		// CriteriaQuery<Rol> criteriaQuery = criteriaBuilder.createQuery(Rol.class);
-		// Root<Rol> root = criteriaQuery.from(Rol.class);
-		// criteriaQuery.select(root);
-		// Predicate pEqRol = criteriaBuilder.equal(root.get("idRol"), id);
-		// criteriaQuery.where(pEqRol);
-		// List<Rol> rols = session.createQuery(criteriaQuery).getResultList();
-		// if(rols != null && rols.size() > 0) {
-		// return rols.get(0);
-		// } else {
-		// return null;
-		// }
-
-		// Criteria crit = getSession().createCriteria(Rol.class);
-		// crit.add(Restrictions.eq("idUsr", id));
-		// return (Rol) crit.uniqueResult();
 	}
 
 	@Override
@@ -87,16 +54,6 @@ public class RolDAOImpl implements RolDAO {
 		String sql = "SELECT * FROM " + TABLA;
 
 		return lista(sql);
-
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getOpenSession();
-		// CriteriaQuery<Rol> criteriaQuery = criteriaBuilder.createQuery(Rol.class);
-		// Root<Rol> root = criteriaQuery.from(Rol.class);
-		// criteriaQuery.select(root);
-		// List<Rol> rols = session.createQuery(criteriaQuery).getResultList();
-		// return rols;
-
-		// return getSession().createQuery("from Rol").list();
 	}
 
 	@Override
@@ -116,7 +73,6 @@ public class RolDAOImpl implements RolDAO {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, rol.getIdRol());
-		// getSession().delete(rol);
 	}
 
 	@Override
@@ -125,16 +81,6 @@ public class RolDAOImpl implements RolDAO {
 		String sql = "SELECT * FROM " + TABLA + " WHERE rol LIKE '" + rolName + "'";
 
 		return lista(sql);
-
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getOpenSession();
-		// CriteriaQuery<Rol> criteriaQuery = criteriaBuilder.createQuery(Rol.class);
-		// Root<Rol> root = criteriaQuery.from(Rol.class);
-		// criteriaQuery.select(root);
-		// Predicate pEqRol = criteriaBuilder.equal(root.get("rol"), rolName);
-		// criteriaQuery.where(pEqRol);
-		// List<Rol> rols = session.createQuery(criteriaQuery).getResultList();
-		// return rols;
 	}
 
 	private List<Rol> lista(String sql) {

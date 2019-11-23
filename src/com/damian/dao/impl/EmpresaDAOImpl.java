@@ -11,14 +11,14 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterEmpresa;
 import com.damian.dao.EmpresaDAO;
 import com.damian.dao.model.ModelEmpresa;
 import com.damian.pojo.Empresa;
 
-//@Repository
-//@Transactional
+@Repository
 public class EmpresaDAOImpl implements EmpresaDAO {
 
 	private JdbcTemplate jdbcTemplate;
@@ -26,21 +26,6 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	public EmpresaDAOImpl(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-
-	// @Autowired
-	// private SessionFactory sessionFactory;
-	//
-	// public Session getSession() {
-	// return sessionFactory.getCurrentSession();
-	// }
-	//
-	// public CriteriaBuilder getCriteriaBuilder() {
-	// return sessionFactory.getCurrentSession().getCriteriaBuilder();
-	// }
-	//
-	// public Session getOpenSession() {
-	// return sessionFactory.openSession();
-	// }
 
 	private final String TABLA = "empresa";
 	private final String KEY = "idEmp";
@@ -61,17 +46,6 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 			}
 
 		});
-
-		// List<Empresa> empresas = findByIdEngine(id);
-		// if (empresas != null && empresas.size() > 0) {
-		// return empresas.get(0);
-		// } else {
-		// return null;
-		// }
-
-		// Criteria crit = getSession().createCriteria(Empresa.class);
-		// crit.add(Restrictions.eq("idUsr", id));
-		// return (Empresa) crit.uniqueResult();
 	}
 
 	@Override
@@ -87,17 +61,6 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		String sql = "SELECT * FROM " + TABLA;
 
 		return lista(sql);
-
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getOpenSession();
-		// CriteriaQuery<Empresa> criteriaQuery =
-		// criteriaBuilder.createQuery(Empresa.class);
-		// Root<Empresa> root = criteriaQuery.from(Empresa.class);
-		// criteriaQuery.select(root);
-		// List<Empresa> empresas = session.createQuery(criteriaQuery).getResultList();
-		// return empresas;
-
-		// return getSession().createQuery("from Empresa").list();
 	}
 
 	@Override
@@ -127,8 +90,6 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, empresa.getIdEmp());
-
-		// getSession().delete(empresa);
 	}
 
 	@Override
@@ -137,18 +98,6 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		String sql = "SELECT * FROM " + TABLA + " WHERE nombreComercial LIKE '" + empresaName + "'";
 
 		return lista(sql);
-
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getOpenSession();
-		// CriteriaQuery<Empresa> criteriaQuery =
-		// criteriaBuilder.createQuery(Empresa.class);
-		// Root<Empresa> root = criteriaQuery.from(Empresa.class);
-		// criteriaQuery.select(root);
-		// Predicate pEqEmpresa = criteriaBuilder.equal(root.get("nombreComercial"),
-		// empresaName);
-		// criteriaQuery.where(pEqEmpresa);
-		// List<Empresa> empresas = session.createQuery(criteriaQuery).getResultList();
-		// return empresas;
 	}
 
 	private List<Empresa> lista(String sql) {
@@ -174,18 +123,4 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		me.setObservaciones(rs.getString("observaciones"));
 		return me;
 	}
-
-	// private List<Empresa> findByIdEngine(int id) {
-	//
-	// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-	// Session session = getSession();
-	// CriteriaQuery<Empresa> criteriaQuery =
-	// criteriaBuilder.createQuery(Empresa.class);
-	// Root<Empresa> root = criteriaQuery.from(Empresa.class);
-	// criteriaQuery.select(root);
-	// Predicate pEqEmpresa = criteriaBuilder.equal(root.get("idEmp"), id);
-	// criteriaQuery.where(pEqEmpresa);
-	// List<Empresa> empresas = session.createQuery(criteriaQuery).getResultList();
-	// return empresas;
-	// }
 }

@@ -11,14 +11,14 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterDireccion;
 import com.damian.dao.DireccionDao;
 import com.damian.dao.model.ModelDireccion;
 import com.damian.pojo.Direccion;
 
-//@Transactional
-//@Repository
+@Repository
 public class DireccionDaoImpl implements DireccionDao {
 
 	private JdbcTemplate jdbcTemplate;
@@ -26,21 +26,6 @@ public class DireccionDaoImpl implements DireccionDao {
 	public DireccionDaoImpl(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-
-	// @Autowired
-	// private SessionFactory sessionFactory;
-	//
-	// public Session getSession() {
-	// return sessionFactory.getCurrentSession();
-	// }
-	//
-	// public CriteriaBuilder getCriteriaBuilder() {
-	// return sessionFactory.getCurrentSession().getCriteriaBuilder();
-	// }
-	//
-	// public Session getOpenSession() {
-	// return sessionFactory.openSession();
-	// }
 
 	private final String TABLA = "direccion";
 	private final String KEY = "idDir";
@@ -62,22 +47,6 @@ public class DireccionDaoImpl implements DireccionDao {
 
 		});
 
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getOpenSession();
-		// CriteriaQuery<Direccion> criteriaQuery =
-		// criteriaBuilder.createQuery(Direccion.class);
-		// Root<Direccion> root = criteriaQuery.from(Direccion.class);
-		// criteriaQuery.select(root);
-		// Predicate pEqDireccion = criteriaBuilder.equal(root.get("idDir"), idDir);
-		// criteriaQuery.where(pEqDireccion);
-		// List<Direccion> direcciones =
-		// session.createQuery(criteriaQuery).getResultList();
-		// if(direcciones != null && !direcciones.isEmpty()) {
-		// return direcciones.get(0);
-		// } else {
-		// return null;
-		// }
-
 	}
 
 	@Override
@@ -96,12 +65,6 @@ public class DireccionDaoImpl implements DireccionDao {
 					md.getProvincia(), md.getCiudad(), md.getPais(), md.getIdDatosPers(), md.getIdDir());
 
 		}
-
-		// if(direccion.getIdDir() > 0) {
-		// getSession().update(direccion);
-		// } else {
-		// getSession().save(direccion);
-		// }
 	}
 
 	@Override
@@ -116,27 +79,6 @@ public class DireccionDaoImpl implements DireccionDao {
 		}
 
 		return dList;
-
-		// CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		// Session session = getOpenSession();
-		// CriteriaQuery<Direccion> criteriaQuery =
-		// criteriaBuilder.createQuery(Direccion.class);
-		// Root<Direccion> root = criteriaQuery.from(Direccion.class);
-		// criteriaQuery.select(root);
-		// Predicate pEqDireccion = criteriaBuilder.equal(root.get("datosPersonales"),
-		// idDatosPers);
-		// criteriaQuery.where(pEqDireccion);
-		// List<Direccion> direcciones =
-		// session.createQuery(criteriaQuery).getResultList();
-
-		// return direcciones;
-
-		// Criteria crit = getSession().createCriteria(Direccion.class)
-		// .setFetchMode("admin", FetchMode.JOIN)
-		// .add(Restrictions.eq("admin.idAd", admin.getIdAd()))
-		// .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-		//
-		// return crit.list();
 	}
 
 	@Override
@@ -144,7 +86,6 @@ public class DireccionDaoImpl implements DireccionDao {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, direccion.getIdDir());
-		// getSession().delete(direccion);
 	}
 
 	private ModelDireccion mapeo(ResultSet rs) throws SQLException {
