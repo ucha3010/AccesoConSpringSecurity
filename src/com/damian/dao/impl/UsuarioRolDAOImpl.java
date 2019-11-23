@@ -1,97 +1,97 @@
 package com.damian.dao.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.sql.DataSource;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.damian.converter.ConverterUsuarioRol;
 import com.damian.dao.UsuarioRolDAO;
+import com.damian.dao.model.ModelUsuarioRol;
 import com.damian.pojo.UsuarioRol;
 
-@Repository
-@Transactional
 public class UsuarioRolDAOImpl implements UsuarioRolDAO {
 
-	@Autowired
-	private SessionFactory sessionFactory;
+	private JdbcTemplate jdbcTemplate;
 
-	public Session getSession() {
-		return sessionFactory.getCurrentSession();
+	public UsuarioRolDAOImpl(DataSource dataSource) {
+		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public CriteriaBuilder getCriteriaBuilder() {
-		return sessionFactory.getCurrentSession().getCriteriaBuilder();
-	}
-
-	public Session getOpenSession() {
-		return sessionFactory.openSession();
-	}
+	private final String TABLA = "usuario_rol";
+	private final String KEY1 = "idUsr";
+	private final String KEY2 = "idRol";
 
 	@Override
 	public List<UsuarioRol> findAll() {
 
-		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		Session session = getOpenSession();
-		CriteriaQuery<UsuarioRol> criteriaQuery = criteriaBuilder.createQuery(UsuarioRol.class);
-		Root<UsuarioRol> root = criteriaQuery.from(UsuarioRol.class);
-		criteriaQuery.select(root);
-		List<UsuarioRol> usuarioRols = session.createQuery(criteriaQuery).getResultList();
-		return usuarioRols;
+		String sql = "SELECT * FROM " + TABLA;
 
-		// return getSession().createQuery("from UsuarioRol").list();
+		return lista(sql);
 	}
 
 	@Override
 	public void save(UsuarioRol usuarioRol) {
-		getSession().save(usuarioRol);
+		ModelUsuarioRol mur = ConverterUsuarioRol.convert(usuarioRol);
+		String sql = "INSERT INTO " + TABLA + " (idUsr, idRol, fechaCreacion, creadoPor)" + " VALUES (?, ?, ?, ?)";
+		jdbcTemplate.update(sql, mur.getIdUsr(), mur.getIdRol(), mur.getFechaCreacion(), mur.getCreadoPor());
 	}
 
 	@Override
 	public void update(UsuarioRol usuarioRol) {
-		getSession().update(usuarioRol);
+		ModelUsuarioRol mur = ConverterUsuarioRol.convert(usuarioRol);
+		String sql = "UPDATE " + TABLA + "SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
+				+ "=?";
+		jdbcTemplate.update(sql, mur.getFechaCreacion(), mur.getCreadoPor(), mur.getIdUsr(), mur.getIdRol());
 	}
 
 	@Override
 	public void delete(UsuarioRol usuarioRol) {
-		getSession().delete(usuarioRol);
+
+		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY1 + "=? AND " + KEY2 + "=?";
+		jdbcTemplate.update(sql, usuarioRol.getUsuario().getIdUsr(), usuarioRol.getRol().getIdRol());
 	}
 
 	@Override
 	public List<UsuarioRol> findByIdUsr(int idUsr) {
 
-		List<UsuarioRol> usuarioRols = findAll();
-		List<UsuarioRol> byUsrId = new ArrayList<>();
-		for (UsuarioRol ur : usuarioRols) {
-			if (ur.getUsuario().getIdUsr() == idUsr) {
-				byUsrId.add(ur);
-			}
-		}
+		String sql = "SELECT * FROM " + TABLA + " WHERE idUsr=" + idUsr;
 
-		return byUsrId;
+		return lista(sql);
 
 	}
 
 	@Override
 	public List<UsuarioRol> findByIdRol(int idRol) {
 
-		List<UsuarioRol> usuarioRols = findAll();
-		List<UsuarioRol> byRolId = new ArrayList<>();
-		for (UsuarioRol ur : usuarioRols) {
-			if (ur.getRol().getIdRol() == idRol) {
-				byRolId.add(ur);
-			}
+		String sql = "SELECT * FROM " + TABLA + " WHERE idRol=" + idRol;
+
+		return lista(sql);
+
+	}
+
+	private List<UsuarioRol> lista(String sql) {
+		List<ModelUsuarioRol> murList = jdbcTemplate.query(sql,
+				BeanPropertyRowMapper.newInstance(ModelUsuarioRol.class));
+		List<UsuarioRol> urList = new ArrayList<>();
+		for (ModelUsuarioRol mur : murList) {
+			urList.add(ConverterUsuarioRol.convert(mur));
 		}
+		return urList;
+	}
 
-		return byRolId;
-
+	private ModelUsuarioRol mapeo(ResultSet rs) throws SQLException {
+		ModelUsuarioRol mue = new ModelUsuarioRol();
+		mue.setIdUsr(rs.getInt("idUsr"));
+		mue.setIdRol(rs.getInt("idRol"));
+		mue.setFechaCreacion(rs.getDate("fechaCreacion"));
+		mue.setCreadoPor(rs.getString("creadoPor"));
+		return mue;
 	}
 
 }

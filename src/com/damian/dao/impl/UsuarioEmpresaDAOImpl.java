@@ -1,115 +1,96 @@
 package com.damian.dao.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.sql.DataSource;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.damian.converter.ConverterUsuarioEmpresa;
 import com.damian.dao.UsuarioEmpresaDAO;
+import com.damian.dao.model.ModelUsuarioEmpresa;
 import com.damian.pojo.UsuarioEmpresa;
 
-@Repository
-@Transactional
 public class UsuarioEmpresaDAOImpl implements UsuarioEmpresaDAO {
-	
-	@Autowired
-	private SessionFactory sessionFactory;
-	
-	public Session getSession() {
-		return sessionFactory.getCurrentSession();
+
+	private JdbcTemplate jdbcTemplate;
+
+	public UsuarioEmpresaDAOImpl(DataSource dataSource) {
+		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-	
-	public CriteriaBuilder getCriteriaBuilder() {
-		return sessionFactory.getCurrentSession().getCriteriaBuilder();
-	}
-	
-	public Session getOpenSession() {
-		return sessionFactory.openSession();
-	}
+
+	private final String TABLA = "usuario_empresa";
+	private final String KEY1 = "idUsr";
+	private final String KEY2 = "idEmp";
 
 	@Override
 	public List<UsuarioEmpresa> findAll() {
-		
-		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-		Session session = getOpenSession();
-		CriteriaQuery<UsuarioEmpresa> criteriaQuery = criteriaBuilder.createQuery(UsuarioEmpresa.class);
-		Root<UsuarioEmpresa> root = criteriaQuery.from(UsuarioEmpresa.class);
-		criteriaQuery.select(root);
-		List<UsuarioEmpresa> usuarioEmpresas = session.createQuery(criteriaQuery).getResultList();
-		return usuarioEmpresas;
-		
-//		return getSession().createQuery("from UsuarioEmpresa").list();
+
+		String sql = "SELECT * FROM " + TABLA;
+
+		return lista(sql);
 	}
 
 	@Override
 	public void save(UsuarioEmpresa usuarioEmpresa) {
-		getSession().save(usuarioEmpresa);
+		ModelUsuarioEmpresa mue = ConverterUsuarioEmpresa.convert(usuarioEmpresa);
+		String sql = "INSERT INTO " + TABLA + " (idUsr, idEmp, fechaCreacion, creadoPor)" + " VALUES (?, ?, ?, ?)";
+		jdbcTemplate.update(sql, mue.getIdUsr(), mue.getIdEmp(), mue.getFechaCreacion(), mue.getCreadoPor());
 	}
-	
+
 	@Override
 	public void update(UsuarioEmpresa usuarioEmpresa) {
-		getSession().update(usuarioEmpresa);
+		ModelUsuarioEmpresa mue = ConverterUsuarioEmpresa.convert(usuarioEmpresa);
+		String sql = "UPDATE " + TABLA + "SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
+				+ "=?";
+		jdbcTemplate.update(sql, mue.getFechaCreacion(), mue.getCreadoPor(), mue.getIdUsr(), mue.getIdEmp());
 	}
-	
+
 	@Override
 	public void delete(UsuarioEmpresa usuarioEmpresa) {
-		getSession().delete(usuarioEmpresa);
+
+		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY1 + "=? AND " + KEY2 + "=?";
+		jdbcTemplate.update(sql, usuarioEmpresa.getUsuario().getIdUsr(), usuarioEmpresa.getEmpresa().getIdEmp());
 	}
 
 	@Override
 	public List<UsuarioEmpresa> findByIdUsr(int idUsr) {
-		
-		List<UsuarioEmpresa> usuarioEmpresas = findAll();
-		List<UsuarioEmpresa> byUsrId = new ArrayList<>();
-		for(UsuarioEmpresa ue: usuarioEmpresas) {
-			if(ue.getUsuario().getIdUsr() == idUsr) {
-				byUsrId.add(ue);
-			}
-		}
-		return byUsrId;
 
-//		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-//		Session session = getOpenSession();
-//		CriteriaQuery<UsuarioEmpresa> criteriaQuery = criteriaBuilder.createQuery(UsuarioEmpresa.class);
-//		Root<UsuarioEmpresa> root = criteriaQuery.from(UsuarioEmpresa.class);
-//		criteriaQuery.select(root);
-//		Predicate pEqUsuarioEmpresa = criteriaBuilder.equal(root.get("pk"), idUsr);
-//		criteriaQuery.where(pEqUsuarioEmpresa);
-//		List<UsuarioEmpresa> usuarioEmpresas = session.createQuery(criteriaQuery).getResultList();
-//		System.out.println(usuarioEmpresas);
-//		return null;
-		
+		String sql = "SELECT * FROM " + TABLA + " WHERE idUsr=" + idUsr;
+
+		return lista(sql);
+
 	}
 
 	@Override
 	public List<UsuarioEmpresa> findByIdEmp(int idEmp) {
-		
-		List<UsuarioEmpresa> usuarioEmpresas = findAll();
-		List<UsuarioEmpresa> byEmpId = new ArrayList<>();
-		for(UsuarioEmpresa ue: usuarioEmpresas) {
-			if(ue.getEmpresa().getIdEmp() == idEmp) {
-				byEmpId.add(ue);
-			}
-		}
-		return byEmpId;
 
-//		CriteriaBuilder criteriaBuilder = getCriteriaBuilder();
-//		Session session = getOpenSession();
-//		CriteriaQuery<UsuarioEmpresa> criteriaQuery = criteriaBuilder.createQuery(UsuarioEmpresa.class);
-//		Root<UsuarioEmpresa> root = criteriaQuery.from(UsuarioEmpresa.class);
-//		criteriaQuery.select(root);
-//		Predicate pEqUsuarioEmpresa = criteriaBuilder.equal(root.get("empresa"), idEmp);
-//		criteriaQuery.where(pEqUsuarioEmpresa);
-//		List<UsuarioEmpresa> usuarioEmpresas = session.createQuery(criteriaQuery).getResultList();
-//		return usuarioEmpresas;
+		String sql = "SELECT * FROM " + TABLA + " WHERE idEmp=" + idEmp;
+
+		return lista(sql);
+	}
+
+	private List<UsuarioEmpresa> lista(String sql) {
+		List<ModelUsuarioEmpresa> mueList = jdbcTemplate.query(sql,
+				BeanPropertyRowMapper.newInstance(ModelUsuarioEmpresa.class));
+		List<UsuarioEmpresa> ueList = new ArrayList<>();
+		for (ModelUsuarioEmpresa mue : mueList) {
+			ueList.add(ConverterUsuarioEmpresa.convert(mue));
+		}
+		return ueList;
+	}
+
+	private ModelUsuarioEmpresa mapeo(ResultSet rs) throws SQLException {
+		ModelUsuarioEmpresa mue = new ModelUsuarioEmpresa();
+		mue.setIdUsr(rs.getInt("idUsr"));
+		mue.setIdEmp(rs.getInt("idEmp"));
+		mue.setFechaCreacion(rs.getDate("fechaCreacion"));
+		mue.setCreadoPor(rs.getString("creadoPor"));
+		return mue;
 	}
 
 }
