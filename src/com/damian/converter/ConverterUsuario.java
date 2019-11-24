@@ -1,25 +1,27 @@
 package com.damian.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.damian.dao.model.ModelUsuario;
 import com.damian.pojo.Usuario;
-import com.damian.service.DatosPersonalesService;
-import com.damian.service.UsuarioEmpresaService;
-import com.damian.service.UsuarioRolService;
 
+@Component
 public class ConverterUsuario {
 
 	@Autowired
-	private static DatosPersonalesService datosPersonalesService;
+	private ConverterRellenaObjeto converterRellenaObjeto;
 
-	@Autowired
-	private static UsuarioEmpresaService usuarioEmpresaService;
+	public Usuario convertAll(ModelUsuario mu) {
 
-	@Autowired
-	private static UsuarioRolService usuarioRolService;
+		Usuario u = convert(mu);
+		converterRellenaObjeto.rellenaUsuario(u, mu);
 
-	public static Usuario convert(ModelUsuario mu) {
+		return u;
+
+	}
+
+	public Usuario convert(ModelUsuario mu) {
 
 		Usuario u = new Usuario();
 		u.setIdUsr(mu.getIdUsr());
@@ -27,15 +29,12 @@ public class ConverterUsuario {
 		u.setClave(mu.getClave());
 		u.setHabilitado(mu.isHabilitado());
 		u.setFechaCreacion(mu.getFechaCreacion());
-		u.setDatosPersonales(datosPersonalesService.findByUsrId(mu.getIdUsr()));
-		u.setUsuarioEmpresa(usuarioEmpresaService.findByIdUsr(mu.getIdUsr()));
-		u.setUsuarioRol(usuarioRolService.findByIdUsr(mu.getIdUsr()));
 
 		return u;
 
 	}
 
-	public static ModelUsuario convert(Usuario u) {
+	public ModelUsuario convert(Usuario u) {
 
 		ModelUsuario mu = new ModelUsuario();
 		mu.setIdUsr(u.getIdUsr());

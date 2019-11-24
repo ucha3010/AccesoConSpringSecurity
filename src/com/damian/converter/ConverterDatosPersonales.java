@@ -1,22 +1,29 @@
 package com.damian.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.damian.dao.model.ModelDatosPersonales;
 import com.damian.pojo.DatosPersonales;
-import com.damian.service.DireccionService;
-import com.damian.service.UsuarioService;
+import com.damian.pojo.Usuario;
 
+@Component
 public class ConverterDatosPersonales {
-	
+
 	@Autowired
-	private static UsuarioService usuarioService;
-	
-	@Autowired
-	private static DireccionService direccionService;
-	
-	public static DatosPersonales convert(ModelDatosPersonales mdp) {
-		
+	private ConverterRellenaObjeto converterRellenaObjeto;
+
+	public DatosPersonales convertAll(ModelDatosPersonales mdp) {
+
+		DatosPersonales dp = convert(mdp);
+		converterRellenaObjeto.rellenaDatosPersonales(dp, mdp);
+
+		return dp;
+
+	}
+
+	public DatosPersonales convert(ModelDatosPersonales mdp) {
+
 		DatosPersonales dp = new DatosPersonales();
 		dp.setIdDatosPers(mdp.getIdDatosPers());
 		dp.setNombre(mdp.getNombre());
@@ -29,15 +36,16 @@ public class ConverterDatosPersonales {
 		dp.setEmail(mdp.getEmail());
 		dp.setTelefono(mdp.getTelefono());
 		dp.setObservaciones(mdp.getObservaciones());
-		dp.setUsuario(usuarioService.findById(mdp.getDatospersonales_idUsr()));
-		dp.setDirecciones(direccionService.findListFromUsuario(mdp.getDatospersonales_idUsr()));
-		
+		Usuario u = new Usuario();
+		u.setIdUsr(mdp.getDatospersonales_idUsr());
+		dp.setUsuario(u);
+
 		return dp;
-		
+
 	}
-	
-	public static ModelDatosPersonales convert(DatosPersonales dp) {
-		
+
+	public ModelDatosPersonales convert(DatosPersonales dp) {
+
 		ModelDatosPersonales mdp = new ModelDatosPersonales();
 		mdp.setIdDatosPers(dp.getIdDatosPers());
 		mdp.setNombre(dp.getNombre());
@@ -51,9 +59,9 @@ public class ConverterDatosPersonales {
 		mdp.setTelefono(dp.getTelefono());
 		mdp.setObservaciones(dp.getObservaciones());
 		mdp.setDatospersonales_idUsr(dp.getUsuario().getIdUsr());
-		
+
 		return mdp;
-		
+
 	}
 
 }

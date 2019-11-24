@@ -11,7 +11,7 @@ import com.damian.pojo.Empresa;
 import com.damian.service.DireccionEmpresaService;
 import com.damian.service.EmpresaService;
 
-@Service("DireccionEmpresaService")
+@Service
 public class DireccionEmpresaServiceImpl implements DireccionEmpresaService {
 
 	@Autowired

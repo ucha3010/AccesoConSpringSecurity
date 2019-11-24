@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,22 +31,18 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 	private final String TABLA = "datospersonales";
 	private final String KEY = "idDatosPers";
 
+	@Autowired
+	private ConverterDatosPersonales converterDatosPersonales;
+
 	@Override
 	public DatosPersonales findById(int id) {
 
-		String sql = "SELECT * FROM " + TABLA + " WHERE " + KEY + "=" + id;
-		return jdbcTemplate.query(sql, new ResultSetExtractor<DatosPersonales>() {
-
-			@Override
-			public DatosPersonales extractData(ResultSet rs) throws SQLException, DataAccessException {
-				if (rs.next()) {
-					return ConverterDatosPersonales.convert(mapeo(rs));
-				}
-
-				return null;
-			}
-
-		});
+		ModelDatosPersonales mdp = findModelById(id);
+		if (mdp != null) {
+			return converterDatosPersonales.convertAll(mdp);
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -57,7 +54,7 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 				BeanPropertyRowMapper.newInstance(ModelDatosPersonales.class));
 		List<DatosPersonales> dpList = new ArrayList<>();
 		for (ModelDatosPersonales mdp : mdpList) {
-			dpList.add(ConverterDatosPersonales.convert(mdp));
+			dpList.add(converterDatosPersonales.convertAll(mdp));
 		}
 
 		return dpList;
@@ -66,7 +63,7 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 	@Override
 	public void save(DatosPersonales datosPersonales) {
 
-		ModelDatosPersonales mdp = ConverterDatosPersonales.convert(datosPersonales);
+		ModelDatosPersonales mdp = converterDatosPersonales.convert(datosPersonales);
 		String sql = "INSERT INTO " + TABLA + " (nombre, apellido1, apellido2, sexo, fechaNacimiento, nacionalidad, "
 				+ "dni, email, telefono, observaciones, datospersonales_idUsr)"
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -78,7 +75,7 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 	@Override
 	public void update(DatosPersonales datosPersonales) {
 
-		ModelDatosPersonales mdp = ConverterDatosPersonales.convert(datosPersonales);
+		ModelDatosPersonales mdp = converterDatosPersonales.convert(datosPersonales);
 		String sql = "UPDATE " + TABLA + "SET nombre=?, apellido1=?, apellido2=?, "
 				+ "sexo=?, fechaNacimiento=?, nacionalidad=?, " + "dni=?, email=?, telefono=?, "
 				+ "observaciones=?, datospersonales_idUsr=? " + "WHERE " + KEY + "=?";
@@ -103,7 +100,7 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 			@Override
 			public DatosPersonales extractData(ResultSet rs) throws SQLException, DataAccessException {
 				if (rs.next()) {
-					return ConverterDatosPersonales.convert(mapeo(rs));
+					return converterDatosPersonales.convertAll(mapeo(rs));
 				}
 
 				return null;
@@ -125,8 +122,63 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 		mdp.setEmail(rs.getString("email"));
 		mdp.setTelefono(rs.getString("telefono"));
 		mdp.setObservaciones(rs.getString("observaciones"));
-		mdp.setDatospersonales_idUsr(rs.getInt("idDatosPers"));
+		mdp.setDatospersonales_idUsr(rs.getInt("datospersonales_idUsr"));
 		return mdp;
+	}
+
+	@Override
+	public ModelDatosPersonales findModelById(int id) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE " + KEY + "=" + id;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<ModelDatosPersonales>() {
+
+			@Override
+			public ModelDatosPersonales extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if (rs.next()) {
+					return mapeo(rs);
+				}
+
+				return null;
+			}
+
+		});
+	}
+
+	@Override
+	public DatosPersonales findByIdModel(int id) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE " + KEY + "=" + id;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<DatosPersonales>() {
+
+			@Override
+			public DatosPersonales extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if (rs.next()) {
+					return converterDatosPersonales.convert(mapeo(rs));
+				}
+
+				return null;
+			}
+
+		});
+	}
+
+	@Override
+	public DatosPersonales findByUsrIdModel(int datosUsrId) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE datospersonales_idUsr=" + datosUsrId;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<DatosPersonales>() {
+
+			@Override
+			public DatosPersonales extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if (rs.next()) {
+					return converterDatosPersonales.convert(mapeo(rs));
+				}
+
+				return null;
+			}
+
+		});
+
 	}
 
 }

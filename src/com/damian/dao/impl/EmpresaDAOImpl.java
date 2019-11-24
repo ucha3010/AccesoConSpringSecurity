@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,6 +31,9 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	private final String TABLA = "empresa";
 	private final String KEY = "idEmp";
 
+	@Autowired
+	private ConverterEmpresa converterEmpresa;
+
 	@Override
 	public Empresa findById(int id) {
 
@@ -39,7 +43,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 			@Override
 			public Empresa extractData(ResultSet rs) throws SQLException, DataAccessException {
 				if (rs.next()) {
-					return ConverterEmpresa.convert(mapeo(rs));
+					return converterEmpresa.convertAll(mapeo(rs));
 				}
 
 				return null;
@@ -68,7 +72,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		if (empresa.getIdEmp() > 0) {
 			update(empresa);
 		} else {
-			ModelEmpresa me = ConverterEmpresa.convert(empresa);
+			ModelEmpresa me = converterEmpresa.convert(empresa);
 			String sql = "INSERT INTO " + TABLA + " (nombreComercial, tipoSociedad, actividad, cif, email, paginaWeb, "
 					+ "telefono, fax, observaciones)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(sql, me.getNombreComercial(), me.getTipoSociedad(), me.getActividad(), me.getCif(),
@@ -78,7 +82,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 
 	@Override
 	public void update(Empresa empresa) {
-		ModelEmpresa me = ConverterEmpresa.convert(empresa);
+		ModelEmpresa me = converterEmpresa.convert(empresa);
 		String sql = "UPDATE " + TABLA + "SET nombreComercial=?, tipoSociedad=?, actividad=?, "
 				+ "cif=?, email=?, paginaWeb=?, " + "telefono=?, fax=?, observaciones=? " + "WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, me.getNombreComercial(), me.getTipoSociedad(), me.getActividad(), me.getCif(),
@@ -104,7 +108,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		List<ModelEmpresa> meList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelEmpresa.class));
 		List<Empresa> eList = new ArrayList<>();
 		for (ModelEmpresa me : meList) {
-			eList.add(ConverterEmpresa.convert(me));
+			eList.add(converterEmpresa.convertAll(me));
 		}
 		return eList;
 	}
@@ -122,5 +126,23 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		me.setFax(rs.getString("fax"));
 		me.setObservaciones(rs.getString("observaciones"));
 		return me;
+	}
+
+	@Override
+	public Empresa findByIdModel(int id) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE " + KEY + "=" + id;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<Empresa>() {
+
+			@Override
+			public Empresa extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if (rs.next()) {
+					return converterEmpresa.convert(mapeo(rs));
+				}
+
+				return null;
+			}
+
+		});
 	}
 }

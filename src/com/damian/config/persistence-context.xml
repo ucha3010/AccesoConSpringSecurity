@@ -28,22 +28,6 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
-<!-- 	Hibernate trabaja con sesiones y esta es la fábrica de sesiones -->
-<!-- 	<bean id="sessionFactory" -->
-<!-- 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"> -->
-<!-- 		<property name="dataSource" ref="dataSource"></property> -->
-<!-- 		<property name="packagesToScan" value="com.damian.pojo"></property> -->
-<!-- 		<property name="hibernateProperties"> -->
-<!-- 			<props> -->
-<!-- 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop> -->
-<!--  				para que se utilice JPA para actualizar las tablas -->
-<!-- 				<prop key="hibernate.hbm2dll.auto">update</prop> -->
-<!-- 				<prop key="hibernate.show_sql">true</prop> -->
-<!-- 			</props> -->
-<!-- 		</property> -->
-<!-- 	</bean> -->
-
-	
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />

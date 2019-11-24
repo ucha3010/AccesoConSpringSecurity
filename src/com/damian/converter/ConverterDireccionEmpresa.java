@@ -1,17 +1,27 @@
 package com.damian.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.damian.dao.model.ModelDireccionEmpresa;
 import com.damian.pojo.DireccionEmpresa;
-import com.damian.service.EmpresaService;
 
+@Component
 public class ConverterDireccionEmpresa {
 
 	@Autowired
-	private static EmpresaService empresaService;
+	private ConverterRellenaObjeto converterRellenaObjeto;
 
-	public static DireccionEmpresa convert(ModelDireccionEmpresa mde) {
+	public DireccionEmpresa convertAll(ModelDireccionEmpresa mde) {
+
+		DireccionEmpresa de = convert(mde);
+		converterRellenaObjeto.rellenaDireccionEmpresa(de, mde);
+
+		return de;
+
+	}
+
+	public DireccionEmpresa convert(ModelDireccionEmpresa mde) {
 
 		DireccionEmpresa de = new DireccionEmpresa();
 		de.setIdDirEmp(mde.getIdDirEmp());
@@ -23,13 +33,12 @@ public class ConverterDireccionEmpresa {
 		de.setProvincia(mde.getProvincia());
 		de.setCiudad(mde.getCiudad());
 		de.setPais(mde.getPais());
-		de.setEmpresa(empresaService.findById(mde.getIdEmp()));
 
 		return de;
 
 	}
 
-	public static ModelDireccionEmpresa convert(DireccionEmpresa de) {
+	public ModelDireccionEmpresa convert(DireccionEmpresa de) {
 
 		ModelDireccionEmpresa mde = new ModelDireccionEmpresa();
 		mde.setIdDirEmp(de.getIdDirEmp());

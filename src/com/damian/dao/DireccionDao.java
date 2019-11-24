@@ -14,4 +14,8 @@ public interface DireccionDao {
 	
 	public void delete(Direccion direccion);
 
+	public Direccion findByIdModel(int id);
+	
+	public List<Direccion> findListFromUsuarioModel(int idDatosPers);
+
 }

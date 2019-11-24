@@ -1,25 +1,42 @@
 package com.damian.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.damian.dao.DatosPersonalesDAO;
+import com.damian.dao.RolDAO;
+import com.damian.dao.UsuarioDAO;
 import com.damian.dao.model.ModelUsuarioRol;
+import com.damian.pojo.Usuario;
 import com.damian.pojo.UsuarioRol;
-import com.damian.service.RolService;
-import com.damian.service.UsuarioService;
 
+@Component
 public class ConverterUsuarioRol {
 
 	@Autowired
-	private static UsuarioService usuarioService;
+	private UsuarioDAO usuarioDAO;
 
 	@Autowired
-	private static RolService rolService;
+	private RolDAO rolDAO;
 
-	public static UsuarioRol convert(ModelUsuarioRol mur) {
+	@Autowired
+	private DatosPersonalesDAO datosPersonalesDAO;
+
+	public UsuarioRol convertAll(ModelUsuarioRol mur) {
+
+		UsuarioRol ur = convert(mur);
+		Usuario u = usuarioDAO.findByIdModel(mur.getIdUsr());
+		u.setDatosPersonales(datosPersonalesDAO.findByUsrIdModel(u.getIdUsr()));
+		ur.setUsuario(u);
+		ur.setRol(rolDAO.findByIdModel(mur.getIdRol()));
+
+		return ur;
+
+	}
+
+	public UsuarioRol convert(ModelUsuarioRol mur) {
 
 		UsuarioRol ur = new UsuarioRol();
-		ur.setUsuario(usuarioService.findById(mur.getIdUsr()));
-		ur.setRol(rolService.findById(mur.getIdRol()));
 		ur.setFechaCreacion(mur.getFechaCreacion());
 		ur.setCreadoPor(mur.getCreadoPor());
 
@@ -27,7 +44,7 @@ public class ConverterUsuarioRol {
 
 	}
 
-	public static ModelUsuarioRol convert(UsuarioRol ur) {
+	public ModelUsuarioRol convert(UsuarioRol ur) {
 
 		ModelUsuarioRol mur = new ModelUsuarioRol();
 		mur.setIdUsr(ur.getUsuario().getIdUsr());

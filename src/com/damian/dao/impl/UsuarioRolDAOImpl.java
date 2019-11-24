@@ -7,11 +7,14 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterUsuarioRol;
+import com.damian.dao.RolDAO;
+import com.damian.dao.UsuarioDAO;
 import com.damian.dao.UsuarioRolDAO;
 import com.damian.dao.model.ModelUsuarioRol;
 import com.damian.pojo.UsuarioRol;
@@ -29,6 +32,15 @@ public class UsuarioRolDAOImpl implements UsuarioRolDAO {
 	private final String KEY1 = "idUsr";
 	private final String KEY2 = "idRol";
 
+	@Autowired
+	private ConverterUsuarioRol converterUsuarioRol;
+
+	@Autowired
+	private RolDAO rolDAO;
+
+	@Autowired
+	private UsuarioDAO usuarioDAO;
+
 	@Override
 	public List<UsuarioRol> findAll() {
 
@@ -39,14 +51,14 @@ public class UsuarioRolDAOImpl implements UsuarioRolDAO {
 
 	@Override
 	public void save(UsuarioRol usuarioRol) {
-		ModelUsuarioRol mur = ConverterUsuarioRol.convert(usuarioRol);
+		ModelUsuarioRol mur = converterUsuarioRol.convert(usuarioRol);
 		String sql = "INSERT INTO " + TABLA + " (idUsr, idRol, fechaCreacion, creadoPor)" + " VALUES (?, ?, ?, ?)";
 		jdbcTemplate.update(sql, mur.getIdUsr(), mur.getIdRol(), mur.getFechaCreacion(), mur.getCreadoPor());
 	}
 
 	@Override
 	public void update(UsuarioRol usuarioRol) {
-		ModelUsuarioRol mur = ConverterUsuarioRol.convert(usuarioRol);
+		ModelUsuarioRol mur = converterUsuarioRol.convert(usuarioRol);
 		String sql = "UPDATE " + TABLA + "SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
 				+ "=?";
 		jdbcTemplate.update(sql, mur.getFechaCreacion(), mur.getCreadoPor(), mur.getIdUsr(), mur.getIdRol());
@@ -82,7 +94,7 @@ public class UsuarioRolDAOImpl implements UsuarioRolDAO {
 				BeanPropertyRowMapper.newInstance(ModelUsuarioRol.class));
 		List<UsuarioRol> urList = new ArrayList<>();
 		for (ModelUsuarioRol mur : murList) {
-			urList.add(ConverterUsuarioRol.convert(mur));
+			urList.add(converterUsuarioRol.convertAll(mur));
 		}
 		return urList;
 	}
@@ -94,6 +106,35 @@ public class UsuarioRolDAOImpl implements UsuarioRolDAO {
 		mue.setFechaCreacion(rs.getDate("fechaCreacion"));
 		mue.setCreadoPor(rs.getString("creadoPor"));
 		return mue;
+	}
+
+	@Override
+	public List<UsuarioRol> findByIdUsrModel(int idUsr) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE idUsr=" + idUsr;
+
+		return listaModel(sql);
+	}
+
+	@Override
+	public List<UsuarioRol> findByIdRolModel(int idRol) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE idRol=" + idRol;
+
+		return listaModel(sql);
+	}
+
+	private List<UsuarioRol> listaModel(String sql) {
+		List<ModelUsuarioRol> murList = jdbcTemplate.query(sql,
+				BeanPropertyRowMapper.newInstance(ModelUsuarioRol.class));
+		List<UsuarioRol> urList = new ArrayList<>();
+		for (ModelUsuarioRol mur : murList) {
+			UsuarioRol ur = converterUsuarioRol.convert(mur);
+			ur.setUsuario(usuarioDAO.findByIdModel(mur.getIdUsr()));
+			ur.setRol(rolDAO.findByIdModel(mur.getIdRol()));
+			urList.add(ur);
+		}
+		return urList;
 	}
 
 }

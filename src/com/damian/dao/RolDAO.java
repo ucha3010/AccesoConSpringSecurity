@@ -16,4 +16,6 @@ public interface RolDAO {
 	
 	public List<Rol> findByRolName(String rolName);
 
+	public Rol findByIdModel(int id);
+
 }

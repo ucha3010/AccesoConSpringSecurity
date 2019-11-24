@@ -2,6 +2,7 @@ package com.damian.dao;
 
 import java.util.List;
 
+import com.damian.dao.model.ModelDatosPersonales;
 import com.damian.pojo.DatosPersonales;
 
 public interface DatosPersonalesDAO {
@@ -17,5 +18,11 @@ public interface DatosPersonalesDAO {
 	public DatosPersonales findById(int id);
 	
 	public DatosPersonales findByUsrId(int datosUsrId);
+
+	public ModelDatosPersonales findModelById(int id);
+
+	public DatosPersonales findByIdModel(int id);
+	
+	public DatosPersonales findByUsrIdModel(int datosUsrId);
 
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,6 +31,9 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 	private final String TABLA = "direccionempresa";
 	private final String KEY = "idDirEmp";
 
+	@Autowired
+	private ConverterDireccionEmpresa converterDireccionEmpresa;
+
 	@Override
 	public DireccionEmpresa findById(int id) {
 
@@ -39,7 +43,7 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 			@Override
 			public DireccionEmpresa extractData(ResultSet rs) throws SQLException, DataAccessException {
 				if (rs.next()) {
-					return ConverterDireccionEmpresa.convert(mapeo(rs));
+					return converterDireccionEmpresa.convertAll(mapeo(rs));
 				}
 
 				return null;
@@ -58,7 +62,7 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 				BeanPropertyRowMapper.newInstance(ModelDireccionEmpresa.class));
 		List<DireccionEmpresa> dpList = new ArrayList<>();
 		for (ModelDireccionEmpresa mdp : mdpList) {
-			dpList.add(ConverterDireccionEmpresa.convert(mdp));
+			dpList.add(converterDireccionEmpresa.convertAll(mdp));
 		}
 
 		return dpList;
@@ -68,7 +72,7 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 	@Override
 	public void save(DireccionEmpresa direccionEmpresa) {
 
-		ModelDireccionEmpresa mdp = ConverterDireccionEmpresa.convert(direccionEmpresa);
+		ModelDireccionEmpresa mdp = converterDireccionEmpresa.convert(direccionEmpresa);
 		String sql = "INSERT INTO " + TABLA + " (tipoVia, nombreVia, numero, resto, cp, provincia, "
 				+ "ciudad, pais, idEmp)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, mdp.getTipoVia(), mdp.getNombreVia(), mdp.getNumero(), mdp.getResto(), mdp.getCp(),
@@ -79,7 +83,7 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 	@Override
 	public void update(DireccionEmpresa direccionEmpresa) {
 
-		ModelDireccionEmpresa mdp = ConverterDireccionEmpresa.convert(direccionEmpresa);
+		ModelDireccionEmpresa mdp = converterDireccionEmpresa.convert(direccionEmpresa);
 		String sql = "UPDATE " + TABLA + "SET tipoVia=?, nombreVia=?, numero=?, " + "resto=?, cp=?, provincia=?, "
 				+ "ciudad=?, pais=?, idEmp=? " + "WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, mdp.getTipoVia(), mdp.getNombreVia(), mdp.getNumero(), mdp.getResto(), mdp.getCp(),
@@ -104,7 +108,7 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 				BeanPropertyRowMapper.newInstance(ModelDireccionEmpresa.class));
 		List<DireccionEmpresa> dpList = new ArrayList<>();
 		for (ModelDireccionEmpresa mdp : mdpList) {
-			dpList.add(ConverterDireccionEmpresa.convert(mdp));
+			dpList.add(converterDireccionEmpresa.convertAll(mdp));
 		}
 
 		return dpList;
@@ -124,6 +128,39 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 		mde.setPais(rs.getString("pais"));
 		mde.setIdEmp(rs.getInt("idEmp"));
 		return mde;
+	}
+
+	@Override
+	public DireccionEmpresa findByIdModel(int id) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE " + KEY + "=" + id;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<DireccionEmpresa>() {
+
+			@Override
+			public DireccionEmpresa extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if (rs.next()) {
+					return converterDireccionEmpresa.convert(mapeo(rs));
+				}
+
+				return null;
+			}
+
+		});
+	}
+
+	@Override
+	public List<DireccionEmpresa> findByIdEmpModel(int idEmp) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE idEmp=" + idEmp;
+
+		List<ModelDireccionEmpresa> mdpList = jdbcTemplate.query(sql,
+				BeanPropertyRowMapper.newInstance(ModelDireccionEmpresa.class));
+		List<DireccionEmpresa> dpList = new ArrayList<>();
+		for (ModelDireccionEmpresa mdp : mdpList) {
+			dpList.add(converterDireccionEmpresa.convert(mdp));
+		}
+
+		return dpList;
 	}
 
 }

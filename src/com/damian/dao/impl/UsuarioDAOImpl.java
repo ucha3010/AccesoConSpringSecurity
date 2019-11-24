@@ -7,17 +7,19 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.damian.converter.ConverterUsuario;
 import com.damian.dao.UsuarioDAO;
+import com.damian.dao.UsuarioRolDAO;
 import com.damian.dao.model.ModelUsuario;
 import com.damian.pojo.Usuario;
+import com.damian.pojo.UsuarioRol;
 
 @Repository
 public class UsuarioDAOImpl implements UsuarioDAO {
@@ -31,6 +33,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	private final String TABLA = "usuario";
 	private final String KEY = "idUsr";
 
+	@Autowired
+	private ConverterUsuario converterUsuario;
+
 	@Override
 	public Usuario findById(int id) {
 
@@ -40,7 +45,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			@Override
 			public Usuario extractData(ResultSet rs) throws SQLException, DataAccessException {
 				if (rs.next()) {
-					return ConverterUsuario.convert(mapeo(rs));
+					return converterUsuario.convertAll(mapeo(rs));
 				}
 
 				return null;
@@ -83,7 +88,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		if (usuario.getIdUsr() > 0) {
 			update(usuario);
 		} else {
-			ModelUsuario mu = ConverterUsuario.convert(usuario);
+			ModelUsuario mu = converterUsuario.convert(usuario);
 			String sql = "INSERT INTO " + TABLA + " (usuario, clave, habilitado, fechaCreacion)"
 					+ " VALUES (?, ?, ?, ?)";
 			jdbcTemplate.update(sql, mu.getUsuario(), mu.getClave(), mu.isHabilitado(), mu.getFechaCreacion());
@@ -92,7 +97,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	@Override
 	public void update(Usuario usuario) {
-		ModelUsuario mu = ConverterUsuario.convert(usuario);
+		ModelUsuario mu = converterUsuario.convert(usuario);
 		String sql = "UPDATE " + TABLA + "SET usuario=?, clave=?, habilitado=?, fechaCreacion=? WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, mu.getUsuario(), mu.getClave(), mu.isHabilitado(), mu.getFechaCreacion(),
 				mu.getIdUsr());
@@ -109,7 +114,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		List<ModelUsuario> muList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelUsuario.class));
 		List<Usuario> uList = new ArrayList<>();
 		for (ModelUsuario mu : muList) {
-			uList.add(ConverterUsuario.convert(mu));
+			uList.add(converterUsuario.convertAll(mu));
 		}
 		return uList;
 	}
@@ -122,6 +127,24 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		mu.setHabilitado(rs.getBoolean("habilitado"));
 		mu.setFechaCreacion(rs.getTimestamp("fechaCreacion"));
 		return mu;
+	}
+
+	@Override
+	public Usuario findByIdModel(int id) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE " + KEY + "=" + id;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<Usuario>() {
+
+			@Override
+			public Usuario extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if (rs.next()) {
+					return converterUsuario.convert(mapeo(rs));
+				}
+
+				return null;
+			}
+
+		});
 	}
 
 }

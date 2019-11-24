@@ -1,17 +1,27 @@
 package com.damian.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.damian.dao.model.ModelDireccion;
 import com.damian.pojo.Direccion;
-import com.damian.service.DatosPersonalesService;
 
+@Component
 public class ConverterDireccion {
 
 	@Autowired
-	private static DatosPersonalesService datosPersonalesService;
+	private ConverterRellenaObjeto converterRellenaObjeto;
 
-	public static Direccion convert(ModelDireccion md) {
+	public Direccion convertAll(ModelDireccion md) {
+
+		Direccion d = convert(md);
+		converterRellenaObjeto.rellenaDireccion(d, md);
+
+		return d;
+
+	}
+
+	public Direccion convert(ModelDireccion md) {
 
 		Direccion d = new Direccion();
 		d.setIdDir(md.getIdDir());
@@ -23,13 +33,12 @@ public class ConverterDireccion {
 		d.setProvincia(md.getProvincia());
 		d.setCiudad(md.getCiudad());
 		d.setPais(md.getPais());
-		d.setDatosPersonales(datosPersonalesService.findById(md.getIdDatosPers()));
 
 		return d;
 
 	}
 
-	public static ModelDireccion convert(Direccion d) {
+	public ModelDireccion convert(Direccion d) {
 
 		ModelDireccion md = new ModelDireccion();
 		md.setIdDir(d.getIdDir());

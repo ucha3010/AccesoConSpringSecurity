@@ -9,7 +9,7 @@ import com.damian.dao.PaisDAO;
 import com.damian.pojo.Pais;
 import com.damian.service.PaisService;
 
-@Service("PaisService")
+@Service
 public class PaisServiceImpl implements PaisService {
 	
 	@Autowired

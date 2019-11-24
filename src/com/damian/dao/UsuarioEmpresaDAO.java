@@ -17,5 +17,9 @@ public interface UsuarioEmpresaDAO {
 	public List<UsuarioEmpresa> findByIdUsr(int idUsr);
 	
 	public List<UsuarioEmpresa> findByIdEmp(int idEmp);
+	
+	public List<UsuarioEmpresa> findByIdUsrModel(int idUsr);
+	
+	public List<UsuarioEmpresa> findByIdEmpModel(int idEmp);
 
 }

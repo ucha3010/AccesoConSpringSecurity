@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,6 +31,9 @@ public class DireccionDaoImpl implements DireccionDao {
 	private final String TABLA = "direccion";
 	private final String KEY = "idDir";
 
+	@Autowired
+	private ConverterDireccion converterDireccion;
+
 	@Override
 	public Direccion findById(int id) {
 
@@ -39,7 +43,7 @@ public class DireccionDaoImpl implements DireccionDao {
 			@Override
 			public Direccion extractData(ResultSet rs) throws SQLException, DataAccessException {
 				if (rs.next()) {
-					return ConverterDireccion.convert(mapeo(rs));
+					return converterDireccion.convertAll(mapeo(rs));
 				}
 
 				return null;
@@ -52,7 +56,7 @@ public class DireccionDaoImpl implements DireccionDao {
 	@Override
 	public void save(Direccion direccion) {
 
-		ModelDireccion md = ConverterDireccion.convert(direccion);
+		ModelDireccion md = converterDireccion.convert(direccion);
 		if (direccion.getIdDir() > 0) {
 			String sql = "INSERT INTO " + TABLA + " (tipoVia, nombreVia, numero, resto, "
 					+ "cp, provincia, ciudad, pais, idDatosPers)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -75,7 +79,7 @@ public class DireccionDaoImpl implements DireccionDao {
 		List<ModelDireccion> mdList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelDireccion.class));
 		List<Direccion> dList = new ArrayList<>();
 		for (ModelDireccion md : mdList) {
-			dList.add(ConverterDireccion.convert(md));
+			dList.add(converterDireccion.convertAll(md));
 		}
 
 		return dList;
@@ -101,6 +105,38 @@ public class DireccionDaoImpl implements DireccionDao {
 		md.setPais(rs.getString("pais"));
 		md.setIdDatosPers(rs.getInt("idDatosPers"));
 		return md;
+	}
+
+	@Override
+	public Direccion findByIdModel(int id) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE " + KEY + "=" + id;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<Direccion>() {
+
+			@Override
+			public Direccion extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if (rs.next()) {
+					return converterDireccion.convert(mapeo(rs));
+				}
+
+				return null;
+			}
+
+		});
+	}
+
+	@Override
+	public List<Direccion> findListFromUsuarioModel(int idDatosPers) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE idDatosPers=" + idDatosPers;
+
+		List<ModelDireccion> mdList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelDireccion.class));
+		List<Direccion> dList = new ArrayList<>();
+		for (ModelDireccion md : mdList) {
+			dList.add(converterDireccion.convert(md));
+		}
+
+		return dList;
 	}
 
 }

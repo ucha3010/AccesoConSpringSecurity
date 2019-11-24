@@ -17,5 +17,9 @@ public interface DireccionEmpresaDAO {
 	void delete(DireccionEmpresa direccionEmpresa);
 	
 	List<DireccionEmpresa> findByIdEmp(int idEmp);
+	
+	DireccionEmpresa findByIdModel(int id);
+	
+	List<DireccionEmpresa> findByIdEmpModel(int idEmp);
 
 }

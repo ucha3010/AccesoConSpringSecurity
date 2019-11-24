@@ -1,25 +1,42 @@
 package com.damian.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import com.damian.dao.DatosPersonalesDAO;
+import com.damian.dao.EmpresaDAO;
+import com.damian.dao.UsuarioDAO;
 import com.damian.dao.model.ModelUsuarioEmpresa;
+import com.damian.pojo.Usuario;
 import com.damian.pojo.UsuarioEmpresa;
-import com.damian.service.EmpresaService;
-import com.damian.service.UsuarioService;
 
+@Component
 public class ConverterUsuarioEmpresa {
 
 	@Autowired
-	private static UsuarioService usuarioService;
+	private UsuarioDAO usuarioDAO;
 
 	@Autowired
-	private static EmpresaService empresaService;
+	private EmpresaDAO empresaDAO;
+	
+	@Autowired
+	private DatosPersonalesDAO datosPersonalesDAO;
 
-	public static UsuarioEmpresa convert(ModelUsuarioEmpresa mue) {
+	public UsuarioEmpresa convertAll(ModelUsuarioEmpresa mue) {
+
+		UsuarioEmpresa ue = convert(mue);
+		Usuario u = usuarioDAO.findByIdModel(mue.getIdUsr());
+		u.setDatosPersonales(datosPersonalesDAO.findByUsrIdModel(u.getIdUsr()));
+		ue.setUsuario(u);
+		ue.setEmpresa(empresaDAO.findByIdModel(mue.getIdEmp()));
+
+		return ue;
+
+	}
+
+	public UsuarioEmpresa convert(ModelUsuarioEmpresa mue) {
 
 		UsuarioEmpresa ue = new UsuarioEmpresa();
-		ue.setUsuario(usuarioService.findById(mue.getIdUsr()));
-		ue.setEmpresa(empresaService.findById(mue.getIdEmp()));
 		ue.setFechaCreacion(mue.getFechaCreacion());
 		ue.setCreadoPor(mue.getCreadoPor());
 
@@ -27,7 +44,7 @@ public class ConverterUsuarioEmpresa {
 
 	}
 
-	public static ModelUsuarioEmpresa convert(UsuarioEmpresa ue) {
+	public ModelUsuarioEmpresa convert(UsuarioEmpresa ue) {
 
 		ModelUsuarioEmpresa mue = new ModelUsuarioEmpresa();
 		mue.setIdUsr(ue.getUsuario().getIdUsr());

@@ -9,7 +9,7 @@ import com.damian.dao.DatosPersonalesDAO;
 import com.damian.pojo.DatosPersonales;
 import com.damian.service.DatosPersonalesService;
 
-@Service("DatosPersonalesService")
+@Service
 public class DatosPersonalesServiceImpl implements DatosPersonalesService {
 	
 	@Autowired

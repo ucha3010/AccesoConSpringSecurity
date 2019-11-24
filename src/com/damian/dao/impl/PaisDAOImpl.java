@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,6 +31,9 @@ public class PaisDAOImpl implements PaisDAO {
 	private final String TABLA = "paises";
 	private final String KEY = "idPais";
 
+	@Autowired
+	private ConverterPais converterPais;
+
 	@Override
 	public Pais findById(int id) {
 
@@ -39,7 +43,7 @@ public class PaisDAOImpl implements PaisDAO {
 			@Override
 			public Pais extractData(ResultSet rs) throws SQLException, DataAccessException {
 				if (rs.next()) {
-					return ConverterPais.convert(mapeo(rs));
+					return converterPais.convert(mapeo(rs));
 				}
 
 				return null;
@@ -59,7 +63,7 @@ public class PaisDAOImpl implements PaisDAO {
 	@Override
 	public void save(Pais pais) {
 
-		ModelPais mp = ConverterPais.convert(pais);
+		ModelPais mp = converterPais.convert(pais);
 		String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN)" + " VALUES (?, ?)";
 		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN());
 	}
@@ -67,7 +71,7 @@ public class PaisDAOImpl implements PaisDAO {
 	@Override
 	public void update(Pais pais) {
 
-		ModelPais mp = ConverterPais.convert(pais);
+		ModelPais mp = converterPais.convert(pais);
 		String sql = "UPDATE " + TABLA + "SET nombreES=?, nombreEN=? WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getIdPais());
 	}
@@ -92,7 +96,7 @@ public class PaisDAOImpl implements PaisDAO {
 		List<ModelPais> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelPais.class));
 		List<Pais> pList = new ArrayList<>();
 		for (ModelPais mp : mpList) {
-			pList.add(ConverterPais.convert(mp));
+			pList.add(converterPais.convert(mp));
 		}
 
 		return pList;

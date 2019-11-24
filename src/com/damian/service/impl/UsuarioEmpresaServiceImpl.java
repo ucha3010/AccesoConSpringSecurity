@@ -17,7 +17,7 @@ import com.damian.service.EmpresaService;
 import com.damian.service.UsuarioEmpresaService;
 import com.damian.service.UsuarioService;
 
-@Service("UsuarioEmpresaService")
+@Service
 public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
 
 	@Autowired

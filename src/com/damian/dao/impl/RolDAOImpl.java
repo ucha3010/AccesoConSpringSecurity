@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,6 +31,9 @@ public class RolDAOImpl implements RolDAO {
 	private final String TABLA = "rol";
 	private final String KEY = "idRol";
 
+	@Autowired
+	private ConverterRol converterRol;
+
 	@Override
 	public Rol findById(int id) {
 
@@ -39,7 +43,7 @@ public class RolDAOImpl implements RolDAO {
 			@Override
 			public Rol extractData(ResultSet rs) throws SQLException, DataAccessException {
 				if (rs.next()) {
-					return ConverterRol.convert(mapeo(rs));
+					return converterRol.convertAll(mapeo(rs));
 				}
 
 				return null;
@@ -58,7 +62,7 @@ public class RolDAOImpl implements RolDAO {
 
 	@Override
 	public void save(Rol rol) {
-		ModelRol mr = ConverterRol.convert(rol);
+		ModelRol mr = converterRol.convert(rol);
 		if (rol.getIdRol() > 0) {
 			String sql = "UPDATE " + TABLA + "SET rol=? WHERE " + KEY + "=?";
 			jdbcTemplate.update(sql, mr.getRol(), mr.getIdRol());
@@ -87,7 +91,7 @@ public class RolDAOImpl implements RolDAO {
 		List<ModelRol> mrList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelRol.class));
 		List<Rol> rList = new ArrayList<>();
 		for (ModelRol mr : mrList) {
-			rList.add(ConverterRol.convert(mr));
+			rList.add(converterRol.convertAll(mr));
 		}
 
 		return rList;
@@ -98,6 +102,24 @@ public class RolDAOImpl implements RolDAO {
 		mr.setIdRol(rs.getInt("idRol"));
 		mr.setRol(rs.getString("rol"));
 		return mr;
+	}
+
+	@Override
+	public Rol findByIdModel(int id) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE " + KEY + "=" + id;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<Rol>() {
+
+			@Override
+			public Rol extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if (rs.next()) {
+					return converterRol.convert(mapeo(rs));
+				}
+
+				return null;
+			}
+
+		});
 	}
 
 }

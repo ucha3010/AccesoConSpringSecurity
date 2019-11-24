@@ -12,7 +12,7 @@ import com.damian.pojo.Direccion;
 import com.damian.service.DatosPersonalesService;
 import com.damian.service.DireccionService;
 
-@Service("DireccionService")
+@Service
 public class DireccionServiceImpl implements DireccionService {
 
 	@Autowired

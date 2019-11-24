@@ -9,7 +9,7 @@ import com.damian.dao.UsuarioRolDAO;
 import com.damian.pojo.UsuarioRol;
 import com.damian.service.UsuarioRolService;
 
-@Service("UsuarioRolService")
+@Service
 public class UsuarioRolServiceImpl implements UsuarioRolService {
 
 	@Autowired

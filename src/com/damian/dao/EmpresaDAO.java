@@ -20,4 +20,6 @@ public interface EmpresaDAO {
 	
 	public List<Empresa> findByEmpresaName(String empresaName);
 
+	public Empresa findByIdModel(int id);
+
 }
