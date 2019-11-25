@@ -98,7 +98,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public void update(Usuario usuario) {
 		ModelUsuario mu = converterUsuario.convert(usuario);
-		String sql = "UPDATE " + TABLA + "SET usuario=?, clave=?, habilitado=?, fechaCreacion=? WHERE " + KEY + "=?";
+		String sql = "UPDATE " + TABLA + " SET usuario=?, clave=?, habilitado=?, fechaCreacion=? WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, mu.getUsuario(), mu.getClave(), mu.isHabilitado(), mu.getFechaCreacion(),
 				mu.getIdUsr());
 	}

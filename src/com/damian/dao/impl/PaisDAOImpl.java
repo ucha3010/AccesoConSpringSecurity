@@ -72,7 +72,7 @@ public class PaisDAOImpl implements PaisDAO {
 	public void update(Pais pais) {
 
 		ModelPais mp = converterPais.convert(pais);
-		String sql = "UPDATE " + TABLA + "SET nombreES=?, nombreEN=? WHERE " + KEY + "=?";
+		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=? WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getIdPais());
 	}
 

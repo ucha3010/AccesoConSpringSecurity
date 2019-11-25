@@ -59,7 +59,7 @@ public class UsuarioRolDAOImpl implements UsuarioRolDAO {
 	@Override
 	public void update(UsuarioRol usuarioRol) {
 		ModelUsuarioRol mur = converterUsuarioRol.convert(usuarioRol);
-		String sql = "UPDATE " + TABLA + "SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
+		String sql = "UPDATE " + TABLA + " SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
 				+ "=?";
 		jdbcTemplate.update(sql, mur.getFechaCreacion(), mur.getCreadoPor(), mur.getIdUsr(), mur.getIdRol());
 	}

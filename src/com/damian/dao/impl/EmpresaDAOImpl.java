@@ -83,7 +83,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	@Override
 	public void update(Empresa empresa) {
 		ModelEmpresa me = converterEmpresa.convert(empresa);
-		String sql = "UPDATE " + TABLA + "SET nombreComercial=?, tipoSociedad=?, actividad=?, "
+		String sql = "UPDATE " + TABLA + " SET nombreComercial=?, tipoSociedad=?, actividad=?, "
 				+ "cif=?, email=?, paginaWeb=?, " + "telefono=?, fax=?, observaciones=? " + "WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, me.getNombreComercial(), me.getTipoSociedad(), me.getActividad(), me.getCif(),
 				me.getEmail(), me.getPaginaWeb(), me.getTelefono(), me.getFax(), me.getObservaciones(), me.getIdEmp());

@@ -63,7 +63,7 @@ public class DireccionDaoImpl implements DireccionDao {
 			jdbcTemplate.update(sql, md.getTipoVia(), md.getNombreVia(), md.getNumero(), md.getResto(), md.getCp(),
 					md.getProvincia(), md.getCiudad(), md.getPais(), md.getIdDatosPers());
 		} else {
-			String sql = "UPDATE " + TABLA + "SET tipoVia=?, nombreVia=?, numero=?, resto=?, cp=?, provincia=?, "
+			String sql = "UPDATE " + TABLA + " SET tipoVia=?, nombreVia=?, numero=?, resto=?, cp=?, provincia=?, "
 					+ "ciudad=?, pais=?, idDatosPers=? WHERE " + KEY + "=?";
 			jdbcTemplate.update(sql, md.getTipoVia(), md.getNombreVia(), md.getNumero(), md.getResto(), md.getCp(),
 					md.getProvincia(), md.getCiudad(), md.getPais(), md.getIdDatosPers(), md.getIdDir());

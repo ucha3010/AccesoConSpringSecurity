@@ -59,7 +59,7 @@ public class UsuarioEmpresaDAOImpl implements UsuarioEmpresaDAO {
 	@Override
 	public void update(UsuarioEmpresa usuarioEmpresa) {
 		ModelUsuarioEmpresa mue = converterUsuarioEmpresa.convert(usuarioEmpresa);
-		String sql = "UPDATE " + TABLA + "SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
+		String sql = "UPDATE " + TABLA + " SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
 				+ "=?";
 		jdbcTemplate.update(sql, mue.getFechaCreacion(), mue.getCreadoPor(), mue.getIdUsr(), mue.getIdEmp());
 	}

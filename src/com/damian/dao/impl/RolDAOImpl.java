@@ -64,7 +64,7 @@ public class RolDAOImpl implements RolDAO {
 	public void save(Rol rol) {
 		ModelRol mr = converterRol.convert(rol);
 		if (rol.getIdRol() > 0) {
-			String sql = "UPDATE " + TABLA + "SET rol=? WHERE " + KEY + "=?";
+			String sql = "UPDATE " + TABLA + " SET rol=? WHERE " + KEY + "=?";
 			jdbcTemplate.update(sql, mr.getRol(), mr.getIdRol());
 		} else {
 			String sql = "INSERT INTO " + TABLA + " (rol)" + " VALUES (?)";

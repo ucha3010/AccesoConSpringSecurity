@@ -76,7 +76,7 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 	public void update(DatosPersonales datosPersonales) {
 
 		ModelDatosPersonales mdp = converterDatosPersonales.convert(datosPersonales);
-		String sql = "UPDATE " + TABLA + "SET nombre=?, apellido1=?, apellido2=?, "
+		String sql = "UPDATE " + TABLA + " SET nombre=?, apellido1=?, apellido2=?, "
 				+ "sexo=?, fechaNacimiento=?, nacionalidad=?, " + "dni=?, email=?, telefono=?, "
 				+ "observaciones=?, datospersonales_idUsr=? " + "WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, mdp.getNombre(), mdp.getApellido1(), mdp.getApellido2(), mdp.getSexo(),
