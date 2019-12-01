@@ -21,5 +21,7 @@ public interface UsuarioRolDAO {
 	public List<UsuarioRol> findByIdUsrModel(int idUsr);
 	
 	public List<UsuarioRol> findByIdRolModel(int idRol);
+	
+	public UsuarioRol findByIdUsrAndIdRol(int idUsr, int idRol);
 
 }

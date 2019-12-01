@@ -32,13 +32,7 @@ public class UsuarioRolServiceImpl implements UsuarioRolService {
 
 	@Override
 	public void delete(int idUsr, int idRol) {
-		List<UsuarioRol> usuarioRolList = findByIdUsr(idUsr);
-		UsuarioRol usuarioRol = null;
-		for (UsuarioRol ur : usuarioRolList) {
-			if (ur.getRol().getIdRol() == idRol) {
-				usuarioRol = ur;
-			}
-		}
+		UsuarioRol usuarioRol = usuarioRolDAO.findByIdUsrAndIdRol(idUsr, idRol);
 		if (usuarioRol != null) {
 			usuarioRolDAO.delete(usuarioRol);
 		}

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +21,6 @@ import com.damian.pojo.Usuario;
 import com.damian.service.PaisService;
 import com.damian.service.RolService;
 import com.damian.service.impl.UsuarioServiceImpl;
-import com.damian.valid.SpringFormGroup;
 
 @Controller
 @SessionAttributes({ "resultado", "estoy", "roles" }) // los atributos que pueden mantenerse en sesión y verse en
@@ -97,8 +95,7 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(value = { "/usuario/save" }, method = RequestMethod.POST)
-	public String saveUser(@ModelAttribute("usuario") @Validated(value = SpringFormGroup.class) Usuario usuario,
-			BindingResult result, Model model,
+	public String saveUser(@ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model,
 			@RequestParam(value = "usuarioRol", required = false) String[] usuarioRol, HttpServletRequest request,
 			RedirectAttributes ra) {
 		if (result.hasErrors()) {

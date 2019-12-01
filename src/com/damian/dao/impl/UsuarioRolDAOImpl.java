@@ -8,8 +8,10 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterUsuarioRol;
@@ -122,6 +124,24 @@ public class UsuarioRolDAOImpl implements UsuarioRolDAO {
 		String sql = "SELECT * FROM " + TABLA + " WHERE idRol=" + idRol;
 
 		return listaModel(sql);
+	}
+
+	@Override
+	public UsuarioRol findByIdUsrAndIdRol(int idUsr, int idRol) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE idUsr=" + idUsr + " AND idRol=" + idRol;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<UsuarioRol>() {
+
+			@Override
+			public UsuarioRol extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if (rs.next()) {
+					return converterUsuarioRol.convert(mapeo(rs));
+				}
+
+				return null;
+			}
+
+		});
 	}
 
 	private List<UsuarioRol> listaModel(String sql) {
