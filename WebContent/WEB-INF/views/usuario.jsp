@@ -224,7 +224,7 @@
 						<c:forEach var="item" items="${roles}">
 							<c:set var="seleccionado" value="false" scope="page" />
 							<c:forEach var="ur" items="${usuario.usuarioRol}">
-						        <c:if test="${ur.pk.rol.idRol == item.getIdRol()}">					            
+						        <c:if test="${ur.rol.idRol == item.getIdRol()}">					            
 									<c:set var="seleccionado" value="true" scope="page" />
 						        </c:if>
 						    </c:forEach>

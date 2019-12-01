@@ -206,20 +206,13 @@ public class UsuarioController {
 		Usuario usuario = new Usuario();
 		usuario = usuarioService.findById(idUsr);
 		usuario.setHabilitado(!usuario.isHabilitado());
-		try {
-			usuarioService.save(usuario, null, null);
-		} catch (RepeatedUsernameException e) {
-		}
+		usuarioService.update(usuario);
 		return "redirect:/usuario";
 	}
 
 	@RequestMapping("/usuario/reset/{idUsr}")
 	public String passwordReset(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
-		Usuario usuario = usuarioService.reset(idUsr);
-		try {
-			usuarioService.save(usuario, null, null);
-		} catch (RepeatedUsernameException e) {
-		}
+		usuarioService.reset(idUsr);
 		return "redirect:/usuario";
 	}
 

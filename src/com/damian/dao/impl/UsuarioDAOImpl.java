@@ -16,10 +16,8 @@ import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterUsuario;
 import com.damian.dao.UsuarioDAO;
-import com.damian.dao.UsuarioRolDAO;
 import com.damian.dao.model.ModelUsuario;
 import com.damian.pojo.Usuario;
-import com.damian.pojo.UsuarioRol;
 
 @Repository
 public class UsuarioDAOImpl implements UsuarioDAO {

@@ -141,17 +141,18 @@ public class ConverterRellenaObjeto {
 	public void rellenaUsuario(Usuario u, ModelUsuario mu) {
 
 		DatosPersonales dp = datosPersonalesDAO.findByUsrIdModel(mu.getIdUsr());
-		dp.setDirecciones(direccionDao.findListFromUsuarioModel(dp.getIdDatosPers()));
-		u.setDatosPersonales(dp);
-		List<UsuarioEmpresa> ueList = usuarioEmpresaDAO.findByIdUsrModel(mu.getIdUsr());
-		for (UsuarioEmpresa ue : ueList) {
-			ue.getEmpresa().setDireccionesEmpresa(direccionEmpresaDAO.findByIdEmpModel(ue.getEmpresa().getIdEmp()));
+		if(dp != null) {
+			dp.setDirecciones(direccionDao.findListFromUsuarioModel(dp.getIdDatosPers()));
+			u.setDatosPersonales(dp);
+			List<UsuarioEmpresa> ueList = usuarioEmpresaDAO.findByIdUsrModel(mu.getIdUsr());
+			for (UsuarioEmpresa ue : ueList) {
+				ue.getEmpresa().setDireccionesEmpresa(direccionEmpresaDAO.findByIdEmpModel(ue.getEmpresa().getIdEmp()));
+			}
+			if(!ueList.isEmpty()) {
+				u.setUsuarioEmpresa(ueList);
+			}
+			u.setUsuarioRol(usuarioRolDAO.findByIdUsrModel(mu.getIdUsr()));
 		}
-		if(!ueList.isEmpty()) {
-			u.setUsuarioEmpresa(ueList);
-		}
-		u.setUsuarioRol(usuarioRolDAO.findByIdUsrModel(mu.getIdUsr()));
-
 	}
 
 }

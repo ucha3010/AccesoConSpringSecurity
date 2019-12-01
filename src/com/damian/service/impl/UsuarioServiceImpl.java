@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.damian.dao.UsuarioDAO;
-import com.damian.dao.UsuarioRolDAO;
 import com.damian.exceptions.RepeatedUsernameException;
 import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
@@ -20,7 +19,6 @@ import com.damian.pojo.Rol;
 import com.damian.pojo.Usuario;
 import com.damian.pojo.UsuarioEmpresa;
 import com.damian.pojo.UsuarioRol;
-import com.damian.pojo.UsuarioRolId;
 import com.damian.service.DatosPersonalesService;
 import com.damian.service.RolService;
 import com.damian.service.UsuarioEmpresaService;
@@ -35,9 +33,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
-	@Autowired
-	private UsuarioRolDAO usuarioRolDAO;
 
 	@Autowired
 	private DatosPersonalesService datosPersonalesService;
@@ -82,32 +77,23 @@ public class UsuarioServiceImpl implements UsuarioService {
 			usuario.setHabilitado(true);
 			String claveUsr = usuario.getClave();
 			usuario.setClave(passwordEncoder.encode(claveUsr));
+			usuarioDAO.save(usuario);
+			usuario = findByUsername(usuario.getUsuario());
+			dp.setUsuario(usuario);
+			datosPersonalesService.save(dp);
 		} else {
 			DatosPersonales dpId = datosPersonalesService.findByUsrId(usuario.getIdUsr());
 			dp.setIdDatosPers(dpId.getIdDatosPers());
-			List<UsuarioEmpresa> usuarioEmpresas = usuarioEmpresaService.findAll();
-			if (usuarioEmpresas != null) {
-				List<UsuarioEmpresa> usuarioEmpresaList = new ArrayList<>();
-				for (UsuarioEmpresa ue : usuarioEmpresas) {
-					if (ue.getUsuario().getIdUsr() == usuario.getIdUsr()) {
-						usuarioEmpresaList.add(ue);
-					}
-				}
-				usuario.setUsuarioEmpresa(usuarioEmpresaList);
-			}
+			dp.setUsuario(usuario);
+			datosPersonalesService.update(dp);
 		}
 		if (usuarioRol != null) {
-			if (usuario.getIdUsr() != 0) {
-				eliminarRolesNoSeleccionados(usuarioRol, usuario);
-			}
-			List<UsuarioRol> roles = new ArrayList<>();
+			eliminarRolesNoSeleccionados(usuarioRol, usuario);
+			String[] nuevosRoles = rolesAGuardar(usuarioRol, usuario);
 			org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 					.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-			for (String rolId : usuarioRol) {
+			for (String rolId : nuevosRoles) {
 				Rol rol = rolService.findById(Integer.parseInt(rolId));
-				UsuarioRolId uri = new UsuarioRolId();
-				uri.setRol(rol);
-				uri.setUsuario(usuario);
 				UsuarioRol ur = new UsuarioRol();
 				ur.setRol(rol);
 				ur.setUsuario(usuario);
@@ -117,34 +103,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 				} else {
 					ur.setCreadoPor("OWN USER");
 				}
-				roles.add(ur);
-			}
-			usuario.setUsuarioRol(roles);
-		}
-		dp.setUsuario(usuario);
-		usuario.setDatosPersonales(dp);
-
-		usuarioDAO.save(usuario);
-	}
-
-	private void eliminarRolesNoSeleccionados(String[] usuarioRol, Usuario usuario) {
-		List<UsuarioRol> rolesQueTraia = usuarioRolService.findByIdUsr(usuario.getIdUsr());
-		List<Integer> rolesABorrar = new ArrayList<>();
-		Boolean estaba;
-		for (UsuarioRol urTraia : rolesQueTraia) {
-			estaba = false;
-			for (String rolNuevo : usuarioRol) {
-				if (urTraia.getRol().getIdRol() == Integer.parseInt(rolNuevo)) {
-					estaba = true;
-				}
-			}
-			if (!estaba) {
-				rolesABorrar.add(urTraia.getRol().getIdRol());
-			}
-		}
-		if (!rolesABorrar.isEmpty()) {
-			for (Integer idRol : rolesABorrar) {
-				usuarioRolService.delete(usuario.getIdUsr(), idRol);
+				usuarioRolService.save(ur);
 			}
 		}
 	}
@@ -155,19 +114,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		String claveUsr = usuario.getClave();
 		usuario = findById(usuario.getIdUsr());
 		usuario.setClave(passwordEncoder.encode(claveUsr));
-		List<UsuarioRol> usuarioRols = usuarioRolService.findAll();
-		List<UsuarioRol> usuarioRolList = new ArrayList<>();
-		for (UsuarioRol ur : usuarioRols) {
-			if (ur.getUsuario().getIdUsr() == usuario.getIdUsr()) {
-				usuarioRolList.add(ur);
-			}
-		}
-		usuario.setUsuarioRol(usuarioRolList);
-		// DatosPersonales dp = datosPersonalesService.findByUsrId(usuario.getIdUsr());
-		// dp.setUsuario(usuario);
-		// usuario.setDatosPersonales(dp);
-
-		usuarioDAO.save(usuario);
+		update(usuario);
 
 	}
 
@@ -221,22 +168,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public void fillExistingUser(Usuario usuario) {
-		// chapuzas hasta que sepa buscar roles y empresas sólo por idUsr
-		List<UsuarioRol> usuarioRolTodos = usuarioRolDAO.findAll();
-		List<UsuarioRol> usuarioRoles = new ArrayList<UsuarioRol>();
-		for (UsuarioRol ur : usuarioRolTodos) {
-			if (ur.getUsuario().getIdUsr() == usuario.getIdUsr()) {
-				usuarioRoles.add(ur);
-			}
-		}
+		List<UsuarioRol> usuarioRoles = usuarioRolService.findByIdUsr(usuario.getIdUsr());
 		usuario.setUsuarioRol(usuarioRoles);
-		List<UsuarioEmpresa> usuarioEmpresaTodos = usuarioEmpresaService.findAll();
-		List<UsuarioEmpresa> usuarioEmpresas = new ArrayList<UsuarioEmpresa>();
-		for (UsuarioEmpresa ue : usuarioEmpresaTodos) {
-			if (ue.getUsuario().getIdUsr() == usuario.getIdUsr()) {
-				usuarioEmpresas.add(ue);
-			}
-		}
+		List<UsuarioEmpresa> usuarioEmpresas = usuarioEmpresaService.findByIdUsr(usuario.getIdUsr());
 		usuario.setUsuarioEmpresa(usuarioEmpresas);
 	}
 
@@ -244,7 +178,52 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public Usuario reset(int idUsr) {
 		Usuario usuario = findById(idUsr);
 		usuario.setClave(passwordEncoder.encode("Superman1"));
+		update(usuario);
 		return usuario;
+	}
+
+	private void eliminarRolesNoSeleccionados(String[] usuarioRol, Usuario usuario) {
+		List<UsuarioRol> rolesQueTraia = usuarioRolService.findByIdUsr(usuario.getIdUsr());
+		List<Integer> rolesABorrar = new ArrayList<>();
+		Boolean estaba;
+		for (UsuarioRol urTraia : rolesQueTraia) {
+			estaba = false;
+			for (String rolNuevo : usuarioRol) {
+				if (urTraia.getRol().getIdRol() == Integer.parseInt(rolNuevo)) {
+					estaba = true;
+				}
+			}
+			if (!estaba) {
+				rolesABorrar.add(urTraia.getRol().getIdRol());
+			}
+		}
+		if (!rolesABorrar.isEmpty()) {
+			for (Integer idRol : rolesABorrar) {
+				usuarioRolService.delete(usuario.getIdUsr(), idRol);
+			}
+		}
+	}
+
+	private String[] rolesAGuardar(String[] usuarioRol, Usuario usuario) {
+		List<UsuarioRol> rolesQueTraia = usuarioRolService.findByIdUsr(usuario.getIdUsr());
+		if (rolesQueTraia == null || rolesQueTraia.isEmpty()) {
+			return usuarioRol;
+		} else {
+			boolean estaba;
+			List<String> agregar = new ArrayList<>();
+			for (String rolNuevo : usuarioRol) {
+				estaba = false;
+				for (UsuarioRol urTraia : rolesQueTraia) {
+					if (urTraia.getRol().getIdRol() == Integer.parseInt(rolNuevo)) {
+						estaba = true;
+					}
+				}
+				if (!estaba) {
+					agregar.add(rolNuevo);
+				}
+			}
+			return agregar.toArray(new String[0]);
+		}
 	}
 
 }
