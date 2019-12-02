@@ -7,6 +7,7 @@ import com.damian.dao.DatosPersonalesDAO;
 import com.damian.dao.EmpresaDAO;
 import com.damian.dao.UsuarioDAO;
 import com.damian.dao.model.ModelUsuarioEmpresa;
+import com.damian.pojo.Empresa;
 import com.damian.pojo.Usuario;
 import com.damian.pojo.UsuarioEmpresa;
 
@@ -39,6 +40,12 @@ public class ConverterUsuarioEmpresa {
 		UsuarioEmpresa ue = new UsuarioEmpresa();
 		ue.setFechaCreacion(mue.getFechaCreacion());
 		ue.setCreadoPor(mue.getCreadoPor());
+		Usuario usuario = new Usuario();
+		usuario.setIdUsr(mue.getIdUsr());
+		ue.setUsuario(usuario);
+		Empresa empresa = new Empresa();
+		empresa.setIdEmp(mue.getIdEmp());
+		ue.setEmpresa(empresa);
 
 		return ue;
 

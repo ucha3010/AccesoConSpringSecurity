@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.damian.dao.model.ModelDireccionEmpresa;
 import com.damian.pojo.DireccionEmpresa;
+import com.damian.pojo.Empresa;
 
 @Component
 public class ConverterDireccionEmpresa {
@@ -33,6 +34,9 @@ public class ConverterDireccionEmpresa {
 		de.setProvincia(mde.getProvincia());
 		de.setCiudad(mde.getCiudad());
 		de.setPais(mde.getPais());
+		Empresa empresa = new Empresa();
+		empresa.setIdEmp(mde.getIdEmp());
+		de.setEmpresa(empresa);
 
 		return de;
 

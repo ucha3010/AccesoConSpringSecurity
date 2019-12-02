@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.damian.dao.model.ModelDireccion;
+import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
 
 @Component
@@ -33,6 +34,9 @@ public class ConverterDireccion {
 		d.setProvincia(md.getProvincia());
 		d.setCiudad(md.getCiudad());
 		d.setPais(md.getPais());
+		DatosPersonales datosPersonales = new DatosPersonales();
+		datosPersonales.setIdDatosPers(md.getIdDatosPers());
+		d.setDatosPersonales(datosPersonales);
 
 		return d;
 

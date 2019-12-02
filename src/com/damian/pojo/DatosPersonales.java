@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class DatosPersonales implements Serializable {
 
 	/**
@@ -17,6 +19,8 @@ public class DatosPersonales implements Serializable {
 	private String apellido1;
 	private String apellido2;
 	private String sexo;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaNacimiento;
 	private String nacionalidad;
 	private String dni;

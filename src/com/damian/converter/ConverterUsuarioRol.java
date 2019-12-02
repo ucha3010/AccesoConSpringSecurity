@@ -7,6 +7,7 @@ import com.damian.dao.DatosPersonalesDAO;
 import com.damian.dao.RolDAO;
 import com.damian.dao.UsuarioDAO;
 import com.damian.dao.model.ModelUsuarioRol;
+import com.damian.pojo.Rol;
 import com.damian.pojo.Usuario;
 import com.damian.pojo.UsuarioRol;
 
@@ -39,7 +40,11 @@ public class ConverterUsuarioRol {
 		UsuarioRol ur = new UsuarioRol();
 		ur.setFechaCreacion(mur.getFechaCreacion());
 		ur.setCreadoPor(mur.getCreadoPor());
-
+		ur.setRol(new Rol(mur.getIdRol(),null,null));
+		Usuario usuario = new Usuario();
+		usuario.setIdUsr(mur.getIdUsr());
+		ur.setUsuario(usuario);
+		
 		return ur;
 
 	}
