@@ -56,10 +56,12 @@
 				}
 			}
 			
-			var isChecked = document.getElementById('gridCheck').checked;
-			if(!isChecked){
-				document.getElementById('gridCheckError').innerHTML = "<fmt:message key='error.must.accept.terms' />";
-				validado = false;
+			if(${usuario.idUsr == 0}){
+				var isChecked = document.getElementById('gridCheck').checked;
+				if(!isChecked){
+					document.getElementById('gridCheckError').innerHTML = "<fmt:message key='error.must.accept.terms' />";
+					validado = false;
+				}
 			}
 			
 			if(validado){
@@ -89,14 +91,20 @@
 			<div class="col-sm-3">
 			</div>
 			<div class="col-xs-12 col-sm-4">
-				<label for="input"><fmt:message key="label.Username" /> *</label>
-				<sf:input path="usuario" type="text" class="form-control" id="username"/>
-				<c:if test="${not empty username_existente}">
-					<span style="color: orange;">
-						<fmt:message key="error.username.existing" />
-					</span>
+				<c:if test="${usuario.idUsr == 0}">
+					<label for="input"><fmt:message key="label.Username" /> *</label>
+					<sf:input path="usuario" type="text" class="form-control" id="username"/>
+					<c:if test="${not empty username_existente}">
+						<span style="color: orange;">
+							<fmt:message key="error.username.existing" />
+						</span>
+					</c:if>
+					<span id="usernameError" name="errorSpan"></span>
 				</c:if>
-				<span id="usernameError" name="errorSpan"></span>
+				<c:if test="${usuario.idUsr > 0}">
+					<label for="input"><fmt:message key="label.Username" /></label>
+					<sf:input path="usuario" type="text" class="form-control" disabled="true"/>
+				</c:if>
 			</div>
 		</div>
 		<c:if test="${(empty usuario.clave) || (not empty username_existente)}">
@@ -264,6 +272,7 @@
 			</div>
 		</div>
 		<br/>
+		<c:if test="${empty usuario.clave}">
 		<div class="form-row">		
 			<div class="col-sm-3">
 			</div>
@@ -275,6 +284,7 @@
 			</div>
 		</div>		
 		<br/>
+		</c:if>
 		<div class="form-row">		
 			<div class="col-sm-3">
 			</div>

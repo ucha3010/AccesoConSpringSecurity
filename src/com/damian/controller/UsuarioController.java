@@ -99,7 +99,7 @@ public class UsuarioController {
 			@RequestParam(value = "usuarioRol", required = false) String[] usuarioRol, HttpServletRequest request,
 			RedirectAttributes ra) {
 		if (result.hasErrors()) {
-			System.out.println(result.getAllErrors());
+			// System.out.println(result.getAllErrors());
 			// return "usuario";
 		}
 		if (usuarioRol == null) {
