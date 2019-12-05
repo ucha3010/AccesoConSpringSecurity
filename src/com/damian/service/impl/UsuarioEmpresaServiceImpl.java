@@ -59,6 +59,7 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
 
 	@Override
 	public void delete(int idUsr, int idEmp) {
+		//TODO DAMIAN crear un findByIdUsrAndIdEmp y suplantar todo este quilombo
 		List<UsuarioEmpresa> usuarioEmpresaList = findByIdUsr(idUsr);
 		UsuarioEmpresa usuarioEmpresa = null;
 		for (UsuarioEmpresa ur : usuarioEmpresaList) {

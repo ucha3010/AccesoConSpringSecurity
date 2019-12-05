@@ -64,8 +64,11 @@ public class EmpresaController {
 	@RequestMapping("/empresa/{idEmp}/delete")
 	public String deleteUser(@PathVariable("idEmp") int idEmp, RedirectAttributes ra) {
 
-		empresaService.delete(idEmp);
-		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
+		if(empresaService.delete(idEmp)) {
+			ra.addFlashAttribute("resultado", "Empresa borrada con éxito");
+		} else {
+			ra.addFlashAttribute("resultado", "No se ha podido borrar la empresa");
+		}
 
 		return "redirect:/empresa";
 

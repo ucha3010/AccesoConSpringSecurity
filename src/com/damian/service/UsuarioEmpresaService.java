@@ -14,7 +14,7 @@ public interface UsuarioEmpresaService {
 	
 	void update(UsuarioEmpresa usuarioEmpresa);
 	
-	void delete(int idUsr, int idRol);
+	void delete(int idUsr, int idEmp);
 	
 	List<UsuarioEmpresa> findByIdUsr(int idUsr);
 	

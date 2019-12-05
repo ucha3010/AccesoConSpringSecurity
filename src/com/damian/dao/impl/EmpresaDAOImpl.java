@@ -90,10 +90,10 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	}
 
 	@Override
-	public void delete(Empresa empresa) {
+	public int delete(Empresa empresa) {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		jdbcTemplate.update(sql, empresa.getIdEmp());
+		return jdbcTemplate.update(sql, empresa.getIdEmp());
 	}
 
 	@Override
