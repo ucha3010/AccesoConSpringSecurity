@@ -19,12 +19,14 @@ public interface UsuarioService {
 
 	List<Usuario> findAll();
 
+	List<Usuario> findAllOrderByNombre();
+
 	void update(Usuario usuario);
 
 	void delete(int idUsr);
 
 	List<Usuario> findCustomers();
-	
+
 	List<Usuario> findFilteredCustomers(int idUsr);
 
 	void fillNewUser(Usuario usuario);

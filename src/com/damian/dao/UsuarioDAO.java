@@ -12,6 +12,8 @@ public interface UsuarioDAO {
 
 	public List<Usuario> findAll();
 
+	public List<Usuario> findAllOrderByNombre();
+
 	public void update(Usuario usuario);
 
 	public void delete(Usuario usuario);

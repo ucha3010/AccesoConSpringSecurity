@@ -124,6 +124,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
+	public List<Usuario> findAllOrderByNombre() {
+		return usuarioDAO.findAllOrderByNombre();
+	}
+
+	@Override
 	public void update(Usuario usuario) {
 		usuarioDAO.update(usuario);
 	}

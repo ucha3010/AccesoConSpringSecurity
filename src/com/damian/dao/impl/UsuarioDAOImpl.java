@@ -3,6 +3,8 @@ package com.damian.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -76,9 +78,18 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public List<Usuario> findAll() {
 
-		String sql = "SELECT * FROM " + TABLA;
+		String sql = "SELECT * FROM " + TABLA + " ORDER BY usuario ASC";
 
 		return lista(sql);
+	}
+
+	@Override
+	public List<Usuario> findAllOrderByNombre() {
+
+		List<Usuario> usuarios = findAll();
+		ordenarPorNombre(usuarios);
+
+		return usuarios;
 	}
 
 	@Override
@@ -108,6 +119,24 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		jdbcTemplate.update(sql, usuario.getIdUsr());
 	}
 
+	@Override
+	public Usuario findByIdModel(int id) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE " + KEY + "=" + id;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<Usuario>() {
+
+			@Override
+			public Usuario extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if (rs.next()) {
+					return converterUsuario.convert(mapeo(rs));
+				}
+
+				return null;
+			}
+
+		});
+	}
+
 	private List<Usuario> lista(String sql) {
 		List<ModelUsuario> muList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelUsuario.class));
 		List<Usuario> uList = new ArrayList<>();
@@ -126,22 +155,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		mu.setFechaCreacion(rs.getTimestamp("fechaCreacion"));
 		return mu;
 	}
-
-	@Override
-	public Usuario findByIdModel(int id) {
-
-		String sql = "SELECT * FROM " + TABLA + " WHERE " + KEY + "=" + id;
-		return jdbcTemplate.query(sql, new ResultSetExtractor<Usuario>() {
+	
+	private void ordenarPorNombre(List<Usuario> usuarios) {
+		Collections.sort(usuarios, new Comparator<Usuario>() {
 
 			@Override
-			public Usuario extractData(ResultSet rs) throws SQLException, DataAccessException {
-				if (rs.next()) {
-					return converterUsuario.convert(mapeo(rs));
-				}
-
-				return null;
+			public int compare(Usuario u1, Usuario u2) {
+				// TODO Auto-generated method stub
+				return new String(u1.getDatosPersonales().getNombre()).compareToIgnoreCase(new String(u2.getDatosPersonales().getNombre()));
 			}
-
 		});
 	}
 

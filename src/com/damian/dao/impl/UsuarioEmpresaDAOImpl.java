@@ -3,6 +3,8 @@ package com.damian.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -84,8 +86,21 @@ public class UsuarioEmpresaDAOImpl implements UsuarioEmpresaDAO {
 	public List<UsuarioEmpresa> findByIdEmp(int idEmp) {
 
 		String sql = "SELECT * FROM " + TABLA + " WHERE idEmp=" + idEmp;
+		List<UsuarioEmpresa> usuarioEmpresas = lista(sql);
+		ordenarPorNombre(usuarioEmpresas);
+		return usuarioEmpresas;
+	}
 
-		return lista(sql);
+	private void ordenarPorNombre(List<UsuarioEmpresa> usuarioEmpresas) {
+		Collections.sort(usuarioEmpresas, new Comparator<UsuarioEmpresa>() {
+
+			@Override
+			public int compare(UsuarioEmpresa u1, UsuarioEmpresa u2) {
+				// TODO Auto-generated method stub
+				return new String(u1.getUsuario().getDatosPersonales().getNombre())
+						.compareToIgnoreCase(new String(u2.getUsuario().getDatosPersonales().getNombre()));
+			}
+		});
 	}
 
 	private List<UsuarioEmpresa> lista(String sql) {

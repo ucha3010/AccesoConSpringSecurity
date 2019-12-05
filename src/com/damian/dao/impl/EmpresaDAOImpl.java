@@ -62,7 +62,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	@Override
 	public List<Empresa> findAll() {
 
-		String sql = "SELECT * FROM " + TABLA;
+		String sql = "SELECT * FROM " + TABLA + " ORDER BY nombreComercial ASC";
 
 		return lista(sql);
 	}

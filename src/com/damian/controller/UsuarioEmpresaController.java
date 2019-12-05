@@ -46,7 +46,7 @@ public class UsuarioEmpresaController {
 		modelAndView.addObject("empresa", empresaService.findById(idEmp));
 		modelAndView.addObject("auxString", new AuxString());
 		modelAndView.addObject("usuarioEmpresas", usuarioEmpresaService.findByIdEmp(idEmp));
-		modelAndView.addObject("usuarios", usuarioService.findAll());
+		modelAndView.addObject("usuarios", usuarioService.findAllOrderByNombre());
 		modelAndView.setViewName("empresaUsuario");
 		return modelAndView;
 	}
