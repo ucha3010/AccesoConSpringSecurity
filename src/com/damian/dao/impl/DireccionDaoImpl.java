@@ -57,7 +57,7 @@ public class DireccionDaoImpl implements DireccionDao {
 	public void save(Direccion direccion) {
 
 		ModelDireccion md = converterDireccion.convert(direccion);
-		if (direccion.getIdDir() > 0) {
+		if (direccion.getIdDir() == 0) {
 			String sql = "INSERT INTO " + TABLA + " (tipoVia, nombreVia, numero, resto, "
 					+ "cp, provincia, ciudad, pais, idDatosPers)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(sql, md.getTipoVia(), md.getNombreVia(), md.getNumero(), md.getResto(), md.getCp(),
