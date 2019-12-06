@@ -135,7 +135,7 @@ public class UsuarioRolDAOImpl implements UsuarioRolDAO {
 			@Override
 			public UsuarioRol extractData(ResultSet rs) throws SQLException, DataAccessException {
 				if (rs.next()) {
-					return converterUsuarioRol.convert(mapeo(rs));
+					return converterUsuarioRol.convertAll(mapeo(rs));
 				}
 
 				return null;

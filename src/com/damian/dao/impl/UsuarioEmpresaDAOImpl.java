@@ -10,8 +10,10 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterUsuarioEmpresa;
@@ -89,6 +91,24 @@ public class UsuarioEmpresaDAOImpl implements UsuarioEmpresaDAO {
 		List<UsuarioEmpresa> usuarioEmpresas = lista(sql);
 		ordenarPorNombre(usuarioEmpresas);
 		return usuarioEmpresas;
+	}
+
+	@Override
+	public UsuarioEmpresa findByIdUsrAndIdEmp(int idUsr, int idEmp) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE idUsr=" + idUsr + " AND idEmp=" + idEmp;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<UsuarioEmpresa>() {
+
+			@Override
+			public UsuarioEmpresa extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if (rs.next()) {
+					return converterUsuarioEmpresa.convertAll(mapeo(rs));
+				}
+
+				return null;
+			}
+
+		});
 	}
 
 	private void ordenarPorNombre(List<UsuarioEmpresa> usuarioEmpresas) {

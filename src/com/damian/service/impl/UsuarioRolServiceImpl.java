@@ -32,7 +32,7 @@ public class UsuarioRolServiceImpl implements UsuarioRolService {
 
 	@Override
 	public void delete(int idUsr, int idRol) {
-		UsuarioRol usuarioRol = usuarioRolDAO.findByIdUsrAndIdRol(idUsr, idRol);
+		UsuarioRol usuarioRol = findByIdUsrAndIdRol(idUsr, idRol);
 		if (usuarioRol != null) {
 			usuarioRolDAO.delete(usuarioRol);
 		}
@@ -46,6 +46,11 @@ public class UsuarioRolServiceImpl implements UsuarioRolService {
 	@Override
 	public List<UsuarioRol> findByIdRol(int idRol) {
 		return usuarioRolDAO.findByIdRol(idRol);
+	}
+
+	@Override
+	public UsuarioRol findByIdUsrAndIdRol(int idUsr, int idRol) {
+		return usuarioRolDAO.findByIdUsrAndIdRol(idUsr, idRol);
 	}
 
 }

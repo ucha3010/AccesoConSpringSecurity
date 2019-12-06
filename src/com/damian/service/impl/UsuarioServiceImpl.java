@@ -20,6 +20,7 @@ import com.damian.pojo.Usuario;
 import com.damian.pojo.UsuarioEmpresa;
 import com.damian.pojo.UsuarioRol;
 import com.damian.service.DatosPersonalesService;
+import com.damian.service.DireccionService;
 import com.damian.service.RolService;
 import com.damian.service.UsuarioEmpresaService;
 import com.damian.service.UsuarioRolService;
@@ -45,6 +46,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
 	private RolService rolService;
+	
+	@Autowired
+	private DireccionService direccionService;
 
 	@Override
 	public Usuario findById(int id) {
@@ -136,6 +140,24 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public void delete(int idUsr) {
 		Usuario usuario = findById(idUsr);
+		if(usuario.getDatosPersonales().getDirecciones() != null) {
+			for(Direccion direccion: usuario.getDatosPersonales().getDirecciones()) {
+				direccionService.delete(direccion.getIdDir());
+			}
+		}
+		datosPersonalesService.delete(usuario.getDatosPersonales().getIdDatosPers());
+		List<UsuarioEmpresa> ueList = usuarioEmpresaService.findByIdUsr(idUsr);
+		if(ueList != null) {
+			for(UsuarioEmpresa ue: ueList) {
+				usuarioEmpresaService.delete(idUsr, ue.getEmpresa().getIdEmp());
+			}
+		}
+		List<UsuarioRol> urList = usuarioRolService.findByIdUsr(idUsr);
+		if(urList != null) {
+			for(UsuarioRol ur:urList) {
+				usuarioRolService.delete(idUsr, ur.getRol().getIdRol());
+			}
+		}
 		usuarioDAO.delete(usuario);
 	}
 

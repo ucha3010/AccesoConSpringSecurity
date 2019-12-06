@@ -25,13 +25,13 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
 
 	@Autowired
 	private UsuarioService usuarioService;
-	
+
 	@Autowired
 	private EmpresaService empresaService;
 
 	@Override
 	public void save(int idUsr, int idEmp, HttpServletRequest request) {
-		
+
 		Usuario usuario = usuarioService.findById(idUsr);
 		Empresa empresa = empresaService.findById(idEmp);
 		UsuarioEmpresaId usuarioEmpresaId = new UsuarioEmpresaId();
@@ -59,14 +59,7 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
 
 	@Override
 	public void delete(int idUsr, int idEmp) {
-		//TODO DAMIAN crear un findByIdUsrAndIdEmp y suplantar todo este quilombo
-		List<UsuarioEmpresa> usuarioEmpresaList = findByIdUsr(idUsr);
-		UsuarioEmpresa usuarioEmpresa = null;
-		for (UsuarioEmpresa ur : usuarioEmpresaList) {
-			if (ur.getEmpresa().getIdEmp() == idEmp) {
-				usuarioEmpresa = ur;
-			}
-		}
+		UsuarioEmpresa usuarioEmpresa = findByIdUsrAndIdEmp(idUsr, idEmp);
 		if (usuarioEmpresa != null) {
 			usuarioEmpresaDAO.delete(usuarioEmpresa);
 		}
@@ -80,6 +73,11 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
 	@Override
 	public List<UsuarioEmpresa> findByIdEmp(int idEmp) {
 		return usuarioEmpresaDAO.findByIdEmp(idEmp);
+	}
+
+	@Override
+	public UsuarioEmpresa findByIdUsrAndIdEmp(int idUsr, int idEmp) {
+		return usuarioEmpresaDAO.findByIdUsrAndIdEmp(idUsr, idEmp);
 	}
 
 }
