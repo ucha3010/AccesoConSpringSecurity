@@ -71,12 +71,16 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 
 	@Override
 	public void save(DireccionEmpresa direccionEmpresa) {
-
-		ModelDireccionEmpresa mdp = converterDireccionEmpresa.convert(direccionEmpresa);
-		String sql = "INSERT INTO " + TABLA + " (tipoVia, nombreVia, numero, resto, cp, provincia, "
-				+ "ciudad, pais, idEmp)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sql, mdp.getTipoVia(), mdp.getNombreVia(), mdp.getNumero(), mdp.getResto(), mdp.getCp(),
-				mdp.getProvincia(), mdp.getCiudad(), mdp.getPais(), mdp.getIdEmp());
+		
+		if(direccionEmpresa.getIdDirEmp() == 0) {
+			ModelDireccionEmpresa mdp = converterDireccionEmpresa.convert(direccionEmpresa);
+			String sql = "INSERT INTO " + TABLA + " (tipoVia, nombreVia, numero, resto, cp, provincia, "
+					+ "ciudad, pais, idEmp)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			jdbcTemplate.update(sql, mdp.getTipoVia(), mdp.getNombreVia(), mdp.getNumero(), mdp.getResto(), mdp.getCp(),
+					mdp.getProvincia(), mdp.getCiudad(), mdp.getPais(), mdp.getIdEmp());
+		} else {
+			update(direccionEmpresa);
+		}
 
 	}
 

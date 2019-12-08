@@ -16,7 +16,6 @@
 	<h1>Index 3</h1>
 
 	<a href='<c:url value="/about"/>'>Acerca de</a><br/>	
-	<a href='<c:url value="/admin"/>'>Admin</a><br/>
 	<a href='<c:url value="/index2"/>'>Index2</a><br/>
 	<br/>
 	Atributos del Model: <c:out value="${mensaje}" /><br/>

@@ -84,6 +84,18 @@
 					</div>
 				</div>
 			</div>
+			<div class="p-2">
+				<c:if test="${not empty usuario_agregado}">
+					<span style="color: green;">
+						<fmt:message key="User.added" />
+					</span>
+				</c:if>
+				<c:if test="${not empty usuario_eliminado}">
+					<span style="color: green;">
+						<fmt:message key="User.deleted" />
+					</span>
+				</c:if>
+			</div>
 			<div class="ml-auto p-2">
 				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/0'/>"'>
 					<fmt:message key="label.Add.user" />

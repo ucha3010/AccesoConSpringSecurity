@@ -52,20 +52,27 @@ public class EmpresaController {
 
 	@RequestMapping(value = { "/empresa/save" }, method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute("empresa") @Validated(value = SpringFormGroup.class) Empresa empresa,
-			BindingResult result, Model model) {
+			BindingResult result, Model model, RedirectAttributes ra) {
 		if (result.hasErrors()) {
 			System.out.println(result.getAllErrors());
 			// return "empresa";
 		}
+		boolean nueva = false;
+		if (empresa.getIdEmp() == 0) {
+			nueva = true;
+		}
 		empresaService.save(empresa);
+		if (nueva) {
+			ra.addFlashAttribute("empresa_agregada", "empresa_agregada");
+		}
 		return "redirect:/empresa";
 	}
 
 	@RequestMapping("/empresa/{idEmp}/delete")
 	public String deleteUser(@PathVariable("idEmp") int idEmp, RedirectAttributes ra) {
 
-		if(empresaService.delete(idEmp)) {
-			ra.addFlashAttribute("resultado", "Empresa borrada con éxito");
+		if (empresaService.delete(idEmp)) {
+			ra.addFlashAttribute("empresa_eliminada", "empresa_eliminada");
 		} else {
 			ra.addFlashAttribute("resultado", "No se ha podido borrar la empresa");
 		}

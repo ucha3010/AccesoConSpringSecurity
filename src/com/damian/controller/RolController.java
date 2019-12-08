@@ -52,12 +52,19 @@ public class RolController {
 
 	@RequestMapping(value = { "/rol/save" }, method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute("rol") @Validated(value = SpringFormGroup.class) Rol rol,
-			BindingResult result, Model model) {
+			BindingResult result, Model model, RedirectAttributes ra) {
 		if (result.hasErrors()) {
-			System.out.println(result.getAllErrors());
+//			System.out.println(result.getAllErrors());
 //			return "rol";
+		}		
+		boolean nueva = false;
+		if (rol.getIdRol() == 0) {
+			nueva = true;
 		}
 		rolService.save(rol);
+		if (nueva) {
+			ra.addFlashAttribute("rol_agregado", "rol_agregado");
+		}
 		return "redirect:/rol";
 	}
 
@@ -67,9 +74,9 @@ public class RolController {
 		List<UsuarioRol> usuarioRolList = usuarioRolService.findByIdRol(idRol);
 		if(usuarioRolList == null || usuarioRolList.isEmpty()) {
 			rolService.delete(idRol);
-			ra.addFlashAttribute("eliminado", "eliminado");
+			ra.addFlashAttribute("rol_eliminado", "rol_eliminado");
 		} else {
-			ra.addFlashAttribute("asociado", "asociado");
+			ra.addFlashAttribute("rol_asociado", "rol_asociado");
 		}
 		return "redirect:/rol";
 

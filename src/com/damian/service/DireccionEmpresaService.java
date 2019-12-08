@@ -8,7 +8,7 @@ public interface DireccionEmpresaService {
 	
 	DireccionEmpresa findById(int idDirEmp);
 	
-	void save(int idUsr, DireccionEmpresa direccionEmpresa);
+	void save(int idEmp, DireccionEmpresa direccionEmpresa);
 
 	List<DireccionEmpresa> findListFromEmpresa(int idEmp);
 	

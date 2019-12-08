@@ -28,7 +28,8 @@ public class DireccionEmpresaServiceImpl implements DireccionEmpresaService {
 	@Override
 	public void save(int idEmp, DireccionEmpresa direccionEmpresa) {
 
-		Empresa empresa = empresaService.findById(idEmp);
+		Empresa empresa = new Empresa();
+		empresa.setIdEmp(idEmp);
 		direccionEmpresa.setEmpresa(empresa);
 		direccionEmpresaDao.save(direccionEmpresa);
 

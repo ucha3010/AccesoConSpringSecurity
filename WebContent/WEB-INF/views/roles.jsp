@@ -35,12 +35,17 @@
 			<div class="p-2">
 			</div>
 			<div class="p-2">
-				<c:if test="${not empty asociado}">
+				<c:if test="${not empty rol_agregado}">
+					<span style="color: green;">
+						<fmt:message key="Rol.added" />
+					</span>
+				</c:if>
+				<c:if test="${not empty rol_asociado}">
 					<span style="color: red;">
 						<fmt:message key="error.Rol.asociated" />
 					</span>
 				</c:if>
-				<c:if test="${not empty eliminado}">
+				<c:if test="${not empty rol_eliminado}">
 					<span style="color: green;">
 						<fmt:message key="Rol.deleted" />
 					</span>

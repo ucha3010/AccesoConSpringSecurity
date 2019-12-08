@@ -49,6 +49,41 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
+	<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+		<div class="d-flex">
+			<div class="p-2">
+				<input type="text" id="formulario" class="form-control">
+				<script>
+					const formulario = document.querySelector('#formulario');
+					formulario.addEventListener('keyup', filtrar);
+				</script>
+			</div>
+			<div class="p-2">
+				<div class="dropdown collapse">
+					<div class="dropdown-content" id="resultado">
+					</div>
+				</div>
+			</div>
+			<div class="p-2">
+				<c:if test="${not empty empresa_agregada}">
+					<span style="color: green;">
+						<fmt:message key="Company.added" />
+					</span>
+				</c:if>
+				<c:if test="${not empty empresa_eliminada}">
+					<span style="color: green;">
+						<fmt:message key="Company.deleted" />
+					</span>
+				</c:if>
+			</div>
+			<div class="ml-auto p-2">
+			<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/empresa/0'/>"'>
+				<fmt:message key="Add.company" />
+			</button>
+		</div>		
+	</div>
+	</sec:authorize>
+	<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 		<div class="d-flex">
 			<div class="p-2">
 				<input type="text" id="formulario" class="form-control">
@@ -64,11 +99,9 @@
 				</div>
 			</div>
 			<div class="ml-auto p-2">
-			<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/empresa/0'/>"'>
-				<fmt:message key="Add.company" />
-			</button>
-		</div>		
-	</div>
+			</div>		
+		</div>
+	</sec:authorize>
 	<div class="divTabla">
 		<table id="tablaOrdenar" class="table table-striped">
 			<thead>
@@ -111,8 +144,11 @@
 						<td><c:out value="${empresa.telefono}" /></td>
 						<td><c:out value="${empresa.fax}" /></td>
 						<td class="sin_padding">
+							<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccionEmpresa/${empresa.idEmp}' />'>
+								<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="width-35">
+							</a>
 							<a title="<fmt:message key="label.Workers" />" href='<c:url value='/usuarioEmpresa/empresa/${empresa.idEmp}' />'>
-								<img src='<c:url value="/resources/imgs/usuarios.png"/>' class="width-35">
+								<img src='<c:url value="/resources/imgs/usuarios.png"/>' class="margin-left-5porciento width-35">
 							</a>
 						</td>
 				    </tr>

@@ -106,12 +106,19 @@ public class UsuarioController {
 			usuarioRol = new String[1];
 			usuarioRol[0] = "1";
 		}
+		boolean nueva = false;
+		if (usuario.getIdUsr() == 0) {
+			nueva = true;
+		}
 		try {
 			usuarioService.save(usuario, usuarioRol, request);
 		} catch (RepeatedUsernameException e) {
 			ra.addFlashAttribute("username_existente", "username_existente");
 			ra.addFlashAttribute("usuario", usuario);
 			return "redirect:/usuario/0";
+		}
+		if (nueva) {
+			ra.addFlashAttribute("usuario_agregado", "usuario_agregado");
 		}
 		return "redirect:/usuario";
 	}
@@ -174,7 +181,7 @@ public class UsuarioController {
 	public String deleteUser(@PathVariable("idUsr") int idUsr, RedirectAttributes ra) {
 
 		usuarioService.delete(idUsr);
-		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
+		ra.addFlashAttribute("usuario_eliminado", "usuario_eliminado");
 
 		return "redirect:/usuario";
 

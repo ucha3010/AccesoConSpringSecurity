@@ -21,7 +21,6 @@
 
 	<h1>About</h1>
 	<a href='<c:url value="/"/>'>Index</a><br/>
-	<a href='<c:url value="/admin"/>'>Admin</a><br/>
 	<br/>
 	Atributos del Model: <c:out value="${mensaje}" /><br/>
 	Atributos en Session (estoy): <c:out value="${sessionScope.estoy}" /><br/>

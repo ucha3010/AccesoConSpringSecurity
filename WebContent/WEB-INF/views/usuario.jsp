@@ -272,7 +272,7 @@
 			</div>
 		</div>
 		<br/>
-		<c:if test="${empty usuario.clave}">
+		<c:if test="${usuario.idUsr == 0}">
 		<div class="form-row">		
 			<div class="col-sm-3">
 			</div>
