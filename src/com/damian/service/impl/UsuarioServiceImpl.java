@@ -21,7 +21,6 @@ import com.damian.pojo.UsuarioEmpresa;
 import com.damian.pojo.UsuarioRol;
 import com.damian.service.DatosPersonalesService;
 import com.damian.service.DireccionService;
-import com.damian.service.RolService;
 import com.damian.service.UsuarioEmpresaService;
 import com.damian.service.UsuarioRolService;
 import com.damian.service.UsuarioService;
@@ -44,9 +43,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Autowired
 	private UsuarioEmpresaService usuarioEmpresaService;
 
-	@Autowired
-	private RolService rolService;
-	
 	@Autowired
 	private DireccionService direccionService;
 
@@ -96,17 +92,22 @@ public class UsuarioServiceImpl implements UsuarioService {
 			String[] nuevosRoles = rolesAGuardar(usuarioRol, usuario);
 			org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 					.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+			String creador;
+			if (context != null) {
+				creador = context.getAuthentication().getName();
+			} else {
+				creador = "OWN USER";
+			}
+			Date ahora = new Date();
+			UsuarioRol ur = null;
 			for (String rolId : nuevosRoles) {
-				Rol rol = rolService.findById(Integer.parseInt(rolId));
-				UsuarioRol ur = new UsuarioRol();
+				Rol rol = new Rol();
+				rol.setIdRol(Integer.parseInt(rolId));
+				ur = new UsuarioRol();
 				ur.setRol(rol);
 				ur.setUsuario(usuario);
-				ur.setFechaCreacion(new Date());
-				if (context != null) {
-					ur.setCreadoPor(context.getAuthentication().getName());
-				} else {
-					ur.setCreadoPor("OWN USER");
-				}
+				ur.setFechaCreacion(ahora);
+				ur.setCreadoPor(creador);
 				usuarioRolService.save(ur);
 			}
 		}
@@ -140,21 +141,21 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public void delete(int idUsr) {
 		Usuario usuario = findById(idUsr);
-		if(usuario.getDatosPersonales().getDirecciones() != null) {
-			for(Direccion direccion: usuario.getDatosPersonales().getDirecciones()) {
+		if (usuario.getDatosPersonales().getDirecciones() != null) {
+			for (Direccion direccion : usuario.getDatosPersonales().getDirecciones()) {
 				direccionService.delete(direccion.getIdDir());
 			}
 		}
 		datosPersonalesService.delete(usuario.getDatosPersonales().getIdDatosPers());
 		List<UsuarioEmpresa> ueList = usuarioEmpresaService.findByIdUsr(idUsr);
-		if(ueList != null) {
-			for(UsuarioEmpresa ue: ueList) {
+		if (ueList != null) {
+			for (UsuarioEmpresa ue : ueList) {
 				usuarioEmpresaService.delete(idUsr, ue.getEmpresa().getIdEmp());
 			}
 		}
 		List<UsuarioRol> urList = usuarioRolService.findByIdUsr(idUsr);
-		if(urList != null) {
-			for(UsuarioRol ur:urList) {
+		if (urList != null) {
+			for (UsuarioRol ur : urList) {
 				usuarioRolService.delete(idUsr, ur.getRol().getIdRol());
 			}
 		}

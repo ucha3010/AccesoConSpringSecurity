@@ -12,10 +12,7 @@ import com.damian.dao.UsuarioEmpresaDAO;
 import com.damian.pojo.Empresa;
 import com.damian.pojo.Usuario;
 import com.damian.pojo.UsuarioEmpresa;
-import com.damian.pojo.UsuarioEmpresaId;
-import com.damian.service.EmpresaService;
 import com.damian.service.UsuarioEmpresaService;
-import com.damian.service.UsuarioService;
 
 @Service
 public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
@@ -23,20 +20,13 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
 	@Autowired
 	private UsuarioEmpresaDAO usuarioEmpresaDAO;
 
-	@Autowired
-	private UsuarioService usuarioService;
-
-	@Autowired
-	private EmpresaService empresaService;
-
 	@Override
 	public void save(int idUsr, int idEmp, HttpServletRequest request) {
 
-		Usuario usuario = usuarioService.findById(idUsr);
-		Empresa empresa = empresaService.findById(idEmp);
-		UsuarioEmpresaId usuarioEmpresaId = new UsuarioEmpresaId();
-		usuarioEmpresaId.setEmpresa(empresa);
-		usuarioEmpresaId.setUsuario(usuario);
+		Usuario usuario = new Usuario();
+		usuario.setIdUsr(idUsr);
+		Empresa empresa = new Empresa();
+		empresa.setIdEmp(idEmp);
 		UsuarioEmpresa usuarioEmpresa = new UsuarioEmpresa();
 		usuarioEmpresa.setUsuario(usuario);
 		usuarioEmpresa.setEmpresa(empresa);

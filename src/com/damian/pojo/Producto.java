@@ -2,6 +2,7 @@ package com.damian.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Producto implements Serializable {
 
@@ -27,8 +28,9 @@ public class Producto implements Serializable {
 	/**
 	 * nuevo, 90%, 80%...
 	 */
+	private String estado;
+	
 	private String partida;
-
 	private Date fechaCompra;
 	private boolean enviar;
 
@@ -40,6 +42,7 @@ public class Producto implements Serializable {
 	private double mesesGarantia;
 	private double peso;
 	private double volumen;
+	private List<Empresa> proveedores;
 
 	public Producto() {
 
