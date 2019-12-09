@@ -29,7 +29,7 @@ public class Producto implements Serializable {
 	 * nuevo, 90%, 80%...
 	 */
 	private String estado;
-	
+
 	private String partida;
 	private Date fechaCompra;
 	private boolean enviar;
@@ -42,7 +42,7 @@ public class Producto implements Serializable {
 	private double mesesGarantia;
 	private double peso;
 	private double volumen;
-	private List<Empresa> proveedores;
+	private List<ProductoEmpresa> productoEmpresaList;
 
 	public Producto() {
 
@@ -58,6 +58,7 @@ public class Producto implements Serializable {
 	 * @param modelo
 	 * @param serie
 	 * @param ubicacion
+	 * @param estado
 	 * @param partida
 	 * @param fechaCompra
 	 * @param enviar
@@ -65,10 +66,12 @@ public class Producto implements Serializable {
 	 * @param mesesGarantia
 	 * @param peso
 	 * @param volumen
+	 * @param productoEmpresaList
 	 */
 	public Producto(int idPro, String descripcion, int unidades, double precioVenta, double precioCompra, String marca,
-			String modelo, String serie, String ubicacion, String partida, Date fechaCompra, boolean enviar,
-			boolean vendible, double mesesGarantia, double peso, double volumen) {
+			String modelo, String serie, String ubicacion, String estado, String partida, Date fechaCompra,
+			boolean enviar, boolean vendible, double mesesGarantia, double peso, double volumen,
+			List<ProductoEmpresa> productoEmpresaList) {
 		this.idPro = idPro;
 		this.descripcion = descripcion;
 		this.unidades = unidades;
@@ -78,6 +81,7 @@ public class Producto implements Serializable {
 		this.modelo = modelo;
 		this.serie = serie;
 		this.ubicacion = ubicacion;
+		this.estado = estado;
 		this.partida = partida;
 		this.fechaCompra = fechaCompra;
 		this.enviar = enviar;
@@ -85,6 +89,7 @@ public class Producto implements Serializable {
 		this.mesesGarantia = mesesGarantia;
 		this.peso = peso;
 		this.volumen = volumen;
+		this.productoEmpresaList = productoEmpresaList;
 	}
 
 	/**
@@ -223,6 +228,21 @@ public class Producto implements Serializable {
 	}
 
 	/**
+	 * @return the estado
+	 */
+	public String getEstado() {
+		return estado;
+	}
+
+	/**
+	 * @param estado
+	 *            the estado to set
+	 */
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	/**
 	 * @return the partida
 	 */
 	public String getPartida() {
@@ -327,6 +347,21 @@ public class Producto implements Serializable {
 		this.volumen = volumen;
 	}
 
+	/**
+	 * @return the productoEmpresaList
+	 */
+	public List<ProductoEmpresa> getProductoEmpresaList() {
+		return productoEmpresaList;
+	}
+
+	/**
+	 * @param productoEmpresaList
+	 *            the productoEmpresaList to set
+	 */
+	public void setProductoEmpresaList(List<ProductoEmpresa> productoEmpresaList) {
+		this.productoEmpresaList = productoEmpresaList;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -336,9 +371,10 @@ public class Producto implements Serializable {
 	public String toString() {
 		return "Producto [idPro=" + idPro + ", descripcion=" + descripcion + ", unidades=" + unidades + ", precioVenta="
 				+ precioVenta + ", precioCompra=" + precioCompra + ", marca=" + marca + ", modelo=" + modelo
-				+ ", serie=" + serie + ", ubicacion=" + ubicacion + ", partida=" + partida + ", fechaCompra="
-				+ fechaCompra + ", enviar=" + enviar + ", vendible=" + vendible + ", mesesGarantia=" + mesesGarantia
-				+ ", peso=" + peso + ", volumen=" + volumen + "]";
+				+ ", serie=" + serie + ", ubicacion=" + ubicacion + ", estado=" + estado + ", partida=" + partida
+				+ ", fechaCompra=" + fechaCompra + ", enviar=" + enviar + ", vendible=" + vendible + ", mesesGarantia="
+				+ mesesGarantia + ", peso=" + peso + ", volumen=" + volumen + ", productoEmpresaList="
+				+ productoEmpresaList + "]";
 	}
 
 }

@@ -23,6 +23,7 @@ public class Empresa implements Serializable {
 	private String observaciones;
 	private List<UsuarioEmpresa> usuarioEmpresa = new ArrayList<UsuarioEmpresa>();
 	private List<DireccionEmpresa> direccionesEmpresa = new ArrayList<DireccionEmpresa>();
+	private List<ProductoEmpresa> productoEmpresaList;
 
 	public Empresa() {
 
@@ -41,10 +42,11 @@ public class Empresa implements Serializable {
 	 * @param observaciones
 	 * @param usuarioEmpresa
 	 * @param direccionesEmpresa
+	 * @param productoEmpresaList
 	 */
 	public Empresa(int idEmp, String nombreComercial, String tipoSociedad, String actividad, String cif, String email,
 			String paginaWeb, String telefono, String fax, String observaciones, List<UsuarioEmpresa> usuarioEmpresa,
-			List<DireccionEmpresa> direccionesEmpresa) {
+			List<DireccionEmpresa> direccionesEmpresa, List<ProductoEmpresa> productoEmpresaList) {
 		this.idEmp = idEmp;
 		this.nombreComercial = nombreComercial;
 		this.tipoSociedad = tipoSociedad;
@@ -57,6 +59,7 @@ public class Empresa implements Serializable {
 		this.observaciones = observaciones;
 		this.usuarioEmpresa = usuarioEmpresa;
 		this.direccionesEmpresa = direccionesEmpresa;
+		this.productoEmpresaList = productoEmpresaList;
 	}
 
 	/**
@@ -239,6 +242,21 @@ public class Empresa implements Serializable {
 		this.direccionesEmpresa = direccionesEmpresa;
 	}
 
+	/**
+	 * @return the productoEmpresaList
+	 */
+	public List<ProductoEmpresa> getProductoEmpresaList() {
+		return productoEmpresaList;
+	}
+
+	/**
+	 * @param productoEmpresaList
+	 *            the productoEmpresaList to set
+	 */
+	public void setProductoEmpresaList(List<ProductoEmpresa> productoEmpresaList) {
+		this.productoEmpresaList = productoEmpresaList;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -249,7 +267,8 @@ public class Empresa implements Serializable {
 		return "Empresa [idEmp=" + idEmp + ", nombreComercial=" + nombreComercial + ", tipoSociedad=" + tipoSociedad
 				+ ", actividad=" + actividad + ", cif=" + cif + ", email=" + email + ", paginaWeb=" + paginaWeb
 				+ ", telefono=" + telefono + ", fax=" + fax + ", observaciones=" + observaciones + ", usuarioEmpresa="
-				+ usuarioEmpresa + ", direccionesEmpresa=" + direccionesEmpresa + "]";
+				+ usuarioEmpresa + ", direccionesEmpresa=" + direccionesEmpresa + ", productoEmpresaList="
+				+ productoEmpresaList + "]";
 	}
 
 }
