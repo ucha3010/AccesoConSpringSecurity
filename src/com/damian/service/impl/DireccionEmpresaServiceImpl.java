@@ -9,16 +9,12 @@ import com.damian.dao.DireccionEmpresaDAO;
 import com.damian.pojo.DireccionEmpresa;
 import com.damian.pojo.Empresa;
 import com.damian.service.DireccionEmpresaService;
-import com.damian.service.EmpresaService;
 
 @Service
 public class DireccionEmpresaServiceImpl implements DireccionEmpresaService {
 
 	@Autowired
 	private DireccionEmpresaDAO direccionEmpresaDao;
-
-	@Autowired
-	private EmpresaService empresaService;
 
 	@Override
 	public DireccionEmpresa findById(int idDirEmp) {
