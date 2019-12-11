@@ -116,7 +116,6 @@ public class UsuarioEmpresaDAOImpl implements UsuarioEmpresaDAO {
 
 			@Override
 			public int compare(UsuarioEmpresa u1, UsuarioEmpresa u2) {
-				// TODO Auto-generated method stub
 				return new String(u1.getUsuario().getDatosPersonales().getNombre())
 						.compareToIgnoreCase(new String(u2.getUsuario().getDatosPersonales().getNombre()));
 			}

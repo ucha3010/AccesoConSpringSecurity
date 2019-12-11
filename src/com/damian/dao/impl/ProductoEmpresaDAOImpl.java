@@ -69,10 +69,10 @@ public class ProductoEmpresaDAOImpl implements ProductoEmpresaDAO {
 	}
 
 	@Override
-	public void delete(ProductoEmpresa productoEmpresa) {
+	public void delete(int idPro, int idEmp) {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY1 + "=? AND " + KEY2 + "=?";
-		jdbcTemplate.update(sql, productoEmpresa.getProducto().getIdPro(), productoEmpresa.getEmpresa().getIdEmp());
+		jdbcTemplate.update(sql, idPro, idEmp);
 	}
 
 	@Override

@@ -107,10 +107,10 @@ public class ProductoDAOImpl implements ProductoDAO {
 	}
 
 	@Override
-	public int delete(Producto producto) {
+	public int delete(int id) {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, producto.getIdPro());
+		return jdbcTemplate.update(sql, id);
 	}
 
 	private List<Producto> lista(String sql) {

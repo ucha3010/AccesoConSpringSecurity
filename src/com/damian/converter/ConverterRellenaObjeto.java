@@ -121,6 +121,7 @@ public class ConverterRellenaObjeto {
 			e.setUsuarioEmpresa(ueList);
 		}
 		e.setDireccionesEmpresa(direccionEmpresaDAO.findByIdEmpModel(me.getIdEmp()));
+		e.setProductoEmpresaList(productoEmpresaDAO.findByIdEmp(e.getIdEmp()));
 
 	}
 

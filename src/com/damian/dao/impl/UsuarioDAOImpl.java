@@ -161,7 +161,6 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 			@Override
 			public int compare(Usuario u1, Usuario u2) {
-				// TODO Auto-generated method stub
 				return new String(u1.getDatosPersonales().getNombre()).compareToIgnoreCase(new String(u2.getDatosPersonales().getNombre()));
 			}
 		});

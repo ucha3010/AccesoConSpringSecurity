@@ -1,10 +1,10 @@
-package com.damian.dao;
+package com.damian.service;
 
 import java.util.List;
 
 import com.damian.pojo.ProductoEmpresa;
 
-public interface ProductoEmpresaDAO {
+public interface ProductoEmpresaService {
 
 	public List<ProductoEmpresa> findAll();
 
