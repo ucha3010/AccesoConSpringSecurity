@@ -5,34 +5,55 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.damian.dao.CategoriaDAO;
 import com.damian.dao.DatosPersonalesDAO;
 import com.damian.dao.DireccionDao;
 import com.damian.dao.DireccionEmpresaDAO;
 import com.damian.dao.EmpresaDAO;
+import com.damian.dao.EstadoDAO;
+import com.damian.dao.FacturaDAO;
+import com.damian.dao.FormaPagoDAO;
+import com.damian.dao.ProductoDAO;
 import com.damian.dao.ProductoEmpresaDAO;
+import com.damian.dao.ProductoFacturaDAO;
+import com.damian.dao.SubcategoriaDAO;
 import com.damian.dao.UsuarioDAO;
 import com.damian.dao.UsuarioEmpresaDAO;
 import com.damian.dao.UsuarioRolDAO;
+import com.damian.dao.model.ModelCategoria;
 import com.damian.dao.model.ModelDatosPersonales;
 import com.damian.dao.model.ModelDireccion;
 import com.damian.dao.model.ModelDireccionEmpresa;
 import com.damian.dao.model.ModelEmpresa;
+import com.damian.dao.model.ModelEstado;
+import com.damian.dao.model.ModelFactura;
+import com.damian.dao.model.ModelFormaPago;
 import com.damian.dao.model.ModelProducto;
 import com.damian.dao.model.ModelRol;
+import com.damian.dao.model.ModelSubcategoria;
 import com.damian.dao.model.ModelUsuario;
+import com.damian.pojo.Categoria;
 import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
 import com.damian.pojo.DireccionEmpresa;
 import com.damian.pojo.Empresa;
+import com.damian.pojo.Estado;
+import com.damian.pojo.Factura;
+import com.damian.pojo.FormaPago;
 import com.damian.pojo.Producto;
 import com.damian.pojo.ProductoEmpresa;
+import com.damian.pojo.ProductoFactura;
 import com.damian.pojo.Rol;
+import com.damian.pojo.Subcategoria;
 import com.damian.pojo.Usuario;
 import com.damian.pojo.UsuarioEmpresa;
 import com.damian.pojo.UsuarioRol;
 
 @Component
 public class ConverterRellenaObjeto {
+
+	@Autowired
+	private CategoriaDAO categoriaDAO;
 
 	@Autowired
 	private DatosPersonalesDAO datosPersonalesDAO;
@@ -47,6 +68,27 @@ public class ConverterRellenaObjeto {
 	private EmpresaDAO empresaDAO;
 
 	@Autowired
+	private EstadoDAO estadoDAO;
+
+	@Autowired
+	private FacturaDAO facturaDAO;
+
+	@Autowired
+	private FormaPagoDAO formaPagoDAO;
+
+	@Autowired
+	private ProductoDAO productoDAO;
+
+	@Autowired
+	private ProductoEmpresaDAO productoEmpresaDAO;
+
+	@Autowired
+	private ProductoFacturaDAO productoFacturaDAO;
+
+	@Autowired
+	private SubcategoriaDAO subcategoriaDAO;
+
+	@Autowired
 	private UsuarioDAO usuarioDAO;
 
 	@Autowired
@@ -54,9 +96,6 @@ public class ConverterRellenaObjeto {
 
 	@Autowired
 	private UsuarioRolDAO usuarioRolDAO;
-
-	@Autowired
-	private ProductoEmpresaDAO productoEmpresaDAO;
 
 	public void rellenaDatosPersonales(DatosPersonales dp, ModelDatosPersonales mdp) {
 
@@ -172,6 +211,49 @@ public class ConverterRellenaObjeto {
 		if (!peList.isEmpty()) {
 			p.setProductoEmpresaList(peList);
 		}
+
+		List<ProductoFactura> pfList = productoFacturaDAO.findByIdProModel(mp.getIdPro());
+		for (ProductoFactura pf : pfList) {
+			pf.setFactura(facturaDAO.findById(pf.getFactura().getIdFac()));
+		}
+		if (!pfList.isEmpty()) {
+			p.setProductoFacturaList(pfList);
+		}
+		
+		p.setSubcategoria(subcategoriaDAO.findByIdModel(mp.getIdSub()));
+
+	}
+
+	public void rellenaEstado(Estado e, ModelEstado me) {
+
+		e.setFacturas(facturaDAO.findByIdEstModel(me.getIdEst()));
+
+	}
+
+	public void rellenaFormaPago(FormaPago f, ModelFormaPago mf) {
+
+		f.setFacturas(facturaDAO.findByIdForModel(mf.getIdFor()));
+
+	}
+
+	public void rellenaFactura(Factura f, ModelFactura mf) {
+
+		f.setProductoFacturaList(productoFacturaDAO.findByIdFacModel(mf.getIdFac()));
+		f.setEstado(estadoDAO.findById(mf.getIdEst()));
+		f.setFormaPago(formaPagoDAO.findById(mf.getIdFor()));
+
+	}
+
+	public void rellenaCategoria(Categoria c, ModelCategoria mc) {
+
+		c.setSubcategorias(subcategoriaDAO.findByIdCatModel(mc.getIdCat()));
+
+	}
+
+	public void rellenaSubcategoria(Subcategoria s, ModelSubcategoria ms) {
+
+		s.setCategoria(categoriaDAO.findByIdModel(ms.getIdCat()));
+		s.setProductos(productoDAO.findByIdSubModel(ms.getIdSub()));
 
 	}
 

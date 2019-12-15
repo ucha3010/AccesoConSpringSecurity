@@ -18,4 +18,6 @@ public interface ProductoDAO {
 
 	public int delete(int id);
 
+	public List<Producto> findByIdSubModel(int idSub);
+
 }

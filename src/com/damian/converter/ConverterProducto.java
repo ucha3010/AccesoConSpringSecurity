@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.damian.dao.model.ModelProducto;
 import com.damian.pojo.Producto;
+import com.damian.pojo.Subcategoria;
 
 @Component
 public class ConverterProducto {
@@ -41,6 +42,9 @@ public class ConverterProducto {
 		p.setMesesGarantia(mp.getMesesGarantia());
 		p.setPeso(mp.getPeso());
 		p.setVolumen(mp.getVolumen());
+		Subcategoria subcategoria = new Subcategoria();
+		subcategoria.setIdSub(mp.getIdSub());
+		p.setSubcategoria(subcategoria);
 
 		return p;
 
@@ -66,6 +70,9 @@ public class ConverterProducto {
 		mp.setMesesGarantia(p.getMesesGarantia());
 		mp.setPeso(p.getPeso());
 		mp.setVolumen(p.getVolumen());
+		if(p.getSubcategoria() != null) {
+			mp.setIdSub(p.getSubcategoria().getIdSub());
+		}
 
 		return mp;
 

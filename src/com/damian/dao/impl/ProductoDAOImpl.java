@@ -85,12 +85,12 @@ public class ProductoDAOImpl implements ProductoDAO {
 		} else {
 			ModelProducto mp = converterProducto.convert(producto);
 			String sql = "INSERT INTO " + TABLA + " (descripcion, unidades, precioVenta, precioCompra, marca, modelo, "
-					+ "serie, ubicacion, estado, partida, fechaCompra, enviar, vendible, mesesGarantia, peso, volumen)"
-					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "serie, ubicacion, estado, partida, fechaCompra, enviar, vendible, mesesGarantia, peso, volumen, idSub)"
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(sql, mp.getDescripcion(), mp.getUnidades(), mp.getPrecioVenta(), mp.getPrecioCompra(),
 					mp.getMarca(), mp.getModelo(), mp.getSerie(), mp.getUbicacion(), mp.getEstado(), mp.getPartida(),
 					mp.getFechaCompra(), mp.isEnviar(), mp.isVendible(), mp.getMesesGarantia(), mp.getPeso(),
-					mp.getVolumen());
+					mp.getVolumen(), mp.getIdSub());
 		}
 	}
 
@@ -99,11 +99,11 @@ public class ProductoDAOImpl implements ProductoDAO {
 		ModelProducto mp = converterProducto.convert(producto);
 		String sql = "UPDATE " + TABLA + " SET descripcion=?, unidades=?, precioVenta=?, precioCompra=?, marca=?, "
 				+ "modelo=?, serie=?, ubicacion=?, estado=?, partida=?, fechaCompra=?, enviar=?, vendible=?, "
-				+ "mesesGarantia=?, peso=?, volumen=? " + "WHERE " + KEY + "=?";
+				+ "mesesGarantia=?, peso=?, volumen=?, idSub " + "WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, mp.getDescripcion(), mp.getUnidades(), mp.getPrecioVenta(), mp.getPrecioCompra(),
 				mp.getMarca(), mp.getModelo(), mp.getSerie(), mp.getUbicacion(), mp.getEstado(), mp.getPartida(),
 				mp.getFechaCompra(), mp.isEnviar(), mp.isVendible(), mp.getMesesGarantia(), mp.getPeso(),
-				mp.getVolumen(), mp.getIdPro());
+				mp.getVolumen(), mp.getIdSub(), mp.getIdPro());
 	}
 
 	@Override
@@ -111,6 +111,14 @@ public class ProductoDAOImpl implements ProductoDAO {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		return jdbcTemplate.update(sql, id);
+	}
+
+	@Override
+	public List<Producto> findByIdSubModel(int idSub) {
+
+		String sql = "SELECT * FROM " + TABLA + " ORDER BY descripcion ASC WHERE idSub = " + idSub;
+
+		return lista(sql);
 	}
 
 	private List<Producto> lista(String sql) {
@@ -141,6 +149,7 @@ public class ProductoDAOImpl implements ProductoDAO {
 		mp.setMesesGarantia(rs.getDouble("mesesGarantia"));
 		mp.setPeso(rs.getDouble("peso"));
 		mp.setVolumen(rs.getDouble("volumen"));
+		mp.setIdSub(rs.getInt("idSub"));
 		return mp;
 	}
 }

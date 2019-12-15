@@ -27,6 +27,7 @@ public class ModelProducto implements Serializable {
 	private double mesesGarantia;
 	private double peso;
 	private double volumen;
+	private int idSub;
 
 	public ModelProducto() {
 
@@ -50,10 +51,12 @@ public class ModelProducto implements Serializable {
 	 * @param mesesGarantia
 	 * @param peso
 	 * @param volumen
+	 * @param idSub
 	 */
 	public ModelProducto(int idPro, String descripcion, int unidades, double precioVenta, double precioCompra,
 			String marca, String modelo, String serie, String ubicacion, String estado, String partida,
-			Date fechaCompra, boolean enviar, boolean vendible, double mesesGarantia, double peso, double volumen) {
+			Date fechaCompra, boolean enviar, boolean vendible, double mesesGarantia, double peso, double volumen,
+			int idSub) {
 		this.idPro = idPro;
 		this.descripcion = descripcion;
 		this.unidades = unidades;
@@ -71,6 +74,7 @@ public class ModelProducto implements Serializable {
 		this.mesesGarantia = mesesGarantia;
 		this.peso = peso;
 		this.volumen = volumen;
+		this.idSub = idSub;
 	}
 
 	/**
@@ -328,18 +332,31 @@ public class ModelProducto implements Serializable {
 		this.volumen = volumen;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
+	 * @return the idSub
+	 */
+	public int getIdSub() {
+		return idSub;
+	}
+
+	/**
+	 * @param idSub the idSub to set
+	 */
+	public void setIdSub(int idSub) {
+		this.idSub = idSub;
+	}
+
+	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Producto [idPro=" + idPro + ", descripcion=" + descripcion + ", unidades=" + unidades + ", precioVenta="
-				+ precioVenta + ", precioCompra=" + precioCompra + ", marca=" + marca + ", modelo=" + modelo
-				+ ", serie=" + serie + ", ubicacion=" + ubicacion + ", estado=" + estado + ", partida=" + partida
-				+ ", fechaCompra=" + fechaCompra + ", enviar=" + enviar + ", vendible=" + vendible + ", mesesGarantia="
-				+ mesesGarantia + ", peso=" + peso + ", volumen=" + volumen + "]";
+		return "ModelProducto [idPro=" + idPro + ", descripcion=" + descripcion + ", unidades=" + unidades
+				+ ", precioVenta=" + precioVenta + ", precioCompra=" + precioCompra + ", marca=" + marca + ", modelo="
+				+ modelo + ", serie=" + serie + ", ubicacion=" + ubicacion + ", estado=" + estado + ", partida="
+				+ partida + ", fechaCompra=" + fechaCompra + ", enviar=" + enviar + ", vendible=" + vendible
+				+ ", mesesGarantia=" + mesesGarantia + ", peso=" + peso + ", volumen=" + volumen + ", idSub=" + idSub
+				+ "]";
 	}
 
 }

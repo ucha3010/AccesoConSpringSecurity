@@ -43,6 +43,8 @@ public class Producto implements Serializable {
 	private double peso;
 	private double volumen;
 	private List<ProductoEmpresa> productoEmpresaList;
+	private Subcategoria subcategoria;
+	private List<ProductoFactura> productoFacturaList;
 
 	public Producto() {
 
@@ -67,11 +69,14 @@ public class Producto implements Serializable {
 	 * @param peso
 	 * @param volumen
 	 * @param productoEmpresaList
+	 * @param subcategoria
+	 * @param productoFacturaList
 	 */
 	public Producto(int idPro, String descripcion, int unidades, double precioVenta, double precioCompra, String marca,
 			String modelo, String serie, String ubicacion, String estado, String partida, Date fechaCompra,
 			boolean enviar, boolean vendible, double mesesGarantia, double peso, double volumen,
-			List<ProductoEmpresa> productoEmpresaList) {
+			List<ProductoEmpresa> productoEmpresaList, Subcategoria subcategoria,
+			List<ProductoFactura> productoFacturaList) {
 		this.idPro = idPro;
 		this.descripcion = descripcion;
 		this.unidades = unidades;
@@ -90,6 +95,8 @@ public class Producto implements Serializable {
 		this.peso = peso;
 		this.volumen = volumen;
 		this.productoEmpresaList = productoEmpresaList;
+		this.subcategoria = subcategoria;
+		this.productoFacturaList = productoFacturaList;
 	}
 
 	/**
@@ -360,6 +367,34 @@ public class Producto implements Serializable {
 	 */
 	public void setProductoEmpresaList(List<ProductoEmpresa> productoEmpresaList) {
 		this.productoEmpresaList = productoEmpresaList;
+	}
+
+	/**
+	 * @return the subcategoria
+	 */
+	public Subcategoria getSubcategoria() {
+		return subcategoria;
+	}
+
+	/**
+	 * @param subcategoria the subcategoria to set
+	 */
+	public void setSubcategoria(Subcategoria subcategoria) {
+		this.subcategoria = subcategoria;
+	}
+
+	/**
+	 * @return the productoFacturaList
+	 */
+	public List<ProductoFactura> getProductoFacturaList() {
+		return productoFacturaList;
+	}
+
+	/**
+	 * @param productoFacturaList the productoFacturaList to set
+	 */
+	public void setProductoFacturaList(List<ProductoFactura> productoFacturaList) {
+		this.productoFacturaList = productoFacturaList;
 	}
 
 	/*
