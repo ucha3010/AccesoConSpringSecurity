@@ -11,10 +11,10 @@ import com.damian.service.RolService;
 
 @Service
 public class RolServiceImpl implements RolService {
-	
+
 	@Autowired
 	private RolDAO rolDAO;
-	
+
 	public Rol findById(int id) {
 		return rolDAO.findById(id);
 	}
@@ -26,10 +26,9 @@ public class RolServiceImpl implements RolService {
 	public List<Rol> findAll() {
 		return rolDAO.findAll();
 	}
-	
+
 	public void delete(int idRol) {
-		Rol rol = findById(idRol);
-		rolDAO.delete(rol);
+		rolDAO.delete(idRol);
 	}
 
 	@Override

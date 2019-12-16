@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-12-2019 a las 17:23:54
+-- Tiempo de generación: 16-12-2019 a las 22:54:17
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -53,6 +53,17 @@ INSERT INTO `admin` (`idAd`, `nombre`, `cargo`, `fechaCreacion`) VALUES
 (36, 'Analía', 'Maquilladora', '2019-11-13 21:52:27'),
 (37, 'Diana', 'Gerente', '2019-11-13 21:52:41'),
 (38, 'Sofía', 'Director de Marketing', '2019-11-13 21:53:08');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoria`
+--
+
+CREATE TABLE `categoria` (
+  `idCat` int(11) NOT NULL,
+  `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -197,6 +208,47 @@ INSERT INTO `empresa` (`idEmp`, `nombreComercial`, `tipoSociedad`, `actividad`, 
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `estado`
+--
+
+CREATE TABLE `estado` (
+  `idEst` int(11) NOT NULL,
+  `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `factura`
+--
+
+CREATE TABLE `factura` (
+  `idFac` int(11) NOT NULL,
+  `compra` tinyint(1) NOT NULL,
+  `ivaTotal` double NOT NULL,
+  `descuentoTotal` double NOT NULL,
+  `fechaCompra` datetime NOT NULL,
+  `fechaEntrega` datetime NOT NULL,
+  `idEst` int(11) NOT NULL,
+  `direccionEntrega` varchar(300) COLLATE utf8_spanish_ci NOT NULL,
+  `observaciones` varchar(300) COLLATE utf8_spanish_ci NOT NULL,
+  `idFor` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `formapago`
+--
+
+CREATE TABLE `formapago` (
+  `idFor` int(11) NOT NULL,
+  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `paises`
 --
 
@@ -253,7 +305,8 @@ CREATE TABLE `producto` (
   `vendible` tinyint(1) NOT NULL,
   `mesesGarantia` double NOT NULL,
   `peso` double NOT NULL,
-  `volumen` double NOT NULL
+  `volumen` double NOT NULL,
+  `idSub` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -267,6 +320,22 @@ CREATE TABLE `producto_empresa` (
   `idEmp` int(11) NOT NULL,
   `fechaCreacion` date NOT NULL,
   `creadoPor` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `producto_factura`
+--
+
+CREATE TABLE `producto_factura` (
+  `idPro` int(11) NOT NULL,
+  `idFac` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `ivaProducto` double NOT NULL,
+  `porcentajeDescuento` double NOT NULL,
+  `precioFinal` double NOT NULL,
+  `observaciones` varchar(100) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -289,6 +358,18 @@ INSERT INTO `rol` (`idRol`, `rol`) VALUES
 (2, 'ROL_USUARIO'),
 (3, 'ROL_ADMIN'),
 (4, 'ROL_ROOT');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `subcategoria`
+--
+
+CREATE TABLE `subcategoria` (
+  `idSub` int(11) NOT NULL,
+  `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `idCat` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -425,6 +506,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`idAd`);
 
 --
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`idCat`);
+
+--
 -- Indices de la tabla `datospersonales`
 --
 ALTER TABLE `datospersonales`
@@ -452,6 +539,26 @@ ALTER TABLE `empresa`
   ADD PRIMARY KEY (`idEmp`);
 
 --
+-- Indices de la tabla `estado`
+--
+ALTER TABLE `estado`
+  ADD PRIMARY KEY (`idEst`);
+
+--
+-- Indices de la tabla `factura`
+--
+ALTER TABLE `factura`
+  ADD PRIMARY KEY (`idFac`),
+  ADD KEY `idFor` (`idFor`),
+  ADD KEY `idEst` (`idEst`);
+
+--
+-- Indices de la tabla `formapago`
+--
+ALTER TABLE `formapago`
+  ADD PRIMARY KEY (`idFor`);
+
+--
 -- Indices de la tabla `paises`
 --
 ALTER TABLE `paises`
@@ -461,7 +568,8 @@ ALTER TABLE `paises`
 -- Indices de la tabla `producto`
 --
 ALTER TABLE `producto`
-  ADD PRIMARY KEY (`idPro`);
+  ADD PRIMARY KEY (`idPro`),
+  ADD KEY `idSub` (`idSub`);
 
 --
 -- Indices de la tabla `producto_empresa`
@@ -471,10 +579,25 @@ ALTER TABLE `producto_empresa`
   ADD KEY `idEmp` (`idEmp`);
 
 --
+-- Indices de la tabla `producto_factura`
+--
+ALTER TABLE `producto_factura`
+  ADD PRIMARY KEY (`idPro`,`idFac`),
+  ADD UNIQUE KEY `idPro` (`idPro`),
+  ADD KEY `idFac` (`idFac`);
+
+--
 -- Indices de la tabla `rol`
 --
 ALTER TABLE `rol`
   ADD PRIMARY KEY (`idRol`);
+
+--
+-- Indices de la tabla `subcategoria`
+--
+ALTER TABLE `subcategoria`
+  ADD PRIMARY KEY (`idSub`),
+  ADD KEY `idCat` (`idCat`);
 
 --
 -- Indices de la tabla `usuario`
@@ -539,7 +662,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
-  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
@@ -568,11 +691,37 @@ ALTER TABLE `direccionempresa`
   ADD CONSTRAINT `direccionEmpresa_ibfk_1` FOREIGN KEY (`idEmp`) REFERENCES `empresa` (`idEmp`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `factura`
+--
+ALTER TABLE `factura`
+  ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`idEst`) REFERENCES `estado` (`idEst`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`idFor`) REFERENCES `formapago` (`idFor`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`idSub`) REFERENCES `subcategoria` (`idSub`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `producto_empresa`
 --
 ALTER TABLE `producto_empresa`
   ADD CONSTRAINT `producto_empresa_ibfk_1` FOREIGN KEY (`idEmp`) REFERENCES `empresa` (`idEmp`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `producto_empresa_ibfk_2` FOREIGN KEY (`idPro`) REFERENCES `producto` (`idPro`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `producto_factura`
+--
+ALTER TABLE `producto_factura`
+  ADD CONSTRAINT `producto_factura_ibfk_1` FOREIGN KEY (`idFac`) REFERENCES `factura` (`idFac`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `producto_factura_ibfk_2` FOREIGN KEY (`idPro`) REFERENCES `producto` (`idPro`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `subcategoria`
+--
+ALTER TABLE `subcategoria`
+  ADD CONSTRAINT `subcategoria_ibfk_1` FOREIGN KEY (`idCat`) REFERENCES `categoria` (`idCat`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuario_empresa`

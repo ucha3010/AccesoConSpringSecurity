@@ -47,8 +47,7 @@ public class DireccionServiceImpl implements DireccionService {
 
 	@Override
 	public void delete(int idDir) {
-		Direccion direccion = findById(idDir);
-		direccionDao.delete(direccion);
+		direccionDao.delete(idDir);
 	}
 
 }

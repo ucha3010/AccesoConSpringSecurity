@@ -14,7 +14,7 @@ public interface DireccionEmpresaDAO {
 	
 	void update(DireccionEmpresa direccionEmpresa);
 	
-	void delete(DireccionEmpresa direccionEmpresa);
+	void delete(int id);
 	
 	List<DireccionEmpresa> findByIdEmp(int idEmp);
 	

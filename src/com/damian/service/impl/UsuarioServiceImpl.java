@@ -140,13 +140,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public void delete(int idUsr) {
-		Usuario usuario = findById(idUsr);
-		if (usuario.getDatosPersonales().getDirecciones() != null) {
-			for (Direccion direccion : usuario.getDatosPersonales().getDirecciones()) {
+		List<Direccion> direccionList = direccionService.findListFromUsuario(idUsr);
+		if (direccionList != null) {
+			for (Direccion direccion : direccionList) {
 				direccionService.delete(direccion.getIdDir());
 			}
 		}
-		datosPersonalesService.delete(usuario.getDatosPersonales().getIdDatosPers());
+		DatosPersonales datosPersonales = datosPersonalesService.findByUsrId(idUsr);
+		datosPersonalesService.delete(datosPersonales.getIdDatosPers());
 		List<UsuarioEmpresa> ueList = usuarioEmpresaService.findByIdUsr(idUsr);
 		if (ueList != null) {
 			for (UsuarioEmpresa ue : ueList) {
@@ -159,7 +160,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 				usuarioRolService.delete(idUsr, ur.getRol().getIdRol());
 			}
 		}
-		usuarioDAO.delete(usuario);
+		usuarioDAO.delete(idUsr);
 	}
 
 	@Override

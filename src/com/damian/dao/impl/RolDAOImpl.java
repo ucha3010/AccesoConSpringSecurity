@@ -73,10 +73,10 @@ public class RolDAOImpl implements RolDAO {
 	}
 
 	@Override
-	public void delete(Rol rol) {
+	public void delete(int id) {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		jdbcTemplate.update(sql, rol.getIdRol());
+		jdbcTemplate.update(sql, id);
 	}
 
 	@Override

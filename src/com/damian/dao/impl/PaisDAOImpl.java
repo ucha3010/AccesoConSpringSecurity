@@ -77,10 +77,10 @@ public class PaisDAOImpl implements PaisDAO {
 	}
 
 	@Override
-	public void delete(Pais pais) {
+	public void delete(int id) {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		jdbcTemplate.update(sql, pais.getIdPais());
+		jdbcTemplate.update(sql, id);
 	}
 
 	@Override

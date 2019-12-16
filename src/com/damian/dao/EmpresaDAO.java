@@ -12,7 +12,7 @@ public interface EmpresaDAO {
 	
 	public void update(Empresa empresa);
 	
-	public int delete(Empresa empresa);
+	public int delete(int id);
 
 	public Empresa findById(int id);
 	

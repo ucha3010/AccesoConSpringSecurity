@@ -12,7 +12,7 @@ public interface DireccionDao {
 	
 	public List<Direccion> findListFromUsuario(int idDatosPers);
 	
-	public void delete(Direccion direccion);
+	public void delete(int id);
 
 	public Direccion findByIdModel(int id);
 	

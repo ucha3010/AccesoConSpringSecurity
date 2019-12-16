@@ -86,10 +86,10 @@ public class DireccionDaoImpl implements DireccionDao {
 	}
 
 	@Override
-	public void delete(Direccion direccion) {
+	public void delete(int id) {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		jdbcTemplate.update(sql, direccion.getIdDir());
+		jdbcTemplate.update(sql, id);
 	}
 
 	private ModelDireccion mapeo(ResultSet rs) throws SQLException {

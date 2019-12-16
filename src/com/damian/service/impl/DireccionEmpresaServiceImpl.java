@@ -39,8 +39,7 @@ public class DireccionEmpresaServiceImpl implements DireccionEmpresaService {
 
 	@Override
 	public void delete(int idDirEmp) {
-		DireccionEmpresa direccionEmpresa = findById(idDirEmp);
-		direccionEmpresaDao.delete(direccionEmpresa);
+		direccionEmpresaDao.delete(idDirEmp);
 	}
 
 }

@@ -10,7 +10,7 @@ public interface RolDAO {
 
 	public List<Rol> findAll();
 	
-	public void delete(Rol rol);
+	public void delete(int id);
 
 	public Rol findById(int id);
 	

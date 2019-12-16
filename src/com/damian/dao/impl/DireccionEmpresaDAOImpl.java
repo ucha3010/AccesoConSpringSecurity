@@ -96,10 +96,10 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 	}
 
 	@Override
-	public void delete(DireccionEmpresa direccionEmpresa) {
+	public void delete(int id) {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		jdbcTemplate.update(sql, direccionEmpresa.getIdDirEmp());
+		jdbcTemplate.update(sql, id);
 
 	}
 

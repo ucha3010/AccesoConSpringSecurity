@@ -11,10 +11,10 @@ import com.damian.service.DatosPersonalesService;
 
 @Service
 public class DatosPersonalesServiceImpl implements DatosPersonalesService {
-	
+
 	@Autowired
 	private DatosPersonalesDAO datosPersonalesDAO;
-	
+
 	public DatosPersonales findById(int id) {
 		return datosPersonalesDAO.findById(id);
 	}
@@ -26,14 +26,14 @@ public class DatosPersonalesServiceImpl implements DatosPersonalesService {
 	public List<DatosPersonales> findAll() {
 		return datosPersonalesDAO.findAll();
 	}
-	
+
 	public void update(DatosPersonales datosPersonales) {
 		datosPersonalesDAO.update(datosPersonales);
 	}
-	
+
 	public void delete(int idUsr) {
 		DatosPersonales datosPersonales = findById(idUsr);
-		datosPersonalesDAO.delete(datosPersonales);
+		datosPersonalesDAO.delete(datosPersonales.getIdDatosPers());
 	}
 
 	@Override

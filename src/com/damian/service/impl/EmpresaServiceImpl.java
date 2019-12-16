@@ -1,6 +1,5 @@
 package com.damian.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 
 	@Autowired
 	private ProductoEmpresaService productoEmpresaService;
-	
+
 	@Override
 	public Empresa findById(int id) {
 		return empresaDAO.findById(id);
@@ -43,9 +42,6 @@ public class EmpresaServiceImpl implements EmpresaService {
 
 	@Override
 	public void save(Empresa empresa) {
-		if (empresa.getIdEmp() == 0) {
-			empresa.setDireccionesEmpresa(new ArrayList<DireccionEmpresa>());
-		}
 		empresaDAO.save(empresa);
 	}
 
@@ -62,21 +58,22 @@ public class EmpresaServiceImpl implements EmpresaService {
 	@Override
 	public boolean delete(int idEmp) {
 		List<UsuarioEmpresa> usuarioEmpresas = usuarioEmpresaService.findByIdEmp(idEmp);
-		if (usuarioEmpresas != null && !usuarioEmpresas.isEmpty()) {
+		if (usuarioEmpresas != null) {
 			for (UsuarioEmpresa usuarioEmpresa : usuarioEmpresas) {
-				usuarioEmpresaService.delete(usuarioEmpresa.getUsuario().getIdUsr(),
-						usuarioEmpresa.getEmpresa().getIdEmp());
+				usuarioEmpresaService.delete(usuarioEmpresa.getUsuario().getIdUsr(), idEmp);
 			}
 		}
-		Empresa empresa = findById(idEmp);
-		for (DireccionEmpresa direccionEmpresa : empresa.getDireccionesEmpresa()) {
-			direccionEmpresaService.delete(direccionEmpresa.getIdDirEmp());
+		List<DireccionEmpresa> direccionEmpresaList = direccionEmpresaService.findListFromEmpresa(idEmp);
+		if (direccionEmpresaList != null) {
+			for (DireccionEmpresa direccionEmpresa : direccionEmpresaList) {
+				direccionEmpresaService.delete(direccionEmpresa.getIdDirEmp());
+			}
 		}
 		List<ProductoEmpresa> peList = productoEmpresaService.findByIdEmp(idEmp);
-		for(ProductoEmpresa pe: peList) {
+		for (ProductoEmpresa pe : peList) {
 			productoEmpresaService.delete(pe.getProducto().getIdPro(), idEmp);
 		}
-		int borrado = empresaDAO.delete(empresa);
+		int borrado = empresaDAO.delete(idEmp);
 		if (borrado == 1) {
 			return true;
 		} else {

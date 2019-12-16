@@ -85,10 +85,10 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 	}
 
 	@Override
-	public void delete(DatosPersonales datosPersonales) {
+	public void delete(int id) {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		jdbcTemplate.update(sql, datosPersonales.getIdDatosPers());
+		jdbcTemplate.update(sql, id);
 	}
 
 	@Override

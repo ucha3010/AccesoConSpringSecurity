@@ -113,10 +113,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public void delete(Usuario usuario) {
+	public void delete(int id) {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		jdbcTemplate.update(sql, usuario.getIdUsr());
+		jdbcTemplate.update(sql, id);
 	}
 
 	@Override
@@ -155,13 +155,14 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		mu.setFechaCreacion(rs.getTimestamp("fechaCreacion"));
 		return mu;
 	}
-	
+
 	private void ordenarPorNombre(List<Usuario> usuarios) {
 		Collections.sort(usuarios, new Comparator<Usuario>() {
 
 			@Override
 			public int compare(Usuario u1, Usuario u2) {
-				return new String(u1.getDatosPersonales().getNombre()).compareToIgnoreCase(new String(u2.getDatosPersonales().getNombre()));
+				return new String(u1.getDatosPersonales().getNombre())
+						.compareToIgnoreCase(new String(u2.getDatosPersonales().getNombre()));
 			}
 		});
 	}

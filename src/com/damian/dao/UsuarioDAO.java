@@ -16,7 +16,7 @@ public interface UsuarioDAO {
 
 	public void update(Usuario usuario);
 
-	public void delete(Usuario usuario);
+	public void delete(int id);
 
 	public Usuario findById(int id);
 
