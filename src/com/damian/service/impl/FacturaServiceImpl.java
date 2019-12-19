@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.damian.dao.FacturaDAO;
 import com.damian.dao.ProductoFacturaDAO;
+import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Factura;
 import com.damian.pojo.ProductoFactura;
 import com.damian.service.FacturaService;
@@ -46,7 +47,7 @@ public class FacturaServiceImpl implements FacturaService {
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int id) throws NotEmptyException {
 		List<ProductoFactura> productoFacturaList = productoFacturaDAO.findByIdFacModel(id);
 		if (productoFacturaList != null) {
 			for (ProductoFactura pf : productoFacturaList) {

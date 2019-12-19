@@ -2,6 +2,7 @@ package com.damian.service;
 
 import java.util.List;
 
+import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Factura;
 
 public interface FacturaService {
@@ -16,10 +17,10 @@ public interface FacturaService {
 
 	public int update(Factura factura);
 
-	public int delete(int id);
-	
+	public int delete(int id) throws NotEmptyException;
+
 	public List<Factura> findByIdEstModel(int idEst);
-	
+
 	public List<Factura> findByIdForModel(int idFor);
 
 }

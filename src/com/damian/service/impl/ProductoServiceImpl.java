@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.damian.dao.ProductoDAO;
 import com.damian.dao.ProductoEmpresaDAO;
 import com.damian.dao.ProductoFacturaDAO;
+import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Producto;
 import com.damian.pojo.ProductoEmpresa;
 import com.damian.pojo.ProductoFactura;
@@ -51,12 +52,10 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int id) throws NotEmptyException {
 		List<ProductoFactura> productoFacturaList = productoFacturaDAO.findByIdPro(id);
-		if (productoFacturaList != null) {
-			for (ProductoFactura p : productoFacturaList) {
-				productoFacturaDAO.delete(id, p.getFactura().getIdFac());
-			}
+		if (productoFacturaList != null && !productoFacturaList.isEmpty()) {
+			throw new NotEmptyException("Tiene asociado facturas");
 		}
 		List<ProductoEmpresa> productoEmpresaList = productoEmpresaDAO.findByIdPro(id);
 		if (productoEmpresaList != null) {
