@@ -2,6 +2,7 @@ package com.damian.service;
 
 import java.util.List;
 
+import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Estado;
 
 public interface EstadoService {
@@ -16,6 +17,6 @@ public interface EstadoService {
 
 	public int update(Estado estado);
 
-	public int delete(int id);
+	public int delete(int id) throws NotEmptyException;
 
 }

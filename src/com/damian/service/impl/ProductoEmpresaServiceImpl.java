@@ -3,11 +3,13 @@ package com.damian.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.damian.dao.ProductoEmpresaDAO;
 import com.damian.pojo.ProductoEmpresa;
 import com.damian.service.ProductoEmpresaService;
 
+@Service
 public class ProductoEmpresaServiceImpl implements ProductoEmpresaService {
 
 	@Autowired
