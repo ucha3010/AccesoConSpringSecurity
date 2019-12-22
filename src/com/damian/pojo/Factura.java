@@ -13,6 +13,7 @@ public class Factura {
 	private Date fechaEntrega;
 	private String direccionEntrega;
 	private String observaciones;
+	private String creadoPor;
 	private List<ProductoFactura> productoFacturaList;
 	private Estado estado;
 	private FormaPago formaPago;
@@ -30,13 +31,14 @@ public class Factura {
 	 * @param fechaEntrega
 	 * @param direccionEntrega
 	 * @param observaciones
+	 * @param creadoPor
 	 * @param productoFacturaList
 	 * @param estado
 	 * @param formaPago
 	 */
 	public Factura(int idFac, boolean compra, double ivaTotal, double descuentoTotal, Date fechaCompra,
-			Date fechaEntrega, String direccionEntrega, String observaciones, List<ProductoFactura> productoFacturaList,
-			Estado estado, FormaPago formaPago) {
+			Date fechaEntrega, String direccionEntrega, String observaciones, String creadoPor,
+			List<ProductoFactura> productoFacturaList, Estado estado, FormaPago formaPago) {
 		this.idFac = idFac;
 		this.compra = compra;
 		this.ivaTotal = ivaTotal;
@@ -45,6 +47,7 @@ public class Factura {
 		this.fechaEntrega = fechaEntrega;
 		this.direccionEntrega = direccionEntrega;
 		this.observaciones = observaciones;
+		this.creadoPor = creadoPor;
 		this.productoFacturaList = productoFacturaList;
 		this.estado = estado;
 		this.formaPago = formaPago;
@@ -163,6 +166,20 @@ public class Factura {
 	}
 
 	/**
+	 * @return the creadoPor
+	 */
+	public String getCreadoPor() {
+		return creadoPor;
+	}
+
+	/**
+	 * @param creadoPor the creadoPor to set
+	 */
+	public void setCreadoPor(String creadoPor) {
+		this.creadoPor = creadoPor;
+	}
+
+	/**
 	 * @return the productoFacturaList
 	 */
 	public List<ProductoFactura> getProductoFacturaList() {
@@ -211,7 +228,8 @@ public class Factura {
 	public String toString() {
 		return "Factura [idFac=" + idFac + ", compra=" + compra + ", ivaTotal=" + ivaTotal + ", descuentoTotal="
 				+ descuentoTotal + ", fechaCompra=" + fechaCompra + ", fechaEntrega=" + fechaEntrega
-				+ ", direccionEntrega=" + direccionEntrega + ", observaciones=" + observaciones + "]";
+				+ ", direccionEntrega=" + direccionEntrega + ", observaciones=" + observaciones + ", creadoPor="
+				+ creadoPor + "]";
 	}
 
 }

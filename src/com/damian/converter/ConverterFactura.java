@@ -34,6 +34,7 @@ public class ConverterFactura {
 		f.setFechaEntrega(mf.getFechaEntrega());
 		f.setDireccionEntrega(mf.getDireccionEntrega());
 		f.setObservaciones(mf.getObservaciones());
+		f.setCreadoPor(mf.getCreadoPor());
 		Estado estado = new Estado();
 		estado.setIdEst(mf.getIdEst());
 		f.setEstado(estado);
@@ -59,6 +60,7 @@ public class ConverterFactura {
 		}
 		mf.setDireccionEntrega(f.getDireccionEntrega());
 		mf.setObservaciones(f.getObservaciones());
+		mf.setCreadoPor(f.getCreadoPor());
 		if (f.getFormaPago() != null) {
 			mf.setIdFor(f.getFormaPago().getIdFor());
 		}

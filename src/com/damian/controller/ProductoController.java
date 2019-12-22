@@ -24,6 +24,15 @@ public class ProductoController {
 	@RequestMapping("/producto")
 	public ModelAndView getAll(ModelAndView modelAndView) {
 		modelAndView.addObject("productos", productoService.findAll());
+		modelAndView.addObject("estoy", "producto");
+		modelAndView.setViewName("productos");
+		return modelAndView;
+	}
+
+	@RequestMapping("/producto/filtered/{idPro}")
+	public ModelAndView getFiltered(ModelAndView modelAndView, @PathVariable("idPro") int idPro) {
+		modelAndView.addObject("productos", productoService.findByIdList(idPro));
+		modelAndView.addObject("estoy", "producto");
 		modelAndView.setViewName("productos");
 		return modelAndView;
 	}

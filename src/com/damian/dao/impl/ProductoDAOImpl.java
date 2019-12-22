@@ -121,6 +121,14 @@ public class ProductoDAOImpl implements ProductoDAO {
 		return lista(sql);
 	}
 
+	@Override
+	public List<Producto> findByIdList(int id) {
+
+		List<Producto> productos = new ArrayList<>();
+		productos.add(findById(id));
+		return productos;
+	}
+
 	private List<Producto> lista(String sql) {
 		List<ModelProducto> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelProducto.class));
 		List<Producto> eList = new ArrayList<>();

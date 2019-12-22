@@ -14,6 +14,7 @@ public class ModelFactura {
 	private String direccionEntrega;
 	private String observaciones;
 	private int idFor;
+	private String creadoPor;
 	
 	public ModelFactura() {
 		
@@ -30,9 +31,10 @@ public class ModelFactura {
 	 * @param direccionEntrega
 	 * @param observaciones
 	 * @param idFor
+	 * @param creadoPor
 	 */
 	public ModelFactura(int idFac, boolean compra, double ivaTotal, double descuentoTotal, Date fechaCompra,
-			Date fechaEntrega, int idEst, String direccionEntrega, String observaciones, int idFor) {
+			Date fechaEntrega, int idEst, String direccionEntrega, String observaciones, int idFor, String creadoPor) {
 		this.idFac = idFac;
 		this.compra = compra;
 		this.ivaTotal = ivaTotal;
@@ -43,6 +45,7 @@ public class ModelFactura {
 		this.direccionEntrega = direccionEntrega;
 		this.observaciones = observaciones;
 		this.idFor = idFor;
+		this.creadoPor = creadoPor;
 	}
 
 	/**
@@ -185,6 +188,20 @@ public class ModelFactura {
 		this.idFor = idFor;
 	}
 
+	/**
+	 * @return the creadoPor
+	 */
+	public String getCreadoPor() {
+		return creadoPor;
+	}
+
+	/**
+	 * @param creadoPor the creadoPor to set
+	 */
+	public void setCreadoPor(String creadoPor) {
+		this.creadoPor = creadoPor;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -193,7 +210,7 @@ public class ModelFactura {
 		return "ModelFactura [idFac=" + idFac + ", compra=" + compra + ", ivaTotal=" + ivaTotal + ", descuentoTotal="
 				+ descuentoTotal + ", fechaCompra=" + fechaCompra + ", fechaEntrega=" + fechaEntrega + ", idEst="
 				+ idEst + ", direccionEntrega=" + direccionEntrega + ", observaciones=" + observaciones + ", idFor="
-				+ idFor + "]";
+				+ idFor + ", creadoPor=" + creadoPor + "]";
 	}
 
 }

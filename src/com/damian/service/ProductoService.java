@@ -18,5 +18,7 @@ public interface ProductoService {
 	public void update(Producto producto);
 
 	public int delete(int id) throws NotEmptyException;
+	
+	public List<Producto> findByIdList(int id);
 
 }
