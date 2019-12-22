@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-12-2019 a las 22:54:17
+-- Tiempo de generación: 22-12-2019 a las 23:43:48
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -64,6 +64,13 @@ CREATE TABLE `categoria` (
   `idCat` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`idCat`, `nombre`) VALUES
+(1, 'Electrónica');
 
 -- --------------------------------------------------------
 
@@ -225,14 +232,15 @@ CREATE TABLE `estado` (
 CREATE TABLE `factura` (
   `idFac` int(11) NOT NULL,
   `compra` tinyint(1) NOT NULL,
-  `ivaTotal` double NOT NULL,
-  `descuentoTotal` double NOT NULL,
+  `ivaTotal` double DEFAULT NULL,
+  `descuentoTotal` double DEFAULT NULL,
   `fechaCompra` datetime NOT NULL,
-  `fechaEntrega` datetime NOT NULL,
+  `fechaEntrega` datetime DEFAULT NULL,
   `idEst` int(11) NOT NULL,
-  `direccionEntrega` varchar(300) COLLATE utf8_spanish_ci NOT NULL,
-  `observaciones` varchar(300) COLLATE utf8_spanish_ci NOT NULL,
-  `idFor` int(11) NOT NULL
+  `direccionEntrega` varchar(300) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `observaciones` varchar(300) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `idFor` int(11) NOT NULL,
+  `creadoPor` varchar(30) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -292,22 +300,29 @@ CREATE TABLE `producto` (
   `idPro` int(11) NOT NULL,
   `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
   `unidades` int(11) NOT NULL,
-  `precioVenta` double NOT NULL,
-  `precioCompra` double NOT NULL,
-  `marca` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `modelo` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
-  `serie` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `ubicacion` varchar(150) COLLATE utf8_spanish_ci NOT NULL,
-  `estado` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
-  `partida` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaCompra` date NOT NULL,
-  `enviar` tinyint(1) NOT NULL,
+  `precioVenta` double DEFAULT NULL,
+  `precioCompra` double DEFAULT NULL,
+  `marca` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `modelo` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `serie` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `ubicacion` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `estado` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `partida` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fechaCompra` date DEFAULT NULL,
+  `enviar` tinyint(1) DEFAULT NULL,
   `vendible` tinyint(1) NOT NULL,
-  `mesesGarantia` double NOT NULL,
-  `peso` double NOT NULL,
-  `volumen` double NOT NULL,
+  `mesesGarantia` double DEFAULT NULL,
+  `peso` double DEFAULT NULL,
+  `volumen` double DEFAULT NULL,
   `idSub` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`idPro`, `descripcion`, `unidades`, `precioVenta`, `precioCompra`, `marca`, `modelo`, `serie`, `ubicacion`, `estado`, `partida`, `fechaCompra`, `enviar`, `vendible`, `mesesGarantia`, `peso`, `volumen`, `idSub`) VALUES
+(1, 'TV Sanyo 15 pulgadas', 0, 150, 115.35, 'Sanyo', 'HR15', '12345678', 'Pasillo 3', '', '', '2019-12-22', 1, 1, 12, 20, 0.016, 1);
 
 -- --------------------------------------------------------
 
@@ -332,10 +347,10 @@ CREATE TABLE `producto_factura` (
   `idPro` int(11) NOT NULL,
   `idFac` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `ivaProducto` double NOT NULL,
-  `porcentajeDescuento` double NOT NULL,
+  `ivaProducto` double DEFAULT NULL,
+  `porcentajeDescuento` double DEFAULT NULL,
   `precioFinal` double NOT NULL,
-  `observaciones` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+  `observaciones` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
@@ -370,6 +385,13 @@ CREATE TABLE `subcategoria` (
   `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `idCat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `subcategoria`
+--
+
+INSERT INTO `subcategoria` (`idSub`, `nombre`, `idCat`) VALUES
+(1, 'Televisores', 1);
 
 -- --------------------------------------------------------
 
@@ -657,7 +679,7 @@ ALTER TABLE `paises`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
