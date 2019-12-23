@@ -22,4 +22,6 @@ public interface EmpresaDAO {
 
 	public Empresa findByIdModel(int id);
 
+	public int getMaxId();
+
 }

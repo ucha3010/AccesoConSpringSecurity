@@ -18,4 +18,6 @@ public interface EstadoDAO {
 
 	public int delete(int id);
 
+	public int getMaxId();
+
 }

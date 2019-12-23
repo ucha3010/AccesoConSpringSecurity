@@ -19,7 +19,9 @@ public interface ProductoDAO {
 	public int delete(int id);
 
 	public List<Producto> findByIdSubModel(int idSub);
-	
+
 	public List<Producto> findByIdList(int id);
+
+	public int getMaxId();
 
 }

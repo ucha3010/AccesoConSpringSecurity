@@ -111,6 +111,11 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 		return lista(sql);
 	}
 
+	@Override
+	public int getMaxId() {
+		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
 	private List<Subcategoria> lista(String sql) {
 		List<ModelSubcategoria> mpList = jdbcTemplate.query(sql,
 				BeanPropertyRowMapper.newInstance(ModelSubcategoria.class));

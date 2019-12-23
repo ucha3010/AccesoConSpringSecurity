@@ -30,11 +30,12 @@ public class DireccionServiceImpl implements DireccionService {
 	}
 
 	@Override
-	public void save(int idUsr, Direccion direccion) {
+	public int save(int idUsr, Direccion direccion) {
 
 		DatosPersonales datosPersonales = datosPersonalesService.findByUsrId(idUsr);
 		direccion.setDatosPersonales(datosPersonales);
 		direccionDao.save(direccion);
+		return direccionDao.getMaxId();
 
 	}
 

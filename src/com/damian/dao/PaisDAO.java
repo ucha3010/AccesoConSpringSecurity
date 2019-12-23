@@ -18,4 +18,6 @@ public interface PaisDAO {
 
 	public List<Pais> findByPaisName(String paisName);
 
+	public int getMaxId();
+
 }

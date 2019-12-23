@@ -145,4 +145,9 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 
 		});
 	}
+
+	@Override
+	public int getMaxId() {
+		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
 }

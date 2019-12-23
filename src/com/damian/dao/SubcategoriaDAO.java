@@ -20,4 +20,6 @@ public interface SubcategoriaDAO {
 
 	public List<Subcategoria> findByIdCatModel(int idCat);
 
+	public int getMaxId();
+
 }

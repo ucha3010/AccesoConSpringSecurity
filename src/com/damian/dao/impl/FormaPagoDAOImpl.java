@@ -103,6 +103,11 @@ public class FormaPagoDAOImpl implements FormaPagoDAO {
 		return jdbcTemplate.update(sql, id);
 	}
 
+	@Override
+	public int getMaxId() {
+		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
 	private List<FormaPago> lista(String sql) {
 		List<ModelFormaPago> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelFormaPago.class));
 		List<FormaPago> eList = new ArrayList<>();

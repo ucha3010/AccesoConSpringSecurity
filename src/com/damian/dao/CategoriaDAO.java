@@ -18,4 +18,6 @@ public interface CategoriaDAO {
 
 	public int delete(int id);
 
+	public int getMaxId();
+
 }

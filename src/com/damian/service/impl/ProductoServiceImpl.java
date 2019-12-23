@@ -42,8 +42,9 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public void save(Producto producto) {
+	public int save(Producto producto) {
 		productoDAO.save(producto);
+		return productoDAO.getMaxId();
 	}
 
 	@Override

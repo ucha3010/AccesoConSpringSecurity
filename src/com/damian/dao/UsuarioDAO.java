@@ -24,4 +24,6 @@ public interface UsuarioDAO {
 
 	public Usuario findByIdModel(int id);
 
+	public int getMaxId();
+
 }

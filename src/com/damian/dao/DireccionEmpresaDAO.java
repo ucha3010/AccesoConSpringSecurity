@@ -22,4 +22,6 @@ public interface DireccionEmpresaDAO {
 	
 	List<DireccionEmpresa> findByIdEmpModel(int idEmp);
 
+	public int getMaxId();
+
 }

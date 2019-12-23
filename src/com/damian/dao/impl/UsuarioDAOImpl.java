@@ -137,6 +137,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		});
 	}
 
+	@Override
+	public int getMaxId() {
+		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
 	private List<Usuario> lista(String sql) {
 		List<ModelUsuario> muList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelUsuario.class));
 		List<Usuario> uList = new ArrayList<>();

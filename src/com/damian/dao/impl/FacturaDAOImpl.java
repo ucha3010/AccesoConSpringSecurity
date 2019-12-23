@@ -127,6 +127,11 @@ public class FacturaDAOImpl implements FacturaDAO {
 		return lista(sql);
 	}
 
+	@Override
+	public int getMaxId() {
+		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
 	private List<Factura> lista(String sql) {
 		List<ModelFactura> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelFactura.class));
 		List<Factura> eList = new ArrayList<>();

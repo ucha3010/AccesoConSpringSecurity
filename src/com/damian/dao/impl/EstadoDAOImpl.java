@@ -103,6 +103,11 @@ public class EstadoDAOImpl implements EstadoDAO {
 		return jdbcTemplate.update(sql, id);
 	}
 
+	@Override
+	public int getMaxId() {
+		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
 	private List<Estado> lista(String sql) {
 		List<ModelEstado> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelEstado.class));
 		List<Estado> eList = new ArrayList<>();

@@ -139,4 +139,9 @@ public class DireccionDaoImpl implements DireccionDao {
 		return dList;
 	}
 
+	@Override
+	public int getMaxId() {
+		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
 }

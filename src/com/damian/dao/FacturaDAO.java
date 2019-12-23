@@ -22,4 +22,6 @@ public interface FacturaDAO {
 	
 	public List<Factura> findByIdForModel(int idFor);
 
+	public int getMaxId();
+
 }

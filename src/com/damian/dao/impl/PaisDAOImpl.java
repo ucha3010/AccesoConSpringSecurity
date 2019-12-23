@@ -91,6 +91,11 @@ public class PaisDAOImpl implements PaisDAO {
 		return lista(sql);
 	}
 
+	@Override
+	public int getMaxId() {
+		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
 	private List<Pais> lista(String sql) {
 
 		List<ModelPais> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelPais.class));

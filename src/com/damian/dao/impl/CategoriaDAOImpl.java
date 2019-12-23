@@ -103,6 +103,11 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		return jdbcTemplate.update(sql, id);
 	}
 
+	@Override
+	public int getMaxId() {
+		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
 	private List<Categoria> lista(String sql) {
 		List<ModelCategoria> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelCategoria.class));
 		List<Categoria> eList = new ArrayList<>();

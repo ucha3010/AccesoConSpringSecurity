@@ -18,4 +18,6 @@ public interface FormaPagoDAO {
 
 	public int delete(int id);
 
+	public int getMaxId();
+
 }

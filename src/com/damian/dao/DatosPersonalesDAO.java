@@ -25,4 +25,6 @@ public interface DatosPersonalesDAO {
 
 	public DatosPersonales findByUsrIdModel(int datosUsrId);
 
+	public int getMaxId();
+
 }

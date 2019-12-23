@@ -13,7 +13,7 @@ public interface ProductoService {
 
 	public Producto findByIdModel(int id);
 
-	public void save(Producto producto);
+	public int save(Producto producto);
 
 	public void update(Producto producto);
 

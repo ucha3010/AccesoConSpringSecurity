@@ -18,4 +18,6 @@ public interface RolDAO {
 
 	public Rol findByIdModel(int id);
 
+	public int getMaxId();
+
 }

@@ -129,6 +129,11 @@ public class ProductoDAOImpl implements ProductoDAO {
 		return productos;
 	}
 
+	@Override
+	public int getMaxId() {
+		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
 	private List<Producto> lista(String sql) {
 		List<ModelProducto> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelProducto.class));
 		List<Producto> eList = new ArrayList<>();

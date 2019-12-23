@@ -181,4 +181,9 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 
 	}
 
+	@Override
+	public int getMaxId() {
+		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
 }
