@@ -54,7 +54,11 @@ public class ConverterProducto {
 
 		ModelProducto mp = new ModelProducto();
 		mp.setIdPro(p.getIdPro());
-		mp.setDescripcion(p.getDescripcion());
+		if (p.getDescripcion() != null) {
+			mp.setDescripcion(p.getDescripcion());
+		} else {
+			mp.setDescripcion("Descripción producto no ingresado");
+		}
 		mp.setUnidades(p.getUnidades());
 		mp.setPrecioVenta(p.getPrecioVenta());
 		mp.setPrecioCompra(p.getPrecioCompra());
@@ -70,7 +74,7 @@ public class ConverterProducto {
 		mp.setMesesGarantia(p.getMesesGarantia());
 		mp.setPeso(p.getPeso());
 		mp.setVolumen(p.getVolumen());
-		if(p.getSubcategoria() != null) {
+		if (p.getSubcategoria() != null) {
 			mp.setIdSub(p.getSubcategoria().getIdSub());
 		}
 

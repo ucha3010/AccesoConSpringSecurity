@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-12-2019 a las 23:43:48
+-- Tiempo de generación: 25-12-2019 a las 19:59:15
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -154,7 +154,8 @@ INSERT INTO `direccion` (`idDir`, `tipoVia`, `nombreVia`, `numero`, `resto`, `cp
 (16, 'Calle', 'Américo Castro', '100', '2ºB', '28050', 'Madrid', 'Madrid', 'Spain', 32),
 (18, 'Calle', 'Américo Castro 104 2ºB', '', '', '28050', 'Madrid', 'Madrid', 'España', 34),
 (20, 'Plaza', 'Mayor', '1', '', '28001', 'Madrid', 'Madrid', 'Italy', 32),
-(21, 'Avenida', 'Velazquez', '35', '', '28027', 'Madrid', 'Madrid', 'España', 45);
+(21, 'Avenida', 'Velazquez', '35', '', '28027', 'Madrid', 'Madrid', 'España', 45),
+(22, 'Paseo', 'Extremadura', '30', '', '28024', '', 'Madrid', 'España', 47);
 
 -- --------------------------------------------------------
 
@@ -300,8 +301,8 @@ CREATE TABLE `producto` (
   `idPro` int(11) NOT NULL,
   `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
   `unidades` int(11) NOT NULL,
-  `precioVenta` double DEFAULT NULL,
-  `precioCompra` double DEFAULT NULL,
+  `precioVenta` double NOT NULL,
+  `precioCompra` double NOT NULL,
   `marca` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `modelo` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `serie` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -309,11 +310,11 @@ CREATE TABLE `producto` (
   `estado` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   `partida` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `fechaCompra` date DEFAULT NULL,
-  `enviar` tinyint(1) DEFAULT NULL,
+  `enviar` tinyint(1) NOT NULL,
   `vendible` tinyint(1) NOT NULL,
-  `mesesGarantia` double DEFAULT NULL,
-  `peso` double DEFAULT NULL,
-  `volumen` double DEFAULT NULL,
+  `mesesGarantia` double NOT NULL,
+  `peso` double NOT NULL,
+  `volumen` double NOT NULL,
   `idSub` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -322,7 +323,8 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idPro`, `descripcion`, `unidades`, `precioVenta`, `precioCompra`, `marca`, `modelo`, `serie`, `ubicacion`, `estado`, `partida`, `fechaCompra`, `enviar`, `vendible`, `mesesGarantia`, `peso`, `volumen`, `idSub`) VALUES
-(1, 'TV Sanyo 15 pulgadas', 0, 150, 115.35, 'Sanyo', 'HR15', '12345678', 'Pasillo 3', '', '', '2019-12-22', 1, 1, 12, 20, 0.016, 1);
+(1, 'TV Sanyo 15 pulgadas', 0, 150, 115.35, 'Sanyo', 'HR15', '12345678', 'Pasillo 3', '', '', '2019-12-22', 1, 1, 12, 20, 0.016, 1),
+(2, 'TV Sony 28 pulgadas', 0, 600, 420, 'Sony', 'RJ25', NULL, NULL, NULL, NULL, NULL, 1, 1, 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -659,7 +661,7 @@ ALTER TABLE `datospersonales`
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `idDir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `idDir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `direccionempresa`
 --
@@ -679,7 +681,7 @@ ALTER TABLE `paises`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
