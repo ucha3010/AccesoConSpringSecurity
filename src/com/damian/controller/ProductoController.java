@@ -14,12 +14,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Producto;
 import com.damian.service.ProductoService;
+import com.damian.service.SubcategoriaService;
 
 @Controller
 public class ProductoController {
 
 	@Autowired
 	private ProductoService productoService;
+	
+	@Autowired
+	private SubcategoriaService subcategoriaService;
 
 	@RequestMapping("/producto")
 	public ModelAndView getAll(ModelAndView modelAndView) {
@@ -44,6 +48,7 @@ public class ProductoController {
 			producto = productoService.findById(idPro);
 		}
 		modelAndView.addObject("producto", producto);
+		modelAndView.addObject("subcategorias", subcategoriaService.findAll());
 		modelAndView.setViewName("producto");
 		return modelAndView;
 	}
@@ -58,6 +63,7 @@ public class ProductoController {
 		boolean nueva = false;
 		if (producto.getIdPro() == 0) {
 			nueva = true;
+			producto.setEstado("ACTIVO");
 		}
 		productoService.save(producto);
 		if (nueva) {

@@ -114,7 +114,7 @@ public class FacturaDAOImpl implements FacturaDAO {
 	@Override
 	public List<Factura> findByIdEstModel(int idEst) {
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY fechaCompra DESC WHERE idEst = " + idEst;
+		String sql = "SELECT * FROM " + TABLA + " WHERE idEst = " + idEst + " ORDER BY fechaCompra DESC";
 
 		return lista(sql);
 	}
@@ -122,7 +122,7 @@ public class FacturaDAOImpl implements FacturaDAO {
 	@Override
 	public List<Factura> findByIdForModel(int idFor) {
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY fechaCompra DESC WHERE idFor = " + idFor;
+		String sql = "SELECT * FROM " + TABLA + " WHERE idFor = " + idFor + " ORDER BY fechaCompra DESC";
 
 		return lista(sql);
 	}

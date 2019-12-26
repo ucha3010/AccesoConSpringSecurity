@@ -18,7 +18,7 @@
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
 		function validar(){
-			var campo = ['nombreComercial'];
+			var campo = ['descripcion','precioVenta','precioCompra'];
 			restablecer();
 			var validado = true;			
 			for(var i=0; i < campo.length; i++){
@@ -30,21 +30,14 @@
 					validado = false;
 				}
 			}
-			
-			var cif = document.getElementById('cif');
-			if(cif.value.length > 0){
-				if(!validarCif(cif.value)){
-					cif.style.borderColor="red";
-					document.getElementById('cifError').innerHTML = "<fmt:message key='error.not.valid.value' />";
-					validado = false;
-				}
-			}
-			
-			var email = document.getElementById('email');
-			if(email.value.length > 0){
-				if(!validarEmail(email.value)){
-					email.style.borderColor="red";
-					document.getElementById('emailError').innerHTML = "<fmt:message key='error.not.valid.value' />";
+
+			var decimales = ['precioVenta','precioCompra','mesesGarantia','peso','volumen'];
+			for(var i=0; i < decimales.length; i++){
+				var nombreDecimal = document.getElementById(decimales[i]);
+				var nombreDecimalError = document.getElementById(decimales[i]+'Error');
+				if(!validarDecimal(nombreDecimal.value)){
+					nombreDecimalError.innerHTML = "<fmt:message key='error.not.valid.value' />";
+					nombreDecimal.style.borderColor="red";
 					validado = false;
 				}
 			}
@@ -81,6 +74,19 @@
 				<label for="descripcion"><fmt:message key="label.Product.description" /></label> 
 				<sf:input path="descripcion" class="form-control" id="descripcion" />
 				<span id="descripcionError" name="errorSpan"></span>
+			</div>
+		</div>
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="estado"><fmt:message key="label.state" /></label>
+				<sf:select class="form-control" id="estado" path="estado">
+					<sf:option value="ACTIVO" />
+					<sf:option value="INACTIVO" />
+					<sf:option value="DESCATALOGADO" />
+				</sf:select>
 			</div>
 		</div>
 		<br/>
@@ -158,7 +164,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-4 form-check">
 				<label class="form-check-label" for="enviar"> <fmt:message key="label.send" /></label>
-				<input class="form-check-input margin-left-5porciento" type="checkbox" id="enviar">
+				<sf:checkbox path="enviar" cssClass="form-check-input margin-left-5porciento" />
 				<br>
 				<span id="enviarError" name="errorSpan" style="color:red"></span>
 			</div>
@@ -169,7 +175,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-4 form-check">
 				<label class="form-check-label" for="vendible"> <fmt:message key="label.salable" /></label>
-				<input class="form-check-input margin-left-5porciento" type="checkbox" id="vendible">
+				<sf:checkbox path="vendible" cssClass="form-check-input margin-left-5porciento" />
 				<br>
 				<span id="vendibleError" name="errorSpan" style="color:red"></span>
 			</div>
@@ -209,9 +215,9 @@
 			<div class="col-sm-3">
 			</div>
 			<div class="col-xs-12 col-sm-4">
-				<label for="subcategoria"><fmt:message key="label.Subcategoria" /></label>
-	        	<sf:select path="subcategoria" class="form-control" id="subcategoria">
-	            	<sf:options items="${subcategorias}" itemValue="${idSub}" itemLabel="${nombre}" />
+				<label for="subcategoria"><fmt:message key="label.Subcategory" /></label>
+	        	<sf:select path="subcategoria.idSub" class="form-control" id="subcategoria">
+	            	<sf:options items="${subcategorias}" itemValue="idSub" itemLabel="nombre" />
 	        	</sf:select>
 			</div>
 		</div>

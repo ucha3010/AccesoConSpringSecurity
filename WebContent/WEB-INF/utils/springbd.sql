@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-12-2019 a las 19:59:15
+-- Tiempo de generación: 26-12-2019 a las 23:52:45
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -307,7 +307,7 @@ CREATE TABLE `producto` (
   `modelo` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
   `serie` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ubicacion` varchar(150) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `estado` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `estado` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `partida` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `fechaCompra` date DEFAULT NULL,
   `enviar` tinyint(1) NOT NULL,
@@ -323,8 +323,8 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idPro`, `descripcion`, `unidades`, `precioVenta`, `precioCompra`, `marca`, `modelo`, `serie`, `ubicacion`, `estado`, `partida`, `fechaCompra`, `enviar`, `vendible`, `mesesGarantia`, `peso`, `volumen`, `idSub`) VALUES
-(1, 'TV Sanyo 15 pulgadas', 0, 150, 115.35, 'Sanyo', 'HR15', '12345678', 'Pasillo 3', '', '', '2019-12-22', 1, 1, 12, 20, 0.016, 1),
-(2, 'TV Sony 28 pulgadas', 0, 600, 420, 'Sony', 'RJ25', NULL, NULL, NULL, NULL, NULL, 1, 1, 0, 0, 0, 1);
+(1, 'TV Sanyo 15 pulgadas', 0, 150, 115.35, 'Sanyo', 'HR15', '12345678', 'Pasillo 3', 'ACTIVO', '', '2019-12-22', 1, 1, 12, 20, 0.016, 1),
+(2, 'TV Sony 28 pulgadas', 0, 600, 421, 'Sony', 'RJ25', '', '', 'DESCATALOGADO', NULL, NULL, 0, 1, 6, 5, 3.2, 3);
 
 -- --------------------------------------------------------
 
@@ -351,7 +351,7 @@ CREATE TABLE `producto_factura` (
   `cantidad` int(11) NOT NULL,
   `ivaProducto` double DEFAULT NULL,
   `porcentajeDescuento` double DEFAULT NULL,
-  `precioFinal` double NOT NULL,
+  `precioUnitSinIva` double NOT NULL,
   `observaciones` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -393,7 +393,9 @@ CREATE TABLE `subcategoria` (
 --
 
 INSERT INTO `subcategoria` (`idSub`, `nombre`, `idCat`) VALUES
-(1, 'Televisores', 1);
+(1, 'Televisores', 1),
+(2, 'USB 512GB', 1),
+(3, 'Ordenador portátil Intel i7', 1);
 
 -- --------------------------------------------------------
 
@@ -653,6 +655,11 @@ ALTER TABLE `usuario_rol`
 ALTER TABLE `admin`
   MODIFY `idAd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `idCat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT de la tabla `datospersonales`
 --
 ALTER TABLE `datospersonales`
@@ -681,12 +688,17 @@ ALTER TABLE `paises`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
   MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT de la tabla `subcategoria`
+--
+ALTER TABLE `subcategoria`
+  MODIFY `idSub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --

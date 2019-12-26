@@ -99,7 +99,7 @@ public class ProductoDAOImpl implements ProductoDAO {
 		ModelProducto mp = converterProducto.convert(producto);
 		String sql = "UPDATE " + TABLA + " SET descripcion=?, unidades=?, precioVenta=?, precioCompra=?, marca=?, "
 				+ "modelo=?, serie=?, ubicacion=?, estado=?, partida=?, fechaCompra=?, enviar=?, vendible=?, "
-				+ "mesesGarantia=?, peso=?, volumen=?, idSub " + "WHERE " + KEY + "=?";
+				+ "mesesGarantia=?, peso=?, volumen=?, idSub=? WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, mp.getDescripcion(), mp.getUnidades(), mp.getPrecioVenta(), mp.getPrecioCompra(),
 				mp.getMarca(), mp.getModelo(), mp.getSerie(), mp.getUbicacion(), mp.getEstado(), mp.getPartida(),
 				mp.getFechaCompra(), mp.isEnviar(), mp.isVendible(), mp.getMesesGarantia(), mp.getPeso(),
@@ -116,7 +116,7 @@ public class ProductoDAOImpl implements ProductoDAO {
 	@Override
 	public List<Producto> findByIdSubModel(int idSub) {
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY descripcion ASC WHERE idSub = " + idSub;
+		String sql = "SELECT * FROM " + TABLA + " WHERE idSub = " + idSub + " ORDER BY descripcion ASC";
 
 		return lista(sql);
 	}

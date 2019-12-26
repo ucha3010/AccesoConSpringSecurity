@@ -110,10 +110,16 @@
 				<tr>
 					<c:set var="count" value="0" scope="page" />
 					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-						<th colspan="2"></th>
-						<c:set var="count" value="${count + 2}" scope="page"/>
+						<th></th>
+						<c:set var="count" value="${count + 1}" scope="page"/>
+					</sec:authorize>
+					<sec:authorize access="hasAnyRole('ROL_ROOT')">
+						<th></th>
+						<c:set var="count" value="${count + 1}" scope="page"/>
 					</sec:authorize>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Product.description" /></th>
+					<c:set var="count" value="${count + 1}" scope="page"/>
+					<th onclick="sortTable(${count})"><fmt:message key="label.state" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="sortTable(${count})"><fmt:message key="label.brand" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
@@ -127,13 +133,15 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${productos}" var="producto">
-				    <tr title='<fmt:message key="label.purchase.price" />: <c:out value="${producto.precioCompra}" />&#xA;<fmt:message key="label.Serial.number" />: <c:out value="${producto.serie}" />&#xA;<fmt:message key="label.location" />: <c:out value="${producto.ubicacion}" />&#xA;<fmt:message key="label.send" />: <c:out value="${producto.enviar}" />&#xA;<fmt:message key="label.salable" />: <c:out value="${producto.vendible}" />&#xA;<fmt:message key="label.warranty.months" />: <c:out value="${producto.mesesGarantia}" />&#xA;<fmt:message key="label.weigth" />: <c:out value="${producto.peso}" />&#xA;<fmt:message key="label.volume" />: <c:out value="${producto.volumen}" />'>
+				    <tr title='<fmt:message key="label.purchase.price" />: <c:out value="${producto.precioCompra}" />&#xA;<fmt:message key="label.Serial.number" />: <c:out value="${producto.serie}" />&#xA;<fmt:message key="label.location" />: <c:out value="${producto.ubicacion}" />&#xA;<fmt:message key="label.send" />: <c:out value="${producto.enviar}" />&#xA;<fmt:message key="label.salable" />: <c:out value="${producto.vendible}" />&#xA;<fmt:message key="label.warranty.months" />: <c:out value="${producto.mesesGarantia}" />&#xA;<fmt:message key="label.weigth" />: <c:out value="${producto.peso}" />&#xA;<fmt:message key="label.volume" />: <c:out value="${producto.volumen}" />&#xA;<fmt:message key="label.Category" />: <c:out value="${producto.subcategoria.categoria.nombre}" />&#xA;<fmt:message key="label.Subcategory" />: <c:out value="${producto.subcategoria.nombre}" />'>
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 							<td class="sin_padding">
 								<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/producto/${producto.idPro}' />"'>
 								  <img src='<c:url value="/resources/imgs/editar.png"/>' alt="Editar" class="tamanio_imagen">
 								</button>
 							</td>
+						</sec:authorize>
+						<sec:authorize access="hasAnyRole('ROL_ROOT')">
 							<td class="sin_padding">
 								<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${producto.idPro})">
 								  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
@@ -141,6 +149,7 @@
 							</td>
 						</sec:authorize>
 						<td><c:out value="${producto.descripcion}" /></td>
+						<td><c:out value="${producto.estado}" /></td>
 						<td><c:out value="${producto.marca}" /></td>
 						<td><c:out value="${producto.modelo}" /></td>	
 						<td><c:out value="${producto.precioVenta}" /></td>

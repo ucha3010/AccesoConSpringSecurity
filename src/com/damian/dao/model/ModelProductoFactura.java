@@ -1,17 +1,17 @@
 package com.damian.dao.model;
 
 public class ModelProductoFactura {
-	
+
 	private int idPro;
 	private int idFac;
 	private int cantidad;
 	private double ivaProducto;
 	private double porcentajeDescuento;
-	private double precioFinal;
+	private double precioUnitSinIva;
 	private String observaciones;
-	
+
 	public ModelProductoFactura() {
-		
+
 	}
 
 	/**
@@ -20,17 +20,17 @@ public class ModelProductoFactura {
 	 * @param cantidad
 	 * @param ivaProducto
 	 * @param porcentajeDescuento
-	 * @param precioFinal
+	 * @param precioUnitSinIva
 	 * @param observaciones
 	 */
 	public ModelProductoFactura(int idPro, int idFac, int cantidad, double ivaProducto, double porcentajeDescuento,
-			double precioFinal, String observaciones) {
+			double precioUnitSinIva, String observaciones) {
 		this.idPro = idPro;
 		this.idFac = idFac;
 		this.cantidad = cantidad;
 		this.ivaProducto = ivaProducto;
 		this.porcentajeDescuento = porcentajeDescuento;
-		this.precioFinal = precioFinal;
+		this.precioUnitSinIva = precioUnitSinIva;
 		this.observaciones = observaciones;
 	}
 
@@ -42,7 +42,8 @@ public class ModelProductoFactura {
 	}
 
 	/**
-	 * @param idPro the idPro to set
+	 * @param idPro
+	 *            the idPro to set
 	 */
 	public void setIdPro(int idPro) {
 		this.idPro = idPro;
@@ -56,7 +57,8 @@ public class ModelProductoFactura {
 	}
 
 	/**
-	 * @param idFac the idFac to set
+	 * @param idFac
+	 *            the idFac to set
 	 */
 	public void setIdFac(int idFac) {
 		this.idFac = idFac;
@@ -70,7 +72,8 @@ public class ModelProductoFactura {
 	}
 
 	/**
-	 * @param cantidad the cantidad to set
+	 * @param cantidad
+	 *            the cantidad to set
 	 */
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
@@ -84,7 +87,8 @@ public class ModelProductoFactura {
 	}
 
 	/**
-	 * @param ivaProducto the ivaProducto to set
+	 * @param ivaProducto
+	 *            the ivaProducto to set
 	 */
 	public void setIvaProducto(double ivaProducto) {
 		this.ivaProducto = ivaProducto;
@@ -98,24 +102,26 @@ public class ModelProductoFactura {
 	}
 
 	/**
-	 * @param porcentajeDescuento the porcentajeDescuento to set
+	 * @param porcentajeDescuento
+	 *            the porcentajeDescuento to set
 	 */
 	public void setPorcentajeDescuento(double porcentajeDescuento) {
 		this.porcentajeDescuento = porcentajeDescuento;
 	}
 
 	/**
-	 * @return the precioFinal
+	 * @return the precioUnitSinIva
 	 */
-	public double getPrecioFinal() {
-		return precioFinal;
+	public double getPrecioUnitSinIva() {
+		return precioUnitSinIva;
 	}
 
 	/**
-	 * @param precioFinal the precioFinal to set
+	 * @param precioUnitSinIva
+	 *            the precioUnitSinIva to set
 	 */
-	public void setPrecioFinal(double precioFinal) {
-		this.precioFinal = precioFinal;
+	public void setPrecioUnitSinIva(double precioUnitSinIva) {
+		this.precioUnitSinIva = precioUnitSinIva;
 	}
 
 	/**
@@ -126,20 +132,23 @@ public class ModelProductoFactura {
 	}
 
 	/**
-	 * @param observaciones the observaciones to set
+	 * @param observaciones
+	 *            the observaciones to set
 	 */
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "ModelProductoFactura [idPro=" + idPro + ", idFac=" + idFac + ", cantidad=" + cantidad + ", ivaProducto="
-				+ ivaProducto + ", porcentajeDescuento=" + porcentajeDescuento + ", precioFinal=" + precioFinal
-				+ ", observaciones=" + observaciones + "]";
+				+ ivaProducto + ", porcentajeDescuento=" + porcentajeDescuento + ", precioUnitSinIva="
+				+ precioUnitSinIva + ", observaciones=" + observaciones + "]";
 	}
 
 }

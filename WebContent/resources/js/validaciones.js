@@ -76,3 +76,12 @@ function validarNifNie(nifnie) {
 
 	  return false;
 	}
+
+function validarDecimal(valor) {
+    var RE = /^\d*\.?\d*$/;
+    if (RE.test(valor)) {
+        return true;
+    } else {
+        return false;
+    }
+}

@@ -106,7 +106,7 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 	@Override
 	public List<Subcategoria> findByIdCatModel(int idCat) {
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY nombre ASC WHERE idCat = " + idCat;
+		String sql = "SELECT * FROM " + TABLA + " WHERE idCat = " + idCat + " ORDER BY nombre ASC";
 
 		return lista(sql);
 	}
@@ -117,13 +117,13 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 	}
 
 	private List<Subcategoria> lista(String sql) {
-		List<ModelSubcategoria> mpList = jdbcTemplate.query(sql,
+		List<ModelSubcategoria> msList = jdbcTemplate.query(sql,
 				BeanPropertyRowMapper.newInstance(ModelSubcategoria.class));
-		List<Subcategoria> eList = new ArrayList<>();
-		for (ModelSubcategoria me : mpList) {
-			eList.add(converterSubcategoria.convertAll(me));
+		List<Subcategoria> sList = new ArrayList<>();
+		for (ModelSubcategoria ms : msList) {
+			sList.add(converterSubcategoria.convertAll(ms));
 		}
-		return eList;
+		return sList;
 	}
 
 	private ModelSubcategoria mapeo(ResultSet rs) throws SQLException {

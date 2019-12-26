@@ -1,17 +1,17 @@
 package com.damian.pojo;
 
 public class ProductoFactura {
-	
+
 	private Producto producto;
 	private Factura factura;
 	private int cantidad;
 	private double ivaProducto;
 	private double porcentajeDescuento;
-	private double precioFinal;
+	private double precioUnitSinIva;
 	private String observaciones;
-	
+
 	public ProductoFactura() {
-		
+
 	}
 
 	/**
@@ -20,17 +20,17 @@ public class ProductoFactura {
 	 * @param cantidad
 	 * @param ivaProducto
 	 * @param porcentajeDescuento
-	 * @param precioFinal
+	 * @param precioUnitSinIva
 	 * @param observaciones
 	 */
 	public ProductoFactura(Producto producto, Factura factura, int cantidad, double ivaProducto,
-			double porcentajeDescuento, double precioFinal, String observaciones) {
+			double porcentajeDescuento, double precioUnitSinIva, String observaciones) {
 		this.producto = producto;
 		this.factura = factura;
 		this.cantidad = cantidad;
 		this.ivaProducto = ivaProducto;
 		this.porcentajeDescuento = porcentajeDescuento;
-		this.precioFinal = precioFinal;
+		this.precioUnitSinIva = precioUnitSinIva;
 		this.observaciones = observaciones;
 	}
 
@@ -42,7 +42,8 @@ public class ProductoFactura {
 	}
 
 	/**
-	 * @param producto the producto to set
+	 * @param producto
+	 *            the producto to set
 	 */
 	public void setProducto(Producto producto) {
 		this.producto = producto;
@@ -56,7 +57,8 @@ public class ProductoFactura {
 	}
 
 	/**
-	 * @param factura the factura to set
+	 * @param factura
+	 *            the factura to set
 	 */
 	public void setFactura(Factura factura) {
 		this.factura = factura;
@@ -70,7 +72,8 @@ public class ProductoFactura {
 	}
 
 	/**
-	 * @param cantidad the cantidad to set
+	 * @param cantidad
+	 *            the cantidad to set
 	 */
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
@@ -84,7 +87,8 @@ public class ProductoFactura {
 	}
 
 	/**
-	 * @param ivaProducto the ivaProducto to set
+	 * @param ivaProducto
+	 *            the ivaProducto to set
 	 */
 	public void setIvaProducto(double ivaProducto) {
 		this.ivaProducto = ivaProducto;
@@ -98,24 +102,26 @@ public class ProductoFactura {
 	}
 
 	/**
-	 * @param porcentajeDescuento the porcentajeDescuento to set
+	 * @param porcentajeDescuento
+	 *            the porcentajeDescuento to set
 	 */
 	public void setPorcentajeDescuento(double porcentajeDescuento) {
 		this.porcentajeDescuento = porcentajeDescuento;
 	}
 
 	/**
-	 * @return the precioFinal
+	 * @return the precioUnitSinIva
 	 */
-	public double getPrecioFinal() {
-		return precioFinal;
+	public double getPrecioUnitSinIva() {
+		return precioUnitSinIva;
 	}
 
 	/**
-	 * @param precioFinal the precioFinal to set
+	 * @param precioUnitSinIva
+	 *            the precioUnitSinIva to set
 	 */
-	public void setPrecioFinal(double precioFinal) {
-		this.precioFinal = precioFinal;
+	public void setPrecioUnitSinIva(double precioUnitSinIva) {
+		this.precioUnitSinIva = precioUnitSinIva;
 	}
 
 	/**
@@ -126,19 +132,23 @@ public class ProductoFactura {
 	}
 
 	/**
-	 * @param observaciones the observaciones to set
+	 * @param observaciones
+	 *            the observaciones to set
 	 */
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "ProductoFactura [cantidad=" + cantidad + ", ivaProducto=" + ivaProducto + ", porcentajeDescuento="
-				+ porcentajeDescuento + ", precioFinal=" + precioFinal + ", observaciones=" + observaciones + "]";
+				+ porcentajeDescuento + ", precioUnitSinIva=" + precioUnitSinIva + ", observaciones=" + observaciones
+				+ "]";
 	}
 
 }

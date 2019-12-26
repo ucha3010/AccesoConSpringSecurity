@@ -5,17 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.damian.dao.CategoriaDAO;
 import com.damian.dao.ProductoDAO;
 import com.damian.dao.ProductoEmpresaDAO;
 import com.damian.dao.ProductoFacturaDAO;
+import com.damian.dao.SubcategoriaDAO;
 import com.damian.exceptions.NotEmptyException;
+import com.damian.pojo.Categoria;
 import com.damian.pojo.Producto;
 import com.damian.pojo.ProductoEmpresa;
 import com.damian.pojo.ProductoFactura;
+import com.damian.pojo.Subcategoria;
 import com.damian.service.ProductoService;
 
 @Service
 public class ProductoServiceImpl implements ProductoService {
+
+	@Autowired
+	private CategoriaDAO categoriaDAO;
 
 	@Autowired
 	private ProductoDAO productoDAO;
@@ -26,9 +33,19 @@ public class ProductoServiceImpl implements ProductoService {
 	@Autowired
 	private ProductoEmpresaDAO productoEmpresaDAO;
 
+	@Autowired
+	private SubcategoriaDAO subcategoriaDAO;
+
 	@Override
 	public List<Producto> findAll() {
-		return productoDAO.findAll();
+		List<Producto> salida = productoDAO.findAll();
+		for(Producto p: salida) {
+			Subcategoria s = subcategoriaDAO.findByIdModel(p.getSubcategoria().getIdSub());
+			Categoria c = categoriaDAO.findByIdModel(s.getCategoria().getIdCat());
+			s.setCategoria(c);
+			p.setSubcategoria(s);
+		}
+		return salida;
 	}
 
 	@Override
