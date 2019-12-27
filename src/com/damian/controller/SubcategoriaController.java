@@ -66,7 +66,7 @@ public class SubcategoriaController {
 		} catch (NotEmptyException e) {
 			ra.addFlashAttribute("subcategoria_asociado", "subcategoria_asociado");
 		}
-		return "redirect:/subcategoria";
+		return "redirect:/categoria";
 
 	}
 
