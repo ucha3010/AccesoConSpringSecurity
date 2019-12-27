@@ -136,7 +136,7 @@ public class FacturaDAOImpl implements FacturaDAO {
 		List<ModelFactura> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelFactura.class));
 		List<Factura> eList = new ArrayList<>();
 		for (ModelFactura mf : mpList) {
-			eList.add(converterFactura.convertAll(mf));
+			eList.add(converterFactura.convert(mf));
 		}
 		return eList;
 	}

@@ -112,7 +112,7 @@ public class EstadoDAOImpl implements EstadoDAO {
 		List<ModelEstado> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelEstado.class));
 		List<Estado> eList = new ArrayList<>();
 		for (ModelEstado me : mpList) {
-			eList.add(converterEstado.convertAll(me));
+			eList.add(converterEstado.convert(me));
 		}
 		return eList;
 	}
