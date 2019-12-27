@@ -19,6 +19,11 @@
 		<div class="col-xs-12 col-md-4 pt-2 border-int-dam">
 			<sec:authorize access="isRememberMe()">
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/formaPago"/>"'>
+						<fmt:message key="label.Payment.methods" />
+					</button>
+				</sec:authorize>
+				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/estado"/>"'>
 						<fmt:message key="label.states" />
 					</button>
@@ -51,6 +56,11 @@
 			</sec:authorize>
 	
 			<sec:authorize access="isFullyAuthenticated()">
+				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/formaPago"/>"'>
+						<fmt:message key="label.Payment.methods" />
+					</button>
+				</sec:authorize>
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/estado"/>"'>
 						<fmt:message key="label.states" />

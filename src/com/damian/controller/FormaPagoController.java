@@ -24,7 +24,7 @@ public class FormaPagoController {
 	@RequestMapping("/formaPago")
 	public ModelAndView getAll(ModelAndView modelAndView) {
 		modelAndView.addObject("formaPagos", formaPagoService.findAll());
-		modelAndView.setViewName("formaPagos");
+		modelAndView.setViewName("formasPago");
 		return modelAndView;
 	}
 
