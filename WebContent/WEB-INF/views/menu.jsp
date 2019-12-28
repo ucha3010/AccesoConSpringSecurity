@@ -16,7 +16,7 @@
 			</a>
 		</div>
 		
-		<div class="col-xs-12 col-md-4 pt-2 border-int-dam">
+		<div class="col-xs-12 col-md-6 pt-2 border-int-dam">
 			<sec:authorize access="isRememberMe()">
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">
 					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/categoria"/>"'>
@@ -104,7 +104,7 @@
 			</sec:authorize>
 		</div>
 		
-		<div class="col-xs-12 col-md-6 pt-2 border-int-dam">
+		<div class="col-xs-12 col-md-4 pt-2 border-int-dam box-user-dam">
 			<sec:authorize access="!isAuthenticated()">
 				<button type="button" class="btn btn-info float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/nuevo'/>"'>
 					<fmt:message key="label.New.user" />

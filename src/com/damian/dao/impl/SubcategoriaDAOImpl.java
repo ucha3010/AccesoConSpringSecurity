@@ -121,7 +121,7 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 				BeanPropertyRowMapper.newInstance(ModelSubcategoria.class));
 		List<Subcategoria> sList = new ArrayList<>();
 		for (ModelSubcategoria ms : msList) {
-			sList.add(converterSubcategoria.convert(ms));
+			sList.add(converterSubcategoria.convertAll(ms));
 		}
 		return sList;
 	}

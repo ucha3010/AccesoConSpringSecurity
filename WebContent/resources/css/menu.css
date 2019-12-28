@@ -80,6 +80,11 @@ button:hover{
 	
 }
 
+.box-user-dam{
+	max-width: 20%;
+	padding: 0;
+}
+
 #logoImg {
 	height: 5rem;
 	opacity: 1.0;

@@ -252,7 +252,7 @@ public class ConverterRellenaObjeto {
 
 	public void rellenaSubcategoria(Subcategoria s, ModelSubcategoria ms) {
 
-		s.setCategoria(categoriaDAO.findByIdModel(ms.getIdCat()));
+//		s.setCategoria(categoriaDAO.findByIdModel(ms.getIdCat()));
 		s.setProductos(productoDAO.findByIdSubModel(ms.getIdSub()));
 
 	}

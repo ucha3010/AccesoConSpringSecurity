@@ -138,7 +138,7 @@ public class ProductoDAOImpl implements ProductoDAO {
 		List<ModelProducto> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelProducto.class));
 		List<Producto> eList = new ArrayList<>();
 		for (ModelProducto mp : mpList) {
-			eList.add(converterProducto.convertAll(mp));
+			eList.add(converterProducto.convert(mp));
 		}
 		return eList;
 	}

@@ -144,7 +144,22 @@
 											</button>
 										</td>
 									</sec:authorize>
-									<td>Combo con productos</td>
+									<c:set var="productos" value="${subcategoria.productos}" scope="page" />
+<!-- 									<td> -->
+									
+<%-- 										<c:forEach items="${productos}" var="producto"> --%>
+<%-- 											<c:out value="${producto.descripcion}" /><br/> --%>
+<%-- 										</c:forEach> --%>
+<!-- 									</td> -->
+									<td>
+										<c:if test="${not empty subcategoria.productos}">
+											<select name="selectProducto">
+												<c:forEach items="${productos}" var="producto">
+													<option value="${producto.idPro}"><c:out value="${producto.descripcion}" /></option>
+												</c:forEach>
+											</select>
+										</c:if>
+									</td>
 							    </tr>
 							</c:forEach>
 						</c:forEach>
