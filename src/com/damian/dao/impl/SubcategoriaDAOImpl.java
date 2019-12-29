@@ -83,17 +83,17 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 		if (subcategoria.getIdSub() > 0) {
 			return update(subcategoria);
 		} else {
-			ModelSubcategoria me = converterSubcategoria.convert(subcategoria);
+			ModelSubcategoria ms = converterSubcategoria.convert(subcategoria);
 			String sql = "INSERT INTO " + TABLA + " (nombre, idCat) VALUES (?, ?)";
-			return jdbcTemplate.update(sql, me.getNombre(), me.getIdCat());
+			return jdbcTemplate.update(sql, ms.getNombre(), ms.getIdCat());
 		}
 	}
 
 	@Override
 	public int update(Subcategoria subcategoria) {
-		ModelSubcategoria me = converterSubcategoria.convert(subcategoria);
+		ModelSubcategoria ms = converterSubcategoria.convert(subcategoria);
 		String sql = "UPDATE " + TABLA + " SET nombre=?, idCat=? " + "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, me.getNombre(), me.getIdCat(), me.getIdSub());
+		return jdbcTemplate.update(sql, ms.getNombre(), ms.getIdCat(), ms.getIdSub());
 	}
 
 	@Override

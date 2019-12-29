@@ -13,10 +13,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Subcategoria;
+import com.damian.service.CategoriaService;
 import com.damian.service.SubcategoriaService;
 
 @Controller
 public class SubcategoriaController {
+
+	@Autowired
+	private CategoriaService categoriaService;
 
 	@Autowired
 	private SubcategoriaService subcategoriaService;
@@ -35,13 +39,14 @@ public class SubcategoriaController {
 			subcategoria = subcategoriaService.findById(idSub);
 		}
 		modelAndView.addObject("subcategoria", subcategoria);
+		modelAndView.addObject("categorias", categoriaService.findAll());
 		modelAndView.setViewName("subcategoria");
 		return modelAndView;
 	}
 
 	@RequestMapping(value = { "/subcategoria/save" }, method = RequestMethod.POST)
-	public String saveSubcategoria(@ModelAttribute("subcategoria") Subcategoria subcategoria, BindingResult result, Model model,
-			RedirectAttributes ra) {
+	public String saveSubcategoria(@ModelAttribute("subcategoria") Subcategoria subcategoria, BindingResult result,
+			Model model, RedirectAttributes ra) {
 		if (result.hasErrors()) {
 			// System.out.println(result.getAllErrors());
 			// return "subcategoria";
@@ -54,7 +59,7 @@ public class SubcategoriaController {
 		if (nueva) {
 			ra.addFlashAttribute("subcategoria_agregado", "subcategoria_agregado");
 		}
-		return "redirect:/subcategoria";
+		return "redirect:/categoria";
 	}
 
 	@RequestMapping("/subcategoria/delete/{idSub}")

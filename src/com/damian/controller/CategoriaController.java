@@ -58,7 +58,7 @@ public class CategoriaController {
 	}
 
 	@RequestMapping("/categoria/delete/{idCat}")
-	public String deleteUser(@PathVariable("idCat") int idCat, RedirectAttributes ra) {
+	public String deleteCategoria(@PathVariable("idCat") int idCat, RedirectAttributes ra) {
 
 		try {
 			categoriaService.delete(idCat);

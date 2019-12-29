@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.damian.dao.CategoriaDAO;
 import com.damian.dao.DatosPersonalesDAO;
 import com.damian.dao.DireccionDao;
 import com.damian.dao.DireccionEmpresaDAO;
@@ -51,9 +50,6 @@ import com.damian.pojo.UsuarioRol;
 
 @Component
 public class ConverterRellenaObjeto {
-
-	@Autowired
-	private CategoriaDAO categoriaDAO;
 
 	@Autowired
 	private DatosPersonalesDAO datosPersonalesDAO;
@@ -219,7 +215,7 @@ public class ConverterRellenaObjeto {
 		if (!pfList.isEmpty()) {
 			p.setProductoFacturaList(pfList);
 		}
-		
+
 		p.setSubcategoria(subcategoriaDAO.findByIdModel(mp.getIdSub()));
 
 	}
@@ -252,7 +248,7 @@ public class ConverterRellenaObjeto {
 
 	public void rellenaSubcategoria(Subcategoria s, ModelSubcategoria ms) {
 
-//		s.setCategoria(categoriaDAO.findByIdModel(ms.getIdCat()));
+		// s.setCategoria(categoriaDAO.findByIdModel(ms.getIdCat()));
 		s.setProductos(productoDAO.findByIdSubModel(ms.getIdSub()));
 
 	}

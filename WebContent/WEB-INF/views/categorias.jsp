@@ -106,6 +106,30 @@
 					<tbody>
 						<c:forEach items="${categorias}" var="categoria">
 							<c:set var="subcategorias" value="${categoria.subcategorias}" scope="page" />
+							
+							<c:if test="${empty subcategorias}">
+								<tr>
+									<td><c:out value="${categoria.nombre}" /></td>
+									<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
+										<td class="sin_padding">
+											<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/categoria/${categoria.idCat}' />"'>
+											  <img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+											</button>
+										</td>
+										<td class="sin_padding">
+											<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${categoria.idCat})" >
+											  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+											</button>
+										</td>
+									</sec:authorize>
+									<td></td>
+									<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
+										<td colspan="2"></td>
+									</sec:authorize>
+									<td></td>
+								</tr>
+							</c:if>
+							
 							<c:set var="repetido" value="false" scope="page" />
 							<c:forEach items="${subcategorias}" var="subcategoria">
 							    <tr>
@@ -145,15 +169,9 @@
 										</td>
 									</sec:authorize>
 									<c:set var="productos" value="${subcategoria.productos}" scope="page" />
-<!-- 									<td> -->
-									
-<%-- 										<c:forEach items="${productos}" var="producto"> --%>
-<%-- 											<c:out value="${producto.descripcion}" /><br/> --%>
-<%-- 										</c:forEach> --%>
-<!-- 									</td> -->
 									<td>
 										<c:if test="${not empty subcategoria.productos}">
-											<select name="selectProducto">
+											<select name="selectProducto" class="border-radius-dam">
 												<c:forEach items="${productos}" var="producto">
 													<option value="${producto.idPro}"><c:out value="${producto.descripcion}" /></option>
 												</c:forEach>

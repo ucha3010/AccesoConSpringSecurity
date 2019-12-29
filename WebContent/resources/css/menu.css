@@ -6,6 +6,10 @@
 	display: inline-block;	
 }
 
+.border-radius-dam {
+	border-radius: 0.5rem;
+}
+
 .bg-color-white-dam {
 	background-color: #fff;
 }
@@ -56,6 +60,9 @@ button:hover{
 	color: #fff;
 }
 
+.form-control{
+	height: auto;
+}
 
 /*Menu*************************************************/
 .margin-header{

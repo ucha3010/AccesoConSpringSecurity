@@ -49,10 +49,8 @@ public class CategoriaServiceImpl implements CategoriaService {
 	@Override
 	public int delete(int id) throws NotEmptyException {
 		List<Subcategoria> subcategoriaList = subcategoriaService.findByIdCatModel(id);
-		if (subcategoriaList != null) {
-			for (Subcategoria s : subcategoriaList) {
-				subcategoriaService.delete(s.getIdSub());
-			}
+		if (subcategoriaList != null && !subcategoriaList.isEmpty()) {
+			throw new NotEmptyException("Tiene asociado subcategorias");
 		}
 		return categoriaDAO.delete(id);
 	}
