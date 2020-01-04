@@ -120,7 +120,7 @@
 					<th onclick="sortTable(${count})"><fmt:message key="label.Phone" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="sortTable(${count})"><fmt:message key="label.Fax" /></th>
-					<th class="width-50"><fmt:message key="label.Extras" /></th>
+					<th class="width-100"><fmt:message key="label.Extras" /></th>
 				</tr>
 			</thead>
 			<tbody>
