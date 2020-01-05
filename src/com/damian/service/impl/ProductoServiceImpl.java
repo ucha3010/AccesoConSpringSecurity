@@ -83,7 +83,8 @@ public class ProductoServiceImpl implements ProductoService {
 		}
 		return productoDAO.delete(id);
 	}
-	
+
+	@Override
 	public List<Producto> findByIdList(int id){
 		return productoDAO.findByIdList(id);
 	}

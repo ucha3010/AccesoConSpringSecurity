@@ -28,6 +28,14 @@ public class FacturaController {
 		return modelAndView;
 	}
 
+	@RequestMapping("/factura/filtered/{idFac}")
+	public ModelAndView getFiltered(ModelAndView modelAndView, @PathVariable("idFac") int idFac) {
+		modelAndView.addObject("facturas", facturaService.findByIdList(idFac));
+		modelAndView.addObject("estoy", "factura");
+		modelAndView.setViewName("facturas");
+		return modelAndView;
+	}
+
 	@RequestMapping("/factura/{idFac}")
 	public ModelAndView getFactura(ModelAndView modelAndView, @PathVariable("idFac") int idFac) {
 		Factura factura = new Factura();

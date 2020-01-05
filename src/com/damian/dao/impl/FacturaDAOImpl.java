@@ -85,11 +85,11 @@ public class FacturaDAOImpl implements FacturaDAO {
 		} else {
 			ModelFactura mf = converterFactura.convert(factura);
 			String sql = "INSERT INTO " + TABLA
-					+ " (compra, ivaTotal, descuentoTotal, fechaCompra, fechaEntrega, idEst, direccionEntrega, observaciones, idFor, creadoPor) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ " (compra, ivaTotal, descuentoTotal, importeTotal, fechaCompra, fechaEntrega, idEst, direccionEntrega, observaciones, idFor, creadoPor) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getDescuentoTotal(),
-					mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(),
-					mf.getObservaciones(), mf.getIdFor(), mf.getCreadoPor());
+					mf.getImporteTotal(), mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(),
+					mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(), mf.getCreadoPor());
 		}
 	}
 
@@ -97,11 +97,11 @@ public class FacturaDAOImpl implements FacturaDAO {
 	public int update(Factura factura) {
 		ModelFactura mf = converterFactura.convert(factura);
 		String sql = "UPDATE " + TABLA
-				+ " SET compra=?, ivaTotal=?, descuentoTotal=?, fechaCompra=?, fechaEntrega=?, idEst=?, direccionEntrega=?, observaciones=?, idFor=?, creadoPor=? "
+				+ " SET compra=?, ivaTotal=?, descuentoTotal=?, importeTotal=?, fechaCompra=?, fechaEntrega=?, idEst=?, direccionEntrega=?, observaciones=?, idFor=?, creadoPor=? "
 				+ "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getDescuentoTotal(), mf.getFechaCompra(),
-				mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(), mf.getCreadoPor(), 
-				mf.getIdFac());
+		return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getDescuentoTotal(), mf.getImporteTotal(),
+				mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(),
+				mf.getObservaciones(), mf.getIdFor(), mf.getCreadoPor(), mf.getIdFac());
 	}
 
 	@Override
@@ -147,6 +147,7 @@ public class FacturaDAOImpl implements FacturaDAO {
 		mf.setCompra(rs.getBoolean("compra"));
 		mf.setIvaTotal(rs.getDouble("ivaTotal"));
 		mf.setDescuentoTotal(rs.getDouble("descuentoTotal"));
+		mf.setImporteTotal(rs.getDouble("importeTotal"));
 		mf.setFechaCompra(rs.getDate("fechaCompra"));
 		mf.setFechaEntrega(rs.getDate("fechaEntrega"));
 		mf.setIdEst(rs.getInt("idEst"));
@@ -155,5 +156,12 @@ public class FacturaDAOImpl implements FacturaDAO {
 		mf.setCreadoPor(rs.getString("creadoPor"));
 		mf.setIdFor(rs.getInt("idFor"));
 		return mf;
+	}
+
+	@Override
+	public List<Factura> findByIdList(int id) {
+		List<Factura> facturas = new ArrayList<>();
+		facturas.add(findById(id));
+		return facturas;
 	}
 }

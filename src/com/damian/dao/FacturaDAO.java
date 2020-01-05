@@ -24,4 +24,6 @@ public interface FacturaDAO {
 
 	public int getMaxId();
 
+	public List<Factura> findByIdList(int id);
+
 }

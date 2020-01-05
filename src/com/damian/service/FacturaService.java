@@ -23,4 +23,6 @@ public interface FacturaService {
 
 	public List<Factura> findByIdForModel(int idFor);
 
+	public List<Factura> findByIdList(int id);
+
 }

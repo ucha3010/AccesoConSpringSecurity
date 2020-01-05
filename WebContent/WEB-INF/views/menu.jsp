@@ -34,6 +34,11 @@
 					</button>
 				</sec:authorize>
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">
+					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/factura"/>"'>
+						<fmt:message key="label.Bills" />
+					</button>
+				</sec:authorize>
+				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">
 					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/producto"/>"'>
 						<fmt:message key="Products" />
 					</button>
@@ -74,6 +79,11 @@
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/estado"/>"'>
 						<fmt:message key="label.states" />
+					</button>
+				</sec:authorize>
+				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">
+					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/factura"/>"'>
+						<fmt:message key="label.Bills" />
 					</button>
 				</sec:authorize>
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">

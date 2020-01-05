@@ -4,11 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 public class Factura {
-	
+
 	private int idFac;
 	private boolean compra;
 	private double ivaTotal;
 	private double descuentoTotal;
+	private double importeTotal;
 	private Date fechaCompra;
 	private Date fechaEntrega;
 	private String direccionEntrega;
@@ -17,9 +18,9 @@ public class Factura {
 	private List<ProductoFactura> productoFacturaList;
 	private Estado estado;
 	private FormaPago formaPago;
-	
+
 	public Factura() {
-		
+
 	}
 
 	/**
@@ -27,30 +28,25 @@ public class Factura {
 	 * @param compra
 	 * @param ivaTotal
 	 * @param descuentoTotal
+	 * @param importeTotal
 	 * @param fechaCompra
 	 * @param fechaEntrega
 	 * @param direccionEntrega
 	 * @param observaciones
 	 * @param creadoPor
-	 * @param productoFacturaList
-	 * @param estado
-	 * @param formaPago
 	 */
-	public Factura(int idFac, boolean compra, double ivaTotal, double descuentoTotal, Date fechaCompra,
-			Date fechaEntrega, String direccionEntrega, String observaciones, String creadoPor,
-			List<ProductoFactura> productoFacturaList, Estado estado, FormaPago formaPago) {
+	public Factura(int idFac, boolean compra, double ivaTotal, double descuentoTotal, double importeTotal,
+			Date fechaCompra, Date fechaEntrega, String direccionEntrega, String observaciones, String creadoPor) {
 		this.idFac = idFac;
 		this.compra = compra;
 		this.ivaTotal = ivaTotal;
 		this.descuentoTotal = descuentoTotal;
+		this.importeTotal = importeTotal;
 		this.fechaCompra = fechaCompra;
 		this.fechaEntrega = fechaEntrega;
 		this.direccionEntrega = direccionEntrega;
 		this.observaciones = observaciones;
 		this.creadoPor = creadoPor;
-		this.productoFacturaList = productoFacturaList;
-		this.estado = estado;
-		this.formaPago = formaPago;
 	}
 
 	/**
@@ -61,7 +57,8 @@ public class Factura {
 	}
 
 	/**
-	 * @param idFac the idFac to set
+	 * @param idFac
+	 *            the idFac to set
 	 */
 	public void setIdFac(int idFac) {
 		this.idFac = idFac;
@@ -75,7 +72,8 @@ public class Factura {
 	}
 
 	/**
-	 * @param compra the compra to set
+	 * @param compra
+	 *            the compra to set
 	 */
 	public void setCompra(boolean compra) {
 		this.compra = compra;
@@ -89,7 +87,8 @@ public class Factura {
 	}
 
 	/**
-	 * @param ivaTotal the ivaTotal to set
+	 * @param ivaTotal
+	 *            the ivaTotal to set
 	 */
 	public void setIvaTotal(double ivaTotal) {
 		this.ivaTotal = ivaTotal;
@@ -103,10 +102,26 @@ public class Factura {
 	}
 
 	/**
-	 * @param descuentoTotal the descuentoTotal to set
+	 * @param descuentoTotal
+	 *            the descuentoTotal to set
 	 */
 	public void setDescuentoTotal(double descuentoTotal) {
 		this.descuentoTotal = descuentoTotal;
+	}
+
+	/**
+	 * @return the importeTotal
+	 */
+	public double getImporteTotal() {
+		return importeTotal;
+	}
+
+	/**
+	 * @param importeTotal
+	 *            the importeTotal to set
+	 */
+	public void setImporteTotal(double importeTotal) {
+		this.importeTotal = importeTotal;
 	}
 
 	/**
@@ -117,7 +132,8 @@ public class Factura {
 	}
 
 	/**
-	 * @param fechaCompra the fechaCompra to set
+	 * @param fechaCompra
+	 *            the fechaCompra to set
 	 */
 	public void setFechaCompra(Date fechaCompra) {
 		this.fechaCompra = fechaCompra;
@@ -131,7 +147,8 @@ public class Factura {
 	}
 
 	/**
-	 * @param fechaEntrega the fechaEntrega to set
+	 * @param fechaEntrega
+	 *            the fechaEntrega to set
 	 */
 	public void setFechaEntrega(Date fechaEntrega) {
 		this.fechaEntrega = fechaEntrega;
@@ -145,7 +162,8 @@ public class Factura {
 	}
 
 	/**
-	 * @param direccionEntrega the direccionEntrega to set
+	 * @param direccionEntrega
+	 *            the direccionEntrega to set
 	 */
 	public void setDireccionEntrega(String direccionEntrega) {
 		this.direccionEntrega = direccionEntrega;
@@ -159,7 +177,8 @@ public class Factura {
 	}
 
 	/**
-	 * @param observaciones the observaciones to set
+	 * @param observaciones
+	 *            the observaciones to set
 	 */
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
@@ -173,7 +192,8 @@ public class Factura {
 	}
 
 	/**
-	 * @param creadoPor the creadoPor to set
+	 * @param creadoPor
+	 *            the creadoPor to set
 	 */
 	public void setCreadoPor(String creadoPor) {
 		this.creadoPor = creadoPor;
@@ -187,7 +207,8 @@ public class Factura {
 	}
 
 	/**
-	 * @param productoFacturaList the productoFacturaList to set
+	 * @param productoFacturaList
+	 *            the productoFacturaList to set
 	 */
 	public void setProductoFacturaList(List<ProductoFactura> productoFacturaList) {
 		this.productoFacturaList = productoFacturaList;
@@ -201,7 +222,8 @@ public class Factura {
 	}
 
 	/**
-	 * @param estado the estado to set
+	 * @param estado
+	 *            the estado to set
 	 */
 	public void setEstado(Estado estado) {
 		this.estado = estado;
@@ -215,21 +237,24 @@ public class Factura {
 	}
 
 	/**
-	 * @param formaPago the formaPago to set
+	 * @param formaPago
+	 *            the formaPago to set
 	 */
 	public void setFormaPago(FormaPago formaPago) {
 		this.formaPago = formaPago;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "Factura [idFac=" + idFac + ", compra=" + compra + ", ivaTotal=" + ivaTotal + ", descuentoTotal="
-				+ descuentoTotal + ", fechaCompra=" + fechaCompra + ", fechaEntrega=" + fechaEntrega
-				+ ", direccionEntrega=" + direccionEntrega + ", observaciones=" + observaciones + ", creadoPor="
-				+ creadoPor + "]";
+				+ descuentoTotal + ", importeTotal=" + importeTotal + ", fechaCompra=" + fechaCompra + ", fechaEntrega="
+				+ fechaEntrega + ", direccionEntrega=" + direccionEntrega + ", observaciones=" + observaciones
+				+ ", creadoPor=" + creadoPor + ", estado=" + estado + ", formaPago=" + formaPago + "]";
 	}
 
 }
