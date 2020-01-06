@@ -11,7 +11,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.converter.ConverterProductoFactura;
 import com.damian.dao.model.ModelProductoFactura;
-import com.damian.pojo.AuxString;
 import com.damian.pojo.ProductoFactura;
 import com.damian.service.FacturaService;
 import com.damian.service.ProductoFacturaService;
@@ -37,9 +36,7 @@ public class ProductoFacturaController {
 	@RequestMapping("/productoFactura/producto/{idPro}")
 	public ModelAndView getProductos(ModelAndView modelAndView, @PathVariable("idPro") int idPro) {
 		modelAndView.addObject("producto", productoService.findById(idPro));
-		modelAndView.addObject("auxString", new AuxString());
 		modelAndView.addObject("productoFacturas", productoFacturaService.findByIdPro(idPro));
-		modelAndView.addObject("facturas", facturaService.findAll());
 		modelAndView.setViewName("productoFactura");
 		return modelAndView;
 	}
