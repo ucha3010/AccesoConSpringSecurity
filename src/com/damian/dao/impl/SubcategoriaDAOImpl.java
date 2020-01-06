@@ -39,7 +39,7 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 
 		String sql = "SELECT * FROM " + TABLA + " ORDER BY nombre ASC";
 
-		return lista(sql);
+		return lista(sql, true);
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 			@Override
 			public Subcategoria extractData(ResultSet rs) throws SQLException, DataAccessException {
 				if (rs.next()) {
-					return converterSubcategoria.convertAll(mapeo(rs));
+					return converterSubcategoria.convertAll(mapeo(rs), true);
 				}
 
 				return null;
@@ -108,7 +108,7 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 
 		String sql = "SELECT * FROM " + TABLA + " WHERE idCat = " + idCat + " ORDER BY nombre ASC";
 
-		return lista(sql);
+		return lista(sql, false);
 	}
 
 	@Override
@@ -116,12 +116,12 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
 	}
 
-	private List<Subcategoria> lista(String sql) {
+	private List<Subcategoria> lista(String sql, boolean cargoCategoria) {
 		List<ModelSubcategoria> msList = jdbcTemplate.query(sql,
 				BeanPropertyRowMapper.newInstance(ModelSubcategoria.class));
 		List<Subcategoria> sList = new ArrayList<>();
 		for (ModelSubcategoria ms : msList) {
-			sList.add(converterSubcategoria.convertAll(ms));
+			sList.add(converterSubcategoria.convertAll(ms, cargoCategoria));
 		}
 		return sList;
 	}

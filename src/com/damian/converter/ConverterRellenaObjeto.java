@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.damian.dao.CategoriaDAO;
 import com.damian.dao.DatosPersonalesDAO;
 import com.damian.dao.DireccionDao;
 import com.damian.dao.DireccionEmpresaDAO;
@@ -53,6 +54,9 @@ public class ConverterRellenaObjeto {
 
 	@Autowired
 	private DatosPersonalesDAO datosPersonalesDAO;
+
+	@Autowired
+	private CategoriaDAO categoriaDAO;
 
 	@Autowired
 	private DireccionDao direccionDao;
@@ -246,9 +250,11 @@ public class ConverterRellenaObjeto {
 
 	}
 
-	public void rellenaSubcategoria(Subcategoria s, ModelSubcategoria ms) {
+	public void rellenaSubcategoria(Subcategoria s, ModelSubcategoria ms, boolean cargoCategoria) {
 
-		// s.setCategoria(categoriaDAO.findByIdModel(ms.getIdCat()));
+		if (cargoCategoria) {
+			s.setCategoria(categoriaDAO.findByIdModel(ms.getIdCat()));
+		}
 		s.setProductos(productoDAO.findByIdSubModel(ms.getIdSub()));
 
 	}

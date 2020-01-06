@@ -13,10 +13,10 @@ public class ConverterSubcategoria {
 	@Autowired
 	private ConverterRellenaObjeto converterRellenaObjeto;
 
-	public Subcategoria convertAll(ModelSubcategoria ms) {
+	public Subcategoria convertAll(ModelSubcategoria ms, boolean cargoCategoria) {
 
 		Subcategoria s = convert(ms);
-		converterRellenaObjeto.rellenaSubcategoria(s, ms);
+		converterRellenaObjeto.rellenaSubcategoria(s, ms, cargoCategoria);
 
 		return s;
 

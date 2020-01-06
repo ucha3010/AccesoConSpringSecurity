@@ -13,17 +13,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Producto;
+import com.damian.service.CategoriaService;
 import com.damian.service.ProductoService;
-import com.damian.service.SubcategoriaService;
 
 @Controller
 public class ProductoController {
 
 	@Autowired
 	private ProductoService productoService;
-	
+
 	@Autowired
-	private SubcategoriaService subcategoriaService;
+	private CategoriaService categoriaService;
 
 	@RequestMapping("/producto")
 	public ModelAndView getAll(ModelAndView modelAndView) {
@@ -48,7 +48,7 @@ public class ProductoController {
 			producto = productoService.findById(idPro);
 		}
 		modelAndView.addObject("producto", producto);
-		modelAndView.addObject("subcategorias", subcategoriaService.findAll());
+		modelAndView.addObject("categorias", categoriaService.findAll());
 		modelAndView.setViewName("producto");
 		return modelAndView;
 	}

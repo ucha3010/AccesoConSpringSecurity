@@ -150,15 +150,15 @@
 			</div>
 		</div>
 		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">	
-				<label for="fechaCompra"><fmt:message key="label.date.purchase" /></label>
-		    	<sf:input type="date" class="form-control" id="fechaCompra" path="fechaCompra"/>
-			</div>
-		</div>
-		<br/>
+<!-- 		<div class="form-row">		 -->
+<!-- 			<div class="col-sm-3"> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-xs-12 col-sm-4">	 -->
+<%-- 				<label for="fechaCompra"><fmt:message key="label.date.purchase" /></label> --%>
+<%-- 		    	<sf:input type="date" class="form-control" id="fechaCompra" path="fechaCompra"/> --%>
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 		<br/> -->
 		<div class="form-row">		
 			<div class="col-sm-3">
 			</div>
@@ -217,7 +217,11 @@
 			<div class="col-xs-12 col-sm-4">
 				<label for="subcategoria"><fmt:message key="label.Subcategory" /></label>
 	        	<sf:select path="subcategoria.idSub" class="form-control" id="subcategoria">
-	            	<sf:options items="${subcategorias}" itemValue="idSub" itemLabel="nombre" />
+	        		<c:forEach var="categoria" items="${categorias}">
+	        			<c:forEach var="sub" items="${categoria.subcategorias}">
+	        				<sf:option value="${sub.idSub}" label="${categoria.nombre} - ${sub.nombre}" />
+	        			</c:forEach>
+	        		</c:forEach>
 	        	</sf:select>
 			</div>
 		</div>

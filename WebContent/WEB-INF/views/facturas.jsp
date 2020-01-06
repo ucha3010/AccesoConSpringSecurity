@@ -40,7 +40,7 @@
 					var importeNum = ${fac.importeTotal};
 					var importe = importeNum.toString();
 					if(creado.toLowerCase().indexOf(texto) !== -1 || estado.indexOf(texto) !== -1 || importe.toLowerCase().indexOf(texto) !== -1){
-						resultado.innerHTML += "<a href=\"<c:url value='/factura/filtered/${fac.idFac}' />\">${fac.idFac} ${fac.fechaCompra} ${fac.importeTotal} ${fac.creadoPor}</a>";
+						resultado.innerHTML += "<a href=\"<c:url value='/factura/filtered/${fac.idFac}' />\">${fac.idFac} ** <fmt:formatDate value='${fac.fechaCompra}' pattern='dd/MM/yyyy'/> ** <fmt:formatNumber type='currency' value='${fac.importeTotal}'/> ** ${fac.creadoPor}</a>";
 					}
 				</c:forEach>
 				$(".collapse").collapse('show');
@@ -83,19 +83,19 @@
 						<th></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
 					</sec:authorize>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Bill.id" /></th>
+					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.Bill.id" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Purchase.Sale" /></th>
+					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.Purchase.Sale" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.date.purchase" /></th>
+					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.date.purchase" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Total.dicount" /></th>
+					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.Total.dicount" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Total.tax" /></th>
+					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.Total.tax" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Total.amount" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.state" /></th>
+					<th onclick="sortTable(${count})" colspan="2" class="text-center"><fmt:message key="label.Total.amount" /></th>
+					<c:set var="count" value="${count + 2}" scope="page"/>
+					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.state" /></th>
 					<th class="width-50"><fmt:message key="label.Extras" /></th>
 				</tr>
 			</thead>
@@ -109,17 +109,18 @@
 								</button>
 							</td>
 						</sec:authorize>
-						<td><c:out value="${factura.idFac}" /></td>
+						<td class="text-center"><c:out value="${factura.idFac}" /></td>
 						<c:if test="${factura.compra}">
-							<td><fmt:message key="label.Purchase" /></td>
+							<td class="text-center"><fmt:message key="label.Purchase" /></td>
 						</c:if>
 						<c:if test="${not factura.compra}">
-							<td><fmt:message key="label.Sale" /></td>
+							<td class="text-center"><fmt:message key="label.Sale" /></td>
 						</c:if>
-						<td><fmt:formatDate value="${factura.fechaCompra}" pattern="dd/MM/yyyy"/></td>
-						<td><c:out value="${factura.descuentoTotal}" /></td>	
-						<td><c:out value="${factura.ivaTotal}" /></td>	
-						<td><c:out value="${factura.importeTotal}" /></td>
+						<td class="text-center"><fmt:formatDate value="${factura.fechaCompra}" pattern="dd/MM/yyyy"/></td>
+						<td class="text-center"><fmt:formatNumber type="number" value="${factura.descuentoTotal}" minFractionDigits="2" />%</td>
+						<td class="text-center"><fmt:formatNumber type="number" value="${factura.ivaTotal}" minFractionDigits="2" />%</td>	
+						<td class="text-right"><fmt:formatNumber type="currency" value="${factura.importeTotal}" /></td>
+						<td class="width-15"></td>
 						<td><c:out value="${factura.estado.nombre}" /></td>
 						<td class="sin_padding">
 							<a title="<fmt:message key="Products" />" href='<c:url value='/productoFactura/factura/${factura.idFac}' />'>
