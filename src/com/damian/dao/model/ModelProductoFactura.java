@@ -8,6 +8,7 @@ public class ModelProductoFactura {
 	private double ivaProducto;
 	private double porcentajeDescuento;
 	private double precioUnitSinIva;
+	private double precioFinal;
 	private String observaciones;
 
 	public ModelProductoFactura() {
@@ -21,16 +22,18 @@ public class ModelProductoFactura {
 	 * @param ivaProducto
 	 * @param porcentajeDescuento
 	 * @param precioUnitSinIva
+	 * @param precioFinal
 	 * @param observaciones
 	 */
 	public ModelProductoFactura(int idPro, int idFac, int cantidad, double ivaProducto, double porcentajeDescuento,
-			double precioUnitSinIva, String observaciones) {
+			double precioUnitSinIva, double precioFinal, String observaciones) {
 		this.idPro = idPro;
 		this.idFac = idFac;
 		this.cantidad = cantidad;
 		this.ivaProducto = ivaProducto;
 		this.porcentajeDescuento = porcentajeDescuento;
 		this.precioUnitSinIva = precioUnitSinIva;
+		this.precioFinal = precioFinal;
 		this.observaciones = observaciones;
 	}
 
@@ -125,6 +128,21 @@ public class ModelProductoFactura {
 	}
 
 	/**
+	 * @return the precioFinal
+	 */
+	public double getPrecioFinal() {
+		return precioFinal;
+	}
+
+	/**
+	 * @param precioFinal
+	 *            the precioFinal to set
+	 */
+	public void setPrecioFinal(double precioFinal) {
+		this.precioFinal = precioFinal;
+	}
+
+	/**
 	 * @return the observaciones
 	 */
 	public String getObservaciones() {
@@ -148,7 +166,7 @@ public class ModelProductoFactura {
 	public String toString() {
 		return "ModelProductoFactura [idPro=" + idPro + ", idFac=" + idFac + ", cantidad=" + cantidad + ", ivaProducto="
 				+ ivaProducto + ", porcentajeDescuento=" + porcentajeDescuento + ", precioUnitSinIva="
-				+ precioUnitSinIva + ", observaciones=" + observaciones + "]";
+				+ precioUnitSinIva + ", precioFinal=" + precioFinal + ", observaciones=" + observaciones + "]";
 	}
 
 }

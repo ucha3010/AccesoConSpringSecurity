@@ -8,7 +8,9 @@ public class Factura {
 	private int idFac;
 	private boolean compra;
 	private double ivaTotal;
+	private double ivaImporteTotal;
 	private double descuentoTotal;
+	private double descuentoImporteTotal;
 	private double importeTotal;
 	private Date fechaCompra;
 	private Date fechaEntrega;
@@ -27,7 +29,9 @@ public class Factura {
 	 * @param idFac
 	 * @param compra
 	 * @param ivaTotal
+	 * @param ivaImporteTotal
 	 * @param descuentoTotal
+	 * @param descuentoImporteTotal
 	 * @param importeTotal
 	 * @param fechaCompra
 	 * @param fechaEntrega
@@ -35,12 +39,15 @@ public class Factura {
 	 * @param observaciones
 	 * @param creadoPor
 	 */
-	public Factura(int idFac, boolean compra, double ivaTotal, double descuentoTotal, double importeTotal,
-			Date fechaCompra, Date fechaEntrega, String direccionEntrega, String observaciones, String creadoPor) {
+	public Factura(int idFac, boolean compra, double ivaTotal, double ivaImporteTotal, double descuentoTotal,
+			double descuentoImporteTotal, double importeTotal, Date fechaCompra, Date fechaEntrega,
+			String direccionEntrega, String observaciones, String creadoPor) {
 		this.idFac = idFac;
 		this.compra = compra;
 		this.ivaTotal = ivaTotal;
+		this.ivaImporteTotal = ivaImporteTotal;
 		this.descuentoTotal = descuentoTotal;
+		this.descuentoImporteTotal = descuentoImporteTotal;
 		this.importeTotal = importeTotal;
 		this.fechaCompra = fechaCompra;
 		this.fechaEntrega = fechaEntrega;
@@ -95,6 +102,21 @@ public class Factura {
 	}
 
 	/**
+	 * @return the ivaImporteTotal
+	 */
+	public double getIvaImporteTotal() {
+		return ivaImporteTotal;
+	}
+
+	/**
+	 * @param ivaImporteTotal
+	 *            the ivaImporteTotal to set
+	 */
+	public void setIvaImporteTotal(double ivaImporteTotal) {
+		this.ivaImporteTotal = ivaImporteTotal;
+	}
+
+	/**
 	 * @return the descuentoTotal
 	 */
 	public double getDescuentoTotal() {
@@ -107,6 +129,21 @@ public class Factura {
 	 */
 	public void setDescuentoTotal(double descuentoTotal) {
 		this.descuentoTotal = descuentoTotal;
+	}
+
+	/**
+	 * @return the descuentoImporteTotal
+	 */
+	public double getDescuentoImporteTotal() {
+		return descuentoImporteTotal;
+	}
+
+	/**
+	 * @param descuentoImporteTotal
+	 *            the descuentoImporteTotal to set
+	 */
+	public void setDescuentoImporteTotal(double descuentoImporteTotal) {
+		this.descuentoImporteTotal = descuentoImporteTotal;
 	}
 
 	/**
@@ -251,10 +288,11 @@ public class Factura {
 	 */
 	@Override
 	public String toString() {
-		return "Factura [idFac=" + idFac + ", compra=" + compra + ", ivaTotal=" + ivaTotal + ", descuentoTotal="
-				+ descuentoTotal + ", importeTotal=" + importeTotal + ", fechaCompra=" + fechaCompra + ", fechaEntrega="
-				+ fechaEntrega + ", direccionEntrega=" + direccionEntrega + ", observaciones=" + observaciones
-				+ ", creadoPor=" + creadoPor + ", estado=" + estado + ", formaPago=" + formaPago + "]";
+		return "Factura [idFac=" + idFac + ", compra=" + compra + ", ivaTotal=" + ivaTotal + ", ivaImporteTotal="
+				+ ivaImporteTotal + ", descuentoTotal=" + descuentoTotal + ", descuentoImporteTotal="
+				+ descuentoImporteTotal + ", importeTotal=" + importeTotal + ", fechaCompra=" + fechaCompra
+				+ ", fechaEntrega=" + fechaEntrega + ", direccionEntrega=" + direccionEntrega + ", observaciones="
+				+ observaciones + ", creadoPor=" + creadoPor + ", formaPago=" + formaPago + "]";
 	}
 
 }

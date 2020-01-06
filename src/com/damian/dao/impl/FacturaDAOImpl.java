@@ -85,9 +85,9 @@ public class FacturaDAOImpl implements FacturaDAO {
 		} else {
 			ModelFactura mf = converterFactura.convert(factura);
 			String sql = "INSERT INTO " + TABLA
-					+ " (compra, ivaTotal, descuentoTotal, importeTotal, fechaCompra, fechaEntrega, idEst, direccionEntrega, observaciones, idFor, creadoPor) "
+					+ " (compra, ivaTotal, ivaImporteTotal, descuentoTotal, descuentoImporteTotal, importeTotal, fechaCompra, fechaEntrega, idEst, direccionEntrega, observaciones, idFor, creadoPor) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getDescuentoTotal(),
+			return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(), mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(),
 					mf.getImporteTotal(), mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(),
 					mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(), mf.getCreadoPor());
 		}
@@ -97,9 +97,9 @@ public class FacturaDAOImpl implements FacturaDAO {
 	public int update(Factura factura) {
 		ModelFactura mf = converterFactura.convert(factura);
 		String sql = "UPDATE " + TABLA
-				+ " SET compra=?, ivaTotal=?, descuentoTotal=?, importeTotal=?, fechaCompra=?, fechaEntrega=?, idEst=?, direccionEntrega=?, observaciones=?, idFor=?, creadoPor=? "
+				+ " SET compra=?, ivaTotal=?, ivaImporteTotal=?, descuentoTotal=?, descuentoImporteTotal=?, importeTotal=?, fechaCompra=?, fechaEntrega=?, idEst=?, direccionEntrega=?, observaciones=?, idFor=?, creadoPor=? "
 				+ "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getDescuentoTotal(), mf.getImporteTotal(),
+		return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(), mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(),
 				mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(),
 				mf.getObservaciones(), mf.getIdFor(), mf.getCreadoPor(), mf.getIdFac());
 	}
@@ -146,6 +146,8 @@ public class FacturaDAOImpl implements FacturaDAO {
 		mf.setIdFac(rs.getInt("idFac"));
 		mf.setCompra(rs.getBoolean("compra"));
 		mf.setIvaTotal(rs.getDouble("ivaTotal"));
+		mf.setIvaImporteTotal(rs.getDouble("ivaImporteTotal"));
+		mf.setDescuentoImporteTotal(rs.getDouble("descuentoImporteTotal"));
 		mf.setDescuentoTotal(rs.getDouble("descuentoTotal"));
 		mf.setImporteTotal(rs.getDouble("importeTotal"));
 		mf.setFechaCompra(rs.getDate("fechaCompra"));

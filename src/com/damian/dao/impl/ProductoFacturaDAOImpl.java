@@ -55,19 +55,21 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 	public void save(ProductoFactura productoFactura) {
 		ModelProductoFactura mpf = converterProductoFactura.convert(productoFactura);
 		String sql = "INSERT INTO " + TABLA
-				+ " (idPro, idFac, cantidad, ivaProducto, porcentajeDescuento, precioUnitSinIva, observaciones)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?)";
+				+ " (idPro, idFac, cantidad, ivaProducto, porcentajeDescuento, precioUnitSinIva, precioFinal, observaciones)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, mpf.getIdPro(), mpf.getIdFac(), mpf.getCantidad(), mpf.getIvaProducto(),
-				mpf.getPorcentajeDescuento(), mpf.getPrecioUnitSinIva(), mpf.getObservaciones());
+				mpf.getPorcentajeDescuento(), mpf.getPrecioUnitSinIva(), mpf.getPrecioFinal(), mpf.getObservaciones());
 	}
 
 	@Override
 	public void update(ProductoFactura productoFactura) {
 		ModelProductoFactura mpf = converterProductoFactura.convert(productoFactura);
-		String sql = "UPDATE " + TABLA + " SET porcentajeDescuento=?, precioUnitSinIva=?, observaciones=? " + "WHERE "
-				+ KEY1 + "=? AND " + KEY2 + "=?";
+		String sql = "UPDATE " + TABLA
+				+ " SET porcentajeDescuento=?, precioUnitSinIva=?, precioFinal=?, observaciones=? " + "WHERE " + KEY1
+				+ "=? AND " + KEY2 + "=?";
 		jdbcTemplate.update(sql, mpf.getCantidad(), mpf.getIvaProducto(), mpf.getPorcentajeDescuento(),
-				mpf.getPrecioUnitSinIva(), mpf.getObservaciones(), mpf.getIdPro(), mpf.getIdFac());
+				mpf.getPrecioUnitSinIva(), mpf.getPrecioFinal(), mpf.getObservaciones(), mpf.getIdPro(),
+				mpf.getIdFac());
 	}
 
 	@Override
@@ -146,6 +148,7 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 		mpf.setIvaProducto(rs.getDouble("ivaProducto"));
 		mpf.setPorcentajeDescuento(rs.getDouble("porcentajeDescuento"));
 		mpf.setPrecioUnitSinIva(rs.getDouble("precioUnitSinIva"));
+		mpf.setPrecioFinal(rs.getDouble("precioFinal"));
 		mpf.setObservaciones(rs.getString("observaciones"));
 
 		return mpf;

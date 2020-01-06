@@ -30,6 +30,10 @@ button:hover{
 	cursor: pointer;
 }
 
+.width-15{
+	width: 15px;
+}
+
 .width-35{
 	width: 35px;
 }

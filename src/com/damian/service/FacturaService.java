@@ -2,6 +2,8 @@ package com.damian.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Factura;
 
@@ -13,7 +15,7 @@ public interface FacturaService {
 
 	public Factura findByIdModel(int id);
 
-	public int save(Factura factura);
+	public int save(Factura factura, HttpServletRequest request);
 
 	public int update(Factura factura);
 

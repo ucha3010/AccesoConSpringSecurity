@@ -155,10 +155,15 @@
 						<c:if test="${language=='es_ES'}">selected</c:if>>
 						<fmt:message key="label.Spanish" />
 					</option>
-					<option value="en_US"
-						<c:if test="${language=='en_US'}">selected</c:if>>
+					<option value="en_IE"
+						<c:if test="${language=='en_IE'}">selected</c:if>>
 						<fmt:message key="label.English" />
 					</option>
+<!-- 					con en_US el símbolo del dinero pasa a ser $ y no € -->
+<!-- 					<option value="en_US" -->
+<%-- 						<c:if test="${language=='en_US'}">selected</c:if>> --%>
+<%-- 						<fmt:message key="label.English" /> --%>
+<!-- 					</option> -->
 				</select>
 			</form>
 		</div>

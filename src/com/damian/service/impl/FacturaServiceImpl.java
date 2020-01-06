@@ -1,17 +1,22 @@
 package com.damian.service.impl;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.damian.dao.EstadoDAO;
 import com.damian.dao.FacturaDAO;
+import com.damian.dao.FacturaEstadoDAO;
 import com.damian.dao.FormaPagoDAO;
 import com.damian.dao.ProductoFacturaDAO;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Estado;
 import com.damian.pojo.Factura;
+import com.damian.pojo.FacturaEstado;
 import com.damian.pojo.FormaPago;
 import com.damian.pojo.ProductoFactura;
 import com.damian.service.FacturaService;
@@ -26,6 +31,9 @@ public class FacturaServiceImpl implements FacturaService {
 	private EstadoDAO estadoDAO;
 
 	@Autowired
+	private FacturaEstadoDAO facturaEstadoDAO;
+
+	@Autowired
 	private FormaPagoDAO formaPagoDAO;
 
 	@Autowired
@@ -34,7 +42,7 @@ public class FacturaServiceImpl implements FacturaService {
 	@Override
 	public List<Factura> findAll() {
 		List<Factura> facturas = facturaDAO.findAll();
-		for(Factura factura:facturas) {
+		for (Factura factura : facturas) {
 			Estado estado = estadoDAO.findById(factura.getEstado().getIdEst());
 			FormaPago formaPago = formaPagoDAO.findById(factura.getFormaPago().getIdFor());
 			factura.setEstado(estado);
@@ -54,8 +62,12 @@ public class FacturaServiceImpl implements FacturaService {
 	}
 
 	@Override
-	public int save(Factura factura) {
-		return facturaDAO.save(factura);
+	public int save(Factura factura, HttpServletRequest request) {
+		facturaDAO.save(factura);
+		factura.setIdFac(facturaDAO.getMaxId());
+		saveFacturaEstado(factura, request);
+		return factura.getIdFac();
+
 	}
 
 	@Override
@@ -87,6 +99,26 @@ public class FacturaServiceImpl implements FacturaService {
 	@Override
 	public List<Factura> findByIdList(int id) {
 		return facturaDAO.findByIdList(id);
+	}
+
+	private void saveFacturaEstado(Factura factura, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		String creador;
+		if (context != null && context.getAuthentication() != null && context.getAuthentication().getName() != null
+				&& !context.getAuthentication().getName().isEmpty()) {
+			creador = context.getAuthentication().getName();
+		} else {
+			creador = "OWN USER";
+		}
+		FacturaEstado facturaEstado = new FacturaEstado();
+		facturaEstado.setFactura(factura);
+		facturaEstado.setEstado(factura.getEstado());
+		facturaEstado.setFecha(new Date());
+		facturaEstado.setCreadoPor(creador);
+		facturaEstadoDAO.save(facturaEstado);
+
 	}
 
 }

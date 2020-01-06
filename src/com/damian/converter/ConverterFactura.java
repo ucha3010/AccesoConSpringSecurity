@@ -29,7 +29,9 @@ public class ConverterFactura {
 		f.setIdFac(mf.getIdFac());
 		f.setCompra(mf.isCompra());
 		f.setIvaTotal(mf.getIvaTotal());
+		f.setIvaImporteTotal(mf.getIvaImporteTotal());
 		f.setDescuentoTotal(mf.getDescuentoTotal());
+		f.setDescuentoImporteTotal(mf.getDescuentoImporteTotal());
 		f.setImporteTotal(mf.getImporteTotal());
 		f.setFechaCompra(mf.getFechaCompra());
 		f.setFechaEntrega(mf.getFechaEntrega());
@@ -53,7 +55,9 @@ public class ConverterFactura {
 		mf.setIdFac(f.getIdFac());
 		mf.setCompra(f.isCompra());
 		mf.setIvaTotal(f.getIvaTotal());
+		mf.setIvaImporteTotal(f.getIvaImporteTotal());
 		mf.setDescuentoTotal(f.getDescuentoTotal());
+		mf.setDescuentoImporteTotal(f.getDescuentoImporteTotal());
 		mf.setImporteTotal(f.getImporteTotal());
 		mf.setFechaCompra(f.getFechaCompra());
 		mf.setFechaEntrega(f.getFechaEntrega());

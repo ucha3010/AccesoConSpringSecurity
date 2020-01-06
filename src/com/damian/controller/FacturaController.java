@@ -1,5 +1,7 @@
 package com.damian.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +51,7 @@ public class FacturaController {
 
 	@RequestMapping(value = { "/factura/save" }, method = RequestMethod.POST)
 	public String saveFactura(@ModelAttribute("factura") Factura factura, BindingResult result, Model model,
-			RedirectAttributes ra) {
+			HttpServletRequest request, RedirectAttributes ra) {
 		if (result.hasErrors()) {
 			// System.out.println(result.getAllErrors());
 			// return "factura";
@@ -58,7 +60,7 @@ public class FacturaController {
 		if (factura.getIdFac() == 0) {
 			nueva = true;
 		}
-		facturaService.save(factura);
+		facturaService.save(factura, request);
 		if (nueva) {
 			ra.addFlashAttribute("factura_agregado", "factura_agregado");
 		}
