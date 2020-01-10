@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-12-2019 a las 14:38:10
--- Versión del servidor: 10.4.8-MariaDB
--- Versión de PHP: 7.3.11
+-- Tiempo de generación: 10-01-2020 a las 20:08:09
+-- Versión del servidor: 10.1.13-MariaDB
+-- Versión de PHP: 5.6.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -72,9 +70,11 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`idCat`, `nombre`) VALUES
-(1, 'Electrónica'),
-(2, 'Casa y hogar'),
-(3, 'Diversión');
+(1, 'Aparatos electrónicos'),
+(2, 'Hogar'),
+(6, 'otra'),
+(7, 'Coches'),
+(8, '0 Otros');
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,7 @@ CREATE TABLE `datospersonales` (
   `dni` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `observaciones` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `observaciones` text COLLATE utf8_spanish_ci,
   `datospersonales_idUsr` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -124,7 +124,8 @@ INSERT INTO `datospersonales` (`idDatosPers`, `nombre`, `apellido1`, `apellido2`
 (60, 'Servicio8', 'Servicio', 'Seis', 'Hombre', '2008-08-08', 'Dinamarca', '', 'servicio8@gmail.com', '', 'Observaciones8', 78),
 (61, 'Servicio9', 'Servicio', 'Nueve', 'Mujer', '2009-09-09', 'empty', '', 'servicio9@gmail.com', '', '', 79),
 (63, 'Felipe', 'Sexto', '', NULL, NULL, 'empty', '', 'sanlore@gmail.com', '', '', 81),
-(64, 'Servicío11', 'Servício', 'Ónce', 'Mujer', '1984-08-25', 'Bélgica', '12345678A', 'servicio11@gmail.com', '600000011', 'Test con muchos acentos para análisis completo', 82);
+(64, 'Servicío11', 'Servício', 'Ónce', 'Mujer', '1984-08-25', 'Bélgica', '12345678A', 'servicio11@gmail.com', '600000011', 'Test con muchos acentos para análisis completo', 82),
+(65, 'Usuario', 'Con Rol', 'De Usuario', 'Hombre', '1979-07-04', 'España', '', 'usuario@gmail.com', '', '', 83);
 
 -- --------------------------------------------------------
 
@@ -197,13 +198,13 @@ CREATE TABLE `empresa` (
   `idEmp` int(10) NOT NULL,
   `nombreComercial` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `tipoSociedad` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `actividad` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `actividad` text COLLATE utf8_spanish_ci,
   `cif` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `paginaWeb` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `fax` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `observaciones` text COLLATE utf8_spanish_ci DEFAULT NULL
+  `observaciones` text COLLATE utf8_spanish_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -246,8 +247,11 @@ INSERT INTO `estado` (`idEst`, `nombre`) VALUES
 CREATE TABLE `factura` (
   `idFac` int(10) NOT NULL,
   `compra` tinyint(1) NOT NULL,
-  `ivaTotal` double DEFAULT NULL,
-  `descuentoTotal` double DEFAULT NULL,
+  `ivaTotal` double NOT NULL,
+  `ivaImporteTotal` double NOT NULL,
+  `descuentoTotal` double NOT NULL,
+  `descuentoImporteTotal` double NOT NULL,
+  `importeTotal` double NOT NULL,
   `fechaCompra` datetime NOT NULL,
   `fechaEntrega` datetime DEFAULT NULL,
   `idEst` int(11) NOT NULL,
@@ -261,8 +265,23 @@ CREATE TABLE `factura` (
 -- Volcado de datos para la tabla `factura`
 --
 
-INSERT INTO `factura` (`idFac`, `compra`, `ivaTotal`, `descuentoTotal`, `fechaCompra`, `fechaEntrega`, `idEst`, `direccionEntrega`, `observaciones`, `idFor`, `creadoPor`) VALUES
-(1, 0, 21, 0, '2019-12-27 00:00:00', '2020-01-09 00:00:00', 3, 'Calle Estrecha 2, Elche', 'Entréguese al portero si no hay nadie en casa.', 2, 'DAMIAN');
+INSERT INTO `factura` (`idFac`, `compra`, `ivaTotal`, `ivaImporteTotal`, `descuentoTotal`, `descuentoImporteTotal`, `importeTotal`, `fechaCompra`, `fechaEntrega`, `idEst`, `direccionEntrega`, `observaciones`, `idFor`, `creadoPor`) VALUES
+(1, 0, 21, 126, 0, 0, 726, '2019-12-27 00:00:00', '2020-01-09 00:00:00', 3, 'Calle Estrecha 2, Elche', 'Entréguese al portero si no hay nadie en casa.', 2, 'DAMIAN');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `factura_estado`
+--
+
+CREATE TABLE `factura_estado` (
+  `id` int(11) NOT NULL,
+  `idFac` int(11) NOT NULL,
+  `idEst` int(11) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `creadoPor` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `observaciones` text COLLATE utf8_spanish_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -353,7 +372,10 @@ CREATE TABLE `producto` (
 
 INSERT INTO `producto` (`idPro`, `descripcion`, `unidades`, `precioVenta`, `precioCompra`, `marca`, `modelo`, `serie`, `ubicacion`, `estado`, `partida`, `fechaCompra`, `enviar`, `vendible`, `mesesGarantia`, `peso`, `volumen`, `idSub`) VALUES
 (1, 'TV Sanyo 15 pulgadas', 0, 150, 115.35, 'Sanyo', 'HR15', '12345678', 'Pasillo 3', 'ACTIVO', '', '2019-12-22', 1, 1, 12, 20, 0.016, 1),
-(2, 'TV Sony 28 pulgadas', 0, 600, 421, 'Sony', 'RJ25', '', '', 'DESCATALOGADO', NULL, NULL, 0, 1, 6, 5, 3.2, 3);
+(2, 'TV Sony 28 pulgadas', 0, 600, 421, 'Sony', 'RJ25', '', '', 'DESCATALOGADO', NULL, NULL, 0, 1, 6, 5, 3.2, 1),
+(3, 'Papel higiénico Higienol', 0, 1.5, 0.95, 'Higienol', '', '', '', 'ACTIVO', NULL, NULL, 0, 1, 0, 0.2, 0.08, 9),
+(4, 'Castañas Gallegas', 0, 2, 0.4, '', '', '', '', 'ACTIVO', NULL, NULL, 0, 1, 0, 0, 0, 15),
+(5, 'Monitor Samsung 27 pulgadas', 0, 250, 180, 'Samsung', 'Energy', '158159126', '', 'ACTIVO', NULL, NULL, 1, 1, 12, 2, 1, 16);
 
 -- --------------------------------------------------------
 
@@ -368,6 +390,15 @@ CREATE TABLE `producto_empresa` (
   `creadoPor` varchar(30) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `producto_empresa`
+--
+
+INSERT INTO `producto_empresa` (`idPro`, `idEmp`, `fechaCreacion`, `creadoPor`) VALUES
+(2, 3, '2020-01-10', 'DAMIAN'),
+(4, 2, '2020-01-10', 'DAMIAN'),
+(4, 3, '2020-01-10', 'DAMIAN');
+
 -- --------------------------------------------------------
 
 --
@@ -381,6 +412,7 @@ CREATE TABLE `producto_factura` (
   `ivaProducto` double DEFAULT NULL,
   `porcentajeDescuento` double DEFAULT NULL,
   `precioUnitSinIva` double NOT NULL,
+  `precioFinal` double NOT NULL,
   `observaciones` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -388,8 +420,8 @@ CREATE TABLE `producto_factura` (
 -- Volcado de datos para la tabla `producto_factura`
 --
 
-INSERT INTO `producto_factura` (`idPro`, `idFac`, `cantidad`, `ivaProducto`, `porcentajeDescuento`, `precioUnitSinIva`, `observaciones`) VALUES
-(2, 1, 1, 0, 0, 600, 'TV Sony 28 pulgadas');
+INSERT INTO `producto_factura` (`idPro`, `idFac`, `cantidad`, `ivaProducto`, `porcentajeDescuento`, `precioUnitSinIva`, `precioFinal`, `observaciones`) VALUES
+(2, 1, 1, 0, 0, 600, 600, 'TV Sony 28 pulgadas');
 
 -- --------------------------------------------------------
 
@@ -434,8 +466,13 @@ INSERT INTO `subcategoria` (`idSub`, `nombre`, `idCat`) VALUES
 (3, 'Ordenador portátil Intel i7', 1),
 (4, 'Sillas', 2),
 (5, 'Mesas', 2),
-(6, 'Teatro', 3),
-(7, 'Cine', 3);
+(9, 'Unirá 2', 6),
+(10, 'Cargadores de móvil', 1),
+(12, 'Ruedas', 7),
+(13, 'Puertas', 7),
+(14, 'Ambientadores', 7),
+(15, '0 Otros', 8),
+(16, 'Monitores', 1);
 
 -- --------------------------------------------------------
 
@@ -478,7 +515,8 @@ INSERT INTO `usuario` (`idUsr`, `usuario`, `clave`, `habilitado`, `fechaCreacion
 (78, 'servicio8', '7a49b2bd8000984ca974d275d95c9365d7d52da9f6b6e4f5bdc95f3f1cbccbb45df26a358885de89', 1, '2019-12-04 22:59:26'),
 (79, 'servicio9', '120891246cdde24113ce295bcbbb9260eca9b7bd4d4d69b6b3aa8cc11c6bc8afd3178709f6a742f4', 1, '2019-12-04 23:06:53'),
 (81, 'dausheff', 'a9c62f9bcd800150e96b1c2c2874a6863b1365f2cb1a519de75538553109a309e8043aaee0000e72', 1, '2019-12-06 23:49:13'),
-(82, 'servicio11', '804097c51146ba177cdc406b06e21aef3f5bfafe91341cd1bb08bcd58517a488293c1f3b25c9fe0f', 1, '2019-12-09 13:42:37');
+(82, 'servicio11', '804097c51146ba177cdc406b06e21aef3f5bfafe91341cd1bb08bcd58517a488293c1f3b25c9fe0f', 1, '2019-12-09 13:42:37'),
+(83, 'usuario', 'b83a56592aaa0e1655049827bef098f1a37028f693e6d04b9fde3a362bb3981bd5292b70a1ff1bc5', 1, '2020-01-10 17:52:03');
 
 -- --------------------------------------------------------
 
@@ -559,7 +597,8 @@ INSERT INTO `usuario_rol` (`idUsr`, `idRol`, `fechaCreacion`, `creadoPor`) VALUE
 (78, 2, '2019-12-04', 'pepe'),
 (79, 1, '2019-12-04', 'OWN USER'),
 (81, 1, '2019-12-06', 'pepe'),
-(82, 2, '2019-12-09', 'pepe');
+(82, 2, '2019-12-09', 'pepe'),
+(83, 2, '2020-01-10', 'pepe');
 
 --
 -- Índices para tablas volcadas
@@ -619,6 +658,12 @@ ALTER TABLE `factura`
   ADD KEY `idEst` (`idEst`);
 
 --
+-- Indices de la tabla `factura_estado`
+--
+ALTER TABLE `factura_estado`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `formapago`
 --
 ALTER TABLE `formapago`
@@ -649,7 +694,6 @@ ALTER TABLE `producto_empresa`
 --
 ALTER TABLE `producto_factura`
   ADD PRIMARY KEY (`idPro`,`idFac`),
-  ADD UNIQUE KEY `idPro` (`idPro`),
   ADD KEY `idFac` (`idFac`);
 
 --
@@ -694,85 +738,76 @@ ALTER TABLE `usuario_rol`
 --
 ALTER TABLE `admin`
   MODIFY `idAd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
-
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `idCat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `datospersonales`
 --
 ALTER TABLE `datospersonales`
-  MODIFY `idDatosPers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
-
+  MODIFY `idDatosPers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 --
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
   MODIFY `idDir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
-
 --
 -- AUTO_INCREMENT de la tabla `direccionempresa`
 --
 ALTER TABLE `direccionempresa`
   MODIFY `idDirEmp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
   MODIFY `idEmp` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT de la tabla `estado`
 --
 ALTER TABLE `estado`
   MODIFY `idEst` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
   MODIFY `idFac` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+--
+-- AUTO_INCREMENT de la tabla `factura_estado`
+--
+ALTER TABLE `factura_estado`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `formapago`
 --
 ALTER TABLE `formapago`
-  MODIFY `idFor` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
+  MODIFY `idFor` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `paises`
 --
 ALTER TABLE `paises`
   MODIFY `idPais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
   MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  MODIFY `idSub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
+  MODIFY `idSub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
-
+  MODIFY `idUsr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 --
 -- Restricciones para tablas volcadas
 --
@@ -841,7 +876,6 @@ ALTER TABLE `usuario_empresa`
 ALTER TABLE `usuario_rol`
   ADD CONSTRAINT `FK_idRol` FOREIGN KEY (`idRol`) REFERENCES `rol` (`idRol`),
   ADD CONSTRAINT `FK_idUsr` FOREIGN KEY (`idUsr`) REFERENCES `usuario` (`idUsr`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

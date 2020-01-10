@@ -169,3 +169,7 @@ th:hover {
 .dropdown:hover {
   background-color: #3e8e41;
 }
+
+.padding-5-25-dam {
+	padding: 5px 25px;
+}

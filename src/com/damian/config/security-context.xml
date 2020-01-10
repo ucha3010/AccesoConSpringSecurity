@@ -49,6 +49,7 @@
 		<security:intercept-url pattern="/subcategoria/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/producto" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/producto/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/productoEmpresa/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/productoFactura/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/factura" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/factura/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
