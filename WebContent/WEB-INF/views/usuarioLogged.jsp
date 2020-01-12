@@ -77,8 +77,10 @@
 					<fmt:message key="label.Change.password" />
 				</button>
 				<br>
-				<c:if test="${not empty sessionScope.resultado}">
-					<fmt:message key="${sessionScope.resultado}" />
+				<c:if test="${not empty passChanged}">
+					<span style="color: green;">
+						<fmt:message key="${passChanged}" />
+					</span>
 				</c:if>
 			</div>
 		</div>

@@ -173,7 +173,7 @@ public class UsuarioController {
 			RedirectAttributes ra) {
 
 		usuarioService.saveChangePassword(usuario);
-		ra.addFlashAttribute("resultado", "label.Passwrod.change.success");
+		ra.addFlashAttribute("passChanged", "label.Passwrod.change.success");
 		return "redirect:/usuario/logged/" + usuario.getIdUsr();
 	}
 

@@ -15,11 +15,53 @@
 	<script type="text/javascript" src='<c:url value="/resources/js/jquery.js" />'></script>
 	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
+	<script type="text/javascript">
+		function validar(){
+
+			var campo = ['inputPassword1','inputPassword2'];
+			restablecer();
+			var validado = true;			
+			for(var i=0; i < campo.length; i++){
+			    var nombreRol = document.getElementById(campo[i]);
+			    var nombreRolError = document.getElementById(campo[i]+'Error');
+				if(nombreRol.value==''){
+					nombreRolError.innerHTML = "<fmt:message key='error.field.not.empty' />";
+					nombreRol.style.borderColor="red";
+					validado = false;
+				}
+			}
+			
+    		var pass1 = document.getElementById('inputPassword1').value;
+	    	var pass2 = document.getElementById('inputPassword2').value;
+	    	if(pass1.length > 0 && pass1 != pass2){
+	    		document.getElementById('inputPassword1Error').innerHTML = "<fmt:message key='error.password.not.equal' />";
+	    		document.getElementById('inputPassword1').style.borderColor="red";
+	    		document.getElementById('inputPassword1').style.borderColor="red";
+	    		validado = false;
+	    	}
+			
+			if(validado){
+				return true;
+			} else {
+				return false;
+			}
+		}
+		function restablecer(){
+			var errorSpan = document.getElementsByName('errorSpan');
+			for (var i = 0; i < errorSpan.length; i++) {
+				errorSpan[i].innerHTML='';
+			}
+			var campos = document.getElementsByClassName("form-control");
+			for (var i = 0; i < campos.length; i++) {
+				campos[i].style.borderColor="#ced4da";
+			}
+		}
+	</script>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
 <br>
-	<sf:form method="post" action="${pageContext.request.contextPath}/usuario/logged/changePass/save" modelAttribute="usuario">
+	<sf:form method="post" action="${pageContext.request.contextPath}/usuario/logged/changePass/save" modelAttribute="usuario" onsubmit="return validar()">
 
 		<c:if test="${not empty usuario.clave}">
 			<sf:hidden path="usuario"/>
@@ -35,13 +77,14 @@
 			<div class="col-sm-2">
 			</div>
 			<div class="col-xs-12 col-sm-4">
-				<label for="inputPassword1"><fmt:message key="label.Password" /></label> 
+				<label for="inputPassword1"><fmt:message key="label.Password" /> *</label> 
 				<sf:password class="form-control" id="inputPassword1" path="clave"/>
-				<sf:errors path="clave" cssStyle="color:red"/>
+				<span id="inputPassword1Error" name="errorSpan"></span>
 			</div>
 			<div class="col-xs-12 col-sm-4">
-				<label for="inputPassword2"><fmt:message key="label.Password.repeat" /></label> 
+				<label for="inputPassword2"><fmt:message key="label.Password.repeat" /> *</label> 
 				<input type="password" class="form-control" id="inputPassword2"/>
+				<span id="inputPassword2Error" name="errorSpan"></span>
 			</div>
 		</div>
 		<br>

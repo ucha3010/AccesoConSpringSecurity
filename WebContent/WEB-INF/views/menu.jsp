@@ -126,25 +126,23 @@
 	
 			<sec:authorize access="isRememberMe()">
 				<sec:authentication property="principal" var="principal" />
-				<c:set var="username" value="${principal}" />
 				<button type="button" class="btn btn-dark float-right ml-1 btn-sm border-color-dam" onclick='location.href="<c:url value='/logout' />"'>
 					<fmt:message key="label.Logout" />
 				</button>
-				<a title="${username}" href='<c:url value="/usuario/logged/${idUsrLogged}"/>'>
+				<a title="${nameUsrLogged}" href='<c:url value="/usuario/logged/${idUsrLogged}"/>'>
 					<img src='<c:url value="/resources/imgs/usuario.png"/>'
-					alt="${username}" id="usuarioImg">
+					alt="${nameUsrLogged}" id="usuarioImg">
 				</a>
 			</sec:authorize>
 	
 			<sec:authorize access="isFullyAuthenticated()">
 				<sec:authentication property="principal" var="principal" />
-				<c:set var="username" value="${principal}" />
 				<button type="button" class="btn btn-dark float-right ml-1 btn-sm border-color-dam" onclick='location.href="<c:url value='/logout' />"'>
 					<fmt:message key="label.Logout" />
 				</button>
-				<a title="${username}" href='<c:url value="/usuario/logged/${idUsrLogged}"/>'>
+				<a title="${nameUsrLogged}" href='<c:url value="/usuario/logged/${idUsrLogged}"/>'>
 					<img src='<c:url value="/resources/imgs/usuario.png"/>'
-					alt="${username}" id="usuarioImg">
+					alt="${nameUsrLogged}" id="usuarioImg">
 				</a>
 	
 			</sec:authorize>

@@ -37,7 +37,9 @@ public class IndexServiceImpl implements IndexService {
 	private void idUserLogged(ModelAndView model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if(!authentication.getName().equals("anonymousUser")) {
-			model.addObject("idUsrLogged", ((Usuario)usuarioService.findByUsername(authentication.getName())).getIdUsr());
+			Usuario usuario = usuarioService.findByUsername(authentication.getName());
+			model.addObject("idUsrLogged", usuario.getIdUsr());
+			model.addObject("nameUsrLogged", usuario.getUsuario());
 		}
 	}
 

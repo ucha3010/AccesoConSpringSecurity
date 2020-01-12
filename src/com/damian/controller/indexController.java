@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.damian.service.IndexService;
 
 @Controller
-@SessionAttributes({ "resultado", "estoy", "errorUsuario", "idUsrLogged" }) // los atributos que pueden mantenerse
+@SessionAttributes({ "resultado", "estoy", "errorUsuario", "idUsrLogged", "nameUsrLogged" }) // los atributos que pueden mantenerse
 																				// en sesión y verse en distintas
 																				// páginas
 public class indexController {
