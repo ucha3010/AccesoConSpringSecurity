@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Producto;
+import com.damian.pojo.front.FrontProductoStock;
 import com.damian.service.CategoriaService;
 import com.damian.service.ProductoService;
 
@@ -83,6 +84,19 @@ public class ProductoController {
 		}
 		return "redirect:/producto";
 
+	}
+
+	@RequestMapping("/producto/stock/{idPro}")
+	public ModelAndView getProductoStock(ModelAndView modelAndView, @PathVariable("idPro") int idPro) {
+		Producto producto = productoService.findById(idPro);
+		FrontProductoStock frontProductoStock = new FrontProductoStock();
+		frontProductoStock.setIdPro(producto.getIdPro());
+		frontProductoStock.setUnidades(producto.getUnidades());
+		frontProductoStock.setDescripcion(producto.getDescripcion());
+		frontProductoStock.setCompra(true);
+		modelAndView.addObject("frontProductoStock", frontProductoStock);
+		modelAndView.setViewName("productoStock");
+		return modelAndView;
 	}
 
 }

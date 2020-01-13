@@ -128,7 +128,7 @@
 					<th onclick="sortTable(${count})" colspan="2" class="text-center"><fmt:message key="label.salePrice" /></th>
 					<c:set var="count" value="${count + 2}" scope="page"/>
 					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.units" /></th>
-					<th class="width-100"><fmt:message key="label.Extras" /></th>
+					<th class="width-150"><fmt:message key="label.Extras" /></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -161,6 +161,9 @@
 							</a>
 							<a title="<fmt:message key="label.Bills" />" href='<c:url value='/productoFactura/producto/${producto.idPro}' />'>
 								<img src='<c:url value="/resources/imgs/factura.png"/>' class="margin-left-5porciento width-35">
+							</a>
+							<a title="<fmt:message key="label.Add.remove.stock" />" href='<c:url value='/producto/stock/${producto.idPro}' />'>
+								<img src='<c:url value="/resources/imgs/stock.png"/>' class="margin-left-5porciento width-35">
 							</a>
 						</td>
 				    </tr>
