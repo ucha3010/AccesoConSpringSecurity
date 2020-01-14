@@ -58,6 +58,18 @@
 				campos[i].style.borderColor="#ced4da";
 			}
 		}
+		function mensaje(valor,max){
+			if(valor == "true"){
+				document.getElementById("queHacer").innerHTML="<fmt:message key='label.added' />";
+				document.getElementById("avisoEliminar").style.display="none";
+				document.getElementById("queSeHizo").innerHTML="<fmt:message key='label.paid' />";
+			} else {
+				document.getElementById("queHacer").innerHTML="<fmt:message key='label.removed' />";
+				document.getElementById("avisoEliminar").style.display="inline";
+				document.getElementById("queSeHizo").innerHTML="<fmt:message key='label.entered' />";				
+			}
+			document.getElementById("cantidad").max=max;
+		}
 	</script>
 </head>
 <body>
@@ -65,18 +77,18 @@
 	<sf:form method="post" action="${pageContext.request.contextPath}/producto/save" modelAttribute="frontProductoStock" onsubmit="return validar()">
 		<sf:hidden path="idPro"/>
 		<sf:hidden path="unidades"/>
-		<div class="form-row">		
+		<div class="form-row">	
 			<div class="col-sm-3">
+			</div>	
+			<div class="col-sm-8">
 				<h1><fmt:message key="label.Add.remove.stock" /></h1>
-			</div>
-			<div class="col-xs-12 col-sm-4">
 			</div>
 		</div>
 		<br/>
 		<div class="form-row">		
 			<div class="col-sm-2">
 			</div>
-			<div class="col-xs-12 col-sm-10">
+			<div class="col-xs-12 col-sm-9">
 				<h2><fmt:message key="label.Product.description" />: <c:out value="${frontProductoStock.descripcion}" /></h2>
 			</div>
 		</div>
@@ -87,37 +99,58 @@
 			</div>
 			<div class="col-xs-12 col-sm-4">
 				<div class="custom-control custom-radio custom-control-inline">
-					<sf:radiobutton id="customRadioInline2" name="customRadioInline1" class="custom-control-input" path="compra" value="true"/>
+					<sf:radiobutton id="customRadioInline2" name="customRadioInline1" class="custom-control-input" path="compra" value="true" onclick="mensaje(this.value,9999)"/>
 					<label class="custom-control-label" for="customRadioInline2"><fmt:message key="label.Add" /></label>
 				</div>
 				<div class="col-sm-4custom-control custom-radio custom-control-inline margin-left-5porciento">
-					<sf:radiobutton id="customRadioInline1" name="customRadioInline1" class="custom-control-input" path="compra" value="false"/>
+					<sf:radiobutton id="customRadioInline1" name="customRadioInline1" class="custom-control-input" path="compra" value="false" onclick="mensaje(this.value,${frontProductoStock.unidades})"/>
 					<label class="custom-control-label" for="customRadioInline1"><fmt:message key="label.Remove" /></label>
 				</div>
 			</div>
 		</div>
 		<br/>
 		<div class="form-row">		
+			<div class="col-sm-2">
+			</div>		
 			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
 				<fmt:message key="label.It.will.be" />
-				<span id="addStock"><fmt:message key="label.added" /></span>
-				<span id="removeStock"><fmt:message key="label.removed" /></span>
-				<sf:input path="precioFinal" class="form-control" id="precioFinal" />
+				<span id="queHacer"><fmt:message key="label.added" /></span>
+				<input type="number" step="1" style="width:60px; text-align: right;" min="0" name="cantidad" id="cantidad"/>
 				<fmt:message key="label.units" />
+			</div>
+			<div class="col-sm-4" id="avisoEliminar" style="display: none">
+				(<fmt:message key="label.Max.to.remove" /> ${frontProductoStock.unidades} <fmt:message key="label.units" />)
+			</div>	
+		</div>
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-2">
+			</div>		
+			<div class="col-sm-9">
+				<fmt:message key="label.And.for.this" />
+				<span id="queSeHizo"><fmt:message key="label.paid" /></span>
+				<sf:input path="precioFinal" type="text" style="width:60px; text-align: right;" id="precioFinal"/> €
+				<fmt:message key="label.with.vat" />
+				<input type="number" step="1" style="width:40px; text-align: right;" min="0" name="iva" id="iva" value="0"/> %
 			</div>
 		</div>
 		<br/>
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		<div class="form-row">		
+			<div class="col-sm-2">
+			</div>		
+			<div class="col-sm-9">
+				<fmt:message key="label.Observations" />
+			</div>
+		</div>
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-2">
+			</div>		
+			<div class="col-sm-9">
+				<sf:textarea path="observaciones" rows="5" cols="100" />
+			</div>
+		</div>
+		<br/>
 		<div class="form-row">		
 			<div class="col-sm-3">
 			</div>

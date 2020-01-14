@@ -162,9 +162,11 @@
 							<a title="<fmt:message key="label.Bills" />" href='<c:url value='/productoFactura/producto/${producto.idPro}' />'>
 								<img src='<c:url value="/resources/imgs/factura.png"/>' class="margin-left-5porciento width-35">
 							</a>
-							<a title="<fmt:message key="label.Add.remove.stock" />" href='<c:url value='/producto/stock/${producto.idPro}' />'>
-								<img src='<c:url value="/resources/imgs/stock.png"/>' class="margin-left-5porciento width-35">
-							</a>
+							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+								<a title="<fmt:message key="label.Add.remove.stock" />" href='<c:url value='/producto/stock/${producto.idPro}' />'>
+									<img src='<c:url value="/resources/imgs/stock.png"/>' class="margin-left-5porciento width-35">
+								</a>
+							</sec:authorize>
 						</td>
 				    </tr>
 				</c:forEach>
