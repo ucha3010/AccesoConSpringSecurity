@@ -18,23 +18,15 @@
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
 		function validar(){
-			var campo = ['descripcion','precioVenta','precioCompra'];
+
 			restablecer();
 			var validado = true;			
-			for(var i=0; i < campo.length; i++){
-			    var nombreRol = document.getElementById(campo[i]);
-			    var nombreRolError = document.getElementById(campo[i]+'Error');
-				if(nombreRol.value==''){
-					nombreRolError.innerHTML = "<fmt:message key='error.field.not.empty' />";
-					nombreRol.style.borderColor="red";
-					validado = false;
-				}
-			}
 
-			var decimales = ['precioVenta','precioCompra','mesesGarantia','peso','volumen'];
+			var decimales = ['precioFinal'];
 			for(var i=0; i < decimales.length; i++){
 				var nombreDecimal = document.getElementById(decimales[i]);
 				var nombreDecimalError = document.getElementById(decimales[i]+'Error');
+				nombreDecimal.value = cambiarComaPorPunto(nombreDecimal.value);
 				if(!validarDecimal(nombreDecimal.value)){
 					nombreDecimalError.innerHTML = "<fmt:message key='error.not.valid.value' />";
 					nombreDecimal.style.borderColor="red";
@@ -74,7 +66,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
-	<sf:form method="post" action="${pageContext.request.contextPath}/producto/save" modelAttribute="frontProductoStock" onsubmit="return validar()">
+	<sf:form method="post" action="${pageContext.request.contextPath}/producto/stock/save" modelAttribute="frontProductoStock" onsubmit="return validar()">
 		<sf:hidden path="idPro"/>
 		<sf:hidden path="unidades"/>
 		<div class="form-row">	
@@ -132,7 +124,7 @@
 				<sf:input path="precioFinal" type="text" style="width:60px; text-align: right;" id="precioFinal"/> €
 				<fmt:message key="label.with.vat" />
 				<input type="number" step="1" style="width:40px; text-align: right;" min="0" name="iva" id="iva" value="0"/> %
-			</div>
+			</div>		
 		</div>
 		<br/>
 		<div class="form-row">		
@@ -157,6 +149,9 @@
 			<div class="col-xs-12 col-sm-4">
 				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
 				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/producto' />"'><fmt:message key="Cancel" /></button>
+			</div>
+			<div class="col-sm-2">
+				<span id="precioFinalError"></span>
 			</div>
 		</div>
 	</sf:form>

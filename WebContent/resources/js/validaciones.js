@@ -85,3 +85,7 @@ function validarDecimal(valor) {
         return false;
     }
 }
+
+function cambiarComaPorPunto(valor) {
+	return valor.replace(",",".");
+}

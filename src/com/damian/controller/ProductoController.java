@@ -99,4 +99,20 @@ public class ProductoController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = { "/producto/stock/save" }, method = RequestMethod.POST)
+	public String saveProductoStock(@ModelAttribute("frontProductoStock") FrontProductoStock producto, BindingResult result, Model model,
+			RedirectAttributes ra) {
+		
+		boolean nueva = false;
+		if (producto.getIdPro() == 0) {
+			nueva = true;
+//			producto.setEstado("ACTIVO");
+		}
+//		productoService.save(producto);
+		if (nueva) {
+			ra.addFlashAttribute("producto_agregado", "producto_agregado");
+		}
+		return "redirect:/producto";
+	}
+
 }

@@ -35,6 +35,7 @@
 			for(var i=0; i < decimales.length; i++){
 				var nombreDecimal = document.getElementById(decimales[i]);
 				var nombreDecimalError = document.getElementById(decimales[i]+'Error');
+				nombreDecimal.value = cambiarComaPorPunto(nombreDecimal.value);
 				if(!validarDecimal(nombreDecimal.value)){
 					nombreDecimalError.innerHTML = "<fmt:message key='error.not.valid.value' />";
 					nombreDecimal.style.borderColor="red";
