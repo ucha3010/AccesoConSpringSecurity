@@ -32,7 +32,8 @@
 					<th class="text-center"><fmt:message key="label.Unit.price" /></th>
 					<th class="text-center"><fmt:message key="label.Quantity" /></th>
 					<th class="text-center"><fmt:message key="label.Discount" /></th>
-					<th class="text-center"><fmt:message key="label.Tax" /></th>
+					<th class="text-center"><fmt:message key="label.Vat" /></th>
+					<th class="text-center"><fmt:message key="label.Unit.price.with.vat" /></th>
 					<th colspan="2" class="text-center"><fmt:message key="label.Final.amount" /></th>
 				</tr>
 			</thead>
@@ -44,6 +45,7 @@
 						<td class="text-center"><c:out value="${productoFactura.cantidad}" /></td>
 						<td class="text-center"><fmt:formatNumber type="number" value="${productoFactura.porcentajeDescuento}" minFractionDigits="2" />%</td>
 						<td class="text-center"><fmt:formatNumber type="number" value="${productoFactura.ivaProducto}" minFractionDigits="2" />%</td>
+						<td class="text-center"><fmt:formatNumber type="currency" value="${productoFactura.precioUnitConIva}"/></td>
 						<td class="text-right"><fmt:formatNumber type="currency" value="${productoFactura.precioFinal}" /></td>
 						<td class="width-35"></td>
 					</tr>
@@ -58,30 +60,31 @@
 					<c:if test="${factura.descuentoTotal == 0}">
 						<td></td>
 					</c:if>
-					<td></td>
+					<td colspan="2"></td>
 					<td class="text-right"><strong>- <fmt:formatNumber type="currency" value="${factura.descuentoImporteTotal}" /></strong></td>
 					<td class="width-35"></td>
 				</tr>
 <!-- 				IVA -->
 				<c:if test="${factura.ivaTotal > 0}">
 					<tr>
-						<td colspan="4"><strong><fmt:message key="label.Total.tax" /></strong></td>
+						<td colspan="4"><strong><fmt:message key="label.Total.vat" /></strong></td>
 						<td class="text-center"><strong><fmt:formatNumber type="number" value="${factura.ivaTotal}" minFractionDigits="2" />%</strong></td>
+						<td></td>
 						<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.ivaImporteTotal}" /></strong></td>
 						<td class="width-35"></td>
 					</tr>
 				</c:if>
 				<c:if test="${factura.ivaTotal == 0}">
 					<tr>
-						<td colspan="4"><strong><fmt:message key="label.Total.tax" /></strong></td>
+						<td colspan="4"><strong><fmt:message key="label.Total.vat" /></strong></td>
 						<td class="text-center"><strong><fmt:formatNumber type="currency" value="${factura.ivaImporteTotal}" /></strong></td>
-						<td></td>
+						<td colspan="2"></td>
 						<td class="width-35"></td>
 					</tr>
 				</c:if>
 <!-- 				IMPORTE FINAL -->
 				<tr>
-					<td colspan="5"><strong><fmt:message key="label.Total.amount" /></strong></td>
+					<td colspan="6"><strong><fmt:message key="label.Total.amount" /></strong></td>
 					<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.importeTotal}" /></strong></td>
 					<td class="width-35"></td>
 				</tr>

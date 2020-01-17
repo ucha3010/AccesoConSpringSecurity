@@ -8,6 +8,7 @@ public class ModelProductoFactura {
 	private double ivaProducto;
 	private double porcentajeDescuento;
 	private double precioUnitSinIva;
+	private double precioUnitConIva;
 	private double precioFinal;
 	private String observaciones;
 
@@ -22,17 +23,19 @@ public class ModelProductoFactura {
 	 * @param ivaProducto
 	 * @param porcentajeDescuento
 	 * @param precioUnitSinIva
+	 * @param precioUnitConIva
 	 * @param precioFinal
 	 * @param observaciones
 	 */
 	public ModelProductoFactura(int idPro, int idFac, int cantidad, double ivaProducto, double porcentajeDescuento,
-			double precioUnitSinIva, double precioFinal, String observaciones) {
+			double precioUnitSinIva, double precioUnitConIva, double precioFinal, String observaciones) {
 		this.idPro = idPro;
 		this.idFac = idFac;
 		this.cantidad = cantidad;
 		this.ivaProducto = ivaProducto;
 		this.porcentajeDescuento = porcentajeDescuento;
 		this.precioUnitSinIva = precioUnitSinIva;
+		this.precioUnitConIva = precioUnitConIva;
 		this.precioFinal = precioFinal;
 		this.observaciones = observaciones;
 	}
@@ -128,6 +131,21 @@ public class ModelProductoFactura {
 	}
 
 	/**
+	 * @return the precioUnitConIva
+	 */
+	public double getPrecioUnitConIva() {
+		return precioUnitConIva;
+	}
+
+	/**
+	 * @param precioUnitConIva
+	 *            the precioUnitConIva to set
+	 */
+	public void setPrecioUnitConIva(double precioUnitConIva) {
+		this.precioUnitConIva = precioUnitConIva;
+	}
+
+	/**
 	 * @return the precioFinal
 	 */
 	public double getPrecioFinal() {
@@ -166,7 +184,8 @@ public class ModelProductoFactura {
 	public String toString() {
 		return "ModelProductoFactura [idPro=" + idPro + ", idFac=" + idFac + ", cantidad=" + cantidad + ", ivaProducto="
 				+ ivaProducto + ", porcentajeDescuento=" + porcentajeDescuento + ", precioUnitSinIva="
-				+ precioUnitSinIva + ", precioFinal=" + precioFinal + ", observaciones=" + observaciones + "]";
+				+ precioUnitSinIva + ", precioUnitConIva=" + precioUnitConIva + ", precioFinal=" + precioFinal
+				+ ", observaciones=" + observaciones + "]";
 	}
 
 }

@@ -2,8 +2,11 @@ package com.damian.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Producto;
+import com.damian.pojo.front.FrontProductoStock;
 
 public interface ProductoService {
 
@@ -18,7 +21,9 @@ public interface ProductoService {
 	public void update(Producto producto);
 
 	public int delete(int id) throws NotEmptyException;
-	
+
 	public List<Producto> findByIdList(int id);
+
+	public void saveProductoStock(FrontProductoStock frontProductoStock, HttpServletRequest request);
 
 }

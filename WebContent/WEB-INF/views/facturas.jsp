@@ -91,7 +91,7 @@
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.Total.dicount" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.Total.tax" /></th>
+					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.Total.vat" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="sortTable(${count})" colspan="2" class="text-center"><fmt:message key="label.Total.amount" /></th>
 					<c:set var="count" value="${count + 2}" scope="page"/>

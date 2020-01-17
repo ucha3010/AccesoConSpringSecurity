@@ -1,5 +1,7 @@
 package com.damian.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -100,18 +102,10 @@ public class ProductoController {
 	}
 
 	@RequestMapping(value = { "/producto/stock/save" }, method = RequestMethod.POST)
-	public String saveProductoStock(@ModelAttribute("frontProductoStock") FrontProductoStock producto, BindingResult result, Model model,
-			RedirectAttributes ra) {
-		
-		boolean nueva = false;
-		if (producto.getIdPro() == 0) {
-			nueva = true;
-//			producto.setEstado("ACTIVO");
-		}
-//		productoService.save(producto);
-		if (nueva) {
-			ra.addFlashAttribute("producto_agregado", "producto_agregado");
-		}
+	public String saveProductoStock(@ModelAttribute("frontProductoStock") FrontProductoStock frontProductoStock,
+			BindingResult result, Model model, RedirectAttributes ra, HttpServletRequest request) {
+
+		productoService.saveProductoStock(frontProductoStock, request);
 		return "redirect:/producto";
 	}
 

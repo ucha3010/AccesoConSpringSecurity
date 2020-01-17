@@ -1,6 +1,11 @@
 package com.damian.service.impl;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +17,15 @@ import com.damian.dao.ProductoFacturaDAO;
 import com.damian.dao.SubcategoriaDAO;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Categoria;
+import com.damian.pojo.Estado;
+import com.damian.pojo.Factura;
+import com.damian.pojo.FormaPago;
 import com.damian.pojo.Producto;
 import com.damian.pojo.ProductoEmpresa;
 import com.damian.pojo.ProductoFactura;
 import com.damian.pojo.Subcategoria;
+import com.damian.pojo.front.FrontProductoStock;
+import com.damian.service.FacturaService;
 import com.damian.service.ProductoService;
 
 @Service
@@ -23,6 +33,9 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
 	private CategoriaDAO categoriaDAO;
+
+	@Autowired
+	private FacturaService facturaService;
 
 	@Autowired
 	private ProductoDAO productoDAO;
@@ -39,7 +52,7 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public List<Producto> findAll() {
 		List<Producto> salida = productoDAO.findAll();
-		for(Producto p: salida) {
+		for (Producto p : salida) {
 			Subcategoria s = subcategoriaDAO.findByIdModel(p.getSubcategoria().getIdSub());
 			Categoria c = categoriaDAO.findByIdModel(s.getCategoria().getIdCat());
 			s.setCategoria(c);
@@ -85,8 +98,64 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public List<Producto> findByIdList(int id){
+	public List<Producto> findByIdList(int id) {
 		return productoDAO.findByIdList(id);
+	}
+
+	@Override
+	public void saveProductoStock(FrontProductoStock frontProductoStock, HttpServletRequest request) {
+		Producto producto = productoDAO.findById(frontProductoStock.getIdPro());
+		BigDecimal iva = new BigDecimal(frontProductoStock.getIva(), MathContext.DECIMAL64);
+		BigDecimal precioFinal = new BigDecimal(frontProductoStock.getPrecioFinal(), MathContext.DECIMAL64);
+		Factura factura = new Factura();
+		factura.setCompra(frontProductoStock.isCompra());
+		factura.setIvaTotal(frontProductoStock.getIva());
+		if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
+			factura.setIvaImporteTotal(
+					(iva.multiply(precioFinal).multiply(new BigDecimal(0.01, MathContext.DECIMAL64))).doubleValue());
+		}
+		factura.setImporteTotal(frontProductoStock.getPrecioFinal());
+		factura.setFechaCompra(new Date());
+		factura.setObservaciones(frontProductoStock.getObservaciones());
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		factura.setFormaPago(new FormaPago(4, null));
+		factura.setCreadoPor(context.getAuthentication().getName());
+		if (frontProductoStock.isCompra()) {
+			producto.setUnidades(producto.getUnidades() + frontProductoStock.getCantidad());
+			factura.setEstado(new Estado(6, null));
+		} else {
+			producto.setUnidades(producto.getUnidades() - frontProductoStock.getCantidad());
+			factura.setEstado(new Estado(7, null));
+
+		}
+		productoDAO.save(producto);
+		int idFac = facturaService.save(factura, request);
+		factura.setIdFac(idFac);
+		ProductoFactura productoFactura = new ProductoFactura();
+		productoFactura.setProducto(producto);
+		productoFactura.setFactura(factura);
+		productoFactura.setCantidad(frontProductoStock.getCantidad());
+		productoFactura.setIvaProducto(frontProductoStock.getIva());
+		BigDecimal precioUnitConIva;
+		if (frontProductoStock.getCantidad() > 0) {
+			precioUnitConIva = precioFinal
+					.divide(new BigDecimal(frontProductoStock.getCantidad(), MathContext.DECIMAL64));
+		} else {
+			precioUnitConIva = new BigDecimal(frontProductoStock.getPrecioFinal(), MathContext.DECIMAL64);
+		}
+		productoFactura.setPrecioUnitConIva(precioUnitConIva.doubleValue());
+		if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
+			productoFactura.setPrecioUnitSinIva(
+					(precioUnitConIva.divide(((new BigDecimal(0.01, MathContext.DECIMAL64).multiply(iva))
+							.add(new BigDecimal(1, MathContext.DECIMAL64))))).doubleValue());
+		} else {
+			productoFactura.setPrecioUnitSinIva(precioUnitConIva.doubleValue());
+
+		}
+		productoFactura.setPrecioFinal(frontProductoStock.getPrecioFinal());
+		productoFacturaDAO.save(productoFactura);
+
 	}
 
 }

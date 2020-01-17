@@ -86,7 +86,7 @@ public class FacturaDAOImpl implements FacturaDAO {
 			ModelFactura mf = converterFactura.convert(factura);
 			String sql = "INSERT INTO " + TABLA
 					+ " (compra, ivaTotal, ivaImporteTotal, descuentoTotal, descuentoImporteTotal, importeTotal, fechaCompra, fechaEntrega, idEst, direccionEntrega, observaciones, idFor, creadoPor) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(), mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(),
 					mf.getImporteTotal(), mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(),
 					mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(), mf.getCreadoPor());
