@@ -52,17 +52,8 @@
 	<c:import url="/WEB-INF/views/menu.jsp" />
 	<div class="d-flex">
 		<div class="p-2">
-			<input type="text" id="formulario" class="form-control">
-			<script>
-				const formulario = document.querySelector('#formulario');
-				formulario.addEventListener('keyup', filtrar);
-			</script>
 		</div>
 		<div class="p-2">
-			<div class="dropdown collapse">
-				<div class="dropdown-content" id="resultado">
-				</div>
-			</div>
 		</div>
 		<div class="p-2">
 			<c:if test="${not empty factura_eliminado}">
@@ -121,7 +112,7 @@
 						<td class="text-center"><fmt:formatNumber type="number" value="${factura.ivaTotal}" minFractionDigits="2" />%</td>	
 						<td class="text-right"><fmt:formatNumber type="currency" value="${factura.importeTotal}" /></td>
 						<td class="width-15"></td>
-						<td><c:out value="${factura.estado.nombre}" /></td>
+						<td><fmt:message key="${factura.estado.nombre}" /></td>
 						<td class="sin_padding">
 							<a title="<fmt:message key="Products" />" href='<c:url value='/productoFactura/factura/${factura.idFac}' />'>
 								<img src='<c:url value="/resources/imgs/factura.png"/>' class="margin-left-5porciento width-35">

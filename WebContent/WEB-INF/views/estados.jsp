@@ -89,7 +89,7 @@
 										</button>
 									</td>
 								</sec:authorize>
-								<td><c:out value="${estado.nombre}" /></td>
+								<td><fmt:message key="${estado.nombre}" /></td>
 						    </tr>
 						</c:forEach>
 					</tbody>
