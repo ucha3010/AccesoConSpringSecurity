@@ -125,9 +125,9 @@
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="sortTable(${count})"><fmt:message key="label.model" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})" colspan="2" class="text-center"><fmt:message key="label.salePrice" /></th>
+					<th colspan="2" class="text-center"><fmt:message key="label.salePrice" /></th>
 					<c:set var="count" value="${count + 2}" scope="page"/>
-					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.units" /></th>
+					<th class="text-center"><fmt:message key="label.units" /></th>
 					<th class="width-150"><fmt:message key="label.Extras" /></th>
 				</tr>
 			</thead>

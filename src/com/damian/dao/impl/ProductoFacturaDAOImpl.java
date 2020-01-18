@@ -82,7 +82,7 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 	@Override
 	public List<ProductoFactura> findByIdPro(int idPro) {
 
-		String sql = "SELECT * FROM " + TABLA + " WHERE idPro=" + idPro;
+		String sql = "SELECT * FROM " + TABLA + " WHERE idPro=" + idPro + " ORDER BY idFac DESC";
 
 		return lista(sql);
 
@@ -91,7 +91,7 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 	@Override
 	public List<ProductoFactura> findByIdFac(int idFac) {
 
-		String sql = "SELECT * FROM " + TABLA + " WHERE idFac=" + idFac;
+		String sql = "SELECT * FROM " + TABLA + " WHERE idFac=" + idFac + " ORDER BY precioFinal ASC";
 
 		return lista(sql);
 	}

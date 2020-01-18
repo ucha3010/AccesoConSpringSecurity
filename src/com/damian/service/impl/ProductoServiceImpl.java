@@ -104,15 +104,27 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Override
 	public void saveProductoStock(FrontProductoStock frontProductoStock, HttpServletRequest request) {
-		Producto producto = productoDAO.findById(frontProductoStock.getIdPro());
+		
 		BigDecimal iva = new BigDecimal(frontProductoStock.getIva(), MathContext.DECIMAL64);
 		BigDecimal precioFinal = new BigDecimal(frontProductoStock.getPrecioFinal(), MathContext.DECIMAL64);
+		BigDecimal precioUnitConIva;
+		if (frontProductoStock.getCantidad() > 0) {
+			precioUnitConIva = precioFinal
+					.divide(new BigDecimal(frontProductoStock.getCantidad(), MathContext.DECIMAL64));
+		} else {
+			precioUnitConIva = new BigDecimal(frontProductoStock.getPrecioFinal(), MathContext.DECIMAL64);
+		}
+		BigDecimal precioUnitSinIva = precioUnitConIva
+				.divide(((new BigDecimal(0.01, MathContext.DECIMAL64).multiply(iva))
+						.add(new BigDecimal(1, MathContext.DECIMAL64))));
+
+		Producto producto = productoDAO.findById(frontProductoStock.getIdPro());
 		Factura factura = new Factura();
 		factura.setCompra(frontProductoStock.isCompra());
 		factura.setIvaTotal(frontProductoStock.getIva());
 		if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
-			factura.setIvaImporteTotal(
-					(iva.multiply(precioFinal).multiply(new BigDecimal(0.01, MathContext.DECIMAL64))).doubleValue());
+			factura.setIvaImporteTotal(((precioUnitConIva.subtract(precioUnitSinIva))
+					.multiply(new BigDecimal(frontProductoStock.getCantidad(), MathContext.DECIMAL64))).doubleValue());
 		}
 		factura.setImporteTotal(frontProductoStock.getPrecioFinal());
 		factura.setFechaCompra(new Date());
@@ -137,18 +149,9 @@ public class ProductoServiceImpl implements ProductoService {
 		productoFactura.setFactura(factura);
 		productoFactura.setCantidad(frontProductoStock.getCantidad());
 		productoFactura.setIvaProducto(frontProductoStock.getIva());
-		BigDecimal precioUnitConIva;
-		if (frontProductoStock.getCantidad() > 0) {
-			precioUnitConIva = precioFinal
-					.divide(new BigDecimal(frontProductoStock.getCantidad(), MathContext.DECIMAL64));
-		} else {
-			precioUnitConIva = new BigDecimal(frontProductoStock.getPrecioFinal(), MathContext.DECIMAL64);
-		}
 		productoFactura.setPrecioUnitConIva(precioUnitConIva.doubleValue());
 		if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
-			productoFactura.setPrecioUnitSinIva(
-					(precioUnitConIva.divide(((new BigDecimal(0.01, MathContext.DECIMAL64).multiply(iva))
-							.add(new BigDecimal(1, MathContext.DECIMAL64))))).doubleValue());
+			productoFactura.setPrecioUnitSinIva(precioUnitSinIva.doubleValue());
 		} else {
 			productoFactura.setPrecioUnitSinIva(precioUnitConIva.doubleValue());
 

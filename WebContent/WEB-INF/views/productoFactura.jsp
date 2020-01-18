@@ -35,7 +35,7 @@
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.date.purchase" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})" colspan="2" class="text-center"><fmt:message key="label.Total.amount" /></th>
+					<th colspan="2" class="text-center"><fmt:message key="label.Total.amount" /></th>
 					<th class="width-50"><fmt:message key="label.Extras" /></th>
 				</tr>
 			</thead>
