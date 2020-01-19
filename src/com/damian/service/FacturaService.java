@@ -17,7 +17,7 @@ public interface FacturaService {
 
 	public int save(Factura factura, HttpServletRequest request);
 
-	public int update(Factura factura);
+	public int update(Factura factura, HttpServletRequest request);
 
 	public int delete(int id) throws NotEmptyException;
 

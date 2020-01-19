@@ -149,7 +149,7 @@
 							</td>
 						</sec:authorize>
 						<td><c:out value="${producto.descripcion}" /></td>
-						<td class="text-center"><c:out value="${producto.estado}" /></td>
+						<td class="text-center"><fmt:message key="${producto.estado}" /></td>
 						<td><c:out value="${producto.marca}" /></td>
 						<td><c:out value="${producto.modelo}" /></td>	
 						<td class="text-right"><fmt:formatNumber type="currency" value="${producto.precioVenta}" /></td>

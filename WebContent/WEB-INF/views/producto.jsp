@@ -84,9 +84,9 @@
 			<div class="col-xs-12 col-sm-4">
 				<label for="estado"><fmt:message key="label.state" /></label>
 				<sf:select class="form-control" id="estado" path="estado">
-					<sf:option value="ACTIVO" />
-					<sf:option value="INACTIVO" />
-					<sf:option value="DESCATALOGADO" />
+					<sf:option value="ACTIVE"><fmt:message key="ACTIVE" /></sf:option>
+					<sf:option value="INACTIVE"><fmt:message key="INACTIVE" /></sf:option>
+					<sf:option value="DISCONTINUED"><fmt:message key="DISCONTINUED" /></sf:option>
 				</sf:select>
 			</div>
 		</div>

@@ -71,8 +71,10 @@ public class FacturaServiceImpl implements FacturaService {
 	}
 
 	@Override
-	public int update(Factura factura) {
-		return facturaDAO.update(factura);
+	public int update(Factura factura, HttpServletRequest request) {
+		facturaDAO.update(factura);
+		saveFacturaEstado(factura, request);
+		return factura.getIdFac();
 	}
 
 	@Override
@@ -82,6 +84,10 @@ public class FacturaServiceImpl implements FacturaService {
 			for (ProductoFactura pf : productoFacturaList) {
 				productoFacturaDAO.delete(pf.getProducto().getIdPro(), id);
 			}
+		}
+		List<FacturaEstado> facturaEstadoList = facturaEstadoDAO.findByIdFacModel(id);
+		for(FacturaEstado fe: facturaEstadoList) {
+			facturaEstadoDAO.delete(fe.getId());
 		}
 		return facturaDAO.delete(id);
 	}

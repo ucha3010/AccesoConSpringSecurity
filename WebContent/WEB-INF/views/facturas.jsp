@@ -46,6 +46,12 @@
 				$(".collapse").collapse('show');
 			}
 		}
+		function actualizaEstado(idFac) {
+			var valSelected = document.getElementById("estadoId" + idFac);
+			var url = "<c:url value='/factura/status/"+idFac+"/" + valSelected.value + "' />";
+			location.href=url;
+			
+		}
 	</script>
 </head>
 <body>
@@ -112,7 +118,17 @@
 						<td class="text-center"><fmt:formatNumber type="number" value="${factura.ivaTotal}" minFractionDigits="2" />%</td>	
 						<td class="text-right"><fmt:formatNumber type="currency" value="${factura.importeTotal}" /></td>
 						<td class="width-15"></td>
-						<td><fmt:message key="${factura.estado.nombre}" /></td>
+						<td>
+							<fmt:message key="label.state.column.name" var="itemSelect"/>
+							<select name="factura.estado.idEst" class="border-radius-dam" id="estadoId${factura.idFac}" onchange="actualizaEstado(${factura.idFac})">
+								<c:forEach items="${estados}" var="est">
+									<option value="${est.idEst}" <c:if test="${factura.estado.idEst == est.idEst}">selected</c:if>>
+										<fmt:message key="${est.nombre}" />
+									</option>
+								</c:forEach>
+							</select>
+<%-- 						<fmt:message key="${factura.estado.nombre}" /> --%>
+						</td>
 						<td class="sin_padding">
 							<a title="<fmt:message key="Products" />" href='<c:url value='/productoFactura/factura/${factura.idFac}' />'>
 								<img src='<c:url value="/resources/imgs/factura.png"/>' class="margin-left-5porciento width-35">
