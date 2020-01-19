@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.damian.pojo.FacturaEstado;
 import com.damian.service.EstadoService;
 import com.damian.service.FacturaEstadoService;
+import com.damian.service.FacturaService;
 
 @Controller
 public class FacturaEstadoController {
@@ -26,12 +27,15 @@ public class FacturaEstadoController {
 	private FacturaEstadoService facturaEstadoService;
 
 	@Autowired
+	private FacturaService facturaService;
+
+	@Autowired
 	private EstadoService estadoService;
 
 	@RequestMapping("/facturaEstado/factura/{idFac}")
 	public ModelAndView getFacturas(ModelAndView modelAndView, @PathVariable("idFac") int idFac) {
-		List<FacturaEstado> facturaEstados = facturaEstadoService.findByIdFac(idFac);
-		modelAndView.addObject("facturaEstados", facturaEstados);
+		modelAndView.addObject("factura", facturaService.findByIdModel(idFac));
+		modelAndView.addObject("facturaEstados", facturaEstadoService.findByIdFac(idFac));
 		modelAndView.setViewName("facturaEstados");
 		return modelAndView;
 	}
