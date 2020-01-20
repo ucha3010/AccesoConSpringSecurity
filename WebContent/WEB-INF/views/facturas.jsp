@@ -93,7 +93,7 @@
 					<th onclick="sortTable(${count})" colspan="2" class="text-center"><fmt:message key="label.Total.amount" /></th>
 					<c:set var="count" value="${count + 2}" scope="page"/>
 					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.state" /></th>
-					<th class="width-50"><fmt:message key="label.Extras" /></th>
+					<th class="width-100"><fmt:message key="label.Extras" /></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -132,6 +132,9 @@
 						<td class="sin_padding">
 							<a title="<fmt:message key="Products" />" href='<c:url value='/productoFactura/factura/${factura.idFac}' />'>
 								<img src='<c:url value="/resources/imgs/factura.png"/>' class="margin-left-5porciento width-35">
+							</a>
+							<a title="<fmt:message key="label.State.historical" />" href='<c:url value='/facturaEstado/factura/${factura.idFac}' />'>
+								<img src='<c:url value="/resources/imgs/states.png"/>' class="margin-left-5porciento width-35">
 							</a>
 						</td>
 				    </tr>

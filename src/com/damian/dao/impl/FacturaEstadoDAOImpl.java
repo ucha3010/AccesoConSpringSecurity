@@ -83,7 +83,7 @@ public class FacturaEstadoDAOImpl implements FacturaEstadoDAO {
 	@Override
 	public List<FacturaEstado> findByIdFac(int idFac) {
 
-		String sql = "SELECT * FROM " + TABLA + " WHERE idFac=" + idFac;
+		String sql = "SELECT * FROM " + TABLA + " WHERE idFac=" + idFac + " ORDER BY fecha DESC";
 
 		return lista(sql);
 	}
@@ -116,7 +116,7 @@ public class FacturaEstadoDAOImpl implements FacturaEstadoDAO {
 				BeanPropertyRowMapper.newInstance(ModelFacturaEstado.class));
 		List<FacturaEstado> feList = new ArrayList<>();
 		for (ModelFacturaEstado mfe : mfeList) {
-			feList.add(converterFacturaEstado.convert(mfe));
+			feList.add(converterFacturaEstado.convertAll(mfe));
 		}
 		return feList;
 	}

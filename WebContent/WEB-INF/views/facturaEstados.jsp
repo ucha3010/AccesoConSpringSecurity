@@ -52,6 +52,30 @@
 			location.href=url;
 			
 		}
+		
+		
+		function cambioTamanio(elemento){
+			$(elemento).on('input', function() {
+				var scroll_height = $(elemento).get(0).scrollHeight;
+
+				$(elemento).css('height', scroll_height + 'px');
+			});
+		}
+		             
+		$(document)
+	    .one('focus.autoExpand', 'textarea.autoExpand', function(){
+	        var savedValue = this.value;
+	        this.value = '';
+	        this.baseScrollHeight = this.scrollHeight;
+	        this.value = savedValue;
+	    })
+	    .on('input.autoExpand', 'textarea.autoExpand', function(){
+	        var minRows = this.getAttribute('data-min-rows')|0, rows;
+	        this.rows = minRows;
+	        rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 30);
+	        this.rows = minRows + rows;
+	    });
+		
 	</script>
 </head>
 <body>
@@ -82,20 +106,21 @@
 				</tr>
 			</thead>
 			<tbody>
+				<c:set var="sizeCount" value="0" scope="page" />
 				<c:forEach items="${facturaEstados}" var="facturaEstado">
-				    <tr title='<fmt:message key="label.Delivery.date" />: <fmt:formatDate value="${factura.fechaEntrega}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.Delivery.address" />: <c:out value="${factura.direccionEntrega}" />&#xA;<fmt:message key="label.Observations" />: <c:out value="${factura.observaciones}" />&#xA;<fmt:message key="label.Payment.method" />: <c:out value="${factura.formaPago.nombre}" />&#xA;<fmt:message key="label.Creator" />: <c:out value="${factura.creadoPor}" />'>
+				    <tr>
 						<td class="text-center"><fmt:message key="${facturaEstado.estado.nombre}" /></td>
-						<td class="text-center"><fmt:formatDate value="${facturaEstado.fecha}" pattern="dd/MM/yyyy"/></td>
+						<td class="text-center"><fmt:formatDate value="${facturaEstado.fecha}" pattern="dd/MM/yyyy hh:mm:ss"/></td>
 						<td class="text-center"><c:out value="${facturaEstado.creadoPor}" /></td>
-						<td class="text-center"><c:out value="${facturaEstado.observaciones}" /></td>
-						<td><button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/usuario"/>"'><fmt:message key="label.Update" /></button></td>
-<!-- 						TODO DAMIAN mostrar caja de texto en facturaEstado.observaciones (que al seleccionarlo se agrande) y hacer destino botón update -->
+						<td class="text-center"><textarea id="observaciones${count}" name="facturaEstado.observaciones" rows='1' data-min-rows='1' class='autoExpand'><c:out value="${facturaEstado.observaciones}" /></textarea></td>
+						<td><button type="button" class="btn btn-primary" onclick='location.href="<c:url value="/usuario"/>"'><fmt:message key="label.Update" /></button></td>
+<!-- 						TODO DAMIAN hacer destino botón update -->
 				    </tr>
+				    <c:set var="sizeCount" value="${sizeCount + 1}" scope="page"/>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-
 	<script type="text/javascript" src="<c:url value='/resources/js/tabla_ordenar.js'/>"></script>
 	<script type="text/javascript" src="<c:url value='/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js'/>"></script>
 </body>
