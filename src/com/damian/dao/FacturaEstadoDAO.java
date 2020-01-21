@@ -8,6 +8,8 @@ public interface FacturaEstadoDAO {
 
 	public List<FacturaEstado> findAll();
 
+	public FacturaEstado findById(int id);
+
 	public void save(FacturaEstado facturaEstado);
 
 	public void update(FacturaEstado facturaEstado);

@@ -9,6 +9,8 @@ import com.damian.pojo.FacturaEstado;
 public interface FacturaEstadoService {
 
 	public List<FacturaEstado> findAll();
+	
+	public FacturaEstado findById(int id);
 
 	public void save(FacturaEstado facturaEstado, HttpServletRequest request);
 

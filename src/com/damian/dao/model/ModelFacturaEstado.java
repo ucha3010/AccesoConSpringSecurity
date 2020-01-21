@@ -1,13 +1,13 @@
 package com.damian.dao.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class ModelFacturaEstado {
 
 	private int id;
 	private int idFac;
 	private int idEst;
-	private Date fecha;
+	private Timestamp fecha;
 	private String creadoPor;
 	private String observaciones;
 
@@ -23,7 +23,7 @@ public class ModelFacturaEstado {
 	 * @param creadoPor
 	 * @param observaciones
 	 */
-	public ModelFacturaEstado(int id, int idFac, int idEst, Date fecha, String creadoPor, String observaciones) {
+	public ModelFacturaEstado(int id, int idFac, int idEst, Timestamp fecha, String creadoPor, String observaciones) {
 		this.id = id;
 		this.idFac = idFac;
 		this.idEst = idEst;
@@ -80,7 +80,7 @@ public class ModelFacturaEstado {
 	/**
 	 * @return the fecha
 	 */
-	public Date getFecha() {
+	public Timestamp getFecha() {
 		return fecha;
 	}
 
@@ -88,7 +88,7 @@ public class ModelFacturaEstado {
 	 * @param fecha
 	 *            the fecha to set
 	 */
-	public void setFecha(Date fecha) {
+	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
 	}
 
@@ -129,8 +129,8 @@ public class ModelFacturaEstado {
 	 */
 	@Override
 	public String toString() {
-		return "ModelFacturaEstado [id=" + id + ", idFac=" + idFac + ", idEst=" + idEst + ", fecha=" + fecha
-				+ ", creadoPor=" + creadoPor + ", observaciones=" + observaciones + "]";
+		return "ModelFacturaEstado [id=" + id + ", idFac=" + idFac + ", idEst=" + idEst + ", creadoPor=" + creadoPor
+				+ ", observaciones=" + observaciones + "]";
 	}
 
 }

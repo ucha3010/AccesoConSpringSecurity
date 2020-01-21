@@ -23,6 +23,11 @@ public class FacturaEstadoServiceImpl implements FacturaEstadoService {
 	}
 
 	@Override
+	public FacturaEstado findById(int id) {
+		return facturaEstadoDAO.findById(id);
+	}
+
+	@Override
 	public void save(FacturaEstado facturaEstado, HttpServletRequest request) {
 		facturaEstadoDAO.save(facturaEstado);
 	}

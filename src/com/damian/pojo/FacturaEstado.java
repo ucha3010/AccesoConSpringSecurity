@@ -1,13 +1,13 @@
 package com.damian.pojo;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class FacturaEstado {
 
 	private int id;
 	private Factura factura;
 	private Estado estado;
-	private Date fecha;
+	private Timestamp fecha;
 	private String creadoPor;
 	private String observaciones;
 
@@ -17,12 +17,17 @@ public class FacturaEstado {
 
 	/**
 	 * @param id
+	 * @param factura
+	 * @param estado
 	 * @param fecha
 	 * @param creadoPor
 	 * @param observaciones
 	 */
-	public FacturaEstado(int id, Date fecha, String creadoPor, String observaciones) {
+	public FacturaEstado(int id, Factura factura, Estado estado, Timestamp fecha, String creadoPor,
+			String observaciones) {
 		this.id = id;
+		this.factura = factura;
+		this.estado = estado;
 		this.fecha = fecha;
 		this.creadoPor = creadoPor;
 		this.observaciones = observaciones;
@@ -76,7 +81,7 @@ public class FacturaEstado {
 	/**
 	 * @return the fecha
 	 */
-	public Date getFecha() {
+	public Timestamp getFecha() {
 		return fecha;
 	}
 
@@ -84,7 +89,7 @@ public class FacturaEstado {
 	 * @param fecha
 	 *            the fecha to set
 	 */
-	public void setFecha(Date fecha) {
+	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
 	}
 

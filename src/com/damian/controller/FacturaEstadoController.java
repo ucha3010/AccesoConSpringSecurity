@@ -35,6 +35,7 @@ public class FacturaEstadoController {
 	@RequestMapping("/facturaEstado/factura/{idFac}")
 	public ModelAndView getFacturas(ModelAndView modelAndView, @PathVariable("idFac") int idFac) {
 		modelAndView.addObject("factura", facturaService.findByIdModel(idFac));
+		modelAndView.addObject("facturaEstado", new FacturaEstado());
 		modelAndView.addObject("facturaEstados", facturaEstadoService.findByIdFac(idFac));
 		modelAndView.setViewName("facturaEstados");
 		return modelAndView;
@@ -50,11 +51,23 @@ public class FacturaEstadoController {
 	}
 
 	@RequestMapping(value = { "/facturaEstado/update" }, method = RequestMethod.POST)
-	public String updateFactura(@ModelAttribute("facturaEstado") FacturaEstado facturaEstado, BindingResult result,
-			Model model, HttpServletRequest request, RedirectAttributes ra) {
+	public String updateFacturaEstado(@ModelAttribute("facturaEstado") FacturaEstado facturaEstado,
+			BindingResult result, Model model, HttpServletRequest request, RedirectAttributes ra) {
 
 		facturaEstadoService.update(facturaEstado, request);
 		return "redirect:/factura";
+	}
+
+	@RequestMapping(value = { "/facturaEstado/update/observaciones" }, method = RequestMethod.POST)
+	public String updateFacturaEstadoObservaciones(@ModelAttribute("facturaEstado") FacturaEstado facturaEstado,
+			BindingResult result, Model model, HttpServletRequest request, RedirectAttributes ra) {
+
+		String observaciones = facturaEstado.getObservaciones();
+		facturaEstado = facturaEstadoService.findById(facturaEstado.getId());
+		facturaEstado.setObservaciones(observaciones);
+		facturaEstadoService.update(facturaEstado, request);
+		ra.addFlashAttribute("facturaEstado_id_observaciones", facturaEstado.getId());
+		return "redirect:/facturaEstado/factura/" + facturaEstado.getFactura().getIdFac();
 	}
 
 }

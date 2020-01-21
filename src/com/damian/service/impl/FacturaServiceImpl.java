@@ -1,5 +1,6 @@
 package com.damian.service.impl;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class FacturaServiceImpl implements FacturaService {
 			}
 		}
 		List<FacturaEstado> facturaEstadoList = facturaEstadoDAO.findByIdFacModel(id);
-		for(FacturaEstado fe: facturaEstadoList) {
+		for (FacturaEstado fe : facturaEstadoList) {
 			facturaEstadoDAO.delete(fe.getId());
 		}
 		return facturaDAO.delete(id);
@@ -121,7 +122,9 @@ public class FacturaServiceImpl implements FacturaService {
 		FacturaEstado facturaEstado = new FacturaEstado();
 		facturaEstado.setFactura(factura);
 		facturaEstado.setEstado(factura.getEstado());
-		facturaEstado.setFecha(new Date());
+		Date utilDate = new Date();
+		long lnMilisegundos = utilDate.getTime();
+		facturaEstado.setFecha(new Timestamp(lnMilisegundos));
 		facturaEstado.setCreadoPor(creador);
 		facturaEstadoDAO.save(facturaEstado);
 
