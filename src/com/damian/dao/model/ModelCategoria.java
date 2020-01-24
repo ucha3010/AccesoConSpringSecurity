@@ -1,23 +1,26 @@
 package com.damian.dao.model;
 
 public class ModelCategoria {
-	
+
 	private int idCat;
-	private String nombre;
+	private String nombreES;
+	private String nombreEN;
 
 	/**
 	 * 
 	 */
 	public ModelCategoria() {
 	}
-	
+
 	/**
 	 * @param idCat
-	 * @param nombre
+	 * @param nombreES
+	 * @param nombreEN
 	 */
-	public ModelCategoria(int idCat, String nombre) {
+	public ModelCategoria(int idCat, String nombreES, String nombreEN) {
 		this.idCat = idCat;
-		this.nombre = nombre;
+		this.nombreES = nombreES;
+		this.nombreEN = nombreEN;
 	}
 
 	/**
@@ -28,32 +31,51 @@ public class ModelCategoria {
 	}
 
 	/**
-	 * @param idCat the idCat to set
+	 * @param idCat
+	 *            the idCat to set
 	 */
 	public void setIdCat(int idCat) {
 		this.idCat = idCat;
 	}
 
 	/**
-	 * @return the nombre
+	 * @return the nombreES
 	 */
-	public String getNombre() {
-		return nombre;
+	public String getNombreES() {
+		return nombreES;
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombreES
+	 *            the nombreES to set
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreES(String nombreES) {
+		this.nombreES = nombreES;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * @return the nombreEN
+	 */
+	public String getNombreEN() {
+		return nombreEN;
+	}
+
+	/**
+	 * @param nombreEN
+	 *            the nombreEN to set
+	 */
+	public void setNombreEN(String nombreEN) {
+		this.nombreEN = nombreEN;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "ModelCategoria [idCat=" + idCat + ", nombre=" + nombre + "]";
+		return "ModelCategoria [idCat=" + idCat + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + "]";
 	}
 
 }

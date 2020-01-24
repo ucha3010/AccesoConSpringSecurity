@@ -37,7 +37,7 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	@Override
 	public List<Categoria> findAll() {
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY nombre ASC";
+		String sql = "SELECT * FROM " + TABLA + " ORDER BY nombreES ASC";
 
 		return lista(sql);
 	}
@@ -84,16 +84,16 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 			return update(categoria);
 		} else {
 			ModelCategoria me = converterCategoria.convert(categoria);
-			String sql = "INSERT INTO " + TABLA + " (nombre) VALUES (?)";
-			return jdbcTemplate.update(sql, me.getNombre());
+			String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN) VALUES (?, ?)";
+			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN());
 		}
 	}
 
 	@Override
 	public int update(Categoria categoria) {
 		ModelCategoria me = converterCategoria.convert(categoria);
-		String sql = "UPDATE " + TABLA + " SET nombre=? " + "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, me.getNombre(), me.getIdCat());
+		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=? " + "WHERE " + KEY + "=?";
+		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getIdCat());
 	}
 
 	@Override
@@ -120,7 +120,8 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	private ModelCategoria mapeo(ResultSet rs) throws SQLException {
 		ModelCategoria me = new ModelCategoria();
 		me.setIdCat(rs.getInt("idCat"));
-		me.setNombre(rs.getString("nombre"));
+		me.setNombreES(rs.getString("nombreES"));
+		me.setNombreEN(rs.getString("nombreEN"));
 		return me;
 	}
 }

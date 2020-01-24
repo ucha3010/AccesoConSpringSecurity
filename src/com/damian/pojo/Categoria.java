@@ -3,9 +3,10 @@ package com.damian.pojo;
 import java.util.List;
 
 public class Categoria {
-	
+
 	private int idCat;
-	private String nombre;
+	private String nombreES;
+	private String nombreEN;
 	private List<Subcategoria> subcategorias;
 
 	/**
@@ -13,25 +14,16 @@ public class Categoria {
 	 */
 	public Categoria() {
 	}
-	
-	/**
-	 * @param idCat
-	 * @param nombre
-	 */
-	public Categoria(int idCat, String nombre) {
-		this.idCat = idCat;
-		this.nombre = nombre;
-	}
 
 	/**
 	 * @param idCat
-	 * @param nombre
-	 * @param subcategorias
+	 * @param nombreES
+	 * @param nombreEN
 	 */
-	public Categoria(int idCat, String nombre, List<Subcategoria> subcategorias) {
+	public Categoria(int idCat, String nombreES, String nombreEN) {
 		this.idCat = idCat;
-		this.nombre = nombre;
-		this.subcategorias = subcategorias;
+		this.nombreES = nombreES;
+		this.nombreEN = nombreEN;
 	}
 
 	/**
@@ -42,24 +34,41 @@ public class Categoria {
 	}
 
 	/**
-	 * @param idCat the idCat to set
+	 * @param idCat
+	 *            the idCat to set
 	 */
 	public void setIdCat(int idCat) {
 		this.idCat = idCat;
 	}
 
 	/**
-	 * @return the nombre
+	 * @return the nombreES
 	 */
-	public String getNombre() {
-		return nombre;
+	public String getNombreES() {
+		return nombreES;
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombreES
+	 *            the nombreES to set
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreES(String nombreES) {
+		this.nombreES = nombreES;
+	}
+
+	/**
+	 * @return the nombreEN
+	 */
+	public String getNombreEN() {
+		return nombreEN;
+	}
+
+	/**
+	 * @param nombreEN
+	 *            the nombreEN to set
+	 */
+	public void setNombreEN(String nombreEN) {
+		this.nombreEN = nombreEN;
 	}
 
 	/**
@@ -70,18 +79,21 @@ public class Categoria {
 	}
 
 	/**
-	 * @param subcategorias the subcategorias to set
+	 * @param subcategorias
+	 *            the subcategorias to set
 	 */
 	public void setSubcategorias(List<Subcategoria> subcategorias) {
 		this.subcategorias = subcategorias;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "ModelCategoria [idCat=" + idCat + ", nombre=" + nombre + "]";
+		return "Categoria [idCat=" + idCat + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + "]";
 	}
 
 }

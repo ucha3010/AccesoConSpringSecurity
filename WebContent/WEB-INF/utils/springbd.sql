@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-01-2020 a las 23:54:27
+-- Tiempo de generación: 25-01-2020 a las 00:23:41
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -62,19 +62,20 @@ INSERT INTO `admin` (`idAd`, `nombre`, `cargo`, `fechaCreacion`) VALUES
 
 CREATE TABLE `categoria` (
   `idCat` int(11) NOT NULL,
-  `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+  `nombreES` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreEN` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `categoria` (`idCat`, `nombre`) VALUES
-(1, 'Aparatos electrónicos'),
-(2, 'Hogar'),
-(6, 'otra'),
-(7, 'Coches'),
-(8, '0 Otros');
+INSERT INTO `categoria` (`idCat`, `nombreES`, `nombreEN`) VALUES
+(1, 'Aparatos electrónicos', 'Electronic devices'),
+(2, 'Hogar', 'Home'),
+(6, 'otra', 'Other'),
+(7, 'Coches', 'Cars'),
+(8, '0 Otros', '0 Others');
 
 -- --------------------------------------------------------
 
@@ -783,7 +784,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idCat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `datospersonales`
 --
@@ -843,7 +844,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  MODIFY `idSub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idSub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --

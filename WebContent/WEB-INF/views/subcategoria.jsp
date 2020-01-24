@@ -41,6 +41,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
+	<fmt:message key="language.name" var="nameColSelect"/>
 	<sf:form method="post" action="${pageContext.request.contextPath}/subcategoria/save" modelAttribute="subcategoria" onsubmit="return validarSubcategoria()">
 		<c:if test="${subcategoria.idSub != 0}">
 			<sf:hidden path="idSub"/>
@@ -51,7 +52,7 @@
 			<div class="col-xs-12 col-sm-2">
 				<label for="categoria"><fmt:message key="label.Category" /></label>
 	        	<sf:select path="categoria.idCat" class="form-control" id="categoria">
-	            	<sf:options items="${categorias}" itemValue="idCat" itemLabel="nombre" />
+	            	<sf:options items="${categorias}" itemValue="idCat" itemLabel="${nameColSelect}" />
 	        	</sf:select>
 			</div>	
 			<div class="col-sm-1">

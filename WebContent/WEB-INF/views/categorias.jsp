@@ -110,7 +110,7 @@
 							
 							<c:if test="${empty subcategorias}">
 								<tr>
-									<td><c:out value="${categoria.nombre}" /></td>
+									<td><c:out value="${categoria[nameColSelect]}" /></td>
 									<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
 										<td class="sin_padding">
 											<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/categoria/${categoria.idCat}' />"'>
@@ -141,7 +141,7 @@
 										</sec:authorize>
 									</c:if>
 								    <c:if test="${not repetido}">
-										<td><c:out value="${categoria.nombre}" /></td>
+										<td><c:out value="${categoria[nameColSelect]}" /></td>
 										<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
 											<td class="sin_padding">
 												<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/categoria/${categoria.idCat}' />"'>

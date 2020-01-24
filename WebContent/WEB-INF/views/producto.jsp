@@ -231,7 +231,7 @@
 	        	<sf:select path="subcategoria.idSub" class="form-control" id="subcategoria">
 	        		<c:forEach var="categoria" items="${categorias}">
 	        			<c:forEach var="sub" items="${categoria.subcategorias}">
-	        				<sf:option value="${sub.idSub}" label="${categoria.nombre} - ${sub.nombre}" />
+	        				<sf:option value="${sub.idSub}" label="${categoria[nameColSelect]} - ${sub.nombre}" />
 	        			</c:forEach>
 	        		</c:forEach>
 	        	</sf:select>

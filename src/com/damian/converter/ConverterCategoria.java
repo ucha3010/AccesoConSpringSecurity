@@ -25,7 +25,8 @@ public class ConverterCategoria {
 
 		Categoria c = new Categoria();
 		c.setIdCat(mc.getIdCat());
-		c.setNombre(mc.getNombre());
+		c.setNombreES(mc.getNombreES());
+		c.setNombreEN(mc.getNombreEN());
 
 		return c;
 
@@ -35,7 +36,8 @@ public class ConverterCategoria {
 
 		ModelCategoria mc = new ModelCategoria();
 		mc.setIdCat(c.getIdCat());
-		mc.setNombre(c.getNombre());
+		mc.setNombreES(c.getNombreES());
+		mc.setNombreEN(c.getNombreEN());
 
 		return mc;
 
