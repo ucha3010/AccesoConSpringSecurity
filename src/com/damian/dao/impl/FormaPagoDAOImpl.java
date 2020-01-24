@@ -37,7 +37,7 @@ public class FormaPagoDAOImpl implements FormaPagoDAO {
 	@Override
 	public List<FormaPago> findAll() {
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY nombre ASC";
+		String sql = "SELECT * FROM " + TABLA + " ORDER BY nombreES ASC";
 
 		return lista(sql);
 	}
@@ -84,16 +84,16 @@ public class FormaPagoDAOImpl implements FormaPagoDAO {
 			return update(formaPago);
 		} else {
 			ModelFormaPago me = converterFormaPago.convert(formaPago);
-			String sql = "INSERT INTO " + TABLA + " (nombre) VALUES (?)";
-			return jdbcTemplate.update(sql, me.getNombre());
+			String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN) VALUES (?, ?)";
+			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN());
 		}
 	}
 
 	@Override
 	public int update(FormaPago formaPago) {
 		ModelFormaPago me = converterFormaPago.convert(formaPago);
-		String sql = "UPDATE " + TABLA + " SET nombre=? " + "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, me.getNombre(), me.getIdFor());
+		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=? " + "WHERE " + KEY + "=?";
+		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getIdFor());
 	}
 
 	@Override
@@ -120,7 +120,8 @@ public class FormaPagoDAOImpl implements FormaPagoDAO {
 	private ModelFormaPago mapeo(ResultSet rs) throws SQLException {
 		ModelFormaPago mf = new ModelFormaPago();
 		mf.setIdFor(rs.getInt("idFor"));
-		mf.setNombre(rs.getString("nombre"));
+		mf.setNombreES(rs.getString("nombreES"));
+		mf.setNombreEN(rs.getString("nombreEN"));
 		return mf;
 	}
 }

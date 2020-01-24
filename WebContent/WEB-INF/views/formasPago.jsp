@@ -30,6 +30,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
+	<fmt:message key="language.name" var="nameColSelect"/>
 	<sec:authorize access="hasAnyRole('ROL_ROOT')">
 		<div class="d-flex justify-content-between">
 			<div class="p-2">
@@ -55,7 +56,9 @@
 				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/formaPago/0'/>"'>
 					<fmt:message key="Add.formaPago" />
 				</button>
-			</div>		
+			</div>	
+			<div class="p-2">
+			</div>	
 		</div>
 	</sec:authorize>
 	<div class="form-row">		
@@ -89,7 +92,7 @@
 										</button>
 									</td>
 								</sec:authorize>
-								<td><c:out value="${formaPago.nombre}" /></td>
+								<td><c:out value="${formaPago[nameColSelect]}" /></td>
 						    </tr>
 						</c:forEach>
 					</tbody>

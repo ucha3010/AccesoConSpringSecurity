@@ -25,7 +25,8 @@ public class ConverterFormaPago {
 
 		FormaPago f = new FormaPago();
 		f.setIdFor(mf.getIdFor());
-		f.setNombre(mf.getNombre());
+		f.setNombreES(mf.getNombreES());
+		f.setNombreEN(mf.getNombreEN());
 
 		return f;
 
@@ -35,7 +36,8 @@ public class ConverterFormaPago {
 
 		ModelFormaPago mf = new ModelFormaPago();
 		mf.setIdFor(f.getIdFor());
-		mf.setNombre(f.getNombre());
+		mf.setNombreES(f.getNombreES());
+		mf.setNombreEN(f.getNombreEN());
 
 		return mf;
 

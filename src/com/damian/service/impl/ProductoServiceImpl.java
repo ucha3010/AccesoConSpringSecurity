@@ -131,7 +131,7 @@ public class ProductoServiceImpl implements ProductoService {
 		factura.setObservaciones(frontProductoStock.getObservaciones());
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		factura.setFormaPago(new FormaPago(4, null));
+		factura.setFormaPago(new FormaPago(4, null, null));
 		factura.setCreadoPor(context.getAuthentication().getName());
 		if (frontProductoStock.isCompra()) {
 			producto.setUnidades(producto.getUnidades() + frontProductoStock.getCantidad());

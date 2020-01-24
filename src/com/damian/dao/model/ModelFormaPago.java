@@ -1,21 +1,24 @@
 package com.damian.dao.model;
 
 public class ModelFormaPago {
-	
+
 	private int idFor;
-	private String nombre;
-	
+	private String nombreES;
+	private String nombreEN;
+
 	public ModelFormaPago() {
-		
+
 	}
 
 	/**
 	 * @param idFor
-	 * @param nombre
+	 * @param nombreES
+	 * @param nombreEN
 	 */
-	public ModelFormaPago(int idFor, String nombre) {
+	public ModelFormaPago(int idFor, String nombreES, String nombreEN) {
 		this.idFor = idFor;
-		this.nombre = nombre;
+		this.nombreES = nombreES;
+		this.nombreEN = nombreEN;
 	}
 
 	/**
@@ -26,32 +29,50 @@ public class ModelFormaPago {
 	}
 
 	/**
-	 * @param idFor the idFor to set
+	 * @param idFor
+	 *            the idFor to set
 	 */
 	public void setIdFor(int idFor) {
 		this.idFor = idFor;
 	}
 
 	/**
-	 * @return the nombre
+	 * @return the nombreES
 	 */
-	public String getNombre() {
-		return nombre;
+	public String getNombreES() {
+		return nombreES;
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombreES
+	 *            the nombreES to set
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreES(String nombreES) {
+		this.nombreES = nombreES;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * @return the nombreEN
+	 */
+	public String getNombreEN() {
+		return nombreEN;
+	}
+
+	/**
+	 * @param nombreEN
+	 *            the nombreEN to set
+	 */
+	public void setNombreEN(String nombreEN) {
+		this.nombreEN = nombreEN;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "ModelFormaPago [idFor=" + idFor + ", nombre=" + nombre + "]";
+		return "ModelFormaPago [idFor=" + idFor + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + "]";
 	}
-
 }

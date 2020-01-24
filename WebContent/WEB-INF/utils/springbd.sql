@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-01-2020 a las 20:36:42
+-- Tiempo de generación: 24-01-2020 a las 21:17:07
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -309,7 +309,9 @@ INSERT INTO `factura_estado` (`id`, `idFac`, `idEst`, `fecha`, `creadoPor`, `obs
 (11, 8, 5, '2020-01-19 11:48:30', 'admin', 'mañana'),
 (12, 8, 7, '2020-01-19 23:15:07', 'admin', 'Pongo otra cosa'),
 (13, 8, 3, '2020-01-22 00:01:21', 'admin', NULL),
-(14, 8, 7, '2020-01-22 00:01:54', 'pepe', 'Vuelvo al estado correcto.');
+(14, 8, 7, '2020-01-22 00:01:54', 'pepe', 'Vuelvo al estado correcto.'),
+(15, 8, 1, '2020-01-24 20:41:14', 'pepe', NULL),
+(16, 8, 7, '2020-01-24 20:41:27', 'pepe', NULL);
 
 -- --------------------------------------------------------
 
@@ -319,18 +321,19 @@ INSERT INTO `factura_estado` (`id`, `idFac`, `idEst`, `fecha`, `creadoPor`, `obs
 
 CREATE TABLE `formapago` (
   `idFor` int(11) NOT NULL,
-  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+  `nombreES` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreEN` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `formapago`
 --
 
-INSERT INTO `formapago` (`idFor`, `nombre`) VALUES
-(1, 'Efectivo'),
-(2, 'Tarjeta de crédito'),
-(3, 'Cheque'),
-(4, 'Movimiento stock');
+INSERT INTO `formapago` (`idFor`, `nombreES`, `nombreEN`) VALUES
+(1, 'Efectivo', 'Cash'),
+(2, 'Tarjeta de crédito', 'Credit card'),
+(3, 'Cheque', 'Check'),
+(4, 'Movimiento stock', 'Stock change');
 
 -- --------------------------------------------------------
 
@@ -814,12 +817,12 @@ ALTER TABLE `factura`
 -- AUTO_INCREMENT de la tabla `factura_estado`
 --
 ALTER TABLE `factura_estado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de la tabla `formapago`
 --
 ALTER TABLE `formapago`
-  MODIFY `idFor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idFor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `paises`
 --
