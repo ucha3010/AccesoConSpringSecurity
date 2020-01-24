@@ -21,8 +21,9 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
+	<fmt:message key="language.name" var="nameColSelect"/>
 	<div>
-		<h2><fmt:message key="label.Product.description" />: <c:out value="${producto.descripcion}" /></h2>
+		<h2><fmt:message key="label.Product.description" />: <c:out value="${producto[nameColSelect]}" /></h2>
 	</div>
 	<div class="form-row">		
 		<div class="col-sm-3">

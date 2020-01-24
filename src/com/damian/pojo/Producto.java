@@ -12,24 +12,16 @@ public class Producto implements Serializable {
 	private static final long serialVersionUID = 130820142307L;
 
 	private int idPro;
-	private String descripcion;
+	private String nombreES;
+	private String nombreEN;
 	private int unidades;
 	private double precioVenta;
 	private double precioCompra;
 	private String marca;
 	private String modelo;
 	private String serie;
-
-	/**
-	 * Ubicación dentro del almacén
-	 */
 	private String ubicacion;
-
-	/**
-	 * nuevo, 90%, 80%...
-	 */
 	private String estado;
-
 	private String partida;
 	private Date fechaCompra;
 	private boolean enviar;
@@ -52,7 +44,8 @@ public class Producto implements Serializable {
 
 	/**
 	 * @param idPro
-	 * @param descripcion
+	 * @param nombreES
+	 * @param nombreEN
 	 * @param unidades
 	 * @param precioVenta
 	 * @param precioCompra
@@ -68,17 +61,13 @@ public class Producto implements Serializable {
 	 * @param mesesGarantia
 	 * @param peso
 	 * @param volumen
-	 * @param productoEmpresaList
-	 * @param subcategoria
-	 * @param productoFacturaList
 	 */
-	public Producto(int idPro, String descripcion, int unidades, double precioVenta, double precioCompra, String marca,
-			String modelo, String serie, String ubicacion, String estado, String partida, Date fechaCompra,
-			boolean enviar, boolean vendible, double mesesGarantia, double peso, double volumen,
-			List<ProductoEmpresa> productoEmpresaList, Subcategoria subcategoria,
-			List<ProductoFactura> productoFacturaList) {
+	public Producto(int idPro, String nombreES, String nombreEN, int unidades, double precioVenta, double precioCompra,
+			String marca, String modelo, String serie, String ubicacion, String estado, String partida,
+			Date fechaCompra, boolean enviar, boolean vendible, double mesesGarantia, double peso, double volumen) {
 		this.idPro = idPro;
-		this.descripcion = descripcion;
+		this.nombreES = nombreES;
+		this.nombreEN = nombreEN;
 		this.unidades = unidades;
 		this.precioVenta = precioVenta;
 		this.precioCompra = precioCompra;
@@ -94,9 +83,6 @@ public class Producto implements Serializable {
 		this.mesesGarantia = mesesGarantia;
 		this.peso = peso;
 		this.volumen = volumen;
-		this.productoEmpresaList = productoEmpresaList;
-		this.subcategoria = subcategoria;
-		this.productoFacturaList = productoFacturaList;
 	}
 
 	/**
@@ -115,18 +101,33 @@ public class Producto implements Serializable {
 	}
 
 	/**
-	 * @return the descripcion
+	 * @return the nombreES
 	 */
-	public String getDescripcion() {
-		return descripcion;
+	public String getNombreES() {
+		return nombreES;
 	}
 
 	/**
-	 * @param descripcion
-	 *            the descripcion to set
+	 * @param nombreES
+	 *            the nombreES to set
 	 */
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setNombreES(String nombreES) {
+		this.nombreES = nombreES;
+	}
+
+	/**
+	 * @return the nombreEN
+	 */
+	public String getNombreEN() {
+		return nombreEN;
+	}
+
+	/**
+	 * @param nombreEN
+	 *            the nombreEN to set
+	 */
+	public void setNombreEN(String nombreEN) {
+		this.nombreEN = nombreEN;
 	}
 
 	/**
@@ -377,7 +378,8 @@ public class Producto implements Serializable {
 	}
 
 	/**
-	 * @param subcategoria the subcategoria to set
+	 * @param subcategoria
+	 *            the subcategoria to set
 	 */
 	public void setSubcategoria(Subcategoria subcategoria) {
 		this.subcategoria = subcategoria;
@@ -391,7 +393,8 @@ public class Producto implements Serializable {
 	}
 
 	/**
-	 * @param productoFacturaList the productoFacturaList to set
+	 * @param productoFacturaList
+	 *            the productoFacturaList to set
 	 */
 	public void setProductoFacturaList(List<ProductoFactura> productoFacturaList) {
 		this.productoFacturaList = productoFacturaList;
@@ -404,12 +407,11 @@ public class Producto implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Producto [idPro=" + idPro + ", descripcion=" + descripcion + ", unidades=" + unidades + ", precioVenta="
-				+ precioVenta + ", precioCompra=" + precioCompra + ", marca=" + marca + ", modelo=" + modelo
-				+ ", serie=" + serie + ", ubicacion=" + ubicacion + ", estado=" + estado + ", partida=" + partida
-				+ ", fechaCompra=" + fechaCompra + ", enviar=" + enviar + ", vendible=" + vendible + ", mesesGarantia="
-				+ mesesGarantia + ", peso=" + peso + ", volumen=" + volumen + ", productoEmpresaList="
-				+ productoEmpresaList + "]";
+		return "Producto [idPro=" + idPro + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", unidades="
+				+ unidades + ", precioVenta=" + precioVenta + ", precioCompra=" + precioCompra + ", marca=" + marca
+				+ ", modelo=" + modelo + ", serie=" + serie + ", ubicacion=" + ubicacion + ", estado=" + estado
+				+ ", partida=" + partida + ", fechaCompra=" + fechaCompra + ", enviar=" + enviar + ", vendible="
+				+ vendible + ", mesesGarantia=" + mesesGarantia + ", peso=" + peso + ", volumen=" + volumen + "]";
 	}
 
 }

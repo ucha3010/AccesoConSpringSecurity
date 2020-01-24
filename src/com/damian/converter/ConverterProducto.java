@@ -26,7 +26,8 @@ public class ConverterProducto {
 
 		Producto p = new Producto();
 		p.setIdPro(mp.getIdPro());
-		p.setDescripcion(mp.getDescripcion());
+		p.setNombreES(mp.getNombreES());
+		p.setNombreEN(mp.getNombreEN());
 		p.setUnidades(mp.getUnidades());
 		p.setPrecioVenta(mp.getPrecioVenta());
 		p.setPrecioCompra(mp.getPrecioCompra());
@@ -54,10 +55,15 @@ public class ConverterProducto {
 
 		ModelProducto mp = new ModelProducto();
 		mp.setIdPro(p.getIdPro());
-		if (p.getDescripcion() != null) {
-			mp.setDescripcion(p.getDescripcion());
+		if (p.getNombreES() != null) {
+			mp.setNombreES(p.getNombreES());
 		} else {
-			mp.setDescripcion("Descripción producto no ingresado");
+			mp.setNombreES("Descripción producto no ingresado");
+		}
+		if (p.getNombreEN() != null) {
+			mp.setNombreEN(p.getNombreEN());
+		} else {
+			mp.setNombreEN("Product description didn't write");
 		}
 		mp.setUnidades(p.getUnidades());
 		mp.setPrecioVenta(p.getPrecioVenta());

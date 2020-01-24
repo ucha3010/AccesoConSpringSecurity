@@ -4,10 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 public class FrontProducto {
-	
-	//Producto
+
+	// Producto
 	private int idPro;
-	private String descripcion;
+	private String nombreES;
+	private String nombreEN;
 	private int unidades;
 	private double precioVenta;
 	private double precioCompra;
@@ -25,14 +26,14 @@ public class FrontProducto {
 	private String nombreCategoria;
 	private int idSub;
 	private String nombreSubcategoria;
-	
-	//ProductoFactura
+
+	// ProductoFactura
 	private int cantidadInOut;
 	private double ivaProducto;
 	private double porcentajeDescuento;
 	private String observaciones;
-	
-	//Factura
+
+	// Factura
 	private boolean compra;
 	private double ivaTotal;
 	private double descuentoTotal;
@@ -46,7 +47,7 @@ public class FrontProducto {
 	private String nombreFormaPago;
 
 	public FrontProducto() {
-		
+
 	}
 
 	/**
@@ -57,24 +58,41 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param idPro the idPro to set
+	 * @param idPro
+	 *            the idPro to set
 	 */
 	public void setIdPro(int idPro) {
 		this.idPro = idPro;
 	}
 
 	/**
-	 * @return the descripcion
+	 * @return the nombreES
 	 */
-	public String getDescripcion() {
-		return descripcion;
+	public String getNombreES() {
+		return nombreES;
 	}
 
 	/**
-	 * @param descripcion the descripcion to set
+	 * @param nombreES
+	 *            the nombreES to set
 	 */
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setNombreES(String nombreES) {
+		this.nombreES = nombreES;
+	}
+
+	/**
+	 * @return the nombreEN
+	 */
+	public String getNombreEN() {
+		return nombreEN;
+	}
+
+	/**
+	 * @param nombreEN
+	 *            the nombreEN to set
+	 */
+	public void setNombreEN(String nombreEN) {
+		this.nombreEN = nombreEN;
 	}
 
 	/**
@@ -85,7 +103,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param unidades the unidades to set
+	 * @param unidades
+	 *            the unidades to set
 	 */
 	public void setUnidades(int unidades) {
 		this.unidades = unidades;
@@ -99,7 +118,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param precioVenta the precioVenta to set
+	 * @param precioVenta
+	 *            the precioVenta to set
 	 */
 	public void setPrecioVenta(double precioVenta) {
 		this.precioVenta = precioVenta;
@@ -113,7 +133,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param precioCompra the precioCompra to set
+	 * @param precioCompra
+	 *            the precioCompra to set
 	 */
 	public void setPrecioCompra(double precioCompra) {
 		this.precioCompra = precioCompra;
@@ -127,7 +148,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param marca the marca to set
+	 * @param marca
+	 *            the marca to set
 	 */
 	public void setMarca(String marca) {
 		this.marca = marca;
@@ -141,7 +163,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param modelo the modelo to set
+	 * @param modelo
+	 *            the modelo to set
 	 */
 	public void setModelo(String modelo) {
 		this.modelo = modelo;
@@ -155,7 +178,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param serie the serie to set
+	 * @param serie
+	 *            the serie to set
 	 */
 	public void setSerie(String serie) {
 		this.serie = serie;
@@ -169,7 +193,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param ubicacion the ubicacion to set
+	 * @param ubicacion
+	 *            the ubicacion to set
 	 */
 	public void setUbicacion(String ubicacion) {
 		this.ubicacion = ubicacion;
@@ -183,7 +208,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param enviar the enviar to set
+	 * @param enviar
+	 *            the enviar to set
 	 */
 	public void setEnviar(boolean enviar) {
 		this.enviar = enviar;
@@ -197,7 +223,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param vendible the vendible to set
+	 * @param vendible
+	 *            the vendible to set
 	 */
 	public void setVendible(boolean vendible) {
 		this.vendible = vendible;
@@ -211,7 +238,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param mesesGarantia the mesesGarantia to set
+	 * @param mesesGarantia
+	 *            the mesesGarantia to set
 	 */
 	public void setMesesGarantia(double mesesGarantia) {
 		this.mesesGarantia = mesesGarantia;
@@ -225,7 +253,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param peso the peso to set
+	 * @param peso
+	 *            the peso to set
 	 */
 	public void setPeso(double peso) {
 		this.peso = peso;
@@ -239,7 +268,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param volumen the volumen to set
+	 * @param volumen
+	 *            the volumen to set
 	 */
 	public void setVolumen(double volumen) {
 		this.volumen = volumen;
@@ -253,7 +283,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param idEmpList the idEmpList to set
+	 * @param idEmpList
+	 *            the idEmpList to set
 	 */
 	public void setIdEmpList(List<Integer> idEmpList) {
 		this.idEmpList = idEmpList;
@@ -267,7 +298,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param idCat the idCat to set
+	 * @param idCat
+	 *            the idCat to set
 	 */
 	public void setIdCat(int idCat) {
 		this.idCat = idCat;
@@ -281,7 +313,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param nombreCategoria the nombreCategoria to set
+	 * @param nombreCategoria
+	 *            the nombreCategoria to set
 	 */
 	public void setNombreCategoria(String nombreCategoria) {
 		this.nombreCategoria = nombreCategoria;
@@ -295,7 +328,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param idSub the idSub to set
+	 * @param idSub
+	 *            the idSub to set
 	 */
 	public void setIdSub(int idSub) {
 		this.idSub = idSub;
@@ -309,7 +343,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param nombreSubcategoria the nombreSubcategoria to set
+	 * @param nombreSubcategoria
+	 *            the nombreSubcategoria to set
 	 */
 	public void setNombreSubcategoria(String nombreSubcategoria) {
 		this.nombreSubcategoria = nombreSubcategoria;
@@ -323,7 +358,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param cantidadInOut the cantidadInOut to set
+	 * @param cantidadInOut
+	 *            the cantidadInOut to set
 	 */
 	public void setCantidadInOut(int cantidadInOut) {
 		this.cantidadInOut = cantidadInOut;
@@ -337,7 +373,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param ivaProducto the ivaProducto to set
+	 * @param ivaProducto
+	 *            the ivaProducto to set
 	 */
 	public void setIvaProducto(double ivaProducto) {
 		this.ivaProducto = ivaProducto;
@@ -351,7 +388,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param porcentajeDescuento the porcentajeDescuento to set
+	 * @param porcentajeDescuento
+	 *            the porcentajeDescuento to set
 	 */
 	public void setPorcentajeDescuento(double porcentajeDescuento) {
 		this.porcentajeDescuento = porcentajeDescuento;
@@ -365,7 +403,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param observaciones the observaciones to set
+	 * @param observaciones
+	 *            the observaciones to set
 	 */
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
@@ -379,7 +418,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param compra the compra to set
+	 * @param compra
+	 *            the compra to set
 	 */
 	public void setCompra(boolean compra) {
 		this.compra = compra;
@@ -393,7 +433,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param ivaTotal the ivaTotal to set
+	 * @param ivaTotal
+	 *            the ivaTotal to set
 	 */
 	public void setIvaTotal(double ivaTotal) {
 		this.ivaTotal = ivaTotal;
@@ -407,7 +448,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param descuentoTotal the descuentoTotal to set
+	 * @param descuentoTotal
+	 *            the descuentoTotal to set
 	 */
 	public void setDescuentoTotal(double descuentoTotal) {
 		this.descuentoTotal = descuentoTotal;
@@ -421,7 +463,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param fechaCompra the fechaCompra to set
+	 * @param fechaCompra
+	 *            the fechaCompra to set
 	 */
 	public void setFechaCompra(Date fechaCompra) {
 		this.fechaCompra = fechaCompra;
@@ -435,7 +478,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param fechaEntrega the fechaEntrega to set
+	 * @param fechaEntrega
+	 *            the fechaEntrega to set
 	 */
 	public void setFechaEntrega(Date fechaEntrega) {
 		this.fechaEntrega = fechaEntrega;
@@ -449,7 +493,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param direccionEntrega the direccionEntrega to set
+	 * @param direccionEntrega
+	 *            the direccionEntrega to set
 	 */
 	public void setDireccionEntrega(String direccionEntrega) {
 		this.direccionEntrega = direccionEntrega;
@@ -463,7 +508,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param creadoPor the creadoPor to set
+	 * @param creadoPor
+	 *            the creadoPor to set
 	 */
 	public void setCreadoPor(String creadoPor) {
 		this.creadoPor = creadoPor;
@@ -477,7 +523,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param idEst the idEst to set
+	 * @param idEst
+	 *            the idEst to set
 	 */
 	public void setIdEst(int idEst) {
 		this.idEst = idEst;
@@ -491,7 +538,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param nombreEstado the nombreEstado to set
+	 * @param nombreEstado
+	 *            the nombreEstado to set
 	 */
 	public void setNombreEstado(String nombreEstado) {
 		this.nombreEstado = nombreEstado;
@@ -505,7 +553,8 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param idFor the idFor to set
+	 * @param idFor
+	 *            the idFor to set
 	 */
 	public void setIdFor(int idFor) {
 		this.idFor = idFor;
@@ -519,28 +568,31 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @param nombreFormaPago the nombreFormaPago to set
+	 * @param nombreFormaPago
+	 *            the nombreFormaPago to set
 	 */
 	public void setNombreFormaPago(String nombreFormaPago) {
 		this.nombreFormaPago = nombreFormaPago;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "FrontProducto [idPro=" + idPro + ", descripcion=" + descripcion + ", unidades=" + unidades
-				+ ", precioVenta=" + precioVenta + ", precioCompra=" + precioCompra + ", marca=" + marca + ", modelo="
-				+ modelo + ", serie=" + serie + ", ubicacion=" + ubicacion + ", enviar=" + enviar + ", vendible="
-				+ vendible + ", mesesGarantia=" + mesesGarantia + ", peso=" + peso + ", volumen=" + volumen
-				+ ", idEmpList=" + idEmpList + ", idCat=" + idCat + ", nombreCategoria=" + nombreCategoria + ", idSub="
-				+ idSub + ", nombreSubcategoria=" + nombreSubcategoria + ", cantidadInOut=" + cantidadInOut
+		return "FrontProducto [idPro=" + idPro + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", unidades="
+				+ unidades + ", precioVenta=" + precioVenta + ", precioCompra=" + precioCompra + ", marca=" + marca
+				+ ", modelo=" + modelo + ", serie=" + serie + ", ubicacion=" + ubicacion + ", enviar=" + enviar
+				+ ", vendible=" + vendible + ", mesesGarantia=" + mesesGarantia + ", peso=" + peso + ", volumen="
+				+ volumen + ", idEmpList=" + idEmpList + ", idCat=" + idCat + ", nombreCategoria=" + nombreCategoria
+				+ ", idSub=" + idSub + ", nombreSubcategoria=" + nombreSubcategoria + ", cantidadInOut=" + cantidadInOut
 				+ ", ivaProducto=" + ivaProducto + ", porcentajeDescuento=" + porcentajeDescuento + ", observaciones="
 				+ observaciones + ", compra=" + compra + ", ivaTotal=" + ivaTotal + ", descuentoTotal=" + descuentoTotal
 				+ ", fechaCompra=" + fechaCompra + ", fechaEntrega=" + fechaEntrega + ", direccionEntrega="
 				+ direccionEntrega + ", creadoPor=" + creadoPor + ", idEst=" + idEst + ", nombreEstado=" + nombreEstado
 				+ ", idFor=" + idFor + ", nombreFormaPago=" + nombreFormaPago + "]";
 	}
-	
+
 }

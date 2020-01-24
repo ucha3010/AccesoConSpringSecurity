@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-01-2020 a las 21:17:07
+-- Tiempo de generación: 24-01-2020 a las 23:54:27
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -379,7 +379,8 @@ INSERT INTO `paises` (`idPais`, `nombreES`, `nombreEN`) VALUES
 
 CREATE TABLE `producto` (
   `idPro` int(11) NOT NULL,
-  `descripcion` text COLLATE utf8_spanish_ci NOT NULL,
+  `nombreES` text COLLATE utf8_spanish_ci NOT NULL,
+  `nombreEN` text COLLATE utf8_spanish_ci NOT NULL,
   `unidades` int(11) NOT NULL,
   `precioVenta` double NOT NULL,
   `precioCompra` double NOT NULL,
@@ -402,12 +403,12 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`idPro`, `descripcion`, `unidades`, `precioVenta`, `precioCompra`, `marca`, `modelo`, `serie`, `ubicacion`, `estado`, `partida`, `fechaCompra`, `enviar`, `vendible`, `mesesGarantia`, `peso`, `volumen`, `idSub`) VALUES
-(1, 'TV Sanyo 15 pulgadas', 8, 150, 115.35, 'Sanyo', 'HR15', '12345678', 'Pasillo 3', 'ACTIVE', '', '2019-12-22', 1, 1, 12, 20, 0.016, 1),
-(2, 'TV Sony 28 pulgadas', 0, 600, 421, 'Sony', 'RJ25', '', '', 'DISCONTINUED', NULL, NULL, 0, 1, 6, 5, 3.2, 1),
-(3, 'Papel higiénico Higienol', 0, 1.5, 0.95, 'Higienol', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 2.5, 0.3, 0.09, 9),
-(4, 'Castañas Gallegas', 0, 2, 0.4, '', '', '', '', 'INACTIVE', NULL, NULL, 0, 1, 0, 0, 0, 4),
-(5, 'Monitor Samsung 27 pulgadas', 0, 250, 180, 'Samsung', 'Energy', '158159126', '', 'ACTIVE', NULL, NULL, 1, 1, 12, 2, 1, 16);
+INSERT INTO `producto` (`idPro`, `nombreES`, `nombreEN`, `unidades`, `precioVenta`, `precioCompra`, `marca`, `modelo`, `serie`, `ubicacion`, `estado`, `partida`, `fechaCompra`, `enviar`, `vendible`, `mesesGarantia`, `peso`, `volumen`, `idSub`) VALUES
+(1, 'TV Sanyo 15 pulgadas', 'TV Sanyo 15 inches', 8, 150, 115.35, 'Sanyo', 'HR15', '12345678', 'Pasillo 3', 'ACTIVE', '', '2019-12-22', 1, 1, 12, 20, 0.016, 1),
+(2, 'TV Sony 28 pulgadas', 'TV Sony 28 inches', 0, 600, 421, 'Sony', 'RJ25', '', '', 'DISCONTINUED', NULL, NULL, 0, 1, 6, 5, 3.2, 1),
+(3, 'Papel higiénico Higienol', 'Toilet paper Higienol', 0, 1.5, 0.95, 'Higienol', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 2.5, 0.3, 0.09, 9),
+(4, 'Castañas Gallegas', 'Chestnuts from Galicia', 0, 2, 0.4, '', '', '', '', 'INACTIVE', NULL, NULL, 0, 1, 0, 0, 0, 4),
+(5, 'Monitor Samsung 27 pulgadas', 'Monitor Samsung 27 inches', 0, 250, 180, 'Samsung', 'Energy', '158159126', '', 'ACTIVE', NULL, NULL, 1, 1, 12, 2, 1, 16);
 
 -- --------------------------------------------------------
 
@@ -832,7 +833,7 @@ ALTER TABLE `paises`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --

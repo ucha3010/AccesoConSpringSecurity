@@ -2,44 +2,23 @@ package com.damian.pojo.front;
 
 public class FrontProductoStock {
 
-	//Producto
+	// Producto
 	private int idPro;
-	private String descripcion;
+	private String nombreES;
+	private String nombreEN;
 	private int unidades;
-	
-	//ProductoFactura
+
+	// ProductoFactura
 	private int cantidad;
 	private double iva;
 	private double precioFinal;
-	
-	//Factura
+
+	// Factura
 	private boolean compra;
 	private String observaciones;
-	
-	public FrontProductoStock() {
-		
-	}
 
-	/**
-	 * @param idPro
-	 * @param descripcion
-	 * @param unidades
-	 * @param cantidad
-	 * @param iva
-	 * @param precioFinal
-	 * @param compra
-	 * @param observaciones
-	 */
-	public FrontProductoStock(int idPro, String descripcion, int unidades, int cantidad, double iva, double precioFinal,
-			boolean compra, String observaciones) {
-		this.idPro = idPro;
-		this.descripcion = descripcion;
-		this.unidades = unidades;
-		this.cantidad = cantidad;
-		this.iva = iva;
-		this.precioFinal = precioFinal;
-		this.compra = compra;
-		this.observaciones = observaciones;
+	public FrontProductoStock() {
+
 	}
 
 	/**
@@ -50,24 +29,41 @@ public class FrontProductoStock {
 	}
 
 	/**
-	 * @param idPro the idPro to set
+	 * @param idPro
+	 *            the idPro to set
 	 */
 	public void setIdPro(int idPro) {
 		this.idPro = idPro;
 	}
 
 	/**
-	 * @return the descripcion
+	 * @return the nombreES
 	 */
-	public String getDescripcion() {
-		return descripcion;
+	public String getNombreES() {
+		return nombreES;
 	}
 
 	/**
-	 * @param descripcion the descripcion to set
+	 * @param nombreES
+	 *            the nombreES to set
 	 */
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setNombreES(String nombreES) {
+		this.nombreES = nombreES;
+	}
+
+	/**
+	 * @return the nombreEN
+	 */
+	public String getNombreEN() {
+		return nombreEN;
+	}
+
+	/**
+	 * @param nombreEN
+	 *            the nombreEN to set
+	 */
+	public void setNombreEN(String nombreEN) {
+		this.nombreEN = nombreEN;
 	}
 
 	/**
@@ -78,7 +74,8 @@ public class FrontProductoStock {
 	}
 
 	/**
-	 * @param unidades the unidades to set
+	 * @param unidades
+	 *            the unidades to set
 	 */
 	public void setUnidades(int unidades) {
 		this.unidades = unidades;
@@ -92,7 +89,8 @@ public class FrontProductoStock {
 	}
 
 	/**
-	 * @param cantidad the cantidad to set
+	 * @param cantidad
+	 *            the cantidad to set
 	 */
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
@@ -106,7 +104,8 @@ public class FrontProductoStock {
 	}
 
 	/**
-	 * @param iva the iva to set
+	 * @param iva
+	 *            the iva to set
 	 */
 	public void setIva(double iva) {
 		this.iva = iva;
@@ -120,7 +119,8 @@ public class FrontProductoStock {
 	}
 
 	/**
-	 * @param precioFinal the precioFinal to set
+	 * @param precioFinal
+	 *            the precioFinal to set
 	 */
 	public void setPrecioFinal(double precioFinal) {
 		this.precioFinal = precioFinal;
@@ -134,7 +134,8 @@ public class FrontProductoStock {
 	}
 
 	/**
-	 * @param compra the compra to set
+	 * @param compra
+	 *            the compra to set
 	 */
 	public void setCompra(boolean compra) {
 		this.compra = compra;
@@ -148,19 +149,22 @@ public class FrontProductoStock {
 	}
 
 	/**
-	 * @param observaciones the observaciones to set
+	 * @param observaciones
+	 *            the observaciones to set
 	 */
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "FrontProductoStock [idPro=" + idPro + ", descripcion=" + descripcion + ", unidades=" + unidades
-				+ ", cantidad=" + cantidad + ", iva=" + iva + ", precioFinal=" + precioFinal + ", compra=" + compra
-				+ ", observaciones=" + observaciones + "]";
+		return "FrontProductoStock [idPro=" + idPro + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN
+				+ ", unidades=" + unidades + ", cantidad=" + cantidad + ", iva=" + iva + ", precioFinal=" + precioFinal
+				+ ", compra=" + compra + ", observaciones=" + observaciones + "]";
 	}
 }

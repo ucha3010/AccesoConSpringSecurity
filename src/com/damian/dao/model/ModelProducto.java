@@ -11,7 +11,8 @@ public class ModelProducto implements Serializable {
 	private static final long serialVersionUID = 130820142307L;
 
 	private int idPro;
-	private String descripcion;
+	private String nombreES;
+	private String nombreEN;
 	private int unidades;
 	private double precioVenta;
 	private double precioCompra;
@@ -35,7 +36,8 @@ public class ModelProducto implements Serializable {
 
 	/**
 	 * @param idPro
-	 * @param descripcion
+	 * @param nombreES
+	 * @param nombreEN
 	 * @param unidades
 	 * @param precioVenta
 	 * @param precioCompra
@@ -53,12 +55,13 @@ public class ModelProducto implements Serializable {
 	 * @param volumen
 	 * @param idSub
 	 */
-	public ModelProducto(int idPro, String descripcion, int unidades, double precioVenta, double precioCompra,
-			String marca, String modelo, String serie, String ubicacion, String estado, String partida,
-			Date fechaCompra, boolean enviar, boolean vendible, double mesesGarantia, double peso, double volumen,
-			int idSub) {
+	public ModelProducto(int idPro, String nombreES, String nombreEN, int unidades, double precioVenta,
+			double precioCompra, String marca, String modelo, String serie, String ubicacion, String estado,
+			String partida, Date fechaCompra, boolean enviar, boolean vendible, double mesesGarantia, double peso,
+			double volumen, int idSub) {
 		this.idPro = idPro;
-		this.descripcion = descripcion;
+		this.nombreES = nombreES;
+		this.nombreEN = nombreEN;
 		this.unidades = unidades;
 		this.precioVenta = precioVenta;
 		this.precioCompra = precioCompra;
@@ -93,18 +96,33 @@ public class ModelProducto implements Serializable {
 	}
 
 	/**
-	 * @return the descripcion
+	 * @return the nombreES
 	 */
-	public String getDescripcion() {
-		return descripcion;
+	public String getNombreES() {
+		return nombreES;
 	}
 
 	/**
-	 * @param descripcion
-	 *            the descripcion to set
+	 * @param nombreES
+	 *            the nombreES to set
 	 */
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setNombreES(String nombreES) {
+		this.nombreES = nombreES;
+	}
+
+	/**
+	 * @return the nombreEN
+	 */
+	public String getNombreEN() {
+		return nombreEN;
+	}
+
+	/**
+	 * @param nombreEN
+	 *            the nombreEN to set
+	 */
+	public void setNombreEN(String nombreEN) {
+		this.nombreEN = nombreEN;
 	}
 
 	/**
@@ -340,23 +358,26 @@ public class ModelProducto implements Serializable {
 	}
 
 	/**
-	 * @param idSub the idSub to set
+	 * @param idSub
+	 *            the idSub to set
 	 */
 	public void setIdSub(int idSub) {
 		this.idSub = idSub;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "ModelProducto [idPro=" + idPro + ", descripcion=" + descripcion + ", unidades=" + unidades
-				+ ", precioVenta=" + precioVenta + ", precioCompra=" + precioCompra + ", marca=" + marca + ", modelo="
-				+ modelo + ", serie=" + serie + ", ubicacion=" + ubicacion + ", estado=" + estado + ", partida="
-				+ partida + ", fechaCompra=" + fechaCompra + ", enviar=" + enviar + ", vendible=" + vendible
-				+ ", mesesGarantia=" + mesesGarantia + ", peso=" + peso + ", volumen=" + volumen + ", idSub=" + idSub
-				+ "]";
+		return "ModelProducto [idPro=" + idPro + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", unidades="
+				+ unidades + ", precioVenta=" + precioVenta + ", precioCompra=" + precioCompra + ", marca=" + marca
+				+ ", modelo=" + modelo + ", serie=" + serie + ", ubicacion=" + ubicacion + ", estado=" + estado
+				+ ", partida=" + partida + ", fechaCompra=" + fechaCompra + ", enviar=" + enviar + ", vendible="
+				+ vendible + ", mesesGarantia=" + mesesGarantia + ", peso=" + peso + ", volumen=" + volumen + ", idSub="
+				+ idSub + "]";
 	}
 
 }

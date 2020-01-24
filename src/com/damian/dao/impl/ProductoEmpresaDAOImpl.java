@@ -132,8 +132,8 @@ public class ProductoEmpresaDAOImpl implements ProductoEmpresaDAO {
 
 			@Override
 			public int compare(ProductoEmpresa u1, ProductoEmpresa u2) {
-				return new String(u1.getProducto().getDescripcion())
-						.compareToIgnoreCase(new String(u2.getProducto().getDescripcion()));
+				return new String(u1.getProducto().getNombreES())
+						.compareToIgnoreCase(new String(u2.getProducto().getNombreES()));
 			}
 		});
 	}

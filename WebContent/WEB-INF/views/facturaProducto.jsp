@@ -21,6 +21,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
+	<fmt:message key="language.name" var="nameColSelect"/>
 	<div>
 		<h2><fmt:message key="label.Bill.id" />: <c:out value="${factura.idFac}" /></h2>
 	</div>
@@ -40,7 +41,7 @@
 			<tbody>
 				<c:forEach items="${productoFacturas}" var="productoFactura">
 					<tr title='<c:out value="${productoFactura.observaciones}" />'>
-						<td><c:out value="${productoFactura.producto.descripcion}" /></td>
+						<td><c:out value="${productoFactura.producto[nameColSelect]}" /></td>
 						<td class="text-center"><fmt:formatNumber type="currency" value="${productoFactura.precioUnitSinIva}"/></td>
 						<td class="text-center"><c:out value="${productoFactura.cantidad}" /></td>
 						<td class="text-center"><fmt:formatNumber type="number" value="${productoFactura.porcentajeDescuento}" minFractionDigits="2" />%</td>

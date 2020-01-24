@@ -94,7 +94,8 @@ public class ProductoController {
 		FrontProductoStock frontProductoStock = new FrontProductoStock();
 		frontProductoStock.setIdPro(producto.getIdPro());
 		frontProductoStock.setUnidades(producto.getUnidades());
-		frontProductoStock.setDescripcion(producto.getDescripcion());
+		frontProductoStock.setNombreES(producto.getNombreES());
+		frontProductoStock.setNombreEN(producto.getNombreEN());
 		frontProductoStock.setCompra(true);
 		modelAndView.addObject("frontProductoStock", frontProductoStock);
 		modelAndView.setViewName("productoStock");

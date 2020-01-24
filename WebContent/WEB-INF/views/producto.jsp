@@ -18,7 +18,7 @@
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
 		function validar(){
-			var campo = ['descripcion','precioVenta','precioCompra'];
+			var campo = ['nombreES', 'nombreEN','precioVenta','precioCompra'];
 			restablecer();
 			var validado = true;			
 			for(var i=0; i < campo.length; i++){
@@ -63,6 +63,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
+	<fmt:message key="language.name" var="nameColSelect"/>
 	<sf:form method="post" action="${pageContext.request.contextPath}/producto/save" modelAttribute="producto" onsubmit="return validar()">
 		<c:if test="${producto.idPro != 0}">
 			<sf:hidden path="idPro"/>
@@ -72,9 +73,19 @@
 			<div class="col-sm-3">
 			</div>
 			<div class="col-xs-12 col-sm-4">
-				<label for="descripcion"><fmt:message key="label.Product.description" /></label> 
-				<sf:input path="descripcion" class="form-control" id="descripcion" />
-				<span id="descripcionError" name="errorSpan"></span>
+				<label for="nombreES"><fmt:message key="label.Product.name.spanish" /></label> 
+				<sf:input path="nombreES" class="form-control" id="nombreES" />
+				<span id="nombreESError" name="errorSpan"></span>
+			</div>
+		</div>
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="nombreEN"><fmt:message key="label.Product.name.english" /></label> 
+				<sf:input path="nombreEN" class="form-control" id="nombreEN" />
+				<span id="nombreENError" name="errorSpan"></span>
 			</div>
 		</div>
 		<br/>

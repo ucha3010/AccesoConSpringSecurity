@@ -39,9 +39,9 @@
 					var modelo = normalizado('${pro.modelo}');
 					var precioNum = ${pro.precioVenta};
 					var precio = precioNum.toString();
-					var descripcion = normalizado('${pro.descripcion}');
-					if(marca.toLowerCase().indexOf(texto) !== -1 || modelo.indexOf(texto) !== -1 || precio.toLowerCase().indexOf(texto) !== -1 || descripcion.toLowerCase().indexOf(texto) !== -1){
-						resultado.innerHTML += "<a href=\"<c:url value='/producto/filtered/${pro.idPro}' />\">${pro.marca} ${pro.modelo} ${pro.precioVenta} ${pro.descripcion}</a>";
+					var nombre = normalizado('${pro[nameColSelect]}');
+					if(marca.toLowerCase().indexOf(texto) !== -1 || modelo.indexOf(texto) !== -1 || precio.toLowerCase().indexOf(texto) !== -1 || nombre.toLowerCase().indexOf(texto) !== -1){
+						resultado.innerHTML += "<a href=\"<c:url value='/producto/filtered/${pro.idPro}' />\">${pro.marca} ${pro.modelo} ${pro.precioVenta} ${pro[nameColSelect]}</a>";
 					}
 				</c:forEach>
 				$(".collapse").collapse('show');
@@ -51,6 +51,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
+	<fmt:message key="language.name" var="nameColSelect"/>
 	<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 		<div class="d-flex">
 			<div class="p-2">
@@ -148,7 +149,7 @@
 								</button>
 							</td>
 						</sec:authorize>
-						<td><c:out value="${producto.descripcion}" /></td>
+						<td><c:out value="${producto[nameColSelect]}" /></td>
 						<td class="text-center"><fmt:message key="${producto.estado}" /></td>
 						<td><c:out value="${producto.marca}" /></td>
 						<td><c:out value="${producto.modelo}" /></td>	

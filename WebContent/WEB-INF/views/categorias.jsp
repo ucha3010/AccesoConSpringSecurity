@@ -38,6 +38,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
+	<fmt:message key="language.name" var="nameColSelect"/>
 	<sec:authorize access="hasAnyRole('ROL_ROOT')">
 		<div class="d-flex justify-content-between">
 			<div class="p-2">
@@ -173,7 +174,7 @@
 										<c:if test="${not empty subcategoria.productos}">
 											<select name="selectProducto" class="border-radius-dam">
 												<c:forEach items="${productos}" var="producto">
-													<option value="${producto.idPro}"><c:out value="${producto.descripcion}" /></option>
+													<option value="${producto.idPro}"><c:out value="${producto[nameColSelect]}" /></option>
 												</c:forEach>
 											</select>
 										</c:if>

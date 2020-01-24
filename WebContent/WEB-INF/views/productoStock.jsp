@@ -66,6 +66,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
+	<fmt:message key="language.name" var="nameColSelect"/>
 	<sf:form method="post" action="${pageContext.request.contextPath}/producto/stock/save" modelAttribute="frontProductoStock" onsubmit="return validar()">
 		<sf:hidden path="idPro"/>
 		<sf:hidden path="unidades"/>
@@ -81,7 +82,7 @@
 			<div class="col-sm-2">
 			</div>
 			<div class="col-xs-12 col-sm-9">
-				<h2><fmt:message key="label.Product.description" />: <c:out value="${frontProductoStock.descripcion}" /></h2>
+				<h2><fmt:message key="label.Product.description" />: <c:out value="${frontProductoStock[nameColSelect]}" /></h2>
 			</div>
 		</div>
 		<br/>
