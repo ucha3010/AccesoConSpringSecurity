@@ -3,33 +3,24 @@ package com.damian.pojo;
 import java.util.List;
 
 public class Estado {
-	
+
 	private int idEst;
-	private String nombre;
+	private String nombreES;
+	private String nombreEN;
 	private List<Factura> facturas;
-	
+
 	public Estado() {
-		
 	}
 
 	/**
 	 * @param idEst
-	 * @param nombre
+	 * @param nombreES
+	 * @param nombreEN
 	 */
-	public Estado(int idEst, String nombre) {
+	public Estado(int idEst, String nombreES, String nombreEN) {
 		this.idEst = idEst;
-		this.nombre = nombre;
-	}
-
-	/**
-	 * @param idEst
-	 * @param nombre
-	 * @param facturas
-	 */
-	public Estado(int idEst, String nombre, List<Factura> facturas) {
-		this.idEst = idEst;
-		this.nombre = nombre;
-		this.facturas = facturas;
+		this.nombreES = nombreES;
+		this.nombreEN = nombreEN;
 	}
 
 	/**
@@ -40,24 +31,41 @@ public class Estado {
 	}
 
 	/**
-	 * @param idEst the idEst to set
+	 * @param idEst
+	 *            the idEst to set
 	 */
 	public void setIdEst(int idEst) {
 		this.idEst = idEst;
 	}
 
 	/**
-	 * @return the nombre
+	 * @return the nombreES
 	 */
-	public String getNombre() {
-		return nombre;
+	public String getNombreES() {
+		return nombreES;
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombreES
+	 *            the nombreES to set
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreES(String nombreES) {
+		this.nombreES = nombreES;
+	}
+
+	/**
+	 * @return the nombreEN
+	 */
+	public String getNombreEN() {
+		return nombreEN;
+	}
+
+	/**
+	 * @param nombreEN
+	 *            the nombreEN to set
+	 */
+	public void setNombreEN(String nombreEN) {
+		this.nombreEN = nombreEN;
 	}
 
 	/**
@@ -68,18 +76,21 @@ public class Estado {
 	}
 
 	/**
-	 * @param facturas the facturas to set
+	 * @param facturas
+	 *            the facturas to set
 	 */
 	public void setFacturas(List<Factura> facturas) {
 		this.facturas = facturas;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "ModelEstado [idEst=" + idEst + ", nombre=" + nombre + "]";
+		return "Estado [idEst=" + idEst + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + "]";
 	}
-	
+
 }

@@ -25,7 +25,8 @@ public class ConverterEstado {
 
 		Estado e = new Estado();
 		e.setIdEst(me.getIdEst());
-		e.setNombre(me.getNombre());
+		e.setNombreES(me.getNombreES());
+		e.setNombreEN(me.getNombreEN());
 
 		return e;
 
@@ -35,7 +36,8 @@ public class ConverterEstado {
 
 		ModelEstado me = new ModelEstado();
 		me.setIdEst(e.getIdEst());
-		me.setNombre(e.getNombre());
+		me.setNombreES(e.getNombreES());
+		me.setNombreEN(e.getNombreEN());
 
 		return me;
 

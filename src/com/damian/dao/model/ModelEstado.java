@@ -1,21 +1,24 @@
 package com.damian.dao.model;
 
 public class ModelEstado {
-	
+
 	private int idEst;
-	private String nombre;
-	
+	private String nombreES;
+	private String nombreEN;
+
 	public ModelEstado() {
-		
+
 	}
 
 	/**
 	 * @param idEst
-	 * @param nombre
+	 * @param nombreES
+	 * @param nombreEN
 	 */
-	public ModelEstado(int idEst, String nombre) {
+	public ModelEstado(int idEst, String nombreES, String nombreEN) {
 		this.idEst = idEst;
-		this.nombre = nombre;
+		this.nombreES = nombreES;
+		this.nombreEN = nombreEN;
 	}
 
 	/**
@@ -26,32 +29,51 @@ public class ModelEstado {
 	}
 
 	/**
-	 * @param idEst the idEst to set
+	 * @param idEst
+	 *            the idEst to set
 	 */
 	public void setIdEst(int idEst) {
 		this.idEst = idEst;
 	}
 
 	/**
-	 * @return the nombre
+	 * @return the nombreES
 	 */
-	public String getNombre() {
-		return nombre;
+	public String getNombreES() {
+		return nombreES;
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombreES
+	 *            the nombreES to set
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreES(String nombreES) {
+		this.nombreES = nombreES;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * @return the nombreEN
+	 */
+	public String getNombreEN() {
+		return nombreEN;
+	}
+
+	/**
+	 * @param nombreEN
+	 *            the nombreEN to set
+	 */
+	public void setNombreEN(String nombreEN) {
+		this.nombreEN = nombreEN;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "ModelEstado [idEst=" + idEst + ", nombre=" + nombre + "]";
+		return "ModelEstado [idEst=" + idEst + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + "]";
 	}
-	
+
 }

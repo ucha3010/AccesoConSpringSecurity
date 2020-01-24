@@ -18,14 +18,24 @@
 	<script type="text/javascript">
 		function validarEstado(){
 			restablecer();
-		    var nombreEstado = document.getElementById('nombreEstado');
-		    var nombreEstadoError = document.getElementById('nombreEstadoError');
-			if(nombreEstado.value==''){
-				nombreEstadoError.innerHTML = "<fmt:message key='error.field.not.empty' />";
-				nombreEstado.style.borderColor="red";
+			var campo = ['nombreEstadoES','nombreEstadoEN'];
+			var validado = true;			
+			for(var i=0; i < campo.length; i++){
+			    var nombreRol = document.getElementById(campo[i]);
+			    var nombreRolError = document.getElementById(campo[i]+'Error');
+				if(nombreRol.value==''){
+					nombreRolError.innerHTML = "<fmt:message key='error.field.not.empty' />";
+					nombreRol.style.borderColor="red";
+					validado = false;
+				}
+			}
+			
+			if(validado){
+				return true;
+			} else {
+				document.getElementById('hayError').innerHTML = "<fmt:message key='error.any.field' />";
 				return false;
 			}
-			return true;
 		}
 		function restablecer(){
 			var errorSpan = document.getElementsByName('errorSpan');
@@ -49,9 +59,19 @@
 			<div class="col-sm-3">
 			</div>
 			<div class="col-xs-12 col-sm-4">
-				<label for="estado"><fmt:message key="Estado.name" /></label> 
-				<sf:input path="nombre" class="form-control" id="nombreEstado" />
-				<span id="nombreEstadoError" name="errorSpan"></span>
+				<label for="estado"><fmt:message key="Estado.name.spanish" /></label> 
+				<sf:input path="nombreES" class="form-control" id="nombreEstadoES" />
+				<span id="nombreEstadoESError" name="errorSpan"></span>
+			</div>
+		</div>
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="estado"><fmt:message key="Estado.name.english" /></label> 
+				<sf:input path="nombreEN" class="form-control" id="nombreEstadoEN" />
+				<span id="nombreEstadoENError" name="errorSpan"></span>
 			</div>
 		</div>
 		<br/>
@@ -61,6 +81,7 @@
 			<div class="col-xs-12 col-sm-4">	
 				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
 				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/estado' />"'><fmt:message key="Cancel" /></button>
+				<span id="hayError" name="errorSpan" style="color:red"></span>
 			</div>
 		</div>
 	</sf:form>

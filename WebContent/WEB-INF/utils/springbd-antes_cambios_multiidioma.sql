@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-01-2020 a las 20:36:42
+-- Tiempo de generación: 23-01-2020 a las 23:01:08
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -228,20 +228,19 @@ INSERT INTO `empresa` (`idEmp`, `nombreComercial`, `tipoSociedad`, `actividad`, 
 
 CREATE TABLE `estado` (
   `idEst` int(11) NOT NULL,
-  `nombreES` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `nombreEN` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
+  `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `estado`
 --
 
-INSERT INTO `estado` (`idEst`, `nombreES`, `nombreEN`) VALUES
-(1, 'Enviado', 'Sent'),
-(3, 'Pendiente de envío', 'Pending to send'),
-(5, 'Cancelado', 'Cancelled'),
-(6, 'Agregar stock', 'Add stock'),
-(7, 'Quitar stock', 'Remove stock');
+INSERT INTO `estado` (`idEst`, `nombre`) VALUES
+(1, 'SENT'),
+(3, 'PENDING.TO.SEND'),
+(5, 'CANCELLED'),
+(6, 'ADD.STOCK'),
+(7, 'REMOVE.STOCK');
 
 -- --------------------------------------------------------
 
@@ -804,7 +803,7 @@ ALTER TABLE `empresa`
 -- AUTO_INCREMENT de la tabla `estado`
 --
 ALTER TABLE `estado`
-  MODIFY `idEst` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idEst` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --

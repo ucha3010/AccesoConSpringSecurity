@@ -135,10 +135,10 @@ public class ProductoServiceImpl implements ProductoService {
 		factura.setCreadoPor(context.getAuthentication().getName());
 		if (frontProductoStock.isCompra()) {
 			producto.setUnidades(producto.getUnidades() + frontProductoStock.getCantidad());
-			factura.setEstado(new Estado(6, null));
+			factura.setEstado(new Estado(6, null, null));
 		} else {
 			producto.setUnidades(producto.getUnidades() - frontProductoStock.getCantidad());
-			factura.setEstado(new Estado(7, null));
+			factura.setEstado(new Estado(7, null, null));
 
 		}
 		productoDAO.save(producto);

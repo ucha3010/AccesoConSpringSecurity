@@ -120,5 +120,11 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${org.springframework.security}</version>
 		</dependency>
+		<dependency>
+			<!--para generar getters y setters -->
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.10</version>
+		</dependency>
 	</dependencies>
 </project>

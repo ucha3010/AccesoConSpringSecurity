@@ -60,6 +60,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
+	<fmt:message key="language.name" var="nameColSelect"/>
 	<div class="d-flex">
 		<div class="p-2">
 		</div>
@@ -97,7 +98,7 @@
 				<c:set var="sizeCount" value="0" scope="page" />
 				<c:forEach items="${facturaEstados}" var="fe">
 				    <tr title='<c:out value="${fe.observaciones}" />'>
-						<td class="text-center"><fmt:message key="${fe.estado.nombre}" /></td>
+						<td class="text-center"><c:out value="${fe.estado[nameColSelect]}" /></td>
 						<td class="text-center"><fmt:formatDate value="${fe.fecha}" pattern="dd/MM/yyyy HH:mm:ss"/></td>
 						<td class="text-center"><c:out value="${fe.creadoPor}" /></td>
 						<td class="text-center"><textarea id="observaciones${sizeCount}" name="fe.observaciones" rows='1' data-min-rows='1' class='autoExpand'><c:out value="${fe.observaciones}" /></textarea></td>

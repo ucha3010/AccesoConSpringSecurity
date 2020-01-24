@@ -36,7 +36,7 @@
 			} else {
 				<c:forEach items="${facturas}" var="fac" varStatus="status">
 					var creado = normalizado('${fac.creadoPor}');
-					var estado = normalizado('${fac.estado.nombre}');
+					var estado = normalizado('${fac.estado[nameColSelect]}');
 					var importeNum = ${fac.importeTotal};
 					var importe = importeNum.toString();
 					if(creado.toLowerCase().indexOf(texto) !== -1 || estado.indexOf(texto) !== -1 || importe.toLowerCase().indexOf(texto) !== -1){
@@ -56,6 +56,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
+	<fmt:message key="language.name" var="nameColSelect"/>
 	<div class="d-flex">
 		<div class="p-2">
 		</div>
@@ -123,11 +124,10 @@
 							<select name="factura.estado.idEst" class="border-radius-dam" id="estadoId${factura.idFac}" onchange="actualizaEstado(${factura.idFac})">
 								<c:forEach items="${estados}" var="est">
 									<option value="${est.idEst}" <c:if test="${factura.estado.idEst == est.idEst}">selected</c:if>>
-										<fmt:message key="${est.nombre}" />
+										<c:out value="${est[nameColSelect]}" />
 									</option>
 								</c:forEach>
 							</select>
-<%-- 						<fmt:message key="${factura.estado.nombre}" /> --%>
 						</td>
 						<td class="sin_padding">
 							<a title="<fmt:message key="Products" />" href='<c:url value='/productoFactura/factura/${factura.idFac}' />'>
