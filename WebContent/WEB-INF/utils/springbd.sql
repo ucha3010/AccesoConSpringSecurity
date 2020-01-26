@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-01-2020 a las 16:52:02
+-- Tiempo de generación: 26-01-2020 a las 21:43:10
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -180,7 +180,7 @@ CREATE TABLE `direccionempresa` (
   `cp` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   `provincia` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ciudad` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `pais` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pais_idPais` int(30) NOT NULL,
   `idEmp` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -188,8 +188,8 @@ CREATE TABLE `direccionempresa` (
 -- Volcado de datos para la tabla `direccionempresa`
 --
 
-INSERT INTO `direccionempresa` (`idDirEmp`, `tipoVia`, `nombreVia`, `numero`, `resto`, `cp`, `provincia`, `ciudad`, `pais`, `idEmp`) VALUES
-(1, 'Calle', 'Mayor', '6', 'local', '28001', 'Madrid', 'Madrid', 'España', 1);
+INSERT INTO `direccionempresa` (`idDirEmp`, `tipoVia`, `nombreVia`, `numero`, `resto`, `cp`, `provincia`, `ciudad`, `pais_idPais`, `idEmp`) VALUES
+(1, 'Calle', 'Mayor', '6', 'local', '28001', 'Madrid', 'Madrid', 1, 1);
 
 -- --------------------------------------------------------
 

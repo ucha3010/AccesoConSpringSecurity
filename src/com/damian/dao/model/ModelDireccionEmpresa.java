@@ -17,7 +17,7 @@ public class ModelDireccionEmpresa implements Serializable {
 	private String cp;
 	private String provincia;
 	private String ciudad;
-	private String pais;
+	private int pais_idPais;
 	private int idEmp;
 
 	public ModelDireccionEmpresa() {
@@ -33,11 +33,11 @@ public class ModelDireccionEmpresa implements Serializable {
 	 * @param cp
 	 * @param provincia
 	 * @param ciudad
-	 * @param pais
+	 * @param pais_idPais
 	 * @param idEmp
 	 */
 	public ModelDireccionEmpresa(int idDirEmp, String tipoVia, String nombreVia, String numero, String resto, String cp,
-			String provincia, String ciudad, String pais, int idEmp) {
+			String provincia, String ciudad, int pais_idPais, int idEmp) {
 		this.idDirEmp = idDirEmp;
 		this.tipoVia = tipoVia;
 		this.nombreVia = nombreVia;
@@ -46,7 +46,7 @@ public class ModelDireccionEmpresa implements Serializable {
 		this.cp = cp;
 		this.provincia = provincia;
 		this.ciudad = ciudad;
-		this.pais = pais;
+		this.pais_idPais = pais_idPais;
 		this.idEmp = idEmp;
 	}
 
@@ -171,18 +171,18 @@ public class ModelDireccionEmpresa implements Serializable {
 	}
 
 	/**
-	 * @return the pais
+	 * @return the pais_idPais
 	 */
-	public String getPais() {
-		return pais;
+	public int getPais_idPais() {
+		return pais_idPais;
 	}
 
 	/**
-	 * @param pais
-	 *            the pais to set
+	 * @param pais_idPais
+	 *            the pais_idPais to set
 	 */
-	public void setPais(String pais) {
-		this.pais = pais;
+	public void setPais_idPais(int pais_idPais) {
+		this.pais_idPais = pais_idPais;
 	}
 
 	/**
@@ -209,7 +209,7 @@ public class ModelDireccionEmpresa implements Serializable {
 	public String toString() {
 		return "ModelDireccionEmpresa [idDirEmp=" + idDirEmp + ", tipoVia=" + tipoVia + ", nombreVia=" + nombreVia
 				+ ", numero=" + numero + ", resto=" + resto + ", cp=" + cp + ", provincia=" + provincia + ", ciudad="
-				+ ciudad + ", pais=" + pais + ", idEmp=" + idEmp + "]";
+				+ ciudad + ", pais_idPais=" + pais_idPais + ", idEmp=" + idEmp + "]";
 	}
 
 }

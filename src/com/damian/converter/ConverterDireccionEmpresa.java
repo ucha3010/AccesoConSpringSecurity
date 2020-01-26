@@ -3,6 +3,7 @@ package com.damian.converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.damian.dao.PaisDAO;
 import com.damian.dao.model.ModelDireccionEmpresa;
 import com.damian.pojo.DireccionEmpresa;
 import com.damian.pojo.Empresa;
@@ -12,6 +13,9 @@ public class ConverterDireccionEmpresa {
 
 	@Autowired
 	private ConverterRellenaObjeto converterRellenaObjeto;
+
+	@Autowired
+	private PaisDAO paisDAO;
 
 	public DireccionEmpresa convertAll(ModelDireccionEmpresa mde) {
 
@@ -33,7 +37,7 @@ public class ConverterDireccionEmpresa {
 		de.setCp(mde.getCp());
 		de.setProvincia(mde.getProvincia());
 		de.setCiudad(mde.getCiudad());
-		de.setPais(mde.getPais());
+		de.setPais(paisDAO.findById(mde.getPais_idPais()));
 		Empresa empresa = new Empresa();
 		empresa.setIdEmp(mde.getIdEmp());
 		de.setEmpresa(empresa);
@@ -53,7 +57,9 @@ public class ConverterDireccionEmpresa {
 		mde.setCp(de.getCp());
 		mde.setProvincia(de.getProvincia());
 		mde.setCiudad(de.getCiudad());
-		mde.setPais(de.getPais());
+		if (de.getPais() != null) {
+			mde.setPais_idPais(de.getPais().getIdPais());
+		}
 		mde.setIdEmp(de.getEmpresa().getIdEmp());
 
 		return mde;

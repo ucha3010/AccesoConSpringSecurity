@@ -71,13 +71,13 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 
 	@Override
 	public void save(DireccionEmpresa direccionEmpresa) {
-		
-		if(direccionEmpresa.getIdDirEmp() == 0) {
+
+		if (direccionEmpresa.getIdDirEmp() == 0) {
 			ModelDireccionEmpresa mdp = converterDireccionEmpresa.convert(direccionEmpresa);
 			String sql = "INSERT INTO " + TABLA + " (tipoVia, nombreVia, numero, resto, cp, provincia, "
-					+ "ciudad, pais, idEmp)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "ciudad, pais_idPais, idEmp)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(sql, mdp.getTipoVia(), mdp.getNombreVia(), mdp.getNumero(), mdp.getResto(), mdp.getCp(),
-					mdp.getProvincia(), mdp.getCiudad(), mdp.getPais(), mdp.getIdEmp());
+					mdp.getProvincia(), mdp.getCiudad(), mdp.getPais_idPais(), mdp.getIdEmp());
 		} else {
 			update(direccionEmpresa);
 		}
@@ -89,9 +89,9 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 
 		ModelDireccionEmpresa mdp = converterDireccionEmpresa.convert(direccionEmpresa);
 		String sql = "UPDATE " + TABLA + " SET tipoVia=?, nombreVia=?, numero=?, " + "resto=?, cp=?, provincia=?, "
-				+ "ciudad=?, pais=?, idEmp=? " + "WHERE " + KEY + "=?";
+				+ "ciudad=?, pais_idPais=?, idEmp=? " + "WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, mdp.getTipoVia(), mdp.getNombreVia(), mdp.getNumero(), mdp.getResto(), mdp.getCp(),
-				mdp.getProvincia(), mdp.getCiudad(), mdp.getPais(), mdp.getIdEmp(), mdp.getIdDirEmp());
+				mdp.getProvincia(), mdp.getCiudad(), mdp.getPais_idPais(), mdp.getIdEmp(), mdp.getIdDirEmp());
 
 	}
 
@@ -129,7 +129,7 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 		mde.setCp(rs.getString("cp"));
 		mde.setProvincia(rs.getString("provincia"));
 		mde.setCiudad(rs.getString("ciudad"));
-		mde.setPais(rs.getString("pais"));
+		mde.setPais_idPais(rs.getInt("pais_idPais"));
 		mde.setIdEmp(rs.getInt("idEmp"));
 		return mde;
 	}

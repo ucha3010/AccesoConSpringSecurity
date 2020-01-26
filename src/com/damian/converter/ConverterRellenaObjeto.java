@@ -129,12 +129,11 @@ public class ConverterRellenaObjeto {
 			u.setUsuarioEmpresa(ueList);
 		}
 		u.setUsuarioRol(usuarioRolDAO.findByIdUsrModel(dp.getUsuario().getIdUsr()));
-		if(dp.getNacionalidad() != null) {
+		if (dp.getNacionalidad() != null) {
 			dp.setNacionalidad(paisDAO.findById(dp.getNacionalidad().getIdPais()));
 		}
 		dp.setUsuario(u);
 		d.setDatosPersonales(dp);
-		d.setPais(paisDAO.findById(d.getPais().getIdPais()));
 
 	}
 
@@ -198,7 +197,7 @@ public class ConverterRellenaObjeto {
 		DatosPersonales dp = datosPersonalesDAO.findByUsrIdModel(mu.getIdUsr());
 		if (dp != null) {
 			dp.setDirecciones(direccionDao.findListFromUsuarioModel(dp.getIdDatosPers()));
-			if(dp.getNacionalidad() != null) {
+			if (dp.getNacionalidad() != null) {
 				dp.setNacionalidad(paisDAO.findById(dp.getNacionalidad().getIdPais()));
 			}
 			u.setDatosPersonales(dp);
