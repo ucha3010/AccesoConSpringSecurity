@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import com.damian.dao.model.ModelDatosPersonales;
 import com.damian.pojo.DatosPersonales;
+import com.damian.pojo.Pais;
 import com.damian.pojo.Usuario;
 
 @Component
@@ -31,7 +32,9 @@ public class ConverterDatosPersonales {
 		dp.setApellido2(mdp.getApellido2());
 		dp.setSexo(mdp.getSexo());
 		dp.setFechaNacimiento(mdp.getFechaNacimiento());
-		dp.setNacionalidad(mdp.getNacionalidad());
+		Pais pais = new Pais();
+		pais.setIdPais(mdp.getNacionalidad_idPais());
+		dp.setNacionalidad(pais);
 		dp.setDni(mdp.getDni());
 		dp.setEmail(mdp.getEmail());
 		dp.setTelefono(mdp.getTelefono());
@@ -53,12 +56,16 @@ public class ConverterDatosPersonales {
 		mdp.setApellido2(dp.getApellido2());
 		mdp.setSexo(dp.getSexo());
 		mdp.setFechaNacimiento(dp.getFechaNacimiento());
-		mdp.setNacionalidad(dp.getNacionalidad());
+		if (dp.getNacionalidad() != null) {
+			mdp.setNacionalidad_idPais(dp.getNacionalidad().getIdPais());
+		}
 		mdp.setDni(dp.getDni());
 		mdp.setEmail(dp.getEmail());
 		mdp.setTelefono(dp.getTelefono());
 		mdp.setObservaciones(dp.getObservaciones());
-		mdp.setDatospersonales_idUsr(dp.getUsuario().getIdUsr());
+		if (dp.getUsuario() != null) {
+			mdp.setDatospersonales_idUsr(dp.getUsuario().getIdUsr());
+		}
 
 		return mdp;
 

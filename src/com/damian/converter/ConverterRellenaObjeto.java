@@ -13,6 +13,7 @@ import com.damian.dao.EmpresaDAO;
 import com.damian.dao.EstadoDAO;
 import com.damian.dao.FacturaDAO;
 import com.damian.dao.FormaPagoDAO;
+import com.damian.dao.PaisDAO;
 import com.damian.dao.ProductoDAO;
 import com.damian.dao.ProductoEmpresaDAO;
 import com.damian.dao.ProductoFacturaDAO;
@@ -75,6 +76,9 @@ public class ConverterRellenaObjeto {
 
 	@Autowired
 	private FormaPagoDAO formaPagoDAO;
+
+	@Autowired
+	private PaisDAO paisDAO;
 
 	@Autowired
 	private ProductoDAO productoDAO;
@@ -190,6 +194,9 @@ public class ConverterRellenaObjeto {
 		DatosPersonales dp = datosPersonalesDAO.findByUsrIdModel(mu.getIdUsr());
 		if (dp != null) {
 			dp.setDirecciones(direccionDao.findListFromUsuarioModel(dp.getIdDatosPers()));
+			if(dp.getNacionalidad() != null) {
+				dp.setNacionalidad(paisDAO.findById(dp.getNacionalidad().getIdPais()));
+			}
 			u.setDatosPersonales(dp);
 			List<UsuarioEmpresa> ueList = usuarioEmpresaDAO.findByIdUsrModel(mu.getIdUsr());
 			for (UsuarioEmpresa ue : ueList) {

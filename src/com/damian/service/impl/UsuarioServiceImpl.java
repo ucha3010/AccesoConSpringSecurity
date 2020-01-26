@@ -15,6 +15,7 @@ import com.damian.dao.UsuarioDAO;
 import com.damian.exceptions.RepeatedUsernameException;
 import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
+import com.damian.pojo.Pais;
 import com.damian.pojo.Rol;
 import com.damian.pojo.Usuario;
 import com.damian.pojo.UsuarioEmpresa;
@@ -189,9 +190,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public void fillNewUser(Usuario usuario) {
 		Direccion direccion = new Direccion();
 		List<Direccion> direcciones = new ArrayList<>();
+		Pais nacionalidad = new Pais();
 		direcciones.add(direccion);
 		DatosPersonales datosPersonales = new DatosPersonales();
 		datosPersonales.setDirecciones(direcciones);
+		datosPersonales.setNacionalidad(nacionalidad);
 		usuario.setDatosPersonales(datosPersonales);
 	}
 

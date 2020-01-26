@@ -22,7 +22,7 @@ public class DatosPersonales implements Serializable {
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaNacimiento;
-	private String nacionalidad;
+	private Pais nacionalidad;
 	private String dni;
 	private String email;
 	private String telefono;
@@ -50,7 +50,7 @@ public class DatosPersonales implements Serializable {
 	 * @param direcciones
 	 */
 	public DatosPersonales(int idDatosPers, String nombre, String apellido1, String apellido2, String sexo,
-			Date fechaNacimiento, String nacionalidad, String dni, String email, String telefono, String observaciones,
+			Date fechaNacimiento, Pais nacionalidad, String dni, String email, String telefono, String observaciones,
 			Usuario usuario, List<Direccion> direcciones) {
 		this.idDatosPers = idDatosPers;
 		this.nombre = nombre;
@@ -160,7 +160,7 @@ public class DatosPersonales implements Serializable {
 	/**
 	 * @return the nacionalidad
 	 */
-	public String getNacionalidad() {
+	public Pais getNacionalidad() {
 		return nacionalidad;
 	}
 
@@ -168,7 +168,7 @@ public class DatosPersonales implements Serializable {
 	 * @param nacionalidad
 	 *            the nacionalidad to set
 	 */
-	public void setNacionalidad(String nacionalidad) {
+	public void setNacionalidad(Pais nacionalidad) {
 		this.nacionalidad = nacionalidad;
 	}
 

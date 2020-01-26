@@ -64,11 +64,12 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 	public void save(DatosPersonales datosPersonales) {
 
 		ModelDatosPersonales mdp = converterDatosPersonales.convert(datosPersonales);
-		String sql = "INSERT INTO " + TABLA + " (nombre, apellido1, apellido2, sexo, fechaNacimiento, nacionalidad, "
+		String sql = "INSERT INTO " + TABLA
+				+ " (nombre, apellido1, apellido2, sexo, fechaNacimiento, nacionalidad_idPais, "
 				+ "dni, email, telefono, observaciones, datospersonales_idUsr)"
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, mdp.getNombre(), mdp.getApellido1(), mdp.getApellido2(), mdp.getSexo(),
-				mdp.getFechaNacimiento(), mdp.getNacionalidad(), mdp.getDni(), mdp.getEmail(), mdp.getTelefono(),
+				mdp.getFechaNacimiento(), mdp.getNacionalidad_idPais(), mdp.getDni(), mdp.getEmail(), mdp.getTelefono(),
 				mdp.getObservaciones(), mdp.getDatospersonales_idUsr());
 	}
 
@@ -77,10 +78,10 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 
 		ModelDatosPersonales mdp = converterDatosPersonales.convert(datosPersonales);
 		String sql = "UPDATE " + TABLA + " SET nombre=?, apellido1=?, apellido2=?, "
-				+ "sexo=?, fechaNacimiento=?, nacionalidad=?, " + "dni=?, email=?, telefono=?, "
+				+ "sexo=?, fechaNacimiento=?, nacionalidad_idPais=?, " + "dni=?, email=?, telefono=?, "
 				+ "observaciones=?, datospersonales_idUsr=? " + "WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, mdp.getNombre(), mdp.getApellido1(), mdp.getApellido2(), mdp.getSexo(),
-				mdp.getFechaNacimiento(), mdp.getNacionalidad(), mdp.getDni(), mdp.getEmail(), mdp.getTelefono(),
+				mdp.getFechaNacimiento(), mdp.getNacionalidad_idPais(), mdp.getDni(), mdp.getEmail(), mdp.getTelefono(),
 				mdp.getObservaciones(), mdp.getDatospersonales_idUsr(), mdp.getIdDatosPers());
 	}
 
@@ -117,7 +118,7 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 		mdp.setApellido2(rs.getString("apellido2"));
 		mdp.setSexo(rs.getString("sexo"));
 		mdp.setFechaNacimiento(rs.getDate("fechaNacimiento"));
-		mdp.setNacionalidad(rs.getString("nacionalidad"));
+		mdp.setNacionalidad_idPais(rs.getInt("nacionalidad_idPais"));
 		mdp.setDni(rs.getString("dni"));
 		mdp.setEmail(rs.getString("email"));
 		mdp.setTelefono(rs.getString("telefono"));

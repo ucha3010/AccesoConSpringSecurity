@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-01-2020 a las 13:41:55
+-- Tiempo de generación: 26-01-2020 a las 15:55:55
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -90,7 +90,7 @@ CREATE TABLE `datospersonales` (
   `apellido2` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `sexo` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   `fechaNacimiento` date DEFAULT NULL,
-  `nacionalidad` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nacionalidad_idPais` int(11) NOT NULL,
   `dni` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -102,33 +102,33 @@ CREATE TABLE `datospersonales` (
 -- Volcado de datos para la tabla `datospersonales`
 --
 
-INSERT INTO `datospersonales` (`idDatosPers`, `nombre`, `apellido1`, `apellido2`, `sexo`, `fechaNacimiento`, `nacionalidad`, `dni`, `email`, `telefono`, `observaciones`, `datospersonales_idUsr`) VALUES
-(1, 'José', 'Martínez', 'Suárez', 'Hombre', '1970-07-19', 'España', '123456789A', 'pepe@pepe.com', '666555444', 'El usuario principal con el cual hacer pruebas', 1),
-(3, 'Roberto', 'Do Santos', '', 'Hombre', '1980-07-28', 'Portugal', '123456789D', 'roberto@roberto.com', '', '', 3),
-(4, 'Damián', 'Usheff', '', 'Hombre', '1976-10-30', 'España', '123456789D', 'damian@damian.com', '666666666', '', 4),
-(32, 'Damián', 'Usheff', 'Vellianitis', 'Hombre', '1976-10-30', 'Austria', '12345678A', 'damian@damian.com', '698765435', 'Observaciones para ser guardadas en base de datos', 44),
-(34, 'María Antonieta', 'De las Nieves', 'Salgados', 'Mujer', '1973-03-16', 'empty', '123456789D', 'asdfasf@kjhicb.com', '638638632', '', 46),
-(38, 'Lara', 'Fuentes', 'Galeano', 'Mujer', '2000-05-01', 'Andorra', '12345678S', 'asdfasf@kjhicb.com', '600000006', '', 55),
-(41, 'Saúl', 'Rodríguez', 'Becerra', 'Hombre', '2002-02-02', 'Germany', '12345678A', 'saul@saul.com', '600000001', 'Alguna observación para ver el reseteo de la contraseña', 58),
-(43, 'Alejandro', 'Vázquez', 'López', 'Hombre', '1984-02-25', 'España', '', 'asdfasf@kjhicb.com', '', '', 60),
-(44, 'Bárbara', 'López', 'Aguirre', 'Mujer', NULL, 'empty', '', 'barbara@gmail.com', '', '', 61),
-(45, 'Juan', 'Pérez', 'Arregui', 'Hombre', '1974-07-14', 'España', '12345678J', 'juan@juan.com', '699999999', '', 62),
-(46, 'Walter', 'Tamanaha', 'Prado', 'Hombre', '1976-10-06', 'Turquía', '', 'walter@gmail.com', '', '', 63),
-(47, 'Daniela', 'Solar', 'Duero', 'Mujer', NULL, 'España', '', 'daniela@daniela.com', '', '', 64),
-(48, 'Tamara', 'Juárez', 'Aguayo', 'Mujer', '1985-04-15', 'España', 'Z2270588X', 'tamara@tamara.com', '688888888', '', 65),
-(49, 'Rubén', 'Flores', 'Rosi', 'Hombre', '1984-08-06', 'España', '', 'ruben@ruben.com', '', '', 66),
-(50, 'Isabel', 'Gutierrez', 'Nereo', 'Mujer', NULL, 'España', '', 'isabel@isabel.com', '', '', 67),
-(51, 'Edu', 'Eduap', '', NULL, NULL, 'empty', '', 'edu@edu.com', '', '', 68),
-(52, 'Dora', 'Núñez', 'Gala', 'Mujer', NULL, 'Grecia', '', 'dora@dora.com', '', '', 69),
-(56, 'Servicio4aaa', 'Servicio', 'Cuatro', 'Hombre', '2003-02-01', 'empty', '', 'servicio4@gmail.com', '', '', 74),
-(57, 'Servicio5', 'Servicio', 'Cinco', 'Mujer', '1972-09-30', 'San Marino', '12345678A', 'servicio5@gmail.com', '600000000', 'us us', 75),
-(60, 'Servicio8', 'Servicio', 'Seis', 'Hombre', '2008-08-08', 'Dinamarca', '', 'servicio8@gmail.com', '', 'Observaciones8', 78),
-(61, 'Servicio9', 'Servicio', 'Nueve', 'Mujer', '2009-09-09', 'empty', '', 'servicio9@gmail.com', '', '', 79),
-(63, 'Felipe', 'Sexto', '', NULL, NULL, 'empty', '', 'sanlore@gmail.com', '', '', 81),
-(64, 'Servicío11', 'Servício', 'Ónce', 'Mujer', '1984-08-25', 'Bélgica', '12345678A', 'servicio11@gmail.com', '600000011', 'Test con muchos acentos para análisis completo', 82),
-(65, 'Usuario', 'Con el Rol', 'De Usuario', 'Hombre', '1979-07-04', 'España', '', 'usuario@gmail.com', '', '', 83),
-(66, 'Cliente', 'Con el Rol', 'De Cliente', 'Mujer', NULL, 'empty', '', 'cliente@gmail.com', '', '', 84),
-(67, 'Administrador', 'Con Rol', 'Admin', 'Hombre', '1980-10-10', 'Alemania', '01234567A', 'admin@gmail.com', '600111222', 'Administrador para test', 85);
+INSERT INTO `datospersonales` (`idDatosPers`, `nombre`, `apellido1`, `apellido2`, `sexo`, `fechaNacimiento`, `nacionalidad_idPais`, `dni`, `email`, `telefono`, `observaciones`, `datospersonales_idUsr`) VALUES
+(1, 'José', 'Martínez', 'Suárez', 'Hombre', '1970-07-19', 1, '123456789A', 'pepe@pepe.com', '666555444', 'El usuario principal con el cual hacer pruebas', 1),
+(3, 'Roberto', 'Do Santos', '', 'Hombre', '1980-07-28', 0, '123456789D', 'roberto@roberto.com', '', '', 3),
+(4, 'Damián', 'Usheff', '', 'Hombre', '1976-10-30', 0, '123456789D', 'damian@damian.com', '666666666', '', 4),
+(32, 'Damián', 'Usheff', 'Vellianitis', 'Hombre', '1976-10-30', 0, '12345678A', 'damian@damian.com', '698765435', 'Observaciones para ser guardadas en base de datos', 44),
+(34, 'María Antonieta', 'De las Nieves', 'Salgados', 'Mujer', '1973-03-16', 0, '123456789D', 'asdfasf@kjhicb.com', '638638632', '', 46),
+(38, 'Lara', 'Fuentes', 'Galeano', 'Mujer', '2000-05-01', 0, '12345678S', 'asdfasf@kjhicb.com', '600000006', '', 55),
+(41, 'Saúl', 'Rodríguez', 'Becerra', 'Hombre', '2002-02-02', 0, '12345678A', 'saul@saul.com', '600000001', 'Alguna observación para ver el reseteo de la contraseña', 58),
+(43, 'Alejandro', 'Vázquez', 'López', 'Hombre', '1984-02-25', 0, '', 'asdfasf@kjhicb.com', '', '', 60),
+(44, 'Bárbara', 'López', 'Aguirre', 'Mujer', NULL, 0, '', 'barbara@gmail.com', '', '', 61),
+(45, 'Juan', 'Pérez', 'Arregui', 'Hombre', '1974-07-14', 0, '12345678J', 'juan@juan.com', '699999999', '', 62),
+(46, 'Walter', 'Tamanaha', 'Prado', 'Hombre', '1976-10-06', 0, '', 'walter@gmail.com', '', '', 63),
+(47, 'Daniela', 'Solar', 'Duero', 'Mujer', NULL, 0, '', 'daniela@daniela.com', '', '', 64),
+(48, 'Tamara', 'Juárez', 'Aguayo', 'Mujer', '1985-04-15', 0, 'Z2270588X', 'tamara@tamara.com', '688888888', '', 65),
+(49, 'Rubén', 'Flores', 'Rosi', 'Hombre', '1984-08-06', 0, '', 'ruben@ruben.com', '', '', 66),
+(50, 'Isabel', 'Gutierrez', 'Nereo', 'Mujer', NULL, 0, '', 'isabel@isabel.com', '', '', 67),
+(51, 'Edu', 'Eduap', '', NULL, NULL, 0, '', 'edu@edu.com', '', '', 68),
+(52, 'Dora', 'Núñez', 'Gala', 'Mujer', NULL, 0, '', 'dora@dora.com', '', '', 69),
+(56, 'Servicio4aaa', 'Servicio', 'Cuatro', 'Hombre', '2003-02-01', 0, '', 'servicio4@gmail.com', '', '', 74),
+(57, 'Servicio5', 'Servicio', 'Cinco', 'Mujer', '1972-09-30', 0, '12345678A', 'servicio5@gmail.com', '600000000', 'us us', 75),
+(60, 'Servicio8', 'Servicio', 'Seis', 'Hombre', '2008-08-08', 0, '', 'servicio8@gmail.com', '', 'Observaciones8', 78),
+(61, 'Servicio9', 'Servicio', 'Nueve', 'Mujer', '2009-09-09', 0, '', 'servicio9@gmail.com', '', '', 79),
+(63, 'Felipe', 'Sexto', '', NULL, NULL, 0, '', 'sanlore@gmail.com', '', '', 81),
+(64, 'Servicío11', 'Servício', 'Ónce', 'Mujer', '1984-08-25', 0, '12345678A', 'servicio11@gmail.com', '600000011', 'Test con muchos acentos para análisis completo', 82),
+(65, 'Usuario', 'Con el Rol', 'De Usuario', 'Hombre', '1979-07-04', 2, '', 'usuario@gmail.com', '', '', 83),
+(66, 'Cliente', 'Con el Rol', 'De Cliente', 'Mujer', NULL, 3, '', 'cliente@gmail.com', '', '', 84),
+(67, 'Administrador', 'Con Rol', 'Admin', 'Hombre', '1980-10-10', 6, '01234567A', 'admin@gmail.com', '600111222', 'Administrador para test', 85);
 
 -- --------------------------------------------------------
 
@@ -353,6 +353,7 @@ CREATE TABLE `paises` (
 --
 
 INSERT INTO `paises` (`idPais`, `nombreES`, `nombreEN`) VALUES
+(0, 'No informado', 'Not selected'),
 (1, 'España', 'Spain'),
 (2, 'Alemania', 'Germany'),
 (3, 'Andorra', 'Andorra'),
@@ -580,6 +581,7 @@ INSERT INTO `usuario_empresa` (`idUsr`, `idEmp`, `fechaCreacion`, `creadoPor`) V
 (1, 1, '2019-08-31', 'DAMIAN'),
 (3, 3, '2019-10-06', 'pepe'),
 (4, 1, '2019-10-09', 'juan'),
+(4, 2, '2020-01-26', 'admin'),
 (4, 5, '2019-12-02', 'pepe'),
 (4, 6, '2019-11-03', 'dora'),
 (44, 2, '2019-10-06', 'pepe'),
@@ -790,7 +792,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `datospersonales`
 --
 ALTER TABLE `datospersonales`
-  MODIFY `idDatosPers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `idDatosPers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
 -- AUTO_INCREMENT de la tabla `direccion`
 --
@@ -830,7 +832,7 @@ ALTER TABLE `formapago`
 -- AUTO_INCREMENT de la tabla `paises`
 --
 ALTER TABLE `paises`
-  MODIFY `idPais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `idPais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
@@ -850,7 +852,7 @@ ALTER TABLE `subcategoria`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `idUsr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 --
 -- Restricciones para tablas volcadas
 --

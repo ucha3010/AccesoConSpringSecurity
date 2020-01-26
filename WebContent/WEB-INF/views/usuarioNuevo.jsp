@@ -171,9 +171,11 @@
 			</div>
 			<div class="col-xs-12 col-sm-4">
 				<label for="nacionalidad"><fmt:message key="label.Nationality" /></label>
-	        	<sf:select path="datosPersonales.nacionalidad" class="form-control" id="nacionalidad">
-	            	<sf:option value="empty" label="${selectCountry}" />
-	            	<sf:options items="${paises}" itemValue="${itemSelect}" itemLabel="${itemSelect}" />
+	        	<sf:select path="datosPersonales.nacionalidad.idPais" class="form-control" id="nacionalidad">
+	            	<sf:option value="0" label="${selectCountry}" />
+	            	<c:forEach items="${paises}" var="pais">
+	            		<sf:option value="${pais.idPais}" label="${pais[itemSelect]}" />
+	            	</c:forEach>
 	        	</sf:select>
 			</div>
 		</div>

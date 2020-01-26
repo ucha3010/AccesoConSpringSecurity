@@ -16,7 +16,7 @@ public class ModelDatosPersonales implements Serializable {
 	private String apellido2;
 	private String sexo;
 	private Date fechaNacimiento;
-	private String nacionalidad;
+	private int nacionalidad_idPais;
 	private String dni;
 	private String email;
 	private String telefono;
@@ -42,15 +42,15 @@ public class ModelDatosPersonales implements Serializable {
 	 * @param datospersonales_idUsr
 	 */
 	public ModelDatosPersonales(int idDatosPers, String nombre, String apellido1, String apellido2, String sexo,
-			Date fechaNacimiento, String nacionalidad, String dni, String email, String telefono, String observaciones,
-			int datospersonales_idUsr) {
+			Date fechaNacimiento, int nacionalidad_idPais, String dni, String email, String telefono,
+			String observaciones, int datospersonales_idUsr) {
 		this.idDatosPers = idDatosPers;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
 		this.sexo = sexo;
 		this.fechaNacimiento = fechaNacimiento;
-		this.nacionalidad = nacionalidad;
+		this.nacionalidad_idPais = nacionalidad_idPais;
 		this.dni = dni;
 		this.email = email;
 		this.telefono = telefono;
@@ -149,18 +149,18 @@ public class ModelDatosPersonales implements Serializable {
 	}
 
 	/**
-	 * @return the nacionalidad
+	 * @return the nacionalidad_idPais
 	 */
-	public String getNacionalidad() {
-		return nacionalidad;
+	public int getNacionalidad_idPais() {
+		return nacionalidad_idPais;
 	}
 
 	/**
-	 * @param nacionalidad
-	 *            the nacionalidad to set
+	 * @param nacionalidad_idPais
+	 *            the nacionalidad_idPais to set
 	 */
-	public void setNacionalidad(String nacionalidad) {
-		this.nacionalidad = nacionalidad;
+	public void setNacionalidad_idPais(int nacionalidad_idPais) {
+		this.nacionalidad_idPais = nacionalidad_idPais;
 	}
 
 	/**
@@ -247,8 +247,9 @@ public class ModelDatosPersonales implements Serializable {
 	public String toString() {
 		return "DatosPersonales [idDatosPers=" + idDatosPers + ", nombre=" + nombre + ", apellido1=" + apellido1
 				+ ", apellido2=" + apellido2 + ", sexo=" + sexo + ", fechaNacimiento=" + fechaNacimiento
-				+ ", nacionalidad=" + nacionalidad + ", dni=" + dni + ", email=" + email + ", telefono=" + telefono
-				+ ", observaciones=" + observaciones + ", datospersonales_idUsr=" + datospersonales_idUsr + "]";
+				+ ", nacionalidad_idPais=" + nacionalidad_idPais + ", dni=" + dni + ", email=" + email + ", telefono="
+				+ telefono + ", observaciones=" + observaciones + ", datospersonales_idUsr=" + datospersonales_idUsr
+				+ "]";
 	}
 
 }
