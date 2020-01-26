@@ -1,23 +1,26 @@
 package com.damian.dao.model;
 
 public class ModelSubcategoria {
-	
+
 	private int idSub;
-	private String nombre;
+	private String nombreES;
+	private String nombreEN;
 	private int idCat;
-	
+
 	public ModelSubcategoria() {
-		
+
 	}
 
 	/**
 	 * @param idSub
-	 * @param nombre
+	 * @param nombreES
+	 * @param nombreEN
 	 * @param idCat
 	 */
-	public ModelSubcategoria(int idSub, String nombre, int idCat) {
+	public ModelSubcategoria(int idSub, String nombreES, String nombreEN, int idCat) {
 		this.idSub = idSub;
-		this.nombre = nombre;
+		this.nombreES = nombreES;
+		this.nombreEN = nombreEN;
 		this.idCat = idCat;
 	}
 
@@ -29,24 +32,41 @@ public class ModelSubcategoria {
 	}
 
 	/**
-	 * @param idSub the idSub to set
+	 * @param idSub
+	 *            the idSub to set
 	 */
 	public void setIdSub(int idSub) {
 		this.idSub = idSub;
 	}
 
 	/**
-	 * @return the nombre
+	 * @return the nombreES
 	 */
-	public String getNombre() {
-		return nombre;
+	public String getNombreES() {
+		return nombreES;
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombreES
+	 *            the nombreES to set
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreES(String nombreES) {
+		this.nombreES = nombreES;
+	}
+
+	/**
+	 * @return the nombreEN
+	 */
+	public String getNombreEN() {
+		return nombreEN;
+	}
+
+	/**
+	 * @param nombreEN
+	 *            the nombreEN to set
+	 */
+	public void setNombreEN(String nombreEN) {
+		this.nombreEN = nombreEN;
 	}
 
 	/**
@@ -57,18 +77,22 @@ public class ModelSubcategoria {
 	}
 
 	/**
-	 * @param idCat the idCat to set
+	 * @param idCat
+	 *            the idCat to set
 	 */
 	public void setIdCat(int idCat) {
 		this.idCat = idCat;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "ModelSubcategoria [idSub=" + idSub + ", nombre=" + nombre + ", idCat=" + idCat + "]";
+		return "ModelSubcategoria [idSub=" + idSub + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", idCat="
+				+ idCat + "]";
 	}
 
 }

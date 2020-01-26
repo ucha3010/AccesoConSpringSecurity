@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-01-2020 a las 00:23:41
+-- Tiempo de generación: 26-01-2020 a las 13:41:55
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -490,7 +490,8 @@ INSERT INTO `rol` (`idRol`, `rol`) VALUES
 
 CREATE TABLE `subcategoria` (
   `idSub` int(11) NOT NULL,
-  `nombre` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
+  `nombreES` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreEN` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `idCat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -498,19 +499,19 @@ CREATE TABLE `subcategoria` (
 -- Volcado de datos para la tabla `subcategoria`
 --
 
-INSERT INTO `subcategoria` (`idSub`, `nombre`, `idCat`) VALUES
-(1, 'Televisores', 1),
-(2, 'USB 512GB', 1),
-(3, 'Ordenador portátil Intel i7', 1),
-(4, 'Sillas', 2),
-(5, 'Mesas', 2),
-(9, 'Unirá 2', 6),
-(10, 'Cargadores de móvil', 1),
-(12, 'Ruedas', 7),
-(13, 'Puertas', 7),
-(14, 'Ambientadores', 7),
-(15, '0 Otros', 8),
-(16, 'Monitores', 1);
+INSERT INTO `subcategoria` (`idSub`, `nombreES`, `nombreEN`, `idCat`) VALUES
+(1, 'Televisores', 'TV', 1),
+(2, 'USB 512GB', 'USB 512GB', 1),
+(3, 'Ordenador portátil Intel i7', 'Laptop Intel i7', 1),
+(4, 'Sillas', 'Chairs', 2),
+(5, 'Mesas', 'Tables', 2),
+(9, 'Unidad 3', 'Unit 3', 6),
+(10, 'Cargadores de móvil', 'Mobile chargers', 1),
+(12, 'Ruedas', 'Wheels', 7),
+(13, 'Puertas', 'Doors', 7),
+(14, 'Ambientadores', 'Air fresheners', 2),
+(15, '0 Otros', '0 Others', 8),
+(16, 'Pantallas de ordenador', 'Computer screens', 1);
 
 -- --------------------------------------------------------
 
@@ -784,7 +785,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idCat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `datospersonales`
 --
@@ -809,7 +810,7 @@ ALTER TABLE `empresa`
 -- AUTO_INCREMENT de la tabla `estado`
 --
 ALTER TABLE `estado`
-  MODIFY `idEst` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idEst` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
@@ -824,7 +825,7 @@ ALTER TABLE `factura_estado`
 -- AUTO_INCREMENT de la tabla `formapago`
 --
 ALTER TABLE `formapago`
-  MODIFY `idFor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idFor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `paises`
 --
@@ -834,7 +835,7 @@ ALTER TABLE `paises`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
@@ -844,7 +845,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  MODIFY `idSub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idSub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --

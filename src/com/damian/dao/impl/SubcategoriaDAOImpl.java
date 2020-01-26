@@ -37,7 +37,7 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 	@Override
 	public List<Subcategoria> findAll() {
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY nombre ASC";
+		String sql = "SELECT * FROM " + TABLA + " ORDER BY nombreES ASC";
 
 		return lista(sql, true);
 	}
@@ -84,16 +84,16 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 			return update(subcategoria);
 		} else {
 			ModelSubcategoria ms = converterSubcategoria.convert(subcategoria);
-			String sql = "INSERT INTO " + TABLA + " (nombre, idCat) VALUES (?, ?)";
-			return jdbcTemplate.update(sql, ms.getNombre(), ms.getIdCat());
+			String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN, idCat) VALUES (?, ?, ?)";
+			return jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getIdCat());
 		}
 	}
 
 	@Override
 	public int update(Subcategoria subcategoria) {
 		ModelSubcategoria ms = converterSubcategoria.convert(subcategoria);
-		String sql = "UPDATE " + TABLA + " SET nombre=?, idCat=? " + "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, ms.getNombre(), ms.getIdCat(), ms.getIdSub());
+		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=?, idCat=? " + "WHERE " + KEY + "=?";
+		return jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getIdCat(), ms.getIdSub());
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 	@Override
 	public List<Subcategoria> findByIdCatModel(int idCat) {
 
-		String sql = "SELECT * FROM " + TABLA + " WHERE idCat = " + idCat + " ORDER BY nombre ASC";
+		String sql = "SELECT * FROM " + TABLA + " WHERE idCat = " + idCat + " ORDER BY nombreES ASC";
 
 		return lista(sql, false);
 	}
@@ -129,7 +129,8 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 	private ModelSubcategoria mapeo(ResultSet rs) throws SQLException {
 		ModelSubcategoria me = new ModelSubcategoria();
 		me.setIdSub(rs.getInt("idSub"));
-		me.setNombre(rs.getString("nombre"));
+		me.setNombreES(rs.getString("nombreES"));
+		me.setNombreEN(rs.getString("nombreEN"));
 		me.setIdCat(rs.getInt("idCat"));
 
 		return me;

@@ -26,7 +26,8 @@ public class ConverterSubcategoria {
 
 		Subcategoria s = new Subcategoria();
 		s.setIdSub(ms.getIdSub());
-		s.setNombre(ms.getNombre());
+		s.setNombreES(ms.getNombreES());
+		s.setNombreEN(ms.getNombreEN());
 		Categoria categoria = new Categoria();
 		categoria.setIdCat(ms.getIdCat());
 		s.setCategoria(categoria);
@@ -39,7 +40,8 @@ public class ConverterSubcategoria {
 
 		ModelSubcategoria ms = new ModelSubcategoria();
 		ms.setIdSub(s.getIdSub());
-		ms.setNombre(s.getNombre());
+		ms.setNombreES(s.getNombreES());
+		ms.setNombreEN(s.getNombreEN());
 		if (s.getCategoria() != null) {
 			ms.setIdCat(s.getCategoria().getIdCat());
 		}

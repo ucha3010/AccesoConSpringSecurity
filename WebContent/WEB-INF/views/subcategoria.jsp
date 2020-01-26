@@ -18,14 +18,24 @@
 	<script type="text/javascript">
 		function validarSubcategoria(){
 			restablecer();
-		    var nombreSubcategoria = document.getElementById('nombreSubcategoria');
-		    var nombreSubcategoriaError = document.getElementById('nombreSubcategoriaError');
-			if(nombreSubcategoria.value==''){
-				nombreSubcategoriaError.innerHTML = "<fmt:message key='error.field.not.empty' />";
-				nombreSubcategoria.style.borderColor="red";
+			var campo = ['nombreSubcategoriaES','nombreSubcategoriaEN'];
+			var validado = true;			
+			for(var i=0; i < campo.length; i++){
+			    var nombreRol = document.getElementById(campo[i]);
+			    var nombreRolError = document.getElementById(campo[i]+'Error');
+				if(nombreRol.value==''){
+					nombreRolError.innerHTML = "<fmt:message key='error.field.not.empty' />";
+					nombreRol.style.borderColor="red";
+					validado = false;
+				}
+			}
+			
+			if(validado){
+				return true;
+			} else {
+				document.getElementById('hayError').innerHTML = "<fmt:message key='error.any.field' />";
 				return false;
 			}
-			return true;
 		}
 		function restablecer(){
 			var errorSpan = document.getElementsByName('errorSpan');
@@ -47,20 +57,33 @@
 			<sf:hidden path="idSub"/>
 		</c:if>
 		<div class="form-row">		
-			<div class="col-sm-1">
+			<div class="col-sm-3">
 			</div>
-			<div class="col-xs-12 col-sm-2">
+			<div class="col-xs-12 col-sm-4">
 				<label for="categoria"><fmt:message key="label.Category" /></label>
 	        	<sf:select path="categoria.idCat" class="form-control" id="categoria">
 	            	<sf:options items="${categorias}" itemValue="idCat" itemLabel="${nameColSelect}" />
 	        	</sf:select>
-			</div>	
-			<div class="col-sm-1">
+			</div>
+		</div>
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
 			</div>
 			<div class="col-xs-12 col-sm-4">
-				<label for="subcategoria"><fmt:message key="Subcategory.name" /></label> 
-				<sf:input path="nombre" class="form-control" id="nombreSubcategoria" />
-				<span id="nombreSubcategoriaError" name="errorSpan"></span>
+				<label for="subcategoria"><fmt:message key="Subcategory.name.spanish" /></label> 
+				<sf:input path="nombreES" class="form-control" id="nombreSubcategoriaES" />
+				<span id="nombreSubcategoriaESError" name="errorSpan"></span>
+			</div>
+		</div>
+		<br/>
+		<div class="form-row">		
+			<div class="col-sm-3">
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<label for="subcategoria"><fmt:message key="Subcategory.name.english" /></label> 
+				<sf:input path="nombreEN" class="form-control" id="nombreSubcategoriaEN" />
+				<span id="nombreSubcategoriaENError" name="errorSpan"></span>
 			</div>
 		</div>
 		<br/>
@@ -70,6 +93,7 @@
 			<div class="col-xs-12 col-sm-4">	
 				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
 				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/categoria' />"'><fmt:message key="Cancel" /></button>
+				<span id="hayError" name="errorSpan" style="color:red"></span>
 			</div>
 		</div>
 	</sf:form>

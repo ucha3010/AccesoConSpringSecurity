@@ -3,25 +3,39 @@ package com.damian.pojo;
 import java.util.List;
 
 public class Subcategoria {
-	
+
 	private int idSub;
-	private String nombre;
+	private String nombreES;
+	private String nombreEN;
 	private Categoria categoria;
 	private List<Producto> productos;
-	
+
 	public Subcategoria() {
-		
+
 	}
 
 	/**
 	 * @param idSub
-	 * @param nombre
+	 * @param nombreES
+	 * @param nombreEN
+	 */
+	public Subcategoria(int idSub, String nombreES, String nombreEN) {
+		this.idSub = idSub;
+		this.nombreES = nombreES;
+		this.nombreEN = nombreEN;
+	}
+
+	/**
+	 * @param idSub
+	 * @param nombreES
+	 * @param nombreEN
 	 * @param categoria
 	 * @param productos
 	 */
-	public Subcategoria(int idSub, String nombre, Categoria categoria, List<Producto> productos) {
+	public Subcategoria(int idSub, String nombreES, String nombreEN, Categoria categoria, List<Producto> productos) {
 		this.idSub = idSub;
-		this.nombre = nombre;
+		this.nombreES = nombreES;
+		this.nombreEN = nombreEN;
 		this.categoria = categoria;
 		this.productos = productos;
 	}
@@ -34,24 +48,41 @@ public class Subcategoria {
 	}
 
 	/**
-	 * @param idSub the idSub to set
+	 * @param idSub
+	 *            the idSub to set
 	 */
 	public void setIdSub(int idSub) {
 		this.idSub = idSub;
 	}
 
 	/**
-	 * @return the nombre
+	 * @return the nombreES
 	 */
-	public String getNombre() {
-		return nombre;
+	public String getNombreES() {
+		return nombreES;
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombreES
+	 *            the nombreES to set
 	 */
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreES(String nombreES) {
+		this.nombreES = nombreES;
+	}
+
+	/**
+	 * @return the nombreEN
+	 */
+	public String getNombreEN() {
+		return nombreEN;
+	}
+
+	/**
+	 * @param nombreEN
+	 *            the nombreEN to set
+	 */
+	public void setNombreEN(String nombreEN) {
+		this.nombreEN = nombreEN;
 	}
 
 	/**
@@ -62,7 +93,8 @@ public class Subcategoria {
 	}
 
 	/**
-	 * @param categoria the categoria to set
+	 * @param categoria
+	 *            the categoria to set
 	 */
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
@@ -76,18 +108,21 @@ public class Subcategoria {
 	}
 
 	/**
-	 * @param productos the productos to set
+	 * @param productos
+	 *            the productos to set
 	 */
 	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Subcategoria [idSub=" + idSub + ", nombre=" + nombre + "]";
+		return "Subcategoria [idSub=" + idSub + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + "]";
 	}
 
 }

@@ -156,7 +156,7 @@
 										</sec:authorize>
 										<c:set var="repetido" value="true" scope="page" />
 									</c:if>
-									<td><c:out value="${subcategoria.nombre}" /></td>
+									<td><c:out value="${subcategoria[nameColSelect]}" /></td>
 									<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
 										<td class="sin_padding">
 											<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/subcategoria/${subcategoria.idSub}' />"'>
