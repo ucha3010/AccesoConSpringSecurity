@@ -66,7 +66,6 @@ public class ProductoController {
 		boolean nueva = false;
 		if (producto.getIdPro() == 0) {
 			nueva = true;
-			producto.setEstado("ACTIVO");
 		}
 		productoService.save(producto);
 		if (nueva) {
@@ -91,13 +90,7 @@ public class ProductoController {
 	@RequestMapping("/producto/stock/{idPro}")
 	public ModelAndView getProductoStock(ModelAndView modelAndView, @PathVariable("idPro") int idPro) {
 		Producto producto = productoService.findById(idPro);
-		FrontProductoStock frontProductoStock = new FrontProductoStock();
-		frontProductoStock.setIdPro(producto.getIdPro());
-		frontProductoStock.setUnidades(producto.getUnidades());
-		frontProductoStock.setNombreES(producto.getNombreES());
-		frontProductoStock.setNombreEN(producto.getNombreEN());
-		frontProductoStock.setCompra(true);
-		modelAndView.addObject("frontProductoStock", frontProductoStock);
+		modelAndView.addObject("frontProductoStock", productoService.fillFrontProductoStock(producto));
 		modelAndView.setViewName("productoStock");
 		return modelAndView;
 	}

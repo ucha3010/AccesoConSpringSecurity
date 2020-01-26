@@ -28,6 +28,12 @@ public class ConverterProducto {
 		p.setIdPro(mp.getIdPro());
 		p.setNombreES(mp.getNombreES());
 		p.setNombreEN(mp.getNombreEN());
+		p.setNombrePT(mp.getNombrePT());
+		p.setNombreFR(mp.getNombreFR());
+		p.setNombreIT(mp.getNombreIT());
+		p.setNombreGE(mp.getNombreGE());
+		p.setNombreCA(mp.getNombreCA());
+		p.setNombreEU(mp.getNombreEU());
 		p.setUnidades(mp.getUnidades());
 		p.setPrecioVenta(mp.getPrecioVenta());
 		p.setPrecioCompra(mp.getPrecioCompra());
@@ -65,6 +71,12 @@ public class ConverterProducto {
 		} else {
 			mp.setNombreEN("Product description didn't write");
 		}
+		mp.setNombrePT(p.getNombrePT());
+		mp.setNombreFR(p.getNombreFR());
+		mp.setNombreIT(p.getNombreIT());
+		mp.setNombreGE(p.getNombreGE());
+		mp.setNombreCA(p.getNombreCA());
+		mp.setNombreEU(p.getNombreEU());
 		mp.setUnidades(p.getUnidades());
 		mp.setPrecioVenta(p.getPrecioVenta());
 		mp.setPrecioCompra(p.getPrecioCompra());

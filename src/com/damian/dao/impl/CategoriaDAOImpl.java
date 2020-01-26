@@ -84,16 +84,16 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 			return update(categoria);
 		} else {
 			ModelCategoria me = converterCategoria.convert(categoria);
-			String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN) VALUES (?, ?)";
-			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN());
+			String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU());
 		}
 	}
 
 	@Override
 	public int update(Categoria categoria) {
 		ModelCategoria me = converterCategoria.convert(categoria);
-		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=? " + "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getIdCat());
+		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=? " + "WHERE " + KEY + "=?";
+		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getIdCat());
 	}
 
 	@Override
@@ -122,6 +122,12 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		me.setIdCat(rs.getInt("idCat"));
 		me.setNombreES(rs.getString("nombreES"));
 		me.setNombreEN(rs.getString("nombreEN"));
+		me.setNombrePT(rs.getString("nombrePT"));
+		me.setNombreFR(rs.getString("nombreFR"));
+		me.setNombreIT(rs.getString("nombreIT"));
+		me.setNombreGE(rs.getString("nombreGE"));
+		me.setNombreCA(rs.getString("nombreCA"));
+		me.setNombreEU(rs.getString("nombreEU"));
 		return me;
 	}
 }

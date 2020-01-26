@@ -84,16 +84,16 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 			return update(subcategoria);
 		} else {
 			ModelSubcategoria ms = converterSubcategoria.convert(subcategoria);
-			String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN, idCat) VALUES (?, ?, ?)";
-			return jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getIdCat());
+			String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU, idCat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			return jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getNombrePT(), ms.getNombreFR(), ms.getNombreIT(), ms.getNombreGE(), ms.getNombreCA(), ms.getNombreEU(), ms.getIdCat());
 		}
 	}
 
 	@Override
 	public int update(Subcategoria subcategoria) {
 		ModelSubcategoria ms = converterSubcategoria.convert(subcategoria);
-		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=?, idCat=? " + "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getIdCat(), ms.getIdSub());
+		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, idCat=? " + "WHERE " + KEY + "=?";
+		return jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getNombrePT(), ms.getNombreFR(), ms.getNombreIT(), ms.getNombreGE(), ms.getNombreCA(), ms.getNombreEU(), ms.getIdCat(), ms.getIdSub());
 	}
 
 	@Override
@@ -131,6 +131,12 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 		me.setIdSub(rs.getInt("idSub"));
 		me.setNombreES(rs.getString("nombreES"));
 		me.setNombreEN(rs.getString("nombreEN"));
+		me.setNombrePT(rs.getString("nombrePT"));
+		me.setNombreFR(rs.getString("nombreFR"));
+		me.setNombreIT(rs.getString("nombreIT"));
+		me.setNombreGE(rs.getString("nombreGE"));
+		me.setNombreCA(rs.getString("nombreCA"));
+		me.setNombreEU(rs.getString("nombreEU"));
 		me.setIdCat(rs.getInt("idCat"));
 
 		return me;

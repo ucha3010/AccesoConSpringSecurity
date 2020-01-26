@@ -27,6 +27,12 @@ public class ConverterCategoria {
 		c.setIdCat(mc.getIdCat());
 		c.setNombreES(mc.getNombreES());
 		c.setNombreEN(mc.getNombreEN());
+		c.setNombrePT(mc.getNombrePT());
+		c.setNombreFR(mc.getNombreFR());
+		c.setNombreIT(mc.getNombreIT());
+		c.setNombreGE(mc.getNombreGE());
+		c.setNombreCA(mc.getNombreCA());
+		c.setNombreEU(mc.getNombreEU());
 
 		return c;
 
@@ -38,6 +44,12 @@ public class ConverterCategoria {
 		mc.setIdCat(c.getIdCat());
 		mc.setNombreES(c.getNombreES());
 		mc.setNombreEN(c.getNombreEN());
+		mc.setNombrePT(c.getNombrePT());
+		mc.setNombreFR(c.getNombreFR());
+		mc.setNombreIT(c.getNombreIT());
+		mc.setNombreGE(c.getNombreGE());
+		mc.setNombreCA(c.getNombreCA());
+		mc.setNombreEU(c.getNombreEU());
 
 		return mc;
 

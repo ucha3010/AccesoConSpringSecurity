@@ -161,4 +161,22 @@ public class ProductoServiceImpl implements ProductoService {
 
 	}
 
+	@Override
+	public FrontProductoStock fillFrontProductoStock(Producto producto) {
+
+		FrontProductoStock frontProductoStock = new FrontProductoStock();
+		frontProductoStock.setIdPro(producto.getIdPro());
+		frontProductoStock.setUnidades(producto.getUnidades());
+		frontProductoStock.setNombreES(producto.getNombreES());
+		frontProductoStock.setNombreEN(producto.getNombreEN());
+		frontProductoStock.setNombrePT(producto.getNombrePT());
+		frontProductoStock.setNombreFR(producto.getNombreFR());
+		frontProductoStock.setNombreIT(producto.getNombreIT());
+		frontProductoStock.setNombreGE(producto.getNombreGE());
+		frontProductoStock.setNombreCA(producto.getNombreCA());
+		frontProductoStock.setNombreEU(producto.getNombreEU());
+		frontProductoStock.setCompra(true);
+		return frontProductoStock;
+	}
+
 }

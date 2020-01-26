@@ -27,6 +27,12 @@ public class ConverterFormaPago {
 		f.setIdFor(mf.getIdFor());
 		f.setNombreES(mf.getNombreES());
 		f.setNombreEN(mf.getNombreEN());
+		f.setNombrePT(mf.getNombrePT());
+		f.setNombreFR(mf.getNombreFR());
+		f.setNombreIT(mf.getNombreIT());
+		f.setNombreGE(mf.getNombreGE());
+		f.setNombreCA(mf.getNombreCA());
+		f.setNombreEU(mf.getNombreEU());
 
 		return f;
 
@@ -38,6 +44,12 @@ public class ConverterFormaPago {
 		mf.setIdFor(f.getIdFor());
 		mf.setNombreES(f.getNombreES());
 		mf.setNombreEN(f.getNombreEN());
+		mf.setNombrePT(f.getNombrePT());
+		mf.setNombreFR(f.getNombreFR());
+		mf.setNombreIT(f.getNombreIT());
+		mf.setNombreGE(f.getNombreGE());
+		mf.setNombreCA(f.getNombreCA());
+		mf.setNombreEU(f.getNombreEU());
 
 		return mf;
 

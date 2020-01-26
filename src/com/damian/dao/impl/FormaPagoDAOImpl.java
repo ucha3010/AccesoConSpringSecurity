@@ -84,16 +84,16 @@ public class FormaPagoDAOImpl implements FormaPagoDAO {
 			return update(formaPago);
 		} else {
 			ModelFormaPago me = converterFormaPago.convert(formaPago);
-			String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN) VALUES (?, ?)";
-			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN());
+			String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU());
 		}
 	}
 
 	@Override
 	public int update(FormaPago formaPago) {
 		ModelFormaPago me = converterFormaPago.convert(formaPago);
-		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=? " + "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getIdFor());
+		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=? " + "WHERE " + KEY + "=?";
+		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getIdFor());
 	}
 
 	@Override
@@ -122,6 +122,12 @@ public class FormaPagoDAOImpl implements FormaPagoDAO {
 		mf.setIdFor(rs.getInt("idFor"));
 		mf.setNombreES(rs.getString("nombreES"));
 		mf.setNombreEN(rs.getString("nombreEN"));
+		mf.setNombrePT(rs.getString("nombrePT"));
+		mf.setNombreFR(rs.getString("nombreFR"));
+		mf.setNombreIT(rs.getString("nombreIT"));
+		mf.setNombreGE(rs.getString("nombreGE"));
+		mf.setNombreCA(rs.getString("nombreCA"));
+		mf.setNombreEU(rs.getString("nombreEU"));
 		return mf;
 	}
 }

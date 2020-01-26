@@ -25,5 +25,7 @@ public interface ProductoService {
 	public List<Producto> findByIdList(int id);
 
 	public void saveProductoStock(FrontProductoStock frontProductoStock, HttpServletRequest request);
+	
+	public FrontProductoStock fillFrontProductoStock(Producto producto);
 
 }

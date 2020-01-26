@@ -28,6 +28,12 @@ public class ConverterSubcategoria {
 		s.setIdSub(ms.getIdSub());
 		s.setNombreES(ms.getNombreES());
 		s.setNombreEN(ms.getNombreEN());
+		s.setNombrePT(ms.getNombrePT());
+		s.setNombreFR(ms.getNombreFR());
+		s.setNombreIT(ms.getNombreIT());
+		s.setNombreGE(ms.getNombreGE());
+		s.setNombreCA(ms.getNombreCA());
+		s.setNombreEU(ms.getNombreEU());
 		Categoria categoria = new Categoria();
 		categoria.setIdCat(ms.getIdCat());
 		s.setCategoria(categoria);
@@ -42,6 +48,12 @@ public class ConverterSubcategoria {
 		ms.setIdSub(s.getIdSub());
 		ms.setNombreES(s.getNombreES());
 		ms.setNombreEN(s.getNombreEN());
+		ms.setNombrePT(s.getNombrePT());
+		ms.setNombreFR(s.getNombreFR());
+		ms.setNombreIT(s.getNombreIT());
+		ms.setNombreGE(s.getNombreGE());
+		ms.setNombreCA(s.getNombreCA());
+		ms.setNombreEU(s.getNombreEU());
 		if (s.getCategoria() != null) {
 			ms.setIdCat(s.getCategoria().getIdCat());
 		}

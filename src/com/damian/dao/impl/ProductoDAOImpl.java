@@ -85,10 +85,10 @@ public class ProductoDAOImpl implements ProductoDAO {
 		} else {
 			ModelProducto mp = converterProducto.convert(producto);
 			String sql = "INSERT INTO " + TABLA
-					+ " (nombreES, nombreEN, unidades, precioVenta, precioCompra, marca, modelo, "
+					+ " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU, unidades, precioVenta, precioCompra, marca, modelo, "
 					+ "serie, ubicacion, estado, partida, fechaCompra, enviar, vendible, mesesGarantia, peso, volumen, idSub)"
-					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getUnidades(), mp.getPrecioVenta(),
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getNombrePT(), mp.getNombreFR(), mp.getNombreIT(), mp.getNombreGE(), mp.getNombreCA(), mp.getNombreEU(), mp.getUnidades(), mp.getPrecioVenta(),
 					mp.getPrecioCompra(), mp.getMarca(), mp.getModelo(), mp.getSerie(), mp.getUbicacion(),
 					mp.getEstado(), mp.getPartida(), mp.getFechaCompra(), mp.isEnviar(), mp.isVendible(),
 					mp.getMesesGarantia(), mp.getPeso(), mp.getVolumen(), mp.getIdSub());
@@ -99,10 +99,10 @@ public class ProductoDAOImpl implements ProductoDAO {
 	public void update(Producto producto) {
 		ModelProducto mp = converterProducto.convert(producto);
 		String sql = "UPDATE " + TABLA
-				+ " SET nombreES=?, nombreEN=?, unidades=?, precioVenta=?, precioCompra=?, marca=?, "
+				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, unidades=?, precioVenta=?, precioCompra=?, marca=?, "
 				+ "modelo=?, serie=?, ubicacion=?, estado=?, partida=?, fechaCompra=?, enviar=?, vendible=?, "
 				+ "mesesGarantia=?, peso=?, volumen=?, idSub=? WHERE " + KEY + "=?";
-		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getUnidades(), mp.getPrecioVenta(),
+		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getNombrePT(), mp.getNombreFR(), mp.getNombreIT(), mp.getNombreGE(), mp.getNombreCA(), mp.getNombreEU(), mp.getUnidades(), mp.getPrecioVenta(),
 				mp.getPrecioCompra(), mp.getMarca(), mp.getModelo(), mp.getSerie(), mp.getUbicacion(), mp.getEstado(),
 				mp.getPartida(), mp.getFechaCompra(), mp.isEnviar(), mp.isVendible(), mp.getMesesGarantia(),
 				mp.getPeso(), mp.getVolumen(), mp.getIdSub(), mp.getIdPro());
@@ -150,6 +150,12 @@ public class ProductoDAOImpl implements ProductoDAO {
 		mp.setIdPro(rs.getInt("idPro"));
 		mp.setNombreES(rs.getString("nombreES"));
 		mp.setNombreEN(rs.getString("nombreEN"));
+		mp.setNombrePT(rs.getString("nombrePT"));
+		mp.setNombreFR(rs.getString("nombreFR"));
+		mp.setNombreIT(rs.getString("nombreIT"));
+		mp.setNombreGE(rs.getString("nombreGE"));
+		mp.setNombreCA(rs.getString("nombreCA"));
+		mp.setNombreEU(rs.getString("nombreEU"));
 		mp.setUnidades(rs.getInt("unidades"));
 		mp.setPrecioVenta(rs.getDouble("precioVenta"));
 		mp.setPrecioCompra(rs.getDouble("precioCompra"));

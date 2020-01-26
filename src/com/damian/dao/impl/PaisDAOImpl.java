@@ -64,16 +64,16 @@ public class PaisDAOImpl implements PaisDAO {
 	public void save(Pais pais) {
 
 		ModelPais mp = converterPais.convert(pais);
-		String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN)" + " VALUES (?, ?)";
-		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN());
+		String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getNombrePT(), mp.getNombreFR(), mp.getNombreIT(), mp.getNombreGE(), mp.getNombreCA(), mp.getNombreEU());
 	}
 
 	@Override
 	public void update(Pais pais) {
 
 		ModelPais mp = converterPais.convert(pais);
-		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=? WHERE " + KEY + "=?";
-		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getIdPais());
+		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=? WHERE " + KEY + "=?";
+		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getNombrePT(), mp.getNombreFR(), mp.getNombreIT(), mp.getNombreGE(), mp.getNombreCA(), mp.getNombreEU(), mp.getIdPais());
 	}
 
 	@Override
@@ -112,6 +112,12 @@ public class PaisDAOImpl implements PaisDAO {
 		mp.setIdPais(rs.getInt("idPais"));
 		mp.setNombreES(rs.getString("nombreES"));
 		mp.setNombreEN(rs.getString("nombreEN"));
+		mp.setNombrePT(rs.getString("nombrePT"));
+		mp.setNombreFR(rs.getString("nombreFR"));
+		mp.setNombreIT(rs.getString("nombreIT"));
+		mp.setNombreGE(rs.getString("nombreGE"));
+		mp.setNombreCA(rs.getString("nombreCA"));
+		mp.setNombreEU(rs.getString("nombreEU"));
 		return mp;
 	}
 

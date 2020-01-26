@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-01-2020 a las 21:43:10
+-- Tiempo de generación: 27-01-2020 a las 00:23:31
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -63,19 +63,25 @@ INSERT INTO `admin` (`idAd`, `nombre`, `cargo`, `fechaCreacion`) VALUES
 CREATE TABLE `categoria` (
   `idCat` int(11) NOT NULL,
   `nombreES` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `nombreEN` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
+  `nombreEN` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombrePT` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreFR` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreIT` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreGE` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreCA` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreEU` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `categoria` (`idCat`, `nombreES`, `nombreEN`) VALUES
-(1, 'Aparatos electrónicos', 'Electronic devices'),
-(2, 'Hogar', 'Home'),
-(6, 'otra', 'Other'),
-(7, 'Coches', 'Cars'),
-(8, '0 Otros', '0 Others');
+INSERT INTO `categoria` (`idCat`, `nombreES`, `nombreEN`, `nombrePT`, `nombreFR`, `nombreIT`, `nombreGE`, `nombreCA`, `nombreEU`) VALUES
+(1, 'Aparatos electrónicos', 'Electronic devices', NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'Hogar', 'Home', NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'otra', 'Other', NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'Coches', 'Cars', NULL, NULL, NULL, NULL, NULL, NULL),
+(8, '0 Otros', '0 Others', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -114,7 +120,7 @@ INSERT INTO `datospersonales` (`idDatosPers`, `nombre`, `apellido1`, `apellido2`
 (44, 'Bárbara', 'López', 'Aguirre', 'Mujer', NULL, 0, '', 'barbara@gmail.com', '', '', 61),
 (45, 'Juan', 'Pérez', 'Arregui', 'Hombre', '1974-07-14', 0, '12345678J', 'juan@juan.com', '699999999', '', 62),
 (46, 'Walter', 'Tamanaha', 'Prado', 'Hombre', '1976-10-06', 0, '', 'walter@gmail.com', '', '', 63),
-(47, 'Daniela', 'Solar', 'Duero', 'Mujer', NULL, 0, '', 'daniela@daniela.com', '', '', 64),
+(47, 'Daniela', 'Solar', 'Duero', 'Mujer', NULL, 1, '', 'daniela@daniela.com', '', '', 64),
 (48, 'Tamara', 'Juárez', 'Aguayo', 'Mujer', '1985-04-15', 0, 'Z2270588X', 'tamara@tamara.com', '688888888', '', 65),
 (49, 'Rubén', 'Flores', 'Rosi', 'Hombre', '1984-08-06', 0, '', 'ruben@ruben.com', '', '', 66),
 (50, 'Isabel', 'Gutierrez', 'Nereo', 'Mujer', NULL, 0, '', 'isabel@isabel.com', '', '', 67),
@@ -128,7 +134,8 @@ INSERT INTO `datospersonales` (`idDatosPers`, `nombre`, `apellido1`, `apellido2`
 (64, 'Servicío11', 'Servício', 'Ónce', 'Mujer', '1984-08-25', 0, '12345678A', 'servicio11@gmail.com', '600000011', 'Test con muchos acentos para análisis completo', 82),
 (65, 'Usuario', 'Con el Rol', 'De Usuario', 'Hombre', '1979-07-04', 2, '', 'usuario@gmail.com', '', '', 83),
 (66, 'Cliente', 'Con el Rol', 'De Cliente', 'Mujer', NULL, 3, '', 'cliente@gmail.com', '', '', 84),
-(67, 'Administrador', 'Con Rol', 'Admin', 'Hombre', '1980-10-10', 6, '01234567A', 'admin@gmail.com', '600111222', 'Administrador para test', 85);
+(67, 'Administrador', 'Con Rol', 'Admin', 'Hombre', '1980-10-10', 6, '01234567A', 'admin@gmail.com', '600111222', 'Administrador para test', 85),
+(69, 'Camilo', 'Sesto', '', 'Hombre', NULL, 4, '', 'cami@gmail.com', '', '', 87);
 
 -- --------------------------------------------------------
 
@@ -189,7 +196,8 @@ CREATE TABLE `direccionempresa` (
 --
 
 INSERT INTO `direccionempresa` (`idDirEmp`, `tipoVia`, `nombreVia`, `numero`, `resto`, `cp`, `provincia`, `ciudad`, `pais_idPais`, `idEmp`) VALUES
-(1, 'Calle', 'Mayor', '6', 'local', '28001', 'Madrid', 'Madrid', 1, 1);
+(1, 'Calle', 'Mayor', '6', 'local', '28001', 'Madrid', 'Madrid', 16, 1),
+(2, 'Avenida', 'Manuel Becerra', 'Bajo 3', '', '47024', 'León', 'Cardales', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -230,19 +238,26 @@ INSERT INTO `empresa` (`idEmp`, `nombreComercial`, `tipoSociedad`, `actividad`, 
 CREATE TABLE `estado` (
   `idEst` int(11) NOT NULL,
   `nombreES` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `nombreEN` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
+  `nombreEN` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombrePT` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreFR` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreIT` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreGE` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreCA` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreEU` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `estado`
 --
 
-INSERT INTO `estado` (`idEst`, `nombreES`, `nombreEN`) VALUES
-(1, 'Enviado', 'Sent'),
-(3, 'Pendiente de envío', 'Pending to send'),
-(5, 'Cancelado', 'Cancelled'),
-(6, 'Agregar stock', 'Add stock'),
-(7, 'Quitar stock', 'Remove stock');
+INSERT INTO `estado` (`idEst`, `nombreES`, `nombreEN`, `nombrePT`, `nombreFR`, `nombreIT`, `nombreGE`, `nombreCA`, `nombreEU`) VALUES
+(1, 'Enviado', 'Sent', NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'Pendiente de envío', 'Pending to send', NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'Cancelado', 'Cancelled', NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'Agregar stock', 'Add stock', NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'Quitar stock', 'Remove stock', NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 'En tránsito', 'In transit', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -275,7 +290,8 @@ INSERT INTO `factura` (`idFac`, `compra`, `ivaTotal`, `ivaImporteTotal`, `descue
 (7, 1, 10, 49.5, 0, 0, 495, '2020-01-17 20:51:06', NULL, 6, NULL, '', 4, 'admin'),
 (8, 0, 21, 50.82, 0, 0, 242, '2020-01-18 00:00:00', NULL, 7, NULL, 'Primera prueba QUITAR unidades. TV Sanyo 15 pulgadas. Saco 1 unidad. Importe 242€. IVA 21%', 4, 'admin'),
 (9, 0, 21, 42, 0, 0, 242, '2020-01-18 12:05:49', NULL, 7, NULL, '', 4, 'admin'),
-(10, 1, 10, 45, 0, 0, 495, '2020-01-18 12:09:07', NULL, 6, NULL, '', 4, 'admin');
+(10, 1, 10, 45, 0, 0, 495, '2020-01-18 12:09:07', NULL, 6, NULL, '', 4, 'admin'),
+(11, 1, 10, 0.1, 0, 0, 1.1, '2020-01-26 22:20:51', NULL, 6, NULL, '', 4, 'pepe');
 
 -- --------------------------------------------------------
 
@@ -312,7 +328,8 @@ INSERT INTO `factura_estado` (`id`, `idFac`, `idEst`, `fecha`, `creadoPor`, `obs
 (13, 8, 3, '2020-01-22 00:01:21', 'admin', NULL),
 (14, 8, 7, '2020-01-22 00:01:54', 'pepe', 'Vuelvo al estado correcto.'),
 (15, 8, 1, '2020-01-24 20:41:14', 'pepe', NULL),
-(16, 8, 7, '2020-01-24 20:41:27', 'pepe', NULL);
+(16, 8, 7, '2020-01-24 20:41:27', 'pepe', NULL),
+(17, 11, 6, '2020-01-26 22:20:51', 'pepe', NULL);
 
 -- --------------------------------------------------------
 
@@ -323,18 +340,25 @@ INSERT INTO `factura_estado` (`id`, `idFac`, `idEst`, `fecha`, `creadoPor`, `obs
 CREATE TABLE `formapago` (
   `idFor` int(11) NOT NULL,
   `nombreES` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `nombreEN` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
+  `nombreEN` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombrePT` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreFR` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreIT` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreGE` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreCA` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreEU` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `formapago`
 --
 
-INSERT INTO `formapago` (`idFor`, `nombreES`, `nombreEN`) VALUES
-(1, 'Efectivo', 'Cash'),
-(2, 'Tarjeta de crédito', 'Credit card'),
-(3, 'Cheque', 'Check'),
-(4, 'Movimiento stock', 'Stock change');
+INSERT INTO `formapago` (`idFor`, `nombreES`, `nombreEN`, `nombrePT`, `nombreFR`, `nombreIT`, `nombreGE`, `nombreCA`, `nombreEU`) VALUES
+(1, 'Efectivo', 'Cash', NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'Tarjeta de débito', 'Debit card', NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'Cheque', 'Check', NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 'Movimiento stock', 'Stock change', NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'Tarjeta de  crédito', 'Credit card', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -345,33 +369,39 @@ INSERT INTO `formapago` (`idFor`, `nombreES`, `nombreEN`) VALUES
 CREATE TABLE `paises` (
   `idPais` int(11) NOT NULL,
   `nombreES` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `nombreEN` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+  `nombreEN` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `nombrePT` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreFR` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreIT` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreGE` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreCA` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreEU` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `paises`
 --
 
-INSERT INTO `paises` (`idPais`, `nombreES`, `nombreEN`) VALUES
-(0, 'No informado', 'Not selected'),
-(1, 'España', 'Spain'),
-(2, 'Alemania', 'Germany'),
-(3, 'Andorra', 'Andorra'),
-(4, 'Austria', 'Austria'),
-(5, 'Bélgica', 'Belgium'),
-(6, 'Dinamarca', 'Denmark'),
-(7, 'El Vaticano', 'The Vatican'),
-(8, 'Francia', 'France'),
-(9, 'Grecia', 'Greece'),
-(10, 'Italia', 'Italy'),
-(11, 'Noruega', 'Norway'),
-(12, 'Países Bajos', 'Netherlands'),
-(13, 'Portugal', 'Portugal'),
-(14, 'Reino Unido', 'United Kingdom'),
-(15, 'San Marino', 'San Marino'),
-(16, 'Suecia', 'Sweden'),
-(17, 'Suiza', 'Switzerland'),
-(18, 'Turquía', 'Turkey');
+INSERT INTO `paises` (`idPais`, `nombreES`, `nombreEN`, `nombrePT`, `nombreFR`, `nombreIT`, `nombreGE`, `nombreCA`, `nombreEU`) VALUES
+(0, 'No informado', 'Not selected', NULL, NULL, NULL, NULL, NULL, NULL),
+(1, 'España', 'Spain', NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 'Alemania', 'Germany', NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 'Andorra', 'Andorra', NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 'Austria', 'Austria', NULL, NULL, NULL, NULL, NULL, NULL),
+(5, 'Bélgica', 'Belgium', NULL, NULL, NULL, NULL, NULL, NULL),
+(6, 'Dinamarca', 'Denmark', NULL, NULL, NULL, NULL, NULL, NULL),
+(7, 'El Vaticano', 'The Vatican', NULL, NULL, NULL, NULL, NULL, NULL),
+(8, 'Francia', 'France', NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 'Grecia', 'Greece', NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 'Italia', 'Italy', NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 'Noruega', 'Norway', NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 'Países Bajos', 'Netherlands', NULL, NULL, NULL, NULL, NULL, NULL),
+(13, 'Portugal', 'Portugal', NULL, NULL, NULL, NULL, NULL, NULL),
+(14, 'Reino Unido', 'United Kingdom', NULL, NULL, NULL, NULL, NULL, NULL),
+(15, 'San Marino', 'San Marino', NULL, NULL, NULL, NULL, NULL, NULL),
+(16, 'Suecia', 'Sweden', NULL, NULL, NULL, NULL, NULL, NULL),
+(17, 'Suiza', 'Switzerland', NULL, NULL, NULL, NULL, NULL, NULL),
+(18, 'Turquía', 'Turkey', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -383,6 +413,12 @@ CREATE TABLE `producto` (
   `idPro` int(11) NOT NULL,
   `nombreES` text COLLATE utf8_spanish_ci NOT NULL,
   `nombreEN` text COLLATE utf8_spanish_ci NOT NULL,
+  `nombrePT` text COLLATE utf8_spanish_ci,
+  `nombreFR` text COLLATE utf8_spanish_ci,
+  `nombreIT` text COLLATE utf8_spanish_ci,
+  `nombreGE` text COLLATE utf8_spanish_ci,
+  `nombreCA` text COLLATE utf8_spanish_ci,
+  `nombreEU` text COLLATE utf8_spanish_ci,
   `unidades` int(11) NOT NULL,
   `precioVenta` double NOT NULL,
   `precioCompra` double NOT NULL,
@@ -405,12 +441,14 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`idPro`, `nombreES`, `nombreEN`, `unidades`, `precioVenta`, `precioCompra`, `marca`, `modelo`, `serie`, `ubicacion`, `estado`, `partida`, `fechaCompra`, `enviar`, `vendible`, `mesesGarantia`, `peso`, `volumen`, `idSub`) VALUES
-(1, 'TV Sanyo 15 pulgadas', 'TV Sanyo 15 inches', 8, 150, 115.35, 'Sanyo', 'HR15', '12345678', 'Pasillo 3', 'ACTIVE', '', '2019-12-22', 1, 1, 12, 20, 0.016, 1),
-(2, 'TV Sony 28 pulgadas', 'TV Sony 28 inches', 0, 600, 421, 'Sony', 'RJ25', '', '', 'DISCONTINUED', NULL, NULL, 0, 1, 6, 5, 3.2, 1),
-(3, 'Papel higiénico Higienol', 'Toilet paper Higienol', 0, 1.5, 0.95, 'Higienol', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 2.5, 0.3, 0.09, 9),
-(4, 'Castañas Gallegas', 'Chestnuts from Galicia', 0, 2, 0.4, '', '', '', '', 'INACTIVE', NULL, NULL, 0, 1, 0, 0, 0, 4),
-(5, 'Monitor Samsung 27 pulgadas', 'Monitor Samsung 27 inches', 0, 250, 180, 'Samsung', 'Energy', '158159126', '', 'ACTIVE', NULL, NULL, 1, 1, 12, 2, 1, 16);
+INSERT INTO `producto` (`idPro`, `nombreES`, `nombreEN`, `nombrePT`, `nombreFR`, `nombreIT`, `nombreGE`, `nombreCA`, `nombreEU`, `unidades`, `precioVenta`, `precioCompra`, `marca`, `modelo`, `serie`, `ubicacion`, `estado`, `partida`, `fechaCompra`, `enviar`, `vendible`, `mesesGarantia`, `peso`, `volumen`, `idSub`) VALUES
+(1, 'TV Sanyo 15 pulgadas', 'TV Sanyo 15 inches', NULL, NULL, NULL, NULL, NULL, NULL, 8, 150, 115.35, 'Sanyo', 'HR15', '12345678', 'Pasillo 3', 'ACTIVE', NULL, '2019-12-22', 1, 1, 12, 20, 0.016, 1),
+(2, 'TV Sony 28 pulgadas', 'TV Sony 28 inches', NULL, NULL, NULL, NULL, NULL, NULL, 0, 600, 421, 'Sony', 'RJ25', '', '', 'DISCONTINUED', NULL, NULL, 0, 1, 6, 5, 3.2, 1),
+(3, 'Papel higiénico Higienol', 'Toilet paper Higienol', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1.5, 0.95, 'Higienol', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 2.5, 0.3, 0.09, 9),
+(4, 'Castañas Gallegas', 'Chestnuts from Galicia', NULL, NULL, NULL, NULL, NULL, NULL, 0, 2, 0.4, '', '', '', '', 'INACTIVE', NULL, NULL, 0, 1, 0, 0, 0, 4),
+(5, 'Monitor Samsung 27 pulgadas', 'Monitor Samsung 27 inches', NULL, NULL, NULL, NULL, NULL, NULL, 0, 250, 180, 'Samsung', 'Energy', '158159126', '', 'ACTIVE', NULL, NULL, 1, 1, 12, 2, 1, 16),
+(6, 'Estantería de madera color roble', 'Oak wood shelving', NULL, NULL, NULL, NULL, NULL, NULL, 0, 45, 32, 'Ikea', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 6, 0, 0, 15),
+(7, 'Taza Star Wars negra', 'Star Wars Mug Black', NULL, NULL, NULL, NULL, NULL, NULL, 0, 2, 0.7, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 0, 0, 0, 15);
 
 -- --------------------------------------------------------
 
@@ -460,7 +498,8 @@ INSERT INTO `producto_factura` (`idPro`, `idFac`, `cantidad`, `ivaProducto`, `po
 (1, 7, 5, 10, 0, 90, 99, 495, NULL),
 (1, 8, 1, 21, 0, 200, 242, 242, NULL),
 (1, 9, 1, 21, 0, 200, 242, 242, NULL),
-(1, 10, 5, 10, 0, 90, 99, 495, NULL);
+(1, 10, 5, 10, 0, 90, 99, 495, NULL),
+(3, 11, 2, 10, 0, 0.5, 0.55, 1.1, NULL);
 
 -- --------------------------------------------------------
 
@@ -493,6 +532,12 @@ CREATE TABLE `subcategoria` (
   `idSub` int(11) NOT NULL,
   `nombreES` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombreEN` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombrePT` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreFR` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreIT` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreGE` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreCA` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreEU` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `idCat` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -500,19 +545,19 @@ CREATE TABLE `subcategoria` (
 -- Volcado de datos para la tabla `subcategoria`
 --
 
-INSERT INTO `subcategoria` (`idSub`, `nombreES`, `nombreEN`, `idCat`) VALUES
-(1, 'Televisores', 'TV', 1),
-(2, 'USB 512GB', 'USB 512GB', 1),
-(3, 'Ordenador portátil Intel i7', 'Laptop Intel i7', 1),
-(4, 'Sillas', 'Chairs', 2),
-(5, 'Mesas', 'Tables', 2),
-(9, 'Unidad 3', 'Unit 3', 6),
-(10, 'Cargadores de móvil', 'Mobile chargers', 1),
-(12, 'Ruedas', 'Wheels', 7),
-(13, 'Puertas', 'Doors', 7),
-(14, 'Ambientadores', 'Air fresheners', 2),
-(15, '0 Otros', '0 Others', 8),
-(16, 'Pantallas de ordenador', 'Computer screens', 1);
+INSERT INTO `subcategoria` (`idSub`, `nombreES`, `nombreEN`, `nombrePT`, `nombreFR`, `nombreIT`, `nombreGE`, `nombreCA`, `nombreEU`, `idCat`) VALUES
+(1, 'Televisores', 'TV', NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(2, 'USB 512GB', 'USB 512GB', NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(3, 'Ordenador portátil Intel i7', 'Laptop Intel i7', NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(4, 'Sillas', 'Chairs', NULL, NULL, NULL, NULL, NULL, NULL, 2),
+(5, 'Mesas', 'Tables', NULL, NULL, NULL, NULL, NULL, NULL, 2),
+(9, 'Unidad 3', 'Unit 3', NULL, NULL, NULL, NULL, NULL, NULL, 6),
+(10, 'Cargadores de móvil', 'Mobile chargers', NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(12, 'Ruedas', 'Wheels', NULL, NULL, NULL, NULL, NULL, NULL, 7),
+(13, 'Puertas', 'Doors', NULL, NULL, NULL, NULL, NULL, NULL, 7),
+(14, 'Ambientadores', 'Air fresheners', NULL, NULL, NULL, NULL, NULL, NULL, 2),
+(15, '0 Otros', '0 Others', NULL, NULL, NULL, NULL, NULL, NULL, 8),
+(16, 'Pantallas de ordenador', 'Computer screens', NULL, NULL, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -558,7 +603,8 @@ INSERT INTO `usuario` (`idUsr`, `usuario`, `clave`, `habilitado`, `fechaCreacion
 (82, 'servicio11', '804097c51146ba177cdc406b06e21aef3f5bfafe91341cd1bb08bcd58517a488293c1f3b25c9fe0f', 1, '2019-12-09 13:42:37'),
 (83, 'usuario', 'b83a56592aaa0e1655049827bef098f1a37028f693e6d04b9fde3a362bb3981bd5292b70a1ff1bc5', 1, '2020-01-10 17:52:03'),
 (84, 'cliente', '246a26ea1d6494b3adeefb95c9b9746d5810c4514646a3c08d181b57e3b757c25456a21ff8399595', 1, '2020-01-12 23:08:26'),
-(85, 'admin', '156cbf1d8b26f4f8da18e962a73709404099f687cb3c77632e81ac7e976e3284cf1d2f59c0fa28ec', 1, '2020-01-13 19:54:04');
+(85, 'admin', '156cbf1d8b26f4f8da18e962a73709404099f687cb3c77632e81ac7e976e3284cf1d2f59c0fa28ec', 1, '2020-01-13 19:54:04'),
+(87, 'cami', 'dcc6c4147e32b298b468d229fa6237685c0ce3bf6316ecfaee9978ee0614f4200531ed7b0b949215', 1, '2020-01-27 00:16:01');
 
 -- --------------------------------------------------------
 
@@ -590,6 +636,7 @@ INSERT INTO `usuario_empresa` (`idUsr`, `idEmp`, `fechaCreacion`, `creadoPor`) V
 (55, 2, '2019-10-06', 'pepe'),
 (58, 2, '2019-10-06', 'pepe'),
 (58, 6, '2019-11-03', 'dora'),
+(61, 2, '2020-01-26', 'pepe'),
 (62, 2, '2019-10-09', 'pepe'),
 (63, 3, '2019-10-09', 'pepe'),
 (69, 6, '2019-11-03', 'dora');
@@ -643,7 +690,8 @@ INSERT INTO `usuario_rol` (`idUsr`, `idRol`, `fechaCreacion`, `creadoPor`) VALUE
 (82, 2, '2019-12-09', 'pepe'),
 (83, 2, '2020-01-10', 'pepe'),
 (84, 1, '2020-01-12', 'OWN USER'),
-(85, 3, '2020-01-13', 'pepe');
+(85, 3, '2020-01-13', 'pepe'),
+(87, 1, '2020-01-27', 'OWN USER');
 
 --
 -- Índices para tablas volcadas
@@ -792,7 +840,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `datospersonales`
 --
 ALTER TABLE `datospersonales`
-  MODIFY `idDatosPers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `idDatosPers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 --
 -- AUTO_INCREMENT de la tabla `direccion`
 --
@@ -802,7 +850,7 @@ ALTER TABLE `direccion`
 -- AUTO_INCREMENT de la tabla `direccionempresa`
 --
 ALTER TABLE `direccionempresa`
-  MODIFY `idDirEmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idDirEmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
@@ -812,22 +860,22 @@ ALTER TABLE `empresa`
 -- AUTO_INCREMENT de la tabla `estado`
 --
 ALTER TABLE `estado`
-  MODIFY `idEst` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idEst` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `idFac` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idFac` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `factura_estado`
 --
 ALTER TABLE `factura_estado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT de la tabla `formapago`
 --
 ALTER TABLE `formapago`
-  MODIFY `idFor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idFor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `paises`
 --
@@ -837,7 +885,7 @@ ALTER TABLE `paises`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
@@ -852,7 +900,7 @@ ALTER TABLE `subcategoria`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idUsr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `idUsr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 --
 -- Restricciones para tablas volcadas
 --

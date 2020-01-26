@@ -84,16 +84,16 @@ public class EstadoDAOImpl implements EstadoDAO {
 			return update(estado);
 		} else {
 			ModelEstado me = converterEstado.convert(estado);
-			String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN) VALUES (?, ?)";
-			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN());
+			String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU());
 		}
 	}
 
 	@Override
 	public int update(Estado estado) {
 		ModelEstado me = converterEstado.convert(estado);
-		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=? " + "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getIdEst());
+		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=? " + "WHERE " + KEY + "=?";
+		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getIdEst());
 	}
 
 	@Override
@@ -122,6 +122,12 @@ public class EstadoDAOImpl implements EstadoDAO {
 		me.setIdEst(rs.getInt("idEst"));
 		me.setNombreES(rs.getString("nombreES"));
 		me.setNombreEN(rs.getString("nombreEN"));
+		me.setNombrePT(rs.getString("nombrePT"));
+		me.setNombreFR(rs.getString("nombreFR"));
+		me.setNombreIT(rs.getString("nombreIT"));
+		me.setNombreGE(rs.getString("nombreGE"));
+		me.setNombreCA(rs.getString("nombreCA"));
+		me.setNombreEU(rs.getString("nombreEU"));
 		return me;
 	}
 }
