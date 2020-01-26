@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-01-2020 a las 15:55:55
+-- Tiempo de generación: 26-01-2020 a las 16:52:02
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -145,7 +145,7 @@ CREATE TABLE `direccion` (
   `cp` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   `provincia` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ciudad` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `pais` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pais_idPais` int(30) NOT NULL,
   `idDatosPers` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -153,17 +153,17 @@ CREATE TABLE `direccion` (
 -- Volcado de datos para la tabla `direccion`
 --
 
-INSERT INTO `direccion` (`idDir`, `tipoVia`, `nombreVia`, `numero`, `resto`, `cp`, `provincia`, `ciudad`, `pais`, `idDatosPers`) VALUES
-(7, 'Calle', 'Menor', '2', NULL, '28005', 'Madrid', 'Madrid', 'España', 1),
-(11, 'Calle', 'Ana de Austria', '50', NULL, '28050', 'Madrid', 'Madrid', 'España', 4),
-(12, 'Avenida', 'Niceto Alcalá Zamora', '200', 'Urbanización El sol naciente', '28050', 'Madrid', 'Madrid', 'España', 4),
-(13, 'Plaza', 'Hidalgo', '3', NULL, '99009', 'Vallladolid', 'Valladolid', 'España', 1),
-(15, 'Calle', 'Martín', '23', NULL, '28050', 'Madrid', 'Sanchinaroo', 'España', 3),
-(16, 'Calle', 'Américo Castro', '100', '2ºB', '28050', 'Madrid', 'Madrid', 'Spain', 32),
-(18, 'Calle', 'Américo Castro 104 2ºB', '', '', '28050', 'Madrid', 'Madrid', 'España', 34),
-(20, 'Plaza', 'Mayor', '1', '', '28001', 'Madrid', 'Madrid', 'Italy', 32),
-(21, 'Avenida', 'Velazquez', '35', '', '28027', 'Madrid', 'Madrid', 'España', 45),
-(22, 'Paseo', 'Extremadura', '30', '', '28024', '', 'Madrid', 'España', 47);
+INSERT INTO `direccion` (`idDir`, `tipoVia`, `nombreVia`, `numero`, `resto`, `cp`, `provincia`, `ciudad`, `pais_idPais`, `idDatosPers`) VALUES
+(7, 'Calle', 'Menor', '2', NULL, '28005', 'Madrid', 'Madrid', 0, 1),
+(11, 'Calle', 'Ana de Austria', '50', NULL, '28050', 'Madrid', 'Madrid', 2, 4),
+(12, 'Avenida', 'Niceto Alcalá Zamora', '200', 'Urbanización El sol naciente', '28050', 'Madrid', 'Madrid', 1, 4),
+(13, 'Plaza', 'Hidalgo', '3', NULL, '99009', 'Vallladolid', 'Valladolid', 1, 1),
+(15, 'Calle', 'Martín', '23', NULL, '28050', 'Madrid', 'Sanchinaroo', 0, 3),
+(16, 'Calle', 'Américo Castro', '100', '2ºB', '28050', 'Madrid', 'Madrid', 0, 32),
+(18, 'Calle', 'Américo Castro 104 2ºB', '', '', '28050', 'Madrid', 'Madrid', 0, 34),
+(20, 'Plaza', 'Mayor', '1', '', '28001', 'Madrid', 'Madrid', 0, 32),
+(21, 'Avenida', 'Velazquez', '35', '', '28027', 'Madrid', 'Madrid', 0, 45),
+(22, 'Paseo', 'Extremadura', '30', '', '28024', '', 'Madrid', 0, 47);
 
 -- --------------------------------------------------------
 
@@ -797,7 +797,7 @@ ALTER TABLE `datospersonales`
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `idDir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idDir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT de la tabla `direccionempresa`
 --

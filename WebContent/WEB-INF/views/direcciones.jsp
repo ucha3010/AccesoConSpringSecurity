@@ -30,6 +30,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
+	<fmt:message key="language.name" var="nameColSelect"/>
 	<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 		<div class="d-flex">
 			<div class="mr-auto p-2">
@@ -90,7 +91,7 @@
 						<td><c:out value="${direccion.cp}" /></td>	
 						<td><c:out value="${direccion.provincia}" /></td>	
 						<td><c:out value="${direccion.ciudad}" /></td>
-						<td><c:out value="${direccion.pais}" /></td>
+						<td><c:out value="${direccion.pais[nameColSelect]}" /></td>
 				    </tr>
 				</c:forEach>
 			</tbody>

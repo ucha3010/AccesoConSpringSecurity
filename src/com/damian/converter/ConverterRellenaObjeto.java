@@ -129,8 +129,12 @@ public class ConverterRellenaObjeto {
 			u.setUsuarioEmpresa(ueList);
 		}
 		u.setUsuarioRol(usuarioRolDAO.findByIdUsrModel(dp.getUsuario().getIdUsr()));
+		if(dp.getNacionalidad() != null) {
+			dp.setNacionalidad(paisDAO.findById(dp.getNacionalidad().getIdPais()));
+		}
 		dp.setUsuario(u);
 		d.setDatosPersonales(dp);
+		d.setPais(paisDAO.findById(d.getPais().getIdPais()));
 
 	}
 

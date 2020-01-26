@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import com.damian.dao.model.ModelDireccion;
 import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
+import com.damian.pojo.Pais;
 
 @Component
 public class ConverterDireccion {
@@ -33,7 +34,9 @@ public class ConverterDireccion {
 		d.setCp(md.getCp());
 		d.setProvincia(md.getProvincia());
 		d.setCiudad(md.getCiudad());
-		d.setPais(md.getPais());
+		Pais pais = new Pais();
+		pais.setIdPais(md.getPais_idPais());
+		d.setPais(pais);
 		DatosPersonales datosPersonales = new DatosPersonales();
 		datosPersonales.setIdDatosPers(md.getIdDatosPers());
 		d.setDatosPersonales(datosPersonales);
@@ -53,7 +56,9 @@ public class ConverterDireccion {
 		md.setCp(d.getCp());
 		md.setProvincia(d.getProvincia());
 		md.setCiudad(d.getCiudad());
-		md.setPais(d.getPais());
+		if (d.getPais() != null) {
+			md.setPais_idPais(d.getPais().getIdPais());
+		}
 		md.setIdDatosPers(d.getDatosPersonales().getIdDatosPers());
 
 		return md;

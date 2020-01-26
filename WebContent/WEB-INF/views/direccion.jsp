@@ -140,9 +140,10 @@
 			</div>
 			<div class="col-xs-12 col-sm-4">
 				<label for="pais"><fmt:message key="label.Country" /></label>
-	        	<sf:select path="pais" class="form-control" id="pais">
-<%-- 	            	<sf:option value="empty" label="${selectCountry}" /> --%>
-	            	<sf:options items="${paises}" itemValue="${itemSelect}" itemLabel="${itemSelect}" />
+	        	<sf:select path="pais.idPais" class="form-control" id="pais">
+	            	<c:forEach items="${paises}" var="country">
+	            		<sf:option value="${country.idPais}" label="${country[itemSelect]}" />
+	            	</c:forEach>
 	        	</sf:select>
 			</div>	
 		</div>

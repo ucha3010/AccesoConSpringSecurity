@@ -17,7 +17,7 @@ public class Direccion implements Serializable {
 	private String cp;
 	private String provincia;
 	private String ciudad;
-	private String pais;
+	private Pais pais;
 	private DatosPersonales datosPersonales;
 
 	public Direccion() {
@@ -37,7 +37,7 @@ public class Direccion implements Serializable {
 	 * @param datosPersonales
 	 */
 	public Direccion(int idDir, String tipoVia, String nombreVia, String numero, String resto, String cp,
-			String provincia, String ciudad, String pais, DatosPersonales datosPersonales) {
+			String provincia, String ciudad, Pais pais, DatosPersonales datosPersonales) {
 		this.idDir = idDir;
 		this.tipoVia = tipoVia;
 		this.nombreVia = nombreVia;
@@ -173,7 +173,7 @@ public class Direccion implements Serializable {
 	/**
 	 * @return the pais
 	 */
-	public String getPais() {
+	public Pais getPais() {
 		return pais;
 	}
 
@@ -181,7 +181,7 @@ public class Direccion implements Serializable {
 	 * @param pais
 	 *            the pais to set
 	 */
-	public void setPais(String pais) {
+	public void setPais(Pais pais) {
 		this.pais = pais;
 	}
 

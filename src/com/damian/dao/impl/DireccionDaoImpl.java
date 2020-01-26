@@ -59,14 +59,14 @@ public class DireccionDaoImpl implements DireccionDao {
 		ModelDireccion md = converterDireccion.convert(direccion);
 		if (direccion.getIdDir() == 0) {
 			String sql = "INSERT INTO " + TABLA + " (tipoVia, nombreVia, numero, resto, "
-					+ "cp, provincia, ciudad, pais, idDatosPers)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "cp, provincia, ciudad, pais_idPais, idDatosPers)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(sql, md.getTipoVia(), md.getNombreVia(), md.getNumero(), md.getResto(), md.getCp(),
-					md.getProvincia(), md.getCiudad(), md.getPais(), md.getIdDatosPers());
+					md.getProvincia(), md.getCiudad(), md.getPais_idPais(), md.getIdDatosPers());
 		} else {
 			String sql = "UPDATE " + TABLA + " SET tipoVia=?, nombreVia=?, numero=?, resto=?, cp=?, provincia=?, "
-					+ "ciudad=?, pais=?, idDatosPers=? WHERE " + KEY + "=?";
+					+ "ciudad=?, pais_idPais=?, idDatosPers=? WHERE " + KEY + "=?";
 			jdbcTemplate.update(sql, md.getTipoVia(), md.getNombreVia(), md.getNumero(), md.getResto(), md.getCp(),
-					md.getProvincia(), md.getCiudad(), md.getPais(), md.getIdDatosPers(), md.getIdDir());
+					md.getProvincia(), md.getCiudad(), md.getPais_idPais(), md.getIdDatosPers(), md.getIdDir());
 
 		}
 	}
@@ -102,7 +102,7 @@ public class DireccionDaoImpl implements DireccionDao {
 		md.setCp(rs.getString("cp"));
 		md.setProvincia(rs.getString("provincia"));
 		md.setCiudad(rs.getString("ciudad"));
-		md.setPais(rs.getString("pais"));
+		md.setPais_idPais(rs.getInt("pais_idPais"));
 		md.setIdDatosPers(rs.getInt("idDatosPers"));
 		return md;
 	}
