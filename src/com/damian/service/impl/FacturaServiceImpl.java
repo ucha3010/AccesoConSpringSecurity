@@ -108,6 +108,17 @@ public class FacturaServiceImpl implements FacturaService {
 		return facturaDAO.findByIdList(id);
 	}
 
+	@Override
+	public List<Factura> findByIdEstList(int idEst) {
+		List<Factura> facturas = facturaDAO.findByIdEstModel(idEst);
+		Estado estado = estadoDAO.findById(idEst);
+		for (Factura factura : facturas) {
+			factura.setEstado(estado);
+			factura.setFormaPago(formaPagoDAO.findById(factura.getFormaPago().getIdFor()));
+		}
+		return facturas;
+	}
+
 	private void saveFacturaEstado(Factura factura, HttpServletRequest request) {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request

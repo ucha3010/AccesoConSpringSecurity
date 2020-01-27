@@ -75,6 +75,7 @@
 								<c:set var="count" value="${count + 2}" scope="page"/>
 							</sec:authorize>
 							<th onclick="sortTable(${count})"><fmt:message key="label.states" /></th>
+							<th class="width-100"><fmt:message key="label.Extras" /></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -93,6 +94,11 @@
 									</td>
 								</sec:authorize>
 								<td><c:out value="${estado[nameColSelect]}" /></td>
+								<td class="sin_padding">
+									<a title="<fmt:message key="label.Bills" />" href='<c:url value='/factura/filteredEstado/${estado.idEst}' />'>
+										<img src='<c:url value="/resources/imgs/factura.png"/>' class="margin-left-5porciento width-35">
+									</a>
+								</td>
 						    </tr>
 						</c:forEach>
 					</tbody>

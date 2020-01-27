@@ -38,6 +38,16 @@ public class FacturaController {
 	@RequestMapping("/factura/filtered/{idFac}")
 	public ModelAndView getFiltered(ModelAndView modelAndView, @PathVariable("idFac") int idFac) {
 		modelAndView.addObject("facturas", facturaService.findByIdList(idFac));
+		modelAndView.addObject("estados", estadoService.findAll());
+		modelAndView.addObject("estoy", "factura");
+		modelAndView.setViewName("facturas");
+		return modelAndView;
+	}
+
+	@RequestMapping("/factura/filteredEstado/{idEst}")
+	public ModelAndView getFilteredEstado(ModelAndView modelAndView, @PathVariable("idEst") int idEst) {
+		modelAndView.addObject("facturas", facturaService.findByIdEstList(idEst));
+		modelAndView.addObject("estados", estadoService.findAll());
 		modelAndView.addObject("estoy", "factura");
 		modelAndView.setViewName("facturas");
 		return modelAndView;

@@ -55,7 +55,9 @@
 				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/rol/0'/>"'>
 					<fmt:message key="Add.rol" />
 				</button>
-			</div>		
+			</div>	
+			<div class="p-2">
+			</div>	
 		</div>
 	</sec:authorize>
 	<div class="form-row">		

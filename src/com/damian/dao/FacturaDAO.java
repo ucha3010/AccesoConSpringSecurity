@@ -17,9 +17,9 @@ public interface FacturaDAO {
 	public int update(Factura factura);
 
 	public int delete(int id);
-	
+
 	public List<Factura> findByIdEstModel(int idEst);
-	
+
 	public List<Factura> findByIdForModel(int idFor);
 
 	public int getMaxId();

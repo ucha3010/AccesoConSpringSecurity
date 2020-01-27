@@ -87,9 +87,10 @@ public class FacturaDAOImpl implements FacturaDAO {
 			String sql = "INSERT INTO " + TABLA
 					+ " (compra, ivaTotal, ivaImporteTotal, descuentoTotal, descuentoImporteTotal, importeTotal, fechaCompra, fechaEntrega, idEst, direccionEntrega, observaciones, idFor, creadoPor) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(), mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(),
-					mf.getImporteTotal(), mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(),
-					mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(), mf.getCreadoPor());
+			return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
+					mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(), mf.getFechaCompra(),
+					mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(),
+					mf.getCreadoPor());
 		}
 	}
 
@@ -99,9 +100,10 @@ public class FacturaDAOImpl implements FacturaDAO {
 		String sql = "UPDATE " + TABLA
 				+ " SET compra=?, ivaTotal=?, ivaImporteTotal=?, descuentoTotal=?, descuentoImporteTotal=?, importeTotal=?, fechaCompra=?, fechaEntrega=?, idEst=?, direccionEntrega=?, observaciones=?, idFor=?, creadoPor=? "
 				+ "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(), mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(),
-				mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(),
-				mf.getObservaciones(), mf.getIdFor(), mf.getCreadoPor(), mf.getIdFac());
+		return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
+				mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(), mf.getFechaCompra(),
+				mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(),
+				mf.getCreadoPor(), mf.getIdFac());
 	}
 
 	@Override
