@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.damian.dao.CategoriaDAO;
+import com.damian.dao.CuotaDAO;
 import com.damian.dao.DatosPersonalesDAO;
 import com.damian.dao.DireccionDao;
 import com.damian.dao.DireccionEmpresaDAO;
@@ -22,6 +23,7 @@ import com.damian.dao.UsuarioDAO;
 import com.damian.dao.UsuarioEmpresaDAO;
 import com.damian.dao.UsuarioRolDAO;
 import com.damian.dao.model.ModelCategoria;
+import com.damian.dao.model.ModelCuota;
 import com.damian.dao.model.ModelDatosPersonales;
 import com.damian.dao.model.ModelDireccion;
 import com.damian.dao.model.ModelDireccionEmpresa;
@@ -34,6 +36,7 @@ import com.damian.dao.model.ModelRol;
 import com.damian.dao.model.ModelSubcategoria;
 import com.damian.dao.model.ModelUsuario;
 import com.damian.pojo.Categoria;
+import com.damian.pojo.Cuota;
 import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
 import com.damian.pojo.DireccionEmpresa;
@@ -58,6 +61,9 @@ public class ConverterRellenaObjeto {
 
 	@Autowired
 	private CategoriaDAO categoriaDAO;
+	
+	@Autowired
+	private CuotaDAO cuotaDAO;
 
 	@Autowired
 	private DireccionDao direccionDao;
@@ -251,6 +257,9 @@ public class ConverterRellenaObjeto {
 		f.setProductoFacturaList(productoFacturaDAO.findByIdFacModel(mf.getIdFac()));
 		f.setEstado(estadoDAO.findById(mf.getIdEst()));
 		f.setFormaPago(formaPagoDAO.findById(mf.getIdFor()));
+		if(mf.getIdCuo() != 0) {
+			f.setCuota(cuotaDAO.findById(mf.getIdCuo()));
+		}
 
 	}
 
@@ -267,6 +276,12 @@ public class ConverterRellenaObjeto {
 		}
 		s.setProductos(productoDAO.findByIdSubModel(ms.getIdSub()));
 
+	}
+
+	public void rellenaCuota(Cuota c, ModelCuota mc) {
+		
+		c.setFacturas(facturaDAO.findByIdCuo(mc.getIdCuo()));
+		
 	}
 
 }

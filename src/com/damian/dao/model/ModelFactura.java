@@ -18,6 +18,10 @@ public class ModelFactura {
 	private String observaciones;
 	private int idFor;
 	private String creadoPor;
+	private int idCuo;
+	private int numeroCuota;
+	private double interesCuotaImporte;
+	private double importeCuotaTotal;
 
 	public ModelFactura() {
 
@@ -38,10 +42,15 @@ public class ModelFactura {
 	 * @param observaciones
 	 * @param idFor
 	 * @param creadoPor
+	 * @param idCuo
+	 * @param numeroCuota
+	 * @param interesCuotaImporte
+	 * @param importeCuotaTotal
 	 */
 	public ModelFactura(int idFac, boolean compra, double ivaTotal, double ivaImporteTotal, double descuentoTotal,
 			double descuentoImporteTotal, double importeTotal, Date fechaCompra, Date fechaEntrega, int idEst,
-			String direccionEntrega, String observaciones, int idFor, String creadoPor) {
+			String direccionEntrega, String observaciones, int idFor, String creadoPor, int idCuo, int numeroCuota,
+			double interesCuotaImporte, double importeCuotaTotal) {
 		this.idFac = idFac;
 		this.compra = compra;
 		this.ivaTotal = ivaTotal;
@@ -56,6 +65,10 @@ public class ModelFactura {
 		this.observaciones = observaciones;
 		this.idFor = idFor;
 		this.creadoPor = creadoPor;
+		this.idCuo = idCuo;
+		this.numeroCuota = numeroCuota;
+		this.interesCuotaImporte = interesCuotaImporte;
+		this.importeCuotaTotal = importeCuotaTotal;
 	}
 
 	/**
@@ -268,6 +281,66 @@ public class ModelFactura {
 		this.creadoPor = creadoPor;
 	}
 
+	/**
+	 * @return the idCuo
+	 */
+	public int getIdCuo() {
+		return idCuo;
+	}
+
+	/**
+	 * @param idCuo
+	 *            the idCuo to set
+	 */
+	public void setIdCuo(int idCuo) {
+		this.idCuo = idCuo;
+	}
+
+	/**
+	 * @return the numeroCuota
+	 */
+	public int getNumeroCuota() {
+		return numeroCuota;
+	}
+
+	/**
+	 * @param numeroCuota
+	 *            the numeroCuota to set
+	 */
+	public void setNumeroCuota(int numeroCuota) {
+		this.numeroCuota = numeroCuota;
+	}
+
+	/**
+	 * @return the interesCuotaImporte
+	 */
+	public double getInteresCuotaImporte() {
+		return interesCuotaImporte;
+	}
+
+	/**
+	 * @param interesCuotaImporte
+	 *            the interesCuotaImporte to set
+	 */
+	public void setInteresCuotaImporte(double interesCuotaImporte) {
+		this.interesCuotaImporte = interesCuotaImporte;
+	}
+
+	/**
+	 * @return the importeCuotaTotal
+	 */
+	public double getImporteCuotaTotal() {
+		return importeCuotaTotal;
+	}
+
+	/**
+	 * @param importeCuotaTotal
+	 *            the importeCuotaTotal to set
+	 */
+	public void setImporteCuotaTotal(double importeCuotaTotal) {
+		this.importeCuotaTotal = importeCuotaTotal;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -279,7 +352,9 @@ public class ModelFactura {
 				+ ivaImporteTotal + ", descuentoTotal=" + descuentoTotal + ", descuentoImporteTotal="
 				+ descuentoImporteTotal + ", importeTotal=" + importeTotal + ", fechaCompra=" + fechaCompra
 				+ ", fechaEntrega=" + fechaEntrega + ", idEst=" + idEst + ", direccionEntrega=" + direccionEntrega
-				+ ", observaciones=" + observaciones + ", idFor=" + idFor + ", creadoPor=" + creadoPor + "]";
+				+ ", observaciones=" + observaciones + ", idFor=" + idFor + ", creadoPor=" + creadoPor + ", idCuo="
+				+ idCuo + ", numeroCuota=" + numeroCuota + ", interesCuotaImporte=" + interesCuotaImporte
+				+ ", importeCuotaTotal=" + importeCuotaTotal + "]";
 	}
 
 }

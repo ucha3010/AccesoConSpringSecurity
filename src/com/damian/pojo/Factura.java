@@ -20,40 +20,13 @@ public class Factura {
 	private List<ProductoFactura> productoFacturaList;
 	private Estado estado;
 	private FormaPago formaPago;
+	private Cuota cuota;
+	private int numeroCuota;
+	private double interesCuotaImporte;
+	private double importeCuotaTotal;
 
 	public Factura() {
 
-	}
-
-	/**
-	 * @param idFac
-	 * @param compra
-	 * @param ivaTotal
-	 * @param ivaImporteTotal
-	 * @param descuentoTotal
-	 * @param descuentoImporteTotal
-	 * @param importeTotal
-	 * @param fechaCompra
-	 * @param fechaEntrega
-	 * @param direccionEntrega
-	 * @param observaciones
-	 * @param creadoPor
-	 */
-	public Factura(int idFac, boolean compra, double ivaTotal, double ivaImporteTotal, double descuentoTotal,
-			double descuentoImporteTotal, double importeTotal, Date fechaCompra, Date fechaEntrega,
-			String direccionEntrega, String observaciones, String creadoPor) {
-		this.idFac = idFac;
-		this.compra = compra;
-		this.ivaTotal = ivaTotal;
-		this.ivaImporteTotal = ivaImporteTotal;
-		this.descuentoTotal = descuentoTotal;
-		this.descuentoImporteTotal = descuentoImporteTotal;
-		this.importeTotal = importeTotal;
-		this.fechaCompra = fechaCompra;
-		this.fechaEntrega = fechaEntrega;
-		this.direccionEntrega = direccionEntrega;
-		this.observaciones = observaciones;
-		this.creadoPor = creadoPor;
 	}
 
 	/**
@@ -281,6 +254,66 @@ public class Factura {
 		this.formaPago = formaPago;
 	}
 
+	/**
+	 * @return the cuota
+	 */
+	public Cuota getCuota() {
+		return cuota;
+	}
+
+	/**
+	 * @param cuota
+	 *            the cuota to set
+	 */
+	public void setCuota(Cuota cuota) {
+		this.cuota = cuota;
+	}
+
+	/**
+	 * @return the numeroCuota
+	 */
+	public int getNumeroCuota() {
+		return numeroCuota;
+	}
+
+	/**
+	 * @param numeroCuota
+	 *            the numeroCuota to set
+	 */
+	public void setNumeroCuota(int numeroCuota) {
+		this.numeroCuota = numeroCuota;
+	}
+
+	/**
+	 * @return the interesCuotaImporte
+	 */
+	public double getInteresCuotaImporte() {
+		return interesCuotaImporte;
+	}
+
+	/**
+	 * @param interesCuotaImporte
+	 *            the interesCuotaImporte to set
+	 */
+	public void setInteresCuotaImporte(double interesCuotaImporte) {
+		this.interesCuotaImporte = interesCuotaImporte;
+	}
+
+	/**
+	 * @return the importeCuotaTotal
+	 */
+	public double getImporteCuotaTotal() {
+		return importeCuotaTotal;
+	}
+
+	/**
+	 * @param importeCuotaTotal
+	 *            the importeCuotaTotal to set
+	 */
+	public void setImporteCuotaTotal(double importeCuotaTotal) {
+		this.importeCuotaTotal = importeCuotaTotal;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -292,7 +325,9 @@ public class Factura {
 				+ ivaImporteTotal + ", descuentoTotal=" + descuentoTotal + ", descuentoImporteTotal="
 				+ descuentoImporteTotal + ", importeTotal=" + importeTotal + ", fechaCompra=" + fechaCompra
 				+ ", fechaEntrega=" + fechaEntrega + ", direccionEntrega=" + direccionEntrega + ", observaciones="
-				+ observaciones + ", creadoPor=" + creadoPor + ", formaPago=" + formaPago + "]";
+				+ observaciones + ", creadoPor=" + creadoPor + ", estado=" + estado + ", formaPago=" + formaPago
+				+ ", cuota=" + cuota + ", numeroCuota=" + numeroCuota + ", interesCuotaImporte=" + interesCuotaImporte
+				+ ", importeCuotaTotal=" + importeCuotaTotal + "]";
 	}
 
 }

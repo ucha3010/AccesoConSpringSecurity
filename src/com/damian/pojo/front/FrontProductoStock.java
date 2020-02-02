@@ -1,5 +1,7 @@
 package com.damian.pojo.front;
 
+import java.util.List;
+
 public class FrontProductoStock {
 
 	// Producto
@@ -22,6 +24,10 @@ public class FrontProductoStock {
 	// Factura
 	private boolean compra;
 	private String observaciones;
+	private double comisionAperturaPor;
+	private double interesPor;
+	private int cantidadCuotas;
+	private List<FrontCuota> cuotas;
 
 	public FrontProductoStock() {
 
@@ -252,6 +258,66 @@ public class FrontProductoStock {
 		this.observaciones = observaciones;
 	}
 
+	/**
+	 * @return the comisionAperturaPor
+	 */
+	public double getComisionAperturaPor() {
+		return comisionAperturaPor;
+	}
+
+	/**
+	 * @param comisionAperturaPor
+	 *            the comisionAperturaPor to set
+	 */
+	public void setComisionAperturaPor(double comisionAperturaPor) {
+		this.comisionAperturaPor = comisionAperturaPor;
+	}
+
+	/**
+	 * @return the interesPor
+	 */
+	public double getInteresPor() {
+		return interesPor;
+	}
+
+	/**
+	 * @param interesPor
+	 *            the interesPor to set
+	 */
+	public void setInteresPor(double interesPor) {
+		this.interesPor = interesPor;
+	}
+
+	/**
+	 * @return the cantidadCuotas
+	 */
+	public int getCantidadCuotas() {
+		return cantidadCuotas;
+	}
+
+	/**
+	 * @param cantidadCuotas
+	 *            the cantidadCuotas to set
+	 */
+	public void setCantidadCuotas(int cantidadCuotas) {
+		this.cantidadCuotas = cantidadCuotas;
+	}
+
+	/**
+	 * @return the cuotas
+	 */
+	public List<FrontCuota> getCuotas() {
+		return cuotas;
+	}
+
+	/**
+	 * @param cuotas
+	 *            the cuotas to set
+	 */
+	public void setCuotas(List<FrontCuota> cuotas) {
+		this.cuotas = cuotas;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -263,6 +329,7 @@ public class FrontProductoStock {
 				+ ", nombrePT=" + nombrePT + ", nombreFR=" + nombreFR + ", nombreIT=" + nombreIT + ", nombreGE="
 				+ nombreGE + ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + ", unidades=" + unidades
 				+ ", cantidad=" + cantidad + ", iva=" + iva + ", precioFinal=" + precioFinal + ", compra=" + compra
-				+ ", observaciones=" + observaciones + "]";
+				+ ", observaciones=" + observaciones + ", comisionAperturaPor=" + comisionAperturaPor + ", interesPor="
+				+ interesPor + ", cantidadCuotas=" + cantidadCuotas + ", cuotas=" + cuotas + "]";
 	}
 }

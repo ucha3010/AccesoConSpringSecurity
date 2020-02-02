@@ -62,14 +62,115 @@
 			}
 			document.getElementById("cantidad").max=max;
 		}
+		
+		var primeraCuota;
+		var sumarUltimaCuota;
+		
+		function cuotas(cb) {
+			var selectCuotas = document.getElementById("cantidadCuotas");
+			var detalleCuotas = document.getElementById("detalleCuotas");
+			
+			if(cb.checked){
+				selectCuotas.style.visibility = "visible";
+				detalleCuotas.style.visibility = "visible";
+				var cuotasSel = document.getElementById("cuotasSel");
+				cargarCuotas(cuotasSel.value);
+			} else {
+				selectCuotas.style.visibility = "hidden";
+				detalleCuotas.style.visibility = "hidden";
+			}
+		}
+		function cargarCuotas() {
+			var num = document.getElementById("cuotasSel").value;
+			sumarUltimaCuota = 0;
+			primeraCuota = 0;
+			var datos = '';
+			var datosCuotas = document.getElementById("datosCuotas");
+			var cuotasMedio = rellenarCuotas(num);
+			
+			for (var i = 0; i < num; i++) {
+				datos = datos + 
+				'<fmt:message key="label.Installment" /> ' + (i+1) + ':<br/><input type="hidden" name="cuotas['+i+'].numeroCuota" value="'+(i+1)+'" />' +
+				'<fmt:message key="label.Date" /> <input type="date" name="cuotas['+i+'].fechaCompra" value="'+ calculaFecha(i) + '" /><br/>' +
+				'<fmt:message key="label.Amount" /> <input type="text" name="cuotas['+i+'].importeTotal" class="width-80-align-rigth"';
+				if(i == 0) {
+					if(num == 1) {
+						datos = datos + ' value="' + (cuotasMedio + sumarUltimaCuota + primeraCuota).toFixed(2) + '" ';						
+					} else {
+						datos = datos + ' value="' + (cuotasMedio + primeraCuota).toFixed(2) + '" ';							
+					}
+				} else if(i < num - 1){
+					datos = datos + ' value="' + cuotasMedio.toFixed(2) + '" ';
+				} else {
+					datos = datos + ' value="' + (cuotasMedio + sumarUltimaCuota).toFixed(2) + '" ';
+				}
+				
+				datos = datos + ' /><br/><br/>';
+				
+			}
+			datosCuotas.innerHTML=datos;
+		}
+		function rellenarCuotas(num) {
+			
+			var precioFinal = document.getElementById("precioFinal").value;
+			var comisionApertura = document.getElementById("comision").value;
+			var tae = document.getElementById("tae").value;
+			
+			if(comisionApertura != 0){
+				primeraCuota = (precioFinal * comisionApertura) / 100;
+			}
+			
+			var cuotaMensual;
+			if(precioFinal == 0){
+				cuotaMensual = 0.0;
+			} else if (precioFinal != 0 && tae == 0) {
+				cuotaMensual = precioFinal / num;
+			} else {
+				var tasaMensual = ((1 + (tae * 0.01)) ** (1/12) ) - 1;
+				cuotaMensual = (tasaMensual * precioFinal) / (1 - ((1 + tasaMensual) ** (-num)));
+			}
+			var residuo = cuotaMensual % 1;
+			residuo *= 100;
+			residuo = residuo % 1;
+			var residuoRestar = residuo * 0.01;
+			cuotaMensual -= residuoRestar;
+			var residuoSumar = residuo * num;
+			sumarUltimaCuota = Math.round(residuoSumar);
+			sumarUltimaCuota *= 0.01;
+		
+			return cuotaMensual;
+			
+		}
+		
+		function calculaFecha(num) {
+
+			var f = new Date();
+			var mes = f.getMonth()+1+num+1;
+			var anio = f.getFullYear();
+			while(mes > 12) {
+				mes -= 12;
+			    anio += 1;
+			}
+			  
+			return anio + '-' + rellenaCerosIzquierda(mes,2) + '-01';
+		}
+
+		function rellenaCerosIzquierda(entrada,cantidad){
+			var salida = entrada + "";
+			while (cantidad > salida.length) {
+		    	salida = "0" + salida;
+		    }
+		    return salida;
+		}
 	</script>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
 	<fmt:message key="language.name" var="nameColSelect"/>
-	<sf:form method="post" action="${pageContext.request.contextPath}/producto/stock/save" modelAttribute="frontProductoStock" onsubmit="return validar()">
+	<sf:form method="post" action="${pageContext.request.contextPath}/producto/stock/save" modelAttribute="frontProductoStock" onsubmit="return validar()" class="d-inline">
 		<sf:hidden path="idPro"/>
 		<sf:hidden path="unidades"/>
+		
 		<div class="form-row">	
 			<div class="col-sm-3">
 			</div>	
@@ -87,73 +188,97 @@
 		</div>
 		<br/>
 		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<div class="custom-control custom-radio custom-control-inline">
-					<sf:radiobutton id="customRadioInline2" name="customRadioInline1" class="custom-control-input" path="compra" value="true" onclick="mensaje(this.value,9999)"/>
-					<label class="custom-control-label" for="customRadioInline2"><fmt:message key="label.Add" /></label>
+		<div class="d-inline-table w-70">
+			<div class="form-row">		
+				<div class="col-sm-2">
 				</div>
-				<div class="col-sm-4custom-control custom-radio custom-control-inline margin-left-5porciento">
-					<sf:radiobutton id="customRadioInline1" name="customRadioInline1" class="custom-control-input" path="compra" value="false" onclick="mensaje(this.value,${frontProductoStock.unidades})"/>
-					<label class="custom-control-label" for="customRadioInline1"><fmt:message key="label.Remove" /></label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="custom-control custom-radio custom-control-inline">
+						<sf:radiobutton id="customRadioInline2" name="customRadioInline1" class="custom-control-input" path="compra" value="true" onclick="mensaje(this.value,9999)"/>
+						<label class="custom-control-label" for="customRadioInline2"><fmt:message key="label.Add" /></label>
+					</div>
+					<div class="custom-control custom-radio custom-control-inline margin-left-5porciento">
+						<sf:radiobutton id="customRadioInline1" name="customRadioInline1" class="custom-control-input" path="compra" value="false" onclick="mensaje(this.value,${frontProductoStock.unidades})"/>
+						<label class="custom-control-label" for="customRadioInline1"><fmt:message key="label.Remove" /></label>
+					</div>
+					<div class="custom-control-inline margin-left-5porciento">
+						<input type='checkbox' class="form-check-input" onclick='cuotas(this);' id="cuotasCheck">
+    					<label class="form-check-label" for="cuotasCheck"><fmt:message key="label.Installments" /></label>
+    					<div id="cantidadCuotas" style="visibility:hidden;" class="margin-left-5porciento">
+				        	<sf:select path="cantidadCuotas" class="form-control" id="cuotasSel" onchange="cargarCuotas()" style="width:auto;">
+					        	<c:forEach begin="1" end="12" varStatus="num">
+				            		<sf:option value="${num.index}" label="${num.index}" />
+								</c:forEach>
+				        	</sf:select>
+			        	</div>
+					</div>
+				</div>
+			</div>
+			<br/>
+			<div class="form-row">		
+				<div class="col-sm-2">
+				</div>		
+				<div class="col-sm-5">
+					<fmt:message key="label.It.will.be" />
+					<span id="queHacer"><fmt:message key="label.added" /></span>
+					<input type="number" step="1" class="width-80-align-rigth" min="0" name="cantidad" id="cantidad"/>
+					<fmt:message key="label.units" />
+				</div>
+				<div class="col-sm-4" id="avisoEliminar" style="display: none">
+					(<fmt:message key="label.Max.to.remove" /> ${frontProductoStock.unidades} <fmt:message key="label.units" />)
+				</div>	
+			</div>
+			<br/>
+			<div class="form-row">		
+				<div class="col-sm-2">
+				</div>		
+				<div class="col-sm-9">
+					<fmt:message key="label.And.for.this" />
+					<span id="queSeHizo"><fmt:message key="label.paid" /></span>
+					<sf:input path="precioFinal" type="text" class="width-80-align-rigth" id="precioFinal"/> €
+					<fmt:message key="label.with.vat" />
+					<input type="number" step="1" style="width:40px; text-align: right;" min="0" name="iva" id="iva" value="0"/> %
+				</div>		
+			</div>
+			<br/>
+			<div class="form-row">		
+				<div class="col-sm-2">
+				</div>		
+				<div class="col-sm-9">
+					<fmt:message key="label.Observations" />
+				</div>
+			</div>
+			<br/>
+			<div class="form-row">		
+				<div class="col-sm-2">
+				</div>		
+				<div class="col-sm-9">
+					<sf:textarea path="observaciones" rows="5" cols="70" />
+				</div>
+			</div>
+			<br/>
+			<div class="form-row">		
+				<div class="col-sm-2">
+				</div>
+				<div class="col-xs-12 col-sm-3">
+					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/producto' />"'><fmt:message key="Cancel" /></button>
+				</div>
+				<div class="col-sm-4">
+					<span id="precioFinalError"></span>
 				</div>
 			</div>
 		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-2">
-			</div>		
-			<div class="col-sm-3">
-				<fmt:message key="label.It.will.be" />
-				<span id="queHacer"><fmt:message key="label.added" /></span>
-				<input type="number" step="1" style="width:60px; text-align: right;" min="0" name="cantidad" id="cantidad"/>
-				<fmt:message key="label.units" />
+		<div class="d-inline-table w-25" id="detalleCuotas" style="visibility:hidden;">
+			<button type="button" class="btn btn-warning margin-left-5porciento" onclick='cargarCuotas()'><fmt:message key="label.Update.installments" /></button>
+			<br/><br/>
+			<div id="cabeceraCuotas">
+				<label class="form-check-label" for="comisionAperturaPor"><fmt:message key="label.Opening.commission" /></label><br/>
+				<sf:input type="text" path="comisionAperturaPor" class="width-80-align-rigth" id="comision" value="0.0" /> %<br/><br/>
+				<label class="form-check-label" for="interesPor"><fmt:message key="label.APR" /></label><br/>
+				<sf:input type="text" path="interesPor" class="width-80-align-rigth" id="tae" value="0.0" /> %<br/><br/>
 			</div>
-			<div class="col-sm-4" id="avisoEliminar" style="display: none">
-				(<fmt:message key="label.Max.to.remove" /> ${frontProductoStock.unidades} <fmt:message key="label.units" />)
-			</div>	
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-2">
-			</div>		
-			<div class="col-sm-9">
-				<fmt:message key="label.And.for.this" />
-				<span id="queSeHizo"><fmt:message key="label.paid" /></span>
-				<sf:input path="precioFinal" type="text" style="width:60px; text-align: right;" id="precioFinal"/> €
-				<fmt:message key="label.with.vat" />
-				<input type="number" step="1" style="width:40px; text-align: right;" min="0" name="iva" id="iva" value="0"/> %
-			</div>		
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-2">
-			</div>		
-			<div class="col-sm-9">
-				<fmt:message key="label.Observations" />
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-2">
-			</div>		
-			<div class="col-sm-9">
-				<sf:textarea path="observaciones" rows="5" cols="100" />
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/producto' />"'><fmt:message key="Cancel" /></button>
-			</div>
-			<div class="col-sm-2">
-				<span id="precioFinalError"></span>
-			</div>
+			<div id="datosCuotas"></div>
 		</div>
 	</sf:form>
 </body>

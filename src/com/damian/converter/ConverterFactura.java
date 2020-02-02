@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.damian.dao.model.ModelFactura;
+import com.damian.pojo.Cuota;
 import com.damian.pojo.Estado;
 import com.damian.pojo.Factura;
 import com.damian.pojo.FormaPago;
@@ -44,6 +45,12 @@ public class ConverterFactura {
 		FormaPago formaPago = new FormaPago();
 		formaPago.setIdFor(mf.getIdFor());
 		f.setFormaPago(formaPago);
+		Cuota cuota = new Cuota();
+		cuota.setIdCuo(mf.getIdCuo());
+		f.setCuota(cuota);
+		f.setNumeroCuota(mf.getNumeroCuota());
+		f.setInteresCuotaImporte(mf.getInteresCuotaImporte());
+		f.setImporteCuotaTotal(mf.getImporteCuotaTotal());
 
 		return f;
 
@@ -70,6 +77,12 @@ public class ConverterFactura {
 		if (f.getFormaPago() != null) {
 			mf.setIdFor(f.getFormaPago().getIdFor());
 		}
+		if (f.getCuota() != null) {
+			mf.setIdCuo(f.getCuota().getIdCuo());
+		}
+		mf.setNumeroCuota(f.getNumeroCuota());
+		mf.setInteresCuotaImporte(f.getInteresCuotaImporte());
+		mf.setImporteCuotaTotal(f.getImporteCuotaTotal());
 
 		return mf;
 

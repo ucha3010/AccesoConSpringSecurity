@@ -26,4 +26,6 @@ public interface FacturaDAO {
 
 	public List<Factura> findByIdList(int id);
 
+	public List<Factura> findByIdCuo(int idCuo);
+
 }

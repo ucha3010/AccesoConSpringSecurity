@@ -85,12 +85,13 @@ public class FacturaDAOImpl implements FacturaDAO {
 		} else {
 			ModelFactura mf = converterFactura.convert(factura);
 			String sql = "INSERT INTO " + TABLA
-					+ " (compra, ivaTotal, ivaImporteTotal, descuentoTotal, descuentoImporteTotal, importeTotal, fechaCompra, fechaEntrega, idEst, direccionEntrega, observaciones, idFor, creadoPor) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ " (compra, ivaTotal, ivaImporteTotal, descuentoTotal, descuentoImporteTotal, importeTotal, fechaCompra, fechaEntrega, idEst, direccionEntrega, "
+					+ "observaciones, idFor, creadoPor, idCuo, numeroCuota, interesCuotaImporte, importeCuotaTotal) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
 					mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(), mf.getFechaCompra(),
 					mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(),
-					mf.getCreadoPor());
+					mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(), mf.getImporteCuotaTotal());
 		}
 	}
 
@@ -98,12 +99,13 @@ public class FacturaDAOImpl implements FacturaDAO {
 	public int update(Factura factura) {
 		ModelFactura mf = converterFactura.convert(factura);
 		String sql = "UPDATE " + TABLA
-				+ " SET compra=?, ivaTotal=?, ivaImporteTotal=?, descuentoTotal=?, descuentoImporteTotal=?, importeTotal=?, fechaCompra=?, fechaEntrega=?, idEst=?, direccionEntrega=?, observaciones=?, idFor=?, creadoPor=? "
+				+ " SET compra=?, ivaTotal=?, ivaImporteTotal=?, descuentoTotal=?, descuentoImporteTotal=?, importeTotal=?, fechaCompra=?, fechaEntrega=?, idEst=?, "
+				+ "direccionEntrega=?, observaciones=?, idFor=?, creadoPor=?, idCuo=?, numeroCuota=?, interesCuotaImporte=?, importeCuotaTotal=? "
 				+ "WHERE " + KEY + "=?";
 		return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
 				mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(), mf.getFechaCompra(),
 				mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(),
-				mf.getCreadoPor(), mf.getIdFac());
+				mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(), mf.getImporteCuotaTotal(), mf.getIdFac());
 	}
 
 	@Override
@@ -134,6 +136,14 @@ public class FacturaDAOImpl implements FacturaDAO {
 		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
 	}
 
+	@Override
+	public List<Factura> findByIdCuo(int idCuo) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE idCuo = " + idCuo + " ORDER BY fechaCompra ASC";
+
+		return lista(sql);
+	}
+
 	private List<Factura> lista(String sql) {
 		List<ModelFactura> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelFactura.class));
 		List<Factura> eList = new ArrayList<>();
@@ -159,6 +169,10 @@ public class FacturaDAOImpl implements FacturaDAO {
 		mf.setObservaciones(rs.getString("observaciones"));
 		mf.setCreadoPor(rs.getString("creadoPor"));
 		mf.setIdFor(rs.getInt("idFor"));
+		mf.setIdCuo(rs.getInt("idCuo"));
+		mf.setNumeroCuota(rs.getInt("numeroCuota"));
+		mf.setInteresCuotaImporte(rs.getDouble("interesCuotaImporte"));
+		mf.setImporteCuotaTotal(rs.getDouble("importeCuotaTotal"));
 		return mf;
 	}
 

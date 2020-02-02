@@ -29,4 +29,6 @@ public interface FacturaService {
 
 	public List<Factura> findByIdEstList(int idEst);
 
+	public List<Factura> findByIdCuo(int idCuo);
+
 }

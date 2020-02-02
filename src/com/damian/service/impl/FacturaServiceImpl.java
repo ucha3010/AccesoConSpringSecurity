@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.damian.dao.CuotaDAO;
 import com.damian.dao.EstadoDAO;
 import com.damian.dao.FacturaDAO;
 import com.damian.dao.FacturaEstadoDAO;
@@ -27,6 +28,9 @@ public class FacturaServiceImpl implements FacturaService {
 
 	@Autowired
 	private FacturaDAO facturaDAO;
+
+	@Autowired
+	private CuotaDAO cuotaDAO;
 
 	@Autowired
 	private EstadoDAO estadoDAO;
@@ -48,6 +52,9 @@ public class FacturaServiceImpl implements FacturaService {
 			FormaPago formaPago = formaPagoDAO.findById(factura.getFormaPago().getIdFor());
 			factura.setEstado(estado);
 			factura.setFormaPago(formaPago);
+			if (factura.getCuota() != null && factura.getCuota().getIdCuo() != 0) {
+				factura.setCuota(cuotaDAO.findById(factura.getCuota().getIdCuo()));
+			}
 		}
 		return facturas;
 	}
@@ -90,6 +97,13 @@ public class FacturaServiceImpl implements FacturaService {
 		for (FacturaEstado fe : facturaEstadoList) {
 			facturaEstadoDAO.delete(fe.getId());
 		}
+		Factura factura = findByIdModel(id);
+		if (factura.getCuota() != null && factura.getCuota().getIdCuo() != 0) {
+			List<Factura> facturas = findByIdCuo(factura.getCuota().getIdCuo());
+			if (facturas != null && facturas.size() == 1) {
+				cuotaDAO.delete(factura.getCuota().getIdCuo());
+			}
+		}
 		return facturaDAO.delete(id);
 	}
 
@@ -117,6 +131,11 @@ public class FacturaServiceImpl implements FacturaService {
 			factura.setFormaPago(formaPagoDAO.findById(factura.getFormaPago().getIdFor()));
 		}
 		return facturas;
+	}
+
+	@Override
+	public List<Factura> findByIdCuo(int idCuo) {
+		return facturaDAO.findByIdCuo(idCuo);
 	}
 
 	private void saveFacturaEstado(Factura factura, HttpServletRequest request) {
