@@ -86,12 +86,12 @@ public class FacturaDAOImpl implements FacturaDAO {
 			ModelFactura mf = converterFactura.convert(factura);
 			String sql = "INSERT INTO " + TABLA
 					+ " (compra, ivaTotal, ivaImporteTotal, descuentoTotal, descuentoImporteTotal, importeTotal, fechaCompra, fechaEntrega, idEst, direccionEntrega, "
-					+ "observaciones, idFor, creadoPor, idCuo, numeroCuota, interesCuotaImporte, importeCuotaTotal) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "observaciones, idFor, creadoPor, idCuo, numeroCuota, interesCuotaImporte, importeCuotaTotal, cuotaConIva, cuotaSinIva) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
 					mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(), mf.getFechaCompra(),
 					mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(),
-					mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(), mf.getImporteCuotaTotal());
+					mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(), mf.getImporteCuotaTotal(), mf.getCuotaConIva(), mf.getCuotaSinIva());
 		}
 	}
 
@@ -100,12 +100,12 @@ public class FacturaDAOImpl implements FacturaDAO {
 		ModelFactura mf = converterFactura.convert(factura);
 		String sql = "UPDATE " + TABLA
 				+ " SET compra=?, ivaTotal=?, ivaImporteTotal=?, descuentoTotal=?, descuentoImporteTotal=?, importeTotal=?, fechaCompra=?, fechaEntrega=?, idEst=?, "
-				+ "direccionEntrega=?, observaciones=?, idFor=?, creadoPor=?, idCuo=?, numeroCuota=?, interesCuotaImporte=?, importeCuotaTotal=? "
+				+ "direccionEntrega=?, observaciones=?, idFor=?, creadoPor=?, idCuo=?, numeroCuota=?, interesCuotaImporte=?, importeCuotaTotal=?, cuotaConIva=?, cuotaSinIva=? "
 				+ "WHERE " + KEY + "=?";
 		return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
 				mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(), mf.getFechaCompra(),
 				mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(),
-				mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(), mf.getImporteCuotaTotal(), mf.getIdFac());
+				mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(), mf.getImporteCuotaTotal(), mf.getCuotaConIva(), mf.getCuotaSinIva(), mf.getIdFac());
 	}
 
 	@Override
@@ -173,6 +173,8 @@ public class FacturaDAOImpl implements FacturaDAO {
 		mf.setNumeroCuota(rs.getInt("numeroCuota"));
 		mf.setInteresCuotaImporte(rs.getDouble("interesCuotaImporte"));
 		mf.setImporteCuotaTotal(rs.getDouble("importeCuotaTotal"));
+		mf.setCuotaConIva(rs.getDouble("cuotaConIva"));
+		mf.setCuotaSinIva(rs.getDouble("cuotaSinIva"));
 		return mf;
 	}
 

@@ -22,53 +22,11 @@ public class ModelFactura {
 	private int numeroCuota;
 	private double interesCuotaImporte;
 	private double importeCuotaTotal;
+	private double cuotaConIva;
+	private double cuotaSinIva;
 
 	public ModelFactura() {
 
-	}
-
-	/**
-	 * @param idFac
-	 * @param compra
-	 * @param ivaTotal
-	 * @param ivaImporteTotal
-	 * @param descuentoTotal
-	 * @param descuentoImporteTotal
-	 * @param importeTotal
-	 * @param fechaCompra
-	 * @param fechaEntrega
-	 * @param idEst
-	 * @param direccionEntrega
-	 * @param observaciones
-	 * @param idFor
-	 * @param creadoPor
-	 * @param idCuo
-	 * @param numeroCuota
-	 * @param interesCuotaImporte
-	 * @param importeCuotaTotal
-	 */
-	public ModelFactura(int idFac, boolean compra, double ivaTotal, double ivaImporteTotal, double descuentoTotal,
-			double descuentoImporteTotal, double importeTotal, Date fechaCompra, Date fechaEntrega, int idEst,
-			String direccionEntrega, String observaciones, int idFor, String creadoPor, int idCuo, int numeroCuota,
-			double interesCuotaImporte, double importeCuotaTotal) {
-		this.idFac = idFac;
-		this.compra = compra;
-		this.ivaTotal = ivaTotal;
-		this.ivaImporteTotal = ivaImporteTotal;
-		this.descuentoTotal = descuentoTotal;
-		this.descuentoImporteTotal = descuentoImporteTotal;
-		this.importeTotal = importeTotal;
-		this.fechaCompra = fechaCompra;
-		this.fechaEntrega = fechaEntrega;
-		this.idEst = idEst;
-		this.direccionEntrega = direccionEntrega;
-		this.observaciones = observaciones;
-		this.idFor = idFor;
-		this.creadoPor = creadoPor;
-		this.idCuo = idCuo;
-		this.numeroCuota = numeroCuota;
-		this.interesCuotaImporte = interesCuotaImporte;
-		this.importeCuotaTotal = importeCuotaTotal;
 	}
 
 	/**
@@ -341,6 +299,36 @@ public class ModelFactura {
 		this.importeCuotaTotal = importeCuotaTotal;
 	}
 
+	/**
+	 * @return the cuotaConIva
+	 */
+	public double getCuotaConIva() {
+		return cuotaConIva;
+	}
+
+	/**
+	 * @param cuotaConIva
+	 *            the cuotaConIva to set
+	 */
+	public void setCuotaConIva(double cuotaConIva) {
+		this.cuotaConIva = cuotaConIva;
+	}
+
+	/**
+	 * @return the cuotaSinIva
+	 */
+	public double getCuotaSinIva() {
+		return cuotaSinIva;
+	}
+
+	/**
+	 * @param cuotaSinIva
+	 *            the cuotaSinIva to set
+	 */
+	public void setCuotaSinIva(double cuotaSinIva) {
+		this.cuotaSinIva = cuotaSinIva;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -354,7 +342,8 @@ public class ModelFactura {
 				+ ", fechaEntrega=" + fechaEntrega + ", idEst=" + idEst + ", direccionEntrega=" + direccionEntrega
 				+ ", observaciones=" + observaciones + ", idFor=" + idFor + ", creadoPor=" + creadoPor + ", idCuo="
 				+ idCuo + ", numeroCuota=" + numeroCuota + ", interesCuotaImporte=" + interesCuotaImporte
-				+ ", importeCuotaTotal=" + importeCuotaTotal + "]";
+				+ ", importeCuotaTotal=" + importeCuotaTotal + ", cuotaConIva=" + cuotaConIva + ", cuotaSinIva="
+				+ cuotaSinIva + "]";
 	}
 
 }

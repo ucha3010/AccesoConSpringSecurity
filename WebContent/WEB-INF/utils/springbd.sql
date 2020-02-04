@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-01-2020 a las 00:23:31
+-- Tiempo de generación: 04-02-2020 a las 23:15:32
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -82,6 +82,21 @@ INSERT INTO `categoria` (`idCat`, `nombreES`, `nombreEN`, `nombrePT`, `nombreFR`
 (6, 'otra', 'Other', NULL, NULL, NULL, NULL, NULL, NULL),
 (7, 'Coches', 'Cars', NULL, NULL, NULL, NULL, NULL, NULL),
 (8, '0 Otros', '0 Others', NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cuota`
+--
+
+CREATE TABLE `cuota` (
+  `idCuo` int(11) NOT NULL,
+  `cantidadCuotas` int(11) NOT NULL,
+  `comisionAperturaPor` double NOT NULL,
+  `comisionAperturaImp` double NOT NULL,
+  `interesPor` double NOT NULL,
+  `interesImp` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -279,19 +294,25 @@ CREATE TABLE `factura` (
   `direccionEntrega` varchar(300) COLLATE utf8_spanish_ci DEFAULT NULL,
   `observaciones` varchar(300) COLLATE utf8_spanish_ci DEFAULT NULL,
   `idFor` int(11) NOT NULL,
-  `creadoPor` varchar(30) COLLATE utf8_spanish_ci NOT NULL
+  `creadoPor` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `idCuo` int(11) NOT NULL,
+  `numeroCuota` int(11) NOT NULL,
+  `interesCuotaImporte` double NOT NULL,
+  `importeCuotaTotal` double NOT NULL,
+  `cuotaConIva` double NOT NULL,
+  `cuotaSinIva` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `factura`
 --
 
-INSERT INTO `factura` (`idFac`, `compra`, `ivaTotal`, `ivaImporteTotal`, `descuentoTotal`, `descuentoImporteTotal`, `importeTotal`, `fechaCompra`, `fechaEntrega`, `idEst`, `direccionEntrega`, `observaciones`, `idFor`, `creadoPor`) VALUES
-(7, 1, 10, 49.5, 0, 0, 495, '2020-01-17 20:51:06', NULL, 6, NULL, '', 4, 'admin'),
-(8, 0, 21, 50.82, 0, 0, 242, '2020-01-18 00:00:00', NULL, 7, NULL, 'Primera prueba QUITAR unidades. TV Sanyo 15 pulgadas. Saco 1 unidad. Importe 242€. IVA 21%', 4, 'admin'),
-(9, 0, 21, 42, 0, 0, 242, '2020-01-18 12:05:49', NULL, 7, NULL, '', 4, 'admin'),
-(10, 1, 10, 45, 0, 0, 495, '2020-01-18 12:09:07', NULL, 6, NULL, '', 4, 'admin'),
-(11, 1, 10, 0.1, 0, 0, 1.1, '2020-01-26 22:20:51', NULL, 6, NULL, '', 4, 'pepe');
+INSERT INTO `factura` (`idFac`, `compra`, `ivaTotal`, `ivaImporteTotal`, `descuentoTotal`, `descuentoImporteTotal`, `importeTotal`, `fechaCompra`, `fechaEntrega`, `idEst`, `direccionEntrega`, `observaciones`, `idFor`, `creadoPor`, `idCuo`, `numeroCuota`, `interesCuotaImporte`, `importeCuotaTotal`, `cuotaConIva`, `cuotaSinIva`) VALUES
+(7, 1, 10, 49.5, 0, 0, 495, '2020-01-17 20:51:06', NULL, 6, NULL, '', 4, 'admin', 0, 0, 0, 0, 0, 0),
+(8, 0, 21, 50.82, 0, 0, 242, '2020-01-18 00:00:00', NULL, 7, NULL, 'Primera prueba QUITAR unidades. TV Sanyo 15 pulgadas. Saco 1 unidad. Importe 242€. IVA 21%', 4, 'admin', 0, 0, 0, 0, 0, 0),
+(9, 0, 21, 42, 0, 0, 242, '2020-01-18 12:05:49', NULL, 7, NULL, '', 4, 'admin', 0, 0, 0, 0, 0, 0),
+(10, 1, 10, 45, 0, 0, 495, '2020-01-18 12:09:07', NULL, 6, NULL, '', 4, 'admin', 0, 0, 0, 0, 0, 0),
+(11, 1, 10, 0.1, 0, 0, 1.1, '2020-01-26 22:20:51', NULL, 6, NULL, '', 4, 'pepe', 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -710,6 +731,12 @@ ALTER TABLE `categoria`
   ADD PRIMARY KEY (`idCat`);
 
 --
+-- Indices de la tabla `cuota`
+--
+ALTER TABLE `cuota`
+  ADD PRIMARY KEY (`idCuo`);
+
+--
 -- Indices de la tabla `datospersonales`
 --
 ALTER TABLE `datospersonales`
@@ -845,7 +872,7 @@ ALTER TABLE `datospersonales`
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
-  MODIFY `idDir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `idDir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `direccionempresa`
 --
@@ -880,12 +907,12 @@ ALTER TABLE `formapago`
 -- AUTO_INCREMENT de la tabla `paises`
 --
 ALTER TABLE `paises`
-  MODIFY `idPais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idPais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --

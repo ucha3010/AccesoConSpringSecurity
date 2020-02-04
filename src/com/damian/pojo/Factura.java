@@ -24,6 +24,8 @@ public class Factura {
 	private int numeroCuota;
 	private double interesCuotaImporte;
 	private double importeCuotaTotal;
+	private double cuotaConIva;
+	private double cuotaSinIva;
 
 	public Factura() {
 
@@ -314,6 +316,36 @@ public class Factura {
 		this.importeCuotaTotal = importeCuotaTotal;
 	}
 
+	/**
+	 * @return the cuotaConIva
+	 */
+	public double getCuotaConIva() {
+		return cuotaConIva;
+	}
+
+	/**
+	 * @param cuotaConIva
+	 *            the cuotaConIva to set
+	 */
+	public void setCuotaConIva(double cuotaConIva) {
+		this.cuotaConIva = cuotaConIva;
+	}
+
+	/**
+	 * @return the cuotaSinIva
+	 */
+	public double getCuotaSinIva() {
+		return cuotaSinIva;
+	}
+
+	/**
+	 * @param cuotaSinIva
+	 *            the cuotaSinIva to set
+	 */
+	public void setCuotaSinIva(double cuotaSinIva) {
+		this.cuotaSinIva = cuotaSinIva;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -325,9 +357,10 @@ public class Factura {
 				+ ivaImporteTotal + ", descuentoTotal=" + descuentoTotal + ", descuentoImporteTotal="
 				+ descuentoImporteTotal + ", importeTotal=" + importeTotal + ", fechaCompra=" + fechaCompra
 				+ ", fechaEntrega=" + fechaEntrega + ", direccionEntrega=" + direccionEntrega + ", observaciones="
-				+ observaciones + ", creadoPor=" + creadoPor + ", estado=" + estado + ", formaPago=" + formaPago
-				+ ", cuota=" + cuota + ", numeroCuota=" + numeroCuota + ", interesCuotaImporte=" + interesCuotaImporte
-				+ ", importeCuotaTotal=" + importeCuotaTotal + "]";
+				+ observaciones + ", creadoPor=" + creadoPor + ", productoFacturaList=" + productoFacturaList
+				+ ", estado=" + estado + ", formaPago=" + formaPago + ", cuota=" + cuota + ", numeroCuota="
+				+ numeroCuota + ", interesCuotaImporte=" + interesCuotaImporte + ", importeCuotaTotal="
+				+ importeCuotaTotal + ", cuotaConIva=" + cuotaConIva + ", cuotaSinIva=" + cuotaSinIva + "]";
 	}
 
 }
