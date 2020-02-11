@@ -118,6 +118,7 @@
 			
 			if(comisionApertura != 0){
 				primeraCuota = (precioFinal * comisionApertura) / 100;
+				primeraCuota = redondear(primeraCuota, 2);
 			}
 			
 			var cuotaMensual;
@@ -125,9 +126,9 @@
 				cuotaMensual = 0.0;
 			} else if (precioFinal != 0 && tae == 0) {
 				cuotaMensual = precioFinal / num;
-			} else {
-				var tasaMensual = ((1 + (tae * 0.01)) ** (1/12) ) - 1;
-				cuotaMensual = (tasaMensual * precioFinal) / (1 - ((1 + tasaMensual) ** (-num)));
+			} else {				
+				var interes = tae / 1200;				
+				cuotaMensual = (precioFinal * ((1 + interes) ** num) * interes ) / (((1 + interes) ** num) - 1);
 			}
 			var residuo = cuotaMensual % 1;
 			residuo *= 100;
@@ -161,6 +162,9 @@
 		    	salida = "0" + salida;
 		    }
 		    return salida;
+		}
+		function redondear(value, decimals) {
+		  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 		}
 	</script>
 </head>
