@@ -235,9 +235,7 @@ public class ProductoServiceImpl implements ProductoService {
 					productoFactura.setCantidad(frontProductoStock.getCantidad());
 					productoFactura.setPrecioFinal(frontProductoStock.getPrecioFinal());
 				} else if (fc.getNumeroCuota() == frontProductoStock.getCuotas().size()) {
-					// TODO DAMIAN verificar si el cálculo de interesCuotaImporte para la última
-					// cuota lo estoy haciendo bien
-					interesCuotaImporte = importeCuotaTotal.subtract(cuotaSinInteres).add(sumarUltimaCuota);
+					interesCuotaImporte = importeCuotaTotal.subtract(cuotaSinInteres.add(sumarUltimaCuota));
 					productoFactura.setCantidad(0);
 					productoFactura.setPrecioFinal(0);
 				} else {
