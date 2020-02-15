@@ -65,7 +65,7 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 	public void update(ProductoFactura productoFactura) {
 		ModelProductoFactura mpf = converterProductoFactura.convert(productoFactura);
 		String sql = "UPDATE " + TABLA
-				+ " SET porcentajeDescuento=?, precioUnitSinIva=?, precioUnitConIva=?, precioFinal=?, observaciones=? " + "WHERE " + KEY1
+				+ " SET cantidad=?, ivaProducto=?, porcentajeDescuento=?, precioUnitSinIva=?, precioUnitConIva=?, precioFinal=?, observaciones=? " + "WHERE " + KEY1
 				+ "=? AND " + KEY2 + "=?";
 		jdbcTemplate.update(sql, mpf.getCantidad(), mpf.getIvaProducto(), mpf.getPorcentajeDescuento(),
 				mpf.getPrecioUnitSinIva(), mpf.getPrecioUnitConIva(), mpf.getPrecioFinal(), mpf.getObservaciones(), mpf.getIdPro(),

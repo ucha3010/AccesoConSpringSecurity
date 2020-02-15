@@ -15,13 +15,16 @@ import com.damian.dao.FacturaDAO;
 import com.damian.dao.FacturaEstadoDAO;
 import com.damian.dao.FormaPagoDAO;
 import com.damian.dao.ProductoFacturaDAO;
+import com.damian.exceptions.NegativeStockException;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Estado;
 import com.damian.pojo.Factura;
 import com.damian.pojo.FacturaEstado;
 import com.damian.pojo.FormaPago;
+import com.damian.pojo.Producto;
 import com.damian.pojo.ProductoFactura;
 import com.damian.service.FacturaService;
+import com.damian.service.ProductoService;
 
 @Service
 public class FacturaServiceImpl implements FacturaService {
@@ -40,6 +43,9 @@ public class FacturaServiceImpl implements FacturaService {
 
 	@Autowired
 	private FormaPagoDAO formaPagoDAO;
+
+	@Autowired
+	private ProductoService productoService;
 
 	@Autowired
 	private ProductoFacturaDAO productoFacturaDAO;
@@ -88,23 +94,57 @@ public class FacturaServiceImpl implements FacturaService {
 	@Override
 	public int delete(int id) throws NotEmptyException {
 		List<ProductoFactura> productoFacturaList = productoFacturaDAO.findByIdFacModel(id);
-		if (productoFacturaList != null) {
-			for (ProductoFactura pf : productoFacturaList) {
-				productoFacturaDAO.delete(pf.getProducto().getIdPro(), id);
-			}
-		}
-		List<FacturaEstado> facturaEstadoList = facturaEstadoDAO.findByIdFacModel(id);
-		for (FacturaEstado fe : facturaEstadoList) {
-			facturaEstadoDAO.delete(fe.getId());
-		}
 		Factura factura = findByIdModel(id);
-		if (factura.getCuota() != null && factura.getCuota().getIdCuo() != 0) {
-			List<Factura> facturas = findByIdCuo(factura.getCuota().getIdCuo());
-			if (facturas != null && facturas.size() == 1) {
-				cuotaDAO.delete(factura.getCuota().getIdCuo());
+		int borrada = 0;
+		boolean continuo = true;
+
+		try {
+			if (factura.getCuota() != null && factura.getCuota().getIdCuo() != 0) {
+				List<Factura> facturas = findByIdCuo(factura.getCuota().getIdCuo());
+				if (facturas != null && facturas.size() == 1) {
+					Producto producto = verificoStock(productoFacturaList.get(0), factura);
+					actualizoStock(productoFacturaList.get(0), factura, producto);
+					cuotaDAO.delete(factura.getCuota().getIdCuo());
+				} else if (facturas != null && facturas.size() > 1 && productoFacturaList != null
+						&& !productoFacturaList.isEmpty() && productoFacturaList.get(0).getCantidad() != 0) {
+					for (Factura f : facturas) {
+						ProductoFactura pf = productoFacturaDAO
+								.findByIdProAndIdFac(productoFacturaList.get(0).getProducto().getIdPro(), f.getIdFac());
+						if (pf.getCantidad() == 0) {
+							pf.setCantidad(productoFacturaList.get(0).getCantidad());
+							productoFacturaDAO.update(pf);
+							asignarDatosFactura(f,factura);
+							break;
+						}
+					}
+				}
+			} else {
+				for (ProductoFactura pf : productoFacturaList) {
+					Producto producto = verificoStock(pf, factura);
+					pf.setProducto(producto);
+				}
+				for (ProductoFactura pf : productoFacturaList) {
+					actualizoStock(pf, factura, pf.getProducto());
+				}
 			}
+		} catch (NegativeStockException e) {
+			System.out.println(e.getMessage());
+			continuo = false;
 		}
-		return facturaDAO.delete(id);
+
+		if (continuo) {
+			if (productoFacturaList != null) {
+				for (ProductoFactura pf : productoFacturaList) {
+					productoFacturaDAO.delete(pf.getProducto().getIdPro(), id);
+				}
+			}
+			List<FacturaEstado> facturaEstadoList = facturaEstadoDAO.findByIdFacModel(id);
+			for (FacturaEstado fe : facturaEstadoList) {
+				facturaEstadoDAO.delete(fe.getId());
+			}
+			borrada = facturaDAO.delete(id);
+		}
+		return borrada;
 	}
 
 	@Override
@@ -157,6 +197,44 @@ public class FacturaServiceImpl implements FacturaService {
 		facturaEstado.setFecha(new Timestamp(lnMilisegundos));
 		facturaEstado.setCreadoPor(creador);
 		facturaEstadoDAO.save(facturaEstado);
+
+	}
+
+	private void asignarDatosFactura(Factura f, Factura factura) {
+		f.setIvaTotal(factura.getIvaTotal());
+		f.setIvaImporteTotal(factura.getIvaImporteTotal());
+		f.setDescuentoTotal(factura.getDescuentoTotal());
+		f.setDescuentoImporteTotal(factura.getDescuentoImporteTotal());
+		f.setImporteTotal(factura.getImporteTotal());
+		f.setObservaciones(factura.getObservaciones());
+		f.setNumeroCuota(factura.getNumeroCuota());
+		facturaDAO.update(f);
+	}
+
+	private Producto verificoStock(ProductoFactura pf, Factura factura) throws NegativeStockException {
+		Producto producto = productoService.findByIdModel(pf.getProducto().getIdPro());
+		int stockFinal;
+		if (factura.isCompra()) {
+			stockFinal = producto.getUnidades() - pf.getCantidad();
+		} else {
+			stockFinal = producto.getUnidades() + pf.getCantidad();
+		}
+		if (stockFinal < 0) {
+			throw new NegativeStockException("La cantidad de stock final sería: " + stockFinal);
+		}
+		return producto;
+	}
+
+	private void actualizoStock(ProductoFactura pf, Factura factura, Producto producto) throws NegativeStockException {
+
+		int stockFinal;
+		if (factura.isCompra()) {
+			stockFinal = producto.getUnidades() - pf.getCantidad();
+		} else {
+			stockFinal = producto.getUnidades() + pf.getCantidad();
+		}
+		producto.setUnidades(stockFinal);
+		productoService.update(producto);
 
 	}
 

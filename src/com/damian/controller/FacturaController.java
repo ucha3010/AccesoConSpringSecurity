@@ -86,8 +86,12 @@ public class FacturaController {
 	public String deleteFactura(@PathVariable("idFac") int idFac, RedirectAttributes ra) {
 
 		try {
-			facturaService.delete(idFac);
-			ra.addFlashAttribute("factura_eliminado", "factura_eliminado");
+			int cantidad = facturaService.delete(idFac);
+			if(cantidad == 0) {
+				ra.addFlashAttribute("factura_stock_negativo", "factura_stock_negativo");				
+			} else {
+				ra.addFlashAttribute("factura_eliminado", "factura_eliminado");
+			}
 		} catch (NotEmptyException e) {
 			ra.addFlashAttribute("factura_asociado", "factura_asociado");
 		}

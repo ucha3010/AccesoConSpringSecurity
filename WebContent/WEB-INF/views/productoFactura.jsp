@@ -42,7 +42,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${productoFacturas}" var="productoFactura">
-					<tr title='<c:out value="${productoFactura.observaciones}" />'>
+					<tr title='<fmt:message key="label.units" />: <c:out value="${productoFactura.cantidad}" />&#xA;<fmt:message key="label.Observations" />: <c:out value="${productoFactura.observaciones}" />'>
 						<td class="text-center"><c:out value="${productoFactura.factura.idFac}" /></td>
 						<c:if test="${productoFactura.factura.compra}">
 							<td class="text-center"><fmt:message key="label.Purchase" /></td>

@@ -52,43 +52,78 @@
 					</tr>
 				</c:forEach>
 				<tr><td colspan="7" class="text-center">***************************************************</td></tr>
-<!-- 				DESCUENTO -->
-				<tr>
-					<td colspan="3"><strong><fmt:message key="label.Total.dicount" /></strong></td>
-					<c:if test="${factura.descuentoTotal > 0}">
-						<td class="text-center"><strong><fmt:formatNumber type="number" value="${factura.descuentoTotal}" minFractionDigits="2" />%</strong></td>
-					</c:if>
-					<c:if test="${factura.descuentoTotal == 0}">
-						<td></td>
-					</c:if>
-					<td colspan="2"></td>
-					<td class="text-right"><strong>- <fmt:formatNumber type="currency" value="${factura.descuentoImporteTotal}" /></strong></td>
-					<td class="width-35"></td>
-				</tr>
-<!-- 				IVA -->
-				<c:if test="${factura.ivaTotal > 0}">
+				<c:if test="${factura.numeroCuota == 0}">
+	<!-- 				DESCUENTO -->
 					<tr>
-						<td colspan="4"><strong><fmt:message key="label.Total.vat" /></strong></td>
+						<td colspan="3"><strong><fmt:message key="label.Total.dicount" /></strong></td>
+						<c:if test="${factura.descuentoTotal > 0}">
+							<td class="text-center"><strong><fmt:formatNumber type="number" value="${factura.descuentoTotal}" minFractionDigits="2" />%</strong></td>
+						</c:if>
+						<c:if test="${factura.descuentoTotal == 0}">
+							<td></td>
+						</c:if>
+						<td colspan="2"></td>
+						<td class="text-right"><strong>- <fmt:formatNumber type="currency" value="${factura.descuentoImporteTotal}" /></strong></td>
+						<td class="width-35"></td>
+					</tr>
+	<!-- 				IVA -->
+					<c:if test="${factura.ivaTotal > 0}">
+						<tr>
+							<td colspan="4"><strong><fmt:message key="label.Total.vat" /></strong></td>
+							<td class="text-center"><strong><fmt:formatNumber type="number" value="${factura.ivaTotal}" minFractionDigits="2" />%</strong></td>
+							<td></td>
+							<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.ivaImporteTotal}" /></strong></td>
+							<td class="width-35"></td>
+						</tr>
+					</c:if>
+					<c:if test="${factura.ivaTotal == 0}">
+						<tr>
+							<td colspan="4"><strong><fmt:message key="label.Total.vat" /></strong></td>
+							<td class="text-center"><strong><fmt:formatNumber type="currency" value="${factura.ivaImporteTotal}" /></strong></td>
+							<td colspan="2"></td>
+							<td class="width-35"></td>
+						</tr>
+					</c:if>
+	<!-- 				IMPORTE FINAL -->
+					<tr>
+						<td colspan="6"><strong><fmt:message key="label.Total.amount" /></strong></td>
+						<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.importeTotal}" /></strong></td>
+						<td class="width-35"></td>
+					</tr>
+				</c:if>
+				<c:if test="${factura.numeroCuota > 0}">
+	<!-- 				CUOTA SIN IVA -->
+					<tr>
+						<td colspan="2"></td>
+						<td colspan="6"><strong><fmt:message key="label.Installment.number" /> <c:out value="${factura.numeroCuota}" /></strong></td>
+					</tr>
+	<!-- 				CUOTA SIN IVA -->
+					<tr>
+						<td colspan="6"><strong><fmt:message key="label.Installment.no.vat" /></strong></td>
+						<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.cuotaSinIva}" /></strong></td>
+						<td class="width-35"></td>
+					</tr>
+	<!-- 				IVA -->
+					<tr>
+						<td colspan="4"><strong><fmt:message key="label.Installment.vat" /></strong></td>
 						<td class="text-center"><strong><fmt:formatNumber type="number" value="${factura.ivaTotal}" minFractionDigits="2" />%</strong></td>
 						<td></td>
-						<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.ivaImporteTotal}" /></strong></td>
+						<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.cuotaConIva}" /></strong></td>
 						<td class="width-35"></td>
 					</tr>
-				</c:if>
-				<c:if test="${factura.ivaTotal == 0}">
+	<!-- 				INTERES -->
 					<tr>
-						<td colspan="4"><strong><fmt:message key="label.Total.vat" /></strong></td>
-						<td class="text-center"><strong><fmt:formatNumber type="currency" value="${factura.ivaImporteTotal}" /></strong></td>
-						<td colspan="2"></td>
+						<td colspan="6"><strong><fmt:message key="label.Loan" /></strong></td>
+						<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.interesCuotaImporte}" /></strong></td>
 						<td class="width-35"></td>
 					</tr>
+	<!-- 				IMPORTE FINAL -->
+					<tr>
+						<td colspan="6"><strong><fmt:message key="label.Total.amount" /></strong></td>
+						<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.importeCuotaTotal}" /></strong></td>
+						<td class="width-35"></td>
+					</tr>					
 				</c:if>
-<!-- 				IMPORTE FINAL -->
-				<tr>
-					<td colspan="6"><strong><fmt:message key="label.Total.amount" /></strong></td>
-					<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.importeTotal}" /></strong></td>
-					<td class="width-35"></td>
-				</tr>
 			</tbody>
 		</table>
 	</div>

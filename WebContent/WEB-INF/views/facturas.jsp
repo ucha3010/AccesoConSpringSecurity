@@ -68,6 +68,11 @@
 					<fmt:message key="Bill.deleted" />
 				</span>
 			</c:if>
+			<c:if test="${not empty factura_stock_negativo}">
+				<span style="color: green;">
+					<fmt:message key="Bill.not.deleted.negative.stock" />
+				</span>
+			</c:if>
 		</div>
 		<div class="ml-auto p-2">
 		</div>		
@@ -99,7 +104,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${facturas}" var="factura">
-				    <tr title='<fmt:message key="label.Delivery.date" />: <fmt:formatDate value="${factura.fechaEntrega}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.Delivery.address" />: <c:out value="${factura.direccionEntrega}" />&#xA;<fmt:message key="label.Observations" />: <c:out value="${factura.observaciones}" />&#xA;<fmt:message key="label.Payment.method" />: <c:out value="${factura.formaPago[nameColSelect]}" />&#xA;<fmt:message key="label.Creator" />: <c:out value="${factura.creadoPor}" />'>
+				    <tr title='<fmt:message key="label.Delivery.date" />: <fmt:formatDate value="${factura.fechaEntrega}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.Delivery.address" />: <c:out value="${factura.direccionEntrega}" />&#xA;<fmt:message key="label.Observations" />: <c:out value="${factura.observaciones}" />&#xA;<fmt:message key="label.Payment.method" />: <c:out value="${factura.formaPago[nameColSelect]}" />&#xA;<fmt:message key="label.Creator" />: <c:out value="${factura.creadoPor}" /><c:if test="${factura.numeroCuota > 0}">&#xA;<fmt:message key="label.Installment.number" />: <c:out value="${factura.numeroCuota}" /></c:if>'>
 						<sec:authorize access="hasAnyRole('ROL_ROOT')">
 							<td class="sin_padding">
 								<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${factura.idFac})">
@@ -116,8 +121,13 @@
 						</c:if>
 						<td class="text-center"><fmt:formatDate value="${factura.fechaCompra}" pattern="dd/MM/yyyy"/></td>
 						<td class="text-center"><fmt:formatNumber type="number" value="${factura.descuentoTotal}" minFractionDigits="2" />%</td>
-						<td class="text-center"><fmt:formatNumber type="number" value="${factura.ivaTotal}" minFractionDigits="2" />%</td>	
-						<td class="text-right"><fmt:formatNumber type="currency" value="${factura.importeTotal}" /></td>
+						<td class="text-center"><fmt:formatNumber type="number" value="${factura.ivaTotal}" minFractionDigits="2" />%</td>
+						<c:if test="${factura.numeroCuota == 0}">	
+							<td class="text-right"><fmt:formatNumber type="currency" value="${factura.importeTotal}" /></td>
+						</c:if>
+						<c:if test="${factura.numeroCuota > 0}">
+							<td class="text-right"><fmt:formatNumber type="currency" value="${factura.importeCuotaTotal}" /></td>
+						</c:if>
 						<td class="width-15"></td>
 						<td>
 							<fmt:message key="label.state.column.name" var="itemSelect"/>
