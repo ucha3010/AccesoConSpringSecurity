@@ -1,5 +1,7 @@
 package com.damian.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,10 +60,10 @@ public class EstadoController {
 	}
 
 	@RequestMapping("/estado/delete/{idEst}")
-	public String deleteUser(@PathVariable("idEst") int idEst, RedirectAttributes ra) {
+	public String deleteUser(@PathVariable("idEst") int idEst, RedirectAttributes ra, HttpServletRequest request) {
 
 		try {
-			estadoService.delete(idEst);
+			estadoService.delete(idEst, "null", request);
 			ra.addFlashAttribute("estado_eliminado", "estado_eliminado");
 		} catch (NotEmptyException e) {
 			ra.addFlashAttribute("estado_asociado", "estado_asociado");

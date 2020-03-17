@@ -51,8 +51,8 @@ public class FacturaServiceImpl implements FacturaService {
 	private ProductoFacturaDAO productoFacturaDAO;
 
 	@Override
-	public List<Factura> findAll() {
-		List<Factura> facturas = facturaDAO.findAll();
+	public List<Factura> findAll(String column, HttpServletRequest request) {
+		List<Factura> facturas = facturaDAO.findAll(column, request);
 		for (Factura factura : facturas) {
 			Estado estado = estadoDAO.findById(factura.getEstado().getIdEst());
 			FormaPago formaPago = formaPagoDAO.findById(factura.getFormaPago().getIdFor());
@@ -113,7 +113,7 @@ public class FacturaServiceImpl implements FacturaService {
 						if (pf.getCantidad() == 0) {
 							pf.setCantidad(productoFacturaList.get(0).getCantidad());
 							productoFacturaDAO.update(pf);
-							asignarDatosFactura(f,factura);
+							asignarDatosFactura(f, factura);
 							break;
 						}
 					}
@@ -148,8 +148,8 @@ public class FacturaServiceImpl implements FacturaService {
 	}
 
 	@Override
-	public List<Factura> findByIdEstModel(int idEst) {
-		return facturaDAO.findByIdEstModel(idEst);
+	public List<Factura> findByIdEstModel(int idEst, String column, HttpServletRequest request) {
+		return facturaDAO.findByIdEstModel(idEst, column, request);
 	}
 
 	@Override
@@ -163,8 +163,8 @@ public class FacturaServiceImpl implements FacturaService {
 	}
 
 	@Override
-	public List<Factura> findByIdEstList(int idEst) {
-		List<Factura> facturas = facturaDAO.findByIdEstModel(idEst);
+	public List<Factura> findByIdEstList(int idEst, String column, HttpServletRequest request) {
+		List<Factura> facturas = facturaDAO.findByIdEstModel(idEst, column, request);
 		Estado estado = estadoDAO.findById(idEst);
 		for (Factura factura : facturas) {
 			factura.setEstado(estado);
@@ -208,6 +208,7 @@ public class FacturaServiceImpl implements FacturaService {
 		f.setImporteTotal(factura.getImporteTotal());
 		f.setObservaciones(factura.getObservaciones());
 		f.setNumeroCuota(factura.getNumeroCuota());
+		f.setImporteFront(factura.getImporteFront());
 		facturaDAO.update(f);
 	}
 

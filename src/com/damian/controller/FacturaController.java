@@ -4,12 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,29 +23,24 @@ public class FacturaController {
 	@Autowired
 	private EstadoService estadoService;
 
-	@RequestMapping("/factura")
-	public ModelAndView getAll(ModelAndView modelAndView) {
-		modelAndView.addObject("facturas", facturaService.findAll());
-		modelAndView.addObject("estados", estadoService.findAll());
-		modelAndView.setViewName("facturas");
-		return modelAndView;
-	}
-
-	@RequestMapping("/factura/filtered/{idFac}")
-	public ModelAndView getFiltered(ModelAndView modelAndView, @PathVariable("idFac") int idFac) {
-		modelAndView.addObject("facturas", facturaService.findByIdList(idFac));
+	@RequestMapping("/factura/all/{column}")
+	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
+			HttpServletRequest request) {
+		modelAndView.addObject("facturas", facturaService.findAll(column, request));
 		modelAndView.addObject("estados", estadoService.findAll());
 		modelAndView.addObject("estoy", "factura");
 		modelAndView.setViewName("facturas");
 		return modelAndView;
 	}
 
-	@RequestMapping("/factura/filteredEstado/{idEst}")
-	public ModelAndView getFilteredEstado(ModelAndView modelAndView, @PathVariable("idEst") int idEst) {
-		modelAndView.addObject("facturas", facturaService.findByIdEstList(idEst));
+	@RequestMapping("/factura/filteredEstado/{idEst}/{column}")
+	public ModelAndView getFilteredEstado(ModelAndView modelAndView, @PathVariable("idEst") int idEst,
+			@PathVariable("column") String column, HttpServletRequest request) {
+		modelAndView.addObject("facturas", facturaService.findByIdEstList(idEst, column, request));
 		modelAndView.addObject("estados", estadoService.findAll());
-		modelAndView.addObject("estoy", "factura");
-		modelAndView.setViewName("facturas");
+		modelAndView.addObject("idEst", idEst);
+		modelAndView.addObject("estoy", "filteredEstado");
+		modelAndView.setViewName("facturasFilteredEstado");
 		return modelAndView;
 	}
 
@@ -62,24 +53,6 @@ public class FacturaController {
 		modelAndView.addObject("factura", factura);
 		modelAndView.setViewName("factura");
 		return modelAndView;
-	}
-
-	@RequestMapping(value = { "/factura/save" }, method = RequestMethod.POST)
-	public String saveFactura(@ModelAttribute("factura") Factura factura, BindingResult result, Model model,
-			HttpServletRequest request, RedirectAttributes ra) {
-		if (result.hasErrors()) {
-			// System.out.println(result.getAllErrors());
-			// return "factura";
-		}
-		boolean nueva = false;
-		if (factura.getIdFac() == 0) {
-			nueva = true;
-		}
-		facturaService.save(factura, request);
-		if (nueva) {
-			ra.addFlashAttribute("factura_agregado", "factura_agregado");
-		}
-		return "redirect:/factura";
 	}
 
 	@RequestMapping("/factura/delete/{idFac}")
@@ -95,18 +68,18 @@ public class FacturaController {
 		} catch (NotEmptyException e) {
 			ra.addFlashAttribute("factura_asociado", "factura_asociado");
 		}
-		return "redirect:/factura";
+		return "redirect:/factura/all/null";
 
 	}
 
-	@RequestMapping("/factura/status/{idFac}/{idEst}")
+	@RequestMapping("/factura/status/{idFac}/{idEst}/{column}")
 	public ModelAndView changeStatus(ModelAndView modelAndView, @PathVariable("idFac") int idFac,
-			@PathVariable("idEst") int idEst, HttpServletRequest request) {
+			@PathVariable("idEst") int idEst, @PathVariable("column") String column, HttpServletRequest request) {
 		Factura factura = new Factura();
 		factura = facturaService.findById(idFac);
 		factura.getEstado().setIdEst(idEst);
 		facturaService.update(factura, request);
-		return getAll(modelAndView);
+		return getAll(modelAndView, column, request);
 	}
 
 }

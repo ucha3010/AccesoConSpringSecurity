@@ -146,6 +146,7 @@ public class ProductoServiceImpl implements ProductoService {
 			factura = new Factura();
 			rellenaFacturaComun(factura, frontProductoStock, precioUnitConIva, precioUnitSinIva, context);
 			factura.setImporteTotal(frontProductoStock.getPrecioFinal());
+			factura.setImporteFront(frontProductoStock.getPrecioFinal());
 			if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
 				factura.setIvaImporteTotal(((precioUnitConIva.subtract(precioUnitSinIva))
 						.multiply(new BigDecimal(frontProductoStock.getCantidad(), MathContext.DECIMAL64)))
@@ -217,6 +218,7 @@ public class ProductoServiceImpl implements ProductoService {
 
 				factura.setCuota(cuota);
 				factura.setImporteCuotaTotal(fc.getImporteTotal());
+				factura.setImporteFront(fc.getImporteTotal());
 				factura.setNumeroCuota(fc.getNumeroCuota());
 
 				BigDecimal cuotaSinIva = new BigDecimal(0, MathContext.DECIMAL64);

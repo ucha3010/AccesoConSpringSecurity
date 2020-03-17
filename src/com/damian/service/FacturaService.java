@@ -9,7 +9,7 @@ import com.damian.pojo.Factura;
 
 public interface FacturaService {
 
-	public List<Factura> findAll();
+	public List<Factura> findAll(String column, HttpServletRequest request);
 
 	public Factura findById(int id);
 
@@ -21,13 +21,13 @@ public interface FacturaService {
 
 	public int delete(int id) throws NotEmptyException;
 
-	public List<Factura> findByIdEstModel(int idEst);
+	public List<Factura> findByIdEstModel(int idEst, String column, HttpServletRequest request);
 
 	public List<Factura> findByIdForModel(int idFor);
 
 	public List<Factura> findByIdList(int id);
 
-	public List<Factura> findByIdEstList(int idEst);
+	public List<Factura> findByIdEstList(int idEst, String column, HttpServletRequest request);
 
 	public List<Factura> findByIdCuo(int idCuo);
 

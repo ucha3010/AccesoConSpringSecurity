@@ -2,11 +2,13 @@ package com.damian.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.pojo.Factura;
 
 public interface FacturaDAO {
 
-	public List<Factura> findAll();
+	public List<Factura> findAll(String column, HttpServletRequest request);
 
 	public Factura findById(int id);
 
@@ -18,7 +20,7 @@ public interface FacturaDAO {
 
 	public int delete(int id);
 
-	public List<Factura> findByIdEstModel(int idEst);
+	public List<Factura> findByIdEstModel(int idEst, String column, HttpServletRequest request);
 
 	public List<Factura> findByIdForModel(int idFor);
 

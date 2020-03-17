@@ -2,6 +2,8 @@ package com.damian.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,8 +49,8 @@ public class EstadoServiceImpl implements EstadoService {
 	}
 
 	@Override
-	public int delete(int id) throws NotEmptyException {
-		List<Factura> lista = facturaDAO.findByIdEstModel(id);
+	public int delete(int id, String column, HttpServletRequest request) throws NotEmptyException {
+		List<Factura> lista = facturaDAO.findByIdEstModel(id, column, request);
 		if (lista != null && !lista.isEmpty()) {
 			throw new NotEmptyException("Tiene asociado facturas");
 		}

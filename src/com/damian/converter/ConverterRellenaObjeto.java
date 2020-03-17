@@ -242,7 +242,7 @@ public class ConverterRellenaObjeto {
 
 	public void rellenaEstado(Estado e, ModelEstado me) {
 
-		e.setFacturas(facturaDAO.findByIdEstModel(me.getIdEst()));
+		e.setFacturas(facturaDAO.findByIdEstModel(me.getIdEst(), null, null));
 
 	}
 

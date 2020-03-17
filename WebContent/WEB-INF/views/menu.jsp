@@ -34,7 +34,7 @@
 					</button>
 				</sec:authorize>
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/factura"/>"'>
+					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/factura/all/null"/>"'>
 						<fmt:message key="label.Bills" />
 					</button>
 				</sec:authorize>
@@ -82,7 +82,7 @@
 					</button>
 				</sec:authorize>
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/factura"/>"'>
+					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/factura/all/null"/>"'>
 						<fmt:message key="label.Bills" />
 					</button>
 				</sec:authorize>

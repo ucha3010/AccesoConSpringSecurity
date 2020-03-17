@@ -24,6 +24,7 @@ public class ModelFactura {
 	private double importeCuotaTotal;
 	private double cuotaConIva;
 	private double cuotaSinIva;
+	private double importeFront;
 
 	public ModelFactura() {
 
@@ -329,6 +330,21 @@ public class ModelFactura {
 		this.cuotaSinIva = cuotaSinIva;
 	}
 
+	/**
+	 * @return the importeFront
+	 */
+	public double getImporteFront() {
+		return importeFront;
+	}
+
+	/**
+	 * @param importeFront
+	 *            the importeFront to set
+	 */
+	public void setImporteFront(double importeFront) {
+		this.importeFront = importeFront;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -343,7 +359,7 @@ public class ModelFactura {
 				+ ", observaciones=" + observaciones + ", idFor=" + idFor + ", creadoPor=" + creadoPor + ", idCuo="
 				+ idCuo + ", numeroCuota=" + numeroCuota + ", interesCuotaImporte=" + interesCuotaImporte
 				+ ", importeCuotaTotal=" + importeCuotaTotal + ", cuotaConIva=" + cuotaConIva + ", cuotaSinIva="
-				+ cuotaSinIva + "]";
+				+ cuotaSinIva + "importeFront=" + importeFront + "]";
 	}
 
 }

@@ -26,6 +26,7 @@ public class Factura {
 	private double importeCuotaTotal;
 	private double cuotaConIva;
 	private double cuotaSinIva;
+	private double importeFront;
 
 	public Factura() {
 
@@ -346,6 +347,21 @@ public class Factura {
 		this.cuotaSinIva = cuotaSinIva;
 	}
 
+	/**
+	 * @return the importeFront
+	 */
+	public double getImporteFront() {
+		return importeFront;
+	}
+
+	/**
+	 * @param importeFront
+	 *            the importeFront to set
+	 */
+	public void setImporteFront(double importeFront) {
+		this.importeFront = importeFront;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -360,7 +376,8 @@ public class Factura {
 				+ observaciones + ", creadoPor=" + creadoPor + ", productoFacturaList=" + productoFacturaList
 				+ ", estado=" + estado + ", formaPago=" + formaPago + ", cuota=" + cuota + ", numeroCuota="
 				+ numeroCuota + ", interesCuotaImporte=" + interesCuotaImporte + ", importeCuotaTotal="
-				+ importeCuotaTotal + ", cuotaConIva=" + cuotaConIva + ", cuotaSinIva=" + cuotaSinIva + "]";
+				+ importeCuotaTotal + ", cuotaConIva=" + cuotaConIva + ", cuotaSinIva=" + cuotaSinIva
+				+ ", importeFront=" + importeFront + "]";
 	}
 
 }

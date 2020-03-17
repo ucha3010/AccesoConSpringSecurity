@@ -95,7 +95,7 @@
 								</sec:authorize>
 								<td><c:out value="${estado[nameColSelect]}" /></td>
 								<td class="sin_padding">
-									<a title="<fmt:message key="label.Bills" />" href='<c:url value='/factura/filteredEstado/${estado.idEst}' />'>
+									<a title="<fmt:message key="label.Bills" />" href='<c:url value='/factura/filteredEstado/${estado.idEst}/null' />'>
 										<img src='<c:url value="/resources/imgs/factura.png"/>' class="margin-left-5porciento width-35">
 									</a>
 								</td>

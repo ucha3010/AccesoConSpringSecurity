@@ -2,6 +2,8 @@ package com.damian.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Estado;
 
@@ -17,6 +19,6 @@ public interface EstadoService {
 
 	public int update(Estado estado);
 
-	public int delete(int id) throws NotEmptyException;
+	public int delete(int id, String column, HttpServletRequest request) throws NotEmptyException;
 
 }

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,11 @@ import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterFactura;
 import com.damian.dao.FacturaDAO;
+import com.damian.dao.UsuarioDAO;
+import com.damian.dao.UsuarioOrdenDAO;
 import com.damian.dao.model.ModelFactura;
 import com.damian.pojo.Factura;
+import com.damian.utils.Utils;
 
 @Repository
 public class FacturaDAOImpl implements FacturaDAO {
@@ -30,14 +34,24 @@ public class FacturaDAOImpl implements FacturaDAO {
 
 	private final String TABLA = "factura";
 	private final String KEY = "idFac";
+	private final String KEY_COLUMN = "fechaCompra";
+	private final String KEY_ORDER = "DESC";
+	private final String COLUMN_ORDER = "fechaCompra DESC";
 
 	@Autowired
 	private ConverterFactura converterFactura;
+	
+	@Autowired
+	private UsuarioDAO usuarioDAO;
+	
+	@Autowired
+	private UsuarioOrdenDAO usuarioOrdenDAO;
 
 	@Override
-	public List<Factura> findAll() {
+	public List<Factura> findAll(String column, HttpServletRequest request) {
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY fechaCompra DESC";
+		String sql = "SELECT * FROM " + TABLA + " ORDER BY " + Utils.validateColumnAndOrder(column, TABLA,
+				KEY_COLUMN, KEY_ORDER, COLUMN_ORDER, request, usuarioDAO, usuarioOrdenDAO);
 
 		return lista(sql);
 	}
@@ -86,12 +100,13 @@ public class FacturaDAOImpl implements FacturaDAO {
 			ModelFactura mf = converterFactura.convert(factura);
 			String sql = "INSERT INTO " + TABLA
 					+ " (compra, ivaTotal, ivaImporteTotal, descuentoTotal, descuentoImporteTotal, importeTotal, fechaCompra, fechaEntrega, idEst, direccionEntrega, "
-					+ "observaciones, idFor, creadoPor, idCuo, numeroCuota, interesCuotaImporte, importeCuotaTotal, cuotaConIva, cuotaSinIva) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "observaciones, idFor, creadoPor, idCuo, numeroCuota, interesCuotaImporte, importeCuotaTotal, cuotaConIva, cuotaSinIva, importeFront) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
 					mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(), mf.getFechaCompra(),
 					mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(),
-					mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(), mf.getImporteCuotaTotal(), mf.getCuotaConIva(), mf.getCuotaSinIva());
+					mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(),
+					mf.getImporteCuotaTotal(), mf.getCuotaConIva(), mf.getCuotaSinIva(), mf.getImporteFront());
 		}
 	}
 
@@ -100,12 +115,14 @@ public class FacturaDAOImpl implements FacturaDAO {
 		ModelFactura mf = converterFactura.convert(factura);
 		String sql = "UPDATE " + TABLA
 				+ " SET compra=?, ivaTotal=?, ivaImporteTotal=?, descuentoTotal=?, descuentoImporteTotal=?, importeTotal=?, fechaCompra=?, fechaEntrega=?, idEst=?, "
-				+ "direccionEntrega=?, observaciones=?, idFor=?, creadoPor=?, idCuo=?, numeroCuota=?, interesCuotaImporte=?, importeCuotaTotal=?, cuotaConIva=?, cuotaSinIva=? "
-				+ "WHERE " + KEY + "=?";
+				+ "direccionEntrega=?, observaciones=?, idFor=?, creadoPor=?, idCuo=?, numeroCuota=?, interesCuotaImporte=?, importeCuotaTotal=?, cuotaConIva=?, cuotaSinIva=?, "
+				+ "importeFront=? WHERE " + KEY + "=?";
 		return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
 				mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(), mf.getFechaCompra(),
 				mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(),
-				mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(), mf.getImporteCuotaTotal(), mf.getCuotaConIva(), mf.getCuotaSinIva(), mf.getIdFac());
+				mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(),
+				mf.getImporteCuotaTotal(), mf.getCuotaConIva(), mf.getCuotaSinIva(), mf.getImporteFront(),
+				mf.getIdFac());
 	}
 
 	@Override
@@ -116,9 +133,10 @@ public class FacturaDAOImpl implements FacturaDAO {
 	}
 
 	@Override
-	public List<Factura> findByIdEstModel(int idEst) {
+	public List<Factura> findByIdEstModel(int idEst, String column, HttpServletRequest request) {
 
-		String sql = "SELECT * FROM " + TABLA + " WHERE idEst = " + idEst + " ORDER BY fechaCompra DESC";
+		String sql = "SELECT * FROM " + TABLA + " WHERE idEst = " + idEst + " ORDER BY " + Utils.validateColumnAndOrder(column, TABLA,
+				KEY_COLUMN, KEY_ORDER, COLUMN_ORDER, request, usuarioDAO, usuarioOrdenDAO);
 
 		return lista(sql);
 	}
@@ -142,6 +160,13 @@ public class FacturaDAOImpl implements FacturaDAO {
 		String sql = "SELECT * FROM " + TABLA + " WHERE idCuo = " + idCuo + " ORDER BY fechaCompra ASC";
 
 		return lista(sql);
+	}
+
+	@Override
+	public List<Factura> findByIdList(int id) {
+		List<Factura> facturas = new ArrayList<>();
+		facturas.add(findById(id));
+		return facturas;
 	}
 
 	private List<Factura> lista(String sql) {
@@ -175,13 +200,8 @@ public class FacturaDAOImpl implements FacturaDAO {
 		mf.setImporteCuotaTotal(rs.getDouble("importeCuotaTotal"));
 		mf.setCuotaConIva(rs.getDouble("cuotaConIva"));
 		mf.setCuotaSinIva(rs.getDouble("cuotaSinIva"));
+		mf.setImporteFront(rs.getDouble("importeFront"));
 		return mf;
 	}
-
-	@Override
-	public List<Factura> findByIdList(int id) {
-		List<Factura> facturas = new ArrayList<>();
-		facturas.add(findById(id));
-		return facturas;
-	}
+	
 }
