@@ -41,7 +41,7 @@ public class ProductoEmpresaController {
 		modelAndView.addObject("producto", productoService.findById(idPro));
 		modelAndView.addObject("auxString", new AuxString());
 		modelAndView.addObject("productoEmpresas", productoEmpresaService.findByIdPro(idPro));
-		modelAndView.addObject("empresas", empresaService.findAll());
+		modelAndView.addObject("empresas", empresaService.findAll(null, null));
 		modelAndView.setViewName("productoEmpresa");
 		return modelAndView;
 	}

@@ -1,5 +1,7 @@
 package com.damian.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,9 +27,10 @@ public class EmpresaController {
 	@Autowired
 	private EmpresaService empresaService;
 
-	@RequestMapping("/empresa")
-	public ModelAndView getAll(ModelAndView modelAndView) {
-		modelAndView.addObject("empresas", empresaService.findAll());
+	@RequestMapping("/empresa/all/{column}")
+	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
+			HttpServletRequest request) {
+		modelAndView.addObject("empresas", empresaService.findAll(column, request));
 		modelAndView.setViewName("empresas");
 		return modelAndView;
 	}

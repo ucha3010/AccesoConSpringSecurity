@@ -2,13 +2,15 @@ package com.damian.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.pojo.Empresa;
 
 public interface EmpresaDAO {
 
 	public void save(Empresa empresa);
 
-	public List<Empresa> findAll();
+	public List<Empresa> findAll(String column, HttpServletRequest request);
 	
 	public void update(Empresa empresa);
 	

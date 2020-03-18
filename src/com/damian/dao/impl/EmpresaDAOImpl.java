@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,11 @@ import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterEmpresa;
 import com.damian.dao.EmpresaDAO;
+import com.damian.dao.UsuarioDAO;
+import com.damian.dao.UsuarioOrdenDAO;
 import com.damian.dao.model.ModelEmpresa;
 import com.damian.pojo.Empresa;
+import com.damian.utils.Utils;
 
 @Repository
 public class EmpresaDAOImpl implements EmpresaDAO {
@@ -30,9 +34,18 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 
 	private final String TABLA = "empresa";
 	private final String KEY = "idEmp";
+	private final String KEY_COLUMN = "nombreComercial";
+	private final String KEY_ORDER = "ASC";
+	private final String COLUMN_ORDER = "nombreComercial ASC";
 
 	@Autowired
 	private ConverterEmpresa converterEmpresa;
+	
+	@Autowired
+	private UsuarioDAO usuarioDAO;
+	
+	@Autowired
+	private UsuarioOrdenDAO usuarioOrdenDAO;
 
 	@Override
 	public Empresa findById(int id) {
@@ -60,9 +73,10 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	}
 
 	@Override
-	public List<Empresa> findAll() {
+	public List<Empresa> findAll(String column, HttpServletRequest request) {
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY nombreComercial ASC";
+		String sql = "SELECT * FROM " + TABLA + " ORDER BY " + Utils.validateColumnAndOrder(column, TABLA,
+				KEY_COLUMN, KEY_ORDER, COLUMN_ORDER, request, usuarioDAO, usuarioOrdenDAO);
 
 		return lista(sql);
 	}

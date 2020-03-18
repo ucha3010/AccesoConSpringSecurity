@@ -2,6 +2,8 @@ package com.damian.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.pojo.Empresa;
 
 public interface EmpresaService {
@@ -12,7 +14,7 @@ public interface EmpresaService {
 
 	void save(Empresa empresa);
 
-	List<Empresa> findAll();
+	List<Empresa> findAll(String column, HttpServletRequest request);
 
 	void update(Empresa empresa);
 

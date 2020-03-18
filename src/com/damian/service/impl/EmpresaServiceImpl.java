@@ -2,6 +2,8 @@ package com.damian.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,8 +48,8 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
-	public List<Empresa> findAll() {
-		return empresaDAO.findAll();
+	public List<Empresa> findAll(String column, HttpServletRequest request) {
+		return empresaDAO.findAll(column, request);
 	}
 
 	@Override

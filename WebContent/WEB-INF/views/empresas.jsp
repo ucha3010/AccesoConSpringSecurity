@@ -45,6 +45,11 @@
 				$(".collapse").collapse('show');
 			}
 		}
+		function ordenaTabla(numCol){
+			var columnas = ['nombreComercial','cif','email','telefono','fax'];
+			var url = "<c:url value='/empresa/all/"+columnas[numCol]+"' />";
+			location.href=url;			
+		}
 	</script>
 </head>
 <body>
@@ -109,17 +114,16 @@
 					<c:set var="count" value="0" scope="page" />
 					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 						<th colspan="2"></th>
-						<c:set var="count" value="${count + 2}" scope="page"/>
 					</sec:authorize>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Company.name" /></th>
+					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Company.name" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.vat" /></th>
+					<th onclick="ordenaTabla(${count})"><fmt:message key="label.vat" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Email" /></th>
+					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Email" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Phone" /></th>
+					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Phone" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Fax" /></th>
+					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Fax" /></th>
 					<th class="width-100"><fmt:message key="label.Extras" /></th>
 				</tr>
 			</thead>
