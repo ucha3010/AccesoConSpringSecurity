@@ -2,11 +2,13 @@ package com.damian.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.pojo.Producto;
 
 public interface ProductoDAO {
 
-	public List<Producto> findAll();
+	public List<Producto> findAll(String column, HttpServletRequest request);
 
 	public Producto findById(int id);
 

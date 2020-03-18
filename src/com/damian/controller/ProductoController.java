@@ -28,9 +28,10 @@ public class ProductoController {
 	@Autowired
 	private CategoriaService categoriaService;
 
-	@RequestMapping("/producto")
-	public ModelAndView getAll(ModelAndView modelAndView) {
-		modelAndView.addObject("productos", productoService.findAll());
+	@RequestMapping("/producto/all/{column}")
+	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
+			HttpServletRequest request) {
+		modelAndView.addObject("productos", productoService.findAll(column, request));
 		modelAndView.addObject("estoy", "producto");
 		modelAndView.setViewName("productos");
 		return modelAndView;

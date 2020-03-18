@@ -59,8 +59,8 @@ public class ProductoServiceImpl implements ProductoService {
 	private SubcategoriaDAO subcategoriaDAO;
 
 	@Override
-	public List<Producto> findAll() {
-		List<Producto> salida = productoDAO.findAll();
+	public List<Producto> findAll(String column, HttpServletRequest request) {
+		List<Producto> salida = productoDAO.findAll(column, request);
 		for (Producto p : salida) {
 			Subcategoria s = subcategoriaDAO.findByIdModel(p.getSubcategoria().getIdSub());
 			Categoria c = categoriaDAO.findByIdModel(s.getCategoria().getIdCat());

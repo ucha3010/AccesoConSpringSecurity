@@ -1,5 +1,7 @@
 package com.damian.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -44,12 +46,13 @@ public class ProductoEmpresaController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/productoEmpresa/empresa/{idEmp}")
-	public ModelAndView getEmpresas(ModelAndView modelAndView, @PathVariable("idEmp") int idEmp) {
+	@RequestMapping("/productoEmpresa/empresa/{idEmp}/{column}")
+	public ModelAndView getEmpresas(ModelAndView modelAndView, @PathVariable("idEmp") int idEmp, @PathVariable("column") String column,
+			HttpServletRequest request) {
 		modelAndView.addObject("empresa", empresaService.findById(idEmp));
 		modelAndView.addObject("auxString", new AuxString());
 		modelAndView.addObject("productoEmpresas", productoEmpresaService.findByIdEmp(idEmp));
-		modelAndView.addObject("productos", productoService.findAll());
+		modelAndView.addObject("productos", productoService.findAll(column, request));
 		modelAndView.setViewName("empresaProducto");
 		return modelAndView;
 	}

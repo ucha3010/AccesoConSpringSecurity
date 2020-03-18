@@ -39,7 +39,7 @@
 					</button>
 				</sec:authorize>
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/producto"/>"'>
+					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/producto/all/null"/>"'>
 						<fmt:message key="Products" />
 					</button>
 				</sec:authorize>
@@ -87,7 +87,7 @@
 					</button>
 				</sec:authorize>
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/producto"/>"'>
+					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/producto/all/null"/>"'>
 						<fmt:message key="Products" />
 					</button>
 				</sec:authorize>

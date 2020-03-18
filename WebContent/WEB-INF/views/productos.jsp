@@ -18,6 +18,7 @@
 	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/tablas.css'/>" rel="stylesheet" type="text/css" />
+	<fmt:message key="language.name" var="nameColSelect"/>
 	<script type="text/javascript">
 		function confirmDelete(idPro){
 			if(confirm("<fmt:message key='Delete.message' />")){
@@ -47,11 +48,15 @@
 				$(".collapse").collapse('show');
 			}
 		}
+		function ordenaTabla(numCol){
+			var columnas = ['${nameColSelect}','estado','marca','modelo','precioVenta','unidades'];
+			var url = "<c:url value='/producto/all/"+columnas[numCol]+"' />";
+			location.href=url;			
+		}
 	</script>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
-	<fmt:message key="language.name" var="nameColSelect"/>
 	<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 		<div class="d-flex">
 			<div class="p-2">
@@ -112,23 +117,21 @@
 					<c:set var="count" value="0" scope="page" />
 					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 						<th></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
 					</sec:authorize>
 					<sec:authorize access="hasAnyRole('ROL_ROOT')">
 						<th></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
 					</sec:authorize>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Product.description" /></th>
+					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Product.description" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.state" /></th>
+					<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.state" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.brand" /></th>
+					<th onclick="ordenaTabla(${count})"><fmt:message key="label.brand" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.model" /></th>
+					<th onclick="ordenaTabla(${count})"><fmt:message key="label.model" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th colspan="2" class="text-center"><fmt:message key="label.salePrice" /></th>
-					<c:set var="count" value="${count + 2}" scope="page"/>
-					<th class="text-center"><fmt:message key="label.units" /></th>
+					<th colspan="2" class="text-center" onclick="ordenaTabla(${count})"><fmt:message key="label.salePrice" /></th>
+					<c:set var="count" value="${count + 1}" scope="page"/>
+					<th class="text-center" onclick="ordenaTabla(${count})"><fmt:message key="label.units" /></th>
 					<th class="width-150"><fmt:message key="label.Extras" /></th>
 				</tr>
 			</thead>
