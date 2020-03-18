@@ -68,7 +68,7 @@ public class EmpresaController {
 		if (nueva) {
 			ra.addFlashAttribute("empresa_agregada", "empresa_agregada");
 		}
-		return "redirect:/empresa";
+		return "redirect:/empresa/all/null";
 	}
 
 	@RequestMapping("/empresa/{idEmp}/delete")
@@ -80,7 +80,7 @@ public class EmpresaController {
 			ra.addFlashAttribute("resultado", "No se ha podido borrar la empresa");
 		}
 
-		return "redirect:/empresa";
+		return "redirect:/empresa/all/null";
 
 	}
 

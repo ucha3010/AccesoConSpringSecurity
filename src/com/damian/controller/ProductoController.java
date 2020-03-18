@@ -72,7 +72,7 @@ public class ProductoController {
 		if (nueva) {
 			ra.addFlashAttribute("producto_agregado", "producto_agregado");
 		}
-		return "redirect:/producto";
+		return "redirect:/producto/all/null";
 	}
 
 	@RequestMapping("/producto/delete/{idPro}")
@@ -84,7 +84,7 @@ public class ProductoController {
 		} catch (NotEmptyException e) {
 			ra.addFlashAttribute("producto_asociado", "producto_asociado");
 		}
-		return "redirect:/producto";
+		return "redirect:/producto/all/null";
 
 	}
 
@@ -101,7 +101,7 @@ public class ProductoController {
 			BindingResult result, Model model, RedirectAttributes ra, HttpServletRequest request) {
 
 		productoService.saveProductoStock(frontProductoStock, request);
-		return "redirect:/producto";
+		return "redirect:/producto/all/null";
 	}
 
 }
