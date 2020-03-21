@@ -40,10 +40,10 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 
 	@Autowired
 	private ConverterEmpresa converterEmpresa;
-	
+
 	@Autowired
 	private UsuarioDAO usuarioDAO;
-	
+
 	@Autowired
 	private UsuarioOrdenDAO usuarioOrdenDAO;
 
@@ -75,7 +75,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	@Override
 	public List<Empresa> findAll(String column, HttpServletRequest request) {
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY " + Utils.validateColumnAndOrder(column, TABLA,
+		String sql = "SELECT * FROM " + TABLA + " ORDER BY " + Utils.validateColumnAndOrder(column, null, TABLA,
 				KEY_COLUMN, KEY_ORDER, COLUMN_ORDER, request, usuarioDAO, usuarioOrdenDAO);
 
 		return lista(sql);

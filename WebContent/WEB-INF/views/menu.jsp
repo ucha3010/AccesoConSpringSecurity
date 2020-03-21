@@ -54,12 +54,12 @@
 					</button>
 				</sec:authorize>
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-					<button type="button" class="btn fondo-1f45e0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/usuario"/>"'>
+					<button type="button" class="btn fondo-1f45e0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/usuario/all/null/null"/>"'>
 						<fmt:message key="label.Users" />
 					</button>
 				</sec:authorize>
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_USUARIO','ROL_ROOT')">
-					<button type="button" class="btn fondo-008000 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/cliente'/>"'>
+					<button type="button" class="btn fondo-008000 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/cliente/all/null/null'/>"'>
 						<fmt:message key="label.Customers" />
 					</button>
 				</sec:authorize>
@@ -102,12 +102,12 @@
 					</button>
 				</sec:authorize>
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-					<button type="button" class="btn fondo-1f45e0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/usuario"/>"'>
+					<button type="button" class="btn fondo-1f45e0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/usuario/all/null/null"/>"'>
 						<fmt:message key="label.Users" />
 					</button>
 				</sec:authorize>
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_USUARIO','ROL_ROOT')">
-					<button type="button" class="btn fondo-008000 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/cliente'/>"'>
+					<button type="button" class="btn fondo-008000 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/cliente/all/null/null'/>"'>
 						<fmt:message key="label.Customers" />
 					</button>
 				</sec:authorize>

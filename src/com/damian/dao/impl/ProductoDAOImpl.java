@@ -40,17 +40,17 @@ public class ProductoDAOImpl implements ProductoDAO {
 
 	@Autowired
 	private ConverterProducto converterProducto;
-	
+
 	@Autowired
 	private UsuarioDAO usuarioDAO;
-	
+
 	@Autowired
 	private UsuarioOrdenDAO usuarioOrdenDAO;
 
 	@Override
 	public List<Producto> findAll(String column, HttpServletRequest request) {
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY " + Utils.validateColumnAndOrder(column, TABLA,
+		String sql = "SELECT * FROM " + TABLA + " ORDER BY " + Utils.validateColumnAndOrder(column, null, TABLA,
 				KEY_COLUMN, KEY_ORDER, COLUMN_ORDER, request, usuarioDAO, usuarioOrdenDAO);
 
 		return lista(sql);
@@ -102,10 +102,11 @@ public class ProductoDAOImpl implements ProductoDAO {
 					+ " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU, unidades, precioVenta, precioCompra, marca, modelo, "
 					+ "serie, ubicacion, estado, partida, fechaCompra, enviar, vendible, mesesGarantia, peso, volumen, idSub)"
 					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getNombrePT(), mp.getNombreFR(), mp.getNombreIT(), mp.getNombreGE(), mp.getNombreCA(), mp.getNombreEU(), mp.getUnidades(), mp.getPrecioVenta(),
-					mp.getPrecioCompra(), mp.getMarca(), mp.getModelo(), mp.getSerie(), mp.getUbicacion(),
-					mp.getEstado(), mp.getPartida(), mp.getFechaCompra(), mp.isEnviar(), mp.isVendible(),
-					mp.getMesesGarantia(), mp.getPeso(), mp.getVolumen(), mp.getIdSub());
+			jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getNombrePT(), mp.getNombreFR(),
+					mp.getNombreIT(), mp.getNombreGE(), mp.getNombreCA(), mp.getNombreEU(), mp.getUnidades(),
+					mp.getPrecioVenta(), mp.getPrecioCompra(), mp.getMarca(), mp.getModelo(), mp.getSerie(),
+					mp.getUbicacion(), mp.getEstado(), mp.getPartida(), mp.getFechaCompra(), mp.isEnviar(),
+					mp.isVendible(), mp.getMesesGarantia(), mp.getPeso(), mp.getVolumen(), mp.getIdSub());
 		}
 	}
 
@@ -116,10 +117,11 @@ public class ProductoDAOImpl implements ProductoDAO {
 				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, unidades=?, precioVenta=?, precioCompra=?, marca=?, "
 				+ "modelo=?, serie=?, ubicacion=?, estado=?, partida=?, fechaCompra=?, enviar=?, vendible=?, "
 				+ "mesesGarantia=?, peso=?, volumen=?, idSub=? WHERE " + KEY + "=?";
-		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getNombrePT(), mp.getNombreFR(), mp.getNombreIT(), mp.getNombreGE(), mp.getNombreCA(), mp.getNombreEU(), mp.getUnidades(), mp.getPrecioVenta(),
-				mp.getPrecioCompra(), mp.getMarca(), mp.getModelo(), mp.getSerie(), mp.getUbicacion(), mp.getEstado(),
-				mp.getPartida(), mp.getFechaCompra(), mp.isEnviar(), mp.isVendible(), mp.getMesesGarantia(),
-				mp.getPeso(), mp.getVolumen(), mp.getIdSub(), mp.getIdPro());
+		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getNombrePT(), mp.getNombreFR(),
+				mp.getNombreIT(), mp.getNombreGE(), mp.getNombreCA(), mp.getNombreEU(), mp.getUnidades(),
+				mp.getPrecioVenta(), mp.getPrecioCompra(), mp.getMarca(), mp.getModelo(), mp.getSerie(),
+				mp.getUbicacion(), mp.getEstado(), mp.getPartida(), mp.getFechaCompra(), mp.isEnviar(), mp.isVendible(),
+				mp.getMesesGarantia(), mp.getPeso(), mp.getVolumen(), mp.getIdSub(), mp.getIdPro());
 	}
 
 	@Override

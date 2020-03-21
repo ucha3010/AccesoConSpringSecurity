@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,10 @@ import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterUsuario;
 import com.damian.dao.UsuarioDAO;
+import com.damian.dao.UsuarioOrdenDAO;
 import com.damian.dao.model.ModelUsuario;
 import com.damian.pojo.Usuario;
+import com.damian.utils.Utils;
 
 @Repository
 public class UsuarioDAOImpl implements UsuarioDAO {
@@ -32,9 +35,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	private final String TABLA = "usuario";
 	private final String KEY = "idUsr";
+	private final String KEY_COLUMN = "usuario";
+	private final String KEY_ORDER = "ASC";
+	private final String COLUMN_ORDER = "usuario ASC";
 
 	@Autowired
 	private ConverterUsuario converterUsuario;
+
+	@Autowired
+	private UsuarioOrdenDAO usuarioOrdenDAO;
 
 	@Override
 	public Usuario findById(int id) {
@@ -76,18 +85,68 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public List<Usuario> findAll() {
+	public List<Usuario> findAll(String column, String order, HttpServletRequest request) {
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY usuario ASC";
+		boolean dp = false;
+		List<Usuario> usuarios = new ArrayList<>();
 
-		return lista(sql);
-	}
+		if (column != null && column.length() > 15 && column.substring(0, 15).equals("datosPersonales")) {
+			dp = true;
+		}
 
-	@Override
-	public List<Usuario> findAllOrderByNombre() {
+		String sql = "SELECT * FROM " + TABLA + " ORDER BY " + Utils.validateColumnAndOrder(column, order, TABLA,
+				KEY_COLUMN, KEY_ORDER, COLUMN_ORDER, request, this, usuarioOrdenDAO);
 
-		List<Usuario> usuarios = findAll();
-		ordenarPorNombre(usuarios);
+		if (order != null && !order.equals("null")) {
+			String orderSql = sql.substring(sql.length() - 3);
+			if (orderSql.equals("ASC")) {
+				sql = sql.substring(0, sql.length() - 3) + order;
+			} else {
+				sql = sql.substring(0, sql.length() - 4) + order;
+			}
+		}
+
+		usuarios = lista(sql);
+
+		if (dp) {
+			if (sql.substring(sql.length() - 3, sql.length()).equals("ASC")) {
+				switch (column.substring(15)) {
+				case "nombre":
+					ordenarPorNombreASC(usuarios);
+					break;
+				case "apellido1":
+					ordenarPorApellido1ASC(usuarios);
+					break;
+				case "fechaNacimiento":
+					ordenarPorFechaNacimientoASC(usuarios);
+					break;
+				case "email":
+					ordenarPorEmailASC(usuarios);
+					break;
+				case "telefono":
+					ordenarPorTelefonoASC(usuarios);
+					break;
+				}
+			} else {
+				switch (column.substring(15)) {
+				case "nombre":
+					ordenarPorNombreDESC(usuarios);
+					break;
+				case "apellido1":
+					ordenarPorApellido1DESC(usuarios);
+					break;
+				case "fechaNacimiento":
+					ordenarPorFechaNacimientoDESC(usuarios);
+					break;
+				case "email":
+					ordenarPorEmailDESC(usuarios);
+					break;
+				case "telefono":
+					ordenarPorTelefonoDESC(usuarios);
+					break;
+				}
+			}
+		}
 
 		return usuarios;
 	}
@@ -161,13 +220,130 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return mu;
 	}
 
-	private void ordenarPorNombre(List<Usuario> usuarios) {
+	private void ordenarPorNombreASC(List<Usuario> usuarios) {
 		Collections.sort(usuarios, new Comparator<Usuario>() {
 
 			@Override
 			public int compare(Usuario u1, Usuario u2) {
 				return new String(u1.getDatosPersonales().getNombre())
 						.compareToIgnoreCase(new String(u2.getDatosPersonales().getNombre()));
+			}
+		});
+	}
+
+	private void ordenarPorApellido1ASC(List<Usuario> usuarios) {
+		Collections.sort(usuarios, new Comparator<Usuario>() {
+
+			@Override
+			public int compare(Usuario u1, Usuario u2) {
+				return new String(u1.getDatosPersonales().getApellido1())
+						.compareToIgnoreCase(new String(u2.getDatosPersonales().getApellido1()));
+			}
+		});
+	}
+
+	private void ordenarPorFechaNacimientoASC(List<Usuario> usuarios) {
+		Collections.sort(usuarios, new Comparator<Usuario>() {
+
+			@Override
+			public int compare(Usuario u1, Usuario u2) {
+				if (u2.getDatosPersonales().getFechaNacimiento() == null) {
+					return 1;
+				} else if (u1.getDatosPersonales().getFechaNacimiento() == null || u1.getDatosPersonales()
+						.getFechaNacimiento().before(u2.getDatosPersonales().getFechaNacimiento())) {
+					return -1;
+				} else if (u1.getDatosPersonales().getFechaNacimiento()
+						.after(u2.getDatosPersonales().getFechaNacimiento())) {
+					return 1;
+				} else {
+					return 0;
+				}
+			}
+		});
+	}
+
+	private void ordenarPorEmailASC(List<Usuario> usuarios) {
+		Collections.sort(usuarios, new Comparator<Usuario>() {
+
+			@Override
+			public int compare(Usuario u1, Usuario u2) {
+				return new String(u1.getDatosPersonales().getEmail())
+						.compareToIgnoreCase(new String(u2.getDatosPersonales().getEmail()));
+			}
+		});
+	}
+
+	private void ordenarPorTelefonoASC(List<Usuario> usuarios) {
+		Collections.sort(usuarios, new Comparator<Usuario>() {
+
+			@Override
+			public int compare(Usuario u1, Usuario u2) {
+				return new String(u1.getDatosPersonales().getTelefono())
+						.compareToIgnoreCase(new String(u2.getDatosPersonales().getTelefono()));
+			}
+		});
+	}
+
+	private void ordenarPorNombreDESC(List<Usuario> usuarios) {
+		Collections.sort(usuarios, new Comparator<Usuario>() {
+
+			@Override
+			public int compare(Usuario u1, Usuario u2) {
+				return new String(u2.getDatosPersonales().getNombre())
+						.compareToIgnoreCase(new String(u1.getDatosPersonales().getNombre()));
+			}
+		});
+	}
+
+	private void ordenarPorApellido1DESC(List<Usuario> usuarios) {
+		Collections.sort(usuarios, new Comparator<Usuario>() {
+
+			@Override
+			public int compare(Usuario u1, Usuario u2) {
+				return new String(u2.getDatosPersonales().getApellido1())
+						.compareToIgnoreCase(new String(u1.getDatosPersonales().getApellido1()));
+			}
+		});
+	}
+
+	private void ordenarPorFechaNacimientoDESC(List<Usuario> usuarios) {
+		Collections.sort(usuarios, new Comparator<Usuario>() {
+
+			@Override
+			public int compare(Usuario u1, Usuario u2) {
+				if (u2.getDatosPersonales().getFechaNacimiento() == null) {
+					return -1;
+				} else if (u1.getDatosPersonales().getFechaNacimiento() == null || u1.getDatosPersonales()
+						.getFechaNacimiento().before(u2.getDatosPersonales().getFechaNacimiento())) {
+					return 1;
+				} else if (u1.getDatosPersonales().getFechaNacimiento()
+						.after(u2.getDatosPersonales().getFechaNacimiento())) {
+					return -1;
+				} else {
+					return 0;
+				}
+			}
+		});
+	}
+
+	private void ordenarPorEmailDESC(List<Usuario> usuarios) {
+		Collections.sort(usuarios, new Comparator<Usuario>() {
+
+			@Override
+			public int compare(Usuario u1, Usuario u2) {
+				return new String(u2.getDatosPersonales().getEmail())
+						.compareToIgnoreCase(new String(u1.getDatosPersonales().getEmail()));
+			}
+		});
+	}
+
+	private void ordenarPorTelefonoDESC(List<Usuario> usuarios) {
+		Collections.sort(usuarios, new Comparator<Usuario>() {
+
+			@Override
+			public int compare(Usuario u1, Usuario u2) {
+				return new String(u2.getDatosPersonales().getTelefono())
+						.compareToIgnoreCase(new String(u1.getDatosPersonales().getTelefono()));
 			}
 		});
 	}

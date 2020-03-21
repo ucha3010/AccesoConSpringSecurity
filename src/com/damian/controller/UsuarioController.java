@@ -36,9 +36,10 @@ public class UsuarioController {
 	@Autowired
 	private RolService rolService;
 
-	@RequestMapping("/usuario")
-	public ModelAndView getAll(ModelAndView modelAndView) {
-		modelAndView.addObject("usuarios", usuarioService.findAll());
+	@RequestMapping("/usuario/all/{column}/{order}")
+	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column, @PathVariable("order") String order,
+			HttpServletRequest request) {
+		modelAndView.addObject("usuarios", usuarioService.findAll(column, order, request));
 		modelAndView.addObject("roles", rolService.findAll());
 		modelAndView.addObject("estoy", "usuario");
 		modelAndView.setViewName("usuarios");
@@ -120,7 +121,7 @@ public class UsuarioController {
 		if (nueva) {
 			ra.addFlashAttribute("usuario_agregado", "usuario_agregado");
 		}
-		return "redirect:/usuario";
+		return "redirect:/usuario/all/" + usuarioService.getColumn(request);
 	}
 
 	@RequestMapping(value = "/usuario/nuevo", method = RequestMethod.GET)
@@ -178,19 +179,20 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/usuario/{idUsr}/delete")
-	public String deleteUser(@PathVariable("idUsr") int idUsr, RedirectAttributes ra) {
+	public String deleteUser(@PathVariable("idUsr") int idUsr, RedirectAttributes ra, HttpServletRequest request) {
 
 		usuarioService.delete(idUsr);
 		ra.addFlashAttribute("usuario_eliminado", "usuario_eliminado");
 
-		return "redirect:/usuario";
+		return "redirect:/usuario/all/" + usuarioService.getColumn(request);
 
 	}
 
-	@RequestMapping("/usuario/cliente")
-	public ModelAndView getCustomers(ModelAndView modelAndView) {
+	@RequestMapping("/usuario/cliente/all/{column}/{order}")
+	public ModelAndView getCustomers(ModelAndView modelAndView, @PathVariable("column") String column, @PathVariable("order") String order,
+			HttpServletRequest request) {
 		modelAndView.addObject("roles", rolService.findAll());
-		modelAndView.addObject("usuarios", usuarioService.findCustomers());
+		modelAndView.addObject("usuarios", usuarioService.findCustomers(column, order, request));
 		modelAndView.addObject("estoy", "usuario");
 		modelAndView.setViewName("usuarios");
 		return modelAndView;
@@ -206,18 +208,20 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/usuario/available/{idUsr}")
-	public String changeAvailable(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
+	public String changeAvailable(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr,
+			HttpServletRequest request) {
 		Usuario usuario = new Usuario();
 		usuario = usuarioService.findById(idUsr);
 		usuario.setHabilitado(!usuario.isHabilitado());
 		usuarioService.update(usuario);
-		return "redirect:/usuario";
+		return "redirect:/usuario/all/" + usuarioService.getColumn(request);
 	}
 
 	@RequestMapping("/usuario/reset/{idUsr}")
-	public String passwordReset(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
+	public String passwordReset(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr,
+			HttpServletRequest request) {
 		usuarioService.reset(idUsr);
-		return "redirect:/usuario";
+		return "redirect:/usuario/all/" + usuarioService.getColumn(request);
 	}
 
 	private void fillLoggedUser(ModelAndView modelAndView, int idUsr) {

@@ -12,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.damian.dao.UsuarioDAO;
+import com.damian.dao.UsuarioOrdenDAO;
+import com.damian.dao.model.ModelUsuarioOrden;
 import com.damian.exceptions.RepeatedUsernameException;
 import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
@@ -25,6 +27,7 @@ import com.damian.service.DireccionService;
 import com.damian.service.UsuarioEmpresaService;
 import com.damian.service.UsuarioRolService;
 import com.damian.service.UsuarioService;
+import com.damian.utils.Utils;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -46,6 +49,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
 	private DireccionService direccionService;
+
+	@Autowired
+	private UsuarioOrdenDAO usuarioOrdenDAO;
 
 	@Override
 	public Usuario findById(int id) {
@@ -125,13 +131,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public List<Usuario> findAll() {
-		return usuarioDAO.findAll();
-	}
-
-	@Override
-	public List<Usuario> findAllOrderByNombre() {
-		return usuarioDAO.findAllOrderByNombre();
+	public List<Usuario> findAll(String column, String order, HttpServletRequest request) {
+		return usuarioDAO.findAll(column, order, request);
 	}
 
 	@Override
@@ -165,8 +166,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public List<Usuario> findCustomers() {
-		List<Usuario> usuarios = usuarioDAO.findAll();
+	public List<Usuario> findCustomers(String column, String order, HttpServletRequest request) {
+		List<Usuario> usuarios = usuarioDAO.findAll(column, order,  request);
 		List<Usuario> clientes = new ArrayList<>();
 		for (Usuario usuario : usuarios) {
 			List<UsuarioRol> roles = usuario.getUsuarioRol();
@@ -212,6 +213,20 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuario.setClave(passwordEncoder.encode("Superman1"));
 		update(usuario);
 		return usuario;
+	}
+
+	@Override
+	public String getColumn(HttpServletRequest request) {
+		Usuario usuario = Utils.getLoggedUser(request, usuarioDAO);
+		ModelUsuarioOrden uo = null;
+		if (usuario != null) {
+			uo = usuarioOrdenDAO.findByIdUsrTabla(usuario.getIdUsr(), "usuario");
+		}
+		if (uo != null) {
+			return uo.getColumna() + "/" + uo.getOrden();
+		} else {
+			return "null/null";
+		}
 	}
 
 	private void eliminarRolesNoSeleccionados(String[] usuarioRol, Usuario usuario) {

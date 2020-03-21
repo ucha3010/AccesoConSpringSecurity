@@ -63,7 +63,12 @@
 				</c:forEach>
 				$(".collapse").collapse('show');
 			}
-		}		
+		}	
+		function ordenaTabla(numCol){
+			var columnas = ['usuario','habilitado','datosPersonalesnombre','datosPersonalesapellido1','datosPersonalesfechaNacimiento','datosPersonalesemail','datosPersonalestelefono'];
+			var url = "<c:url value='/usuario/all/"+columnas[numCol]+"/null' />";
+			location.href=url;			
+		}	
 	</script>
 	
 </head>
@@ -130,24 +135,22 @@
 					<c:set var="count" value="0" scope="page" />
 					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 						<th colspan="2"></th>
-						<c:set var="count" value="${count + 2}" scope="page"/>
 					</sec:authorize>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Username" /></th>
+					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Username" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"></th>
+					<th onclick="ordenaTabla(${count})"></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Name" /></th>
+					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Name" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Lastname" /></th>
+					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Lastname" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Birthdate" /></th>
+					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Birthdate" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Email" /></th>
+					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Email" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Phone" /></th>
+					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Phone" /></th>
 					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="sortTable(${count})"><fmt:message key="label.Roles" /></th>
+						<th onclick="sortTable(9)"><fmt:message key="label.Roles" /></th>
 					</sec:authorize>
 					<th class="width-150"><fmt:message key="label.Extras" /></th>
 				</tr>

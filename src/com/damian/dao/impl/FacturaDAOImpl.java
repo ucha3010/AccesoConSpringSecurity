@@ -40,17 +40,17 @@ public class FacturaDAOImpl implements FacturaDAO {
 
 	@Autowired
 	private ConverterFactura converterFactura;
-	
+
 	@Autowired
 	private UsuarioDAO usuarioDAO;
-	
+
 	@Autowired
 	private UsuarioOrdenDAO usuarioOrdenDAO;
 
 	@Override
 	public List<Factura> findAll(String column, HttpServletRequest request) {
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY " + Utils.validateColumnAndOrder(column, TABLA,
+		String sql = "SELECT * FROM " + TABLA + " ORDER BY " + Utils.validateColumnAndOrder(column, null, TABLA,
 				KEY_COLUMN, KEY_ORDER, COLUMN_ORDER, request, usuarioDAO, usuarioOrdenDAO);
 
 		return lista(sql);
@@ -135,8 +135,8 @@ public class FacturaDAOImpl implements FacturaDAO {
 	@Override
 	public List<Factura> findByIdEstModel(int idEst, String column, HttpServletRequest request) {
 
-		String sql = "SELECT * FROM " + TABLA + " WHERE idEst = " + idEst + " ORDER BY " + Utils.validateColumnAndOrder(column, TABLA,
-				KEY_COLUMN, KEY_ORDER, COLUMN_ORDER, request, usuarioDAO, usuarioOrdenDAO);
+		String sql = "SELECT * FROM " + TABLA + " WHERE idEst = " + idEst + " ORDER BY " + Utils.validateColumnAndOrder(
+				column, null, TABLA, KEY_COLUMN, KEY_ORDER, COLUMN_ORDER, request, usuarioDAO, usuarioOrdenDAO);
 
 		return lista(sql);
 	}
@@ -203,5 +203,5 @@ public class FacturaDAOImpl implements FacturaDAO {
 		mf.setImporteFront(rs.getDouble("importeFront"));
 		return mf;
 	}
-	
+
 }

@@ -10,8 +10,9 @@ import com.mysql.jdbc.StringUtils;
 
 public class Utils {
 
-	public static String validateColumnAndOrder(String column, String table, String defaultColumn, String defaultOrder,
-			String columnOrder, HttpServletRequest request, UsuarioDAO usuarioDAO, UsuarioOrdenDAO usuarioOrdenDAO) {
+	public static String validateColumnAndOrder(String column, String orderObl, String table, String defaultColumn,
+			String defaultOrder, String columnOrder, HttpServletRequest request, UsuarioDAO usuarioDAO,
+			UsuarioOrdenDAO usuarioOrdenDAO) {
 
 		String dataOut = "";
 		Usuario usuario = getLoggedUser(request, usuarioDAO);
@@ -28,7 +29,8 @@ public class Utils {
 				usuarioOrdenDAO.save(uo);
 				dataOut = columnOrder;
 			} else {
-				dataOut = uo.getColumna().concat(" ").concat(defineOrder(uo, column, defaultOrder));
+				dataOut = defineColumn(uo.getColumna(), defaultColumn).concat(" ")
+						.concat(defineOrder(uo, column, orderObl, defaultOrder));
 			}
 		} else {
 			if (uo == null) {
@@ -36,30 +38,43 @@ public class Utils {
 				usuarioOrdenDAO.save(uo);
 				dataOut = column + " " + defaultOrder;
 			} else {
-				String order = defineOrder(uo, column, defaultOrder);
+				String order = defineOrder(uo, column, orderObl, defaultOrder);
 				uo.setColumna(column);
 				uo.setOrden(order);
 				usuarioOrdenDAO.update(uo);
-				dataOut = uo.getColumna().concat(" ").concat(uo.getOrden());
+				dataOut = defineColumn(uo.getColumna(), defaultColumn).concat(" ").concat(uo.getOrden());
 			}
 		}
 		return dataOut;
 
 	}
 
-	private static String defineOrder(ModelUsuarioOrden uo, String column, String defaultOrder) {
+	private static String defineOrder(ModelUsuarioOrden uo, String column, String orderObl, String defaultOrder) {
 
 		String order;
-		if (uo != null && uo.getColumna().equals(column)) {
-			if (uo.getOrden().equals("ASC")) {
-				order = "DESC";
+		if (orderObl == null || orderObl.equals("null")) {
+			if (uo != null && uo.getColumna().equals(column)) {
+				if (uo.getOrden().equals("ASC")) {
+					order = "DESC";
+				} else {
+					order = "ASC";
+				}
 			} else {
-				order = "ASC";
+				order = defaultOrder;
 			}
 		} else {
-			order = defaultOrder;
+			order = orderObl;
 		}
 		return order;
+	}
+
+	private static String defineColumn(String column, String defaultColumn) {
+
+		if (column != null && column.length() > 15 && column.substring(0, 15).equals("datosPersonales")) {
+			return defaultColumn;
+		} else {
+			return column;
+		}
 	}
 
 	public static Usuario getLoggedUser(HttpServletRequest request, UsuarioDAO usuarioDAO) {
@@ -79,29 +94,5 @@ public class Utils {
 		return usuarioDAO.findByUsername(creador);
 
 	}
-
-	// private void ordenarPorImporte(List<FacturaOrdenar> productoEmpresas, boolean
-	// ascendente) {
-	//
-	// if(ascendente) {
-	// Collections.sort(productoEmpresas, new Comparator<FacturaOrdenar>() {
-	// @Override
-	// public int compare(FacturaOrdenar fo1, FacturaOrdenar fo2) {
-	// if (fo1.getImporte() < fo2.getImporte()) return -1;
-	// if (fo1.getImporte() > fo2.getImporte()) return 1;
-	// return 0;
-	// }
-	// });
-	// } else {
-	// Collections.sort(productoEmpresas, new Comparator<FacturaOrdenar>() {
-	// @Override
-	// public int compare(FacturaOrdenar fo1, FacturaOrdenar fo2) {
-	// if (fo1.getImporte() > fo2.getImporte()) return -1;
-	// if (fo1.getImporte() < fo2.getImporte()) return 1;
-	// return 0;
-	// }
-	// });
-	// }
-	// }
 
 }

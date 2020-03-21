@@ -2,6 +2,8 @@ package com.damian.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.pojo.Usuario;
 
 public interface UsuarioDAO {
@@ -10,9 +12,7 @@ public interface UsuarioDAO {
 
 	public void save(Usuario usuario);
 
-	public List<Usuario> findAll();
-
-	public List<Usuario> findAllOrderByNombre();
+	public List<Usuario> findAll(String column, String order, HttpServletRequest request);
 
 	public void update(Usuario usuario);
 
