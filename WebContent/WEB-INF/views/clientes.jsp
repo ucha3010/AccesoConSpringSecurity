@@ -21,7 +21,7 @@
 	<script type="text/javascript">
 		function confirmDelete(idUsr){
 			if(confirm("<fmt:message key='Delete.message' />")){
-				var url = "<c:url value='/usuario/"+idUsr+"/delete' />";
+				var url = "<c:url value='/cliente/"+idUsr+"/delete' />";
 				location.href=url;
 				return true;
 			}
@@ -29,7 +29,7 @@
 		}
 		function confirmReset(idUsr){
 			if(confirm("<fmt:message key='Reset.message' />")){
-				var url = "<c:url value='/usuario/reset/"+idUsr+"' />";
+				var url = "<c:url value='/cliente/reset/"+idUsr+"' />";
 				location.href=url;
 				return true;
 			}
@@ -54,9 +54,9 @@
 					var apellidos = normalizado('${usu.datosPersonales.apellido1}'+" "+'${usu.datosPersonales.apellido2}');
 					if(username.toLowerCase().indexOf(texto) !== -1 || nombre.toLowerCase().indexOf(texto) !== -1 || apellidos.toLowerCase().indexOf(texto) !== -1){
 						if(admin){
-							resultado.innerHTML += "<a href=\"<c:url value='/usuario/filtered/${usu.idUsr}' />\">${usu.usuario} - ${usu.datosPersonales.nombre} ${usu.datosPersonales.apellido1} ${usu.datosPersonales.apellido2}</a>";
-						} else {
 							resultado.innerHTML += "<a href=\"<c:url value='/cliente/filtered/${usu.idUsr}' />\">${usu.usuario} - ${usu.datosPersonales.nombre} ${usu.datosPersonales.apellido1} ${usu.datosPersonales.apellido2}</a>";
+						} else {
+							resultado.innerHTML += "<a href=\"<c:url value='/cliente/cliente/filtered/${usu.idUsr}' />\">${usu.usuario} - ${usu.datosPersonales.nombre} ${usu.datosPersonales.apellido1} ${usu.datosPersonales.apellido2}</a>";
 							
 						}
 					}
@@ -66,7 +66,7 @@
 		}	
 		function ordenaTabla(numCol){
 			var columnas = ['usuario','habilitado','datosPersonalesnombre','datosPersonalesapellido1','datosPersonalesfechaNacimiento','datosPersonalesemail','datosPersonalestelefono'];
-			var url = "<c:url value='/usuario/all/"+columnas[numCol]+"/null' />";
+			var url = "<c:url value='/cliente/all/"+columnas[numCol]+"/null' />";
 			location.href=url;			
 		}	
 	</script>
@@ -103,7 +103,7 @@
 				</c:if>
 			</div>
 			<div class="ml-auto p-2">
-				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/0'/>"'>
+				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/cliente/0'/>"'>
 					<fmt:message key="label.Add.user" />
 				</button>
 			</div>		
@@ -160,7 +160,7 @@
 				    <tr title='<fmt:message key="label.Creation.date" />: <fmt:formatDate value="${usuario.fechaCreacion}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.idcard" />: <c:out value="${usuario.datosPersonales.dni}" />&#xA;<fmt:message key="label.Sex" />: <c:out value="${usuario.datosPersonales.sexo}" />&#xA;<fmt:message key="label.Nationality" />: <c:out value="${usuario.datosPersonales.nacionalidad[nameColSelect]}" />&#xA;<c:out value="${usuario.datosPersonales.observaciones}" />'>
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 							<td class="sin_padding">
-								<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/usuario/${usuario.idUsr}' />"'>
+								<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/cliente/${usuario.idUsr}' />"'>
 								  <img src='<c:url value="/resources/imgs/editar.png"/>' alt="Editar" class="tamanio_imagen">
 								</button>
 							</td>
@@ -183,10 +183,10 @@
 						
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 							<c:if test="${usuario.habilitado}">
-								<td><img src='<c:url value="/resources/imgs/true.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/usuario/available/${usuario.idUsr}' />"'></td>
+								<td><img src='<c:url value="/resources/imgs/true.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/cliente/available/${usuario.idUsr}' />"'></td>
 							</c:if>
 							<c:if test="${not usuario.habilitado}">
-								<td><img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/usuario/available/${usuario.idUsr}' />"'></td>
+								<td><img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/cliente/available/${usuario.idUsr}' />"'></td>
 							</c:if>
 						</sec:authorize>
 						
