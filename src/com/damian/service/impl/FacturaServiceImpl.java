@@ -1,6 +1,7 @@
 package com.damian.service.impl;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class FacturaServiceImpl implements FacturaService {
 	public List<Factura> findAll(String column, HttpServletRequest request) {
 		List<Factura> facturas = facturaDAO.findAll(column, request);
 		for (Factura factura : facturas) {
-			Estado estado = estadoDAO.findById(factura.getEstado().getIdEst());
+			Estado estado = estadoDAO.findByIdModel(factura.getEstado().getIdEst());
 			FormaPago formaPago = formaPagoDAO.findById(factura.getFormaPago().getIdFor());
 			factura.setEstado(estado);
 			factura.setFormaPago(formaPago);
@@ -176,6 +177,21 @@ public class FacturaServiceImpl implements FacturaService {
 	@Override
 	public List<Factura> findByIdCuo(int idCuo) {
 		return facturaDAO.findByIdCuo(idCuo);
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public List<Factura> selectExpire(List<Factura> facturas) {
+		Date hoy = new Date();
+		List<Factura> facturasVencen = new ArrayList<>();
+		int milisegDif = 0;
+		for(Factura factura: facturas) {
+			milisegDif = factura.getFechaCompra().getDate() - hoy.getDate();
+			if(0 < milisegDif && milisegDif < (86400000 * 5)) { //5 días
+				facturasVencen.add(factura);
+			}
+		}
+		return facturasVencen;
 	}
 
 	private void saveFacturaEstado(Factura factura, HttpServletRequest request) {

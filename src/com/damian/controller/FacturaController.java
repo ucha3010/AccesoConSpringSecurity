@@ -1,5 +1,7 @@
 package com.damian.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,10 @@ public class FacturaController {
 	@RequestMapping("/factura/all/{column}")
 	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
 			HttpServletRequest request) {
-		modelAndView.addObject("facturas", facturaService.findAll(column, request));
+		List<Factura> facturas = facturaService.findAll(column, request);
+		modelAndView.addObject("facturas", facturas);
+		List<Factura> vencen = facturaService.selectExpire(facturas);
+		modelAndView.addObject("vencen", vencen);
 		modelAndView.addObject("estados", estadoService.findAll());
 		modelAndView.addObject("estoy", "factura");
 		modelAndView.setViewName("facturas");

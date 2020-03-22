@@ -3,6 +3,7 @@ package test.java;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.Date;
 
 import com.damian.service.UsuarioEmpresaService;
 import com.damian.service.impl.UsuarioEmpresaServiceImpl;
@@ -38,6 +39,9 @@ public class TestUsuarioEmpresa {
 		System.out.println("conComa: " + conComa);
 		System.out.println("conComa: " + cortaADosDecimales(conComa));
 		System.out.println("conComa: " + conComa.divide(BigDecimal.ONE, 2, RoundingMode.DOWN));
+		
+		Date date = new Date();
+		System.out.println(date.getTime());
 	}
 
 	private static BigDecimal cortaADosDecimales(BigDecimal num) {

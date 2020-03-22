@@ -31,4 +31,6 @@ public interface FacturaService {
 
 	public List<Factura> findByIdCuo(int idCuo);
 
+	public List<Factura> selectExpire(List<Factura> facturas);
+
 }

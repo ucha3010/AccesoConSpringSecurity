@@ -40,6 +40,61 @@
 	</script>
 </head>
 <body>
+	<div class="modal fade" id="ventanaVencen">
+		<div class="modal-dialog maxwidth-maxcontent">
+			<div clas="modal-content">
+				
+				<!-- Header de la ventana -->
+				<div class="modal-header bg-info">
+					<h4 class="modal-title"><fmt:message key='label.Bill.next.days' /></h4>
+				</div>
+				
+				<!-- Contenido de la ventana -->
+				<div class="modal-body">
+					<div class="divTablaSinScroll bg-light">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th class="text-center"><fmt:message key="label.Bill.id" /></th>
+									<th class="text-center"><fmt:message key="label.Purchase.Sale" /></th>
+									<th class="text-center"><fmt:message key="label.Date" /></th>
+									<th class="text-center"><fmt:message key="label.Total.dicount" /></th>
+									<th class="text-center"><fmt:message key="label.Total.vat" /></th>
+									<th colspan="2" class="text-center"><fmt:message key="label.Total.amount" /></th>
+									<th class="text-center"><fmt:message key="label.state" /></th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${vencen}" var="vence">
+									<td class="text-center"><c:out value="${vence.idFac}" /></td>
+									<c:if test="${vence.compra}">
+										<td class="text-center"><fmt:message key="label.Purchase" /></td>
+									</c:if>
+									<c:if test="${not vence.compra}">
+										<td class="text-center"><fmt:message key="label.Sale" /></td>
+									</c:if>
+									<td class="text-center"><fmt:formatDate value="${vence.fechaCompra}" pattern="dd/MM/yyyy"/></td>
+									<td class="text-center"><fmt:formatNumber type="number" value="${vence.descuentoTotal}" minFractionDigits="2" />%</td>
+									<td class="text-center"><fmt:formatNumber type="number" value="${vence.ivaTotal}" minFractionDigits="2" />%</td>
+									<td class="text-right"><fmt:formatNumber type="currency" value="${vence.importeFront}" /></td>
+									<td class="width-15"></td>
+									<td>
+										<fmt:message key="label.state.column.name" var="itemSelect"/>
+										<c:forEach items="${estados}" var="est">
+											<option value="${est.idEst}" <c:if test="${factura.estado.idEst == est.idEst}">selected</c:if>>
+												<c:out value="${est[nameColSelect]}" />
+											</option>
+										</c:forEach>
+									</td>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
 	<c:import url="/WEB-INF/views/menu.jsp" />
 	<fmt:message key="language.name" var="nameColSelect"/>
 	<div class="d-flex">
@@ -60,6 +115,11 @@
 			</c:if>
 		</div>
 		<div class="ml-auto p-2">
+			<c:if test="${not empty vencen}">
+				<a href="#ventanaVencen" class="btn btn-danger btn-lg" data-toggle="modal"><fmt:message key='label.Bill.next.days' /></a>
+			</c:if>
+		</div>
+		<div class="ml-auto p-2">
 		</div>		
 	</div>
 	<div class="divTabla">
@@ -74,7 +134,7 @@
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.Purchase.Sale" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.date.purchase" /></th>
+					<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.Date" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.Total.dicount" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>

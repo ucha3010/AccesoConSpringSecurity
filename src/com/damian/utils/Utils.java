@@ -2,6 +2,8 @@ package com.damian.utils;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.core.userdetails.User;
+
 import com.damian.dao.UsuarioDAO;
 import com.damian.dao.UsuarioOrdenDAO;
 import com.damian.dao.model.ModelUsuarioOrden;
@@ -88,6 +90,9 @@ public class Utils {
 		if (context != null && context.getAuthentication() != null && context.getAuthentication().getPrincipal() != null
 				&& !context.getAuthentication().getPrincipal().toString().isEmpty()) {
 			creador = context.getAuthentication().getPrincipal().toString();
+		} else if (context != null && context.getAuthentication() != null && context.getAuthentication().getPrincipal() != null) {
+			org.springframework.security.core.userdetails.User usuario = (User) context.getAuthentication().getPrincipal();
+			creador = usuario.getUsername();
 		} else {
 			creador = "OWN USER";
 		}

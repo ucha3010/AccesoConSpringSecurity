@@ -173,3 +173,7 @@ th:hover {
 .padding-5-25-dam {
 	padding: 5px 25px;
 }
+
+.maxwidth-maxcontent {
+	max-width: max-content;
+}
