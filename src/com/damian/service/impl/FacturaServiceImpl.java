@@ -178,16 +178,15 @@ public class FacturaServiceImpl implements FacturaService {
 	public List<Factura> findByIdCuo(int idCuo) {
 		return facturaDAO.findByIdCuo(idCuo);
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	@Override
 	public List<Factura> selectExpire(List<Factura> facturas) {
 		Date hoy = new Date();
 		List<Factura> facturasVencen = new ArrayList<>();
-		int milisegDif = 0;
-		for(Factura factura: facturas) {
-			milisegDif = factura.getFechaCompra().getDate() - hoy.getDate();
-			if(0 < milisegDif && milisegDif < (86400000 * 5)) { //5 días
+		long milisegDif = 0;
+		for (Factura factura : facturas) {
+			milisegDif = factura.getFechaCompra().getTime() - hoy.getTime();
+			if (0 < milisegDif && milisegDif < (86400000 * 5)) { // 5 días
 				facturasVencen.add(factura);
 			}
 		}
