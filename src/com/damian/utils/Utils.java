@@ -21,12 +21,12 @@ public class Utils {
 		ModelUsuarioOrden uo = null;
 		if (usuario != null) {
 			uo = usuarioOrdenDAO.findByIdUsrTabla(usuario.getIdUsr(), table);
+		} else {
+			return null;
 		}
 
 		if (StringUtils.isNullOrEmpty(column) || column.equals("null")) {
-			if (usuario == null && uo == null) {
-				dataOut = defaultColumn.concat(" ").concat(defaultOrder);
-			} else if (uo == null) {
+			if (uo == null) {
 				uo = new ModelUsuarioOrden(0, usuario.getIdUsr(), table, defaultColumn, defaultOrder);
 				usuarioOrdenDAO.save(uo);
 				dataOut = columnOrder;
@@ -88,10 +88,15 @@ public class Utils {
 		}
 		String creador;
 		if (context != null && context.getAuthentication() != null && context.getAuthentication().getPrincipal() != null
-				&& !context.getAuthentication().getPrincipal().toString().isEmpty()) {
+				&& !context.getAuthentication().getPrincipal().toString().isEmpty() && !context.getAuthentication()
+						.getPrincipal().toString().startsWith("org.springframework.security.core.userdetails.User")) {
 			creador = context.getAuthentication().getPrincipal().toString();
-		} else if (context != null && context.getAuthentication() != null && context.getAuthentication().getPrincipal() != null) {
-			org.springframework.security.core.userdetails.User usuario = (User) context.getAuthentication().getPrincipal();
+		} else if (context != null && context.getAuthentication() != null
+				&& context.getAuthentication().getPrincipal() != null
+				&& !context.getAuthentication().getPrincipal().toString().isEmpty() && context.getAuthentication()
+						.getPrincipal().toString().startsWith("org.springframework.security.core.userdetails.User")) {
+			org.springframework.security.core.userdetails.User usuario = (User) context.getAuthentication()
+					.getPrincipal();
 			creador = usuario.getUsername();
 		} else {
 			creador = "OWN USER";

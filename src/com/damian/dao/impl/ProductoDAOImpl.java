@@ -50,10 +50,16 @@ public class ProductoDAOImpl implements ProductoDAO {
 	@Override
 	public List<Producto> findAll(String column, HttpServletRequest request) {
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY " + Utils.validateColumnAndOrder(column, null, TABLA,
-				KEY_COLUMN, KEY_ORDER, COLUMN_ORDER, request, usuarioDAO, usuarioOrdenDAO);
+		String columnAndOrder = Utils.validateColumnAndOrder(column, null, TABLA, KEY_COLUMN, KEY_ORDER, COLUMN_ORDER,
+				request, usuarioDAO, usuarioOrdenDAO);
 
-		return lista(sql);
+		if (columnAndOrder != null) {
+			String sql = "SELECT * FROM " + TABLA + " ORDER BY " + columnAndOrder;
+
+			return lista(sql);
+		} else {
+			return new ArrayList<>();
+		}
 	}
 
 	@Override

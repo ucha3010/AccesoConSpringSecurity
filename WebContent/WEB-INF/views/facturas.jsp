@@ -37,6 +37,25 @@
 			var url = "<c:url value='/factura/all/"+columnas[numCol]+"' />";
 			location.href=url;			
 		}
+		
+		function imprimirId(id){
+			var elemento = document.getElementById(id);
+			var ventana = window.open('', 'PRINT', 'height=400,width=600');
+			ventana.document.write('<html><head><title>' + document.title + '</title>');
+			ventana.document.write('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />');
+			ventana.document.write('<link rel="stylesheet" href="/resources/css/tablas.css" rel="stylesheet" type="text/css" />');
+			ventana.document.write('</head><body >');
+			ventana.document.write(elemento.innerHTML);
+			ventana.document.write('</body></html>');
+			ventana.document.close();
+			ventana.focus();
+			ventana.onload = function() {
+			    ventana.print();
+				ventana.close();
+			};
+			return true;
+		}
+		
 	</script>
 </head>
 <body>
@@ -138,11 +157,12 @@
 	
 	<div class="modal fade" id="ventanaVencen">
 		<div class="modal-dialog maxwidth-maxcontent">
-			<div clas="modal-content">
+			<div class="modal-content">
 				
 				<!-- Header de la ventana -->
 				<div class="modal-header bg-info">
 					<h4 class="modal-title"><fmt:message key='label.Bill.next.days' /></h4>
+					<button style="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				
 				<!-- Contenido de la ventana -->
@@ -185,6 +205,11 @@
 							</tbody>
 						</table>
 					</div>
+				</div>
+				
+				<!-- Contenido de la ventana -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="imprimirId('ventanaVencen')"><fmt:message key="label.Print" /></button>
 				</div>
 				
 			</div>

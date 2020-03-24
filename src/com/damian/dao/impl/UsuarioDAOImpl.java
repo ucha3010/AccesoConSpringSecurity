@@ -94,61 +94,67 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			dp = true;
 		}
 
-		String sql = "SELECT * FROM " + TABLA + " ORDER BY " + Utils.validateColumnAndOrder(column, order, TABLA,
-				KEY_COLUMN, KEY_ORDER, COLUMN_ORDER, request, this, usuarioOrdenDAO);
+		String columnAndOrder = Utils.validateColumnAndOrder(column, null, TABLA, KEY_COLUMN, KEY_ORDER, COLUMN_ORDER,
+				request, this, usuarioOrdenDAO);
 
-		if (order != null && !order.equals("null")) {
-			String orderSql = sql.substring(sql.length() - 3);
-			if (orderSql.equals("ASC")) {
-				sql = sql.substring(0, sql.length() - 3) + order;
-			} else {
-				sql = sql.substring(0, sql.length() - 4) + order;
-			}
-		}
+		if (columnAndOrder != null) {
+			String sql = "SELECT * FROM " + TABLA + " ORDER BY " + columnAndOrder;
 
-		usuarios = lista(sql);
-
-		if (dp) {
-			if (sql.substring(sql.length() - 3, sql.length()).equals("ASC")) {
-				switch (column.substring(15)) {
-				case "nombre":
-					ordenarPorNombreASC(usuarios);
-					break;
-				case "apellido1":
-					ordenarPorApellido1ASC(usuarios);
-					break;
-				case "fechaNacimiento":
-					ordenarPorFechaNacimientoASC(usuarios);
-					break;
-				case "email":
-					ordenarPorEmailASC(usuarios);
-					break;
-				case "telefono":
-					ordenarPorTelefonoASC(usuarios);
-					break;
-				}
-			} else {
-				switch (column.substring(15)) {
-				case "nombre":
-					ordenarPorNombreDESC(usuarios);
-					break;
-				case "apellido1":
-					ordenarPorApellido1DESC(usuarios);
-					break;
-				case "fechaNacimiento":
-					ordenarPorFechaNacimientoDESC(usuarios);
-					break;
-				case "email":
-					ordenarPorEmailDESC(usuarios);
-					break;
-				case "telefono":
-					ordenarPorTelefonoDESC(usuarios);
-					break;
+			if (order != null && !order.equals("null")) {
+				String orderSql = sql.substring(sql.length() - 3);
+				if (orderSql.equals("ASC")) {
+					sql = sql.substring(0, sql.length() - 3) + order;
+				} else {
+					sql = sql.substring(0, sql.length() - 4) + order;
 				}
 			}
-		}
 
-		return usuarios;
+			usuarios = lista(sql);
+
+			if (dp) {
+				if (sql.substring(sql.length() - 3, sql.length()).equals("ASC")) {
+					switch (column.substring(15)) {
+					case "nombre":
+						ordenarPorNombreASC(usuarios);
+						break;
+					case "apellido1":
+						ordenarPorApellido1ASC(usuarios);
+						break;
+					case "fechaNacimiento":
+						ordenarPorFechaNacimientoASC(usuarios);
+						break;
+					case "email":
+						ordenarPorEmailASC(usuarios);
+						break;
+					case "telefono":
+						ordenarPorTelefonoASC(usuarios);
+						break;
+					}
+				} else {
+					switch (column.substring(15)) {
+					case "nombre":
+						ordenarPorNombreDESC(usuarios);
+						break;
+					case "apellido1":
+						ordenarPorApellido1DESC(usuarios);
+						break;
+					case "fechaNacimiento":
+						ordenarPorFechaNacimientoDESC(usuarios);
+						break;
+					case "email":
+						ordenarPorEmailDESC(usuarios);
+						break;
+					case "telefono":
+						ordenarPorTelefonoDESC(usuarios);
+						break;
+					}
+				}
+			}
+
+			return usuarios;
+		} else {
+			return new ArrayList<>();
+		}
 	}
 
 	@Override
