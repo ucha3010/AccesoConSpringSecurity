@@ -139,11 +139,7 @@ th:hover {
 	border: 1px solid #ddd;
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
+/* evaluar si elimino esta clase */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -166,14 +162,60 @@ th:hover {
   display: block;
 }
 
-.dropdown:hover {
-  background-color: #3e8e41;
-}
-
 .padding-5-25-dam {
 	padding: 5px 25px;
 }
 
 .maxwidth-maxcontent {
 	max-width: max-content;
+}
+
+.border-radius-dam {
+	border-radius: 0.5rem;
+}
+
+.margin-left-5porciento{
+	margin-left: 5%;
+}
+
+.cursor-pointer{
+	cursor: pointer;
+}
+
+.d-inline-table {
+	display: inline-table;
+}
+
+.width-15{
+	width: 15px;
+}
+
+.width-35{
+	width: 35px;
+}
+
+.width-50{
+	width: 50px;
+}
+
+.width-100{
+	width: 100px;
+}
+
+.width-150{
+	width: 150px;
+}
+
+.w-70{
+	width: 70%;
+}
+
+.width-80-align-rigth{
+	width: 80px;
+	text-align: right;
+}
+
+.fondo-c0c0c0 {
+	background-color: #c0c0c0;
+	color: #000;
 }

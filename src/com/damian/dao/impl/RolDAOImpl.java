@@ -55,7 +55,7 @@ public class RolDAOImpl implements RolDAO {
 	@Override
 	public List<Rol> findAll() {
 
-		String sql = "SELECT * FROM " + TABLA;
+		String sql = "SELECT * FROM " + TABLA + " ORDER BY rol";
 
 		return lista(sql);
 	}

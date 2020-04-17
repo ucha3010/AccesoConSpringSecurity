@@ -7,165 +7,114 @@
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="com.damian.utils.multilanguage" />
 
-<div class="menu-dam margin-header d-inline-block bg-color-white-dam">
-	<div class="row">
-		
-		<div class="col-xs-12 col-md-2">
-			<a title="Company" href='<c:url value="/"/>'>
-				<img src='<c:url value="/resources/imgs/logo.jpg"/>' alt="Logo de la empresa" id="logoImg">
-			</a>
-		</div>
-		
-		<div class="col-xs-12 col-md-6 pt-2 border-int-dam">
-			<sec:authorize access="isRememberMe()">
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/categoria"/>"'>
-						<fmt:message key="label.Categories" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/formaPago"/>"'>
-						<fmt:message key="label.Payment.methods" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/estado"/>"'>
-						<fmt:message key="label.states" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/factura/all/null"/>"'>
-						<fmt:message key="label.Bills" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/producto/all/null"/>"'>
-						<fmt:message key="Products" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/rol"/>"'>
-						<fmt:message key="label.Roles" />
-					</button>
-				</sec:authorize>				
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_USUARIO','ROL_ROOT')">
-					<button type="button" class="btn fondo-1f45e0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/empresa/all/null"/>"'>
-						<fmt:message key="Companies" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-					<button type="button" class="btn fondo-1f45e0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/usuario/all/null/null"/>"'>
-						<fmt:message key="label.Users" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_USUARIO','ROL_ROOT')">
-					<button type="button" class="btn fondo-008000 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/cliente/all/null/null'/>"'>
-						<fmt:message key="label.Customers" />
-					</button>
-				</sec:authorize>
-			</sec:authorize>
-	
-			<sec:authorize access="isFullyAuthenticated()">
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/categoria"/>"'>
-						<fmt:message key="label.Categories" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/formaPago"/>"'>
-						<fmt:message key="label.Payment.methods" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/estado"/>"'>
-						<fmt:message key="label.states" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/factura/all/null"/>"'>
-						<fmt:message key="label.Bills" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT','ROL_USUARIO')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/producto/all/null"/>"'>
-						<fmt:message key="Products" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-					<button type="button" class="btn colorFondo4 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/rol"/>"'>
-						<fmt:message key="label.Roles" />
-					</button>
-				</sec:authorize>				
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_USUARIO','ROL_ROOT')">
-					<button type="button" class="btn fondo-1f45e0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/empresa/all/null"/>"'>
-						<fmt:message key="Companies" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-					<button type="button" class="btn fondo-1f45e0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value="/usuario/all/null/null"/>"'>
-						<fmt:message key="label.Users" />
-					</button>
-				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_USUARIO','ROL_ROOT')">
-					<button type="button" class="btn fondo-008000 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/cliente/all/null/null'/>"'>
-						<fmt:message key="label.Customers" />
-					</button>
-				</sec:authorize>
-			</sec:authorize>
-		</div>
-		
-		<div class="col-xs-12 col-md-4 pt-2 border-int-dam box-user-dam">
-			<sec:authorize access="!isAuthenticated()">
-				<button type="button" class="btn btn-info float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/nuevo'/>"'>
-					<fmt:message key="label.New.user" />
+<header>
+	<nav class="navbar navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navegacion-fm">
+					<span class="sr-only"><fmt:message key="label.Expand.Hide" /> <fmt:message key="label.Menu" /></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
 				</button>
-				<button type="button" class="btn btn-success float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/private/${sessionScope.estoy}'/>"'>
-					<fmt:message key="label.Login" />
-				</button>
-			</sec:authorize>
-	
-			<sec:authorize access="isRememberMe()">
-				<sec:authentication property="principal" var="principal" />
-				<button type="button" class="btn btn-dark float-right ml-1 btn-sm border-color-dam" onclick='location.href="<c:url value='/logout' />"'>
-					<fmt:message key="label.Logout" />
-				</button>
-				<a title="${nameUsrLogged}" href='<c:url value="/usuario/logged/${idUsrLogged}"/>'>
-					<img src='<c:url value="/resources/imgs/usuario.png"/>'
-					alt="${nameUsrLogged}" id="usuarioImg">
+				<a title="Company" href='<c:url value="/"/>'>
+					<img src='<c:url value="/resources/imgs/logo.jpg"/>' alt="Logo de la empresa" id="logoImg">
 				</a>
-			</sec:authorize>
-	
-			<sec:authorize access="isFullyAuthenticated()">
-				<sec:authentication property="principal" var="principal" />
-				<button type="button" class="btn btn-dark float-right ml-1 btn-sm border-color-dam" onclick='location.href="<c:url value='/logout' />"'>
-					<fmt:message key="label.Logout" />
-				</button>
-				<a title="${nameUsrLogged}" href='<c:url value="/usuario/logged/${idUsrLogged}"/>'>
-					<img src='<c:url value="/resources/imgs/usuario.png"/>'
-					alt="${nameUsrLogged}" id="usuarioImg">
-				</a>
-	
-			</sec:authorize>
-			<form class="float-right">
-				<select class="browser-default custom-select w-auto" name="language"
-					onchange="submit();">
-					<option value="es_ES"
-						<c:if test="${language=='es_ES'}">selected</c:if>>
-						<fmt:message key="label.Spanish" />
-					</option>
-					<option value="en_IE"
-						<c:if test="${language=='en_IE'}">selected</c:if>>
-						<fmt:message key="label.English" />
-					</option>
-<!-- 					con en_US el símbolo del dinero pasa a ser $ y no € -->
-<!-- 					<option value="en_US" -->
-<%-- 						<c:if test="${language=='en_US'}">selected</c:if>> --%>
-<%-- 						<fmt:message key="label.English" /> --%>
-<!-- 					</option> -->
-				</select>
-			</form>
+			</div>
+			
+			<div class="collapse navbar-collapse" id="navegacion-fm">
+				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+					<div class="hidden-sm hidden-md">
+						<ul class="nav navbar-nav">
+							<sec:authorize access="isRememberMe()">
+								<c:import url="/WEB-INF/views/menuUsuario.jsp" />	
+								<c:import url="/WEB-INF/views/menuAdmin.jsp" />	
+							</sec:authorize>
+							<sec:authorize access="isFullyAuthenticated()">
+								<c:import url="/WEB-INF/views/menuUsuario.jsp" />
+								<c:import url="/WEB-INF/views/menuAdmin.jsp" />	
+							</sec:authorize>
+						</ul>
+					</div>
+					<sec:authorize access="isFullyAuthenticated()">
+						<c:import url="/WEB-INF/views/menuDropdownAdmin.jsp" />
+					</sec:authorize>				
+					<sec:authorize access="isRememberMe()">
+						<c:import url="/WEB-INF/views/menuDropdownAdmin.jsp" />
+					</sec:authorize>
+				</sec:authorize>
+				<sec:authorize access="hasAnyRole('ROL_USUARIO')">
+					<div class="hidden-sm">
+						<ul class="nav navbar-nav">
+							<sec:authorize access="isRememberMe()">
+								<c:import url="/WEB-INF/views/menuUsuario.jsp" />
+							</sec:authorize>
+							<sec:authorize access="isFullyAuthenticated()">
+								<c:import url="/WEB-INF/views/menuUsuario.jsp" />	
+							</sec:authorize>
+						</ul>
+					</div>
+					<sec:authorize access="isFullyAuthenticated()">
+						<c:import url="/WEB-INF/views/menuDropdownUsuario.jsp" />
+					</sec:authorize>				
+					<sec:authorize access="isRememberMe()">
+						<c:import url="/WEB-INF/views/menuDropdownUsuario.jsp" />
+					</sec:authorize>
+				</sec:authorize>
+				
+			
+				<ul class="nav navbar-nav navbar-right">
+					<sec:authorize access="!isAuthenticated()">
+						<li class="btn-info border-color-dam">
+							<a class="menu-style" href="<c:url value='/usuario/nuevo'/>"><fmt:message key="label.New.user" /></a>
+						</li>
+						<li class="btn-success border-color-dam">
+							<a class="menu-style" href="<c:url value='/private/${sessionScope.estoy}'/>"><fmt:message key="label.Login" /></a>
+						</li>
+					</sec:authorize>
+			
+					<sec:authorize access="isRememberMe()">
+						<sec:authentication property="principal" var="principal" />
+						<li>
+							<span>
+								<a title="${nameUsrLogged}" href='<c:url value="/usuario/logged/${idUsrLogged}"/>'>
+										<img src='<c:url value="/resources/imgs/usuario.png"/>' alt="${nameUsrLogged}" class="usuarioImg">
+								</a>
+							</span>
+						</li>
+						<li class="btn-danger">
+							<a class="menu-style" href="<c:url value='/logout' />"><span class="glyphicon glyphicon-off"></span></a>
+						</li>
+					</sec:authorize>
+			
+					<sec:authorize access="isFullyAuthenticated()">
+						<sec:authentication property="principal" var="principal" />
+						<li class="margin-right-10px bg-color-white-dam">
+							<span>
+								<a title="${nameUsrLogged}" href='<c:url value="/usuario/logged/${idUsrLogged}"/>'>
+										<img src='<c:url value="/resources/imgs/usuario.png"/>' alt="${nameUsrLogged}" class="usuarioImg">
+								</a>
+							</span>
+						</li>
+						<li class="btn-danger">
+							<a class="menu-style" href="<c:url value='/logout' />"><span class="glyphicon glyphicon-off"></span></a>
+						</li>
+					</sec:authorize>
+				</ul>
+				
+				<form class="navbar-form navbar-right desaparece-1200-1282 bg-color-white-dam">
+					<select class="dropdown dropdown-toggle" name="language" onchange="submit();">
+						<option value="es_ES" <c:if test="${language=='es_ES'}">selected</c:if>><fmt:message key="label.Spanish" /></option>
+						<option value="en_IE" <c:if test="${language=='en_IE'}">selected</c:if>><fmt:message key="label.English" /></option>						
+	<!-- 					con en_US el símbolo del dinero pasa a ser $ y no € -->
+	<!-- 					<option value="en_US" -->
+	<%-- 						<c:if test="${language=='en_US'}">selected</c:if>> --%>
+	<%-- 						<fmt:message key="label.English" /> --%>
+	<!-- 					</option> -->
+					</select>
+				</form>
+			</div>
+			
 		</div>
-	</div>
-</div>
-<!-- 	dejo un espacio entre el menú y la página en sí -->
-<div class="py-24px-dam bg-color-white-dam border border-light border-bottom"></div>
+	</nav>
+</header>

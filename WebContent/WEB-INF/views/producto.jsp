@@ -10,12 +10,10 @@
 <fmt:setBundle basename="com.damian.utils.multilanguage" />
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title><fmt:message key="Product" /></title>
-	<script type="text/javascript" src='<c:url value="/resources/js/jquery.js" />'></script>
+	<c:import url="/WEB-INF/views/importHead.jsp" />
+	
 	<script type="text/javascript" src='<c:url value="/resources/js/validaciones.js" />'></script>
-	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
-	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
 		function validar(){
 			var campo = ['nombreES', 'nombreEN','precioVenta','precioCompra'];
@@ -247,5 +245,9 @@
 			</div>
 		</div>
 	</sf:form>
+	
+	<footer>
+		<c:import url="/WEB-INF/views/importFooter.jsp" />
+	</footer>
 </body>
 </html>

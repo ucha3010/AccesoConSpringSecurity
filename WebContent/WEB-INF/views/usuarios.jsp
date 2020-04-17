@@ -11,13 +11,9 @@
 <html>
 <head>
 	<title><fmt:message key="label.Users" /></title>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<script type="text/javascript" src='<c:url value="/resources/js/jquery.js" />'></script>
+	<c:import url="/WEB-INF/views/importHead.jsp" />
+	
 	<script type="text/javascript" src='<c:url value="/resources/js/utiles.js" />'></script>
-	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
-	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
-	<link href="<c:url value='/resources/css/tablas.css'/>" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
 		function confirmDelete(idUsr){
 			if(confirm("<fmt:message key='Delete.message' />")){
@@ -221,8 +217,9 @@
 			</tbody>
 		</table>
 	</div>
-
-	<script type="text/javascript" src="<c:url value='/resources/js/tabla_ordenar.js'/>"></script>
-	<script type="text/javascript" src="<c:url value='/resources/bootstrap-4.3.1-dist/js/bootstrap.min.js'/>"></script>
+	
+	<footer>
+		<c:import url="/WEB-INF/views/importFooter.jsp" />
+	</footer>
 </body>
 </html>

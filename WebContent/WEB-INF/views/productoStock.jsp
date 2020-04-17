@@ -10,12 +10,10 @@
 <fmt:setBundle basename="com.damian.utils.multilanguage" />
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title><fmt:message key="label.Add.remove.stock" /></title>
-	<script type="text/javascript" src='<c:url value="/resources/js/jquery.js" />'></script>
+	<c:import url="/WEB-INF/views/importHead.jsp" />
+	
 	<script type="text/javascript" src='<c:url value="/resources/js/validaciones.js" />'></script>
-	<link href="<c:url value='/resources/bootstrap-4.3.1-dist/css/bootstrap.min.css'/>" rel="stylesheet" type="text/css" />
-	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 	<script type="text/javascript">
 		function validar(){
 
@@ -266,7 +264,7 @@
 				</div>
 				<div class="col-xs-12 col-sm-3">
 					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/producto' />"'><fmt:message key="Cancel" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/producto/all/null' />"'><fmt:message key="Cancel" /></button>
 				</div>
 				<div class="col-sm-4">
 					<span id="precioFinalError"></span>
@@ -285,5 +283,9 @@
 			<div id="datosCuotas"></div>
 		</div>
 	</sf:form>
+	
+	<footer>
+		<c:import url="/WEB-INF/views/importFooter.jsp" />
+	</footer>
 </body>
 </html>
