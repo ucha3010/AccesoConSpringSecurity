@@ -52,130 +52,134 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-	<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-		<div class="d-flex">
-			<div class="p-2">
-				<input type="text" id="formulario" class="form-control">
-				<script>
-					const formulario = document.querySelector('#formulario');
-					formulario.addEventListener('keyup', filtrar);
-				</script>
-			</div>
-			<div class="p-2">
-				<div class="dropdown collapse">
-					<div class="dropdown-content" id="resultado">
+	<div class="container-fluid">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+			<div class="row">
+				<div class="hidden-xs col-sm-3 col-md-2">
+					<input type="text" id="formulario" class="form-control">
+					<script>
+						const formulario = document.querySelector('#formulario');
+						formulario.addEventListener('keyup', filtrar);
+					</script>
+				</div>
+				<div class="hidden-xs col-sm-3 col-md-6">
+					<div class="dropdown collapse">
+						<div class="dropdown-content" id="resultado">
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="p-2">
-				<c:if test="${not empty producto_agregado}">
-					<span style="color: green;">
-						<fmt:message key="Product.added" />
-					</span>
-				</c:if>
-				<c:if test="${not empty producto_eliminado}">
-					<span style="color: green;">
-						<fmt:message key="Product.deleted" />
-					</span>
-				</c:if>
-			</div>
-			<div class="ml-auto p-2">
-			<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/producto/0'/>"'>
-				<fmt:message key="Add.product" />
-			</button>
-		</div>		
-	</div>
-	</sec:authorize>
-	<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-		<div class="d-flex">
-			<div class="p-2">
-				<input type="text" id="formulario" class="form-control">
-				<script>
-					const formulario = document.querySelector('#formulario');
-					formulario.addEventListener('keyup', filtrar);
-				</script>
-			</div>
-			<div class="p-2">
-				<div class="dropdown collapse">
-					<div class="dropdown-content" id="resultado">
-					</div>
+				<div class="col-sm-3 col-md-2">
+					<c:if test="${not empty producto_agregado}">
+						<span style="color: green;">
+							<fmt:message key="Product.added" />
+						</span>
+					</c:if>
+					<c:if test="${not empty producto_eliminado}">
+						<span style="color: green;">
+							<fmt:message key="Product.deleted" />
+						</span>
+					</c:if>
 				</div>
-			</div>
-			<div class="ml-auto p-2">
+				<div class="col-sm-3 col-md-2  navbar-right">
+				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/producto/0'/>"'>
+					<fmt:message key="Add.product" />
+				</button>
 			</div>		
 		</div>
-	</sec:authorize>
-	<div class="divTabla">
-		<table id="tablaOrdenar" class="table table-striped">
-			<thead>
-				<tr>
-					<c:set var="count" value="0" scope="page" />
-					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-						<th></th>
-					</sec:authorize>
-					<sec:authorize access="hasAnyRole('ROL_ROOT')">
-						<th></th>
-					</sec:authorize>
-					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Product.description" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.state" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="ordenaTabla(${count})"><fmt:message key="label.brand" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="ordenaTabla(${count})"><fmt:message key="label.model" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th colspan="2" class="text-center" onclick="ordenaTabla(${count})"><fmt:message key="label.salePrice" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th class="text-center" onclick="ordenaTabla(${count})"><fmt:message key="label.units" /></th>
-					<th class="width-150"><fmt:message key="label.Extras" /></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${productos}" var="producto">
-				    <tr title='<fmt:message key="label.purchase.price" />: <fmt:formatNumber type="currency" value="${producto.precioCompra}" />&#xA;<fmt:message key="label.Serial.number" />: <c:out value="${producto.serie}" />&#xA;<fmt:message key="label.location" />: <c:out value="${producto.ubicacion}" />&#xA;<fmt:message key="label.send" />: <c:out value="${producto.enviar}" />&#xA;<fmt:message key="label.salable" />: <c:out value="${producto.vendible}" />&#xA;<fmt:message key="label.warranty.months" />: <c:out value="${producto.mesesGarantia}" />&#xA;<fmt:message key="label.weigth" />: <c:out value="${producto.peso}" />&#xA;<fmt:message key="label.volume" />: <c:out value="${producto.volumen}" />&#xA;<fmt:message key="label.Category" />: <c:out value="${producto.subcategoria.categoria[nameColSelect]}" />&#xA;<fmt:message key="label.Subcategory" />: <c:out value="${producto.subcategoria[nameColSelect]}" />'>
+		</sec:authorize>
+		<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+			<div class="row">
+				<div class="hidden-xs col-sm-3 col-md-2">
+					<input type="text" id="formulario" class="form-control">
+					<script>
+						const formulario = document.querySelector('#formulario');
+						formulario.addEventListener('keyup', filtrar);
+					</script>
+				</div>
+				<div class="hidden-xs col-sm-3 col-md-6">
+					<div class="dropdown collapse">
+						<div class="dropdown-content" id="resultado">
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3 col-md-2">
+				</div>
+				<div class="col-sm-3 col-md-2  navbar-right">
+				</div>
+			</div>
+		</sec:authorize>
+		<div class="divTabla">
+			<table id="tablaOrdenar" class="table table-striped">
+				<thead>
+					<tr>
+						<c:set var="count" value="0" scope="page" />
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-							<td class="sin_padding">
-								<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/producto/${producto.idPro}' />"'>
-								  <img src='<c:url value="/resources/imgs/editar.png"/>' alt="Editar" class="tamanio_imagen">
-								</button>
-							</td>
+							<th></th>
 						</sec:authorize>
 						<sec:authorize access="hasAnyRole('ROL_ROOT')">
-							<td class="sin_padding">
-								<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${producto.idPro})">
-								  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-								</button>
-							</td>
+							<th></th>
 						</sec:authorize>
-						<td><c:out value="${producto[nameColSelect]}" /></td>
-						<td class="text-center"><fmt:message key="${producto.estado}" /></td>
-						<td><c:out value="${producto.marca}" /></td>
-						<td><c:out value="${producto.modelo}" /></td>	
-						<td class="text-right"><fmt:formatNumber type="currency" value="${producto.precioVenta}" /></td>
-						<td class="width-35"></td>
-						<td class="text-center"><c:out value="${producto.unidades}" /></td>
-						<td class="sin_padding">
-							<a title="<fmt:message key="Companies" />" href='<c:url value='/productoEmpresa/producto/${producto.idPro}' />'>
-								<img src='<c:url value="/resources/imgs/empresa.png"/>' class="width-35">
-							</a>
-							<a title="<fmt:message key="label.Bills" />" href='<c:url value='/productoFactura/producto/${producto.idPro}' />'>
-								<img src='<c:url value="/resources/imgs/factura.png"/>' class="margin-left-5porciento width-35">
-							</a>
+						<th onclick="ordenaTabla(${count})"><fmt:message key="label.Product.description" /></th>
+						<c:set var="count" value="${count + 1}" scope="page"/>
+						<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.state" /></th>
+						<c:set var="count" value="${count + 1}" scope="page"/>
+						<th onclick="ordenaTabla(${count})"><fmt:message key="label.brand" /></th>
+						<c:set var="count" value="${count + 1}" scope="page"/>
+						<th onclick="ordenaTabla(${count})"><fmt:message key="label.model" /></th>
+						<c:set var="count" value="${count + 1}" scope="page"/>
+						<th colspan="2" class="text-center" onclick="ordenaTabla(${count})"><fmt:message key="label.salePrice" /></th>
+						<c:set var="count" value="${count + 1}" scope="page"/>
+						<th class="text-center" onclick="ordenaTabla(${count})"><fmt:message key="label.units" /></th>
+						<th class="extraAdmin-th"><fmt:message key="label.Extras" /></th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${productos}" var="producto">
+					    <tr title='<fmt:message key="label.purchase.price" />: <fmt:formatNumber type="currency" value="${producto.precioCompra}" />&#xA;<fmt:message key="label.Serial.number" />: <c:out value="${producto.serie}" />&#xA;<fmt:message key="label.location" />: <c:out value="${producto.ubicacion}" />&#xA;<fmt:message key="label.send" />: <c:out value="${producto.enviar}" />&#xA;<fmt:message key="label.salable" />: <c:out value="${producto.vendible}" />&#xA;<fmt:message key="label.warranty.months" />: <c:out value="${producto.mesesGarantia}" />&#xA;<fmt:message key="label.weigth" />: <c:out value="${producto.peso}" />&#xA;<fmt:message key="label.volume" />: <c:out value="${producto.volumen}" />&#xA;<fmt:message key="label.Category" />: <c:out value="${producto.subcategoria.categoria[nameColSelect]}" />&#xA;<fmt:message key="label.Subcategory" />: <c:out value="${producto.subcategoria[nameColSelect]}" />'>
 							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-								<a title="<fmt:message key="label.Add.remove.stock" />" href='<c:url value='/producto/stock/${producto.idPro}' />'>
-									<img src='<c:url value="/resources/imgs/stock.png"/>' class="margin-left-5porciento width-35">
-								</a>
+								<td class="extraAdmin-td">
+									<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/producto/${producto.idPro}' />"'>
+										<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+									</a>
+								</td>
 							</sec:authorize>
-						</td>
-				    </tr>
-				</c:forEach>
-			</tbody>
-		</table>
+							<sec:authorize access="hasAnyRole('ROL_ROOT')">
+								<td class="extraAdmin-td">
+									<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${producto.idPro})">
+										<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+									</a>
+								</td>
+							</sec:authorize>
+							<td><c:out value="${producto[nameColSelect]}" /></td>
+							<td class="text-center"><fmt:message key="${producto.estado}" /></td>
+							<td><c:out value="${producto.marca}" /></td>
+							<td><c:out value="${producto.modelo}" /></td>	
+							<td class="text-right"><fmt:formatNumber type="currency" value="${producto.precioVenta}" /></td>
+							<td class="width-35"></td>
+							<td class="text-center"><c:out value="${producto.unidades}" /></td>
+							<td class="extraAdmin-td">
+								<a title="<fmt:message key="Companies" />" href='<c:url value='/productoEmpresa/producto/${producto.idPro}' />'>
+									<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
+								</a>
+								<a title="<fmt:message key="label.Bills" />" href='<c:url value='/productoFactura/producto/${producto.idPro}' />'>
+									<img src='<c:url value="/resources/imgs/factura.png"/>' class="tamanio_imagen">
+								</a>
+								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+									<a title="<fmt:message key="label.Add.remove.stock" />" href='<c:url value='/producto/stock/${producto.idPro}' />'>
+										<img src='<c:url value="/resources/imgs/stock.png"/>' class="tamanio_imagen">
+									</a>
+								</sec:authorize>
+							</td>
+					    </tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
 	</div>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
 </body>
 </html>

@@ -25,82 +25,78 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-	<fmt:message key="language.name" var="nameColSelect"/>
-	<sec:authorize access="hasAnyRole('ROL_ROOT')">
-		<div class="d-flex justify-content-between">
-			<div class="p-2">
+	<div class="container-fluid">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<fmt:message key="language.name" var="nameColSelect"/>
+		<sec:authorize access="hasAnyRole('ROL_ROOT')">
+			<div class="row">
+				<div class="hidden-xs col-sm-3">
+				</div>
+				<div class="col-xs-12 col-sm-3">
+					<c:if test="${not empty formaPago_agregado}">
+						<span style="color: green;">
+							<fmt:message key="PaymentMethod.added" />
+						</span>
+					</c:if>
+					<c:if test="${not empty formaPago_asociado}">
+						<span style="color: red;">
+							<fmt:message key="error.PaymentMethod.asociated" />
+						</span>
+					</c:if>
+					<c:if test="${not empty formaPago_eliminado}">
+						<span style="color: green;">
+							<fmt:message key="PaymentMethod.deleted" />
+						</span>
+					</c:if>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/formaPago/0'/>"'>
+						<fmt:message key="Add.formaPago" />
+					</button>
+				</div>	
 			</div>
-			<div class="p-2">
-				<c:if test="${not empty formaPago_agregado}">
-					<span style="color: green;">
-						<fmt:message key="PaymentMethod.added" />
-					</span>
-				</c:if>
-				<c:if test="${not empty formaPago_asociado}">
-					<span style="color: red;">
-						<fmt:message key="error.PaymentMethod.asociated" />
-					</span>
-				</c:if>
-				<c:if test="${not empty formaPago_eliminado}">
-					<span style="color: green;">
-						<fmt:message key="PaymentMethod.deleted" />
-					</span>
-				</c:if>
+		</sec:authorize>
+		<div class="form-row">
+			<div class="hidden-xs col-sm-2 col-md-3">
 			</div>
-			<div class="p-2">
-				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/formaPago/0'/>"'>
-					<fmt:message key="Add.formaPago" />
-				</button>
-			</div>	
-			<div class="p-2">
-			</div>	
-		</div>
-	</sec:authorize>
-	<div class="form-row">		
-		<div class="col-sm-4">
-		</div>
-		<div class="col-xs-12 col-sm-4">
-			<div class="divTablaSinScroll">
-				<table id="tablaOrdenar" class="table table-striped">
-					<thead>
-						<tr>
-							<c:set var="count" value="0" scope="page" />
-							<sec:authorize access="hasAnyRole('ROL_ROOT')">
-								<th colspan="2"></th>
-								<c:set var="count" value="${count + 2}" scope="page"/>
-							</sec:authorize>
-							<th onclick="sortTable(${count})"><fmt:message key="label.Name" /></th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${formaPagos}" var="formaPago">
-						    <tr>
+			<div class="col-xs-12 col-sm-8 col-md-6">
+				<div class="divTablaSinScroll">
+					<table id="tablaOrdenar" class="table table-striped">
+						<thead>
+							<tr>
 								<sec:authorize access="hasAnyRole('ROL_ROOT')">
-									<td class="sin_padding">
-										<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/formaPago/${formaPago.idFor}' />"'>
-										  <img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
-										</button>
-									</td>
-									<td class="sin_padding">
-										<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${formaPago.idFor})" >
-										  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-										</button>
-									</td>
+									<th class="extraAdmin-th"></th>
 								</sec:authorize>
-								<td><c:out value="${formaPago[nameColSelect]}" /></td>
-						    </tr>
-						</c:forEach>
-					</tbody>
-				</table>
+								<th><fmt:message key="label.Name" /></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${formaPagos}" var="formaPago">
+							    <tr>
+									<sec:authorize access="hasAnyRole('ROL_ROOT')">
+										<td class="extraAdmin-td">
+											<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/formaPago/${formaPago.idFor}' />"'>
+												<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+											</a>
+											<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${formaPago.idFor})">
+												<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+											</a>
+										</td>
+									</sec:authorize>
+									<td><c:out value="${formaPago[nameColSelect]}" /></td>
+							    </tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>				
-		<div class="col-sm-4">
+			<div class="hidden-xs col-sm-2 col-md-3">
+			</div>
 		</div>
+		
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
 	</div>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
 </body>
 </html>

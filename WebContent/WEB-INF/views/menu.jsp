@@ -7,6 +7,7 @@
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="com.damian.utils.multilanguage" />
 
+<br>
 <header>
 	<nav class="navbar navbar-fixed-top" role="navigation">
 		<div class="container-fluid">

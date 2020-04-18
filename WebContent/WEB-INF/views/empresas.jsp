@@ -49,116 +49,118 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-	<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-		<div class="d-flex">
-			<div class="p-2">
-				<input type="text" id="formulario" class="form-control">
-				<script>
-					const formulario = document.querySelector('#formulario');
-					formulario.addEventListener('keyup', filtrar);
-				</script>
-			</div>
-			<div class="p-2">
-				<div class="dropdown collapse">
-					<div class="dropdown-content" id="resultado">
+	<div class="container-fluid">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+			<div class="row">
+				<div class="hidden-xs col-sm-3 col-md-2">
+					<input type="text" id="formulario" class="form-control">
+					<script>
+						const formulario = document.querySelector('#formulario');
+						formulario.addEventListener('keyup', filtrar);
+					</script>
+				</div>
+				<div class="hidden-xs col-sm-3 col-md-6">
+					<div class="dropdown collapse">
+						<div class="dropdown-content" id="resultado">
+						</div>
 					</div>
 				</div>
+				<div class="col-sm-3 col-md-2">
+					<c:if test="${not empty empresa_agregada}">
+						<span style="color: green;">
+							<fmt:message key="Company.added" />
+						</span>
+					</c:if>
+					<c:if test="${not empty empresa_eliminada}">
+						<span style="color: green;">
+							<fmt:message key="Company.deleted" />
+						</span>
+					</c:if>
+				</div>
+				<div class="col-sm-3 col-md-2  navbar-right">
+					<button type="button" class="btn fondo-c0c0c0 ml-1 border-color-dam" onclick='location.href="<c:url value='/empresa/0'/>"'>
+						<fmt:message key="Add.company" />
+					</button>
+				</div>		
 			</div>
-			<div class="p-2">
-				<c:if test="${not empty empresa_agregada}">
-					<span style="color: green;">
-						<fmt:message key="Company.added" />
-					</span>
-				</c:if>
-				<c:if test="${not empty empresa_eliminada}">
-					<span style="color: green;">
-						<fmt:message key="Company.deleted" />
-					</span>
-				</c:if>
-			</div>
-			<div class="ml-auto p-2">
-			<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/empresa/0'/>"'>
-				<fmt:message key="Add.company" />
-			</button>
-		</div>		
-	</div>
-	</sec:authorize>
-	<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-		<div class="d-flex">
-			<div class="p-2">
-				<input type="text" id="formulario" class="form-control">
-				<script>
-					const formulario = document.querySelector('#formulario');
-					formulario.addEventListener('keyup', filtrar);
-				</script>
-			</div>
-			<div class="p-2">
-				<div class="dropdown collapse">
-					<div class="dropdown-content" id="resultado">
+		</sec:authorize>
+		<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+			<div class="row">
+				<div class="hidden-xs col-sm-3 col-md-2">
+					<input type="text" id="formulario" class="form-control">
+					<script>
+						const formulario = document.querySelector('#formulario');
+						formulario.addEventListener('keyup', filtrar);
+					</script>
+				</div>
+				<div class="hidden-xs col-sm-3 col-md-6">
+					<div class="dropdown collapse">
+						<div class="dropdown-content" id="resultado">
+						</div>
 					</div>
 				</div>
+				<div class="col-sm-3 col-md-2">
+				</div>
+				<div class="col-sm-3 col-md-2  navbar-right">
+				</div>
 			</div>
-			<div class="ml-auto p-2">
-			</div>		
-		</div>
-	</sec:authorize>
-	<div class="divTabla">
-		<table id="tablaOrdenar" class="table table-striped">
-			<thead>
-				<tr>
-					<c:set var="count" value="0" scope="page" />
-					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-						<th colspan="2"></th>
-					</sec:authorize>
-					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Company.name" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="ordenaTabla(${count})"><fmt:message key="label.vat" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Email" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Phone" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="ordenaTabla(${count})"><fmt:message key="label.Fax" /></th>
-					<th class="width-100"><fmt:message key="label.Extras" /></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${empresas}" var="empresa">
-				    <tr title='<fmt:message key="label.Limited.company" />: <c:out value="${empresa.tipoSociedad}" />&#xA;<fmt:message key="label.Activity" />: <c:out value="${empresa.actividad}" />&#xA;<fmt:message key="label.Web.page" />: <c:out value="${empresa.paginaWeb}" />&#xA;<c:out value="${empresa.observaciones}" />'>
+		</sec:authorize>
+		<div class="divTabla">
+			<table id="tablaOrdenar" class="table table-striped">
+				<thead>
+					<tr>
+						<c:set var="count" value="0" scope="page" />
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-							<td class="sin_padding">
-								<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/empresa/${empresa.idEmp}' />"'>
-								  <img src='<c:url value="/resources/imgs/editar.png"/>' alt="Editar" class="tamanio_imagen">
-								</button>
-							</td>
-							<td class="sin_padding">
-								<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${empresa.idEmp})">
-								  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-								</button>
-							</td>
+							<th class="extraAdmin-th"></th>
 						</sec:authorize>
-						<td><c:out value="${empresa.nombreComercial}" /></td>
-						<td><c:out value="${empresa.cif}" /></td>
-						<td><c:out value="${empresa.email}" /></td>	
-						<td><c:out value="${empresa.telefono}" /></td>
-						<td><c:out value="${empresa.fax}" /></td>
-						<td class="sin_padding">
-							<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccionEmpresa/${empresa.idEmp}' />'>
-								<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="width-35">
-							</a>
-							<a title="<fmt:message key="label.Workers" />" href='<c:url value='/usuarioEmpresa/empresa/${empresa.idEmp}' />'>
-								<img src='<c:url value="/resources/imgs/usuarios.png"/>' class="margin-left-5porciento width-35">
-							</a>
-						</td>
-				    </tr>
-				</c:forEach>
-			</tbody>
-		</table>
+						<th onclick="ordenaTabla(${count})"><fmt:message key="label.Company.name" /></th>
+						<c:set var="count" value="${count + 1}" scope="page"/>
+						<th onclick="ordenaTabla(${count})"><fmt:message key="label.vat" /></th>
+						<c:set var="count" value="${count + 1}" scope="page"/>
+						<th onclick="ordenaTabla(${count})"><fmt:message key="label.Email" /></th>
+						<c:set var="count" value="${count + 1}" scope="page"/>
+						<th onclick="ordenaTabla(${count})"><fmt:message key="label.Phone" /></th>
+						<c:set var="count" value="${count + 1}" scope="page"/>
+						<th onclick="ordenaTabla(${count})"><fmt:message key="label.Fax" /></th>
+						<th class="extraAdmin-th"><fmt:message key="label.Extras" /></th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${empresas}" var="empresa">
+					    <tr title='<fmt:message key="label.Limited.company" />: <c:out value="${empresa.tipoSociedad}" />&#xA;<fmt:message key="label.Activity" />: <c:out value="${empresa.actividad}" />&#xA;<fmt:message key="label.Web.page" />: <c:out value="${empresa.paginaWeb}" />&#xA;<c:out value="${empresa.observaciones}" />'>
+							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+								<td class="extraAdmin-td">
+									<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/empresa/${empresa.idEmp}' />"'>
+										<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+									</a>
+									<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${empresa.idEmp})">
+										<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+									</a>
+								</td>
+							</sec:authorize>
+							<td><c:out value="${empresa.nombreComercial}" /></td>
+							<td><c:out value="${empresa.cif}" /></td>
+							<td><c:out value="${empresa.email}" /></td>	
+							<td><c:out value="${empresa.telefono}" /></td>
+							<td><c:out value="${empresa.fax}" /></td>
+							<td class="extraAdmin-td">
+								<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccionEmpresa/${empresa.idEmp}' />'>
+									<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="tamanio_imagen">
+								</a>
+								<a title="<fmt:message key="label.Workers" />" href='<c:url value='/usuarioEmpresa/empresa/${empresa.idEmp}' />'>
+									<img src='<c:url value="/resources/imgs/usuarios.png"/>' class="tamanio_imagen">
+								</a>
+							</td>
+					    </tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
 	</div>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
 </body>
 </html>

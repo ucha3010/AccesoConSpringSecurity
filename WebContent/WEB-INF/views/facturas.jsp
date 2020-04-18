@@ -57,12 +57,10 @@
 <body>
 	<c:import url="/WEB-INF/views/menu.jsp" />
 	<fmt:message key="language.name" var="nameColSelect"/>
-	<div class="d-flex">
-		<div class="p-2">
+	<div class="row">
+		<div class="hidden-xs col-sm-3">
 		</div>
-		<div class="p-2">
-		</div>
-		<div class="p-2">
+		<div class="col-xs-12 col-sm-3">
 			<c:if test="${not empty factura_eliminado}">
 				<span style="color: green;">
 					<fmt:message key="Bill.deleted" />
@@ -74,12 +72,12 @@
 				</span>
 			</c:if>
 		</div>
-		<div class="ml-auto p-2">
+		<div class="col-xs-12 col-sm-3">
 			<c:if test="${not empty vencen}">
 				<a href="#ventanaVencen" class="btn btn-danger btn-lg" data-toggle="modal"><fmt:message key='label.Bill.next.days' /></a>
 			</c:if>
 		</div>
-		<div class="ml-auto p-2">
+		<div class="hidden-xs col-sm-3">
 		</div>		
 	</div>
 	<div class="divTabla">
@@ -88,7 +86,7 @@
 				<tr>
 					<c:set var="count" value="0" scope="page" />
 					<sec:authorize access="hasAnyRole('ROL_ROOT')">
-						<th></th>
+						<th class="extraAdmin-th"></th>
 					</sec:authorize>
 					<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.Bill.id" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
@@ -102,17 +100,17 @@
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="ordenaTabla(${count})" colspan="2" class="text-center"><fmt:message key="label.Total.amount" /></th>
 					<th class="text-center"><fmt:message key="label.state" /></th>
-					<th class="width-100"><fmt:message key="label.Extras" /></th>
+					<th class="extraAdmin-th"><fmt:message key="label.Extras" /></th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${facturas}" var="factura">
 				    <tr title='<fmt:message key="label.Delivery.date" />: <fmt:formatDate value="${factura.fechaEntrega}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.Delivery.address" />: <c:out value="${factura.direccionEntrega}" />&#xA;<fmt:message key="label.Observations" />: <c:out value="${factura.observaciones}" />&#xA;<fmt:message key="label.Payment.method" />: <c:out value="${factura.formaPago[nameColSelect]}" />&#xA;<fmt:message key="label.Creator" />: <c:out value="${factura.creadoPor}" /><c:if test="${factura.numeroCuota > 0}">&#xA;<fmt:message key="label.Installment.number" />: <c:out value="${factura.numeroCuota}" /></c:if>'>
 						<sec:authorize access="hasAnyRole('ROL_ROOT')">
-							<td class="sin_padding">
-								<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${factura.idFac})">
-								  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-								</button>
+							<td class="extraAdmin-td">
+								<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${factura.idFac})">
+									<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+								</a>
 							</td>
 						</sec:authorize>
 						<td class="text-center"><c:out value="${factura.idFac}" /></td>
@@ -137,12 +135,12 @@
 								</c:forEach>
 							</select>
 						</td>
-						<td class="sin_padding">
+						<td class="extraAdmin-td">
 							<a title="<fmt:message key="Products" />" href='<c:url value='/productoFactura/factura/${factura.idFac}' />'>
-								<img src='<c:url value="/resources/imgs/factura.png"/>' class="margin-left-5porciento width-35">
+								<img src='<c:url value="/resources/imgs/factura.png"/>' class="tamanio_imagen">
 							</a>
 							<a title="<fmt:message key="label.State.historical" />" href='<c:url value='/facturaEstado/factura/${factura.idFac}' />'>
-								<img src='<c:url value="/resources/imgs/states.png"/>' class="margin-left-5porciento width-35">
+								<img src='<c:url value="/resources/imgs/states.png"/>' class="tamanio_imagen">
 							</a>
 						</td>
 				    </tr>

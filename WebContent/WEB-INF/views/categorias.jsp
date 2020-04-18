@@ -33,161 +33,157 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-	<fmt:message key="language.name" var="nameColSelect"/>
-	<sec:authorize access="hasAnyRole('ROL_ROOT')">
-		<div class="d-flex justify-content-between">
-			<div class="p-2">
+	<div class="container-fluid">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<fmt:message key="language.name" var="nameColSelect"/>
+		<sec:authorize access="hasAnyRole('ROL_ROOT')">
+			<div class="row">
+				<div class="hidden-xs col-sm-3">
+				</div>
+				<div class="col-xs-12 col-sm-3">
+					<c:if test="${not empty categoria_agregado}">
+						<span style="color: green;">
+							<fmt:message key="Category.added" />
+						</span>
+					</c:if>
+					<c:if test="${not empty categoria_asociado}">
+						<span style="color: red;">
+							<fmt:message key="error.Category.asociated" />
+						</span>
+					</c:if>
+					<c:if test="${not empty categoria_eliminado}">
+						<span style="color: green;">
+							<fmt:message key="Category.deleted" />
+						</span>
+					</c:if>
+					<c:if test="${not empty subcategoria_agregado}">
+						<span style="color: green;">
+							<fmt:message key="Subcategory.added" />
+						</span>
+					</c:if>
+					<c:if test="${not empty subcategoria_asociado}">
+						<span style="color: red;">
+							<fmt:message key="error.Subcategory.asociated" />
+						</span>
+					</c:if>
+					<c:if test="${not empty subcategoria_eliminado}">
+						<span style="color: green;">
+							<fmt:message key="Subcategory.deleted" />
+						</span>
+					</c:if>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/subcategoria/0'/>"'>
+						<fmt:message key="Add.subcategory" />
+					</button>
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/categoria/0'/>"'>
+						<fmt:message key="Add.category" />
+					</button>
+				</div>		
 			</div>
-			<div class="p-2">
-				<c:if test="${not empty categoria_agregado}">
-					<span style="color: green;">
-						<fmt:message key="Category.added" />
-					</span>
-				</c:if>
-				<c:if test="${not empty categoria_asociado}">
-					<span style="color: red;">
-						<fmt:message key="error.Category.asociated" />
-					</span>
-				</c:if>
-				<c:if test="${not empty categoria_eliminado}">
-					<span style="color: green;">
-						<fmt:message key="Category.deleted" />
-					</span>
-				</c:if>
-				<c:if test="${not empty subcategoria_agregado}">
-					<span style="color: green;">
-						<fmt:message key="Subcategory.added" />
-					</span>
-				</c:if>
-				<c:if test="${not empty subcategoria_asociado}">
-					<span style="color: red;">
-						<fmt:message key="error.Subcategory.asociated" />
-					</span>
-				</c:if>
-				<c:if test="${not empty subcategoria_eliminado}">
-					<span style="color: green;">
-						<fmt:message key="Subcategory.deleted" />
-					</span>
-				</c:if>
+		</sec:authorize>
+		<div class="form-row">
+			<div class="hidden-xs hidden-sm hidden-md col-lg-2">
 			</div>
-			<div class="p-2">
-				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/subcategoria/0'/>"'>
-					<fmt:message key="Add.subcategory" />
-				</button>
-				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/categoria/0'/>"'>
-					<fmt:message key="Add.category" />
-				</button>
-			</div>		
-		</div>
-	</sec:authorize>
-	<div class="form-row">		
-		<div class="col-sm-4">
-		</div>
-		<div class="col-xs-12 col-sm-4">
-			<div class="divTablaSinScroll">
-				<table id="tablaOrdenar" class="table table-striped">
-					<thead>
-						<tr>
-							<th><fmt:message key="label.Categories" /></th>
-							<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
-								<th colspan="2"></th>
-							</sec:authorize>
-							<th><fmt:message key="label.Subcategories" /></th>
-							<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
-								<th colspan="2"></th>
-							</sec:authorize>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${categorias}" var="categoria">
-							<c:set var="subcategorias" value="${categoria.subcategorias}" scope="page" />
-							
-							<c:if test="${empty subcategorias}">
-								<tr>
-									<td><c:out value="${categoria[nameColSelect]}" /></td>
-									<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
-										<td class="sin_padding">
-											<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/categoria/${categoria.idCat}' />"'>
-											  <img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
-											</button>
-										</td>
-										<td class="sin_padding">
-											<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${categoria.idCat})" >
-											  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-											</button>
-										</td>
-									</sec:authorize>
-									<td></td>
-									<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
-										<td colspan="2"></td>
-									</sec:authorize>
-									<td></td>
-								</tr>
-							</c:if>
-							
-							<c:set var="repetido" value="false" scope="page" />
-							<c:forEach items="${subcategorias}" var="subcategoria">
-							    <tr>
-								    <c:if test="${repetido}">
-										<td></td>
+			<div class="col-xs-12 col-lg-8">
+				<div class="divTablaSinScroll">
+					<table id="tablaOrdenar" class="table table-striped">
+						<thead>
+							<tr>
+								<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
+									<th class="extraAdmin-th"></th>
+								</sec:authorize>
+								<th><fmt:message key="label.Categories" /></th>
+								<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
+									<th class="extraAdmin-th"></th>
+								</sec:authorize>
+								<th><fmt:message key="label.Subcategories" /></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${categorias}" var="categoria">
+								<c:set var="subcategorias" value="${categoria.subcategorias}" scope="page" />
+								
+								<c:if test="${empty subcategorias}">
+									<tr>
 										<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
-											<td></td><td></td>
+											<td class="extraAdmin-td">
+												<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/categoria/${categoria.idCat}' />"'>
+													<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+												</a>
+												<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${categoria.idCat})">
+													<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+												</a>
+											</td>
 										</sec:authorize>
-									</c:if>
-								    <c:if test="${not repetido}">
 										<td><c:out value="${categoria[nameColSelect]}" /></td>
 										<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
-											<td class="sin_padding">
-												<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/categoria/${categoria.idCat}' />"'>
-												  <img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
-												</button>
-											</td>
-											<td class="sin_padding">
-												<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${categoria.idCat})" >
-												  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-												</button>
+											<td></td>
+										</sec:authorize>
+										<td></td>
+										<td></td>
+									</tr>
+								</c:if>
+								
+								<c:set var="repetido" value="false" scope="page" />
+								<c:forEach items="${subcategorias}" var="subcategoria">
+								    <tr>
+									    <c:if test="${repetido}">
+											<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
+												<td></td>
+											</sec:authorize>
+											<td></td>
+										</c:if>
+									    <c:if test="${not repetido}">
+											<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
+												<td class="extraAdmin-td">
+													<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/categoria/${categoria.idCat}' />"'>
+														<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+													</a>
+													<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${categoria.idCat})">
+														<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+													</a>
+												</td>
+											</sec:authorize>
+											<td><c:out value="${categoria[nameColSelect]}" /></td>
+											<c:set var="repetido" value="true" scope="page" />
+										</c:if>
+										<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
+											<td class="extraAdmin-td">
+												<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/subcategoria/${subcategoria.idSub}' />"'>
+													<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+												</a>
+												<a title="<fmt:message key='Delete' />" onclick="return confirmDeleteSub(${subcategoria.idSub})">
+													<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+												</a>
 											</td>
 										</sec:authorize>
-										<c:set var="repetido" value="true" scope="page" />
-									</c:if>
-									<td><c:out value="${subcategoria[nameColSelect]}" /></td>
-									<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
-										<td class="sin_padding">
-											<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/subcategoria/${subcategoria.idSub}' />"'>
-											  <img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
-											</button>
+										<td><c:out value="${subcategoria[nameColSelect]}" /></td>
+										<c:set var="productos" value="${subcategoria.productos}" scope="page" />
+										<td>
+											<c:if test="${not empty subcategoria.productos}">
+												<select name="selectProducto" class="border-radius-dam">
+													<c:forEach items="${productos}" var="producto">
+														<option value="${producto.idPro}"><c:out value="${producto[nameColSelect]}" /></option>
+													</c:forEach>
+												</select>
+											</c:if>
 										</td>
-										<td class="sin_padding">
-											<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDeleteSub(${subcategoria.idSub})" >
-											  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-											</button>
-										</td>
-									</sec:authorize>
-									<c:set var="productos" value="${subcategoria.productos}" scope="page" />
-									<td>
-										<c:if test="${not empty subcategoria.productos}">
-											<select name="selectProducto" class="border-radius-dam">
-												<c:forEach items="${productos}" var="producto">
-													<option value="${producto.idPro}"><c:out value="${producto[nameColSelect]}" /></option>
-												</c:forEach>
-											</select>
-										</c:if>
-									</td>
-							    </tr>
+								    </tr>
+								</c:forEach>
 							</c:forEach>
-						</c:forEach>
-					</tbody>
-				</table>
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>				
-		<div class="col-sm-4">
+			<div class="hidden-xs hidden-sm hidden-md col-lg-2">
+			</div>
 		</div>
+		
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
 	</div>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
 </body>
 </html>
