@@ -26,55 +26,59 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-	<div>
-		<h2><fmt:message key="label.users.belong" /> <c:out value="${empresa.nombreComercial}" /></h2>
-	</div>
-	<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-		<div class="form-row">		
-			<div class="col-sm-3">
+	<div class="container">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div>
+			<h2><fmt:message key="label.users.belong" /> <c:out value="${empresa.nombreComercial}" /></h2>
+		</div>
+		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+			<div class="row">		
+				<div class="hidden-xs col-sm-3">
+				</div>
+				<div class="col-xs-12 col-sm-9">
+					<sf:form method="post" action="${pageContext.request.contextPath}/usuarioEmpresa/empresa/save/${empresa.idEmp}" modelAttribute="auxString">
+						<div class="p-4">
+				        	<sf:select path="campo" class="form-control-dam">
+				        		<c:forEach items="${usuarios}" var="usuarioFor">
+				        			<c:set var="nombreAp" value="${usuarioFor.datosPersonales.nombre} ${usuarioFor.datosPersonales.apellido1} ${usuarioFor.datosPersonales.apellido2}" scope="page"/>
+				            		<sf:option value="${usuarioFor.idUsr}" label="${nombreAp}"/>
+				            	</c:forEach>
+				        	</sf:select>
+							<button type="submit" class="btn fondo-c0c0c0 border-color-dam">
+								<fmt:message key="label.New.user" />
+							</button>
+							<c:if test="${error}">
+								<span><fmt:message key="label.User.already.asigned" /> (<c:out value="${existia}"></c:out>)</span>
+							</c:if>
+						</div>
+					</sf:form>	
+				</div>
+			</div>
+		</sec:authorize>
+		<div class="row">
+			<div class="hidden-xs col-sm-3">
 			</div>
 			<div class="col-xs-12 col-sm-9">
-				<sf:form method="post" action="${pageContext.request.contextPath}/usuarioEmpresa/empresa/save/${empresa.idEmp}" modelAttribute="auxString">
-					<div class="p-4">
-			        	<sf:select path="campo" class="form-control-dam">
-			        		<c:forEach items="${usuarios}" var="usuarioFor">
-			        			<c:set var="nombreAp" value="${usuarioFor.datosPersonales.nombre} ${usuarioFor.datosPersonales.apellido1} ${usuarioFor.datosPersonales.apellido2}" scope="page"/>
-			            		<sf:option value="${usuarioFor.idUsr}" label="${nombreAp}"/>
-			            	</c:forEach>
-			        	</sf:select>
-						<button type="submit" class="btn fondo-c0c0c0 border-color-dam">
-							<fmt:message key="label.New.user" />
-						</button>
-						<c:if test="${error}">
-							<span><fmt:message key="label.User.already.asigned" /> (<c:out value="${existia}"></c:out>)</span>
-						</c:if>
-					</div>
-				</sf:form>	
-			</div>
-		</div>
-	</sec:authorize>
-	<div class="form-row">		
-		<div class="col-sm-3">
-		</div>
-		<div class="col-xs-12 col-sm-9">
-			<div class="divTabla margin-left-5porciento">
-				<table id="tablaOrdenar" class="table-striped">
-					<c:forEach items="${usuarioEmpresas}" var="usuarioEmpresa">
-					    <tr class="border-1px-ddd" title='<fmt:message key="label.Birthdate" />: <fmt:formatDate value="${usuarioEmpresa.usuario.datosPersonales.fechaNacimiento}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.idcard" />: <c:out value="${usuarioEmpresa.usuario.datosPersonales.dni}" />&#xA;<fmt:message key="label.Email" />: <c:out value="${usuarioEmpresa.usuario.datosPersonales.email}" />&#xA;<fmt:message key="label.Phone" />: <c:out value="${usuarioEmpresa.usuario.datosPersonales.telefono}" />&#xA;<c:out value="${usuarioEmpresa.usuario.datosPersonales.observaciones}" />'>
-					    	<td>
-						    	* <c:out value="${usuarioEmpresa.usuario.datosPersonales.nombre}" /> <c:out value="${usuarioEmpresa.usuario.datosPersonales.apellido1}" /> <c:out value="${usuarioEmpresa.usuario.datosPersonales.apellido2}" />
-								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-									<td class="sin_padding">
-										<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${usuarioEmpresa.usuario.idUsr},${usuarioEmpresa.empresa.idEmp})">
-										  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-										</button>
+				<div class="divTablaSinScroll">
+					<table class="table table-striped">
+						<tbody>
+							<c:forEach items="${usuarioEmpresas}" var="usuarioEmpresa">
+							    <tr class="border-1px-ddd" title='<fmt:message key="label.Birthdate" />: <fmt:formatDate value="${usuarioEmpresa.usuario.datosPersonales.fechaNacimiento}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.idcard" />: <c:out value="${usuarioEmpresa.usuario.datosPersonales.dni}" />&#xA;<fmt:message key="label.Email" />: <c:out value="${usuarioEmpresa.usuario.datosPersonales.email}" />&#xA;<fmt:message key="label.Phone" />: <c:out value="${usuarioEmpresa.usuario.datosPersonales.telefono}" />&#xA;<c:out value="${usuarioEmpresa.usuario.datosPersonales.observaciones}" />'>
+									<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+										<td class="extraAdmin-td">
+											<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${usuarioEmpresa.usuario.idUsr},${usuarioEmpresa.empresa.idEmp})">
+												<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+											</a>
+										</td>
+									</sec:authorize>
+							    	<td>
+								    	<c:out value="${usuarioEmpresa.usuario.datosPersonales.nombre}" /> <c:out value="${usuarioEmpresa.usuario.datosPersonales.apellido1}" /> <c:out value="${usuarioEmpresa.usuario.datosPersonales.apellido2}" />
 									</td>
-								</sec:authorize>
-							</td>
-					    </tr>
-					</c:forEach>
-				</table>
+							    </tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

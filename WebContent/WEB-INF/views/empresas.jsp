@@ -107,7 +107,7 @@
 			</div>
 		</sec:authorize>
 		<div class="divTabla">
-			<table id="tablaOrdenar" class="table table-striped">
+			<table class="table table-striped">
 				<thead>
 					<tr>
 						<c:set var="count" value="0" scope="page" />

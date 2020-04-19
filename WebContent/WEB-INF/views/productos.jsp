@@ -128,7 +128,7 @@
 						<c:set var="count" value="${count + 1}" scope="page"/>
 						<th onclick="ordenaTabla(${count})"><fmt:message key="label.model" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th colspan="2" class="text-center" onclick="ordenaTabla(${count})"><fmt:message key="label.salePrice" /></th>
+						<th colspan="2" class="text-center min-width-160" onclick="ordenaTabla(${count})"><fmt:message key="label.salePrice" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
 						<th class="text-center" onclick="ordenaTabla(${count})"><fmt:message key="label.units" /></th>
 						<th class="extraAdmin-th"><fmt:message key="label.Extras" /></th>

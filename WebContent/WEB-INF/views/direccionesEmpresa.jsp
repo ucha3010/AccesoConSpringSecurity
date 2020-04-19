@@ -25,73 +25,66 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-	<fmt:message key="language.name" var="nameColSelect"/>
-	<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-		<div class="d-flex">
-			<div class="mr-auto p-2">
-				<h1><c:out value="${empresa.nombreComercial}" /></h1>
+	<div class="container">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<fmt:message key="language.name" var="nameColSelect"/>
+		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+			<div class="row">
+				<div class="col-xs-12 col-sm-9">
+					<h1><c:out value="${empresa.nombreComercial}" /></h1>
+				</div>
+				<div class="col-xs-12 col-sm-3">
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/direccionEmpresa/formulario/0/${empresa.idEmp}'/>"'>
+						<fmt:message key="Add.address" />
+					</button>
+				</div>		
 			</div>
-			<div class="p-2">
-				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/direccionEmpresa/formulario/0/${empresa.idEmp}'/>"'>
-					<fmt:message key="Add.address" />
-				</button>
-			</div>		
+		</sec:authorize>
+		<div class="row">
+			<div class="divTablaSinScroll">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+								<th class="extraAdmin-th"></th>
+							</sec:authorize>
+							<th><fmt:message key="label.Type.road" /></th>
+							<th><fmt:message key="label.Street" /></th>
+							<th><fmt:message key="label.Number" /></th>
+							<th><fmt:message key="label.Rest" /></th>
+							<th><fmt:message key="label.Postal.code" /></th>
+							<th><fmt:message key="label.Province" /></th>
+							<th><fmt:message key="label.City" /></th>
+							<th><fmt:message key="label.Country" /></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${direccionesEmpresa}" var="direccion">
+						    <tr>
+								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+									<td class="extraAdmin-td">
+										<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/direccionEmpresa/formulario/${direccion.idDirEmp}/0' />"'>
+											<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+										</a>
+										<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${direccion.idDirEmp},${empresa.idEmp})">
+											<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+										</a>
+									</td>
+								</sec:authorize>
+								<td><c:out value="${direccion.tipoVia}" /></td>
+								<td><c:out value="${direccion.nombreVia}" /></td>	
+								<td><c:out value="${direccion.numero}" /></td>
+								<td><c:out value="${direccion.resto}" /></td>
+								<td><c:out value="${direccion.cp}" /></td>	
+								<td><c:out value="${direccion.provincia}" /></td>	
+								<td><c:out value="${direccion.ciudad}" /></td>
+								<td><c:out value="${direccion.pais[nameColSelect]}" /></td>
+						    </tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</div>
-	</sec:authorize>
-	<div class="divTabla">
-		<table id="tablaOrdenar" class="table table-striped">
-			<thead>
-				<tr>
-					<c:set var="count" value="0" scope="page" />
-					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-						<th colspan="2"></th>
-						<c:set var="count" value="${count + 2}" scope="page"/>
-					</sec:authorize>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Type.road" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Street" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Number" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Rest" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Postal.code" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Province" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.City" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})"><fmt:message key="label.Country" /></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${direccionesEmpresa}" var="direccion">
-				    <tr>
-						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-							<td class="sin_padding">
-								<button type="button" class="btn btn-default" title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/direccionEmpresa/formulario/${direccion.idDirEmp}/0' />"'>
-								  <img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
-								</button>
-							</td>
-							<td class="sin_padding">
-								<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${direccion.idDirEmp},${empresa.idEmp})" >
-								  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-								</button>
-							</td>
-						</sec:authorize>
-						<td><c:out value="${direccion.tipoVia}" /></td>
-						<td><c:out value="${direccion.nombreVia}" /></td>	
-						<td><c:out value="${direccion.numero}" /></td>
-						<td><c:out value="${direccion.resto}" /></td>
-						<td><c:out value="${direccion.cp}" /></td>	
-						<td><c:out value="${direccion.provincia}" /></td>	
-						<td><c:out value="${direccion.ciudad}" /></td>
-						<td><c:out value="${direccion.pais[nameColSelect]}" /></td>
-				    </tr>
-				</c:forEach>
-			</tbody>
-		</table>
 	</div>
 	
 	<footer>

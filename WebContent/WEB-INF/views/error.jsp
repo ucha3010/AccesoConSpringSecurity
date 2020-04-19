@@ -22,6 +22,8 @@
 	<h2>Ha ocurrido un error</h2>
 	<br>
 	<c:out value="${errorLog}" />
+	<br>---------------------------<br>
+	<c:out value="${sessionScope}"></c:out>
 
 	
 	<footer>

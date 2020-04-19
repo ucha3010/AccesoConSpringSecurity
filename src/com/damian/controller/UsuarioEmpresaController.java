@@ -32,11 +32,11 @@ public class UsuarioEmpresaController {
 	private UsuarioEmpresaService usuarioEmpresaService;
 
 	@RequestMapping("/usuarioEmpresa/usuario/{idUsr}")
-	public ModelAndView getUsers(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
+	public ModelAndView getUsers(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr, HttpServletRequest request) {
 		modelAndView.addObject("usuario", usuarioService.findById(idUsr));
 		modelAndView.addObject("auxString", new AuxString());
 		modelAndView.addObject("usuarioEmpresas", usuarioEmpresaService.findByIdUsr(idUsr));
-		modelAndView.addObject("empresas", empresaService.findAll(null, null));
+		modelAndView.addObject("empresas", empresaService.findAll(null, request));
 		modelAndView.setViewName("usuarioEmpresa");
 		return modelAndView;
 	}

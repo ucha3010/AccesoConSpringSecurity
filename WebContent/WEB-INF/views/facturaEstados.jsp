@@ -55,56 +55,59 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-	<fmt:message key="language.name" var="nameColSelect"/>
-	<div class="d-flex">
-		<div class="p-2">
+	<div class="container-fluid">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<fmt:message key="language.name" var="nameColSelect"/>
+		<div class="row">
+			<div class="hidden-xs col-sm-1">
+			</div>
+			<div class="col-xs-12 col-sm-7">
+				<h2><fmt:message key="label.Bill.id" />: ${factura.idFac}</h2>
+			</div>
+			<div class="col-xs-12 col-sm-4">
+				<c:if test="${not empty facturaEstado_id_observaciones}">
+					<span style="color: green;">
+						<fmt:message key="label.observations.updated" />
+					</span>
+				</c:if>
+			</div>		
 		</div>
-		<div class="p-6">
-			<h2><fmt:message key="label.Bill.id" />: ${factura.idFac}</h2>
+		<div class="row">
+			<div class="hidden-xs col-sm-1">
+			</div>
+			<div class="col-xs-12 col-sm-10">
+				<div class="divTablaSinScroll">
+					<table class="table table-striped">
+						<sf:form method="post" action="${pageContext.request.contextPath}/facturaEstado/update/observaciones" modelAttribute="facturaEstado">
+							<sf:hidden path="id"/>
+							<sf:hidden path="observaciones"/>
+							<thead>
+								<tr>
+									<th class="text-center"><fmt:message key="label.state" /></th>
+									<th class="text-center"><fmt:message key="label.Creation.date" /></th>
+									<th class="text-center"><fmt:message key="label.Creator" /></th>
+									<th class="text-center"><fmt:message key="label.Observations" /></th>
+									<th class="width-50"><fmt:message key="label.Extras" /></th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:set var="sizeCount" value="0" scope="page" />
+								<c:forEach items="${facturaEstados}" var="fe">
+								    <tr title='<c:out value="${fe.observaciones}" />'>
+										<td class="text-center"><c:out value="${fe.estado[nameColSelect]}" /></td>
+										<td class="text-center"><fmt:formatDate value="${fe.fecha}" pattern="dd/MM/yyyy HH:mm:ss"/></td>
+										<td class="text-center"><c:out value="${fe.creadoPor}" /></td>
+										<td class="text-center"><textarea id="observaciones${sizeCount}" name="fe.observaciones" rows='1' data-min-rows='1' class='autoExpand'><c:out value="${fe.observaciones}" /></textarea></td>
+										<td><button type="submit" class="btn btn-primary" onclick="enviarCambio(${fe.id},${sizeCount})"><fmt:message key="label.Update" /></button></td>
+								    </tr>
+								    <c:set var="sizeCount" value="${sizeCount + 1}" scope="page"/>
+								</c:forEach>
+							</tbody>
+						</sf:form>
+					</table>
+				</div>
+			</div>
 		</div>
-		<div class="p-2">
-		</div>
-		<div class="ml-auto p-2">
-			<c:if test="${not empty facturaEstado_id_observaciones}">
-				<span style="color: green;">
-					<fmt:message key="label.observations.updated" />
-				</span>
-			</c:if>
-		</div>		
-	</div>
-	<div class="divTabla">
-	<sf:form method="post" action="${pageContext.request.contextPath}/facturaEstado/update/observaciones" modelAttribute="facturaEstado">
-		<sf:hidden path="id"/>
-		<sf:hidden path="observaciones"/>
-		<table id="tablaOrdenar" class="table table-striped">
-			<thead>
-				<tr>
-					<c:set var="count" value="0" scope="page" />
-					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.state" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.Creation.date" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="sortTable(${count})" class="text-center"><fmt:message key="label.Creator" /></th>
-					<th class="text-center"><fmt:message key="label.Observations" /></th>
-					<th class="width-50"><fmt:message key="label.Extras" /></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:set var="sizeCount" value="0" scope="page" />
-				<c:forEach items="${facturaEstados}" var="fe">
-				    <tr title='<c:out value="${fe.observaciones}" />'>
-						<td class="text-center"><c:out value="${fe.estado[nameColSelect]}" /></td>
-						<td class="text-center"><fmt:formatDate value="${fe.fecha}" pattern="dd/MM/yyyy HH:mm:ss"/></td>
-						<td class="text-center"><c:out value="${fe.creadoPor}" /></td>
-						<td class="text-center"><textarea id="observaciones${sizeCount}" name="fe.observaciones" rows='1' data-min-rows='1' class='autoExpand'><c:out value="${fe.observaciones}" /></textarea></td>
-						<td><button type="submit" class="btn btn-primary" onclick="enviarCambio(${fe.id},${sizeCount})"><fmt:message key="label.Update" /></button></td>
-				    </tr>
-				    <c:set var="sizeCount" value="${sizeCount + 1}" scope="page"/>
-				</c:forEach>
-			</tbody>
-		</table>
-	</sf:form>
 	</div>
 	
 	<footer>

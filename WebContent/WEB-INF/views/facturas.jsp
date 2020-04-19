@@ -86,7 +86,7 @@
 				<tr>
 					<c:set var="count" value="0" scope="page" />
 					<sec:authorize access="hasAnyRole('ROL_ROOT')">
-						<th class="extraAdmin-th"></th>
+						<th></th>
 					</sec:authorize>
 					<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.Bill.id" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
@@ -98,7 +98,7 @@
 					<c:set var="count" value="${count + 1}" scope="page"/>
 					<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.Total.vat" /></th>
 					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="ordenaTabla(${count})" colspan="2" class="text-center"><fmt:message key="label.Total.amount" /></th>
+					<th onclick="ordenaTabla(${count})" colspan="2" class="text-center min-width-160"><fmt:message key="label.Total.amount" /></th>
 					<th class="text-center"><fmt:message key="label.state" /></th>
 					<th class="extraAdmin-th"><fmt:message key="label.Extras" /></th>
 				</tr>

@@ -15,30 +15,34 @@
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-	<fmt:message key="language.name" var="nameColSelect"/>
-	<div>
-		<h2><fmt:message key="label.Product.description" />: <c:out value="${producto[nameColSelect]}" /></h2>
-	</div>
-	<div class="form-row">		
-		<div class="col-sm-3">
+	<div class="container">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<fmt:message key="language.name" var="nameColSelect"/>
+		<div>
+			<h2><fmt:message key="label.Product.description" />: <c:out value="${producto[nameColSelect]}" /></h2>
 		</div>
-		<div class="col-xs-12 col-sm-9">
-			<div class="margin-left-5porciento">
-				<table id="tablaOrdenar" class="table-striped">
-					<c:forEach items="${productoEmpresas}" var="productoEmpresa">
-					    <tr class="border-1px-ddd" title='<fmt:message key="label.vat" />: <c:out value="${productoEmpresa.empresa.cif}" />&#xA;<fmt:message key="label.Email" />: <c:out value="${productoEmpresa.empresa.email}" />&#xA;<fmt:message key="label.Phone" />: <c:out value="${productoEmpresa.empresa.telefono}" />'>
-					    	<td class="padding-5-25-dam">
-						    	<c:out value="${productoEmpresa.empresa.nombreComercial}" />
-					    	</td>
-							<td class="padding-5-25-dam">
-								<a title="<fmt:message key="Companies" />" href='<c:url value='/empresa/filtered/${productoEmpresa.empresa.idEmp}' />'>
-									<img src='<c:url value="/resources/imgs/empresa.png"/>' class="margin-left-5porciento width-35">
-								</a>
-							</td>
-					    </tr>
-					</c:forEach>
-				</table>
+		<div class="row">
+			<div class="hidden-xs col-sm-1 col-md-2">
+			</div>
+			<div class="col-xs-12 col-sm-10 col-md-8">
+				<div class="divTablaSinScroll">
+					<table class="table table-striped">
+						<c:forEach items="${productoEmpresas}" var="productoEmpresa">
+						    <tr class="border-1px-ddd" title='<fmt:message key="label.vat" />: <c:out value="${productoEmpresa.empresa.cif}" />&#xA;<fmt:message key="label.Email" />: <c:out value="${productoEmpresa.empresa.email}" />&#xA;<fmt:message key="label.Phone" />: <c:out value="${productoEmpresa.empresa.telefono}" />'>
+								<td class="extraAdmin-td">
+									<a title="<fmt:message key="Companies" />" onclick='location.href="<c:url value='/empresa/filtered/${productoEmpresa.empresa.idEmp}' />"'>
+										<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
+									</a>
+								</td>
+						    	<td>
+							    	<c:out value="${productoEmpresa.empresa.nombreComercial}" />
+						    	</td>
+						    </tr>
+						</c:forEach>
+					</table>
+				</div>
+			</div>
+			<div class="hidden-xs col-sm-1 col-md-2">
 			</div>
 		</div>
 	</div>

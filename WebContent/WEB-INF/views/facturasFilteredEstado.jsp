@@ -36,95 +36,93 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-	<fmt:message key="language.name" var="nameColSelect"/>
-	<div class="d-flex">
-		<div class="p-2">
+	<div class="container-fluid">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<fmt:message key="language.name" var="nameColSelect"/>
+		<div class="row">
+			<div class="col-xs-12">
+				<c:if test="${not empty factura_eliminado}">
+					<span style="color: green;">
+						<fmt:message key="Bill.deleted" />
+					</span>
+				</c:if>
+				<c:if test="${not empty factura_stock_negativo}">
+					<span style="color: green;">
+						<fmt:message key="Bill.not.deleted.negative.stock" />
+					</span>
+				</c:if>
+			</div>		
 		</div>
-		<div class="p-2">
+		<div class="row">
+			<div class="divTablaSinScroll">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<c:set var="count" value="0" scope="page" />
+							<sec:authorize access="hasAnyRole('ROL_ROOT')">
+								<th></th>
+							</sec:authorize>
+							<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.Bill.id" /></th>
+							<c:set var="count" value="${count + 1}" scope="page"/>
+							<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.Purchase.Sale" /></th>
+							<c:set var="count" value="${count + 1}" scope="page"/>
+							<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.date.purchase" /></th>
+							<c:set var="count" value="${count + 1}" scope="page"/>
+							<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.Total.dicount" /></th>
+							<c:set var="count" value="${count + 1}" scope="page"/>
+							<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.Total.vat" /></th>
+							<c:set var="count" value="${count + 1}" scope="page"/>
+							<th onclick="ordenaTabla(${idEst},${count})" colspan="2" class="text-center min-width-160"><fmt:message key="label.Total.amount" /></th>
+							<th class="text-center"><fmt:message key="label.state" /></th>
+							<th class="extraAdmin-th"><fmt:message key="label.Extras" /></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${facturas}" var="factura">
+						    <tr title='<fmt:message key="label.Delivery.date" />: <fmt:formatDate value="${factura.fechaEntrega}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.Delivery.address" />: <c:out value="${factura.direccionEntrega}" />&#xA;<fmt:message key="label.Observations" />: <c:out value="${factura.observaciones}" />&#xA;<fmt:message key="label.Payment.method" />: <c:out value="${factura.formaPago[nameColSelect]}" />&#xA;<fmt:message key="label.Creator" />: <c:out value="${factura.creadoPor}" /><c:if test="${factura.numeroCuota > 0}">&#xA;<fmt:message key="label.Installment.number" />: <c:out value="${factura.numeroCuota}" /></c:if>'>
+								<sec:authorize access="hasAnyRole('ROL_ROOT')">
+									<td class="extraAdmin-td">
+										<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${factura.idFac})">
+											<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+										</a>
+									</td>
+								</sec:authorize>
+								<td class="text-center"><c:out value="${factura.idFac}" /></td>
+								<c:if test="${factura.compra}">
+									<td class="text-center"><fmt:message key="label.Purchase" /></td>
+								</c:if>
+								<c:if test="${not factura.compra}">
+									<td class="text-center"><fmt:message key="label.Sale" /></td>
+								</c:if>
+								<td class="text-center"><fmt:formatDate value="${factura.fechaCompra}" pattern="dd/MM/yyyy"/></td>
+								<td class="text-center"><fmt:formatNumber type="number" value="${factura.descuentoTotal}" minFractionDigits="2" />%</td>
+								<td class="text-center"><fmt:formatNumber type="number" value="${factura.ivaTotal}" minFractionDigits="2" />%</td>
+								<td class="text-right"><fmt:formatNumber type="currency" value="${factura.importeFront}" /></td>
+								<td class="width-15"></td>
+								<td>
+									<fmt:message key="label.state.column.name" var="itemSelect"/>
+									<select name="factura.estado.idEst" class="border-radius-dam" id="estadoId${factura.idFac}" onchange="actualizaEstado(${factura.idFac})">
+										<c:forEach items="${estados}" var="est">
+											<option value="${est.idEst}" <c:if test="${factura.estado.idEst == est.idEst}">selected</c:if>>
+												<c:out value="${est[nameColSelect]}" />
+											</option>
+										</c:forEach>
+									</select>
+								</td>
+								<td class="sin_padding">
+									<a title="<fmt:message key="Products" />" href='<c:url value='/productoFactura/factura/${factura.idFac}' />'>
+										<img src='<c:url value="/resources/imgs/factura.png"/>' class="margin-left-5porciento width-35">
+									</a>
+									<a title="<fmt:message key="label.State.historical" />" href='<c:url value='/facturaEstado/factura/${factura.idFac}' />'>
+										<img src='<c:url value="/resources/imgs/states.png"/>' class="margin-left-5porciento width-35">
+									</a>
+								</td>
+						    </tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</div>
-		<div class="p-2">
-			<c:if test="${not empty factura_eliminado}">
-				<span style="color: green;">
-					<fmt:message key="Bill.deleted" />
-				</span>
-			</c:if>
-			<c:if test="${not empty factura_stock_negativo}">
-				<span style="color: green;">
-					<fmt:message key="Bill.not.deleted.negative.stock" />
-				</span>
-			</c:if>
-		</div>
-		<div class="ml-auto p-2">
-		</div>		
-	</div>
-	<div class="divTabla">
-		<table id="tablaOrdenar" class="table table-striped">
-			<thead>
-				<tr>
-					<c:set var="count" value="0" scope="page" />
-					<sec:authorize access="hasAnyRole('ROL_ROOT')">
-						<th></th>
-					</sec:authorize>
-					<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.Bill.id" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.Purchase.Sale" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.date.purchase" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.Total.dicount" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.Total.vat" /></th>
-					<c:set var="count" value="${count + 1}" scope="page"/>
-					<th onclick="ordenaTabla(${idEst},${count})" colspan="2" class="text-center"><fmt:message key="label.Total.amount" /></th>
-					<th class="text-center"><fmt:message key="label.state" /></th>
-					<th class="width-100"><fmt:message key="label.Extras" /></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${facturas}" var="factura">
-				    <tr title='<fmt:message key="label.Delivery.date" />: <fmt:formatDate value="${factura.fechaEntrega}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.Delivery.address" />: <c:out value="${factura.direccionEntrega}" />&#xA;<fmt:message key="label.Observations" />: <c:out value="${factura.observaciones}" />&#xA;<fmt:message key="label.Payment.method" />: <c:out value="${factura.formaPago[nameColSelect]}" />&#xA;<fmt:message key="label.Creator" />: <c:out value="${factura.creadoPor}" /><c:if test="${factura.numeroCuota > 0}">&#xA;<fmt:message key="label.Installment.number" />: <c:out value="${factura.numeroCuota}" /></c:if>'>
-						<sec:authorize access="hasAnyRole('ROL_ROOT')">
-							<td class="sin_padding">
-								<button type="button" class="btn btn-default" title="<fmt:message key='Delete' />" onclick="return confirmDelete(${factura.idFac})">
-								  <img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-								</button>
-							</td>
-						</sec:authorize>
-						<td class="text-center"><c:out value="${factura.idFac}" /></td>
-						<c:if test="${factura.compra}">
-							<td class="text-center"><fmt:message key="label.Purchase" /></td>
-						</c:if>
-						<c:if test="${not factura.compra}">
-							<td class="text-center"><fmt:message key="label.Sale" /></td>
-						</c:if>
-						<td class="text-center"><fmt:formatDate value="${factura.fechaCompra}" pattern="dd/MM/yyyy"/></td>
-						<td class="text-center"><fmt:formatNumber type="number" value="${factura.descuentoTotal}" minFractionDigits="2" />%</td>
-						<td class="text-center"><fmt:formatNumber type="number" value="${factura.ivaTotal}" minFractionDigits="2" />%</td>
-						<td class="text-right"><fmt:formatNumber type="currency" value="${factura.importeFront}" /></td>
-						<td class="width-15"></td>
-						<td>
-							<fmt:message key="label.state.column.name" var="itemSelect"/>
-							<select name="factura.estado.idEst" class="border-radius-dam" id="estadoId${factura.idFac}" onchange="actualizaEstado(${factura.idFac})">
-								<c:forEach items="${estados}" var="est">
-									<option value="${est.idEst}" <c:if test="${factura.estado.idEst == est.idEst}">selected</c:if>>
-										<c:out value="${est[nameColSelect]}" />
-									</option>
-								</c:forEach>
-							</select>
-						</td>
-						<td class="sin_padding">
-							<a title="<fmt:message key="Products" />" href='<c:url value='/productoFactura/factura/${factura.idFac}' />'>
-								<img src='<c:url value="/resources/imgs/factura.png"/>' class="margin-left-5porciento width-35">
-							</a>
-							<a title="<fmt:message key="label.State.historical" />" href='<c:url value='/facturaEstado/factura/${factura.idFac}' />'>
-								<img src='<c:url value="/resources/imgs/states.png"/>' class="margin-left-5porciento width-35">
-							</a>
-						</td>
-				    </tr>
-				</c:forEach>
-			</tbody>
-		</table>
 	</div>
 	
 	<footer>

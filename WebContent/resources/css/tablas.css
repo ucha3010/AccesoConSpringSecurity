@@ -190,3 +190,7 @@
 .extraAdmin-th {
 	min-width: 100px;
 }
+
+.min-width-160 {
+	min-width: 160px;
+}

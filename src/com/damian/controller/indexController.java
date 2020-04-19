@@ -72,6 +72,10 @@ public class indexController {
 		if (error != null) {
 			model.addObject("error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
 		}
+		if (estoy == null) {
+			model.addObject("estoy", "index");
+			return showIndex(model);
+		}
 		model.setViewName("login");
 		return model;
 	}

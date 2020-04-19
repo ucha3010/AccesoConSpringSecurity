@@ -70,7 +70,12 @@
 							<a class="menu-style" href="<c:url value='/usuario/nuevo'/>"><fmt:message key="label.New.user" /></a>
 						</li>
 						<li class="btn-success border-color-dam">
-							<a class="menu-style" href="<c:url value='/private/${sessionScope.estoy}'/>"><fmt:message key="label.Login" /></a>
+							<c:if test="${sessionScope.estoy != null}">
+								<a class="menu-style" href="<c:url value='/private/${sessionScope.estoy}'/>"><fmt:message key="label.Login" /></a>
+							</c:if>
+							<c:if test="${sessionScope.estoy == null}">
+								<a class="menu-style" href="<c:url value='/private/index'/>"><fmt:message key="label.Login" /></a>
+							</c:if>
 						</li>
 					</sec:authorize>
 			
