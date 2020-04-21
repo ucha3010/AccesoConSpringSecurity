@@ -54,6 +54,7 @@
 <body>
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2"><fmt:message key="Products" /></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
 				<div class="hidden-xs col-sm-3 col-md-2">
@@ -109,16 +110,13 @@
 				</div>
 			</div>
 		</sec:authorize>
-		<div class="divTabla">
-			<table id="tablaOrdenar" class="table table-striped">
+		<div class="divTablaSinScroll">
+			<table class="table table-striped">
 				<thead>
-					<tr>
+					<tr class="cursor-pointer">
 						<c:set var="count" value="0" scope="page" />
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-							<th></th>
-						</sec:authorize>
-						<sec:authorize access="hasAnyRole('ROL_ROOT')">
-							<th></th>
+							<th class="extraAdmin-th"></th>
 						</sec:authorize>
 						<th onclick="ordenaTabla(${count})"><fmt:message key="label.Product.description" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
@@ -142,13 +140,11 @@
 									<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/producto/${producto.idPro}' />"'>
 										<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
 									</a>
-								</td>
-							</sec:authorize>
-							<sec:authorize access="hasAnyRole('ROL_ROOT')">
-								<td class="extraAdmin-td">
-									<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${producto.idPro})">
-										<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-									</a>
+									<sec:authorize access="hasAnyRole('ROL_ROOT')">
+										<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${producto.idPro})">
+											<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+										</a>
+									</sec:authorize>
 								</td>
 							</sec:authorize>
 							<td><c:out value="${producto[nameColSelect]}" /></td>

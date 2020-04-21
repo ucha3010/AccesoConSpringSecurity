@@ -7,9 +7,8 @@
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="com.damian.utils.multilanguage" />
 
-<br>
 <header>
-	<nav class="navbar navbar-fixed-top" role="navigation">
+	<nav class="navbar navbar-fixed-top mb-0" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navegacion-fm">

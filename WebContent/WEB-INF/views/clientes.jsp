@@ -10,7 +10,7 @@
 
 <html>
 <head>
-	<title><fmt:message key="label.Users" /></title>
+	<title><fmt:message key="label.Customers" /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 	
 	<script type="text/javascript" src='<c:url value="/resources/js/utiles.js" />'></script>
@@ -71,6 +71,7 @@
 <body>
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2"><fmt:message key="label.Customers" /></div>
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
@@ -127,10 +128,10 @@
 				</div>
 			</div>
 		</sec:authorize>
-		<div class="divTabla">
-			<table id="tablaOrdenar" class="table table-striped">
+		<div class="divTablaSinScroll">
+			<table class="table table-striped">
 				<thead>
-					<tr>
+					<tr class="cursor-pointer">
 						<c:set var="count" value="0" scope="page" />
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 							<th class="extraAdmin-th"></th>
@@ -151,7 +152,7 @@
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 							<th onclick="sortTable(9)"><fmt:message key="label.Roles" /></th>
 						</sec:authorize>
-						<th class="width-150"><fmt:message key="label.Extras" /></th>
+						<th class="text-center extraAdmin-th"><fmt:message key="label.Extras" /></th>
 					</tr>
 				</thead>
 				<tbody>

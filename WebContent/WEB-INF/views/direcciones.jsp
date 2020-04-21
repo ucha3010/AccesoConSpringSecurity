@@ -36,7 +36,7 @@
 				<div class="hidden-xs col-sm-3">
 				</div>
 				<div class="col-xs-12 col-sm-3">
-					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/direccion/formulario/0/${usuario.datosPersonales.idDatosPers}'/>"'>
+					<button class="btn fondo-c0c0c0 border-color-dam margin-top-20" onclick='location.href="<c:url value='/direccion/formulario/0/${usuario.datosPersonales.idDatosPers}'/>"'>
 						<fmt:message key="Add.address" />
 					</button>
 				</div>		

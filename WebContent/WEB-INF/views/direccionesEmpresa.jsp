@@ -34,7 +34,7 @@
 					<h1><c:out value="${empresa.nombreComercial}" /></h1>
 				</div>
 				<div class="col-xs-12 col-sm-3">
-					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/direccionEmpresa/formulario/0/${empresa.idEmp}'/>"'>
+					<button type="button" class="btn fondo-c0c0c0 border-color-dam margin-top-20" onclick='location.href="<c:url value='/direccionEmpresa/formulario/0/${empresa.idEmp}'/>"'>
 						<fmt:message key="Add.address" />
 					</button>
 				</div>		

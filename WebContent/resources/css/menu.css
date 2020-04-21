@@ -47,7 +47,7 @@
 }
 
 body {
-	padding-top: 80px; /*esto es para que no se ponga la info bajo la barra de navegación*/
+	padding-top: 52px; /*esto es para que no se ponga la info bajo la barra de navegación*/
 }
 		
 .border-color-dam {
@@ -87,4 +87,17 @@ body {
 
 button:hover{
 	opacity: 0.7;
+}
+
+.navbar {
+	margin-bottom: 10 !important;
+}
+
+.collapse.in {
+	max-height: none !important;
+	background-color: white;
+}
+
+.well {
+	margin-bottom: 10 !important;
 }

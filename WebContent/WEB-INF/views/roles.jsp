@@ -27,6 +27,7 @@
 <body>
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2"><fmt:message key="label.Roles" /></div>
 		<sec:authorize access="hasAnyRole('ROL_ROOT')">
 			<div class="row">
 				<div class="hidden-xs col-sm-3">

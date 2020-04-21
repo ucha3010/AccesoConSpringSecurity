@@ -27,6 +27,7 @@
 <body>
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2"><fmt:message key="label.states" /></div>
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<sec:authorize access="hasAnyRole('ROL_ROOT')">
 			<div class="row">

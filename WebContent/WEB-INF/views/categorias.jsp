@@ -35,6 +35,7 @@
 <body>
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2"><fmt:message key="label.Categories.and.subcategories" /></div>
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<sec:authorize access="hasAnyRole('ROL_ROOT')">
 			<div class="row">
@@ -87,7 +88,7 @@
 			</div>
 			<div class="col-xs-12 col-lg-8">
 				<div class="divTablaSinScroll">
-					<table id="tablaOrdenar" class="table table-striped">
+					<table class="table table-striped">
 						<thead>
 							<tr>
 								<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
