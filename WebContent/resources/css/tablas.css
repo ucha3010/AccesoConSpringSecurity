@@ -61,7 +61,7 @@
 
 .divTablaSinScroll thead th { 
 	position: sticky; 
-	top: -0.1rem; 
+	top: 50px; 
 	background-color: #fff;
 	vertical-align: middle !important;
 	padding-top: 0;

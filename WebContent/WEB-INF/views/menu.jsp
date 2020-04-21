@@ -10,7 +10,7 @@
 <header>
 	<nav class="navbar navbar-fixed-top mb-0" role="navigation">
 		<div class="container-fluid">
-			<div class="navbar-header">
+			<div class="navbar-header bg-white">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navegacion-fm">
 					<span class="sr-only"><fmt:message key="label.Expand.Hide" /> <fmt:message key="label.Menu" /></span>
 					<span class="icon-bar"></span>
@@ -22,7 +22,7 @@
 				</a>
 			</div>
 			
-			<div class="collapse navbar-collapse" id="navegacion-fm">
+			<div class="collapse navbar-collapse bg-white" id="navegacion-fm">
 				<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 					<div class="hidden-sm hidden-md">
 						<ul class="nav navbar-nav">
