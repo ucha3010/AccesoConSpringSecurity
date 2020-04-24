@@ -14,7 +14,7 @@
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 	
 	<script type="text/javascript">
-		function validarRol(){
+		function validar(){
 			restablecer();
 		    var nombreRol = document.getElementById('nombreRol');
 		    var nombreRolError = document.getElementById('nombreRolError');
@@ -43,33 +43,38 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-	<sf:form method="post" action="${pageContext.request.contextPath}/rol/save" modelAttribute="rol" onsubmit="return validarRol()">
-		<c:if test="${rol.idRol != 0}">
-			<sf:hidden path="idRol"/>
-		</c:if>
-		<div class="form-row">		
-			<div class="col-sm-3">
+	<div class="container">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2"><fmt:message key="Add.rol" /></div>
+		<sf:form method="post" action="${pageContext.request.contextPath}/rol/save" modelAttribute="rol" onsubmit="return validar()">
+			<c:if test="${rol.idRol != 0}">
+				<sf:hidden path="idRol"/>
+			</c:if>
+			<div class="row">		
+				<div class="hidden-xs col-sm-3">
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<label for="rol"><fmt:message key="Rol.name" /></label> 
+					<sf:input path="rol" class="form-control" id="nombreRol" />
+					<span id="nombreRolError" name="errorSpan"></span>
+				</div>
+				<div class="hidden-xs col-sm-3">
+				</div>
 			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="rol"><fmt:message key="Rol.name" /></label> 
-				<sf:input path="rol" class="form-control" id="nombreRol" />
-				<span id="nombreRolError" name="errorSpan"></span>
+			<br/>
+			<div class="row">	
+				<div class="hidden-xs col-sm-4">
+				</div>
+				<div class="col-xs-12 col-sm-8">
+					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/rol' />"'><fmt:message key="Cancel" /></button>
+				</div>
 			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">	
-				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/rol' />"'><fmt:message key="Cancel" /></button>
-			</div>
-		</div>
-	</sf:form>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+		</sf:form>
+		
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
+	</div>
 </body>
 </html>

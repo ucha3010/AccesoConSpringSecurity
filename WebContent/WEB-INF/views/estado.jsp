@@ -14,7 +14,7 @@
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 	
 	<script type="text/javascript">
-		function validarEstado(){
+		function validar(){
 			restablecer();
 			var campo = ['nombreEstadoES','nombreEstadoEN'];
 			var validado = true;			
@@ -48,44 +48,42 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-	<sf:form method="post" action="${pageContext.request.contextPath}/estado/save" modelAttribute="estado" onsubmit="return validarEstado()">
-		<c:if test="${estado.idEst != 0}">
-			<sf:hidden path="idEst"/>
-		</c:if>
-		<div class="form-row">		
-			<div class="col-sm-3">
+	<div class="container">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2"><fmt:message key="Add.estado" /></div>
+		<sf:form method="post" action="${pageContext.request.contextPath}/estado/save" modelAttribute="estado" onsubmit="return validar()">
+			<c:if test="${estado.idEst != 0}">
+				<sf:hidden path="idEst"/>
+			</c:if>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="estado"><fmt:message key="Estado.name.spanish" /></label> 
+					<sf:input path="nombreES" class="form-control" id="nombreEstadoES" />
+					<span id="nombreEstadoESError" name="errorSpan"></span>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="estado"><fmt:message key="Estado.name.english" /></label> 
+					<sf:input path="nombreEN" class="form-control" id="nombreEstadoEN" />
+					<span id="nombreEstadoENError" name="errorSpan"></span>
+				</div>	
 			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="estado"><fmt:message key="Estado.name.spanish" /></label> 
-				<sf:input path="nombreES" class="form-control" id="nombreEstadoES" />
-				<span id="nombreEstadoESError" name="errorSpan"></span>
+			<br/>
+			<div class="row">	
+				<div class="hidden-xs col-sm-4">
+				</div>
+				<div class="col-xs-12 col-sm-8">
+					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/estado' />"'><fmt:message key="Cancel" /></button>
+					<span id="hayError" name="errorSpan" style="color:red"></span>
+				</div>
 			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="estado"><fmt:message key="Estado.name.english" /></label> 
-				<sf:input path="nombreEN" class="form-control" id="nombreEstadoEN" />
-				<span id="nombreEstadoENError" name="errorSpan"></span>
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">	
-				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/estado' />"'><fmt:message key="Cancel" /></button>
-				<span id="hayError" name="errorSpan" style="color:red"></span>
-			</div>
-		</div>
-	</sf:form>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+		</sf:form>
+		
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
+	</div>
 </body>
 </html>

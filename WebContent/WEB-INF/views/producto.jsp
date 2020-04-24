@@ -60,194 +60,151 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
 	<fmt:message key="language.name" var="nameColSelect"/>
-	<sf:form method="post" action="${pageContext.request.contextPath}/producto/save" modelAttribute="producto" onsubmit="return validar()">
-		<c:if test="${producto.idPro != 0}">
-			<sf:hidden path="idPro"/>
-			<sf:hidden path="unidades"/>
-		</c:if>
-		<div class="form-row">		
-			<div class="col-sm-3">
+	<div class="container">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2"><fmt:message key="Add.product" /></div>
+		<sf:form method="post" action="${pageContext.request.contextPath}/producto/save" modelAttribute="producto" onsubmit="return validar()">
+			<c:if test="${producto.idPro != 0}">
+				<sf:hidden path="idPro"/>
+				<sf:hidden path="unidades"/>
+			</c:if>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="nombreES"><fmt:message key="label.Product.name.spanish" /></label> 
+					<sf:input path="nombreES" class="form-control" id="nombreES" />
+					<span id="nombreESError" name="errorSpan"></span>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="nombreEN"><fmt:message key="label.Product.name.english" /></label> 
+					<sf:input path="nombreEN" class="form-control" id="nombreEN" />
+					<span id="nombreENError" name="errorSpan"></span>
+				</div>	
 			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="nombreES"><fmt:message key="label.Product.name.spanish" /></label> 
-				<sf:input path="nombreES" class="form-control" id="nombreES" />
-				<span id="nombreESError" name="errorSpan"></span>
+			<br/>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="estado"><fmt:message key="label.state" /></label>
+					<sf:select class="form-control" id="estado" path="estado">
+						<sf:option value="ACTIVE"><fmt:message key="ACTIVE" /></sf:option>
+						<sf:option value="INACTIVE"><fmt:message key="INACTIVE" /></sf:option>
+						<sf:option value="DISCONTINUED"><fmt:message key="DISCONTINUED" /></sf:option>
+					</sf:select>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="precioVenta"><fmt:message key="label.salePrice" /></label> 
+					<sf:input path="precioVenta" class="form-control" id="precioVenta" />
+					<span id="precioVentaError" name="errorSpan"></span>
+				</div>	
 			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
+			<br/>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="precioCompra"><fmt:message key="label.purchase.price" /></label> 
+					<sf:input path="precioCompra" class="form-control" id="precioCompra" />
+					<span id="precioCompraError" name="errorSpan"></span>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="marca"><fmt:message key="label.brand" /></label> 
+					<sf:input path="marca" class="form-control" id="marca" />
+					<span id="marcaError" name="errorSpan"></span>
+				</div>	
 			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="nombreEN"><fmt:message key="label.Product.name.english" /></label> 
-				<sf:input path="nombreEN" class="form-control" id="nombreEN" />
-				<span id="nombreENError" name="errorSpan"></span>
+			<br/>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="modelo"><fmt:message key="label.model" /></label> 
+					<sf:input path="modelo" class="form-control" id="modelo" />
+					<span id="modeloError" name="errorSpan"></span>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="serie"><fmt:message key="label.Serial.number" /></label> 
+					<sf:input path="serie" class="form-control" id="serie" />
+					<span id="serieError" name="errorSpan"></span>
+				</div>	
 			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
+			<br/>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="ubicacion"><fmt:message key="label.location" /></label> 
+					<sf:input path="ubicacion" class="form-control" id="ubicacion" />
+					<span id="ubicacionError" name="errorSpan"></span>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+				
+				
+					<div class="checkbox">
+						<label>
+							<sf:checkbox path="enviar" /><fmt:message key="label.send" />
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<sf:checkbox path="vendible" /><fmt:message key="label.salable" />
+						</label>
+					</div>
+				</div>	
 			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="estado"><fmt:message key="label.state" /></label>
-				<sf:select class="form-control" id="estado" path="estado">
-					<sf:option value="ACTIVE"><fmt:message key="ACTIVE" /></sf:option>
-					<sf:option value="INACTIVE"><fmt:message key="INACTIVE" /></sf:option>
-					<sf:option value="DISCONTINUED"><fmt:message key="DISCONTINUED" /></sf:option>
-				</sf:select>
+			<br/>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="peso"><fmt:message key="label.weigth" /></label> 
+					<sf:input path="peso" class="form-control" id="peso" />
+					<span id="pesoError" name="errorSpan"></span>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="volumen"><fmt:message key="label.volume" /></label> 
+					<sf:input path="volumen" class="form-control" id="volumen" />
+					<span id="volumenError" name="errorSpan"></span>
+				
+				</div>	
 			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
+			<br/>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="subcategoria"><fmt:message key="label.Subcategory" /></label>
+		        	<sf:select path="subcategoria.idSub" class="form-control" id="subcategoria">
+		        		<c:forEach var="categoria" items="${categorias}">
+		        			<c:forEach var="sub" items="${categoria.subcategorias}">
+		        				<sf:option value="${sub.idSub}" label="${categoria[nameColSelect]} - ${sub[nameColSelect]}" />
+		        			</c:forEach>
+		        		</c:forEach>
+		        	</sf:select>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="mesesGarantia"><fmt:message key="label.warranty.months" /></label> 
+					<sf:input path="mesesGarantia" class="form-control" id="mesesGarantia" />
+					<span id="mesesGarantiaError" name="errorSpan"></span>
+				</div>	
 			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="precioVenta"><fmt:message key="label.salePrice" /></label> 
-				<sf:input path="precioVenta" class="form-control" id="precioVenta" />
-				<span id="precioVentaError" name="errorSpan"></span>
+			<br/>
+			<div class="row">	
+				<div class="hidden-xs col-sm-4">
+				</div>
+				<div class="col-xs-12 col-sm-8">
+					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/producto' />"'><fmt:message key="Cancel" /></button>
+				</div>
 			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="precioCompra"><fmt:message key="label.purchase.price" /></label> 
-				<sf:input path="precioCompra" class="form-control" id="precioCompra" />
-				<span id="precioCompraError" name="errorSpan"></span>
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="marca"><fmt:message key="label.brand" /></label> 
-				<sf:input path="marca" class="form-control" id="marca" />
-				<span id="marcaError" name="errorSpan"></span>
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="modelo"><fmt:message key="label.model" /></label> 
-				<sf:input path="modelo" class="form-control" id="modelo" />
-				<span id="modeloError" name="errorSpan"></span>
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="serie"><fmt:message key="label.Serial.number" /></label> 
-				<sf:input path="serie" class="form-control" id="serie" />
-				<span id="serieError" name="errorSpan"></span>
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="ubicacion"><fmt:message key="label.location" /></label> 
-				<sf:input path="ubicacion" class="form-control" id="ubicacion" />
-				<span id="ubicacionError" name="errorSpan"></span>
-			</div>
-		</div>
-		<br/>
-<!-- 		<div class="form-row">		 -->
-<!-- 			<div class="col-sm-3"> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-xs-12 col-sm-4">	 -->
-<%-- 				<label for="fechaCompra"><fmt:message key="label.date.purchase" /></label> --%>
-<%-- 		    	<sf:input type="date" class="form-control" id="fechaCompra" path="fechaCompra"/> --%>
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 		<br/> -->
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4 form-check">
-				<label class="form-check-label" for="enviar"> <fmt:message key="label.send" /></label>
-				<sf:checkbox path="enviar" cssClass="form-check-input margin-left-5porciento" />
-				<br>
-				<span id="enviarError" name="errorSpan" style="color:red"></span>
-			</div>
-		</div>		
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4 form-check">
-				<label class="form-check-label" for="vendible"> <fmt:message key="label.salable" /></label>
-				<sf:checkbox path="vendible" cssClass="form-check-input margin-left-5porciento" />
-				<br>
-				<span id="vendibleError" name="errorSpan" style="color:red"></span>
-			</div>
-		</div>		
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="mesesGarantia"><fmt:message key="label.warranty.months" /></label> 
-				<sf:input path="mesesGarantia" class="form-control" id="mesesGarantia" />
-				<span id="mesesGarantiaError" name="errorSpan"></span>
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="peso"><fmt:message key="label.weigth" /></label> 
-				<sf:input path="peso" class="form-control" id="peso" />
-				<span id="pesoError" name="errorSpan"></span>
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="volumen"><fmt:message key="label.volume" /></label> 
-				<sf:input path="volumen" class="form-control" id="volumen" />
-				<span id="volumenError" name="errorSpan"></span>
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="subcategoria"><fmt:message key="label.Subcategory" /></label>
-	        	<sf:select path="subcategoria.idSub" class="form-control" id="subcategoria">
-	        		<c:forEach var="categoria" items="${categorias}">
-	        			<c:forEach var="sub" items="${categoria.subcategorias}">
-	        				<sf:option value="${sub.idSub}" label="${categoria[nameColSelect]} - ${sub[nameColSelect]}" />
-	        			</c:forEach>
-	        		</c:forEach>
-	        	</sf:select>
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/producto' />"'><fmt:message key="Cancel" /></button>
-			</div>
-		</div>
-	</sf:form>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+		</sf:form>
+		
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
+	</div>
 </body>
 </html>

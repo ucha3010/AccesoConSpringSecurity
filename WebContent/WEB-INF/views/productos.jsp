@@ -64,13 +64,13 @@
 						formulario.addEventListener('keyup', filtrar);
 					</script>
 				</div>
-				<div class="hidden-xs col-sm-3 col-md-6">
+				<div class="hidden-xs col-sm-2 col-md-4">
 					<div class="dropdown collapse">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-3 col-md-2">
+				<div class="col-sm-4">
 					<c:if test="${not empty producto_agregado}">
 						<span style="color: green;">
 							<fmt:message key="Product.added" />

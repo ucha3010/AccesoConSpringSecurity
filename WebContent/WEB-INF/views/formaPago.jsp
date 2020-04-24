@@ -14,7 +14,7 @@
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 	
 	<script type="text/javascript">
-		function validarFormaPago(){
+		function validar(){
 			restablecer();
 			var campo = ['nombreFormaPagoES','nombreFormaPagoEN'];
 			var validado = true;			
@@ -48,44 +48,42 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-	<sf:form method="post" action="${pageContext.request.contextPath}/formaPago/save" modelAttribute="formaPago" onsubmit="return validarFormaPago()">
-		<c:if test="${formaPago.idFor != 0}">
-			<sf:hidden path="idFor"/>
-		</c:if>
-		<div class="form-row">		
-			<div class="col-sm-3">
+	<div class="container">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2"><fmt:message key="Add.formaPago" /></div>
+		<sf:form method="post" action="${pageContext.request.contextPath}/formaPago/save" modelAttribute="formaPago" onsubmit="return validar()">
+			<c:if test="${formaPago.idFor != 0}">
+				<sf:hidden path="idFor"/>
+			</c:if>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="formaPago"><fmt:message key="Payment.method.name.spanish" /></label> 
+					<sf:input path="nombreES" class="form-control" id="nombreFormaPagoES" />
+					<span id="nombreFormaPagoESError" name="errorSpan"></span>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="formaPago"><fmt:message key="Payment.method.name.english" /></label> 
+					<sf:input path="nombreEN" class="form-control" id="nombreFormaPagoEN" />
+					<span id="nombreFormaPagoENError" name="errorSpan"></span>
+				</div>	
 			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="formaPago"><fmt:message key="Payment.method.name.spanish" /></label> 
-				<sf:input path="nombreES" class="form-control" id="nombreFormaPagoES" />
-				<span id="nombreFormaPagoESError" name="errorSpan"></span>
+			<br/>
+			<div class="row">	
+				<div class="hidden-xs col-sm-4">
+				</div>
+				<div class="col-xs-12 col-sm-8">
+					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/formaPago' />"'><fmt:message key="Cancel" /></button>
+					<span id="hayError" name="errorSpan" style="color:red"></span>
+				</div>
 			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="formaPago"><fmt:message key="Payment.method.name.english" /></label> 
-				<sf:input path="nombreEN" class="form-control" id="nombreFormaPagoEN" />
-				<span id="nombreFormaPagoENError" name="errorSpan"></span>
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">	
-				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/formaPago' />"'><fmt:message key="Cancel" /></button>
-				<span id="hayError" name="errorSpan" style="color:red"></span>
-			</div>
-		</div>
-	</sf:form>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+		</sf:form>
+		
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
+	</div>
 </body>
 </html>

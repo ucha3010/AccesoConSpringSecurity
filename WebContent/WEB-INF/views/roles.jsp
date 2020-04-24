@@ -30,9 +30,9 @@
 		<div class="well well-sm text-center h2"><fmt:message key="label.Roles" /></div>
 		<sec:authorize access="hasAnyRole('ROL_ROOT')">
 			<div class="row">
-				<div class="hidden-xs col-sm-3">
+				<div class="hidden-xs col-sm-1">
 				</div>
-				<div class="col-xs-12 col-sm-3">
+				<div class="col-xs-12 col-sm-5 text-center">
 					<c:if test="${not empty rol_agregado}">
 						<span style="color: green;">
 							<fmt:message key="Rol.added" />

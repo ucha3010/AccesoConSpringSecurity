@@ -14,7 +14,7 @@
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 	
 	<script type="text/javascript">
-		function validarSubcategoria(){
+		function validar(){
 			restablecer();
 			var campo = ['nombreSubcategoriaES','nombreSubcategoriaEN'];
 			var validado = true;			
@@ -48,56 +48,58 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-	<fmt:message key="language.name" var="nameColSelect"/>
-	<sf:form method="post" action="${pageContext.request.contextPath}/subcategoria/save" modelAttribute="subcategoria" onsubmit="return validarSubcategoria()">
-		<c:if test="${subcategoria.idSub != 0}">
-			<sf:hidden path="idSub"/>
-		</c:if>
-		<div class="form-row">		
-			<div class="col-sm-3">
+	<div class="container">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<fmt:message key="language.name" var="nameColSelect"/>
+		<div class="well well-sm text-center h2"><fmt:message key="Add.subcategory" /></div>
+		<sf:form method="post" action="${pageContext.request.contextPath}/subcategoria/save" modelAttribute="subcategoria" onsubmit="return validar()">
+			<c:if test="${subcategoria.idSub != 0}">
+				<sf:hidden path="idSub"/>
+			</c:if>
+			<div class="row">		
+				<div class="hidden-xs col-sm-3">
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<label for="categoria"><fmt:message key="label.Category" /></label>
+		        	<sf:select path="categoria.idCat" class="form-control" id="categoria">
+		            	<sf:options items="${categorias}" itemValue="idCat" itemLabel="${nameColSelect}" />
+		        	</sf:select>
+				</div>		
+				<div class="hidden-xs col-sm-3">
+				</div>	
 			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="categoria"><fmt:message key="label.Category" /></label>
-	        	<sf:select path="categoria.idCat" class="form-control" id="categoria">
-	            	<sf:options items="${categorias}" itemValue="idCat" itemLabel="${nameColSelect}" />
-	        	</sf:select>
+			<br/>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="subcategoria"><fmt:message key="Subcategory.name.spanish" /></label> 
+					<sf:input path="nombreES" class="form-control" id="nombreSubcategoriaES" />
+					<span id="nombreSubcategoriaESError" name="errorSpan"></span>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="subcategoria"><fmt:message key="Subcategory.name.english" /></label> 
+					<sf:input path="nombreEN" class="form-control" id="nombreSubcategoriaEN" />
+					<span id="nombreSubcategoriaENError" name="errorSpan"></span>
+				</div>			
+				<div class="hidden-xs col-sm-1">
+				</div>
 			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
+			<br/>
+			<div class="row">	
+				<div class="hidden-xs col-sm-4">
+				</div>
+				<div class="col-xs-12 col-sm-8">
+					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/categoria' />"'><fmt:message key="Cancel" /></button>
+					<span id="hayError" name="errorSpan" style="color:red"></span>
+				</div>
 			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="subcategoria"><fmt:message key="Subcategory.name.spanish" /></label> 
-				<sf:input path="nombreES" class="form-control" id="nombreSubcategoriaES" />
-				<span id="nombreSubcategoriaESError" name="errorSpan"></span>
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="subcategoria"><fmt:message key="Subcategory.name.english" /></label> 
-				<sf:input path="nombreEN" class="form-control" id="nombreSubcategoriaEN" />
-				<span id="nombreSubcategoriaENError" name="errorSpan"></span>
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">	
-				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/categoria' />"'><fmt:message key="Cancel" /></button>
-				<span id="hayError" name="errorSpan" style="color:red"></span>
-			</div>
-		</div>
-	</sf:form>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+		</sf:form>
+		
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
+	</div>
 </body>
 </html>

@@ -39,9 +39,7 @@
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<sec:authorize access="hasAnyRole('ROL_ROOT')">
 			<div class="row">
-				<div class="hidden-xs col-sm-3">
-				</div>
-				<div class="col-xs-12 col-sm-3">
+				<div class="col-xs-12 col-sm-6 text-center">
 					<c:if test="${not empty categoria_agregado}">
 						<span style="color: green;">
 							<fmt:message key="Category.added" />

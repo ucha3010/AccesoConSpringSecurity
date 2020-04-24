@@ -86,6 +86,14 @@
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<div class="well well-sm text-center h2"><fmt:message key="label.Add.user" /></div>
 		<sf:form method="post" action="${pageContext.request.contextPath}/usuario/save" modelAttribute="usuario" onsubmit="return validar()">
+			<c:if test="${(not empty usuario.clave) && (empty username_existente)}">
+				<sf:hidden path="clave"/>
+				<sf:hidden path="idUsr"/>
+				<sf:hidden path="habilitado"/>
+				<sf:hidden path="fechaCreacion"/>
+			</c:if>
+			<fmt:message key="Country.item.column" var="itemSelect"/>
+			<fmt:message key="Select.country" var="selectCountry" />
 			<div class="row">		
 				<div class="hidden-xs col-sm-1">
 				</div>
@@ -104,7 +112,9 @@
 					<label for="inputNombre"><fmt:message key="label.Name" /> *</label> 
 					<sf:input path="datosPersonales.nombre" class="form-control" id="inputNombre" />
 					<span id="inputNombreError" name="errorSpan"></span>
-				</div>	
+				</div>		
+				<div class="hidden-xs col-sm-1">
+				</div>
 			</div>
 			<c:if test="${not empty username_existente}">			
 				<div class="row">		
@@ -155,14 +165,6 @@
 				</div>
 				<br>
 			</c:if>
-			<c:if test="${(not empty usuario.clave) && (empty username_existente)}">
-				<sf:hidden path="clave"/>
-				<sf:hidden path="idUsr"/>
-				<sf:hidden path="habilitado"/>
-				<sf:hidden path="fechaCreacion"/>
-			</c:if>
-			<fmt:message key="Country.item.column" var="itemSelect"/>
-			<fmt:message key="Select.country" var="selectCountry" />
 			<div class="row">	
 				<div class="hidden-xs col-sm-1">
 				</div>
@@ -179,14 +181,6 @@
 							<fmt:message key="label.Male" />
 						</label>
 					</div>
-<!-- 					<div class="custom-control custom-radio custom-control-inline"> -->
-<%-- 						<sf:radiobutton id="customRadioInline2" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Mujer"/> --%>
-<%-- 						<label class="custom-control-label" for="customRadioInline2"><fmt:message key="label.Female" /></label> --%>
-<!-- 					</div> -->
-<!-- 					<div class="col-sm-4custom-control custom-radio custom-control-inline margin-left-5porciento"> -->
-<%-- 						<sf:radiobutton id="customRadioInline1" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Hombre"/> --%>
-<%-- 						<label class="custom-control-label" for="customRadioInline1"><fmt:message key="label.Male" /></label> --%>
-<!-- 					</div> -->
 				</div>	
 				<div class="col-xs-12 col-sm-4">	
 					<label for="fechaNacimiento"><fmt:message key="label.Birthdate" /></label>
