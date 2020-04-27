@@ -88,8 +88,16 @@
 			
 			for (var i = 0; i < num; i++) {
 				datos = datos + 
-				'<fmt:message key="label.Installment" /> ' + (i+1) + ':<br/><input type="hidden" name="cuotas['+i+'].numeroCuota" value="'+(i+1)+'" />' +
-				'<fmt:message key="label.Date" /> <input type="date" name="cuotas['+i+'].fechaCompra" value="'+ calculaFecha(i) + '" /><br/>' +
+				'<div class="row"><div class="col-xs-12">' +
+				'<fmt:message key="label.Installment" /> ' + (i+1) + ':' +
+				'</div></div>' +
+				'<div class="row"><div class="col-xs-12">' +
+				'<input type="hidden" name="cuotas['+i+'].numeroCuota" value="'+(i+1)+'" />' +
+				'</div></div>' +
+				'<div class="row margin-b-5"><div class="col-xs-12">' +
+				'<fmt:message key="label.Date" /> <input type="date" name="cuotas['+i+'].fechaCompra" class="width-130" value="'+ calculaFecha(i) + '" />' +
+				'</div></div>' +
+				'<div class="row"><div class="col-xs-12">' +
 				'<fmt:message key="label.Amount" /> <input type="text" name="cuotas['+i+'].importeTotal" class="width-80-align-rigth"';
 				if(i == 0) {
 					if(num == 1) {
@@ -103,7 +111,9 @@
 					datos = datos + ' value="' + (cuotasMedio + sumarUltimaCuota).toFixed(2) + '" ';
 				}
 				
-				datos = datos + ' /><br/><br/>';
+				datos = datos + ' onclick="this.value=\'\'" onblur="if (this.value==\'\') this.value=0.00" />' +
+				'</div></div>' +
+				'<br/>';
 				
 			}
 			datosCuotas.innerHTML=datos;
@@ -167,125 +177,156 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
 	<fmt:message key="language.name" var="nameColSelect"/>
-	<sf:form method="post" action="${pageContext.request.contextPath}/producto/stock/save" modelAttribute="frontProductoStock" onsubmit="return validar()" class="d-inline">
-		<sf:hidden path="idPro"/>
-		<sf:hidden path="unidades"/>
-		
-		<div class="form-row">	
-			<div class="col-sm-3">
-			</div>	
-			<div class="col-sm-8">
-				<h1><fmt:message key="label.Add.remove.stock" /></h1>
-			</div>
+	<div class="container">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2">
+			<fmt:message key="label.Add.remove.stock" />
+			<br>
+			<fmt:message key="label.Product.description" />: <c:out value="${frontProductoStock[nameColSelect]}" />
 		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-2">
-			</div>
-			<div class="col-xs-12 col-sm-9">
-				<h2><fmt:message key="label.Product.description" />: <c:out value="${frontProductoStock[nameColSelect]}" /></h2>
-			</div>
-		</div>
-		<br/>
-		<br/>
-		<div class="d-inline-table w-70">
-			<div class="form-row">		
-				<div class="col-sm-2">
-				</div>
-				<div class="col-xs-12 col-sm-9">
-					<div class="custom-control custom-radio custom-control-inline">
-						<sf:radiobutton id="customRadioInline2" name="customRadioInline1" class="custom-control-input" path="compra" value="true" onclick="mensaje(this.value,9999)"/>
-						<label class="custom-control-label" for="customRadioInline2"><fmt:message key="label.Add" /></label>
+		<sf:form method="post" action="${pageContext.request.contextPath}/producto/stock/save" modelAttribute="frontProductoStock" onsubmit="return validar()">
+			<sf:hidden path="idPro"/>
+			<sf:hidden path="unidades"/>
+			<div class="col-xs-9">
+				<div class="row">		
+					<div class="hidden-xs col-sm-1">
 					</div>
-					<div class="custom-control custom-radio custom-control-inline margin-left-5porciento">
-						<sf:radiobutton id="customRadioInline1" name="customRadioInline1" class="custom-control-input" path="compra" value="false" onclick="mensaje(this.value,${frontProductoStock.unidades})"/>
-						<label class="custom-control-label" for="customRadioInline1"><fmt:message key="label.Remove" /></label>
+					<div class="col-xs-12 col-sm-5">
+						<div class="radio-inline">
+							<label for="customRadioInline2">
+								<sf:radiobutton id="customRadioInline2" name="customRadioInline1" class="custom-control-input" path="compra" value="true" onclick="mensaje(this.value,9999)" />
+								<fmt:message key="label.Add" />
+							</label>
+						</div>
+						<div class="radio-inline">
+							<label for="customRadioInline1">
+								<sf:radiobutton id="customRadioInline1" name="customRadioInline1" class="custom-control-input" path="compra" value="false" onclick="mensaje(this.value,${frontProductoStock.unidades})" />
+								<fmt:message key="label.Remove" />
+							</label>
+						</div>
 					</div>
-					<div class="custom-control-inline margin-left-5porciento">
-						<input type='checkbox' class="form-check-input" onclick='cuotas(this);' id="cuotasCheck">
-    					<label class="form-check-label" for="cuotasCheck"><fmt:message key="label.Installments" /></label>
-    					<div id="cantidadCuotas" style="visibility:hidden;" class="margin-left-5porciento">
+					<div class="col-xs-3 col-sm-2">
+						<div class="checkbox-inline">
+							<label for="cuotasCheck">
+								<input type='checkbox' class="form-check-input" onclick='cuotas(this);' id="cuotasCheck"> <fmt:message key="label.Installments" />
+							</label>
+						</div>
+					</div>
+					<div class="col-xs-9 col-sm-4">
+	   					<div id="cantidadCuotas" style="visibility:hidden;">
 				        	<sf:select path="cantidadCuotas" class="form-control" id="cuotasSel" onchange="cargarCuotas()" style="width:auto;">
 					        	<c:forEach begin="1" end="12" varStatus="num">
 				            		<sf:option value="${num.index}" label="${num.index}" />
 								</c:forEach>
 				        	</sf:select>
 			        	</div>
+		        	</div>
+				</div>
+				<br>
+				<div class="row">		
+					<div class="hidden-xs col-sm-1">
+					</div>	
+					<div class="col-xs-12 col-sm-10">
+						<fmt:message key="label.It.will.be" />
+						<span id="queHacer"><fmt:message key="label.added" /></span>
+						<input type="number" step="1" class="width-80-align-rigth" min="0" name="cantidad" id="cantidad"/>
+						<fmt:message key="label.units" />
+					</div>
+					<div class="hidden-xs col-sm-1">
+					</div>
+				</div>
+				<div class="row">		
+					<div class="hidden-xs col-sm-1">
+					</div>
+					<div class="col-xs-12 col-sm-10" id="avisoEliminar" style="display: none">
+						(<fmt:message key="label.Max.to.remove" /> ${frontProductoStock.unidades} <fmt:message key="label.units" />)
+					</div>
+					<div class="hidden-xs col-sm-1">
+					</div>
+				</div>
+				<br>
+				<div class="row">		
+					<div class="hidden-xs col-sm-1">
+					</div>	
+					<div class="col-xs-12 col-sm-10">
+						<fmt:message key="label.And.for.this" />
+						<span id="queSeHizo"><fmt:message key="label.paid" /></span>
+						<sf:input path="precioFinal" type="text" class="width-80-align-rigth" id="precioFinal"/> €
+						<fmt:message key="label.with.vat" />
+						<input type="number" step="1" style="width:40px; text-align: right;" min="0" name="iva" id="iva" value="0"/> %
+					</div>
+					<div class="hidden-xs col-sm-1">
+					</div>
+				</div>
+				<br>
+				<div class="row">		
+					<div class="hidden-xs col-sm-1">
+					</div>	
+					<div class="col-xs-12 col-sm-11">
+						<fmt:message key="label.Observations" />
+					</div>
+				</div>
+				<br>
+				<div class="row">		
+					<div class="hidden-xs col-sm-1">
+					</div>	
+					<div class="col-xs-12 col-sm-10">
+						<sf:textarea path="observaciones" rows="5" cols="45" />
+					</div>
+					<div class="hidden-xs col-sm-1">
+					</div>
+				</div>
+				<br>
+				<div class="row">	
+					<div class="hidden-xs col-sm-2">
+					</div>
+					<div class="col-xs-12 col-sm-6">
+						<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
+						<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/producto/all/null' />"'><fmt:message key="Cancel" /></button>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span id="precioFinalError"></span>
 					</div>
 				</div>
 			</div>
-			<br/>
-			<div class="form-row">		
-				<div class="col-sm-2">
-				</div>		
-				<div class="col-sm-5">
-					<fmt:message key="label.It.will.be" />
-					<span id="queHacer"><fmt:message key="label.added" /></span>
-					<input type="number" step="1" class="width-80-align-rigth" min="0" name="cantidad" id="cantidad"/>
-					<fmt:message key="label.units" />
+				
+			<div class="col-xs-3" id="detalleCuotas" style="visibility:hidden;">
+			
+				<div class="row">
+					<div class="col-xs-12">
+						<button type="button" class="btn btn-warning" onclick='cargarCuotas()'><fmt:message key="label.Update.installments" /></button>
+					</div>
 				</div>
-				<div class="col-sm-4" id="avisoEliminar" style="display: none">
-					(<fmt:message key="label.Max.to.remove" /> ${frontProductoStock.unidades} <fmt:message key="label.units" />)
-				</div>	
-			</div>
-			<br/>
-			<div class="form-row">		
-				<div class="col-sm-2">
-				</div>		
-				<div class="col-sm-9">
-					<fmt:message key="label.And.for.this" />
-					<span id="queSeHizo"><fmt:message key="label.paid" /></span>
-					<sf:input path="precioFinal" type="text" class="width-80-align-rigth" id="precioFinal"/> €
-					<fmt:message key="label.with.vat" />
-					<input type="number" step="1" style="width:40px; text-align: right;" min="0" name="iva" id="iva" value="0"/> %
-				</div>		
-			</div>
-			<br/>
-			<div class="form-row">		
-				<div class="col-sm-2">
-				</div>		
-				<div class="col-sm-9">
-					<fmt:message key="label.Observations" />
+				<br/>
+				<div class="row">
+					<div class="col-xs-12">
+						<label class="form-check-label" for="comisionAperturaPor"><fmt:message key="label.Opening.commission" /></label>
+					</div>
 				</div>
-			</div>
-			<br/>
-			<div class="form-row">		
-				<div class="col-sm-2">
-				</div>		
-				<div class="col-sm-9">
-					<sf:textarea path="observaciones" rows="5" cols="70" />
+				<div class="row">
+					<div class="col-xs-12">
+						<sf:input type="text" path="comisionAperturaPor" class="width-50-align-rigth" id="comision" value="0.0" /> %
+					</div>
 				</div>
-			</div>
-			<br/>
-			<div class="form-row">		
-				<div class="col-sm-2">
+				<div class="row">
+					<div class="col-xs-12">
+						<label class="form-check-label" for="interesPor"><fmt:message key="label.APR" /></label>
+					</div>
 				</div>
-				<div class="col-xs-12 col-sm-3">
-					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/producto/all/null' />"'><fmt:message key="Cancel" /></button>
+				<div class="row">
+					<div class="col-xs-12">
+						<sf:input type="text" path="interesPor" class="width-50-align-rigth" id="tae" value="0.0" /> %
+					</div>
 				</div>
-				<div class="col-sm-4">
-					<span id="precioFinalError"></span>
-				</div>
+				<br>
+				<div id="datosCuotas"></div>
 			</div>
-		</div>
-		<div class="d-inline-table w-25" id="detalleCuotas" style="visibility:hidden;">
-			<button type="button" class="btn btn-warning margin-left-5porciento" onclick='cargarCuotas()'><fmt:message key="label.Update.installments" /></button>
-			<br/><br/>
-			<div id="cabeceraCuotas">
-				<label class="form-check-label" for="comisionAperturaPor"><fmt:message key="label.Opening.commission" /></label><br/>
-				<sf:input type="text" path="comisionAperturaPor" class="width-80-align-rigth" id="comision" value="0.0" /> %<br/><br/>
-				<label class="form-check-label" for="interesPor"><fmt:message key="label.APR" /></label><br/>
-				<sf:input type="text" path="interesPor" class="width-80-align-rigth" id="tae" value="0.0" /> %<br/><br/>
-			</div>
-			<div id="datosCuotas"></div>
-		</div>
-	</sf:form>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+		</sf:form>
+		
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
+	</div>
 </body>
 </html>

@@ -57,47 +57,46 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-<br>
-	<sf:form method="post" action="${pageContext.request.contextPath}/usuario/logged/changePass/save" modelAttribute="usuario" onsubmit="return validar()">
-
-		<c:if test="${not empty usuario.clave}">
-			<sf:hidden path="usuario"/>
-			<sf:hidden path="idUsr"/>
-			<sf:hidden path="habilitado"/>
-			<sf:hidden path="fechaCreacion"/>
-		</c:if>		
-		<div class="text-center">
-			<h1><c:out value="${usuario.datosPersonales.nombre}"/> <c:out value="${usuario.datosPersonales.apellido1}"/> <c:out value="${usuario.datosPersonales.apellido2}"/></h1>
-		</div>
-		<br>
-		<div class="form-row">	
-			<div class="col-sm-2">
+	<div class="container">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2"><c:out value="${usuario.datosPersonales.nombre}"/> <c:out value="${usuario.datosPersonales.apellido1}"/> <c:out value="${usuario.datosPersonales.apellido2}"/></div>
+		<sf:form method="post" action="${pageContext.request.contextPath}/usuario/logged/changePass/save" modelAttribute="usuario" onsubmit="return validar()">
+			<c:if test="${not empty usuario.clave}">
+				<sf:hidden path="usuario"/>
+				<sf:hidden path="idUsr"/>
+				<sf:hidden path="habilitado"/>
+				<sf:hidden path="fechaCreacion"/>
+			</c:if>	
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="inputPassword1"><fmt:message key="label.Password" /> *</label> 
+					<sf:password class="form-control" id="inputPassword1" path="clave"/>
+					<span id="inputPassword1Error" name="errorSpan"></span>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="inputPassword2"><fmt:message key="label.Password.repeat" /> *</label> 
+					<input type="password" class="form-control" id="inputPassword2"/>
+					<span id="inputPassword2Error" name="errorSpan"></span>
+				</div>	
+				<div class="hidden-xs col-sm-1">
+				</div>
 			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="inputPassword1"><fmt:message key="label.Password" /> *</label> 
-				<sf:password class="form-control" id="inputPassword1" path="clave"/>
-				<span id="inputPassword1Error" name="errorSpan"></span>
+			<br/>
+			<div class="row">	
+				<div class="hidden-xs col-sm-4">
+				</div>
+				<div class="col-xs-12 col-sm-8">
+					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/usuario/logged/${usuario.idUsr}"/>"'><fmt:message key="Cancel" /></button>
+				</div>
 			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="inputPassword2"><fmt:message key="label.Password.repeat" /> *</label> 
-				<input type="password" class="form-control" id="inputPassword2"/>
-				<span id="inputPassword2Error" name="errorSpan"></span>
-			</div>
-		</div>
-		<br>
-		<div class="form-row">	
-			<div class="col-sm-5">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<button type="submit" class="btn btn-success margin-left-5porciento"><fmt:message key="Send" /></button>
-				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/usuario/logged/${usuario.idUsr}"/>"'><fmt:message key="Cancel" /></button>
-			</div>
-		</div>
-	</sf:form>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+		</sf:form>
+		
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
+	</div>
 </body>
 </html>

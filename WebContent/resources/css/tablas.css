@@ -144,12 +144,16 @@
 	margin-top: 20px;
 }
 
+.margin-b-5 {
+	margin-bottom: 5px;
+}
+
 .cursor-pointer{
 	cursor: pointer;
 }
 
-.d-inline-table {
-	display: inline-table;
+.d-inline-block {
+	display: inline-block;
 }
 
 .width-15{
@@ -168,12 +172,21 @@
 	width: 100px;
 }
 
+.width-130{
+	width: 130px;
+}
+
 .width-150{
 	width: 150px;
 }
 
 .w-70{
 	width: 70%;
+}
+
+.width-50-align-rigth{
+	width: 50px;
+	text-align: right;
 }
 
 .width-80-align-rigth{

@@ -68,7 +68,12 @@
 <body>
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="Add.company" /></div>
+		<c:if test="${empresa.idEmp != 0}">
+			<div class="well well-sm text-center h2"><c:out value="${empresa.nombreComercial}"></c:out></div>
+		</c:if>
+		<c:if test="${empresa.idEmp == 0}">
+			<div class="well well-sm text-center h2"><fmt:message key="Add.company" /></div>
+		</c:if>
 		<sf:form method="post" action="${pageContext.request.contextPath}/empresa/save" modelAttribute="empresa" onsubmit="return validar()">
 			<c:if test="${empresa.idEmp != 0}">
 				<sf:hidden path="idEmp"/>

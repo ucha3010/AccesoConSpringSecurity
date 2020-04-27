@@ -51,7 +51,12 @@
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
-		<div class="well well-sm text-center h2"><fmt:message key="Add.subcategory" /></div>
+		<c:if test="${subcategoria.idSub != 0}">
+			<div class="well well-sm text-center h2"><fmt:message key='Edit' /></div>
+		</c:if>
+		<c:if test="${subcategoria.idSub == 0}">
+			<div class="well well-sm text-center h2"><fmt:message key="Add.subcategory" /></div>
+		</c:if>
 		<sf:form method="post" action="${pageContext.request.contextPath}/subcategoria/save" modelAttribute="subcategoria" onsubmit="return validar()">
 			<c:if test="${subcategoria.idSub != 0}">
 				<sf:hidden path="idSub"/>

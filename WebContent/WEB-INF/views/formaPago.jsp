@@ -50,7 +50,12 @@
 <body>
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="Add.formaPago" /></div>
+		<c:if test="${formaPago.idFor != 0}">
+			<div class="well well-sm text-center h2"><fmt:message key='Edit' /></div>
+		</c:if>
+		<c:if test="${formaPago.idFor == 0}">
+			<div class="well well-sm text-center h2"><fmt:message key="Add.formaPago" /></div>
+		</c:if>
 		<sf:form method="post" action="${pageContext.request.contextPath}/formaPago/save" modelAttribute="formaPago" onsubmit="return validar()">
 			<c:if test="${formaPago.idFor != 0}">
 				<sf:hidden path="idFor"/>

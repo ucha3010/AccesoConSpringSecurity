@@ -63,7 +63,12 @@
 	<fmt:message key="language.name" var="nameColSelect"/>
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="Add.product" /></div>
+		<c:if test="${producto.idPro != 0}">
+			<div class="well well-sm text-center h2"><fmt:message key='Edit' /></div>
+		</c:if>
+		<c:if test="${producto.idPro == 0}">
+			<div class="well well-sm text-center h2"><fmt:message key="Add.product" /></div>
+		</c:if>
 		<sf:form method="post" action="${pageContext.request.contextPath}/producto/save" modelAttribute="producto" onsubmit="return validar()">
 			<c:if test="${producto.idPro != 0}">
 				<sf:hidden path="idPro"/>
@@ -141,8 +146,6 @@
 					<span id="ubicacionError" name="errorSpan"></span>
 				</div>
 				<div class="col-xs-12 col-sm-5">
-				
-				
 					<div class="checkbox">
 						<label>
 							<sf:checkbox path="enviar" /><fmt:message key="label.send" />

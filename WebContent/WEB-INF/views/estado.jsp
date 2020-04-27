@@ -50,7 +50,12 @@
 <body>
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="Add.estado" /></div>
+		<c:if test="${estado.idEst != 0}">
+			<div class="well well-sm text-center h2"><fmt:message key='Edit' /></div>
+		</c:if>
+		<c:if test="${estado.idEst == 0}">
+			<div class="well well-sm text-center h2"><fmt:message key="Add.estado" /></div>
+		</c:if>
 		<sf:form method="post" action="${pageContext.request.contextPath}/estado/save" modelAttribute="estado" onsubmit="return validar()">
 			<c:if test="${estado.idEst != 0}">
 				<sf:hidden path="idEst"/>

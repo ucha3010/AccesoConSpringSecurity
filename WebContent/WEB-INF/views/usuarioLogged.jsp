@@ -58,203 +58,183 @@
 	</script>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-<br>
-	<sf:form method="post" action="${pageContext.request.contextPath}/usuario/logged/save" modelAttribute="usuario" onsubmit="return validar()">
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="input"><fmt:message key="label.Username" /></label>
-				<sf:input path="usuario" type="text" class="form-control" disabled="true"/>
-			</div>
-			<div class="col-sm-1">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<button type="button" class="btn btn-danger margin-left-5porciento" onclick='location.href="<c:url value="/usuario/logged/changePass/${usuario.idUsr}"/>"'>
-					<fmt:message key="label.Change.password" />
-				</button>
-				<br>
-				<c:if test="${not empty passChanged}">
-					<span style="color: green;">
-						<fmt:message key="${passChanged}" />
-					</span>
-				</c:if>
-			</div>
-		</div>
-		<c:if test="${not empty usuario.clave}">
-			<sf:hidden path="usuario"/>
-			<sf:hidden path="clave"/>
-			<sf:hidden path="idUsr"/>
-			<sf:hidden path="habilitado"/>
-			<sf:hidden path="fechaCreacion"/>
-		</c:if>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="inputNombre"><fmt:message key="label.Name" /> *</label> 
-				<sf:input path="datosPersonales.nombre" class="form-control" id="inputNombre" />
-				<span id="inputNombreError" name="errorSpan"></span>
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="inputApellido1"><fmt:message key="label.Fist.lastname" /> *</label>
-				<sf:input path="datosPersonales.apellido1" type="text" class="form-control" id="inputApellido1" />
-				<span id="inputApellido1Error" name="errorSpan"></span>
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="inputApellido2"><fmt:message key="label.Second.lastname" /></label>
-				<sf:input path="datosPersonales.apellido2" type="text" class="form-control" id="inputApellido2" />
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<div class="custom-control custom-radio custom-control-inline">
-					<sf:radiobutton id="customRadioInline2" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Mujer"/>
-					<label class="custom-control-label" for="customRadioInline2"><fmt:message key="label.Female" /></label>
+	<div class="container">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2"><fmt:message key="label.User" /> <c:out value="${usuario.usuario}"></c:out></div>
+		<sf:form method="post" action="${pageContext.request.contextPath}/usuario/logged/save" modelAttribute="usuario" onsubmit="return validar()">
+			<c:if test="${(not empty usuario.clave) && (empty username_existente)}">
+				<sf:hidden path="usuario"/>
+				<sf:hidden path="clave"/>
+				<sf:hidden path="idUsr"/>
+				<sf:hidden path="habilitado"/>
+				<sf:hidden path="fechaCreacion"/>
+			</c:if>
+			<fmt:message key="Country.item.column" var="itemSelect"/>
+			<fmt:message key="Select.country" var="selectCountry" />
+			<div class="row">		
+				<div class="hidden-xs col-sm-2 col-md-3">
 				</div>
-				<div class="col-sm-4custom-control custom-radio custom-control-inline margin-left-5porciento">
-					<sf:radiobutton id="customRadioInline1" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Hombre"/>
-					<label class="custom-control-label" for="customRadioInline1"><fmt:message key="label.Male" /></label>
+				<div class="col-xs-5 col-sm-4 col-md-3">
+					<button type="button" class="btn btn-danger margin-left-5porciento" onclick='location.href="<c:url value="/usuario/logged/changePass/${usuario.idUsr}"/>"'>
+						<fmt:message key="label.Change.password" />
+					</button>
+				</div>
+				<div class="col-xs-7 col-sm-6">
+					<c:if test="${not empty passChanged}">
+						<span style="color: green;">
+							<fmt:message key="${passChanged}" />
+						</span>
+					</c:if>
 				</div>
 			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">	
-				<label for="fechaNacimiento"><fmt:message key="label.Birthdate" /></label>
-		    	<sf:input type="date" class="form-control" id="fechaNacimiento" path="datosPersonales.fechaNacimiento"/>
-	    	</div>
-		</div>
-		<fmt:message key="Country.item.column" var="itemSelect"/>
-		<fmt:message key="Select.country" var="selectCountry" />
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="nacionalidad"><fmt:message key="label.Nationality" /></label>
-	        	<sf:select path="datosPersonales.nacionalidad.idPais" class="form-control" id="nacionalidad">
-	            	<sf:option value="0" label="${selectCountry}" />
-	            	<c:forEach items="${paises}" var="pais">
-	            		<sf:option value="${pais.idPais}" label="${pais[itemSelect]}" />
-	            	</c:forEach>
-	        	</sf:select>
-        	</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="dni"><fmt:message key="label.idcard" /></label>
-				<sf:input path="datosPersonales.dni" type="text" class="form-control" id="dni" />
-			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="email"><fmt:message key="label.Email" /> *</label>
-				<sf:input path="datosPersonales.email" type="text" class="form-control" id="email" />
-				<span id="emailError" name="errorSpan"></span>
-			</div>
-		</div>
-		<sec:authorize access="!hasAnyRole('ROL_ROOT')">
-			<div class="form-row invisible">
-		</sec:authorize>
-		<sec:authorize access="hasAnyRole('ROL_ROOT')">
 			<br/>
-			<div class="form-row">		
-		</sec:authorize>
-			<div class="col-sm-3">
-			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="rol"><fmt:message key="label.roles.press.ctrl" /></label>
-				<div>
-					<sf:select path="usuarioRol">
-						<c:forEach var="item" items="${roles}">
-							<c:set var="seleccionado" value="false" scope="page" />
-							<c:forEach var="ur" items="${usuario.usuarioRol}">
-						        <c:if test="${ur.rol.idRol == item.getIdRol()}">					            
-									<c:set var="seleccionado" value="true" scope="page" />
-						        </c:if>
-						    </c:forEach>
-						    <c:choose>
-						    	<c:when test="${seleccionado}">
-							    	<sf:option selected="true" value="${item.getIdRol()}">
-								    	<c:out value="${item.getRol()}"></c:out>
-						            </sf:option>
-						    	</c:when>
-						    	<c:otherwise>
-						            <sf:option value="${item.getIdRol()}">
-										<c:out value="${item.getRol()}"></c:out>
-						            </sf:option>
-						    	</c:otherwise>
-					        </c:choose>
-						</c:forEach>
-					</sf:select>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="inputNombre"><fmt:message key="label.Name" /> *</label> 
+					<sf:input path="datosPersonales.nombre" class="form-control" id="inputNombre" />
+					<span id="inputNombreError" name="errorSpan"></span>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="inputApellido1"><fmt:message key="label.Fist.lastname" /> *</label>
+					<sf:input path="datosPersonales.apellido1" type="text" class="form-control" id="inputApellido1" />
+					<span id="inputApellido1Error" name="errorSpan"></span>
+				</div>		
+				<div class="hidden-xs col-sm-1">
 				</div>
 			</div>
-		</div>	
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
+			<br/>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="inputApellido2"><fmt:message key="label.Second.lastname" /></label>
+					<sf:input path="datosPersonales.apellido2" type="text" class="form-control" id="inputApellido2" />
+				</div>
+				<div class="col-xs-12 col-sm-2">
+					<div class="radio">
+						<label for="customRadioInline2">
+							<sf:radiobutton id="customRadioInline2" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Mujer"/>
+							<fmt:message key="label.Female" />
+						</label>
+					</div>
+					<div class="radio">
+						<label for="customRadioInline1">
+							<sf:radiobutton id="customRadioInline1" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Hombre"/>
+							<fmt:message key="label.Male" />
+						</label>
+					</div>
+				</div>	
+				<div class="col-xs-12 col-sm-3">	
+					<label for="fechaNacimiento"><fmt:message key="label.Birthdate" /></label>
+			    	<sf:input type="date" class="form-control" id="fechaNacimiento" path="datosPersonales.fechaNacimiento"/>
+				</div>
 			</div>
-			<div class="col-xs-12 col-sm-4">
-				<label for="telefono"><fmt:message key="label.Phone" /></label>
-				<sf:input path="datosPersonales.telefono" type="text" class="form-control" id="telefono" />
+			<br/>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="nacionalidad"><fmt:message key="label.Nationality" /></label>
+		        	<sf:select path="datosPersonales.nacionalidad.idPais" class="form-control" id="nacionalidad">
+		            	<sf:option value="0" label="${selectCountry}" />
+		            	<c:forEach items="${paises}" var="pais">
+		            		<sf:option value="${pais.idPais}" label="${pais[itemSelect]}" />
+		            	</c:forEach>
+		        	</sf:select>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="dni"><fmt:message key="label.idcard" /></label>
+					<sf:input path="datosPersonales.dni" type="text" class="form-control" id="dni" />
+				</div>		
+				<div class="hidden-xs col-sm-1">
+				</div>
 			</div>
-		</div>
-		<br/>
-		<div class="form-row">		
-			<div class="col-sm-3">
+			<br/>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="email"><fmt:message key="label.Email" /> *</label>
+					<sf:input path="datosPersonales.email" type="text" class="form-control" id="email" />
+					<span id="emailError" name="errorSpan"></span>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<sec:authorize access="hasAnyRole('ROL_ROOT')">
+						<label for="rol"><fmt:message key="label.roles.press.ctrl" /></label>
+						<div>
+							<sf:select path="usuarioRol">
+								<c:forEach var="item" items="${roles}">
+									<c:set var="seleccionado" value="false" scope="page" />
+									<c:forEach var="ur" items="${usuario.usuarioRol}">
+								        <c:if test="${ur.rol.idRol == item.getIdRol()}">					            
+											<c:set var="seleccionado" value="true" scope="page" />
+								        </c:if>
+								    </c:forEach>
+								    <c:choose>
+								    	<c:when test="${seleccionado}">
+									    	<sf:option selected="true" value="${item.getIdRol()}">
+										    	<c:out value="${item.getRol()}"></c:out>
+								            </sf:option>
+								    	</c:when>
+								    	<c:otherwise>
+								            <sf:option value="${item.getIdRol()}">
+												<c:out value="${item.getRol()}"></c:out>
+								            </sf:option>
+								    	</c:otherwise>
+							        </c:choose>
+								</c:forEach>
+							</sf:select>
+						</div>
+					</sec:authorize>
+				</div>		
+				<div class="hidden-xs col-sm-1">
+				</div>
 			</div>
-			<div class="col-xs-12 col-sm-6">
-				<label for="observaciones"><fmt:message key="label.Observations" /></label>
-				<sf:textarea path="datosPersonales.observaciones" class="form-control" id="observaciones" rows="3" />
+			<br/>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="telefono"><fmt:message key="label.Phone" /></label>
+					<sf:input path="datosPersonales.telefono" type="text" class="form-control" id="telefono" />
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="observaciones"><fmt:message key="label.Observations" /></label>
+					<sf:textarea path="datosPersonales.observaciones" class="form-control" id="observaciones" rows="3" />
+				</div>		
+				<div class="hidden-xs col-sm-1">
+				</div>
 			</div>
-		</div>
-		<br/>
-<!-- 		<div class="form-row">		 -->
-<!-- 			<div class="col-sm-3"> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-xs-12 col-sm-4 form-check margin-left-5porciento"> -->
-<!-- 				<input class="form-check-input" type="checkbox" id="gridCheck"> -->
-<%-- 				<label class="form-check-label" for="gridCheck"> <fmt:message key="Accept.terms.and.conditions" /></label> --%>
-<!-- 			</div> -->
-<!-- 		</div>	 -->
-<!-- 		<br/> -->
-		<div class="form-row">		
-			<div class="col-sm-3">
+			<br/>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+				
+				</div>
+				<div class="col-xs-12 col-sm-5">
+				
+				</div>		
+				<div class="hidden-xs col-sm-1">
+				</div>
 			</div>
-			<div class="col-xs-12 col-sm-4">
-				<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-				<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/"/>"'><fmt:message key="Cancel" /></button>
-				<span id="hayError" name="errorSpan" style="color:red"></span>
+			<br/>
+			<div class="row">	
+				<div class="hidden-xs col-sm-4">
+				</div>
+				<div class="col-xs-12 col-sm-8">
+					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/"/>"'><fmt:message key="Cancel" /></button>
+					<span id="hayError" name="errorSpan" style="color:red"></span>
+				</div>
 			</div>
-		</div>
-	</sf:form>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+		</sf:form>
+		
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
+	</div>
 </body>
 </html>

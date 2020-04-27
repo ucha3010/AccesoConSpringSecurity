@@ -160,7 +160,7 @@
 					    <tr title='<fmt:message key="label.Creation.date" />: <fmt:formatDate value="${usuario.fechaCreacion}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.idcard" />: <c:out value="${usuario.datosPersonales.dni}" />&#xA;<fmt:message key="label.Sex" />: <c:out value="${usuario.datosPersonales.sexo}" />&#xA;<fmt:message key="label.Nationality" />: <c:out value="${usuario.datosPersonales.nacionalidad[nameColSelect]}" />&#xA;<c:out value="${usuario.datosPersonales.observaciones}" />'>
 							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 								<td class="extraAdmin-td">
-									<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/cliente/${usuario.idUsr}' />"'>
+									<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/usuario/${usuario.idUsr}' />"'>
 										<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
 									</a>
 									<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${usuario.idUsr})">

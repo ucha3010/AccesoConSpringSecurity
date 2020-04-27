@@ -45,7 +45,12 @@
 <body>
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="Add.rol" /></div>
+		<c:if test="${rol.idRol != 0}">
+			<div class="well well-sm text-center h2"><fmt:message key='Edit' /></div>
+		</c:if>
+		<c:if test="${rol.idRol == 0}">
+			<div class="well well-sm text-center h2"><fmt:message key="Add.rol" /></div>
+		</c:if>
 		<sf:form method="post" action="${pageContext.request.contextPath}/rol/save" modelAttribute="rol" onsubmit="return validar()">
 			<c:if test="${rol.idRol != 0}">
 				<sf:hidden path="idRol"/>

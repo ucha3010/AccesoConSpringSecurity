@@ -84,7 +84,14 @@
 <body>
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="label.Add.user" /></div>
+		<c:if test="${usuario.idUsr != 0}">
+			<div class="well well-sm text-center h2">
+				<c:out value="${usuario.datosPersonales.nombre}" /> <c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" />
+			</div>
+		</c:if>
+		<c:if test="${usuario.idUsr == 0}">
+			<div class="well well-sm text-center h2"><fmt:message key="label.Add.user" /></div>
+		</c:if>
 		<sf:form method="post" action="${pageContext.request.contextPath}/cliente/save" modelAttribute="usuario" onsubmit="return validar()">
 			<div class="row">		
 				<div class="hidden-xs col-sm-1">
