@@ -73,7 +73,7 @@
 										</a>
 									</td>
 								</sec:authorize>
-								<td><c:out value="${direccion.tipoVia}" /></td>
+								<td><fmt:message key='${direccion.tipoVia}' /></td>
 								<td><c:out value="${direccion.nombreVia}" /></td>	
 								<td><c:out value="${direccion.numero}" /></td>
 								<td><c:out value="${direccion.resto}" /></td>
