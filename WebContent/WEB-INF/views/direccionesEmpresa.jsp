@@ -71,7 +71,7 @@
 										</a>
 									</td>
 								</sec:authorize>
-								<td><c:out value="${direccion.tipoVia}" /></td>
+								<td><fmt:message key='${direccion.tipoVia}' /></td>
 								<td><c:out value="${direccion.nombreVia}" /></td>	
 								<td><c:out value="${direccion.numero}" /></td>
 								<td><c:out value="${direccion.resto}" /></td>
@@ -85,10 +85,10 @@
 				</table>
 			</div>
 		</div>
+		
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
 	</div>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
 </body>
 </html>

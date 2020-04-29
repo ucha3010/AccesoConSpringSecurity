@@ -68,10 +68,14 @@
 				<div class="col-xs-12 col-sm-2">
 				<label for="tipoVia"><fmt:message key="label.Type.road" /></label>
 					<sf:select class="form-control" id="tipoVia" path="tipoVia">
-						<sf:option value="Calle" />
-						<sf:option value="Avenida" />
-						<sf:option value="Paseo" />
-						<sf:option value="Plaza" />
+						<sf:option value="road.Street" ><fmt:message key="road.Street" /></sf:option>
+						<sf:option value="road.Avenue" ><fmt:message key="road.Avenue" /></sf:option>
+						<sf:option value="road.Paseo" ><fmt:message key="road.Paseo" /></sf:option>
+						<sf:option value="road.Square" ><fmt:message key="road.Square" /></sf:option>
+						<sf:option value="road.Route" ><fmt:message key="road.Route" /></sf:option>
+						<sf:option value="road.Road" ><fmt:message key="road.Road" /></sf:option>
+						<sf:option value="road.Boulevard" ><fmt:message key="road.Boulevard" /></sf:option>
+						<sf:option value="road.Other" ><fmt:message key="road.Other" /></sf:option>
 					</sf:select>
 				</div>
 				<div class="col-xs-12 col-sm-6">

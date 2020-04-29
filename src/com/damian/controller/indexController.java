@@ -13,9 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.damian.service.IndexService;
 
 @Controller
-@SessionAttributes({ "resultado", "estoy", "errorUsuario", "idUsrLogged", "nameUsrLogged" }) // los atributos que pueden mantenerse
-																				// en sesión y verse en distintas
-																				// páginas
+@SessionAttributes({ "resultado", "estoy", "errorUsuario", "idUsrLogged", "nameUsrLogged" }) // los atributos que pueden
+																								// mantenerse
+// en sesión y verse en distintas
+// páginas
 public class indexController {
 
 	@Autowired
@@ -66,9 +67,10 @@ public class indexController {
 	}
 
 	@RequestMapping("/login")
-	public ModelAndView login(ModelAndView model, @ModelAttribute("estoy") String estoy,
-			@RequestParam(value = "error", required = false) String error, HttpServletRequest request) {
+	public ModelAndView login(ModelAndView model, @RequestParam(value = "error", required = false) String error,
+			HttpServletRequest request) {
 
+		Object estoy = request.getSession().getAttribute("estoy");
 		if (error != null) {
 			model.addObject("error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
 		}
