@@ -57,7 +57,7 @@
 <body>
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-			<div class="well well-sm text-center h2"><fmt:message key="label.Bills" /></div>
+		<div class="well well-sm text-center h2"><fmt:message key="label.Bills" /></div>
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<div class="row">
 			<div class="hidden-xs col-sm-3">
@@ -74,9 +74,14 @@
 					</span>
 				</c:if>
 			</div>
-			<div class="col-xs-12 col-sm-3">
+			<div class="hidden-xs col-sm-3">
 				<c:if test="${not empty vencen}">
 					<a href="#ventanaVencen" class="btn btn-danger btn-lg" data-toggle="modal"><fmt:message key='label.Bill.next.days' /></a>
+				</c:if>
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+				<c:if test="${not empty vencen}">
+					<a href="#ventanaVencenXs" class="btn btn-danger btn-lg" data-toggle="modal"><fmt:message key='label.Bill.next.days' /></a>
 				</c:if>
 			</div>
 			<div class="hidden-xs col-sm-3">
@@ -172,31 +177,33 @@
 										<th class="text-center"><fmt:message key="label.Date" /></th>
 										<th class="text-center"><fmt:message key="label.Total.dicount" /></th>
 										<th class="text-center"><fmt:message key="label.Total.vat" /></th>
-										<th colspan="2" class="text-center"><fmt:message key="label.Total.amount" /></th>
+										<th colspan="2" class="text-center extraAdmin-th"><fmt:message key="label.Total.amount" /></th>
 										<th class="text-center"><fmt:message key="label.state" /></th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${vencen}" var="vence">
-										<td class="text-center"><c:out value="${vence.idFac}" /></td>
-										<c:if test="${vence.compra}">
-											<td class="text-center"><fmt:message key="label.Purchase" /></td>
-										</c:if>
-										<c:if test="${not vence.compra}">
-											<td class="text-center"><fmt:message key="label.Sale" /></td>
-										</c:if>
-										<td class="text-center"><fmt:formatDate value="${vence.fechaCompra}" pattern="dd/MM/yyyy"/></td>
-										<td class="text-center"><fmt:formatNumber type="number" value="${vence.descuentoTotal}" minFractionDigits="2" />%</td>
-										<td class="text-center"><fmt:formatNumber type="number" value="${vence.ivaTotal}" minFractionDigits="2" />%</td>
-										<td class="text-right"><fmt:formatNumber type="currency" value="${vence.importeFront}" /></td>
-										<td class="width-15"></td>
-										<td>
-											<c:forEach items="${estados}" var="est">
-												<c:if test="${vence.estado.idEst == est.idEst}">
-													<c:out value="${est[nameColSelect]}" />
-												</c:if>
-											</c:forEach>
-										</td>
+										<tr>
+											<td class="text-center"><c:out value="${vence.idFac}" /></td>
+											<c:if test="${vence.compra}">
+												<td class="text-center"><fmt:message key="label.Purchase" /></td>
+											</c:if>
+											<c:if test="${not vence.compra}">
+												<td class="text-center"><fmt:message key="label.Sale" /></td>
+											</c:if>
+											<td class="text-center"><fmt:formatDate value="${vence.fechaCompra}" pattern="dd/MM/yyyy"/></td>
+											<td class="text-center"><fmt:formatNumber type="number" value="${vence.descuentoTotal}" minFractionDigits="2" />%</td>
+											<td class="text-center"><fmt:formatNumber type="number" value="${vence.ivaTotal}" minFractionDigits="2" />%</td>
+											<td class="text-right"><fmt:formatNumber type="currency" value="${vence.importeFront}" /></td>
+											<td class="width-15"></td>
+											<td>
+												<c:forEach items="${estados}" var="est">
+													<c:if test="${vence.estado.idEst == est.idEst}">
+														<c:out value="${est[nameColSelect]}" />
+													</c:if>
+												</c:forEach>
+											</td>
+										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
@@ -206,6 +213,60 @@
 					<!-- Contenido de la ventana -->
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" onclick="imprimirId('ventanaVencen')"><fmt:message key="label.Print" /></button>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="ventanaVencenXs">
+			<div class="modal-dialog maxwidth-maxcontent">
+				<div class="modal-content">
+					
+					<!-- Header de la ventana -->
+					<div class="modal-header bg-info">
+						<h4 class="modal-title"><fmt:message key='label.Bill.next.days' /></h4>
+						<button style="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					
+					<!-- Contenido de la ventana -->
+					<div class="modal-body">
+						<div class="divTablaSinScroll bg-light">
+							<table class="table table-striped">
+								<thead>
+									<tr>
+										<th class="text-center"><fmt:message key="label.Bill.id" /></th>
+										<th class="text-center"><fmt:message key="label.Purchase.Sale" /></th>
+										<th class="text-center"><fmt:message key="label.Date" /></th>
+										<th colspan="2" class="text-center extraAdmin-th"><fmt:message key="label.Total.amount" /></th>
+										<th class="text-center"><fmt:message key="label.state" /></th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${vencen}" var="vence">
+										<tr>
+											<td class="text-center"><c:out value="${vence.idFac}" /></td>
+											<c:if test="${vence.compra}">
+												<td class="text-center"><fmt:message key="label.Purchase" /></td>
+											</c:if>
+											<c:if test="${not vence.compra}">
+												<td class="text-center"><fmt:message key="label.Sale" /></td>
+											</c:if>
+											<td class="text-center"><fmt:formatDate value="${vence.fechaCompra}" pattern="dd/MM/yyyy"/></td>
+											<td class="text-right"><fmt:formatNumber type="currency" value="${vence.importeFront}" /></td>
+											<td class="width-15"></td>
+											<td>
+												<c:forEach items="${estados}" var="est">
+													<c:if test="${vence.estado.idEst == est.idEst}">
+														<c:out value="${est[nameColSelect]}" />
+													</c:if>
+												</c:forEach>
+											</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
 					</div>
 					
 				</div>

@@ -18,9 +18,7 @@
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
-		<div>
-			<h2><fmt:message key="label.Product.description" />: <c:out value="${producto[nameColSelect]}" /></h2>
-		</div>
+		<div class="well well-sm text-center h2"><c:out value="${producto[nameColSelect]}" /></div>
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="divTablaSinScroll">

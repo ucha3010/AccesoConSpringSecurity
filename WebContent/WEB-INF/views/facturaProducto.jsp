@@ -14,13 +14,26 @@
 	<title><fmt:message key="label.Bill.detail" /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 	
+	<script>
+		function mostrarAviso(nombrediv) {
+			var ventanamostrar = document.getElementById(nombrediv);
+			if(ventanamostrar.style.display == "block"){
+				ventanamostrar.style.display = "none";				
+			} else {
+				ventanamostrar.style.display = "block";
+			}
+		}
+	</script>
+	
 </head>
-<body>
+<body>		
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
-		<div>
-			<h2><fmt:message key="label.Bill.id" />: <c:out value="${factura.idFac}" /></h2>
+		<div class="well well-sm text-center h2">
+			<fmt:message key="label.Bill.id" />: <c:out value="${factura.idFac}" />
+			<br>
+			<fmt:message key="label.Date" />: <fmt:formatDate value="${factura.fechaCompra}" pattern="dd/MM/yyyy"/>
 		</div>
 		<div class="divTablaSinScroll">
 			<table class="table table-striped">
@@ -28,7 +41,7 @@
 					<tr>
 						<th class="text-center min-width-160"><fmt:message key="label.Product.description" /></th>
 						<th class="text-center min-width-160"><fmt:message key="label.Unit.price" /></th>
-						<th class="text-center"><fmt:message key="label.Quantity" /></th>
+						<th class="text-center"><fmt:message key="label.Units" /></th>
 						<th class="text-center"><fmt:message key="label.Discount" /></th>
 						<th class="text-center"><fmt:message key="label.Vat" /></th>
 						<th class="text-center min-width-160"><fmt:message key="label.Unit.price.with.vat" /></th>
@@ -38,13 +51,36 @@
 				<tbody>
 					<c:forEach items="${productoFacturas}" var="productoFactura">
 						<tr title='<c:out value="${productoFactura.observaciones}" />'>
-							<td><c:out value="${productoFactura.producto[nameColSelect]}" /></td>
+							<td><a href="<c:url value='/productoFactura/producto/${productoFactura.producto.idPro}' />"><c:out value="${productoFactura.producto[nameColSelect]}" /></a></td>
 							<td class="text-center"><fmt:formatNumber type="currency" value="${productoFactura.precioUnitSinIva}"/></td>
 							<td class="text-center"><c:out value="${productoFactura.cantidad}" /></td>
 							<td class="text-center"><fmt:formatNumber type="number" value="${productoFactura.porcentajeDescuento}" minFractionDigits="2" />%</td>
 							<td class="text-center"><fmt:formatNumber type="number" value="${productoFactura.ivaProducto}" minFractionDigits="2" />%</td>
 							<td class="text-center"><fmt:formatNumber type="currency" value="${productoFactura.precioUnitConIva}"/></td>
-							<td class="text-right"><fmt:formatNumber type="currency" value="${productoFactura.precioFinal}" /></td>
+							
+							<c:if test="${factura.numeroCuota == 0}">
+								<td class="text-right"><fmt:formatNumber type="currency" value="${productoFactura.precioFinal}" /></td>
+							</c:if>
+							<c:if test="${factura.numeroCuota > 0}">
+								<td class="text-right">
+									<fmt:formatNumber type="currency" value="${productoFactura.precioFinal}" /> 
+									<span onclick="mostrarAviso('aviso${productoFactura.producto.idPro}');" class="glyphicon glyphicon-info-sign"></span>
+									<c:if test="${factura.numeroCuota == 1}">
+										<div id="aviso${productoFactura.producto.idPro}" style="display: none;">
+											<fmt:message key="label.message.final.amount.1" /><br>
+											<fmt:message key="label.message.final.amount.3" />
+										</div>
+									</c:if>
+									<c:if test="${factura.numeroCuota > 1}">
+										<div id="aviso${productoFactura.producto.idPro}" style="display: none;">
+											<fmt:message key="label.message.final.amount.1" /><br>
+											<fmt:message key="label.message.final.amount.2" /> <a href="<c:url value='/productoFactura/factura/${factura.cuota.facturas[0].idFac}' />"><c:out value="${factura.cuota.facturas[0].idFac}"></c:out></a>
+										</div>
+									</c:if>
+								</td>
+							</c:if>
+							
+							
 							<td class="width-35"></td>
 						</tr>
 					</c:forEach>
@@ -92,7 +128,7 @@
 		<!-- 				CUOTA SIN IVA -->
 						<tr>
 							<td colspan="2"></td>
-							<td colspan="6"><strong><fmt:message key="label.Installment.number" /> <c:out value="${factura.numeroCuota}" /></strong></td>
+							<td colspan="6"><strong><fmt:message key="label.Installment.number" /> <c:out value="${factura.numeroCuota}" /> <fmt:message key="label.of" /> <c:out value="${factura.cuota.cantidadCuotas}" /></strong></td>
 						</tr>
 		<!-- 				CUOTA SIN IVA -->
 						<tr>
