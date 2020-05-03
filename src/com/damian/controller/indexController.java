@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -41,13 +40,23 @@ public class indexController {
 	// ////////////////////////////////////////////////////////////////////////////////////////////
 
 	@RequestMapping("/about")
-	public ModelAndView showAbout(ModelAndView model, @ModelAttribute("estoy") String estoy) {
-		return indexService.manageAbout(model, estoy);
+	public ModelAndView showAbout(ModelAndView model, HttpServletRequest request) {
+		Object estoy = request.getSession().getAttribute("estoy");
+		if (estoy == null) {
+			model.addObject("estoy", "about");
+			estoy = "about";
+		}
+		return indexService.manageAbout(model, estoy.toString());
 	}
 
 	@RequestMapping("/private/about")
-	public ModelAndView showPrivateAbout(ModelAndView model, @ModelAttribute("estoy") String estoy) {
-		return indexService.manageAbout(model, estoy);
+	public ModelAndView showPrivateAbout(ModelAndView model, HttpServletRequest request) {
+		Object estoy = request.getSession().getAttribute("estoy");
+		if (estoy == null) {
+			model.addObject("estoy", "about");
+			estoy = "about";
+		}
+		return indexService.manageAbout(model, estoy.toString());
 	}
 
 	// index2
@@ -76,7 +85,10 @@ public class indexController {
 		}
 		if (estoy == null) {
 			model.addObject("estoy", "index");
-			return showIndex(model);
+			String rutaSalida = ((org.springframework.security.web.savedrequest.DefaultSavedRequest) request
+					.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST")).getServletPath();
+			model.setViewName("redirect:" + rutaSalida);
+			return model;
 		}
 		model.setViewName("login");
 		return model;

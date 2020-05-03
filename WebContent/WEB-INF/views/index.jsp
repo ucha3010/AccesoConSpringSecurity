@@ -14,22 +14,25 @@
 
 </head>
 <body>
-	<c:import url="/WEB-INF/views/menu.jsp" />
-	<div class="d-flex justify-content-between">
-		<div class="p-2">
-		</div>
-		<div class="p-2">
-			<c:if test="${not empty usuario_creado}">
-				<span style="color: green;">
-					<fmt:message key="label.user.successfully.created" />
-				</span>
-			</c:if>
-		</div>
-		<div class="p-2">
-		</div>		
-	</div>
-	<div class="container-fluid">
-	
+	<div class="container">
+		<c:import url="/WEB-INF/views/menu.jsp" />
+		<c:if test="${not empty usuario_creado}">
+			
+			<div class="row">
+				<div class="col-xs-2 col-sm-3">
+				</div>
+				<div class="col-xs-8 col-sm-6">
+					<div class="alert alert-success">
+						<button class="close" data-dismiss="alert"><span>&times;</span></button>
+						<fmt:message key="label.user.successfully.created" />
+					</div>					
+				</div>
+				<div class="col-xs-2 col-sm-3">
+				</div>
+			</div>
+		</c:if>	
+		
+		
 		<div class="row">
 			<div class="col-md-12">
 				<h1>Index</h1>

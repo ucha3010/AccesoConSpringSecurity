@@ -27,8 +27,41 @@
 				nombreDecimal.value = cambiarComaPorPunto(nombreDecimal.value);
 				if(!validarDecimal(nombreDecimal.value)){
 					nombreDecimalError.innerHTML = "<fmt:message key='error.not.valid.value' />";
+					nombreDecimalError.style.color="red";
 					nombreDecimal.style.borderColor="red";
 					validado = false;
+				}
+			}
+
+			var cantidad = document.getElementById("cantidad");
+			var precioFinal = document.getElementById("precioFinal");
+			if((cantidad.value == '' || cantidad.value == 0) && (precioFinal.value == '' || precioFinal.value == '0.0' || precioFinal.value == '0' || precioFinal.value == '0.00')) {
+				cantidad.style.borderColor="red";
+				precioFinal.style.borderColor="red";
+				var precioFinalError = document.getElementById('precioFinalError');
+				precioFinalError.innerHTML = "<fmt:message key='error.not.valid.data' />";
+				precioFinalError.style.color="red";
+				validado = false;				
+			}
+
+			var cuotas = document.getElementsByClassName("installment-verify");
+			var totalCuotas= 0;
+			var cuotaText
+			if(cuotas.length > 0 && validado){
+				for (var i = 0; i < cuotas.length; i++) {
+					cuotaText = cambiarComaPorPunto(cuotas[i].value);
+					if(!validarDecimal(cuotaText)){
+						cuotas[i].style.borderColor="red";
+						validado = false;
+					} else {
+						totalCuotas += parseFloat(cuotaText);
+					}
+				}
+				if(parseFloat(precioFinal.value) > totalCuotas) {
+					var errorCuotas = document.getElementById("errorCuotas");
+					errorCuotas.innerHTML = "<fmt:message key='error.total.installment.less.purchase' />";	
+					errorCuotas.style.color="red";				
+					validado = false;					
 				}
 			}
 			
@@ -43,7 +76,7 @@
 			for (var i = 0; i < errorSpan.length; i++) {
 				errorSpan[i].innerHTML='';
 			}
-			var campos = document.getElementsByClassName("form-control");
+			var campos = document.getElementsByClassName("form-validacion");
 			for (var i = 0; i < campos.length; i++) {
 				campos[i].style.borderColor="#ced4da";
 			}
@@ -78,6 +111,7 @@
 				detalleCuotas.style.visibility = "hidden";
 			}
 		}
+		
 		function cargarCuotas() {
 			var num = document.getElementById("cuotasSel").value;
 			sumarUltimaCuota = 0;
@@ -98,7 +132,7 @@
 				'<fmt:message key="label.Date" /> <input type="date" name="cuotas['+i+'].fechaCompra" class="width-130" value="'+ calculaFecha(i) + '" />' +
 				'</div></div>' +
 				'<div class="row"><div class="col-xs-12">' +
-				'<fmt:message key="label.Amount" /> <input type="text" name="cuotas['+i+'].importeTotal" class="width-80-align-rigth"';
+				'<fmt:message key="label.Amount" /> <input type="text" name="cuotas['+i+'].importeTotal" class="width-80-align-rigth installment-verify form-validacion"';
 				if(i == 0) {
 					if(num == 1) {
 						datos = datos + ' value="' + (cuotasMedio + sumarUltimaCuota + primeraCuota).toFixed(2) + '" ';						
@@ -111,7 +145,7 @@
 					datos = datos + ' value="' + (cuotasMedio + sumarUltimaCuota).toFixed(2) + '" ';
 				}
 				
-				datos = datos + ' onclick="this.value=\'\'" onblur="if (this.value==\'\') this.value=0.00" />' +
+				datos = datos + ' onclick="if (this.value==0.00) this.value=\'\'" onblur="if (this.value==\'\') this.value=0.00" />' +
 				'</div></div>' +
 				'<br/>';
 				
@@ -230,7 +264,7 @@
 					<div class="col-xs-12 col-sm-10">
 						<fmt:message key="label.It.will.be" />
 						<span id="queHacer"><fmt:message key="label.added" /></span>
-						<input type="number" step="1" class="width-80-align-rigth" min="0" name="cantidad" id="cantidad"/>
+						<input type="number" step="1" class="width-80-align-rigth form-validacion" min="0" name="cantidad" id="cantidad"/>
 						<fmt:message key="label.units" />
 					</div>
 					<div class="hidden-xs col-sm-1">
@@ -252,7 +286,7 @@
 					<div class="col-xs-12 col-sm-10">
 						<fmt:message key="label.And.for.this" />
 						<span id="queSeHizo"><fmt:message key="label.paid" /></span>
-						<sf:input path="precioFinal" type="text" class="width-80-align-rigth" id="precioFinal"/> €
+						<sf:input path="precioFinal" type="text" class="width-80-align-rigth form-validacion" id="precioFinal"/> €
 						<fmt:message key="label.with.vat" />
 						<input type="number" step="1" style="width:40px; text-align: right;" min="0" name="iva" id="iva" value="0"/> %
 					</div>
@@ -281,12 +315,10 @@
 				<div class="row">	
 					<div class="hidden-xs col-sm-2">
 					</div>
-					<div class="col-xs-12 col-sm-6">
+					<div class="col-xs-12 col-sm-10">
 						<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
 						<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/producto/all/null' />"'><fmt:message key="Cancel" /></button>
-					</div>
-					<div class="col-xs-12 col-sm-4">
-						<span id="precioFinalError"></span>
+						<span id="precioFinalError" name="errorSpan"></span>
 					</div>
 				</div>
 			</div>
@@ -296,6 +328,11 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<button type="button" class="btn btn-warning" onclick='cargarCuotas()'><fmt:message key="label.Update.installments" /></button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<span id="errorCuotas" name="errorSpan"></span>
 					</div>
 				</div>
 				<br/>
