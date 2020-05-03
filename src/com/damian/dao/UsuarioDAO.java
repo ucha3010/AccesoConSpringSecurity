@@ -12,7 +12,8 @@ public interface UsuarioDAO {
 
 	public void save(Usuario usuario);
 
-	public List<Usuario> findAll(String column, String order, HttpServletRequest request);
+	public List<Usuario> findAll(String column, String order, int paginaInicio, int totalPaginas,
+			HttpServletRequest request);
 
 	public void update(Usuario usuario);
 

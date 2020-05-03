@@ -17,13 +17,14 @@ public interface UsuarioService {
 
 	void saveChangePassword(Usuario usuario);
 
-	List<Usuario> findAll(String column, String order, HttpServletRequest request);
+	List<Usuario> findAll(String column, String order, int paginaInicio, int totalPaginas, HttpServletRequest request);
 
 	void update(Usuario usuario);
 
 	void delete(int idUsr);
 
-	List<Usuario> findCustomers(String column, String order, HttpServletRequest request);
+	List<Usuario> findCustomers(String column, String order, int paginaInicio, int totalPaginas,
+			HttpServletRequest request);
 
 	List<Usuario> findFilteredCustomers(int idUsr);
 
@@ -34,7 +35,7 @@ public interface UsuarioService {
 	Usuario reset(int idUsr);
 
 	public Usuario findByUsername(String usuario);
-	
+
 	public String getColumn(HttpServletRequest request);
 
 }

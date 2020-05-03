@@ -39,7 +39,7 @@ public class ClienteController {
 	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
 			@PathVariable("order") String order, HttpServletRequest request) {
 		modelAndView.addObject("roles", rolService.findAll());
-		modelAndView.addObject("usuarios", usuarioService.findCustomers(column, order, request));
+		modelAndView.addObject("usuarios", usuarioService.findCustomers(column, order, 0, 100, request)); //TODO DAMIAN poner bien
 		modelAndView.addObject("estoy", "cliente");
 		modelAndView.setViewName("clientes");
 		return modelAndView;

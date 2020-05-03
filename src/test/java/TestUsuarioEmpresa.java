@@ -42,6 +42,13 @@ public class TestUsuarioEmpresa {
 		
 		Date date = new Date();
 		System.out.println(date.getTime());
+		
+		System.out.println("***********************************************************");
+		int a = 235;
+		int b = 100;
+		int c = (int) Math.ceil(a/b);
+		int d = (int) Math.ceil((double)a/(double)b);
+		System.out.println(c + ", " + d);
 	}
 
 	private static BigDecimal cortaADosDecimales(BigDecimal num) {

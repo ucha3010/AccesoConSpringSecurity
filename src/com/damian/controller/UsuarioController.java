@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.exceptions.RepeatedUsernameException;
 import com.damian.pojo.Usuario;
+import com.damian.service.PaginacionService;
 import com.damian.service.PaisService;
 import com.damian.service.RolService;
 import com.damian.service.impl.UsuarioServiceImpl;
@@ -31,15 +32,20 @@ public class UsuarioController {
 	private UsuarioServiceImpl usuarioService;
 
 	@Autowired
+	private PaginacionService paginacionService;
+
+	@Autowired
 	private PaisService paisService;
 
 	@Autowired
 	private RolService rolService;
 
-	@RequestMapping("/usuario/all/{column}/{order}")
-	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column, @PathVariable("order") String order,
-			HttpServletRequest request) {
-		modelAndView.addObject("usuarios", usuarioService.findAll(column, order, request));
+	@RequestMapping("/usuario/all/{column}/{order}/{paginaInicio}/{totalPaginas}")
+	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
+			@PathVariable("order") String order, @PathVariable("paginaInicio") int paginaInicio,
+			@PathVariable("totalPaginas") int totalPaginas, HttpServletRequest request) {
+		modelAndView.addObject("usuarios", usuarioService.findAll(column, order, paginaInicio, totalPaginas, request));
+		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio,totalPaginas,"usuario"));
 		modelAndView.addObject("roles", rolService.findAll());
 		modelAndView.addObject("estoy", "usuario");
 		modelAndView.setViewName("usuarios");
@@ -188,11 +194,13 @@ public class UsuarioController {
 
 	}
 
-	@RequestMapping("/usuario/cliente/all/{column}/{order}")
-	public ModelAndView getCustomers(ModelAndView modelAndView, @PathVariable("column") String column, @PathVariable("order") String order,
-			HttpServletRequest request) {
+	@RequestMapping("/usuario/cliente/all/{column}/{order}/{paginaInicio}/{totalPaginas}")
+	public ModelAndView getCustomers(ModelAndView modelAndView, @PathVariable("column") String column,
+			@PathVariable("order") String order, @PathVariable("paginaInicio") int paginaInicio,
+			@PathVariable("totalPaginas") int totalPaginas, HttpServletRequest request) {
 		modelAndView.addObject("roles", rolService.findAll());
-		modelAndView.addObject("usuarios", usuarioService.findCustomers(column, order, request));
+		modelAndView.addObject("usuarios",
+				usuarioService.findCustomers(column, order, paginaInicio, totalPaginas, request));
 		modelAndView.addObject("estoy", "usuario");
 		modelAndView.setViewName("usuarios");
 		return modelAndView;

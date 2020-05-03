@@ -131,8 +131,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public List<Usuario> findAll(String column, String order, HttpServletRequest request) {
-		return usuarioDAO.findAll(column, order, request);
+	public List<Usuario> findAll(String column, String order, int paginaInicio, int totalPaginas,
+			HttpServletRequest request) {
+		return usuarioDAO.findAll(column, order, paginaInicio, totalPaginas, request);
 	}
 
 	@Override
@@ -166,8 +167,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public List<Usuario> findCustomers(String column, String order, HttpServletRequest request) {
-		List<Usuario> usuarios = usuarioDAO.findAll(column, order,  request);
+	public List<Usuario> findCustomers(String column, String order, int paginaInicio, int totalPaginas,
+			HttpServletRequest request) {
+		List<Usuario> usuarios = usuarioDAO.findAll(column, order, paginaInicio, totalPaginas, request);
 		List<Usuario> clientes = new ArrayList<>();
 		for (Usuario usuario : usuarios) {
 			List<UsuarioRol> roles = usuario.getUsuarioRol();

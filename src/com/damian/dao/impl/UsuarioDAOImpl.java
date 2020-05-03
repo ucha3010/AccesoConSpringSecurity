@@ -85,7 +85,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public List<Usuario> findAll(String column, String order, HttpServletRequest request) {
+	public List<Usuario> findAll(String column, String order, int paginaInicio, int totalPaginas,
+			HttpServletRequest request) {
 
 		boolean dp = false;
 		List<Usuario> usuarios = new ArrayList<>();
@@ -98,7 +99,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				request, this, usuarioOrdenDAO);
 
 		if (columnAndOrder != null) {
-			String sql = "SELECT * FROM " + TABLA + " ORDER BY " + columnAndOrder;
+			String sql = "SELECT * FROM " + TABLA + " ORDER BY " + columnAndOrder + " LIMIT " + paginaInicio + ","
+					+ totalPaginas;
 
 			if (order != null && !order.equals("null")) {
 				String orderSql = sql.substring(sql.length() - 3);
