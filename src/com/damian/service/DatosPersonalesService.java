@@ -17,5 +17,7 @@ public interface DatosPersonalesService {
 	void delete(int idDatosPersonales);
 	
 	DatosPersonales findByUsrId(int datosUsrId);
+	
+	DatosPersonales findByUsrIdSearch(int datosUsrId);
 
 }

@@ -44,7 +44,7 @@
 			if(texto === ''){
 				$(".collapse").collapse('hide');
 			} else {
-				<c:forEach items="${usuarios}" var="usu" varStatus="status">
+				<c:forEach items="${buscarusuarios}" var="usu" varStatus="status">
 					var username = normalizado('${usu.usuario}');
 					var nombre = normalizado('${usu.datosPersonales.nombre}');
 					var apellidos = normalizado('${usu.datosPersonales.apellido1}'+" "+'${usu.datosPersonales.apellido2}');
@@ -218,6 +218,24 @@
 					</c:forEach>
 				</tbody>
 			</table>
+		</div>
+		
+		<!-- PAGINACION -->
+		<div class="row">
+			<div class="justify-content-center">
+				<c:set var="rutaAll" value="usuario/all/null/null" scope="page" /> <!-- esta es la ruta que cambia en cada página -->
+				<ul class="pagination">
+					<li<c:if test="${paginacion.primeraPagina}"> class="disabled"</c:if>><a href="<c:url value="/${rutaAll}/${paginacion.anterior}/${paginacion.registrosPorPagina}"/>">&laquo;</a></li>
+					
+					<c:set var="pagina" value="0" scope="page" />
+					<c:forEach items="${paginacion.comienzaPagina}" var="comienza">
+						<c:set var="pagina" value="${pagina + 1}" scope="page"/>
+						<li<c:if test="${comienza == paginacion.actual}"> class="disabled"</c:if>><a href="<c:url value="/${rutaAll}/${comienza}/${paginacion.registrosPorPagina}"/>">${pagina}</a></li>
+					</c:forEach>
+					
+					<li<c:if test="${paginacion.ultimaPagina}"> class="disabled"</c:if>><a href="<c:url value="/${rutaAll}/${paginacion.siguiente}/${paginacion.registrosPorPagina}"/>">&raquo;</a></li>
+				</ul>
+			</div>
 		</div>
 		
 		<footer>

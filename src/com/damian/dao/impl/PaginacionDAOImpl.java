@@ -29,14 +29,14 @@ public class PaginacionDAOImpl implements PaginacionDAO {
 		paginacion.setActual(paginaInicio);
 		paginacion.setTotalRegistros(totalRegistros);
 		paginacion.setRegistrosPorPagina(registrosPorPagina);
-		if(paginaInicio - registrosPorPagina < 0) {
+		if(paginaInicio == 0) {
 			paginacion.setPrimeraPagina(true);
 			paginacion.setAnterior(0);
 		} else {
 			paginacion.setPrimeraPagina(false);
 			paginacion.setAnterior(paginaInicio - registrosPorPagina);
 		}
-		if(paginaInicio + registrosPorPagina > totalRegistros) {
+		if(paginaInicio + registrosPorPagina + 1 > totalRegistros) {
 			paginacion.setUltimaPagina(true);
 			paginacion.setSiguiente(0);
 		} else {

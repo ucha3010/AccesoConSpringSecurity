@@ -27,4 +27,6 @@ public interface UsuarioDAO {
 
 	public int getMaxId();
 
+	public List<Usuario> findSearchAll();
+
 }

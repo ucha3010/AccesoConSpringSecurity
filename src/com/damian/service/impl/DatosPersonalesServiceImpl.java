@@ -41,4 +41,9 @@ public class DatosPersonalesServiceImpl implements DatosPersonalesService {
 		return datosPersonalesDAO.findByUsrId(datosUsrId);
 	}
 
+	@Override
+	public DatosPersonales findByUsrIdSearch(int datosUsrId) {
+		return datosPersonalesDAO.findByUsrIdSearch(datosUsrId);
+	}
+
 }

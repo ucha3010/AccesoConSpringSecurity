@@ -37,5 +37,7 @@ public interface UsuarioService {
 	public Usuario findByUsername(String usuario);
 
 	public String getColumn(HttpServletRequest request);
+	
+	public List<Usuario> findSearchAll();
 
 }

@@ -45,6 +45,7 @@ public class UsuarioController {
 			@PathVariable("order") String order, @PathVariable("paginaInicio") int paginaInicio,
 			@PathVariable("totalPaginas") int totalPaginas, HttpServletRequest request) {
 		modelAndView.addObject("usuarios", usuarioService.findAll(column, order, paginaInicio, totalPaginas, request));
+		modelAndView.addObject("buscarusuarios", usuarioService.findSearchAll());
 		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio,totalPaginas,"usuario"));
 		modelAndView.addObject("roles", rolService.findAll());
 		modelAndView.addObject("estoy", "usuario");

@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -110,21 +111,22 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 		});
 	}
 
-	private ModelDatosPersonales mapeo(ResultSet rs) throws SQLException {
-		ModelDatosPersonales mdp = new ModelDatosPersonales();
-		mdp.setIdDatosPers(rs.getInt("idDatosPers"));
-		mdp.setNombre(rs.getString("nombre"));
-		mdp.setApellido1(rs.getString("apellido1"));
-		mdp.setApellido2(rs.getString("apellido2"));
-		mdp.setSexo(rs.getString("sexo"));
-		mdp.setFechaNacimiento(rs.getDate("fechaNacimiento"));
-		mdp.setNacionalidad_idPais(rs.getInt("nacionalidad_idPais"));
-		mdp.setDni(rs.getString("dni"));
-		mdp.setEmail(rs.getString("email"));
-		mdp.setTelefono(rs.getString("telefono"));
-		mdp.setObservaciones(rs.getString("observaciones"));
-		mdp.setDatospersonales_idUsr(rs.getInt("datospersonales_idUsr"));
-		return mdp;
+	@Override
+	public DatosPersonales findByUsrIdSearch(int datosUsrId) {
+
+		String sql = "SELECT nombre, apellido1, apellido2 FROM " + TABLA + " WHERE datospersonales_idUsr=" + datosUsrId;
+		return mapeoSearch(jdbcTemplate.queryForMap(sql));
+		
+	}
+
+	private DatosPersonales mapeoSearch(Map<String, Object> dpMap) {
+
+			DatosPersonales dp = new DatosPersonales();
+			dp.setNombre((String) dpMap.get("nombre"));
+			dp.setApellido1((String) dpMap.get("apellido1"));
+			dp.setApellido2((String) dpMap.get("apellido2"));
+
+			return dp;
 	}
 
 	@Override
@@ -185,6 +187,23 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 	@Override
 	public int getMaxId() {
 		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
+	private ModelDatosPersonales mapeo(ResultSet rs) throws SQLException {
+		ModelDatosPersonales mdp = new ModelDatosPersonales();
+		mdp.setIdDatosPers(rs.getInt("idDatosPers"));
+		mdp.setNombre(rs.getString("nombre"));
+		mdp.setApellido1(rs.getString("apellido1"));
+		mdp.setApellido2(rs.getString("apellido2"));
+		mdp.setSexo(rs.getString("sexo"));
+		mdp.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+		mdp.setNacionalidad_idPais(rs.getInt("nacionalidad_idPais"));
+		mdp.setDni(rs.getString("dni"));
+		mdp.setEmail(rs.getString("email"));
+		mdp.setTelefono(rs.getString("telefono"));
+		mdp.setObservaciones(rs.getString("observaciones"));
+		mdp.setDatospersonales_idUsr(rs.getInt("datospersonales_idUsr"));
+		return mdp;
 	}
 
 }

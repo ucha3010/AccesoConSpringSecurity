@@ -22,6 +22,7 @@ import com.damian.dao.UsuarioDAO;
 import com.damian.dao.UsuarioOrdenDAO;
 import com.damian.dao.model.ModelUsuario;
 import com.damian.pojo.Usuario;
+import com.damian.service.DatosPersonalesService;
 import com.damian.utils.Utils;
 
 @Repository
@@ -41,6 +42,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	@Autowired
 	private ConverterUsuario converterUsuario;
+	
+	@Autowired
+	private DatosPersonalesService datosPersonalesService;
 
 	@Autowired
 	private UsuarioOrdenDAO usuarioOrdenDAO;
@@ -207,6 +211,19 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public int getMaxId() {
 		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
+	@Override
+	public List<Usuario> findSearchAll() {
+		List<ModelUsuario> muList = jdbcTemplate.query("SELECT idUsr, usuario FROM " + TABLA, BeanPropertyRowMapper.newInstance(ModelUsuario.class));
+		List<Usuario> uList = new ArrayList<>();
+		Usuario usuario = null;
+		for (ModelUsuario mu : muList) {
+			usuario = converterUsuario.convert(mu);
+			usuario.setDatosPersonales(datosPersonalesService.findByUsrIdSearch(mu.getIdUsr()));
+			uList.add(usuario);
+		}
+		return uList;
 	}
 
 	private List<Usuario> lista(String sql) {

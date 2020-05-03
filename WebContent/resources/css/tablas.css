@@ -211,3 +211,8 @@
 .min-width-160 {
 	min-width: 160px;
 }
+
+.justify-content-center {
+	margin: auto;
+	max-width: 480px;
+}
