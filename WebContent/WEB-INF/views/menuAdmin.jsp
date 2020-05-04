@@ -7,7 +7,7 @@
 <fmt:setBundle basename="com.damian.utils.multilanguage" />
 
 							<li class="btn-primary border-color-dam">
-								<a class="menu-style" href="<c:url value="/usuario/all/null/null/0/100"/>"><fmt:message key="label.Users" /></a>
+								<a class="menu-style" href="<c:url value="/usuario/all/null/null/0/10"/>"><fmt:message key="label.Users" /></a>
 							</li>
 							<li class="btn-primary border-color-dam">
 								<a class="menu-style" href="<c:url value="/formaPago"/>"><fmt:message key="label.Payment.methods" /></a>

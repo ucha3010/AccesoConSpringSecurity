@@ -44,7 +44,7 @@
 			if(texto === ''){
 				$(".collapse").collapse('hide');
 			} else {
-				<c:forEach items="${usuarios}" var="usu" varStatus="status">
+				<c:forEach items="${buscarusuarios}" var="usu" varStatus="status">
 					var username = normalizado('${usu.usuario}');
 					var nombre = normalizado('${usu.datosPersonales.nombre}');
 					var apellidos = normalizado('${usu.datosPersonales.apellido1}'+" "+'${usu.datosPersonales.apellido2}');
@@ -60,9 +60,9 @@
 				$(".collapse").collapse('show');
 			}
 		}	
-		function ordenaTabla(numCol){
+		function ordenaTabla(numCol,actual,total){
 			var columnas = ['usuario','habilitado','datosPersonalesnombre','datosPersonalesapellido1','datosPersonalesfechaNacimiento','datosPersonalesemail','datosPersonalestelefono'];
-			var url = "<c:url value='/cliente/all/"+columnas[numCol]+"/null' />";
+			var url = "<c:url value='/cliente/all/"+columnas[numCol]+"/null/"+actual+"/"+total+"' />";
 			location.href=url;			
 		}	
 	</script>
@@ -136,19 +136,19 @@
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 							<th class="extraAdmin-th"></th>
 						</sec:authorize>
-						<th onclick="ordenaTabla(${count})"><fmt:message key="label.Username" /></th>
+						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.Username" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count})"></th>
+						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count})"><fmt:message key="label.Name" /></th>
+						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.Name" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count})"><fmt:message key="label.Lastname" /></th>
+						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.Lastname" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count})"><fmt:message key="label.Birthdate" /></th>
+						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.Birthdate" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count})"><fmt:message key="label.Email" /></th>
+						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.Email" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count})"><fmt:message key="label.Phone" /></th>
+						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.Phone" /></th>
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 							<th onclick="sortTable(9)"><fmt:message key="label.Roles" /></th>
 						</sec:authorize>
@@ -218,6 +218,24 @@
 					</c:forEach>
 				</tbody>
 			</table>
+		</div>
+		
+		<!-- PAGINACION -->
+		<div class="row">
+			<div class="justify-content-center">
+				<c:set var="rutaAll" value="cliente/all/null/null" scope="page" /> <!-- esta es la ruta que cambia en cada página -->
+				<ul class="pagination">
+					<li<c:if test="${paginacion.primeraPagina}"> class="disabled"</c:if>><a href="<c:url value="/${rutaAll}/${paginacion.anterior}/${paginacion.registrosPorPagina}"/>">&laquo;</a></li>
+					
+					<c:set var="pagina" value="0" scope="page" />
+					<c:forEach items="${paginacion.comienzaPagina}" var="comienza">
+						<c:set var="pagina" value="${pagina + 1}" scope="page"/>
+						<li<c:if test="${comienza == paginacion.actual}"> class="disabled"</c:if>><a href="<c:url value="/${rutaAll}/${comienza}/${paginacion.registrosPorPagina}"/>">${pagina}</a></li>
+					</c:forEach>
+					
+					<li<c:if test="${paginacion.ultimaPagina}"> class="disabled"</c:if>><a href="<c:url value="/${rutaAll}/${paginacion.siguiente}/${paginacion.registrosPorPagina}"/>">&raquo;</a></li>
+				</ul>
+			</div>
 		</div>
 		
 		<footer>

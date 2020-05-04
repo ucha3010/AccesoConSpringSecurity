@@ -49,6 +49,10 @@ public class TestUsuarioEmpresa {
 		int c = (int) Math.ceil(a/b);
 		int d = (int) Math.ceil((double)a/(double)b);
 		System.out.println(c + ", " + d);
+		
+		System.out.println("***********************************************************");
+		String sql = "SELECT * FROM usuario ORDER BY usuario ASC LIMIT 0,10";
+		System.out.println(sql.indexOf("BY usuario"));
 	}
 
 	private static BigDecimal cortaADosDecimales(BigDecimal num) {

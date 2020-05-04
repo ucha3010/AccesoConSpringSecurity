@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.exceptions.RepeatedUsernameException;
 import com.damian.pojo.Usuario;
+import com.damian.service.PaginacionService;
 import com.damian.service.PaisService;
 import com.damian.service.RolService;
 import com.damian.service.impl.UsuarioServiceImpl;
@@ -30,22 +31,28 @@ public class ClienteController {
 	private UsuarioServiceImpl usuarioService;
 
 	@Autowired
+	private PaginacionService paginacionService;
+
+	@Autowired
 	private PaisService paisService;
 
 	@Autowired
 	private RolService rolService;
 
-	@RequestMapping("/cliente/all/{column}/{order}") // si
+	@RequestMapping("/cliente/all/{column}/{order}/{paginaInicio}/{totalPaginas}")
 	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
-			@PathVariable("order") String order, HttpServletRequest request) {
+			@PathVariable("order") String order, @PathVariable("paginaInicio") int paginaInicio,
+			@PathVariable("totalPaginas") int totalPaginas, HttpServletRequest request) {
 		modelAndView.addObject("roles", rolService.findAll());
-		modelAndView.addObject("usuarios", usuarioService.findCustomers(column, order, 0, 100, request)); //TODO DAMIAN poner bien
+		modelAndView.addObject("usuarios", usuarioService.findCustomers(column, order, paginaInicio, totalPaginas, request));
+		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio,totalPaginas,"usuario"));
+		modelAndView.addObject("buscarusuarios", usuarioService.findSearchAll());
 		modelAndView.addObject("estoy", "cliente");
 		modelAndView.setViewName("clientes");
 		return modelAndView;
 	}
 
-	@RequestMapping("/cliente/filtered/{idUsr}") // si
+	@RequestMapping("/cliente/filtered/{idUsr}")
 	public ModelAndView getFiltered(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
 		modelAndView.addObject("usuarios", usuarioService.findByIdList(idUsr));
 		modelAndView.addObject("roles", rolService.findAll());
@@ -54,7 +61,7 @@ public class ClienteController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/cliente/cliente/filtered/{idUsr}") // si
+	@RequestMapping("/cliente/cliente/filtered/{idUsr}")
 	public ModelAndView getFilteredCustomers(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
 		modelAndView.addObject("roles", rolService.findAll());
 		modelAndView.addObject("usuarios", usuarioService.findFilteredCustomers(idUsr));
@@ -63,7 +70,7 @@ public class ClienteController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/cliente/{idUsr}") // si
+	@RequestMapping("/cliente/{idUsr}")
 	public ModelAndView getUser(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr,
 			@ModelAttribute("usuario") Usuario usuario, final BindingResult br) {
 
@@ -106,7 +113,7 @@ public class ClienteController {
 	// return modelAndView;
 	// }
 
-	@RequestMapping(value = { "/cliente/save" }, method = RequestMethod.POST) // si
+	@RequestMapping(value = { "/cliente/save" }, method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model,
 			@RequestParam(value = "usuarioRol", required = false) String[] usuarioRol, HttpServletRequest request,
 			RedirectAttributes ra) {
@@ -198,7 +205,7 @@ public class ClienteController {
 	// return "redirect:/cliente/logged/" + usuario.getIdUsr();
 	// }
 
-	@RequestMapping("/cliente/{idUsr}/delete") // si
+	@RequestMapping("/cliente/{idUsr}/delete")
 	public String deleteUser(@PathVariable("idUsr") int idUsr, RedirectAttributes ra, HttpServletRequest request) {
 
 		usuarioService.delete(idUsr);
@@ -220,7 +227,7 @@ public class ClienteController {
 	// return modelAndView;
 	// }
 
-	@RequestMapping("/cliente/available/{idUsr}") // si
+	@RequestMapping("/cliente/available/{idUsr}")
 	public String changeAvailable(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr,
 			HttpServletRequest request) {
 		Usuario usuario = new Usuario();
@@ -230,7 +237,7 @@ public class ClienteController {
 		return "redirect:/cliente/all/" + usuarioService.getColumn(request);
 	}
 
-	@RequestMapping("/cliente/reset/{idUsr}") // si
+	@RequestMapping("/cliente/reset/{idUsr}")
 	public String passwordReset(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr,
 			HttpServletRequest request) {
 		usuarioService.reset(idUsr);

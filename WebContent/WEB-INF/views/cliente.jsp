@@ -293,7 +293,7 @@
 				</div>
 				<div class="col-xs-12 col-sm-8">
 					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/cliente/all/null/null"/>"'><fmt:message key="Cancel" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/cliente/all/null/null/0/100"/>"'><fmt:message key="Cancel" /></button>
 					<span id="hayError" name="errorSpan" style="color:red"></span>
 				</div>
 			</div>

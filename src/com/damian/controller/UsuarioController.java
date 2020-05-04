@@ -195,26 +195,26 @@ public class UsuarioController {
 
 	}
 
-	@RequestMapping("/usuario/cliente/all/{column}/{order}/{paginaInicio}/{totalPaginas}")
-	public ModelAndView getCustomers(ModelAndView modelAndView, @PathVariable("column") String column,
-			@PathVariable("order") String order, @PathVariable("paginaInicio") int paginaInicio,
-			@PathVariable("totalPaginas") int totalPaginas, HttpServletRequest request) {
-		modelAndView.addObject("roles", rolService.findAll());
-		modelAndView.addObject("usuarios",
-				usuarioService.findCustomers(column, order, paginaInicio, totalPaginas, request));
-		modelAndView.addObject("estoy", "usuario");
-		modelAndView.setViewName("usuarios");
-		return modelAndView;
-	}
+//	@RequestMapping("/usuario/cliente/all/{column}/{order}/{paginaInicio}/{totalPaginas}")
+//	public ModelAndView getCustomers(ModelAndView modelAndView, @PathVariable("column") String column,
+//			@PathVariable("order") String order, @PathVariable("paginaInicio") int paginaInicio,
+//			@PathVariable("totalPaginas") int totalPaginas, HttpServletRequest request) {
+//		modelAndView.addObject("roles", rolService.findAll());
+//		modelAndView.addObject("usuarios",
+//				usuarioService.findCustomers(column, order, paginaInicio, totalPaginas, request));
+//		modelAndView.addObject("estoy", "usuario");
+//		modelAndView.setViewName("usuarios");
+//		return modelAndView;
+//	}
 
-	@RequestMapping("/usuario/cliente/filtered/{idUsr}")
-	public ModelAndView getFilteredCustomers(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
-		modelAndView.addObject("roles", rolService.findAll());
-		modelAndView.addObject("usuarios", usuarioService.findFilteredCustomers(idUsr));
-		modelAndView.addObject("estoy", "usuario");
-		modelAndView.setViewName("usuarios");
-		return modelAndView;
-	}
+//	@RequestMapping("/usuario/cliente/filtered/{idUsr}")
+//	public ModelAndView getFilteredCustomers(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
+//		modelAndView.addObject("roles", rolService.findAll());
+//		modelAndView.addObject("usuarios", usuarioService.findFilteredCustomers(idUsr));
+//		modelAndView.addObject("estoy", "usuario");
+//		modelAndView.setViewName("usuarios");
+//		return modelAndView;
+//	}
 
 	@RequestMapping("/usuario/available/{idUsr}")
 	public String changeAvailable(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr,

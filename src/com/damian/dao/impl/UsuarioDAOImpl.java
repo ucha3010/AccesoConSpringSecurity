@@ -106,19 +106,17 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			String sql = "SELECT * FROM " + TABLA + " ORDER BY " + columnAndOrder + " LIMIT " + paginaInicio + ","
 					+ totalPaginas;
 
+			int ubicacionOrden = sql.indexOf("BY usuario") + 11;
+			String orderSql = sql.substring(ubicacionOrden, ubicacionOrden + 3);
 			if (order != null && !order.equals("null")) {
-				String orderSql = sql.substring(sql.length() - 3);
-				if (orderSql.equals("ASC")) {
-					sql = sql.substring(0, sql.length() - 3) + order;
-				} else {
-					sql = sql.substring(0, sql.length() - 4) + order;
-				}
+				sql = sql.substring(0, ubicacionOrden) + order+ " LIMIT " + paginaInicio + ","
+						+ totalPaginas;
 			}
 
 			usuarios = lista(sql);
 
 			if (dp) {
-				if (sql.substring(sql.length() - 3, sql.length()).equals("ASC")) {
+				if (orderSql.equals("ASC")) {
 					switch (column.substring(15)) {
 					case "nombre":
 						ordenarPorNombreASC(usuarios);
