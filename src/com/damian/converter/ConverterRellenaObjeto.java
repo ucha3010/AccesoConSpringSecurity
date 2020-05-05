@@ -63,6 +63,12 @@ public class ConverterRellenaObjeto {
 	private CategoriaDAO categoriaDAO;
 	
 	@Autowired
+	private ConverterDatosPersonales converterDatosPersonales;
+	
+	@Autowired
+	private ConverterUsuario converterUsuario;
+	
+	@Autowired
 	private CuotaDAO cuotaDAO;
 
 	@Autowired
@@ -216,6 +222,19 @@ public class ConverterRellenaObjeto {
 			}
 			u.setUsuarioRol(usuarioRolDAO.findByIdUsrModel(mu.getIdUsr()));
 		}
+	}
+
+	public Usuario rellenaUsuarioLista(ModelUsuario mu, ModelDatosPersonales mdp) {
+
+		DatosPersonales dp = converterDatosPersonales.convert(mdp);
+		if (dp.getNacionalidad().getIdPais() != 0) {
+			dp.setNacionalidad(paisDAO.findById(dp.getNacionalidad().getIdPais()));
+		}
+		Usuario u = converterUsuario.convert(mu);
+		u.setUsuarioRol(usuarioRolDAO.findByIdUsrModel(mu.getIdUsr()));
+		u.setDatosPersonales(dp);
+		
+		return u;
 	}
 
 	public void rellenaProducto(Producto p, ModelProducto mp) {

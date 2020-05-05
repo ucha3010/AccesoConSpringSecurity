@@ -61,7 +61,7 @@
 			}
 		}	
 		function ordenaTabla(numCol,actual,total){
-			var columnas = ['usuario','habilitado','datosPersonalesnombre','datosPersonalesapellido1','datosPersonalesfechaNacimiento','datosPersonalesemail','datosPersonalestelefono'];
+			var columnas = ['usuario.usuario','usuario.habilitado','datosPersonales.nombre','datosPersonales.apellido1','datosPersonales.fechaNacimiento','datosPersonales.email','datosPersonales.telefono'];
 			var url = "<c:url value='/usuario/all/"+columnas[numCol]+"/null/"+actual+"/"+total+"' />";
 			location.href=url;			
 		}	

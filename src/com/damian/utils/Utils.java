@@ -31,8 +31,7 @@ public class Utils {
 				usuarioOrdenDAO.save(uo);
 				dataOut = columnOrder;
 			} else {
-				dataOut = defineColumn(uo.getColumna(), defaultColumn).concat(" ")
-						.concat(defineOrder(uo, column, orderObl, defaultOrder));
+				dataOut = uo.getColumna().concat(" ").concat(uo.getOrden() == null ? defaultOrder : uo.getOrden());
 			}
 		} else {
 			if (uo == null) {
@@ -44,7 +43,7 @@ public class Utils {
 				uo.setColumna(column);
 				uo.setOrden(order);
 				usuarioOrdenDAO.update(uo);
-				dataOut = defineColumn(uo.getColumna(), defaultColumn).concat(" ").concat(uo.getOrden());
+				dataOut = uo.getColumna().concat(" ").concat(uo.getOrden());
 			}
 		}
 		return dataOut;
@@ -68,15 +67,6 @@ public class Utils {
 			order = orderObl;
 		}
 		return order;
-	}
-
-	private static String defineColumn(String column, String defaultColumn) {
-
-		if (column != null && column.length() > 15 && column.substring(0, 15).equals("datosPersonales")) {
-			return defaultColumn;
-		} else {
-			return column;
-		}
 	}
 
 	public static Usuario getLoggedUser(HttpServletRequest request, UsuarioDAO usuarioDAO) {
