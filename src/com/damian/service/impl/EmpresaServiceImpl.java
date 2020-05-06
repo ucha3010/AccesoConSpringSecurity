@@ -48,8 +48,8 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
-	public List<Empresa> findAll(String column, HttpServletRequest request) {
-		return empresaDAO.findAll(column, request);
+	public List<Empresa> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request) {
+		return empresaDAO.findAll(column, paginaInicio, totalPaginas, request);
 	}
 
 	@Override
@@ -86,6 +86,11 @@ public class EmpresaServiceImpl implements EmpresaService {
 	@Override
 	public List<Empresa> findByEmpresaName(String empresaName) {
 		return empresaDAO.findByEmpresaName(empresaName);
+	}
+
+	@Override
+	public List<Empresa> findSearchAll() {
+		return empresaDAO.findSearchAll();
 	}
 
 }

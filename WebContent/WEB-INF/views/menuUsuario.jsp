@@ -10,7 +10,7 @@
 								<a class="menu-style" href="<c:url value='/cliente/all/null/null/0/10'/>"><fmt:message key="label.Customers" /></a>
 							</li>
 							<li class="btn-info border-color-dam">
-								<a class="menu-style" href="<c:url value="/empresa/all/null"/>"><fmt:message key="Companies" /></a>
+								<a class="menu-style" href="<c:url value="/empresa/all/null/0/10"/>"><fmt:message key="Companies" /></a>
 							</li>
 							<li class="btn-info border-color-dam">
 								<a class="menu-style" href="<c:url value="/producto/all/null"/>"><fmt:message key="Products" /></a>

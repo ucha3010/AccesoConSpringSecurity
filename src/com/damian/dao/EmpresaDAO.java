@@ -10,20 +10,21 @@ public interface EmpresaDAO {
 
 	public void save(Empresa empresa);
 
-	public List<Empresa> findAll(String column, HttpServletRequest request);
-	
+	public List<Empresa> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request);
+
 	public void update(Empresa empresa);
-	
+
 	public int delete(int id);
 
 	public Empresa findById(int id);
-	
+
 	public List<Empresa> findByIdList(int id);
-	
+
 	public List<Empresa> findByEmpresaName(String empresaName);
 
 	public Empresa findByIdModel(int id);
 
 	public int getMaxId();
 
+	public List<Empresa> findSearchAll();
 }

@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.pojo.Empresa;
 import com.damian.service.EmpresaService;
+import com.damian.service.PaginacionService;
 import com.damian.valid.SpringFormGroup;
 
 @Controller
@@ -27,10 +28,16 @@ public class EmpresaController {
 	@Autowired
 	private EmpresaService empresaService;
 
-	@RequestMapping("/empresa/all/{column}")
+	@Autowired
+	private PaginacionService paginacionService;
+
+	@RequestMapping("/empresa/all/{column}/{paginaInicio}/{totalPaginas}")
 	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
+			@PathVariable("paginaInicio") int paginaInicio, @PathVariable("totalPaginas") int totalPaginas,
 			HttpServletRequest request) {
-		modelAndView.addObject("empresas", empresaService.findAll(column, request));
+		modelAndView.addObject("empresas", empresaService.findAll(column, paginaInicio, totalPaginas, request));
+		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, "empresa"));
+		modelAndView.addObject("buscarempresas", empresaService.findSearchAll());
 		modelAndView.setViewName("empresas");
 		return modelAndView;
 	}

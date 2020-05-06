@@ -14,12 +14,14 @@ public interface EmpresaService {
 
 	void save(Empresa empresa);
 
-	List<Empresa> findAll(String column, HttpServletRequest request);
+	List<Empresa> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request);
 
 	void update(Empresa empresa);
 
 	boolean delete(int idEmpresa);
 
 	List<Empresa> findByEmpresaName(String empresaName);
+
+	public List<Empresa> findSearchAll();
 
 }

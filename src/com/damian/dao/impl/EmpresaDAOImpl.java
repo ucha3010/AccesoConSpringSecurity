@@ -73,13 +73,14 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	}
 
 	@Override
-	public List<Empresa> findAll(String column, HttpServletRequest request) {
+	public List<Empresa> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request) {
 
 		String columnAndOrder = Utils.validateColumnAndOrder(column, null, TABLA, KEY_COLUMN, KEY_ORDER, COLUMN_ORDER,
 				request, usuarioDAO, usuarioOrdenDAO);
 
 		if (columnAndOrder != null) {
-			String sql = "SELECT * FROM " + TABLA + " ORDER BY " + columnAndOrder;
+			String sql = "SELECT * FROM " + TABLA + " ORDER BY " + columnAndOrder + " LIMIT " + paginaInicio + ","
+					+ totalPaginas;
 
 			return lista(sql);
 		} else {
@@ -128,7 +129,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		List<ModelEmpresa> meList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelEmpresa.class));
 		List<Empresa> eList = new ArrayList<>();
 		for (ModelEmpresa me : meList) {
-			eList.add(converterEmpresa.convertAll(me));
+			eList.add(converterEmpresa.convert(me));
 		}
 		return eList;
 	}
@@ -169,5 +170,16 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	@Override
 	public int getMaxId() {
 		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
+	@Override
+	public List<Empresa> findSearchAll() {
+		List<ModelEmpresa> meList = jdbcTemplate.query("SELECT idEmp, nombreComercial, cif, email FROM " + TABLA,
+				BeanPropertyRowMapper.newInstance(ModelEmpresa.class));
+		List<Empresa> eList = new ArrayList<>();
+		for (ModelEmpresa me : meList) {
+			eList.add(converterEmpresa.convert(me));
+		}
+		return eList;
 	}
 }
