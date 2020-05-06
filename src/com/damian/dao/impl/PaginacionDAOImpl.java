@@ -24,7 +24,10 @@ public class PaginacionDAOImpl implements PaginacionDAO {
 	public Paginacion pagination(int paginaInicio, int registrosPorPagina, String tabla) {
 		
 		Paginacion paginacion = new Paginacion();
-		int totalRegistros = totalRows(tabla);
+		int totalRegistros = 0;
+		if(registrosPorPagina > 0) {
+			totalRegistros = totalRows(tabla);
+		}
 		
 		paginacion.setActual(paginaInicio);
 		paginacion.setTotalRegistros(totalRegistros);

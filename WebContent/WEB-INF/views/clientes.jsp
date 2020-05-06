@@ -61,7 +61,7 @@
 			}
 		}	
 		function ordenaTabla(numCol,actual,total){
-			var columnas = ['usuario','habilitado','datosPersonalesnombre','datosPersonalesapellido1','datosPersonalesfechaNacimiento','datosPersonalesemail','datosPersonalestelefono'];
+			var columnas = ['usuario.usuario','usuario.habilitado','datosPersonales.nombre','datosPersonales.apellido1','datosPersonales.fechaNacimiento','datosPersonales.email','datosPersonales.telefono'];
 			var url = "<c:url value='/cliente/all/"+columnas[numCol]+"/null/"+actual+"/"+total+"' />";
 			location.href=url;			
 		}	
@@ -223,17 +223,38 @@
 		<!-- PAGINACION -->
 		<div class="row">
 			<div class="justify-content-center">
-				<c:set var="rutaAll" value="cliente/all/null/null" scope="page" /> <!-- esta es la ruta que cambia en cada página -->
+				<c:set var="rutaAll" value="usuario/all/null/null" scope="page" /> <!-- esta es la ruta que cambia en cada página -->
 				<ul class="pagination">
-					<li<c:if test="${paginacion.primeraPagina}"> class="disabled"</c:if>><a href="<c:url value="/${rutaAll}/${paginacion.anterior}/${paginacion.registrosPorPagina}"/>">&laquo;</a></li>
+					<li<c:if test="${paginacion.primeraPagina}"> class="disabled"</c:if>>
+						<c:if test="${!paginacion.primeraPagina}">
+							<a href="<c:url value="/${rutaAll}/${paginacion.anterior}/${paginacion.registrosPorPagina}"/>">&laquo;</a>
+						</c:if>
+						<c:if test="${paginacion.primeraPagina}">
+							<span>&laquo;</span>
+						</c:if>
+					</li>
 					
 					<c:set var="pagina" value="0" scope="page" />
 					<c:forEach items="${paginacion.comienzaPagina}" var="comienza">
 						<c:set var="pagina" value="${pagina + 1}" scope="page"/>
-						<li<c:if test="${comienza == paginacion.actual}"> class="disabled"</c:if>><a href="<c:url value="/${rutaAll}/${comienza}/${paginacion.registrosPorPagina}"/>">${pagina}</a></li>
+						<li<c:if test="${comienza == paginacion.actual}"> class="disabled"</c:if>>
+							<c:if test="${comienza != paginacion.actual}">
+								<a href="<c:url value="/${rutaAll}/${comienza}/${paginacion.registrosPorPagina}"/>">${pagina}</a>
+							</c:if>
+							<c:if test="${comienza == paginacion.actual}">
+								<span>${pagina}</span>
+							</c:if>
+						</li>
 					</c:forEach>
 					
-					<li<c:if test="${paginacion.ultimaPagina}"> class="disabled"</c:if>><a href="<c:url value="/${rutaAll}/${paginacion.siguiente}/${paginacion.registrosPorPagina}"/>">&raquo;</a></li>
+					<li<c:if test="${paginacion.ultimaPagina}"> class="disabled"</c:if>>
+						<c:if test="${!paginacion.ultimaPagina}">
+							<a href="<c:url value="/${rutaAll}/${paginacion.siguiente}/${paginacion.registrosPorPagina}"/>">&raquo;</a>
+						</c:if>
+						<c:if test="${paginacion.ultimaPagina}">
+							<span>&raquo;</span>
+						</c:if>
+					</li>
 				</ul>
 			</div>
 		</div>

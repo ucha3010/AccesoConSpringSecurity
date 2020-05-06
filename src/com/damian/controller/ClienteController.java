@@ -55,19 +55,13 @@ public class ClienteController {
 	@RequestMapping("/cliente/filtered/{idUsr}")
 	public ModelAndView getFiltered(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
 		modelAndView.addObject("usuarios", usuarioService.findByIdList(idUsr));
-		modelAndView.addObject("roles", rolService.findAll());
-		modelAndView.addObject("estoy", "cliente");
-		modelAndView.setViewName("clientes");
-		return modelAndView;
+		return fillFiltered(modelAndView);
 	}
 
 	@RequestMapping("/cliente/cliente/filtered/{idUsr}")
 	public ModelAndView getFilteredCustomers(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
-		modelAndView.addObject("roles", rolService.findAll());
 		modelAndView.addObject("usuarios", usuarioService.findFilteredCustomers(idUsr));
-		modelAndView.addObject("estoy", "cliente");
-		modelAndView.setViewName("clientes");
-		return modelAndView;
+		return fillFiltered(modelAndView);
 	}
 
 	@RequestMapping("/cliente/{idUsr}")
@@ -87,31 +81,6 @@ public class ClienteController {
 		modelAndView.setViewName("cliente");
 		return modelAndView;
 	}
-
-	// @RequestMapping("/cliente/logged/{idUsr}")
-	// public ModelAndView getLoggedUser(ModelAndView modelAndView,
-	// @PathVariable("idUsr") int idUsr) {
-	// fillLoggedUser(modelAndView, idUsr);
-	// modelAndView.setViewName("usuarioLogged");
-	// return modelAndView;
-	// }
-	//
-	// @RequestMapping("/cliente/logged/changePass/{idUsr}")
-	// public ModelAndView getChangePassword(ModelAndView modelAndView,
-	// @PathVariable("idUsr") int idUsr) {
-	// fillLoggedUser(modelAndView, idUsr);
-	// modelAndView.setViewName("usuarioChangePassword");
-	// return modelAndView;
-	// }
-
-	// @RequestMapping("/cliente/username/{username}")
-	// public ModelAndView getUserByUsername(ModelAndView modelAndView,
-	// @PathVariable("username") String username) {
-	// modelAndView.addObject("usuario", usuarioService.findByUsername(username));
-	// modelAndView.addObject("estoy", "username/" + username);
-	// modelAndView.setViewName("usuario");
-	// return modelAndView;
-	// }
 
 	@RequestMapping(value = { "/cliente/save" }, method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model,
@@ -142,69 +111,6 @@ public class ClienteController {
 		return "redirect:/cliente/all/" + usuarioService.getColumn(request);
 	}
 
-	// @RequestMapping(value = "/cliente/nuevo", method = RequestMethod.GET)
-	// public ModelAndView getUser(ModelAndView modelAndView,
-	// @ModelAttribute("usuario") Usuario usuario,
-	// final BindingResult br, HttpServletRequest request) {
-	// if (usuario.getUsuario() == null) {
-	// usuarioService.fillNewUser(usuario);
-	// }
-	// modelAndView.addObject("paises", paisService.findAll());
-	// modelAndView.addObject("usuario", usuario);
-	// modelAndView.addObject("estoy", "index");
-	// modelAndView.setViewName("usuarioNuevo");
-	// return modelAndView;
-	// }
-
-	// @RequestMapping(value = { "/cliente/nuevo/save" }, method =
-	// RequestMethod.POST)
-	// public ModelAndView saveNewUser(@ModelAttribute("usuario") Usuario usuario,
-	// final BindingResult br,
-	// final ModelMap model, HttpServletRequest request, final RedirectAttributes
-	// ra) {
-	//
-	// String[] usuarioRol = new String[1];
-	// usuarioRol[0] = "1";
-	// try {
-	// usuarioService.save(usuario, usuarioRol, request);
-	// } catch (RepeatedUsernameException e) {
-	// ra.addFlashAttribute("usuario", usuario);
-	// ra.addFlashAttribute("username_existente", "username_existente");
-	// return new ModelAndView("redirect:/cliente/nuevo");
-	// }
-	// ra.addFlashAttribute("usuario_creado", "usuario_creado");
-	// return new ModelAndView("redirect:/");
-	// }
-
-	// @RequestMapping(value = { "/cliente/logged/save" }, method =
-	// RequestMethod.POST)
-	// public String saveLoggedUser(@ModelAttribute("usuario") Usuario usuario,
-	// BindingResult result, Model model,
-	// @RequestParam(value = "usuarioRol", required = false) String[] usuarioRol,
-	// HttpServletRequest request) {
-	//
-	// if (usuarioRol == null) {
-	// usuarioRol = new String[1];
-	// usuarioRol[0] = "1";
-	// }
-	// try {
-	// usuarioService.save(usuario, usuarioRol, request);
-	// } catch (RepeatedUsernameException e) {
-	// }
-	// return "redirect:/";
-	// }
-
-	// @RequestMapping(value = { "/cliente/logged/changePass/save" }, method =
-	// RequestMethod.POST)
-	// public String saveChangeUserPass(@ModelAttribute("usuario") Usuario usuario,
-	// BindingResult result, Model model,
-	// RedirectAttributes ra) {
-	//
-	// usuarioService.saveChangePassword(usuario);
-	// ra.addFlashAttribute("passChanged", "label.Passwrod.change.success");
-	// return "redirect:/cliente/logged/" + usuario.getIdUsr();
-	// }
-
 	@RequestMapping("/cliente/{idUsr}/delete")
 	public String deleteUser(@PathVariable("idUsr") int idUsr, RedirectAttributes ra, HttpServletRequest request) {
 
@@ -214,18 +120,6 @@ public class ClienteController {
 		return "redirect:/cliente/all/" + usuarioService.getColumn(request);
 
 	}
-
-	// @RequestMapping("/cliente/cliente/all/{column}/{order}")
-	// public ModelAndView getCustomers(ModelAndView modelAndView,
-	// @PathVariable("column") String column, @PathVariable("order") String order,
-	// HttpServletRequest request) {
-	// modelAndView.addObject("roles", rolService.findAll());
-	// modelAndView.addObject("usuarios", usuarioService.findCustomers(column,
-	// order, request));
-	// modelAndView.addObject("estoy", "cliente");
-	// modelAndView.setViewName("usuarios");
-	// return modelAndView;
-	// }
 
 	@RequestMapping("/cliente/available/{idUsr}")
 	public String changeAvailable(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr,
@@ -243,20 +137,15 @@ public class ClienteController {
 		usuarioService.reset(idUsr);
 		return "redirect:/cliente/all/" + usuarioService.getColumn(request);
 	}
-
-	// private void fillLoggedUser(ModelAndView modelAndView, int idUsr) {
-	// Usuario usuario = new Usuario();
-	// if (idUsr > 0) {
-	// usuario = usuarioService.findById(idUsr);
-	// usuarioService.fillExistingUser(usuario);
-	// } else {
-	// modelAndView.setViewName("index");
-	// return;
-	// }
-	// modelAndView.addObject("roles", rolService.findAll());
-	// modelAndView.addObject("paises", paisService.findAll());
-	// modelAndView.addObject("usuario", usuario);
-	// modelAndView.addObject("estoy", "cliente");
-	// }
+	
+	private ModelAndView fillFiltered(ModelAndView modelAndView) {
+		modelAndView.addObject("roles", rolService.findAll());
+		modelAndView.addObject("paginacion", paginacionService.pagination(0,0,"usuario"));
+		modelAndView.addObject("estoy", "cliente");
+		modelAndView.addObject("buscarusuarios", usuarioService.findSearchAll());
+		modelAndView.setViewName("clientes");
+		return modelAndView;
+		
+	}
 
 }
