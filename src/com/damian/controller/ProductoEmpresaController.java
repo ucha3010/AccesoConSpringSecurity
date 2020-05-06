@@ -41,14 +41,14 @@ public class ProductoEmpresaController {
 		modelAndView.addObject("producto", productoService.findById(idPro));
 		modelAndView.addObject("auxString", new AuxString());
 		modelAndView.addObject("productoEmpresas", productoEmpresaService.findByIdPro(idPro));
-		modelAndView.addObject("empresas", empresaService.findAll(null, null));
+		modelAndView.addObject("empresas", empresaService.findAll(null, 0, 10000, null));
 		modelAndView.setViewName("productoEmpresa");
 		return modelAndView;
 	}
 
 	@RequestMapping("/productoEmpresa/empresa/{idEmp}/{column}")
-	public ModelAndView getEmpresas(ModelAndView modelAndView, @PathVariable("idEmp") int idEmp, @PathVariable("column") String column,
-			HttpServletRequest request) {
+	public ModelAndView getEmpresas(ModelAndView modelAndView, @PathVariable("idEmp") int idEmp,
+			@PathVariable("column") String column, HttpServletRequest request) {
 		modelAndView.addObject("empresa", empresaService.findById(idEmp));
 		modelAndView.addObject("auxString", new AuxString());
 		modelAndView.addObject("productoEmpresas", productoEmpresaService.findByIdEmp(idEmp));
