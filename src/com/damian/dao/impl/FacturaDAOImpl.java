@@ -48,13 +48,14 @@ public class FacturaDAOImpl implements FacturaDAO {
 	private UsuarioOrdenDAO usuarioOrdenDAO;
 
 	@Override
-	public List<Factura> findAll(String column, HttpServletRequest request) {
+	public List<Factura> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request) {
 
 		String columnAndOrder = Utils.validateColumnAndOrder(column, null, TABLA, KEY_COLUMN, KEY_ORDER, COLUMN_ORDER,
 				request, usuarioDAO, usuarioOrdenDAO);
 
 		if (columnAndOrder != null) {
-			String sql = "SELECT * FROM " + TABLA + " ORDER BY " + columnAndOrder;
+			String sql = "SELECT * FROM " + TABLA + " ORDER BY " + columnAndOrder + " LIMIT " + paginaInicio + ","
+					+ totalPaginas;
 
 			return lista(sql);
 		} else {
@@ -179,6 +180,17 @@ public class FacturaDAOImpl implements FacturaDAO {
 		List<Factura> facturas = new ArrayList<>();
 		facturas.add(findById(id));
 		return facturas;
+	}
+
+	@Override
+	public List<Factura> findSearchAll() {
+		List<ModelFactura> mfList = jdbcTemplate.query("SELECT idFac, fechaCompra, importeFront FROM " + TABLA,
+				BeanPropertyRowMapper.newInstance(ModelFactura.class));
+		List<Factura> fList = new ArrayList<>();
+		for (ModelFactura mf : mfList) {
+			fList.add(converterFactura.convert(mf));
+		}
+		return fList;
 	}
 
 	private List<Factura> lista(String sql) {

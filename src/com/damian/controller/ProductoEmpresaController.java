@@ -41,7 +41,7 @@ public class ProductoEmpresaController {
 		modelAndView.addObject("producto", productoService.findById(idPro));
 		modelAndView.addObject("auxString", new AuxString());
 		modelAndView.addObject("productoEmpresas", productoEmpresaService.findByIdPro(idPro));
-		modelAndView.addObject("empresas", empresaService.findAll(null, 0, 10000, null));
+		modelAndView.addObject("empresas", empresaService.findSearchAll());
 		modelAndView.setViewName("productoEmpresa");
 		return modelAndView;
 	}
@@ -52,7 +52,7 @@ public class ProductoEmpresaController {
 		modelAndView.addObject("empresa", empresaService.findById(idEmp));
 		modelAndView.addObject("auxString", new AuxString());
 		modelAndView.addObject("productoEmpresas", productoEmpresaService.findByIdEmp(idEmp));
-		modelAndView.addObject("productos", productoService.findAll(column, 0, 10000, request));
+		modelAndView.addObject("productos", productoService.findSearchAll());
 		modelAndView.setViewName("empresaProducto");
 		return modelAndView;
 	}

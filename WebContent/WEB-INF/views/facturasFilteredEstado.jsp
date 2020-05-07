@@ -28,9 +28,9 @@
 			var url = "<c:url value='/factura/status/"+idFac+"/" + valSelected.value + "/null' />";
 			location.href=url;
 		}
-		function ordenaTabla(idEst,numCol){
+		function ordenaTabla(idEst,numCol,actual,total){
 			var columnas = ['idFac','compra','fechaCompra','descuentoTotal','ivaTotal','importeFront'];
-			var url = "<c:url value='/factura/filteredEstado/"+idEst+"/"+columnas[numCol]+"' />";
+			var url = "<c:url value='/factura/filteredEstado/"+idEst+"/"+columnas[numCol]+"/"+actual+"/"+total+"' />";
 			location.href=url;			
 		}
 	</script>
@@ -62,17 +62,17 @@
 							<sec:authorize access="hasAnyRole('ROL_ROOT')">
 								<th></th>
 							</sec:authorize>
-							<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.Bill.id" /></th>
+							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Bill.id" /></th>
 							<c:set var="count" value="${count + 1}" scope="page"/>
-							<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.Purchase.Sale" /></th>
+							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Purchase.Sale" /></th>
 							<c:set var="count" value="${count + 1}" scope="page"/>
-							<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.date.purchase" /></th>
+							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.date.purchase" /></th>
 							<c:set var="count" value="${count + 1}" scope="page"/>
-							<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.Total.dicount" /></th>
+							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Total.dicount" /></th>
 							<c:set var="count" value="${count + 1}" scope="page"/>
-							<th onclick="ordenaTabla(${idEst},${count})" class="text-center"><fmt:message key="label.Total.vat" /></th>
+							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Total.vat" /></th>
 							<c:set var="count" value="${count + 1}" scope="page"/>
-							<th onclick="ordenaTabla(${idEst},${count})" colspan="2" class="text-center min-width-160"><fmt:message key="label.Total.amount" /></th>
+							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" colspan="2" class="text-center min-width-160"><fmt:message key="label.Total.amount" /></th>
 							<th class="text-center"><fmt:message key="label.state" /></th>
 							<th class="extraAdmin-th"><fmt:message key="label.Extras" /></th>
 						</tr>
@@ -124,6 +124,45 @@
 			</div>
 		</div>
 	</div>
+
+		<!-- PAGINACION -->
+		<div class="row">
+			<div class="justify-content-center">
+				<c:set var="rutaAll" value="factura/filteredEstado/${idEst}/null" scope="page" /> <!-- esta es la ruta que cambia en cada página -->
+				<ul class="pagination">
+					<li<c:if test="${paginacion.primeraPagina}"> class="disabled"</c:if>>
+						<c:if test="${!paginacion.primeraPagina}">
+							<a href="<c:url value="/${rutaAll}/${paginacion.anterior}/${paginacion.registrosPorPagina}"/>">&laquo;</a>
+						</c:if>
+						<c:if test="${paginacion.primeraPagina}">
+							<span>&laquo;</span>
+						</c:if>
+					</li>
+
+					<c:set var="pagina" value="0" scope="page" />
+					<c:forEach items="${paginacion.comienzaPagina}" var="comienza">
+						<c:set var="pagina" value="${pagina + 1}" scope="page"/>
+						<li<c:if test="${comienza == paginacion.actual}"> class="disabled"</c:if>>
+							<c:if test="${comienza != paginacion.actual}">
+								<a href="<c:url value="/${rutaAll}/${comienza}/${paginacion.registrosPorPagina}"/>">${pagina}</a>
+							</c:if>
+							<c:if test="${comienza == paginacion.actual}">
+								<span>${pagina}</span>
+							</c:if>
+						</li>
+					</c:forEach>
+
+					<li<c:if test="${paginacion.ultimaPagina}"> class="disabled"</c:if>>
+						<c:if test="${!paginacion.ultimaPagina}">
+							<a href="<c:url value="/${rutaAll}/${paginacion.siguiente}/${paginacion.registrosPorPagina}"/>">&raquo;</a>
+						</c:if>
+						<c:if test="${paginacion.ultimaPagina}">
+							<span>&raquo;</span>
+						</c:if>
+					</li>
+				</ul>
+			</div>
+		</div>
 	
 	<footer>
 		<c:import url="/WEB-INF/views/importFooter.jsp" />

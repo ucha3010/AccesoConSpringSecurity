@@ -15,6 +15,7 @@ import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Factura;
 import com.damian.service.EstadoService;
 import com.damian.service.FacturaService;
+import com.damian.service.PaginacionService;
 
 @Controller
 public class FacturaController {
@@ -25,11 +26,17 @@ public class FacturaController {
 	@Autowired
 	private EstadoService estadoService;
 
-	@RequestMapping("/factura/all/{column}")
+	@Autowired
+	private PaginacionService paginacionService;
+
+	@RequestMapping("/factura/all/{column}/{paginaInicio}/{totalPaginas}")
 	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
+			@PathVariable("paginaInicio") int paginaInicio, @PathVariable("totalPaginas") int totalPaginas,
 			HttpServletRequest request) {
-		List<Factura> facturas = facturaService.findAll(column, request);
-		modelAndView.addObject("facturas", facturas);
+		List<Factura> facturas = facturaService.findSearchAll();
+		modelAndView.addObject("facturas", facturaService.findAll(column, paginaInicio, totalPaginas, request));
+		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, "factura"));
+		modelAndView.addObject("buscarfacturas", facturas);
 		List<Factura> vencen = facturaService.selectExpire(facturas);
 		modelAndView.addObject("vencen", vencen);
 		modelAndView.addObject("estados", estadoService.findAll());
@@ -38,10 +45,22 @@ public class FacturaController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/factura/filteredEstado/{idEst}/{column}")
+	@RequestMapping("/factura/filtered/{idFac}")
+	public ModelAndView getFiltered(ModelAndView modelAndView, @PathVariable("idFac") int idFac) {
+		modelAndView.addObject("facturas", facturaService.findByIdList(idFac));
+		modelAndView.addObject("paginacion", paginacionService.pagination(0, 0, "factura"));
+		modelAndView.addObject("buscarfacturas", facturaService.findSearchAll());
+		modelAndView.addObject("estoy", "factura");
+		modelAndView.setViewName("facturas");
+		return modelAndView;
+	}
+
+	@RequestMapping("/factura/filteredEstado/{idEst}/{column}/{paginaInicio}/{totalPaginas}")
 	public ModelAndView getFilteredEstado(ModelAndView modelAndView, @PathVariable("idEst") int idEst,
-			@PathVariable("column") String column, HttpServletRequest request) {
+			@PathVariable("column") String column,
+			@PathVariable("paginaInicio") int paginaInicio, @PathVariable("totalPaginas") int totalPaginas, HttpServletRequest request) {
 		modelAndView.addObject("facturas", facturaService.findByIdEstList(idEst, column, request));
+		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, "factura"));
 		modelAndView.addObject("estados", estadoService.findAll());
 		modelAndView.addObject("idEst", idEst);
 		modelAndView.addObject("estoy", "filteredEstado");
@@ -65,26 +84,28 @@ public class FacturaController {
 
 		try {
 			int cantidad = facturaService.delete(idFac);
-			if(cantidad == 0) {
-				ra.addFlashAttribute("factura_stock_negativo", "factura_stock_negativo");				
+			if (cantidad == 0) {
+				ra.addFlashAttribute("factura_stock_negativo", "factura_stock_negativo");
 			} else {
 				ra.addFlashAttribute("factura_eliminado", "factura_eliminado");
 			}
 		} catch (NotEmptyException e) {
 			ra.addFlashAttribute("factura_asociado", "factura_asociado");
 		}
-		return "redirect:/factura/all/null";
+		return "redirect:/factura/all/null/0/100";
 
 	}
 
-	@RequestMapping("/factura/status/{idFac}/{idEst}/{column}")
+	@RequestMapping("/factura/status/{idFac}/{idEst}/{column}/{paginaInicio}/{totalPaginas}")
 	public ModelAndView changeStatus(ModelAndView modelAndView, @PathVariable("idFac") int idFac,
-			@PathVariable("idEst") int idEst, @PathVariable("column") String column, HttpServletRequest request) {
+			@PathVariable("idEst") int idEst, @PathVariable("column") String column,
+			@PathVariable("paginaInicio") int paginaInicio, @PathVariable("totalPaginas") int totalPaginas,
+			HttpServletRequest request) {
 		Factura factura = new Factura();
 		factura = facturaService.findById(idFac);
 		factura.getEstado().setIdEst(idEst);
 		facturaService.update(factura, request);
-		return getAll(modelAndView, column, request);
+		return getAll(modelAndView, column, paginaInicio, totalPaginas, request);
 	}
 
 }

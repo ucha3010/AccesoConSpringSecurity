@@ -23,15 +23,36 @@
 			}
 			return false;
 		}
-		function actualizaEstado(idFac) {
+		function actualizaEstado(idFac, numPagina, cantRegistros) {
 			var valSelected = document.getElementById("estadoId" + idFac);
-			var url = "<c:url value='/factura/status/"+idFac+"/" + valSelected.value + "/null' />";
+			var url = "<c:url value='/factura/status/"+idFac+"/" + valSelected.value + "/null/" + numPagina + "/" + cantidadRegistros + "' />";
 			location.href=url;
 		}
-		function ordenaTabla(numCol){
+		function ordenaTabla(numCol,actual,total){
 			var columnas = ['idFac','compra','fechaCompra','descuentoTotal','ivaTotal','importeFront'];
-			var url = "<c:url value='/factura/all/"+columnas[numCol]+"' />";
+			var url = "<c:url value='/factura/all/"+columnas[numCol]+"/"+actual+"/"+total+"' />";
 			location.href=url;			
+		}
+		function filtrar() {		
+			const resultado = document.querySelector('#resultado');
+			const texto = normalizado(formulario.value.toLowerCase());
+			resultado.innerHTML = '';
+			if(texto === ''){
+				$(".collapse").collapse('hide');
+			} else {
+				<c:forEach items="${buscarfacturas}" var="fac" varStatus="status">
+					var idNum = ${fac.idFac};
+					var idString = idNum.toString();
+					var fecha = ${fac.fechaCompra};
+					var fechaString = fecha.toString();
+					var importeNum = ${fac.importeFront};
+					var importeString = importeNum.toString();
+					if(importeString.indexOf(texto) !== -1 || idString.indexOf(texto) !== -1 || fechaString.indexOf(texto) !== -1){
+						resultado.innerHTML += "<a href=\"<c:url value='/factura/filtered/${fac.idFac}' />\">${fac.idFac} ${fac.fechaCompra} ${fac.importeFront}</a>";
+					}
+				</c:forEach>
+				$(".collapse").collapse('show');
+			}
 		}
 		
 		function imprimirId(id){
@@ -61,6 +82,17 @@
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<div class="row">
 			<div class="hidden-xs col-sm-3">
+				<input type="text" id="formulario" class="form-control">
+				<script>
+					const formulario = document.querySelector('#formulario');
+					formulario.addEventListener('keyup', filtrar);
+				</script>
+			</div>
+			<div class="hidden-xs col-sm-3">
+				<div class="dropdown collapse">
+					<div class="dropdown-content" id="resultado">
+					</div>
+				</div>
 			</div>
 			<div class="col-xs-12 col-sm-3">
 				<c:if test="${not empty factura_eliminado}">
@@ -83,8 +115,6 @@
 				<c:if test="${not empty vencen}">
 					<a href="#ventanaVencenXs" class="btn btn-danger btn-lg" data-toggle="modal"><fmt:message key='label.Bill.next.days' /></a>
 				</c:if>
-			</div>
-			<div class="hidden-xs col-sm-3">
 			</div>		
 		</div>
 		<div class="divTablaSinScroll">
@@ -95,17 +125,17 @@
 						<sec:authorize access="hasAnyRole('ROL_ROOT')">
 							<th></th>
 						</sec:authorize>
-						<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.Bill.id" /></th>
+						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Bill.id" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.Purchase.Sale" /></th>
+						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Purchase.Sale" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.Date" /></th>
+						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Date" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.Total.dicount" /></th>
+						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Total.dicount" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count})" class="text-center"><fmt:message key="label.Total.vat" /></th>
+						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Total.vat" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count})" colspan="2" class="text-center min-width-160"><fmt:message key="label.Total.amount" /></th>
+						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})" colspan="2" class="text-center min-width-160"><fmt:message key="label.Total.amount" /></th>
 						<th class="text-center"><fmt:message key="label.state" /></th>
 						<th class="extraAdmin-th"><fmt:message key="label.Extras" /></th>
 					</tr>
@@ -134,7 +164,7 @@
 							<td class="width-15"></td>
 							<td>
 								<fmt:message key="label.state.column.name" var="itemSelect"/>
-								<select name="factura.estado.idEst" class="border-radius-dam" id="estadoId${factura.idFac}" onchange="actualizaEstado(${factura.idFac})">
+								<select name="factura.estado.idEst" class="border-radius-dam" id="estadoId${factura.idFac}" onchange="actualizaEstado(${factura.idFac},${paginacion.actual},${paginacion.registrosPorPagina})">
 									<c:forEach items="${estados}" var="est">
 										<option value="${est.idEst}" <c:if test="${factura.estado.idEst == est.idEst}">selected</c:if>>
 											<c:out value="${est[nameColSelect]}" />
@@ -270,6 +300,45 @@
 					</div>
 					
 				</div>
+			</div>
+		</div>
+
+		<!-- PAGINACION -->
+		<div class="row">
+			<div class="justify-content-center">
+				<c:set var="rutaAll" value="factura/all/null" scope="page" /> <!-- esta es la ruta que cambia en cada página -->
+				<ul class="pagination">
+					<li<c:if test="${paginacion.primeraPagina}"> class="disabled"</c:if>>
+						<c:if test="${!paginacion.primeraPagina}">
+							<a href="<c:url value="/${rutaAll}/${paginacion.anterior}/${paginacion.registrosPorPagina}"/>">&laquo;</a>
+						</c:if>
+						<c:if test="${paginacion.primeraPagina}">
+							<span>&laquo;</span>
+						</c:if>
+					</li>
+
+					<c:set var="pagina" value="0" scope="page" />
+					<c:forEach items="${paginacion.comienzaPagina}" var="comienza">
+						<c:set var="pagina" value="${pagina + 1}" scope="page"/>
+						<li<c:if test="${comienza == paginacion.actual}"> class="disabled"</c:if>>
+							<c:if test="${comienza != paginacion.actual}">
+								<a href="<c:url value="/${rutaAll}/${comienza}/${paginacion.registrosPorPagina}"/>">${pagina}</a>
+							</c:if>
+							<c:if test="${comienza == paginacion.actual}">
+								<span>${pagina}</span>
+							</c:if>
+						</li>
+					</c:forEach>
+
+					<li<c:if test="${paginacion.ultimaPagina}"> class="disabled"</c:if>>
+						<c:if test="${!paginacion.ultimaPagina}">
+							<a href="<c:url value="/${rutaAll}/${paginacion.siguiente}/${paginacion.registrosPorPagina}"/>">&raquo;</a>
+						</c:if>
+						<c:if test="${paginacion.ultimaPagina}">
+							<span>&raquo;</span>
+						</c:if>
+					</li>
+				</ul>
 			</div>
 		</div>
 		

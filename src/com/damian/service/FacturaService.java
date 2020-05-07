@@ -9,7 +9,7 @@ import com.damian.pojo.Factura;
 
 public interface FacturaService {
 
-	public List<Factura> findAll(String column, HttpServletRequest request);
+	public List<Factura> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request);
 
 	public Factura findById(int id);
 
@@ -32,5 +32,7 @@ public interface FacturaService {
 	public List<Factura> findByIdCuo(int idCuo);
 
 	public List<Factura> selectExpire(List<Factura> facturas);
+
+	public List<Factura> findSearchAll();
 
 }

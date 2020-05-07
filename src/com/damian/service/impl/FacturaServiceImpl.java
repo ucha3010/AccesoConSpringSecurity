@@ -52,8 +52,8 @@ public class FacturaServiceImpl implements FacturaService {
 	private ProductoFacturaDAO productoFacturaDAO;
 
 	@Override
-	public List<Factura> findAll(String column, HttpServletRequest request) {
-		List<Factura> facturas = facturaDAO.findAll(column, request);
+	public List<Factura> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request) {
+		List<Factura> facturas = facturaDAO.findAll(column, paginaInicio, totalPaginas, request);
 		for (Factura factura : facturas) {
 			Estado estado = estadoDAO.findByIdModel(factura.getEstado().getIdEst());
 			FormaPago formaPago = formaPagoDAO.findById(factura.getFormaPago().getIdFor());
@@ -191,6 +191,11 @@ public class FacturaServiceImpl implements FacturaService {
 			}
 		}
 		return facturasVencen;
+	}
+
+	@Override
+	public List<Factura> findSearchAll() {
+		return facturaDAO.findSearchAll();
 	}
 
 	private void saveFacturaEstado(Factura factura, HttpServletRequest request) {
