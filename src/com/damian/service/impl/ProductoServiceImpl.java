@@ -59,8 +59,8 @@ public class ProductoServiceImpl implements ProductoService {
 	private SubcategoriaDAO subcategoriaDAO;
 
 	@Override
-	public List<Producto> findAll(String column, HttpServletRequest request) {
-		List<Producto> salida = productoDAO.findAll(column, request);
+	public List<Producto> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request) {
+		List<Producto> salida = productoDAO.findAll(column, paginaInicio, totalPaginas, request);
 		for (Producto p : salida) {
 			Subcategoria s = subcategoriaDAO.findByIdModel(p.getSubcategoria().getIdSub());
 			Categoria c = categoriaDAO.findByIdModel(s.getCategoria().getIdCat());
@@ -314,6 +314,11 @@ public class ProductoServiceImpl implements ProductoService {
 		frontProductoStock.setCompra(true);
 		frontProductoStock.setCuotas(new ArrayList<FrontCuota>());
 		return frontProductoStock;
+	}
+
+	@Override
+	public List<Producto> findSearchAll() {
+		return productoDAO.findSearchAll();
 	}
 
 }

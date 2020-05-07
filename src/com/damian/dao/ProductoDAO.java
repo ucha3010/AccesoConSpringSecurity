@@ -8,7 +8,7 @@ import com.damian.pojo.Producto;
 
 public interface ProductoDAO {
 
-	public List<Producto> findAll(String column, HttpServletRequest request);
+	public List<Producto> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request);
 
 	public Producto findById(int id);
 
@@ -25,5 +25,7 @@ public interface ProductoDAO {
 	public List<Producto> findByIdList(int id);
 
 	public int getMaxId();
+
+	public List<Producto> findSearchAll();
 
 }

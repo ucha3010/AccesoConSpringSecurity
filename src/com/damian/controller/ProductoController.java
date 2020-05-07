@@ -17,6 +17,7 @@ import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Producto;
 import com.damian.pojo.front.FrontProductoStock;
 import com.damian.service.CategoriaService;
+import com.damian.service.PaginacionService;
 import com.damian.service.ProductoService;
 
 @Controller
@@ -28,10 +29,16 @@ public class ProductoController {
 	@Autowired
 	private CategoriaService categoriaService;
 
-	@RequestMapping("/producto/all/{column}")
+	@Autowired
+	private PaginacionService paginacionService;
+
+	@RequestMapping("/producto/all/{column}/{paginaInicio}/{totalPaginas}")
 	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
+			@PathVariable("paginaInicio") int paginaInicio, @PathVariable("totalPaginas") int totalPaginas,
 			HttpServletRequest request) {
-		modelAndView.addObject("productos", productoService.findAll(column, request));
+		modelAndView.addObject("productos", productoService.findAll(column, paginaInicio, totalPaginas, request));
+		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, "producto"));
+		modelAndView.addObject("buscarproductos", productoService.findSearchAll());
 		modelAndView.addObject("estoy", "producto");
 		modelAndView.setViewName("productos");
 		return modelAndView;
@@ -40,6 +47,8 @@ public class ProductoController {
 	@RequestMapping("/producto/filtered/{idPro}")
 	public ModelAndView getFiltered(ModelAndView modelAndView, @PathVariable("idPro") int idPro) {
 		modelAndView.addObject("productos", productoService.findByIdList(idPro));
+		modelAndView.addObject("paginacion", paginacionService.pagination(0, 0, "producto"));
+		modelAndView.addObject("buscarproductos", productoService.findSearchAll());
 		modelAndView.addObject("estoy", "producto");
 		modelAndView.setViewName("productos");
 		return modelAndView;
@@ -72,7 +81,7 @@ public class ProductoController {
 		if (nueva) {
 			ra.addFlashAttribute("producto_agregado", "producto_agregado");
 		}
-		return "redirect:/producto/all/null";
+		return "redirect:/producto/all/null/0/100";
 	}
 
 	@RequestMapping("/producto/delete/{idPro}")
@@ -84,7 +93,7 @@ public class ProductoController {
 		} catch (NotEmptyException e) {
 			ra.addFlashAttribute("producto_asociado", "producto_asociado");
 		}
-		return "redirect:/producto/all/null";
+		return "redirect:/producto/all/null/0/100";
 
 	}
 
@@ -101,7 +110,7 @@ public class ProductoController {
 			BindingResult result, Model model, RedirectAttributes ra, HttpServletRequest request) {
 
 		productoService.saveProductoStock(frontProductoStock, request);
-		return "redirect:/producto/all/null";
+		return "redirect:/producto/all/null/0/100";
 	}
 
 }

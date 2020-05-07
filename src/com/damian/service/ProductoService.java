@@ -10,7 +10,7 @@ import com.damian.pojo.front.FrontProductoStock;
 
 public interface ProductoService {
 
-	public List<Producto> findAll(String column, HttpServletRequest request);
+	public List<Producto> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request);
 
 	public Producto findById(int id);
 
@@ -27,5 +27,7 @@ public interface ProductoService {
 	public void saveProductoStock(FrontProductoStock frontProductoStock, HttpServletRequest request);
 
 	public FrontProductoStock fillFrontProductoStock(Producto producto);
+
+	public List<Producto> findSearchAll();
 
 }

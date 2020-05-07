@@ -48,13 +48,14 @@ public class ProductoDAOImpl implements ProductoDAO {
 	private UsuarioOrdenDAO usuarioOrdenDAO;
 
 	@Override
-	public List<Producto> findAll(String column, HttpServletRequest request) {
+	public List<Producto> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request) {
 
 		String columnAndOrder = Utils.validateColumnAndOrder(column, null, TABLA, KEY_COLUMN, KEY_ORDER, COLUMN_ORDER,
 				request, usuarioDAO, usuarioOrdenDAO);
 
 		if (columnAndOrder != null) {
-			String sql = "SELECT * FROM " + TABLA + " ORDER BY " + columnAndOrder;
+			String sql = "SELECT * FROM " + TABLA + " ORDER BY " + columnAndOrder + " LIMIT " + paginaInicio + ","
+					+ totalPaginas;
 
 			return lista(sql);
 		} else {
@@ -156,6 +157,19 @@ public class ProductoDAOImpl implements ProductoDAO {
 	@Override
 	public int getMaxId() {
 		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
+	@Override
+	public List<Producto> findSearchAll() {
+		List<ModelProducto> mpList = jdbcTemplate.query(
+				"SELECT idPro, marca, modelo, precioVenta, nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU FROM "
+						+ TABLA,
+				BeanPropertyRowMapper.newInstance(ModelProducto.class));
+		List<Producto> pList = new ArrayList<>();
+		for (ModelProducto mp : mpList) {
+			pList.add(converterProducto.convert(mp));
+		}
+		return pList;
 	}
 
 	private List<Producto> lista(String sql) {

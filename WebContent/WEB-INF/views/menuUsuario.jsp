@@ -13,7 +13,7 @@
 								<a class="menu-style" href="<c:url value="/empresa/all/null/0/10"/>"><fmt:message key="Companies" /></a>
 							</li>
 							<li class="btn-info border-color-dam">
-								<a class="menu-style" href="<c:url value="/producto/all/null"/>"><fmt:message key="Products" /></a>
+								<a class="menu-style" href="<c:url value="/producto/all/null/0/10"/>"><fmt:message key="Products" /></a>
 							</li>
 							<li class="btn-info border-color-dam">
 								<a class="menu-style" href="<c:url value="/factura/all/null"/>"><fmt:message key="label.Bills" /></a>

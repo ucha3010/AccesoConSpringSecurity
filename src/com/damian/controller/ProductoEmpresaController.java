@@ -52,7 +52,7 @@ public class ProductoEmpresaController {
 		modelAndView.addObject("empresa", empresaService.findById(idEmp));
 		modelAndView.addObject("auxString", new AuxString());
 		modelAndView.addObject("productoEmpresas", productoEmpresaService.findByIdEmp(idEmp));
-		modelAndView.addObject("productos", productoService.findAll(column, request));
+		modelAndView.addObject("productos", productoService.findAll(column, 0, 10000, request));
 		modelAndView.setViewName("empresaProducto");
 		return modelAndView;
 	}

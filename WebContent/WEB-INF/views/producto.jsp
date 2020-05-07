@@ -200,7 +200,7 @@
 				</div>
 				<div class="col-xs-12 col-sm-8">
 					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/producto' />"'><fmt:message key="Cancel" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/producto/all/null/0/100' />"'><fmt:message key="Cancel" /></button>
 				</div>
 			</div>
 		</sf:form>
