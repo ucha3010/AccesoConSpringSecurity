@@ -95,7 +95,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public List<Usuario> findAll(String column, String order, int paginaInicio, int totalPaginas,
+	public List<Usuario> findAll(boolean customer, String column, String order, int paginaInicio, int totalPaginas,
 			HttpServletRequest request) {
 
 		String columnAndOrder = Utils.validateColumnAndOrder(column, order, TABLA, KEY_COLUMN, KEY_ORDER, COLUMN_ORDER,
@@ -103,8 +103,17 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 		if (columnAndOrder != null) {
 
-			String sql = "SELECT * FROM usuario JOIN datospersonales ON usuario.idUsr = datospersonales.datospersonales_idUsr ORDER BY "
+			String sql = null;
+			if(customer) {
+				sql = "SELECT usuario.idUsr, usuario.usuario, usuario.habilitado, usuario.fechaCreacion, datospersonales.idDatosPers, datospersonales.nombre, "
+						+ "datospersonales.apellido1, datospersonales.apellido2, datospersonales.sexo, datospersonales.fechaNacimiento, datospersonales.nacionalidad_idPais, "
+						+ "datospersonales.dni, datospersonales.email, datospersonales.telefono, datospersonales.observaciones, datospersonales.datospersonales_idUsr "
+						+ "FROM usuario, datospersonales, usuario_rol WHERE usuario.idUsr = datospersonales.datospersonales_idUsr AND usuario.idUsr = usuario_rol.idUsr "
+						+ "AND usuario_rol.idRol = 1 ORDER BY " + columnAndOrder + " LIMIT " + paginaInicio + "," + totalPaginas;
+			} else {
+				sql = "SELECT * FROM usuario JOIN datospersonales ON usuario.idUsr = datospersonales.datospersonales_idUsr ORDER BY "
 					+ columnAndOrder + " LIMIT " + paginaInicio + "," + totalPaginas;
+			}
 
 			List<Map<String, Object>> listJoin = jdbcTemplate.queryForList(sql);
 
@@ -174,8 +183,14 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public List<Usuario> findSearchAll() {
-		List<ModelUsuario> muList = jdbcTemplate.query("SELECT idUsr, usuario FROM " + TABLA,
+	public List<Usuario> findSearchAll(boolean customer) {
+		String sql = null;
+		if(customer) {
+			sql = "SELECT usuario.idUsr, usuario.usuario FROM usuario, usuario_rol WHERE usuario.idUsr = usuario_rol.idUsr AND usuario_rol.idRol = 1";
+		} else {
+			sql = "SELECT idUsr, usuario FROM " + TABLA;
+		}
+		List<ModelUsuario> muList = jdbcTemplate.query(sql,
 				BeanPropertyRowMapper.newInstance(ModelUsuario.class));
 		List<Usuario> uList = new ArrayList<>();
 		Usuario usuario = null;

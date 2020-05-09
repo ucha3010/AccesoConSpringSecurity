@@ -38,6 +38,6 @@ public interface UsuarioService {
 
 	public String getColumn(HttpServletRequest request);
 	
-	public List<Usuario> findSearchAll();
+	public List<Usuario> findSearchAll(boolean customer);
 
 }

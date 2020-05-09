@@ -12,7 +12,7 @@ public interface UsuarioDAO {
 
 	public void save(Usuario usuario);
 
-	public List<Usuario> findAll(String column, String order, int paginaInicio, int totalPaginas,
+	public List<Usuario> findAll(boolean customer, String column, String order, int paginaInicio, int totalPaginas,
 			HttpServletRequest request);
 
 	public void update(Usuario usuario);
@@ -27,6 +27,6 @@ public interface UsuarioDAO {
 
 	public int getMaxId();
 
-	public List<Usuario> findSearchAll();
+	public List<Usuario> findSearchAll(boolean customer);
 
 }

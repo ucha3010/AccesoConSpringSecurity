@@ -46,7 +46,7 @@ public class ClienteController {
 		modelAndView.addObject("roles", rolService.findAll());
 		modelAndView.addObject("usuarios", usuarioService.findCustomers(column, order, paginaInicio, totalPaginas, request));
 		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio,totalPaginas,"usuario"));
-		modelAndView.addObject("buscarusuarios", usuarioService.findSearchAll());
+		modelAndView.addObject("buscarusuarios", usuarioService.findSearchAll(true));
 		modelAndView.addObject("estoy", "cliente");
 		modelAndView.setViewName("clientes");
 		return modelAndView;
@@ -142,7 +142,7 @@ public class ClienteController {
 		modelAndView.addObject("roles", rolService.findAll());
 		modelAndView.addObject("paginacion", paginacionService.pagination(0,0,"usuario"));
 		modelAndView.addObject("estoy", "cliente");
-		modelAndView.addObject("buscarusuarios", usuarioService.findSearchAll());
+		modelAndView.addObject("buscarusuarios", usuarioService.findSearchAll(true));
 		modelAndView.setViewName("clientes");
 		return modelAndView;
 		

@@ -152,6 +152,10 @@
 	cursor: pointer;
 }
 
+.cursor-text{
+	cursor: text;
+}
+
 .d-inline-block {
 	display: inline-block;
 }

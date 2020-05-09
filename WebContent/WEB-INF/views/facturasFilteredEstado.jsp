@@ -25,7 +25,7 @@
 		}
 		function actualizaEstado(idFac) {
 			var valSelected = document.getElementById("estadoId" + idFac);
-			var url = "<c:url value='/factura/status/"+idFac+"/" + valSelected.value + "/null' />";
+			var url = "<c:url value='/factura/status/"+idFac+"/" + valSelected.value + "/null/${paginacion.actual}/${paginacion.registrosPorPagina}/facturasFilteredEstado/${idEst}	' />";
 			location.href=url;
 		}
 		function ordenaTabla(idEst,numCol,actual,total){
@@ -62,17 +62,17 @@
 							<sec:authorize access="hasAnyRole('ROL_ROOT')">
 								<th></th>
 							</sec:authorize>
-							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Bill.id" /></th>
+							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center cursor-pointer"><fmt:message key="label.Bill.id" /></th>
 							<c:set var="count" value="${count + 1}" scope="page"/>
-							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Purchase.Sale" /></th>
+							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center cursor-pointer"><fmt:message key="label.Purchase.Sale" /></th>
 							<c:set var="count" value="${count + 1}" scope="page"/>
-							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.date.purchase" /></th>
+							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center cursor-pointer"><fmt:message key="label.date.purchase" /></th>
 							<c:set var="count" value="${count + 1}" scope="page"/>
-							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Total.dicount" /></th>
+							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center cursor-pointer"><fmt:message key="label.Total.dicount" /></th>
 							<c:set var="count" value="${count + 1}" scope="page"/>
-							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Total.vat" /></th>
+							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center cursor-pointer"><fmt:message key="label.Total.vat" /></th>
 							<c:set var="count" value="${count + 1}" scope="page"/>
-							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" colspan="2" class="text-center min-width-160"><fmt:message key="label.Total.amount" /></th>
+							<th onclick="ordenaTabla(${idEst},${count},${paginacion.actual},${paginacion.registrosPorPagina})" colspan="2" class="text-center min-width-160 cursor-pointer"><fmt:message key="label.Total.amount" /></th>
 							<th class="text-center"><fmt:message key="label.state" /></th>
 							<th class="extraAdmin-th"><fmt:message key="label.Extras" /></th>
 						</tr>

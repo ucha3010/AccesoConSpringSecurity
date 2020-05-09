@@ -25,7 +25,7 @@
 		}
 		function actualizaEstado(idFac, numPagina, cantRegistros) {
 			var valSelected = document.getElementById("estadoId" + idFac);
-			var url = "<c:url value='/factura/status/"+idFac+"/" + valSelected.value + "/null/" + numPagina + "/" + cantidadRegistros + "' />";
+			var url = "<c:url value='/factura/status/"+idFac+"/" + valSelected.value + "/null/" + numPagina + "/" + cantRegistros + "/facturas/0' />";
 			location.href=url;
 		}
 		function ordenaTabla(numCol,actual,total){
@@ -43,12 +43,12 @@
 				<c:forEach items="${buscarfacturas}" var="fac" varStatus="status">
 					var idNum = ${fac.idFac};
 					var idString = idNum.toString();
-					var fecha = ${fac.fechaCompra};
-					var fechaString = fecha.toString();
+					var d = new Date("${fac.fechaCompra}");
+					var fechaString = ddmmyyyy(d);
 					var importeNum = ${fac.importeFront};
 					var importeString = importeNum.toString();
 					if(importeString.indexOf(texto) !== -1 || idString.indexOf(texto) !== -1 || fechaString.indexOf(texto) !== -1){
-						resultado.innerHTML += "<a href=\"<c:url value='/factura/filtered/${fac.idFac}' />\">${fac.idFac} ${fac.fechaCompra} ${fac.importeFront}</a>";
+						resultado.innerHTML += "<a href=\"<c:url value='/factura/filtered/${fac.idFac}' />\"><fmt:message key="label.Bill.id" />: ${fac.idFac} // <fmt:message key='label.Date' />: "+fechaString+" // <fmt:message key='label.Total.amount' />: ${fac.importeFront}</a>";
 					}
 				</c:forEach>
 				$(".collapse").collapse('show');
@@ -123,21 +123,21 @@
 					<tr class="cursor-pointer">
 						<c:set var="count" value="0" scope="page" />
 						<sec:authorize access="hasAnyRole('ROL_ROOT')">
-							<th></th>
+							<th class="cursor-text"></th>
 						</sec:authorize>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Bill.id" /></th>
+						<th <c:if test="${facturas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if> class="text-center"><fmt:message key="label.Bill.id" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Purchase.Sale" /></th>
+						<th <c:if test="${facturas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if> class="text-center"><fmt:message key="label.Purchase.Sale" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Date" /></th>
+						<th <c:if test="${facturas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if> class="text-center"><fmt:message key="label.Date" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Total.dicount" /></th>
+						<th <c:if test="${facturas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if> class="text-center"><fmt:message key="label.Total.dicount" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.Total.vat" /></th>
+						<th <c:if test="${facturas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if> class="text-center"><fmt:message key="label.Total.vat" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})" colspan="2" class="text-center min-width-160"><fmt:message key="label.Total.amount" /></th>
-						<th class="text-center"><fmt:message key="label.state" /></th>
-						<th class="extraAdmin-th"><fmt:message key="label.Extras" /></th>
+						<th <c:if test="${facturas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if> colspan="2" class="text-center min-width-160"><fmt:message key="label.Total.amount" /></th>
+						<th class="text-center cursor-text"><fmt:message key="label.state" /></th>
+						<th class="extraAdmin-th cursor-text"><fmt:message key="label.Extras" /></th>
 					</tr>
 				</thead>
 				<tbody>

@@ -133,7 +133,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public List<Usuario> findAll(String column, String order, int paginaInicio, int totalPaginas,
 			HttpServletRequest request) {
-		return usuarioDAO.findAll(column, order, paginaInicio, totalPaginas, request);
+		return usuarioDAO.findAll(false, column, order, paginaInicio, totalPaginas, request);
 	}
 
 	@Override
@@ -169,7 +169,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public List<Usuario> findCustomers(String column, String order, int paginaInicio, int totalPaginas,
 			HttpServletRequest request) {
-		List<Usuario> usuarios = usuarioDAO.findAll(column, order, paginaInicio, totalPaginas, request);
+		List<Usuario> usuarios = usuarioDAO.findAll(true, column, order, paginaInicio, totalPaginas, request);
 		List<Usuario> clientes = new ArrayList<>();
 		for (Usuario usuario : usuarios) {
 			List<UsuarioRol> roles = usuario.getUsuarioRol();
@@ -232,8 +232,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public List<Usuario> findSearchAll() {
-		return usuarioDAO.findSearchAll();
+	public List<Usuario> findSearchAll(boolean customer) {
+		return usuarioDAO.findSearchAll(customer);
 	}
 
 	private void eliminarRolesNoSeleccionados(String[] usuarioRol, Usuario usuario) {

@@ -116,20 +116,20 @@
 					<tr class="cursor-pointer">
 						<c:set var="count" value="0" scope="page" />
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-							<th class="extraAdmin-th"></th>
+							<th class="extraAdmin-th cursor-text"></th>
 						</sec:authorize>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.Product.description" /></th>
+						<th <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Product.description" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})" class="text-center"><fmt:message key="label.state" /></th>
+						<th <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if> class="text-center"><fmt:message key="label.state" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.brand" /></th>
+						<th <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.brand" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.model" /></th>
+						<th <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.model" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th colspan="2" class="text-center min-width-160" onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.salePrice" /></th>
+						<th colspan="2" class="text-center min-width-160" <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.salePrice" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th class="text-center" onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.units" /></th>
-						<th class="extraAdmin-th"><fmt:message key="label.Extras" /></th>
+						<th class="text-center" <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.units" /></th>
+						<th class="extraAdmin-th cursor-text"><fmt:message key="label.Extras" /></th>
 					</tr>
 				</thead>
 				<tbody>

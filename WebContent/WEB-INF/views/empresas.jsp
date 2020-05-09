@@ -113,18 +113,18 @@
 					<tr class="cursor-pointer">
 						<c:set var="count" value="0" scope="page" />
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-							<th class="extraAdmin-th"></th>
+							<th class="extraAdmin-th cursor-text"></th>
 						</sec:authorize>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.Company.name" /></th>
+						<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Company.name" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.vat" /></th>
+						<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.vat" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.Email" /></th>
+						<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Email" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.Phone" /></th>
+						<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Phone" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"><fmt:message key="label.Fax" /></th>
-						<th class="extraAdmin-th"><fmt:message key="label.Extras" /></th>
+						<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Fax" /></th>
+						<th class="extraAdmin-th cursor-text"><fmt:message key="label.Extras" /></th>
 					</tr>
 				</thead>
 				<tbody>

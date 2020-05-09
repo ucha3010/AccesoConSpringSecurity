@@ -50,6 +50,7 @@ public class FacturaController {
 		modelAndView.addObject("facturas", facturaService.findByIdList(idFac));
 		modelAndView.addObject("paginacion", paginacionService.pagination(0, 0, "factura"));
 		modelAndView.addObject("buscarfacturas", facturaService.findSearchAll());
+		modelAndView.addObject("estados", estadoService.findAll());
 		modelAndView.addObject("estoy", "factura");
 		modelAndView.setViewName("facturas");
 		return modelAndView;
@@ -96,16 +97,21 @@ public class FacturaController {
 
 	}
 
-	@RequestMapping("/factura/status/{idFac}/{idEst}/{column}/{paginaInicio}/{totalPaginas}")
+	@RequestMapping("/factura/status/{idFac}/{idEst}/{column}/{paginaInicio}/{totalPaginas}/{from}/{idEstView}")
 	public ModelAndView changeStatus(ModelAndView modelAndView, @PathVariable("idFac") int idFac,
 			@PathVariable("idEst") int idEst, @PathVariable("column") String column,
 			@PathVariable("paginaInicio") int paginaInicio, @PathVariable("totalPaginas") int totalPaginas,
-			HttpServletRequest request) {
+			@PathVariable("from") String from, @PathVariable("idEstView") int idEstView, HttpServletRequest request) {
 		Factura factura = new Factura();
 		factura = facturaService.findById(idFac);
 		factura.getEstado().setIdEst(idEst);
 		facturaService.update(factura, request);
-		return getAll(modelAndView, column, paginaInicio, totalPaginas, request);
+		if(from != null && from.equalsIgnoreCase("facturasFilteredEstado")) {
+			return getFilteredEstado(modelAndView, idEstView, column, paginaInicio, totalPaginas, request);
+		} else {
+			return getAll(modelAndView, column, paginaInicio, totalPaginas, request);
+		}
+		
 	}
 
 }
