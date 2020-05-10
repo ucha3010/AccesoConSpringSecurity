@@ -1,19 +1,34 @@
 package com.damian.service.impl;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.damian.dao.CategoriaDAO;
 import com.damian.dao.ProductoEmpresaDAO;
+import com.damian.dao.SubcategoriaDAO;
+import com.damian.pojo.Categoria;
+import com.damian.pojo.Empresa;
+import com.damian.pojo.Producto;
 import com.damian.pojo.ProductoEmpresa;
+import com.damian.pojo.Subcategoria;
 import com.damian.service.ProductoEmpresaService;
 
 @Service
 public class ProductoEmpresaServiceImpl implements ProductoEmpresaService {
 
 	@Autowired
+	private CategoriaDAO categoriaDAO;
+
+	@Autowired
 	private ProductoEmpresaDAO productoEmpresaDAO;
+
+	@Autowired
+	private SubcategoriaDAO subcategoriaDAO;
 
 	@Override
 	public List<ProductoEmpresa> findAll() {
@@ -21,7 +36,19 @@ public class ProductoEmpresaServiceImpl implements ProductoEmpresaService {
 	}
 
 	@Override
-	public void save(ProductoEmpresa productoEmpresa) {
+	public void save(int idPro, int idEmp, HttpServletRequest request) {
+
+		Producto producto = new Producto();
+		producto.setIdPro(idPro);
+		Empresa empresa = new Empresa();
+		empresa.setIdEmp(idEmp);
+		ProductoEmpresa productoEmpresa = new ProductoEmpresa();
+		productoEmpresa.setProducto(producto);
+		productoEmpresa.setEmpresa(empresa);
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		productoEmpresa.setCreadoPor(context.getAuthentication().getName());
+		productoEmpresa.setFechaCreacion(new Date());
 		productoEmpresaDAO.save(productoEmpresa);
 	}
 
@@ -42,7 +69,14 @@ public class ProductoEmpresaServiceImpl implements ProductoEmpresaService {
 
 	@Override
 	public List<ProductoEmpresa> findByIdEmp(int idEmp) {
-		return productoEmpresaDAO.findByIdEmp(idEmp);
+		List<ProductoEmpresa> productoEmpresas = productoEmpresaDAO.findByIdEmp(idEmp);
+		for (ProductoEmpresa pe : productoEmpresas) {
+			Subcategoria s = subcategoriaDAO.findByIdModel(pe.getProducto().getSubcategoria().getIdSub());
+			Categoria c = categoriaDAO.findByIdModel(s.getCategoria().getIdCat());
+			s.setCategoria(c);
+			pe.getProducto().setSubcategoria(s);
+		}
+		return productoEmpresas;
 	}
 
 	@Override

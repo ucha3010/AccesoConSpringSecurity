@@ -51,6 +51,7 @@
 					</sf:form>	
 				</div>
 			</div>
+			<br>
 		</sec:authorize>
 		<div class="row">
 			<div class="hidden-xs col-sm-3">

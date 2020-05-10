@@ -11,31 +11,32 @@
 
 <html>
 <head>
-	<title><fmt:message key="Companies" /></title>
+	<title><fmt:message key="Products" /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 </head>
 <body>
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
-		<div class="well well-sm text-center h2"><c:out value="${producto[nameColSelect]}"></c:out></div>
+		<div class="well well-sm text-center h2"><c:out value="${empresa.nombreComercial}"></c:out></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">		
 				<div class="hidden-xs col-sm-3">
 				</div>
 				<div class="col-xs-12 col-sm-9">
-					<sf:form method="post" action="${pageContext.request.contextPath}/productoEmpresa/producto/save/${producto.idPro}" modelAttribute="auxString">
+					<sf:form method="post" action="${pageContext.request.contextPath}/productoEmpresa/empresa/save/${empresa.idEmp}" modelAttribute="auxString">
 						<div class="p-4">
 				        	<sf:select path="campo" class="form-control-dam">
-				        		<c:forEach items="${empresas}" var="empresa">
-				            		<sf:option value="${empresa.idEmp}" label="${empresa.nombreComercial}"/>
+				        		<c:forEach items="${productos}" var="producto">
+				        			<c:set var="nombreProducto" value="${producto[nameColSelect]}" scope="page"/>
+				            		<sf:option value="${producto.idPro}" label="${nombreProducto}"/>
 				            	</c:forEach>
 				        	</sf:select>
 							<button type="submit" class="btn fondo-c0c0c0 border-color-dam">
-								<fmt:message key="Add.company" />
+								<fmt:message key="Add.product" />
 							</button>
 							<c:if test="${error}">
-								<span><fmt:message key="label.Company.already.asigned" /></span>
+								<span><fmt:message key="label.Product.already.asigned" /></span>
 							</c:if>
 						</div>
 					</sf:form>	
@@ -50,14 +51,14 @@
 				<div class="divTablaSinScroll">
 					<table class="table table-striped">
 						<c:forEach items="${productoEmpresas}" var="productoEmpresa">
-						    <tr class="border-1px-ddd" title='<fmt:message key="label.vat" />: <c:out value="${productoEmpresa.empresa.cif}" />&#xA;<fmt:message key="label.Email" />: <c:out value="${productoEmpresa.empresa.email}" />&#xA;<fmt:message key="label.Phone" />: <c:out value="${productoEmpresa.empresa.telefono}" />'>
+					    	<tr title='<fmt:message key="label.state" />: <fmt:message key="${productoEmpresa.producto.estado}" />&#xA;<fmt:message key="label.brand" />: <c:out value="${productoEmpresa.producto.marca}" />&#xA;<fmt:message key="label.model" />: <c:out value="${productoEmpresa.producto.modelo}" />&#xA;<fmt:message key="label.salePrice" />: <fmt:formatNumber type="currency" value="${productoEmpresa.producto.precioVenta}" />&#xA;<fmt:message key="label.units" />: <c:out value="${productoEmpresa.producto.unidades}" />&#xA;<fmt:message key="label.Category" />: <c:out value="${productoEmpresa.producto.subcategoria.categoria[nameColSelect]}" />&#xA;<fmt:message key="label.Subcategory" />: <c:out value="${productoEmpresa.producto.subcategoria[nameColSelect]}" />'>
 								<td class="extraAdmin-td">
-									<a title="<fmt:message key="Companies" />" onclick='location.href="<c:url value='/empresa/filtered/${productoEmpresa.empresa.idEmp}' />"'>
-										<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
+									<a title="<fmt:message key="Companies" />" onclick='location.href="<c:url value='/producto/filtered/${productoEmpresa.producto.idPro}' />"'>
+										<img src='<c:url value="/resources/imgs/productos.png"/>' class="tamanio_imagen">
 									</a>
 								</td>
 						    	<td>
-							    	<c:out value="${productoEmpresa.empresa.nombreComercial}" />
+							    	<c:out value="${productoEmpresa.producto[nameColSelect]}" />
 						    	</td>
 						    </tr>
 						</c:forEach>

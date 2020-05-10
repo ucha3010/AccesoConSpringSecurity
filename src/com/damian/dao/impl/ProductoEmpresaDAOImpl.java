@@ -55,17 +55,17 @@ public class ProductoEmpresaDAOImpl implements ProductoEmpresaDAO {
 
 	@Override
 	public void save(ProductoEmpresa productoEmpresa) {
-		ModelProductoEmpresa mpe = converterProductoEmpresa.convert(productoEmpresa);
 		String sql = "INSERT INTO " + TABLA + " (idPro, idEmp, fechaCreacion, creadoPor)" + " VALUES (?, ?, ?, ?)";
-		jdbcTemplate.update(sql, mpe.getIdPro(), mpe.getIdEmp(), mpe.getFechaCreacion(), mpe.getCreadoPor());
+		jdbcTemplate.update(sql, productoEmpresa.getProducto().getIdPro(), productoEmpresa.getEmpresa().getIdEmp(),
+				productoEmpresa.getFechaCreacion(), productoEmpresa.getCreadoPor());
 	}
 
 	@Override
 	public void update(ProductoEmpresa productoEmpresa) {
-		ModelProductoEmpresa mpe = converterProductoEmpresa.convert(productoEmpresa);
 		String sql = "UPDATE " + TABLA + " SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
 				+ "=?";
-		jdbcTemplate.update(sql, mpe.getFechaCreacion(), mpe.getCreadoPor(), mpe.getIdPro(), mpe.getIdEmp());
+		jdbcTemplate.update(sql, productoEmpresa.getFechaCreacion(), productoEmpresa.getCreadoPor(),
+				productoEmpresa.getProducto().getIdPro(), productoEmpresa.getEmpresa().getIdEmp());
 	}
 
 	@Override

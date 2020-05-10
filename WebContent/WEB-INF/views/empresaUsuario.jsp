@@ -28,9 +28,7 @@
 <body>
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div>
-			<h2><fmt:message key="label.users.belong" /> <c:out value="${empresa.nombreComercial}" /></h2>
-		</div>
+		<div class="well well-sm text-center h2"><fmt:message key="label.users.belong" /> <c:out value="${empresa.nombreComercial}" /></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">		
 				<div class="hidden-xs col-sm-3">
@@ -54,6 +52,7 @@
 					</sf:form>	
 				</div>
 			</div>
+			<br>
 		</sec:authorize>
 		<div class="row">
 			<div class="hidden-xs col-sm-3">

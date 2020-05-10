@@ -61,13 +61,7 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public List<Producto> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request) {
 		List<Producto> salida = productoDAO.findAll(column, paginaInicio, totalPaginas, request);
-		for (Producto p : salida) {
-			Subcategoria s = subcategoriaDAO.findByIdModel(p.getSubcategoria().getIdSub());
-			Categoria c = categoriaDAO.findByIdModel(s.getCategoria().getIdCat());
-			s.setCategoria(c);
-			p.setSubcategoria(s);
-		}
-		return salida;
+		return fillCategoriaYSubcategoria(salida);
 	}
 
 	@Override
@@ -108,7 +102,8 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Override
 	public List<Producto> findByIdList(int id) {
-		return productoDAO.findByIdList(id);
+		List<Producto> salida = productoDAO.findByIdList(id);
+		return fillCategoriaYSubcategoria(salida);
 	}
 
 	@Override
@@ -280,23 +275,6 @@ public class ProductoServiceImpl implements ProductoService {
 
 	}
 
-	private void rellenaFacturaComun(Factura factura, FrontProductoStock frontProductoStock,
-			BigDecimal precioUnitConIva, BigDecimal precioUnitSinIva,
-			org.springframework.security.core.context.SecurityContextImpl context) {
-
-		factura.setCompra(frontProductoStock.isCompra());
-		factura.setIvaTotal(frontProductoStock.getIva());
-		factura.setObservaciones(frontProductoStock.getObservaciones());
-		factura.setFormaPago(new FormaPago(Constantes.MOVIMIENTO_STOCK, null, null));
-		factura.setCreadoPor(context.getAuthentication().getName());
-		if (frontProductoStock.isCompra()) {
-			factura.setEstado(new Estado(Constantes.AGREGAR_STOCK, null, null));
-		} else {
-			factura.setEstado(new Estado(Constantes.QUITAR_STOCK, null, null));
-		}
-
-	}
-
 	@Override
 	public FrontProductoStock fillFrontProductoStock(Producto producto) {
 
@@ -319,6 +297,33 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public List<Producto> findSearchAll() {
 		return productoDAO.findSearchAll();
+	}
+
+	private void rellenaFacturaComun(Factura factura, FrontProductoStock frontProductoStock,
+			BigDecimal precioUnitConIva, BigDecimal precioUnitSinIva,
+			org.springframework.security.core.context.SecurityContextImpl context) {
+
+		factura.setCompra(frontProductoStock.isCompra());
+		factura.setIvaTotal(frontProductoStock.getIva());
+		factura.setObservaciones(frontProductoStock.getObservaciones());
+		factura.setFormaPago(new FormaPago(Constantes.MOVIMIENTO_STOCK, null, null));
+		factura.setCreadoPor(context.getAuthentication().getName());
+		if (frontProductoStock.isCompra()) {
+			factura.setEstado(new Estado(Constantes.AGREGAR_STOCK, null, null));
+		} else {
+			factura.setEstado(new Estado(Constantes.QUITAR_STOCK, null, null));
+		}
+
+	}
+
+	private List<Producto> fillCategoriaYSubcategoria(List<Producto> salida) {
+		for (Producto p : salida) {
+			Subcategoria s = subcategoriaDAO.findByIdModel(p.getSubcategoria().getIdSub());
+			Categoria c = categoriaDAO.findByIdModel(s.getCategoria().getIdCat());
+			s.setCategoria(c);
+			p.setSubcategoria(s);
+		}
+		return salida;
 	}
 
 }

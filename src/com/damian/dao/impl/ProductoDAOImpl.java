@@ -72,7 +72,7 @@ public class ProductoDAOImpl implements ProductoDAO {
 			@Override
 			public Producto extractData(ResultSet rs) throws SQLException, DataAccessException {
 				if (rs.next()) {
-					return converterProducto.convertAll(mapeo(rs));
+					return converterProducto.convert(mapeo(rs));
 				}
 
 				return null;

@@ -152,7 +152,7 @@
 						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 							<th class="cursor-text"><fmt:message key="label.Roles" /></th>
 						</sec:authorize>
-						<th class="text-center extraAdmin-th cursor-text"><fmt:message key="label.Extras" /></th>
+						<th class="extraAdmin-th cursor-text"><fmt:message key="label.Extras" /></th>
 					</tr>
 				</thead>
 				<tbody>

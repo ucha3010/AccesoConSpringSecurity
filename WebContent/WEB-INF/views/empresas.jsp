@@ -152,6 +152,9 @@
 								<a title="<fmt:message key="label.Workers" />" href='<c:url value='/usuarioEmpresa/empresa/${empresa.idEmp}' />'>
 									<img src='<c:url value="/resources/imgs/usuarios.png"/>' class="tamanio_imagen">
 								</a>
+								<a title="<fmt:message key="Products" />" href='<c:url value='/productoEmpresa/empresa/${empresa.idEmp}' />'>
+									<img src='<c:url value="/resources/imgs/productos.png"/>' class="tamanio_imagen">
+								</a>
 							</td>
 					    </tr>
 					</c:forEach>

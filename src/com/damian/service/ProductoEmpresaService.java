@@ -2,13 +2,15 @@ package com.damian.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.pojo.ProductoEmpresa;
 
 public interface ProductoEmpresaService {
 
 	public List<ProductoEmpresa> findAll();
 
-	public void save(ProductoEmpresa productoEmpresa);
+	public void save(int idPro, int idEmp, HttpServletRequest request);
 
 	public void update(ProductoEmpresa productoEmpresa);
 
