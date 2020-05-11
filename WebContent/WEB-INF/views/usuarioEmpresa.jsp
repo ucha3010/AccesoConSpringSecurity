@@ -13,7 +13,6 @@
 <head>
 	<title><fmt:message key="Companies" /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
-	
 	<script type="text/javascript">
 		function confirmDelete(idUsr,idEmp){
 			if(confirm("<fmt:message key='Delete.message' />")){
@@ -28,9 +27,7 @@
 <body>
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div>
-			<h2><fmt:message key="label.companies.belongs.1" /> <c:out value="${usuario.datosPersonales.nombre}" /> <c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /> <fmt:message key="label.companies.belongs.2" /></h2>
-		</div>
+		<div class="well well-sm text-center h2"><fmt:message key="label.companies.belongs.1" /> <c:out value="${usuario.datosPersonales.nombre}" /> <c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /> <fmt:message key="label.companies.belongs.2" /></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">		
 				<div class="hidden-xs col-sm-3">
@@ -47,6 +44,9 @@
 							<c:if test="${error}">
 								<span><fmt:message key="label.Company.already.asigned" /></span>
 							</c:if>
+							<c:if test="${usuarioEmpresa_deleted}">
+								<span><fmt:message key="label.Deleted" /></span>
+							</c:if>
 						</div>
 					</sf:form>	
 				</div>
@@ -54,9 +54,9 @@
 			<br>
 		</sec:authorize>
 		<div class="row">
-			<div class="hidden-xs col-sm-3">
+			<div class="hidden-xs col-sm-1 col-md-2">
 			</div>
-			<div class="col-xs-12 col-sm-9">
+			<div class="col-xs-12 col-sm-10 col-md-8">
 				<div class="divTablaSinScroll">
 					<table class="table table-striped">
 						<tbody>
@@ -64,6 +64,9 @@
 							    <tr class="border-1px-ddd" title='<fmt:message key="label.vat" />: <c:out value="${usuarioEmpresa.empresa.cif}" />&#xA;<fmt:message key="label.Limited.company" />: <c:out value="${usuarioEmpresa.empresa.tipoSociedad}" />&#xA;<fmt:message key="label.Email" />: <c:out value="${usuarioEmpresa.empresa.email}" />&#xA;<fmt:message key="label.Phone" />: <c:out value="${usuarioEmpresa.empresa.telefono}" />&#xA;<fmt:message key="label.Fax" />: <c:out value="${usuarioEmpresa.empresa.fax}" />&#xA;<fmt:message key="label.Web.page" />: <c:out value="${usuarioEmpresa.empresa.paginaWeb}" />&#xA;<fmt:message key="label.Activity" />: <c:out value="${usuarioEmpresa.empresa.actividad}" />&#xA;<c:out value="${usuarioEmpresa.empresa.observaciones}" />'>
 									<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 										<td class="extraAdmin-td">
+											<a title="<fmt:message key="Companies" />" onclick='location.href="<c:url value='/empresa/filtered/${usuarioEmpresa.empresa.idEmp}' />"'>
+												<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
+											</a>
 											<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${usuarioEmpresa.usuario.idUsr},${usuarioEmpresa.empresa.idEmp})">
 												<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
 											</a>
@@ -77,6 +80,8 @@
 						</tbody>
 					</table>
 				</div>
+			</div>
+			<div class="hidden-xs col-sm-1 col-md-2">
 			</div>
 		</div>
 	</div>

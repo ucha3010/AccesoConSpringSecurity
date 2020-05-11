@@ -13,6 +13,16 @@
 <head>
 	<title><fmt:message key="Companies" /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
+	<script type="text/javascript">
+		function confirmDelete(idPro,idEmp){
+			if(confirm("<fmt:message key='Delete.message' />")){
+				var url = "<c:url value='/productoEmpresa/producto/delete/"+idPro+"/"+idEmp+"' />";
+				location.href=url;
+				return true;
+			}
+			return false;
+		}
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -37,6 +47,9 @@
 							<c:if test="${error}">
 								<span><fmt:message key="label.Company.already.asigned" /></span>
 							</c:if>
+							<c:if test="${productoEmpresa_deleted}">
+								<span><fmt:message key="label.Deleted" /></span>
+							</c:if>
 						</div>
 					</sf:form>	
 				</div>
@@ -54,6 +67,9 @@
 								<td class="extraAdmin-td">
 									<a title="<fmt:message key="Companies" />" onclick='location.href="<c:url value='/empresa/filtered/${productoEmpresa.empresa.idEmp}' />"'>
 										<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
+									</a>
+									<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${productoEmpresa.producto.idPro},${productoEmpresa.empresa.idEmp})">
+										<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
 									</a>
 								</td>
 						    	<td>

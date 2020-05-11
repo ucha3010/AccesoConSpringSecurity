@@ -82,7 +82,7 @@ public class ProductoEmpresaController {
 			RedirectAttributes ra) {
 
 		productoEmpresaService.delete(idPro, idEmp);
-		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
+		ra.addFlashAttribute("productoEmpresa_deleted", true);
 
 		return "redirect:/productoEmpresa/producto/" + idPro;
 
@@ -93,7 +93,7 @@ public class ProductoEmpresaController {
 			RedirectAttributes ra) {
 
 		productoEmpresaService.delete(idPro, idEmp);
-		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
+		ra.addFlashAttribute("productoEmpresa_deleted", true);
 
 		return "redirect:/productoEmpresa/empresa/" + idEmp;
 

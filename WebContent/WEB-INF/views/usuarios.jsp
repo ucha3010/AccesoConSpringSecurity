@@ -107,27 +107,6 @@
 				</div>		
 			</div>
 		</sec:authorize>
-		<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-			<div class="row">
-				<div class="hidden-xs col-sm-3 col-md-2">
-					<input type="text" id="formulario" class="form-control">
-					<script>
-						const formulario = document.querySelector('#formulario');
-						formulario.addEventListener('keyup', filtrar);
-					</script>
-				</div>
-				<div class="hidden-xs col-sm-3 col-md-6">
-					<div class="dropdown collapse">
-						<div class="dropdown-content" id="resultado">
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3 col-md-2">
-				</div>
-				<div class="col-sm-3 col-md-2  navbar-right">
-				</div>
-			</div>
-		</sec:authorize>
 		<div class="divTablaSinScroll">
 			<table class="table table-striped">
 				<thead>
@@ -202,9 +181,11 @@
 								</td>
 							</sec:authorize>
 							<td class="extraAdmin-td">
-								<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccion/${usuario.idUsr}' />'>
-									<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="tamanio_imagen">
-								</a>
+								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+									<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccion/${usuario.idUsr}' />'>
+										<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="tamanio_imagen">
+									</a>
+								</sec:authorize>
 								<a title="<fmt:message key="Companies" />" href='<c:url value='/usuarioEmpresa/usuario/${usuario.idUsr}' />'>
 									<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
 								</a>

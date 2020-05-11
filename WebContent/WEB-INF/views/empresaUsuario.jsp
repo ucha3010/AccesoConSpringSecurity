@@ -13,7 +13,6 @@
 <head>
 	<title><fmt:message key="label.Users" /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
-	
 	<script type="text/javascript">
 		function confirmDelete(idUsr,idEmp){
 			if(confirm("<fmt:message key='Delete.message' />")){
@@ -48,6 +47,9 @@
 							<c:if test="${error}">
 								<span><fmt:message key="label.User.already.asigned" /> (<c:out value="${existia}"></c:out>)</span>
 							</c:if>
+							<c:if test="${usuarioEmpresa_deleted}">
+								<span><fmt:message key="label.Deleted" /></span>
+							</c:if>
 						</div>
 					</sf:form>	
 				</div>
@@ -55,21 +57,24 @@
 			<br>
 		</sec:authorize>
 		<div class="row">
-			<div class="hidden-xs col-sm-3">
+			<div class="hidden-xs col-sm-1 col-md-2">
 			</div>
-			<div class="col-xs-12 col-sm-9">
+			<div class="col-xs-12 col-sm-10 col-md-8">
 				<div class="divTablaSinScroll">
 					<table class="table table-striped">
 						<tbody>
 							<c:forEach items="${usuarioEmpresas}" var="usuarioEmpresa">
 							    <tr class="border-1px-ddd" title='<fmt:message key="label.Birthdate" />: <fmt:formatDate value="${usuarioEmpresa.usuario.datosPersonales.fechaNacimiento}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.idcard" />: <c:out value="${usuarioEmpresa.usuario.datosPersonales.dni}" />&#xA;<fmt:message key="label.Email" />: <c:out value="${usuarioEmpresa.usuario.datosPersonales.email}" />&#xA;<fmt:message key="label.Phone" />: <c:out value="${usuarioEmpresa.usuario.datosPersonales.telefono}" />&#xA;<c:out value="${usuarioEmpresa.usuario.datosPersonales.observaciones}" />'>
-									<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-										<td class="extraAdmin-td">
+									<td class="extraAdmin-td">
+										<a title="<fmt:message key="label.Users" />" onclick='location.href="<c:url value='/usuario/filtered/${usuarioEmpresa.usuario.idUsr}' />"'>
+											<img src='<c:url value="/resources/imgs/usuarios.png"/>' class="tamanio_imagen">
+										</a>
+										<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 											<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${usuarioEmpresa.usuario.idUsr},${usuarioEmpresa.empresa.idEmp})">
 												<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
 											</a>
-										</td>
-									</sec:authorize>
+										</sec:authorize>
+									</td>
 							    	<td>
 								    	<c:out value="${usuarioEmpresa.usuario.datosPersonales.nombre}" /> <c:out value="${usuarioEmpresa.usuario.datosPersonales.apellido1}" /> <c:out value="${usuarioEmpresa.usuario.datosPersonales.apellido2}" />
 									</td>
@@ -78,6 +83,8 @@
 						</tbody>
 					</table>
 				</div>
+			</div>
+			<div class="hidden-xs col-sm-1 col-md-2">
 			</div>
 		</div>
 	</div>

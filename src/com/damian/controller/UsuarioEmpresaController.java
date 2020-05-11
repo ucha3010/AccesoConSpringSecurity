@@ -83,7 +83,7 @@ public class UsuarioEmpresaController {
 			RedirectAttributes ra) {
 
 		usuarioEmpresaService.delete(idUsr, idEmp);
-		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
+		ra.addFlashAttribute("usuarioEmpresa_deleted", true);
 
 		return "redirect:/usuarioEmpresa/usuario/" + idUsr;
 
@@ -94,7 +94,7 @@ public class UsuarioEmpresaController {
 			RedirectAttributes ra) {
 
 		usuarioEmpresaService.delete(idUsr, idEmp);
-		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
+		ra.addFlashAttribute("usuarioEmpresa_deleted", true);
 
 		return "redirect:/usuarioEmpresa/empresa/" + idEmp;
 

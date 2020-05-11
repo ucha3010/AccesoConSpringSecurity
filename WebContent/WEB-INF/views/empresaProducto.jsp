@@ -13,6 +13,16 @@
 <head>
 	<title><fmt:message key="Products" /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
+	<script type="text/javascript">
+		function confirmDelete(idPro,idEmp){
+			if(confirm("<fmt:message key='Delete.message' />")){
+				var url = "<c:url value='/productoEmpresa/empresa/delete/"+idPro+"/"+idEmp+"' />";
+				location.href=url;
+				return true;
+			}
+			return false;
+		}
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -38,6 +48,9 @@
 							<c:if test="${error}">
 								<span><fmt:message key="label.Product.already.asigned" /></span>
 							</c:if>
+							<c:if test="${productoEmpresa_deleted}">
+								<span><fmt:message key="label.Deleted" /></span>
+							</c:if>
 						</div>
 					</sf:form>	
 				</div>
@@ -50,18 +63,23 @@
 			<div class="col-xs-12 col-sm-10 col-md-8">
 				<div class="divTablaSinScroll">
 					<table class="table table-striped">
-						<c:forEach items="${productoEmpresas}" var="productoEmpresa">
-					    	<tr title='<fmt:message key="label.state" />: <fmt:message key="${productoEmpresa.producto.estado}" />&#xA;<fmt:message key="label.brand" />: <c:out value="${productoEmpresa.producto.marca}" />&#xA;<fmt:message key="label.model" />: <c:out value="${productoEmpresa.producto.modelo}" />&#xA;<fmt:message key="label.salePrice" />: <fmt:formatNumber type="currency" value="${productoEmpresa.producto.precioVenta}" />&#xA;<fmt:message key="label.units" />: <c:out value="${productoEmpresa.producto.unidades}" />&#xA;<fmt:message key="label.Category" />: <c:out value="${productoEmpresa.producto.subcategoria.categoria[nameColSelect]}" />&#xA;<fmt:message key="label.Subcategory" />: <c:out value="${productoEmpresa.producto.subcategoria[nameColSelect]}" />'>
-								<td class="extraAdmin-td">
-									<a title="<fmt:message key="Companies" />" onclick='location.href="<c:url value='/producto/filtered/${productoEmpresa.producto.idPro}' />"'>
-										<img src='<c:url value="/resources/imgs/productos.png"/>' class="tamanio_imagen">
-									</a>
-								</td>
-						    	<td>
-							    	<c:out value="${productoEmpresa.producto[nameColSelect]}" />
-						    	</td>
-						    </tr>
-						</c:forEach>
+						<tbody>
+							<c:forEach items="${productoEmpresas}" var="productoEmpresa">
+						    	<tr title='<fmt:message key="label.state" />: <fmt:message key="${productoEmpresa.producto.estado}" />&#xA;<fmt:message key="label.brand" />: <c:out value="${productoEmpresa.producto.marca}" />&#xA;<fmt:message key="label.model" />: <c:out value="${productoEmpresa.producto.modelo}" />&#xA;<fmt:message key="label.salePrice" />: <fmt:formatNumber type="currency" value="${productoEmpresa.producto.precioVenta}" />&#xA;<fmt:message key="label.units" />: <c:out value="${productoEmpresa.producto.unidades}" />&#xA;<fmt:message key="label.Category" />: <c:out value="${productoEmpresa.producto.subcategoria.categoria[nameColSelect]}" />&#xA;<fmt:message key="label.Subcategory" />: <c:out value="${productoEmpresa.producto.subcategoria[nameColSelect]}" />'>
+									<td class="extraAdmin-td">
+										<a title="<fmt:message key="Products" />" onclick='location.href="<c:url value='/producto/filtered/${productoEmpresa.producto.idPro}' />"'>
+											<img src='<c:url value="/resources/imgs/productos.png"/>' class="tamanio_imagen">
+										</a>
+										<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${productoEmpresa.producto.idPro},${productoEmpresa.empresa.idEmp})">
+											<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+										</a>
+									</td>
+							    	<td>
+								    	<c:out value="${productoEmpresa.producto[nameColSelect]}" />
+							    	</td>
+							    </tr>
+							</c:forEach>
+						</tbody>
 					</table>
 				</div>
 			</div>
