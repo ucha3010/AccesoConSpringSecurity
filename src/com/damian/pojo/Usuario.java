@@ -19,6 +19,7 @@ public class Usuario implements Serializable {
 	private List<UsuarioEmpresa> usuarioEmpresa = new ArrayList<UsuarioEmpresa>();
 	private DatosPersonales datosPersonales;
 	private boolean habilitado;
+	private List<Foto> fotos;
 	private Timestamp fechaCreacion;
 
 	public Usuario() {
@@ -154,6 +155,21 @@ public class Usuario implements Serializable {
 	}
 
 	/**
+	 * @return the fotos
+	 */
+	public List<Foto> getFotos() {
+		return fotos;
+	}
+
+	/**
+	 * @param fotos
+	 *            the fotos to set
+	 */
+	public void setFotos(List<Foto> fotos) {
+		this.fotos = fotos;
+	}
+
+	/**
 	 * @return the fechaCreacion
 	 */
 	public Timestamp getFechaCreacion() {
@@ -177,7 +193,7 @@ public class Usuario implements Serializable {
 	public String toString() {
 		return "Usuario [idUsr=" + idUsr + ", usuario=" + usuario + ", clave=" + clave + ", usuarioRol=" + usuarioRol
 				+ ", usuarioEmpresa=" + usuarioEmpresa + ", datosPersonales=" + datosPersonales + ", habilitado="
-				+ habilitado + ", fechaCreacion=" + fechaCreacion + "]";
+				+ habilitado + ", fotos=" + fotos + ", fechaCreacion=" + fechaCreacion + "]";
 	}
 
 }

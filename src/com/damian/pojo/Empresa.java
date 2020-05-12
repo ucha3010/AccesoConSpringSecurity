@@ -24,43 +24,7 @@ public class Empresa implements Serializable {
 	private List<UsuarioEmpresa> usuarioEmpresa = new ArrayList<UsuarioEmpresa>();
 	private List<DireccionEmpresa> direccionesEmpresa = new ArrayList<DireccionEmpresa>();
 	private List<ProductoEmpresa> productoEmpresaList;
-
-	public Empresa() {
-
-	}
-
-	/**
-	 * @param idEmp
-	 * @param nombreComercial
-	 * @param tipoSociedad
-	 * @param actividad
-	 * @param cif
-	 * @param email
-	 * @param paginaWeb
-	 * @param telefono
-	 * @param fax
-	 * @param observaciones
-	 * @param usuarioEmpresa
-	 * @param direccionesEmpresa
-	 * @param productoEmpresaList
-	 */
-	public Empresa(int idEmp, String nombreComercial, String tipoSociedad, String actividad, String cif, String email,
-			String paginaWeb, String telefono, String fax, String observaciones, List<UsuarioEmpresa> usuarioEmpresa,
-			List<DireccionEmpresa> direccionesEmpresa, List<ProductoEmpresa> productoEmpresaList) {
-		this.idEmp = idEmp;
-		this.nombreComercial = nombreComercial;
-		this.tipoSociedad = tipoSociedad;
-		this.actividad = actividad;
-		this.cif = cif;
-		this.email = email;
-		this.paginaWeb = paginaWeb;
-		this.telefono = telefono;
-		this.fax = fax;
-		this.observaciones = observaciones;
-		this.usuarioEmpresa = usuarioEmpresa;
-		this.direccionesEmpresa = direccionesEmpresa;
-		this.productoEmpresaList = productoEmpresaList;
-	}
+	List<Foto> fotos;
 
 	/**
 	 * @return the idEmp
@@ -257,6 +221,21 @@ public class Empresa implements Serializable {
 		this.productoEmpresaList = productoEmpresaList;
 	}
 
+	/**
+	 * @return the fotos
+	 */
+	public List<Foto> getFotos() {
+		return fotos;
+	}
+
+	/**
+	 * @param fotos
+	 *            the fotos to set
+	 */
+	public void setFotos(List<Foto> fotos) {
+		this.fotos = fotos;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -268,7 +247,7 @@ public class Empresa implements Serializable {
 				+ ", actividad=" + actividad + ", cif=" + cif + ", email=" + email + ", paginaWeb=" + paginaWeb
 				+ ", telefono=" + telefono + ", fax=" + fax + ", observaciones=" + observaciones + ", usuarioEmpresa="
 				+ usuarioEmpresa + ", direccionesEmpresa=" + direccionesEmpresa + ", productoEmpresaList="
-				+ productoEmpresaList + "]";
+				+ productoEmpresaList + ", fotos=" + fotos + "]";
 	}
 
 }

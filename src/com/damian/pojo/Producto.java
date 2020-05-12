@@ -37,53 +37,7 @@ public class Producto {
 	private List<ProductoEmpresa> productoEmpresaList;
 	private Subcategoria subcategoria;
 	private List<ProductoFactura> productoFacturaList;
-
-	public Producto() {
-
-	}
-
-	/**
-	 * @param idPro
-	 * @param nombreES
-	 * @param nombreEN
-	 * @param unidades
-	 * @param precioVenta
-	 * @param precioCompra
-	 * @param marca
-	 * @param modelo
-	 * @param serie
-	 * @param ubicacion
-	 * @param estado
-	 * @param partida
-	 * @param fechaCompra
-	 * @param enviar
-	 * @param vendible
-	 * @param mesesGarantia
-	 * @param peso
-	 * @param volumen
-	 */
-	public Producto(int idPro, String nombreES, String nombreEN, int unidades, double precioVenta, double precioCompra,
-			String marca, String modelo, String serie, String ubicacion, String estado, String partida,
-			Date fechaCompra, boolean enviar, boolean vendible, double mesesGarantia, double peso, double volumen) {
-		this.idPro = idPro;
-		this.nombreES = nombreES;
-		this.nombreEN = nombreEN;
-		this.unidades = unidades;
-		this.precioVenta = precioVenta;
-		this.precioCompra = precioCompra;
-		this.marca = marca;
-		this.modelo = modelo;
-		this.serie = serie;
-		this.ubicacion = ubicacion;
-		this.estado = estado;
-		this.partida = partida;
-		this.fechaCompra = fechaCompra;
-		this.enviar = enviar;
-		this.vendible = vendible;
-		this.mesesGarantia = mesesGarantia;
-		this.peso = peso;
-		this.volumen = volumen;
-	}
+	List<Foto> fotos;
 
 	/**
 	 * @return the idPro
@@ -490,6 +444,21 @@ public class Producto {
 		this.productoFacturaList = productoFacturaList;
 	}
 
+	/**
+	 * @return the fotos
+	 */
+	public List<Foto> getFotos() {
+		return fotos;
+	}
+
+	/**
+	 * @param fotos
+	 *            the fotos to set
+	 */
+	public void setFotos(List<Foto> fotos) {
+		this.fotos = fotos;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -502,10 +471,10 @@ public class Producto {
 				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + ", unidades=" + unidades + ", precioVenta="
 				+ precioVenta + ", precioCompra=" + precioCompra + ", marca=" + marca + ", modelo=" + modelo
 				+ ", serie=" + serie + ", ubicacion=" + ubicacion + ", estado=" + estado + ", partida=" + partida
-				+ ", fechaCompra=" + fechaCompra + ", enviar=" + enviar + ", vendible=" + vendible + ", mesesGarantia="
-				+ mesesGarantia + ", peso=" + peso + ", volumen=" + volumen + ", productoEmpresaList="
-				+ productoEmpresaList + ", subcategoria=" + subcategoria + ", productoFacturaList="
-				+ productoFacturaList + "]";
+				+ ", fechaCompra=" + fechaCompra + ", enviar=" + enviar + ", fotos=" + fotos + ", vendible=" + vendible
+				+ ", mesesGarantia=" + mesesGarantia + ", peso=" + peso + ", volumen=" + volumen
+				+ ", productoEmpresaList=" + productoEmpresaList + ", subcategoria=" + subcategoria
+				+ ", productoFacturaList=" + productoFacturaList + "]";
 	}
 
 }

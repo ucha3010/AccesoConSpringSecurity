@@ -14,6 +14,7 @@ public class Estado {
 	private String nombreCA;
 	private String nombreEU;
 	private List<Factura> facturas;
+	Foto foto;
 
 	public Estado() {
 	}
@@ -179,6 +180,21 @@ public class Estado {
 		this.facturas = facturas;
 	}
 
+	/**
+	 * @return the foto
+	 */
+	public Foto getFoto() {
+		return foto;
+	}
+
+	/**
+	 * @param foto
+	 *            the foto to set
+	 */
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -188,7 +204,7 @@ public class Estado {
 	public String toString() {
 		return "Estado [idEst=" + idEst + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", nombrePT=" + nombrePT
 				+ ", nombreFR=" + nombreFR + ", nombreIT=" + nombreIT + ", nombreGE=" + nombreGE + ", nombreCA="
-				+ nombreCA + ", nombreEU=" + nombreEU + ", facturas=" + facturas + "]";
+				+ nombreCA + ", nombreEU=" + nombreEU + ", facturas=" + facturas + ", foto=" + foto + "]";
 	}
 
 }

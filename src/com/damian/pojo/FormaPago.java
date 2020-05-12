@@ -14,6 +14,7 @@ public class FormaPago {
 	private String nombreCA;
 	private String nombreEU;
 	private List<Factura> facturas;
+	Foto foto;
 
 	public FormaPago() {
 
@@ -180,6 +181,21 @@ public class FormaPago {
 		this.facturas = facturas;
 	}
 
+	/**
+	 * @return the foto
+	 */
+	public Foto getFoto() {
+		return foto;
+	}
+
+	/**
+	 * @param foto
+	 *            the foto to set
+	 */
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -189,7 +205,8 @@ public class FormaPago {
 	public String toString() {
 		return "FormaPago [idFor=" + idFor + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", nombrePT="
 				+ nombrePT + ", nombreFR=" + nombreFR + ", nombreIT=" + nombreIT + ", nombreGE=" + nombreGE
-				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + ", facturas=" + facturas + "]";
+				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + ", facturas=" + facturas + ", foto=" + foto
+				+ "]";
 	}
 
 }

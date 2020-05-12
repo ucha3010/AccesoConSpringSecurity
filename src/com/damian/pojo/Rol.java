@@ -1,7 +1,6 @@
 package com.damian.pojo;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Rol implements Serializable {
@@ -13,7 +12,8 @@ public class Rol implements Serializable {
 
 	private int idRol;
 	private String rol;
-	private List<UsuarioRol> usuarioRol = new ArrayList<UsuarioRol>();
+	private List<UsuarioRol> usuarioRol;
+	Foto foto;
 
 	public Rol() {
 
@@ -75,6 +75,21 @@ public class Rol implements Serializable {
 		this.usuarioRol = usuarioRol;
 	}
 
+	/**
+	 * @return the foto
+	 */
+	public Foto getFoto() {
+		return foto;
+	}
+
+	/**
+	 * @param foto
+	 *            the foto to set
+	 */
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -82,6 +97,6 @@ public class Rol implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Rol [idRol=" + idRol + ", rol=" + rol + ", usuarioRol=" + usuarioRol + "]";
+		return "Rol [idRol=" + idRol + ", rol=" + rol + ", usuarioRol=" + usuarioRol + ", foto=" + foto + "]";
 	}
 }

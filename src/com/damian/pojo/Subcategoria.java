@@ -15,6 +15,7 @@ public class Subcategoria {
 	private String nombreEU;
 	private Categoria categoria;
 	private List<Producto> productos;
+	Foto foto;
 
 	public Subcategoria() {
 
@@ -211,6 +212,21 @@ public class Subcategoria {
 		this.productos = productos;
 	}
 
+	/**
+	 * @return the foto
+	 */
+	public Foto getFoto() {
+		return foto;
+	}
+
+	/**
+	 * @param foto
+	 *            the foto to set
+	 */
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -221,7 +237,7 @@ public class Subcategoria {
 		return "Subcategoria [idSub=" + idSub + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", nombrePT="
 				+ nombrePT + ", nombreFR=" + nombreFR + ", nombreIT=" + nombreIT + ", nombreGE=" + nombreGE
 				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + ", categoria=" + categoria + ", productos="
-				+ productos + "]";
+				+ productos + ", foto=" + foto + "]";
 	}
 
 }
