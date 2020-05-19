@@ -26,6 +26,13 @@ public class Pais implements Serializable {
 
 	/**
 	 * @param idPais
+	 */
+	public Pais(int idPais) {
+		this.idPais = idPais;
+	}
+
+	/**
+	 * @param idPais
 	 * @param nombreES
 	 * @param nombreEN
 	 */

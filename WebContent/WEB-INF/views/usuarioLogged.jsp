@@ -60,7 +60,10 @@
 <body>
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="label.User" /> <c:out value="${usuario.usuario}"></c:out></div>
+		<div class="well well-sm text-center h2">
+			<fmt:message key="label.User" /> <c:out value="${usuario.usuario}" /> <a onclick='location.href="<c:url value='/foto/usuarioLogged/${usuario.idUsr}' />"' class="btn btn-success"><fmt:message key="label.Pictures" /></a>
+		</div>
+
 		<sf:form method="post" action="${pageContext.request.contextPath}/usuario/logged/save" modelAttribute="usuario" onsubmit="return validar()">
 			<c:if test="${(not empty usuario.clave) && (empty username_existente)}">
 				<sf:hidden path="usuario"/>
@@ -71,6 +74,9 @@
 			</c:if>
 			<fmt:message key="Country.item.column" var="itemSelect"/>
 			<fmt:message key="Select.country" var="selectCountry" />
+
+			
+			
 			<div class="row">		
 				<div class="hidden-xs col-sm-2 col-md-3">
 				</div>
@@ -79,15 +85,44 @@
 						<fmt:message key="label.Change.password" />
 					</button>
 				</div>
-				<div class="col-xs-7 col-sm-6">
-					<c:if test="${not empty passChanged}">
-						<span style="color: green;">
-							<fmt:message key="${passChanged}" />
-						</span>
+				<div class="col-xs-3 col-sm-2 col-md-1">
+					<c:if test="${(not empty usuario.fotos)}">
+						<c:forEach items="${usuario.fotos}" var="fotoPerfil">
+							<c:if test="${fotoPerfil.principal}">
+								<a href="#foto1" class="thumbnail" data-toggle="modal">
+									<img src='<c:url value="/resources/imgs/usuarios/${usuario.idUsr}/${fotoPerfil.nombre}"/>' class="width-100">
+								</a>
+								<c:set var="fotoPrincipal" value="${fotoPerfil}" scope="page" />
+							</c:if>
+						</c:forEach>
 					</c:if>
 				</div>
 			</div>
 			<br/>
+			
+			<div class="modal fade" id="foto1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title"><img src='<c:url value="/resources/imgs/usuarios/${usuario.idUsr}/${fotoPrincipal.nombre}"/>' class="justify-content-center"></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<c:if test="${not empty passChanged}">
+				<div class="row">		
+					<div class="hidden-xs col-sm-2 col-md-3">
+					</div>
+					<div class="col-xs-12 col-sm-10 col-md-9">
+						<span style="color: green;">
+							<fmt:message key="${passChanged}" />
+						</span>
+					</div>
+				</div>
+				<br/>
+			</c:if>
 			<div class="row">		
 				<div class="hidden-xs col-sm-1">
 				</div>

@@ -23,6 +23,13 @@ public class Subcategoria {
 
 	/**
 	 * @param idSub
+	 */
+	public Subcategoria(int idSub) {
+		this.idSub = idSub;
+	}
+
+	/**
+	 * @param idSub
 	 * @param nombreES
 	 * @param nombreEN
 	 */

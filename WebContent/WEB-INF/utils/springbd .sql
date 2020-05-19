@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-05-2020 a las 14:52:42
+-- Tiempo de generación: 19-05-2020 a las 23:27:39
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 5.6.20
 
@@ -161,7 +161,7 @@ INSERT INTO `datospersonales` (`idDatosPers`, `nombre`, `apellido1`, `apellido2`
 (63, 'Felipe', 'Sexto', '', NULL, NULL, 0, '', 'sanlore@gmail.com', '', '', 81),
 (64, 'Servicío11', 'Servício', 'Ónce', 'Mujer', '1984-08-25', 0, '12345678A', 'servicio11@gmail.com', '600000011', 'Test con muchos acentos para análisis completo', 82),
 (65, 'Usuario', 'Con el Rol', 'De Usuario', 'Hombre', '1979-07-04', 2, '', 'usuario@gmail.com', '', '', 83),
-(66, 'Cliente', 'Con el Rol', 'De Cliente', 'Mujer', NULL, 3, '', 'cliente@gmail.com', '', '', 84),
+(66, 'Cliente', 'Con el Rol', 'De Cliente', 'Mujer', '1980-06-10', 3, '', 'cliente@gmail.com', '661661661', '', 84),
 (67, 'Administrador', 'Con Rol', 'Admin', 'Hombre', '1980-10-10', 6, '01234567A', 'admin@gmail.com', '600111222', 'Administrador para test', 85),
 (71, 'Capo Servicio', 'Numero', 'Diez', NULL, '1974-06-12', 0, '', 'elservicio@servicio.com', '', '', 89),
 (72, 'Virus', 'Chino', '', 'Hombre', '2019-12-20', 1, '', 'corona@vir.us', '', '', 90),
@@ -268,7 +268,11 @@ INSERT INTO `empresa` (`idEmp`, `nombreComercial`, `tipoSociedad`, `actividad`, 
 (5, 'Dupuitrago', 'SA', '', 'H88268842', 'info@dupuitrago.com', '', '', '', ''),
 (6, 'Qualisoftware', 'SL', 'Desarrollo de software', '', 'quali@software.com', '', '', '', ''),
 (8, 'Empresa borrar', 'SL', '', '', '', '', '', '', ''),
-(9, 'La prueba de la organización', 'SA', 'Ver si van todos los datos', 'E56898976', 'prueba@organizacion.com', 'www.prueba.organizacion.es', '915235236', '915235237', 'Observación de la empresa Prueba de la organización.');
+(9, 'La prueba de la organización', 'SA', 'Ver si van todos los datos', 'E56898976', 'prueba@organizacion.com', 'www.prueba.organizacion.es', '915235236', '915235237', 'Observación de la empresa Prueba de la organización.'),
+(10, 'Floristería Juana', 'SL', '', '', '', '', '', '', ''),
+(11, 'Muebles Eladio', 'SL', '', '', '', '', '', '', ''),
+(12, 'Peluquería Bernarda', 'SL', '', '', '', '', '', '', ''),
+(13, 'Maderera Soria', 'SL', '', '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -337,12 +341,12 @@ CREATE TABLE `factura` (
 INSERT INTO `factura` (`idFac`, `compra`, `ivaTotal`, `ivaImporteTotal`, `descuentoTotal`, `descuentoImporteTotal`, `importeTotal`, `fechaCompra`, `fechaEntrega`, `idEst`, `direccionEntrega`, `observaciones`, `idFor`, `creadoPor`, `idCuo`, `numeroCuota`, `interesCuotaImporte`, `importeCuotaTotal`, `cuotaConIva`, `cuotaSinIva`, `importeFront`) VALUES
 (7, 1, 10, 49.5, 0, 0, 495, '2020-01-17 20:51:06', NULL, 6, NULL, '', 4, 'admin', 0, 0, 0, 0, 0, 0, 495),
 (8, 0, 21, 50.82, 0, 0, 242, '2020-01-18 00:00:00', NULL, 7, NULL, 'Primera prueba QUITAR unidades. TV Sanyo 15 pulgadas. Saco 1 unidad. Importe 242€. IVA 21%', 4, 'admin', 0, 0, 0, 0, 0, 0, 242),
-(9, 0, 21, 42, 0, 0, 242, '2020-03-28 12:05:49', NULL, 7, NULL, '', 4, 'admin', 0, 0, 0, 0, 0, 0, 242),
+(9, 0, 21, 42, 0, 0, 242, '2020-03-28 00:00:00', NULL, 1, NULL, '', 4, 'admin', 0, 0, 0, 0, 0, 0, 242),
 (64, 1, 21, 118.93, 0, 0, 685.27, '2020-03-01 00:00:00', NULL, 6, NULL, '', 4, 'pepe', 24, 1, 0.56, 116.83, 114.21, 94.38, 116.83),
 (66, 1, 21, 0, 0, 0, 0, '2020-05-01 00:00:00', NULL, 1, NULL, '', 4, 'pepe', 24, 3, 0.56, 114.77, 114.21, 94.38, 114.77),
 (67, 1, 21, 0, 0, 0, 0, '2020-06-01 00:00:00', NULL, 8, NULL, '', 4, 'pepe', 24, 4, 0.56, 114.77, 114.21, 94.38, 114.77),
-(68, 1, 21, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 6, NULL, '', 4, 'pepe', 24, 5, 0.56, 114.77, 114.21, 94.38, 114.77),
-(69, 1, 21, 0, 0, 0, 0, '2020-08-01 00:00:00', NULL, 6, NULL, '', 4, 'pepe', 24, 6, 0.6, 114.82, 114.22, 94.39, 114.82),
+(68, 1, 21, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 8, NULL, '', 4, 'pepe', 24, 5, 0.56, 114.77, 114.21, 94.38, 114.77),
+(69, 1, 21, 0, 0, 0, 0, '2020-08-01 00:00:00', NULL, 8, NULL, '', 4, 'pepe', 24, 6, 0.6, 114.82, 114.22, 94.39, 114.82),
 (72, 1, 0, 0, 0, 0, 7, '2020-03-22 00:00:00', NULL, 3, NULL, '', 4, 'pepe', 0, 0, 0, 0, 0, 0, 7),
 (74, 1, 0, 0, 0, 0, 8, '2020-02-15 00:00:00', NULL, 8, NULL, '', 4, 'pepe', 0, 0, 0, 0, 0, 0, 8),
 (75, 0, 0, 0, 0, 0, 0, '2020-02-15 11:40:35', NULL, 7, NULL, '', 4, 'pepe', 0, 0, 0, 0, 0, 0, 0),
@@ -357,16 +361,16 @@ INSERT INTO `factura` (`idFac`, `compra`, `ivaTotal`, `ivaImporteTotal`, `descue
 (94, 1, 0, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 6, NULL, '', 4, 'pepe', 28, 3, 0, 3, 3, 3, 3),
 (95, 1, 0, 0, 0, 0, 0, '2020-08-01 00:00:00', NULL, 6, NULL, '', 4, 'pepe', 28, 4, 0, 3, 3, 3, 3),
 (96, 1, 0, 0, 0, 0, 0, '2020-09-01 00:00:00', NULL, 6, NULL, '', 4, 'pepe', 28, 5, 0, 3, 3, 3, 3),
-(100, 1, 6, 3.96, 0, 0, 70, '2020-05-01 00:00:00', NULL, 6, NULL, 'Con la pantalla minimizada', 4, 'pepe', 30, 1, 0.19, 24.92, 23.33, 22, 24.92),
+(100, 1, 6, 3.96, 0, 0, 70, '2020-05-01 00:00:00', NULL, 1, NULL, 'Con la pantalla minimizada', 4, 'pepe', 30, 1, 0.19, 24.92, 23.33, 22, 24.92),
 (101, 1, 6, 0, 0, 0, 0, '2020-06-01 00:00:00', NULL, 6, NULL, 'Con la pantalla minimizada', 4, 'pepe', 30, 2, 0.19, 23.52, 23.33, 22, 23.52),
 (102, 1, 6, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 6, NULL, 'Con la pantalla minimizada', 4, 'pepe', 30, 3, 0.2, 23.54, 23.34, 22.01, 23.54),
 (103, 1, 5, 2.85, 0, 0, 60, '2020-05-01 00:00:00', NULL, 6, NULL, 'Observación de agregado castañas', 4, 'pepe', 31, 1, 0.06, 23.06, 20, 19.04, 23.06),
 (104, 1, 5, 0, 0, 0, 0, '2020-06-01 00:00:00', NULL, 6, NULL, 'Observación de agregado castañas', 4, 'pepe', 31, 2, 0.06, 20.06, 20, 19.04, 20.06),
 (105, 1, 5, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 6, NULL, 'Observación de agregado castañas', 4, 'pepe', 31, 3, 0.08, 20.08, 20, 19.04, 20.08),
 (106, 1, 0, 0, 0, 0, 1, '2020-05-03 00:00:00', NULL, 6, NULL, '', 4, 'pepe', 32, 1, 0, 1, 1, 1, 1),
-(107, 1, 0, 0, 0, 0, 2, '2020-05-03 00:00:00', NULL, 6, NULL, '', 4, 'pepe', 33, 1, 0, 2, 2, 2, 2),
+(107, 1, 0, 0, 0, 0, 2, '2020-05-03 00:00:00', NULL, 8, NULL, '', 4, 'pepe', 33, 1, 0, 2, 2, 2, 2),
 (108, 1, 21, 2.6, 0, 0, 15, '2020-06-01 00:00:00', NULL, 6, NULL, '', 4, 'pepe', 34, 1, 0.01, 5.01, 5, 4.13, 5.01),
-(109, 1, 21, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 6, NULL, '', 4, 'pepe', 34, 2, 0.01, 5.01, 5, 4.13, 5.01),
+(109, 1, 21, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 1, NULL, '', 4, 'pepe', 34, 2, 0.01, 5.01, 5, 4.13, 5.01),
 (110, 1, 21, 0, 0, 0, 0, '2020-08-01 00:00:00', NULL, 6, NULL, '', 4, 'pepe', 34, 3, 0.03, 5.03, 5, 4.13, 5.03),
 (111, 1, 0, 0, 0, 0, 0, '2020-06-01 00:00:00', NULL, 6, NULL, '', 4, 'pepe', 35, 1, 0, 4, 0, 0, 4),
 (112, 1, 0, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 6, NULL, '', 4, 'pepe', 35, 2, 0, 4, 0, 0, 4),
@@ -459,7 +463,15 @@ INSERT INTO `factura_estado` (`id`, `idFac`, `idEst`, `fecha`, `creadoPor`, `obs
 (134, 112, 6, '2020-05-03 14:01:57', 'pepe', NULL),
 (135, 113, 6, '2020-05-03 14:02:22', 'pepe', NULL),
 (136, 114, 6, '2020-05-03 14:04:33', 'pepe', NULL),
-(137, 115, 6, '2020-05-03 14:04:33', 'pepe', NULL);
+(137, 115, 6, '2020-05-03 14:04:33', 'pepe', NULL),
+(138, 100, 1, '2020-05-09 17:58:58', 'admin', NULL),
+(139, 68, 8, '2020-05-09 18:07:22', 'admin', NULL),
+(140, 69, 8, '2020-05-09 18:08:34', 'admin', NULL),
+(141, 9, 1, '2020-05-09 20:06:14', 'pepe', NULL),
+(142, 109, 1, '2020-05-09 20:06:27', 'pepe', NULL),
+(143, 107, 8, '2020-05-09 20:09:05', 'pepe', NULL),
+(144, 100, 8, '2020-05-09 21:44:12', 'pepe', NULL),
+(145, 100, 1, '2020-05-09 21:45:15', 'pepe', NULL);
 
 -- --------------------------------------------------------
 
@@ -489,6 +501,45 @@ INSERT INTO `formapago` (`idFor`, `nombreES`, `nombreEN`, `nombrePT`, `nombreFR`
 (3, 'Cheque', 'Check', NULL, NULL, NULL, NULL, NULL, NULL),
 (4, 'Movimiento stock', 'Stock change', NULL, NULL, NULL, NULL, NULL, NULL),
 (5, 'Tarjeta de  crédito', 'Credit card', NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `foto`
+--
+
+CREATE TABLE `foto` (
+  `idFot` int(11) NOT NULL,
+  `idUsr` int(11) NOT NULL,
+  `idPro` int(11) NOT NULL,
+  `idEmp` int(11) NOT NULL,
+  `idCat` int(11) NOT NULL,
+  `idSub` int(11) NOT NULL,
+  `idPais` int(11) NOT NULL,
+  `idFor` int(11) NOT NULL,
+  `idEst` int(11) NOT NULL,
+  `idRol` int(11) NOT NULL,
+  `nombre` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `ruta` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` text COLLATE utf8_spanish_ci,
+  `peso` bigint(20) NOT NULL,
+  `principal` tinyint(4) NOT NULL,
+  `extension` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fechaCreacion` datetime NOT NULL,
+  `creadoPor` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `fechaModificacion` datetime DEFAULT NULL,
+  `modificadoPor` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `foto`
+--
+
+INSERT INTO `foto` (`idFot`, `idUsr`, `idPro`, `idEmp`, `idCat`, `idSub`, `idPais`, `idFor`, `idEst`, `idRol`, `nombre`, `ruta`, `descripcion`, `peso`, `principal`, `extension`, `fechaCreacion`, `creadoPor`, `fechaModificacion`, `modificadoPor`) VALUES
+(34, 1, 0, 0, 0, 0, 0, 0, 0, 0, 'IMG-20200222-WA0053.jpeg', '', '', 628963, 1, NULL, '2020-05-19 20:11:35', 'pepe', NULL, NULL),
+(39, 84, 0, 0, 0, 0, 0, 0, 0, 0, 'IMG-20200221-WA0037.jpg', '\\resources\\imgs\\usuarios\\84', '', 89023, 0, NULL, '2020-05-19 23:08:00', 'cliente', NULL, NULL),
+(40, 84, 0, 0, 0, 0, 0, 0, 0, 0, 'IMG-20200224-WA0024.jpeg', '\\resources\\imgs\\usuarios\\84', '', 1645864, 1, NULL, '2020-05-19 23:15:11', 'cliente', '2020-05-19 23:24:52', 'cliente'),
+(42, 84, 0, 0, 0, 0, 0, 0, 0, 0, 'IMG-20200225-WA0024.jpg', '\\resources\\imgs\\usuarios\\84', '', 104130, 0, NULL, '2020-05-19 23:21:12', 'cliente', '2020-05-19 23:24:52', 'cliente');
 
 -- --------------------------------------------------------
 
@@ -574,13 +625,15 @@ CREATE TABLE `producto` (
 INSERT INTO `producto` (`idPro`, `nombreES`, `nombreEN`, `nombrePT`, `nombreFR`, `nombreIT`, `nombreGE`, `nombreCA`, `nombreEU`, `unidades`, `precioVenta`, `precioCompra`, `marca`, `modelo`, `serie`, `ubicacion`, `estado`, `partida`, `fechaCompra`, `enviar`, `vendible`, `mesesGarantia`, `peso`, `volumen`, `idSub`) VALUES
 (1, 'TV Sanyo 15 pulgadas', 'TV Sanyo 15 inches', NULL, NULL, NULL, NULL, NULL, NULL, 7, 150, 115.35, 'Sanyo', 'HR15', '12345678', 'Pasillo 3', 'ACTIVE', NULL, '2019-12-22', 1, 1, 12, 20, 0.016, 1),
 (2, 'TV Sony 28 pulgadas', 'TV Sony 28 inches', NULL, NULL, NULL, NULL, NULL, NULL, 0, 600, 421, 'Sony', 'RJ25', '', '', 'DISCONTINUED', NULL, NULL, 0, 1, 6, 5, 3.2, 1),
-(3, 'Papel higiénico Higienol', 'Toilet paper Higienol', NULL, NULL, NULL, NULL, NULL, NULL, 6, 1.5, 0.95, 'Higienol', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 2.5, 0.3, 0.09, 9),
-(4, 'Castañas Gallegas', 'Chestnuts from Galicia', NULL, NULL, NULL, NULL, NULL, NULL, 8, 2, 0.4, '', '', '', '', 'INACTIVE', NULL, NULL, 0, 1, 0, 0, 0, 4),
+(3, 'Papel higiénico Higienol', 'Toilet paper Higienol', NULL, NULL, NULL, NULL, NULL, NULL, 6, 1.5, 0.95, 'Higienol', '', '', '', 'ACTIVE', NULL, NULL, 1, 1, 2.5, 0.3, 0.29, 9),
+(4, 'Castañas Gallegas', 'Chestnuts from Galicia', NULL, NULL, NULL, NULL, NULL, NULL, 8, 2, 0.4, 'La castañera', 'Bolsa L', '', '', 'INACTIVE', NULL, NULL, 0, 1, 0, 2, 0, 18),
 (5, 'Monitor Samsung 27 pulgadas', 'Monitor Samsung 27 inches', NULL, NULL, NULL, NULL, NULL, NULL, 0, 250, 180, 'Samsung', 'Energy', '158159126', '', 'ACTIVE', NULL, NULL, 1, 1, 12, 2, 1, 16),
 (6, 'Estantería de madera color roble', 'Oak wood shelving', NULL, NULL, NULL, NULL, NULL, NULL, 7, 45, 32, 'Ikea', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 6, 0, 0, 17),
-(7, 'Taza Star Wars negra', 'Star Wars Mug Black', NULL, NULL, NULL, NULL, NULL, NULL, 10, 2, 0.7, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 0, 0, 0, 15),
+(7, 'Taza Star Wars negra', 'Star Wars Mug Black', NULL, NULL, NULL, NULL, NULL, NULL, 10, 2.5, 0.7, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 0, 0, 0, 15),
 (8, 'Reloj temperatura', 'Temperature clock', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 0, 0, 0, 0, 15),
-(9, 'Cable USB', 'USB cable', NULL, NULL, NULL, NULL, NULL, NULL, 0, 2, 1, 'IBM', 'X26', '12358', 'Pasillo 3', 'INACTIVE', NULL, NULL, 0, 1, 3, 0.2, 0.6, 2);
+(9, 'Cable USB', 'USB cable', NULL, NULL, NULL, NULL, NULL, NULL, 0, 2, 1, 'IBM', 'X26', '12358', 'Pasillo 3', 'INACTIVE', NULL, NULL, 0, 1, 3, 0.2, 0.6, 2),
+(10, 'Jamón ibérico', 'Jam', NULL, NULL, NULL, NULL, NULL, NULL, 0, 12, 0, '4J', '', '', '', 'ACTIVE', NULL, NULL, 0, 0, 0, 0, 0, 15),
+(11, 'Mesa redonda', 'Circle table', NULL, NULL, NULL, NULL, NULL, NULL, 0, 30, 0, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 0, 0, 7, 0, 5);
 
 -- --------------------------------------------------------
 
@@ -601,8 +654,13 @@ CREATE TABLE `producto_empresa` (
 
 INSERT INTO `producto_empresa` (`idPro`, `idEmp`, `fechaCreacion`, `creadoPor`) VALUES
 (2, 3, '2020-01-10', 'DAMIAN'),
+(3, 1, '2020-05-10', 'pepe'),
 (4, 2, '2020-01-10', 'DAMIAN'),
-(4, 3, '2020-01-10', 'DAMIAN');
+(4, 3, '2020-01-10', 'DAMIAN'),
+(7, 9, '2020-05-11', 'pepe'),
+(8, 5, '2020-05-11', 'pepe'),
+(9, 3, '2020-05-10', 'pepe'),
+(11, 11, '2020-05-10', 'pepe');
 
 -- --------------------------------------------------------
 
@@ -723,7 +781,8 @@ INSERT INTO `subcategoria` (`idSub`, `nombreES`, `nombreEN`, `nombrePT`, `nombre
 (14, 'Ambientadores', 'Air fresheners', NULL, NULL, NULL, NULL, NULL, NULL, 2),
 (15, '0 Otros', '0 Others', NULL, NULL, NULL, NULL, NULL, NULL, 8),
 (16, 'Pantallas de ordenador', 'Computer screens', NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(17, 'Estanterías', 'Shelves', NULL, NULL, NULL, NULL, NULL, NULL, 2);
+(17, 'Estanterías', 'Shelves', NULL, NULL, NULL, NULL, NULL, NULL, 2),
+(18, 'Alimento', 'Food', NULL, NULL, NULL, NULL, NULL, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -751,7 +810,7 @@ INSERT INTO `usuario` (`idUsr`, `usuario`, `clave`, `habilitado`, `fechaCreacion
 (46, 'maria', '6528de74a3a997555a963d5e0fdf49daefe22ae73b1478e0ab9d4076f73b4c369d8524aa84afaea8', 1, '2019-09-19 12:02:56'),
 (55, 'lara', '476520558b62a164fa6703002dc8a18c1358db557da022709b0366dac3d58a47c8771358874ae922', 1, '2019-09-30 21:15:39'),
 (58, 'saul', '6a3121471f38805e88617b51876fbd30a4512687366dfa6e38eff311368b3e55a06c2414268c018a', 1, '2019-09-30 23:31:03'),
-(60, 'alejandro', 'b43d75e6f04a5b896a14027c13b2885313eaa4dc02059027fc7efa28270a40bcc86138b6952b4acc', 1, '2019-10-09 22:46:50'),
+(60, 'alejandro', 'e802fb1dbb24708e796f6635894ba4e706c304061c83579d1392b6af6eef8d93047d49e0c0a00faf', 1, '2019-10-09 22:46:50'),
 (61, 'barbara', '09995b0ba36f4e70c8ec38828bf00fe3a65845e2854065861f02a607b71afeeb3e37fe99f4515fd6', 1, '2019-10-09 22:47:35'),
 (62, 'juan', 'b2b3cc92be337bf743138ff1a841f9d8ae25e0fb95b6a1d9506191763063baed8002e36385c0cc57', 1, '2019-10-09 22:48:57'),
 (63, 'walter', '5b664c1584d3d8ef4df19dac1967f70d4434abec39ffc4967c23a2920a9786e7589b10340f2201ff', 0, '2019-10-09 22:49:55'),
@@ -785,7 +844,7 @@ CREATE TABLE `usuarioorden` (
   `id` int(11) NOT NULL,
   `idUsr` int(11) NOT NULL,
   `tabla` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `columna` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `columna` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `orden` varchar(4) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -794,18 +853,18 @@ CREATE TABLE `usuarioorden` (
 --
 
 INSERT INTO `usuarioorden` (`id`, `idUsr`, `tabla`, `columna`, `orden`) VALUES
-(1, 1, 'factura', 'idFac', 'ASC'),
-(2, 1, 'producto', 'precioVenta', 'ASC'),
+(1, 1, 'factura', 'fechaCompra', 'DESC'),
+(2, 1, 'producto', 'nombreES', 'DESC'),
 (3, 1, 'empresa', 'nombreComercial', 'ASC'),
 (4, 83, 'empresa', 'email', 'ASC'),
 (5, 83, 'producto', 'precioVenta', 'ASC'),
 (6, 85, 'producto', 'nombreEN', 'ASC'),
 (7, 85, 'empresa', 'nombreComercial', 'ASC'),
 (8, 83, 'factura', 'fechaCompra', 'DESC'),
-(9, 85, 'factura', 'fechaCompra', 'DESC'),
-(10, 1, 'usuario', 'datosPersonales.nombre', 'DESC'),
+(9, 85, 'factura', 'importeFront', 'DESC'),
 (11, 85, 'usuario', 'usuario', 'ASC'),
-(12, 83, 'usuario', 'datosPersonalesfechaNacimiento', 'ASC');
+(12, 83, 'usuario', 'datosPersonales.nombre', 'ASC'),
+(13, 1, 'usuario', 'datosPersonales.nombre', 'ASC');
 
 -- --------------------------------------------------------
 
@@ -832,7 +891,6 @@ INSERT INTO `usuario_empresa` (`idUsr`, `idEmp`, `fechaCreacion`, `creadoPor`) V
 (4, 6, '2019-11-03', 'dora'),
 (44, 2, '2019-10-06', 'pepe'),
 (46, 1, '2019-10-06', 'pepe'),
-(46, 2, '2019-10-06', 'pepe'),
 (55, 2, '2019-10-06', 'pepe'),
 (58, 2, '2019-10-06', 'pepe'),
 (58, 6, '2019-11-03', 'dora'),
@@ -842,7 +900,8 @@ INSERT INTO `usuario_empresa` (`idUsr`, `idEmp`, `fechaCreacion`, `creadoPor`) V
 (63, 3, '2019-10-09', 'pepe'),
 (69, 6, '2019-11-03', 'dora'),
 (84, 2, '2020-04-25', 'pepe'),
-(90, 1, '2020-04-19', 'pepe');
+(90, 1, '2020-04-19', 'pepe'),
+(92, 1, '2020-05-10', 'pepe');
 
 -- --------------------------------------------------------
 
@@ -974,6 +1033,12 @@ ALTER TABLE `formapago`
   ADD PRIMARY KEY (`idFor`);
 
 --
+-- Indices de la tabla `foto`
+--
+ALTER TABLE `foto`
+  ADD PRIMARY KEY (`idFot`);
+
+--
 -- Indices de la tabla `paises`
 --
 ALTER TABLE `paises`
@@ -1077,7 +1142,7 @@ ALTER TABLE `direccionempresa`
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `idEmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idEmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `estado`
 --
@@ -1092,12 +1157,17 @@ ALTER TABLE `factura`
 -- AUTO_INCREMENT de la tabla `factura_estado`
 --
 ALTER TABLE `factura_estado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
 --
 -- AUTO_INCREMENT de la tabla `formapago`
 --
 ALTER TABLE `formapago`
   MODIFY `idFor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT de la tabla `foto`
+--
+ALTER TABLE `foto`
+  MODIFY `idFot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT de la tabla `paises`
 --
@@ -1107,7 +1177,7 @@ ALTER TABLE `paises`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
@@ -1117,7 +1187,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  MODIFY `idSub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idSub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
@@ -1127,7 +1197,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `usuarioorden`
 --
 ALTER TABLE `usuarioorden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- Restricciones para tablas volcadas
 --

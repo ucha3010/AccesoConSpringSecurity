@@ -22,6 +22,13 @@ public class FormaPago {
 
 	/**
 	 * @param idFor
+	 */
+	public FormaPago(int idFor) {
+		this.idFor = idFor;
+	}
+
+	/**
+	 * @param idFor
 	 * @param nombreES
 	 * @param nombreEN
 	 */

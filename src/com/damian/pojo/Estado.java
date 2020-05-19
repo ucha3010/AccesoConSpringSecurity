@@ -21,6 +21,13 @@ public class Estado {
 
 	/**
 	 * @param idEst
+	 */
+	public Estado(int idEst) {
+		this.idEst = idEst;
+	}
+
+	/**
+	 * @param idEst
 	 * @param nombreES
 	 * @param nombreEN
 	 */

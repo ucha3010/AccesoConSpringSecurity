@@ -25,6 +25,13 @@ public class Usuario implements Serializable {
 	public Usuario() {
 
 	}
+	
+	/**
+	 * @param idUsr
+	 */
+	public Usuario(int idUsr) {
+		this.idUsr = idUsr;
+	}
 
 	/**
 	 * @param idUsr

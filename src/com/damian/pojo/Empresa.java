@@ -25,6 +25,14 @@ public class Empresa implements Serializable {
 	private List<DireccionEmpresa> direccionesEmpresa = new ArrayList<DireccionEmpresa>();
 	private List<ProductoEmpresa> productoEmpresaList;
 	List<Foto> fotos;
+	
+	public Empresa() {
+		
+	}
+	
+	public Empresa(int idEmp) {
+		this.idEmp = idEmp;
+	}
 
 	/**
 	 * @return the idEmp

@@ -1,12 +1,12 @@
 package test.java;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Date;
 
-import com.damian.service.UsuarioEmpresaService;
-import com.damian.service.impl.UsuarioEmpresaServiceImpl;
+import javax.servlet.http.HttpServletRequest;
 
 public class TestUsuarioEmpresa {
 
@@ -53,6 +53,13 @@ public class TestUsuarioEmpresa {
 		System.out.println("***********************************************************");
 		String sql = "SELECT * FROM usuario ORDER BY usuario ASC LIMIT 0,10";
 		System.out.println(sql.indexOf("BY usuario"));
+		directorioActual();
+	}
+	
+	private static void directorioActual() {
+		String ruta = System.getProperty("user.dir") + System.getProperty("file.separator") + "WebContent"
+				+ System.getProperty("file.separator") + "resources" + System.getProperty("file.separator") + "imgs";
+		System.out.println("Ruta: " + ruta);
 	}
 
 	private static BigDecimal cortaADosDecimales(BigDecimal num) {

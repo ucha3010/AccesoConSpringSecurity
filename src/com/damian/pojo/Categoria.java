@@ -24,6 +24,13 @@ public class Categoria {
 
 	/**
 	 * @param idCat
+	 */
+	public Categoria(int idCat) {
+		this.idCat = idCat;
+	}
+
+	/**
+	 * @param idCat
 	 * @param nombreES
 	 * @param nombreEN
 	 */

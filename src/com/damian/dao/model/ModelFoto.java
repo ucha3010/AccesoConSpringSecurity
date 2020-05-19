@@ -1,22 +1,19 @@
-package com.damian.pojo;
+package com.damian.dao.model;
 
 import java.sql.Timestamp;
 
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
-public class Foto {
+public class ModelFoto {
 
 	private int idFot;
-	private CommonsMultipartFile archivo;
-	private Usuario usuario;
-	private Producto producto;
-	private Empresa empresa;
-	private Categoria categoria;
-	private Subcategoria subcategoria;
-	private Pais pais;
-	private FormaPago formaPago;
-	private Estado estado;
-	private Rol rol;
+	private int idUsr;
+	private int idPro;
+	private int idEmp;
+	private int idCat;
+	private int idSub;
+	private int idPais;
+	private int idFor;
+	private int idEst;
+	private int idRol;
 	private String nombre;
 	private String ruta;
 	private String descripcion;
@@ -28,14 +25,14 @@ public class Foto {
 	private Timestamp fechaModificacion;
 	private String modificadoPor;
 
-	public Foto() {
+	public ModelFoto() {
 
 	}
 
 	/**
 	 * @param idFot
 	 */
-	public Foto(int idFot) {
+	public ModelFoto(int idFot) {
 		this.idFot = idFot;
 	}
 
@@ -55,153 +52,138 @@ public class Foto {
 	}
 
 	/**
-	 * @return the archivo
+	 * @return the idUsr
 	 */
-	public CommonsMultipartFile getArchivo() {
-		return archivo;
+	public int getIdUsr() {
+		return idUsr;
 	}
 
 	/**
-	 * @param archivo
-	 *            the archivo to set
+	 * @param idUsr
+	 *            the idUsr to set
 	 */
-	public void setArchivo(CommonsMultipartFile archivo) {
-		this.archivo = archivo;
+	public void setIdUsr(int idUsr) {
+		this.idUsr = idUsr;
 	}
 
 	/**
-	 * @return the usuario
+	 * @return the idPro
 	 */
-	public Usuario getUsuario() {
-		return usuario;
+	public int getIdPro() {
+		return idPro;
 	}
 
 	/**
-	 * @param usuario
-	 *            the usuario to set
+	 * @param idPro
+	 *            the idPro to set
 	 */
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setIdPro(int idPro) {
+		this.idPro = idPro;
 	}
 
 	/**
-	 * @return the producto
+	 * @return the idEmp
 	 */
-	public Producto getProducto() {
-		return producto;
+	public int getIdEmp() {
+		return idEmp;
 	}
 
 	/**
-	 * @param producto
-	 *            the producto to set
+	 * @param idEmp
+	 *            the idEmp to set
 	 */
-	public void setProducto(Producto producto) {
-		this.producto = producto;
+	public void setIdEmp(int idEmp) {
+		this.idEmp = idEmp;
 	}
 
 	/**
-	 * @return the empresa
+	 * @return the idCat
 	 */
-	public Empresa getEmpresa() {
-		return empresa;
+	public int getIdCat() {
+		return idCat;
 	}
 
 	/**
-	 * @param empresa
-	 *            the empresa to set
+	 * @param idCat
+	 *            the idCat to set
 	 */
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
+	public void setIdCat(int idCat) {
+		this.idCat = idCat;
 	}
 
 	/**
-	 * @return the categoria
+	 * @return the idSub
 	 */
-	public Categoria getCategoria() {
-		return categoria;
+	public int getIdSub() {
+		return idSub;
 	}
 
 	/**
-	 * @param categoria
-	 *            the categoria to set
+	 * @param idSub
+	 *            the idSub to set
 	 */
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setIdSub(int idSub) {
+		this.idSub = idSub;
 	}
 
 	/**
-	 * @return the subcategoria
+	 * @return the idPais
 	 */
-	public Subcategoria getSubcategoria() {
-		return subcategoria;
+	public int getIdPais() {
+		return idPais;
 	}
 
 	/**
-	 * @param subcategoria
-	 *            the subcategoria to set
+	 * @param idPais
+	 *            the idPais to set
 	 */
-	public void setSubcategoria(Subcategoria subcategoria) {
-		this.subcategoria = subcategoria;
+	public void setIdPais(int idPais) {
+		this.idPais = idPais;
 	}
 
 	/**
-	 * @return the pais
+	 * @return the idFor
 	 */
-	public Pais getPais() {
-		return pais;
+	public int getIdFor() {
+		return idFor;
 	}
 
 	/**
-	 * @param pais
-	 *            the pais to set
+	 * @param idFor
+	 *            the idFor to set
 	 */
-	public void setPais(Pais pais) {
-		this.pais = pais;
+	public void setIdFor(int idFor) {
+		this.idFor = idFor;
 	}
 
 	/**
-	 * @return the formaPago
+	 * @return the idEst
 	 */
-	public FormaPago getFormaPago() {
-		return formaPago;
+	public int getIdEst() {
+		return idEst;
 	}
 
 	/**
-	 * @param formaPago
-	 *            the formaPago to set
+	 * @param idEst
+	 *            the idEst to set
 	 */
-	public void setFormaPago(FormaPago formaPago) {
-		this.formaPago = formaPago;
+	public void setIdEst(int idEst) {
+		this.idEst = idEst;
 	}
 
 	/**
-	 * @return the estado
+	 * @return the idRol
 	 */
-	public Estado getEstado() {
-		return estado;
+	public int getIdRol() {
+		return idRol;
 	}
 
 	/**
-	 * @param estado
-	 *            the estado to set
+	 * @param idRol
+	 *            the idRol to set
 	 */
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
-
-	/**
-	 * @return the rol
-	 */
-	public Rol getRol() {
-		return rol;
-	}
-
-	/**
-	 * @param rol
-	 *            the rol to set
-	 */
-	public void setRol(Rol rol) {
-		this.rol = rol;
+	public void setIdRol(int idRol) {
+		this.idRol = idRol;
 	}
 
 	/**
@@ -352,21 +334,6 @@ public class Foto {
 	 */
 	public void setModificadoPor(String modificadoPor) {
 		this.modificadoPor = modificadoPor;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Foto [idFot=" + idFot + ", usuario=" + usuario + ", producto=" + producto + ", empresa=" + empresa
-				+ ", categoria=" + categoria + ", subcategoria=" + subcategoria + ", pais=" + pais + ", formaPago="
-				+ formaPago + ", estado=" + estado + ", rol=" + rol + ", nombre=" + nombre + ", ruta=" + ruta
-				+ ", descripcion=" + descripcion + ", peso=" + peso + ", principal=" + principal + ", extension="
-				+ extension + ", fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor + ", fechaModificacion="
-				+ fechaModificacion + ", modificadoPor=" + modificadoPor + "]";
 	}
 
 }

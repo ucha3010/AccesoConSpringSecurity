@@ -21,6 +21,13 @@ public class Rol implements Serializable {
 
 	/**
 	 * @param idRol
+	 */
+	public Rol(int idRol) {
+		this.idRol = idRol;
+	}
+
+	/**
+	 * @param idRol
 	 * @param rol
 	 * @param usuarioRol
 	 */

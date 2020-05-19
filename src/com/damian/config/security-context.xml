@@ -57,6 +57,7 @@
 		<security:intercept-url pattern="/facturaEstado/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/cliente" access="permitAll" />
 		<security:intercept-url pattern="/cliente/**" access="permitAll" />
+		<security:intercept-url pattern="/foto/**" access="permitAll" />
 		<security:intercept-url pattern="/**" access="denyAll" />
 		<security:form-login login-page="/login"
 			password-parameter="clave" username-parameter="usuario"

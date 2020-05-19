@@ -39,6 +39,17 @@ public class Producto {
 	private List<ProductoFactura> productoFacturaList;
 	List<Foto> fotos;
 
+	public Producto() {
+
+	}
+
+	/**
+	 * @param idPro
+	 */
+	public Producto(int idPro) {
+		this.idPro = idPro;
+	}
+
 	/**
 	 * @return the idPro
 	 */
