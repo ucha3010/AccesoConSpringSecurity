@@ -16,7 +16,7 @@
 	<script type="text/javascript">
 		function confirmDelete(idFot){
 			if(confirm("<fmt:message key='Delete.message' />")){
-				var url = "<c:url value='/foto/usuarioLogged/delete/"+idFot+"' />";
+				var url = "<c:url value='/foto/producto/delete/"+idFot+"' />";
 				location.href=url;
 				return true;
 			}
@@ -25,10 +25,11 @@
 	</script>
 </head>
 <body>
+	<fmt:message key="language.name" var="nameColSelect"/>
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<div class="well well-sm text-center h2">
-			<fmt:message key="label.Pictures.of" /> <c:out value="${usuario.usuario}" />
+			<fmt:message key="label.Pictures.of" /> <c:out value="${producto[nameColSelect]}" />
 		</div>
 		<c:if test="${not empty foto_agregada}">
 			<div class="row">	
@@ -47,7 +48,7 @@
 			<c:forEach items="${fotos}" var="f">
 				<div class="col-xs-12 col-sm-6 col-md-3">
 					<div class="thumbnail">
-						<img src='<c:url value="/resources/imgs/usuarios/${usuario.idUsr}/${f.nombre}"/>' alt="${f.nombre}">
+						<img src='<c:url value="/resources/imgs/productos/${producto.idPro}/${f.nombre}"/>' alt="${f.nombre}">
 						<div class="caption">
 							<h3>${f.nombre}</h3>
 							<p>${f.descripcion}</p>
@@ -59,7 +60,7 @@
 							<div class="alert alert-success text-center"><fmt:message key='label.Principal' /></div>
 						</c:if>
 						<c:if test="${not f.principal }">
-							<button class="btn btn-warning btn-xs" type="button" onclick='location.href="<c:url value="/foto/usuarioLogged/principal/${f.idFot}"/>"'><fmt:message key="label.Do.principal" /></button>
+							<button class="btn btn-warning btn-xs" type="button" onclick='location.href="<c:url value="/foto/producto/principal/${f.idFot}"/>"'><fmt:message key="label.Do.principal" /></button>
 						</c:if>
 					</div>
 				</div>				
@@ -70,21 +71,21 @@
 			<div class="hidden-xs col-sm-3">
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				<h4><fmt:message key="label.Add.picture" /> <fmt:message key="label.to" /> <c:out value="${usuario.usuario}" /></h4>
+				<h4><fmt:message key="label.Add.picture" /> <fmt:message key="label.to" /> <c:out value="${producto[nameColSelect]}" /></h4>
 			</div>
 			<div class="hidden-xs col-sm-3">
 			</div>
 		</div>
 		
-		<sf:form method="POST" action="${pageContext.request.contextPath}/foto/usuarioLogged/save" enctype="multipart/form-data" modelAttribute="foto">
+		<sf:form method="POST" action="${pageContext.request.contextPath}/foto/producto/save" enctype="multipart/form-data" modelAttribute="foto">
 		
-			<sf:hidden path="usuario.idUsr" value="${usuario.idUsr}"/>
+			<sf:hidden path="producto.idPro" value="${producto.idPro}"/>
 			<div class="row">
 				<div class="hidden-xs col-sm-3">
 				</div>
 				<div class="col-xs-12 col-sm-6">
-					<label for="fotoUsuario"><fmt:message key="label.Select.file" /></label>
-					<input type="file" class="form-control-file form-control" id="fotoUsuario" name="file" />
+					<label for="fotoProducto"><fmt:message key="label.Select.file" /></label>
+					<input type="file" class="form-control-file form-control" id="fotoProducto" name="file" />
 				</div>
 				<div class="hidden-xs col-sm-3">
 				</div>
@@ -96,13 +97,13 @@
 				<div class="col-xs-12 col-sm-6">
 					<div class="radio">
 						<label for="siPrincipal">
-							<sf:radiobutton id="siPrincipal" name="usuarioPrincipal" class="custom-control-input" path="principal" value="true"/>
+							<sf:radiobutton id="siPrincipal" name="productoPrincipal" class="custom-control-input" path="principal" value="true"/>
 							<fmt:message key="label.Principal.picture" />
 						</label>
 					</div>
 					<div class="radio">
 						<label for="noPrincipal">
-							<sf:radiobutton id="noPrincipal" name="usuarioPrincipal" class="custom-control-input"  path="principal" value="false"/>
+							<sf:radiobutton id="noPrincipal" name="productoPrincipal" class="custom-control-input" path="principal" value="false"/>
 							<fmt:message key="label.Not.principal.picture" />
 						</label>
 					</div>
@@ -127,7 +128,7 @@
 				<div class="hidden-xs col-sm-3">
 				</div>
 				<div class="col-xs-12 col-sm-6">
-					<button class="btn btn-default" type="button" onclick='location.href="<c:url value="/usuario/logged/${usuario.idUsr}"/>"'><fmt:message key="label.Back" /></button>
+					<button class="btn btn-default" type="button" onclick='location.href="<c:url value="/producto/all/null/0/100"/>"'><fmt:message key="Cancel" /></button>
 					<button class="btn btn-success" type="submit" <c:if test="${fotos.size() == 4 }">disabled</c:if>><fmt:message key="Send" /></button>
 				</div>
 				<div class="hidden-xs col-sm-3">

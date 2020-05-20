@@ -23,6 +23,7 @@ import com.damian.pojo.Cuota;
 import com.damian.pojo.Estado;
 import com.damian.pojo.Factura;
 import com.damian.pojo.FormaPago;
+import com.damian.pojo.Foto;
 import com.damian.pojo.Producto;
 import com.damian.pojo.ProductoEmpresa;
 import com.damian.pojo.ProductoFactura;
@@ -31,6 +32,7 @@ import com.damian.pojo.front.FrontCuota;
 import com.damian.pojo.front.FrontProductoStock;
 import com.damian.service.CuotaService;
 import com.damian.service.FacturaService;
+import com.damian.service.FotoService;
 import com.damian.service.ProductoService;
 import com.damian.utils.Constantes;
 
@@ -45,6 +47,9 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
 	private FacturaService facturaService;
+	
+	@Autowired
+	private FotoService fotoService;
 
 	@Autowired
 	private ProductoDAO productoDAO;
@@ -61,7 +66,7 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public List<Producto> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request) {
 		List<Producto> salida = productoDAO.findAll(column, paginaInicio, totalPaginas, request);
-		return fillCategoriaYSubcategoria(salida);
+		return fillCatSubcatYFotoPrinc(salida);
 	}
 
 	@Override
@@ -103,7 +108,7 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public List<Producto> findByIdList(int id) {
 		List<Producto> salida = productoDAO.findByIdList(id);
-		return fillCategoriaYSubcategoria(salida);
+		return fillCatSubcatYFotoPrinc(salida);
 	}
 
 	@Override
@@ -316,14 +321,29 @@ public class ProductoServiceImpl implements ProductoService {
 
 	}
 
-	private List<Producto> fillCategoriaYSubcategoria(List<Producto> salida) {
+	private List<Producto> fillCatSubcatYFotoPrinc(List<Producto> salida) {
 		for (Producto p : salida) {
 			Subcategoria s = subcategoriaDAO.findByIdModel(p.getSubcategoria().getIdSub());
 			Categoria c = categoriaDAO.findByIdModel(s.getCategoria().getIdCat());
 			s.setCategoria(c);
 			p.setSubcategoria(s);
+			p.setFotos(fillFotoPrincipal(p.getIdPro()));
 		}
 		return salida;
+	}
+
+	private List<Foto> fillFotoPrincipal(int idPro) {
+		
+		List<Foto> fotos = fotoService.findByIdPro(idPro);
+		List<Foto> fotoPrincipal = null;
+		for(Foto foto: fotos) {
+			if(foto.isPrincipal()) {
+				fotoPrincipal = new ArrayList<>();
+				fotoPrincipal.add(foto);
+				break;
+			}
+		}
+		return fotoPrincipal;
 	}
 
 }

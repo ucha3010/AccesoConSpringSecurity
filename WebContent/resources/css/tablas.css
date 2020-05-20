@@ -208,6 +208,10 @@
 	display: inline-block;
 }
 
+.min-width-60 {
+	min-width: 60px;
+}
+
 .extraAdmin-th {
 	min-width: 100px;
 }
@@ -219,4 +223,12 @@
 .justify-content-center {
 	margin: auto;
 	max-width: 480px;
+}
+
+.zindex-1 {
+	z-index: 1;
+}
+
+.zindex-100 {
+	z-index: 100;
 }

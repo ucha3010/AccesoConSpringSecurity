@@ -14,8 +14,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.pojo.Foto;
+import com.damian.pojo.Producto;
 import com.damian.pojo.Usuario;
 import com.damian.service.FotoService;
+import com.damian.service.ProductoService;
 import com.damian.service.UsuarioService;
 
 @Controller
@@ -23,6 +25,9 @@ public class FotoController {
 
 	@Autowired
 	private FotoService fotoService;
+
+	@Autowired
+	private ProductoService productoService;
 
 	@Autowired
 	private UsuarioService usuarioService;
@@ -52,8 +57,22 @@ public class FotoController {
 
 	}
 
+	@RequestMapping("/foto/producto/{idPro}")
+	public ModelAndView getProductoFotos(ModelAndView modelAndView, @PathVariable("idPro") int idPro) {
+
+		modelAndView.addObject("producto", productoService.findById(idPro));
+		modelAndView.addObject("fotos", fotoService.findByIdPro(idPro));
+		Foto foto = new Foto();
+		Producto producto = new Producto();
+		foto.setProducto(producto);
+		modelAndView.addObject("foto", foto);
+		modelAndView.setViewName("productoFotos");
+		return modelAndView;
+
+	}
+
 	@RequestMapping(value = { "/foto/usuarioLogged/save" }, method = RequestMethod.POST)
-	public String save(@RequestParam("file") MultipartFile file, @ModelAttribute("foto") Foto foto,
+	public String saveUsuario(@RequestParam("file") MultipartFile file, @ModelAttribute("foto") Foto foto,
 			RedirectAttributes ra, HttpServletRequest request) {
 
 		if (!file.isEmpty()) {
@@ -66,20 +85,51 @@ public class FotoController {
 		return "redirect:/foto/usuarioLogged/" + foto.getUsuario().getIdUsr();
 	}
 
-	@RequestMapping("/foto/usuarioLogged/delete/{idUsr}/{idFot}")
-	public String delete(@PathVariable("idUsr") int idUsr, @PathVariable("idFot") int idFot, RedirectAttributes ra,
+	@RequestMapping(value = { "/foto/producto/save" }, method = RequestMethod.POST)
+	public String saveProducto(@RequestParam("file") MultipartFile file, @ModelAttribute("foto") Foto foto,
+			RedirectAttributes ra, HttpServletRequest request) {
+
+		if (!file.isEmpty()) {
+			fotoService.save(foto, file, request);
+			ra.addFlashAttribute("foto_agregada", true);
+		} else {
+			ra.addFlashAttribute("foto_agregada", false);
+		}
+
+		return "redirect:/foto/producto/" + foto.getProducto().getIdPro();
+	}
+
+	@RequestMapping("/foto/usuarioLogged/delete/{idFot}")
+	public String deleteUsuario(@PathVariable("idFot") int idFot, RedirectAttributes ra,
 			HttpServletRequest request) {
 
-		fotoService.delete(idFot, request);
+		int idUsr = fotoService.delete(idFot, request);
 		ra.addFlashAttribute("foto_eliminada", "foto_eliminada");
 		return "redirect:/foto/usuarioLogged/" + idUsr;
 
 	}
 
+	@RequestMapping("/foto/producto/delete/{idFot}")
+	public String deleteProducto(@PathVariable("idFot") int idFot, RedirectAttributes ra,
+			HttpServletRequest request) {
+
+		int idUsr = fotoService.delete(idFot, request);
+		ra.addFlashAttribute("foto_eliminada", "foto_eliminada");
+		return "redirect:/foto/producto/" + idUsr;
+
+	}
+
 	@RequestMapping("/foto/usuarioLogged/principal/{idFot}")
-	public String doPrincipal(ModelAndView modelAndView, @PathVariable("idFot") int idFot, HttpServletRequest request) {
+	public String doPrincipalUsuario(ModelAndView modelAndView, @PathVariable("idFot") int idFot, HttpServletRequest request) {
 
 		return "redirect:/foto/usuarioLogged/" + fotoService.doPrincipal(idFot, request);
+
+	}
+
+	@RequestMapping("/foto/producto/principal/{idFot}")
+	public String doPrincipalProducto(ModelAndView modelAndView, @PathVariable("idFot") int idFot, HttpServletRequest request) {
+
+		return "redirect:/foto/producto/" + fotoService.doPrincipal(idFot, request);
 
 	}
 

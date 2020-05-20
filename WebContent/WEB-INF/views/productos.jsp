@@ -119,6 +119,7 @@
 							<th class="extraAdmin-th cursor-text"></th>
 						</sec:authorize>
 						<th <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Product.description" /></th>
+						<th class="min-width-60"></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
 						<th <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if> class="text-center"><fmt:message key="label.state" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
@@ -129,7 +130,7 @@
 						<th colspan="2" class="text-center min-width-160" <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.salePrice" /></th>
 						<c:set var="count" value="${count + 1}" scope="page"/>
 						<th class="text-center" <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.units" /></th>
-						<th class="extraAdmin-th cursor-text"><fmt:message key="label.Extras" /></th>
+						<th class="min-width-160 cursor-text zindex-100"><fmt:message key="label.Extras" /></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -148,6 +149,27 @@
 								</td>
 							</sec:authorize>
 							<td><c:out value="${producto[nameColSelect]}" /></td>
+							<td>
+								<c:if test="${(not empty producto.fotos)}">
+									<c:forEach items="${producto.fotos}" var="fotoPerfil">
+										<c:if test="${fotoPerfil.principal}">
+											<a href="#foto${producto.idPro}" class="thumbnail" data-toggle="modal">
+												<img src='<c:url value="/resources/imgs/productos/${producto.idPro}/${fotoPerfil.nombre}"/>' class="width-50">
+											</a>
+											<div class="modal fade" id="foto${producto.idPro}">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+															<h4 class="modal-title"><img src='<c:url value="/resources/imgs/productos/${producto.idPro}/${fotoPerfil.nombre}"/>' class="justify-content-center"></h4>
+														</div>
+													</div>
+												</div>
+											</div>
+										</c:if>
+									</c:forEach>
+								</c:if>
+							</td>
 							<td class="text-center"><fmt:message key="${producto.estado}" /></td>
 							<td><c:out value="${producto.marca}" /></td>
 							<td><c:out value="${producto.modelo}" /></td>	
@@ -155,6 +177,9 @@
 							<td class="width-35"></td>
 							<td class="text-center"><c:out value="${producto.unidades}" /></td>
 							<td class="extraAdmin-td">
+								<a title="<fmt:message key='label.Pictures' />" href='<c:url value='/foto/producto/${producto.idPro}' />'>
+									<span class="glyphicon glyphicon-picture tamanio_imagen zindex-1"></span>
+								</a>
 								<a title="<fmt:message key="Companies" />" href='<c:url value='/productoEmpresa/producto/${producto.idPro}' />'>
 									<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
 								</a>

@@ -14,7 +14,6 @@ import com.damian.dao.EmpresaDAO;
 import com.damian.dao.EstadoDAO;
 import com.damian.dao.FacturaDAO;
 import com.damian.dao.FormaPagoDAO;
-import com.damian.dao.FotoDAO;
 import com.damian.dao.PaisDAO;
 import com.damian.dao.ProductoDAO;
 import com.damian.dao.ProductoEmpresaDAO;
@@ -53,6 +52,7 @@ import com.damian.pojo.Subcategoria;
 import com.damian.pojo.Usuario;
 import com.damian.pojo.UsuarioEmpresa;
 import com.damian.pojo.UsuarioRol;
+import com.damian.service.FotoService;
 
 @Component
 public class ConverterRellenaObjeto {
@@ -91,7 +91,7 @@ public class ConverterRellenaObjeto {
 	private FormaPagoDAO formaPagoDAO;
 	
 	@Autowired
-	private FotoDAO fotoDao;
+	private FotoService fotoService;
 
 	@Autowired
 	private PaisDAO paisDAO;
@@ -225,7 +225,7 @@ public class ConverterRellenaObjeto {
 				u.setUsuarioEmpresa(ueList);
 			}
 			u.setUsuarioRol(usuarioRolDAO.findByIdUsrModel(mu.getIdUsr()));
-			u.setFotos(fotoDao.findByIdUsr(mu.getIdUsr()));
+			u.setFotos(fotoService.findByIdUsr(mu.getIdUsr()));
 		}
 	}
 

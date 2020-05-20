@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,10 +77,24 @@ public class FotoServiceImpl implements FotoService {
 	@Override
 	public int save(Foto foto, MultipartFile file, HttpServletRequest request) {
 
-		List<Foto> fotos = fotoDAO.findByIdUsr(foto.getUsuario().getIdUsr());
+		List<Foto> fotos = new ArrayList<>();
+		String llamada = null;
+		int id = 0;
+		if(foto != null) {
+			if(foto.getUsuario() != null && foto.getUsuario().getIdUsr() != 0) {
+				fotos = findByIdUsr(foto.getUsuario().getIdUsr());
+				llamada = "usuarios";
+				id = foto.getUsuario().getIdUsr();
+			}
+			if(foto.getProducto() != null && foto.getProducto().getIdPro() != 0) {
+				id = foto.getProducto().getIdPro();
+				fotos = findByIdPro(id);
+				llamada = "productos";
+			}
+		}
 		if (fotos.isEmpty() || fotos.size() < 4) {
 
-			Ruta ruta = Ruta("usuarios", foto.getUsuario().getIdUsr(), request);
+			Ruta ruta = Ruta(llamada, id, request);
 
 
 			try {
@@ -135,10 +150,26 @@ public class FotoServiceImpl implements FotoService {
 	public int delete(int id, HttpServletRequest request) {
 
 		Foto foto = findByIdFot(id);
-		Ruta ruta = Ruta("usuarios", foto.getUsuario().getIdUsr(), request);
-		File file = new File(ruta.getRutaAbsoluta() + System.getProperty("file.separator") + foto.getNombre());
-		file.delete();
-		return fotoDAO.delete(id);
+		Ruta ruta = null;
+		int idSalida = 0;
+		if(foto != null) {
+			if(foto.getUsuario() != null && foto.getUsuario().getIdUsr() != 0) {
+				idSalida = foto.getUsuario().getIdUsr();
+				ruta = Ruta("usuarios", idSalida, request);
+			}
+			if(foto.getProducto() != null && foto.getProducto().getIdPro() != 0) {
+				idSalida = foto.getProducto().getIdPro();
+				ruta = Ruta("productos", idSalida, request);
+			}
+		}
+		if(ruta != null) {
+			File file = new File(ruta.getRutaAbsoluta() + System.getProperty("file.separator") + foto.getNombre());
+			file.delete();
+			fotoDAO.delete(id);
+			return idSalida;
+		} else {
+			return 0;
+		}
 	}
 
 	@Override
@@ -149,14 +180,25 @@ public class FotoServiceImpl implements FotoService {
 	@Override
 	public int doPrincipal(int idFot, HttpServletRequest request) {
 		Foto foto = findByIdFot(idFot);
-		List<Foto> fotos = findByIdUsr(foto.getUsuario().getIdUsr());
+		List<Foto> fotos = new ArrayList<>();
+		int id = 0;
+		if(foto != null) {
+			if(foto.getUsuario() != null && foto.getUsuario().getIdUsr() != 0) {
+				id = foto.getUsuario().getIdUsr();
+				fotos = findByIdUsr(id);
+			}
+			if(foto.getProducto() != null && foto.getProducto().getIdPro() != 0) {
+				id = foto.getProducto().getIdPro();
+				fotos = findByIdPro(id);
+			}
+		}
 		doAllNotPrincipal(fotos, request);
 		foto.setPrincipal(true);
 		update(foto, request);
-		return foto.getUsuario().getIdUsr();
+		return id;
 	}
 
-	private Ruta Ruta(String string, int idUsr, HttpServletRequest request) {
+	private Ruta Ruta(String llamante, int id, HttpServletRequest request) {
 
 		Ruta ruta = new Ruta();
 
@@ -172,8 +214,8 @@ public class FotoServiceImpl implements FotoService {
 		rutaWorkspace = rutaWorkspace + request.getContextPath().substring(1);
 		// Ruta dentro del proyecto
 		ruta.setRutaRelativa(System.getProperty("file.separator") + "resources" + System.getProperty("file.separator")
-				+ "imgs" + System.getProperty("file.separator") + "usuarios" + System.getProperty("file.separator")
-				+ idUsr);
+				+ "imgs" + System.getProperty("file.separator") + llamante + System.getProperty("file.separator")
+				+ id);
 		ruta.setRutaAbsoluta(
 				rutaWorkspace + System.getProperty("file.separator") + "WebContent" + ruta.getRutaRelativa());
 		return ruta;
