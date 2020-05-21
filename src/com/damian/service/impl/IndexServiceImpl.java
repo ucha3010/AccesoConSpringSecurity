@@ -1,17 +1,24 @@
 package com.damian.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.damian.pojo.Foto;
 import com.damian.pojo.Usuario;
+import com.damian.service.FotoService;
 import com.damian.service.IndexService;
 import com.damian.service.UsuarioService;
 
 @Service
 public class IndexServiceImpl implements IndexService {
+	
+	@Autowired
+	private FotoService fotoService;
 	
 	@Autowired
 	private UsuarioService usuarioService;
@@ -40,6 +47,13 @@ public class IndexServiceImpl implements IndexService {
 			Usuario usuario = usuarioService.findByUsername(authentication.getName());
 			model.addObject("idUsrLogged", usuario.getIdUsr());
 			model.addObject("nameUsrLogged", usuario.getUsuario());
+			List<Foto> fotos = fotoService.findByIdUsr(usuario.getIdUsr());
+			for (Foto f : fotos) {
+				if (f.isPrincipal()) {
+					model.addObject("prinPicUsr", f.getNombre());
+					break;
+				}
+			}
 		}
 	}
 

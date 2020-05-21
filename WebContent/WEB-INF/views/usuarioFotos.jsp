@@ -49,7 +49,7 @@
 					<div class="thumbnail">
 						<img src='<c:url value="/resources/imgs/usuarios/${usuario.idUsr}/${f.nombre}"/>' alt="${f.nombre}">
 						<div class="caption">
-							<h3>${f.nombre}</h3>
+<%-- 							<h3>${f.nombre}</h3> --%>
 							<p>${f.descripcion}</p>
 						</div>
 						<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${f.idFot})">

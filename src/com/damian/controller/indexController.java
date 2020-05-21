@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.damian.service.IndexService;
 
 @Controller
-@SessionAttributes({ "resultado", "estoy", "errorUsuario", "idUsrLogged", "nameUsrLogged" }) // los atributos que pueden
+@SessionAttributes({ "resultado", "estoy", "errorUsuario", "idUsrLogged", "nameUsrLogged", "prinPicUsr" }) // los atributos que pueden
 																								// mantenerse
 // en sesión y verse en distintas
 // páginas
@@ -95,7 +95,8 @@ public class indexController {
 	}
 
 	@RequestMapping("/logout")
-	public String logout() {
+	public String logout(ModelAndView model) {
+		model.addObject("prinPicUsr", null);
 		return "/";
 	}
 

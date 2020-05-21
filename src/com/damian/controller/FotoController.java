@@ -1,5 +1,7 @@
 package com.damian.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,6 +24,8 @@ import com.damian.service.ProductoService;
 import com.damian.service.UsuarioService;
 
 @Controller
+@SessionAttributes({ "resultado", "estoy", "roles", "prinPicUsr" })
+
 public class FotoController {
 
 	@Autowired
@@ -47,7 +52,9 @@ public class FotoController {
 	public ModelAndView getUsuarioFotos(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr) {
 
 		modelAndView.addObject("usuario", usuarioService.findById(idUsr));
-		modelAndView.addObject("fotos", fotoService.findByIdUsr(idUsr));
+		List<Foto> fotos = fotoService.findByIdUsr(idUsr);
+		modelAndView.addObject("fotos", fotos);
+		modelAndView.addObject("prinPicUsr", fotoService.principalPictureName(fotos));
 		Foto foto = new Foto();
 		Usuario usuario = new Usuario();
 		foto.setUsuario(usuario);
@@ -100,36 +107,38 @@ public class FotoController {
 	}
 
 	@RequestMapping("/foto/usuarioLogged/delete/{idFot}")
-	public String deleteUsuario(@PathVariable("idFot") int idFot, RedirectAttributes ra,
-			HttpServletRequest request) {
+	public String deleteUsuario(@PathVariable("idFot") int idFot, RedirectAttributes ra, HttpServletRequest request) {
 
-		int idUsr = fotoService.delete(idFot, request);
+		Foto foto = fotoService.delete(idFot, request);
 		ra.addFlashAttribute("foto_eliminada", "foto_eliminada");
-		return "redirect:/foto/usuarioLogged/" + idUsr;
+		return "redirect:/foto/usuarioLogged/" + foto.getUsuario().getIdUsr();
 
 	}
 
 	@RequestMapping("/foto/producto/delete/{idFot}")
-	public String deleteProducto(@PathVariable("idFot") int idFot, RedirectAttributes ra,
-			HttpServletRequest request) {
+	public String deleteProducto(@PathVariable("idFot") int idFot, RedirectAttributes ra, HttpServletRequest request) {
 
-		int idUsr = fotoService.delete(idFot, request);
+		Foto foto = fotoService.delete(idFot, request);
 		ra.addFlashAttribute("foto_eliminada", "foto_eliminada");
-		return "redirect:/foto/producto/" + idUsr;
+		return "redirect:/foto/producto/" + foto.getProducto().getIdPro();
 
 	}
 
 	@RequestMapping("/foto/usuarioLogged/principal/{idFot}")
-	public String doPrincipalUsuario(ModelAndView modelAndView, @PathVariable("idFot") int idFot, HttpServletRequest request) {
+	public String doPrincipalUsuario(ModelAndView modelAndView, @PathVariable("idFot") int idFot, RedirectAttributes ra,
+			HttpServletRequest request) {
 
-		return "redirect:/foto/usuarioLogged/" + fotoService.doPrincipal(idFot, request);
+		Foto foto = fotoService.doPrincipal(idFot, request);
+		return "redirect:/foto/usuarioLogged/" + foto.getUsuario().getIdUsr();
 
 	}
 
 	@RequestMapping("/foto/producto/principal/{idFot}")
-	public String doPrincipalProducto(ModelAndView modelAndView, @PathVariable("idFot") int idFot, HttpServletRequest request) {
+	public String doPrincipalProducto(ModelAndView modelAndView, @PathVariable("idFot") int idFot,
+			HttpServletRequest request) {
 
-		return "redirect:/foto/producto/" + fotoService.doPrincipal(idFot, request);
+		Foto foto = fotoService.doPrincipal(idFot, request);
+		return "redirect:/foto/producto/" + foto.getProducto().getIdPro();
 
 	}
 

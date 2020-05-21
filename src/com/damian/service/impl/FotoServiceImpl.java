@@ -147,7 +147,7 @@ public class FotoServiceImpl implements FotoService {
 	}
 
 	@Override
-	public int delete(int id, HttpServletRequest request) {
+	public Foto delete(int id, HttpServletRequest request) {
 
 		Foto foto = findByIdFot(id);
 		Ruta ruta = null;
@@ -166,10 +166,8 @@ public class FotoServiceImpl implements FotoService {
 			File file = new File(ruta.getRutaAbsoluta() + System.getProperty("file.separator") + foto.getNombre());
 			file.delete();
 			fotoDAO.delete(id);
-			return idSalida;
-		} else {
-			return 0;
 		}
+		return foto;
 	}
 
 	@Override
@@ -178,24 +176,32 @@ public class FotoServiceImpl implements FotoService {
 	}
 
 	@Override
-	public int doPrincipal(int idFot, HttpServletRequest request) {
+	public Foto doPrincipal(int idFot, HttpServletRequest request) {
 		Foto foto = findByIdFot(idFot);
 		List<Foto> fotos = new ArrayList<>();
-		int id = 0;
 		if(foto != null) {
 			if(foto.getUsuario() != null && foto.getUsuario().getIdUsr() != 0) {
-				id = foto.getUsuario().getIdUsr();
-				fotos = findByIdUsr(id);
+				fotos = findByIdUsr(foto.getUsuario().getIdUsr());
 			}
 			if(foto.getProducto() != null && foto.getProducto().getIdPro() != 0) {
-				id = foto.getProducto().getIdPro();
-				fotos = findByIdPro(id);
+				fotos = findByIdPro(foto.getProducto().getIdPro());
 			}
 		}
 		doAllNotPrincipal(fotos, request);
 		foto.setPrincipal(true);
 		update(foto, request);
-		return id;
+		return foto;
+	}
+	
+	public String principalPictureName(List<Foto> fotos) {
+		String nombre = null;
+		for (Foto f : fotos) {
+			if (f.isPrincipal()) {
+				nombre = f.getNombre();
+				break;
+			}
+		}
+		return nombre;
 	}
 
 	private Ruta Ruta(String llamante, int id, HttpServletRequest request) {

@@ -1,5 +1,7 @@
 package com.damian.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +19,21 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.exceptions.RepeatedUsernameException;
+import com.damian.pojo.Foto;
 import com.damian.pojo.Usuario;
+import com.damian.service.FotoService;
 import com.damian.service.PaginacionService;
 import com.damian.service.PaisService;
 import com.damian.service.RolService;
 import com.damian.service.impl.UsuarioServiceImpl;
 
 @Controller
-@SessionAttributes({ "resultado", "estoy", "roles" }) // los atributos que pueden mantenerse en sesión y verse en
+@SessionAttributes({ "resultado", "estoy", "roles", "prinPicUsr" }) // los atributos que pueden mantenerse en sesión y verse en
 														// distintas páginas
 public class UsuarioController {
 
 	@Autowired
-	private UsuarioServiceImpl usuarioService;
+	private FotoService fotoService;
 
 	@Autowired
 	private PaginacionService paginacionService;
@@ -39,6 +43,9 @@ public class UsuarioController {
 
 	@Autowired
 	private RolService rolService;
+
+	@Autowired
+	private UsuarioServiceImpl usuarioService;
 
 	@RequestMapping("/usuario/all/{column}/{order}/{paginaInicio}/{totalPaginas}")
 	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
@@ -219,6 +226,8 @@ public class UsuarioController {
 		if (idUsr > 0) {
 			usuario = usuarioService.findById(idUsr);
 			usuarioService.fillExistingUser(usuario);
+			List<Foto> fotos = fotoService.findByIdUsr(idUsr);
+			modelAndView.addObject("prinPicUsr", fotoService.principalPictureName(fotos));
 		} else {
 			modelAndView.setViewName("index");
 			return;

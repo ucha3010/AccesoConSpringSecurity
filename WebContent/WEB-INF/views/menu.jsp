@@ -83,7 +83,7 @@
 						<li>
 							<span>
 								<a title="${nameUsrLogged}" href='<c:url value="/usuario/logged/${idUsrLogged}"/>'>
-										<img src='<c:url value="/resources/imgs/usuario.png"/>' alt="${nameUsrLogged}" class="usuarioImg">
+									<img src='<c:url value="/resources/imgs/usuario.png"/>' alt="${nameUsrLogged}" class="usuarioImg">
 								</a>
 							</span>
 						</li>
@@ -97,7 +97,12 @@
 						<li class="margin-right-10px bg-color-white-dam">
 							<span>
 								<a title="${nameUsrLogged}" href='<c:url value="/usuario/logged/${idUsrLogged}"/>'>
+									<c:if test="${prinPicUsr == null}">
 										<img src='<c:url value="/resources/imgs/usuario.png"/>' alt="${nameUsrLogged}" class="usuarioImg">
+									</c:if>
+									<c:if test="${prinPicUsr != null}">
+										<img src='<c:url value="/resources/imgs/usuarios/${idUsrLogged}/${prinPicUsr}"/>' alt="${nameUsrLogged}" class="usuarioImgSize img-circle">
+									</c:if>
 								</a>
 							</span>
 						</li>

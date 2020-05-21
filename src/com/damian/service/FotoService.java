@@ -34,10 +34,12 @@ public interface FotoService {
 
 	public int update(Foto foto, HttpServletRequest request);
 
-	public int delete(int id, HttpServletRequest request);
+	public Foto delete(int id, HttpServletRequest request);
 
 	public int getMaxId();
 
-	public int doPrincipal(int idFot, HttpServletRequest request);
+	public Foto doPrincipal(int idFot, HttpServletRequest request);
+	
+	public String principalPictureName(List<Foto> fotos);
 
 }
