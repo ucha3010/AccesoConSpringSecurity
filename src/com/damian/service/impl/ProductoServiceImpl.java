@@ -3,6 +3,7 @@ package com.damian.service.impl;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,11 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.damian.dao.CategoriaDAO;
 import com.damian.dao.ProductoDAO;
-import com.damian.dao.ProductoEmpresaDAO;
-import com.damian.dao.ProductoFacturaDAO;
-import com.damian.dao.SubcategoriaDAO;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Categoria;
 import com.damian.pojo.Cuota;
@@ -30,24 +27,28 @@ import com.damian.pojo.ProductoFactura;
 import com.damian.pojo.Subcategoria;
 import com.damian.pojo.front.FrontCuota;
 import com.damian.pojo.front.FrontProductoStock;
+import com.damian.service.CategoriaService;
 import com.damian.service.CuotaService;
 import com.damian.service.FacturaService;
 import com.damian.service.FotoService;
+import com.damian.service.ProductoEmpresaService;
+import com.damian.service.ProductoFacturaService;
 import com.damian.service.ProductoService;
+import com.damian.service.SubcategoriaService;
 import com.damian.utils.Constantes;
 
 @Service
 public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
-	private CategoriaDAO categoriaDAO;
+	private CategoriaService categoriaService;
 
 	@Autowired
 	private CuotaService cuotaService;
 
 	@Autowired
 	private FacturaService facturaService;
-	
+
 	@Autowired
 	private FotoService fotoService;
 
@@ -55,13 +56,13 @@ public class ProductoServiceImpl implements ProductoService {
 	private ProductoDAO productoDAO;
 
 	@Autowired
-	private ProductoFacturaDAO productoFacturaDAO;
+	private ProductoFacturaService productoFacturaService;
 
 	@Autowired
-	private ProductoEmpresaDAO productoEmpresaDAO;
+	private ProductoEmpresaService productoEmpresaService;
 
 	@Autowired
-	private SubcategoriaDAO subcategoriaDAO;
+	private SubcategoriaService subcategoriaService;
 
 	@Override
 	public List<Producto> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request) {
@@ -80,26 +81,38 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public int save(Producto producto) {
+	public int save(Producto producto, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		producto.setModificadoPor(context.getAuthentication().getName());
+		producto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		productoDAO.save(producto);
 		return productoDAO.getMaxId();
 	}
 
 	@Override
-	public void update(Producto producto) {
+	public void update(Producto producto, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		producto.setModificadoPor(context.getAuthentication().getName());
+		producto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		productoDAO.update(producto);
 	}
 
 	@Override
 	public int delete(int id) throws NotEmptyException {
-		List<ProductoFactura> productoFacturaList = productoFacturaDAO.findByIdPro(id);
+		List<ProductoFactura> productoFacturaList = productoFacturaService.findByIdPro(id);
 		if (productoFacturaList != null && !productoFacturaList.isEmpty()) {
 			throw new NotEmptyException("Tiene asociado facturas");
 		}
-		List<ProductoEmpresa> productoEmpresaList = productoEmpresaDAO.findByIdPro(id);
+		List<ProductoEmpresa> productoEmpresaList = productoEmpresaService.findByIdPro(id);
 		if (productoEmpresaList != null) {
 			for (ProductoEmpresa p : productoEmpresaList) {
-				productoEmpresaDAO.delete(id, p.getEmpresa().getIdEmp());
+				productoEmpresaService.delete(id, p.getEmpresa().getIdEmp());
 			}
 		}
 		return productoDAO.delete(id);
@@ -172,7 +185,7 @@ public class ProductoServiceImpl implements ProductoService {
 
 			}
 			productoFactura.setPrecioFinal(frontProductoStock.getPrecioFinal());
-			productoFacturaDAO.save(productoFactura);
+			productoFacturaService.save(productoFactura, request);
 		} else {
 			BigDecimal comisionAperturaPor = new BigDecimal(frontProductoStock.getComisionAperturaPor(),
 					MathContext.DECIMAL64);
@@ -193,7 +206,7 @@ public class ProductoServiceImpl implements ProductoService {
 						.subtract(new BigDecimal(frontProductoStock.getPrecioFinal(), MathContext.DECIMAL64));
 				cuota.setInteresImp(interesImp.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
 			}
-			int idCuo = cuotaService.save(cuota);
+			int idCuo = cuotaService.save(cuota, request);
 			cuota.setIdCuo(idCuo);
 
 			BigDecimal cuotaSinInteres = precioFinal.divide(
@@ -274,7 +287,7 @@ public class ProductoServiceImpl implements ProductoService {
 							precioUnitConIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
 
 				}
-				productoFacturaDAO.save(productoFactura);
+				productoFacturaService.save(productoFactura, request);
 			}
 		}
 
@@ -304,6 +317,16 @@ public class ProductoServiceImpl implements ProductoService {
 		return productoDAO.findSearchAll();
 	}
 
+	@Override
+	public List<Producto> findByIdSubModel(int idSub) {
+		return productoDAO.findByIdSubModel(idSub);
+	}
+
+	@Override
+	public int getMaxId() {
+		return productoDAO.getMaxId();
+	}
+
 	private void rellenaFacturaComun(Factura factura, FrontProductoStock frontProductoStock,
 			BigDecimal precioUnitConIva, BigDecimal precioUnitSinIva,
 			org.springframework.security.core.context.SecurityContextImpl context) {
@@ -323,8 +346,8 @@ public class ProductoServiceImpl implements ProductoService {
 
 	private List<Producto> fillCatSubcatYFotoPrinc(List<Producto> salida) {
 		for (Producto p : salida) {
-			Subcategoria s = subcategoriaDAO.findByIdModel(p.getSubcategoria().getIdSub());
-			Categoria c = categoriaDAO.findByIdModel(s.getCategoria().getIdCat());
+			Subcategoria s = subcategoriaService.findByIdModel(p.getSubcategoria().getIdSub());
+			Categoria c = categoriaService.findByIdModel(s.getCategoria().getIdCat());
 			s.setCategoria(c);
 			p.setSubcategoria(s);
 			p.setFotos(fillFotoPrincipal(p.getIdPro()));
@@ -333,11 +356,11 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	private List<Foto> fillFotoPrincipal(int idPro) {
-		
+
 		List<Foto> fotos = fotoService.findByIdPro(idPro);
 		List<Foto> fotoPrincipal = null;
-		for(Foto foto: fotos) {
-			if(foto.isPrincipal()) {
+		for (Foto foto : fotos) {
+			if (foto.isPrincipal()) {
 				fotoPrincipal = new ArrayList<>();
 				fotoPrincipal.add(foto);
 				break;

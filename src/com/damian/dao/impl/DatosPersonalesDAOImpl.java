@@ -67,11 +67,12 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 		ModelDatosPersonales mdp = converterDatosPersonales.convert(datosPersonales);
 		String sql = "INSERT INTO " + TABLA
 				+ " (nombre, apellido1, apellido2, sexo, fechaNacimiento, nacionalidad_idPais, "
-				+ "dni, email, telefono, observaciones, datospersonales_idUsr)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "dni, email, telefono, observaciones, datospersonales_idUsr, modificadoPor, fechaModificacion)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, mdp.getNombre(), mdp.getApellido1(), mdp.getApellido2(), mdp.getSexo(),
 				mdp.getFechaNacimiento(), mdp.getNacionalidad_idPais(), mdp.getDni(), mdp.getEmail(), mdp.getTelefono(),
-				mdp.getObservaciones(), mdp.getDatospersonales_idUsr());
+				mdp.getObservaciones(), mdp.getDatospersonales_idUsr(), mdp.getModificadoPor(),
+				mdp.getFechaModificacion());
 	}
 
 	@Override
@@ -80,10 +81,11 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 		ModelDatosPersonales mdp = converterDatosPersonales.convert(datosPersonales);
 		String sql = "UPDATE " + TABLA + " SET nombre=?, apellido1=?, apellido2=?, "
 				+ "sexo=?, fechaNacimiento=?, nacionalidad_idPais=?, " + "dni=?, email=?, telefono=?, "
-				+ "observaciones=?, datospersonales_idUsr=? " + "WHERE " + KEY + "=?";
+				+ "observaciones=?, datospersonales_idUsr=?, modificadoPor=?, fechaModificacion=? WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, mdp.getNombre(), mdp.getApellido1(), mdp.getApellido2(), mdp.getSexo(),
 				mdp.getFechaNacimiento(), mdp.getNacionalidad_idPais(), mdp.getDni(), mdp.getEmail(), mdp.getTelefono(),
-				mdp.getObservaciones(), mdp.getDatospersonales_idUsr(), mdp.getIdDatosPers());
+				mdp.getObservaciones(), mdp.getDatospersonales_idUsr(), mdp.getModificadoPor(),
+				mdp.getFechaModificacion(), mdp.getIdDatosPers());
 	}
 
 	@Override
@@ -116,17 +118,17 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 
 		String sql = "SELECT nombre, apellido1, apellido2 FROM " + TABLA + " WHERE datospersonales_idUsr=" + datosUsrId;
 		return mapeoSearch(jdbcTemplate.queryForMap(sql));
-		
+
 	}
 
 	private DatosPersonales mapeoSearch(Map<String, Object> dpMap) {
 
-			DatosPersonales dp = new DatosPersonales();
-			dp.setNombre((String) dpMap.get("nombre"));
-			dp.setApellido1((String) dpMap.get("apellido1"));
-			dp.setApellido2((String) dpMap.get("apellido2"));
+		DatosPersonales dp = new DatosPersonales();
+		dp.setNombre((String) dpMap.get("nombre"));
+		dp.setApellido1((String) dpMap.get("apellido1"));
+		dp.setApellido2((String) dpMap.get("apellido2"));
 
-			return dp;
+		return dp;
 	}
 
 	@Override
@@ -203,6 +205,8 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 		mdp.setTelefono(rs.getString("telefono"));
 		mdp.setObservaciones(rs.getString("observaciones"));
 		mdp.setDatospersonales_idUsr(rs.getInt("datospersonales_idUsr"));
+		mdp.setModificadoPor(rs.getString("modificadoPor"));
+		mdp.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
 		return mdp;
 	}
 

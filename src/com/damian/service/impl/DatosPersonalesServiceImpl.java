@@ -1,6 +1,9 @@
 package com.damian.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +22,13 @@ public class DatosPersonalesServiceImpl implements DatosPersonalesService {
 		return datosPersonalesDAO.findById(id);
 	}
 
-	public void save(DatosPersonales datosPersonales) {
+	public void save(DatosPersonales datosPersonales, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		datosPersonales.setModificadoPor(context.getAuthentication().getName());
+		datosPersonales.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		datosPersonalesDAO.save(datosPersonales);
 	}
 
@@ -27,7 +36,13 @@ public class DatosPersonalesServiceImpl implements DatosPersonalesService {
 		return datosPersonalesDAO.findAll();
 	}
 
-	public void update(DatosPersonales datosPersonales) {
+	public void update(DatosPersonales datosPersonales, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		datosPersonales.setModificadoPor(context.getAuthentication().getName());
+		datosPersonales.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		datosPersonalesDAO.update(datosPersonales);
 	}
 

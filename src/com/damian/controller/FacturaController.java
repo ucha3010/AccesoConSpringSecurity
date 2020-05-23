@@ -58,8 +58,8 @@ public class FacturaController {
 
 	@RequestMapping("/factura/filteredEstado/{idEst}/{column}/{paginaInicio}/{totalPaginas}")
 	public ModelAndView getFilteredEstado(ModelAndView modelAndView, @PathVariable("idEst") int idEst,
-			@PathVariable("column") String column,
-			@PathVariable("paginaInicio") int paginaInicio, @PathVariable("totalPaginas") int totalPaginas, HttpServletRequest request) {
+			@PathVariable("column") String column, @PathVariable("paginaInicio") int paginaInicio,
+			@PathVariable("totalPaginas") int totalPaginas, HttpServletRequest request) {
 		modelAndView.addObject("facturas", facturaService.findByIdEstList(idEst, column, request));
 		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, "factura"));
 		modelAndView.addObject("estados", estadoService.findAll());
@@ -81,10 +81,10 @@ public class FacturaController {
 	}
 
 	@RequestMapping("/factura/delete/{idFac}")
-	public String deleteFactura(@PathVariable("idFac") int idFac, RedirectAttributes ra) {
+	public String deleteFactura(@PathVariable("idFac") int idFac, RedirectAttributes ra, HttpServletRequest request) {
 
 		try {
-			int cantidad = facturaService.delete(idFac);
+			int cantidad = facturaService.delete(idFac, request);
 			if (cantidad == 0) {
 				ra.addFlashAttribute("factura_stock_negativo", "factura_stock_negativo");
 			} else {
@@ -106,12 +106,12 @@ public class FacturaController {
 		factura = facturaService.findById(idFac);
 		factura.getEstado().setIdEst(idEst);
 		facturaService.update(factura, request);
-		if(from != null && from.equalsIgnoreCase("facturasFilteredEstado")) {
+		if (from != null && from.equalsIgnoreCase("facturasFilteredEstado")) {
 			return getFilteredEstado(modelAndView, idEstView, column, paginaInicio, totalPaginas, request);
 		} else {
 			return getAll(modelAndView, column, paginaInicio, totalPaginas, request);
 		}
-		
+
 	}
 
 }

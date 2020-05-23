@@ -55,21 +55,22 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 	public void save(ProductoFactura productoFactura) {
 		ModelProductoFactura mpf = converterProductoFactura.convert(productoFactura);
 		String sql = "INSERT INTO " + TABLA
-				+ " (idPro, idFac, cantidad, ivaProducto, porcentajeDescuento, precioUnitSinIva, precioUnitConIva, precioFinal, observaciones)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ " (idPro, idFac, cantidad, ivaProducto, porcentajeDescuento, precioUnitSinIva, precioUnitConIva, precioFinal, observaciones, modificadoPor, fechaModificacion)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, mpf.getIdPro(), mpf.getIdFac(), mpf.getCantidad(), mpf.getIvaProducto(),
-				mpf.getPorcentajeDescuento(), mpf.getPrecioUnitSinIva(), mpf.getPrecioUnitConIva(), mpf.getPrecioFinal(), mpf.getObservaciones());
+				mpf.getPorcentajeDescuento(), mpf.getPrecioUnitSinIva(), mpf.getPrecioUnitConIva(),
+				mpf.getPrecioFinal(), mpf.getObservaciones(), mpf.getModificadoPor(), mpf.getFechaModificacion());
 	}
 
 	@Override
 	public void update(ProductoFactura productoFactura) {
 		ModelProductoFactura mpf = converterProductoFactura.convert(productoFactura);
 		String sql = "UPDATE " + TABLA
-				+ " SET cantidad=?, ivaProducto=?, porcentajeDescuento=?, precioUnitSinIva=?, precioUnitConIva=?, precioFinal=?, observaciones=? " + "WHERE " + KEY1
-				+ "=? AND " + KEY2 + "=?";
+				+ " SET cantidad=?, ivaProducto=?, porcentajeDescuento=?, precioUnitSinIva=?, precioUnitConIva=?, precioFinal=?, observaciones=?, modificadoPor=?, fechaModificacion=? "
+				+ "WHERE " + KEY1 + "=? AND " + KEY2 + "=?";
 		jdbcTemplate.update(sql, mpf.getCantidad(), mpf.getIvaProducto(), mpf.getPorcentajeDescuento(),
-				mpf.getPrecioUnitSinIva(), mpf.getPrecioUnitConIva(), mpf.getPrecioFinal(), mpf.getObservaciones(), mpf.getIdPro(),
-				mpf.getIdFac());
+				mpf.getPrecioUnitSinIva(), mpf.getPrecioUnitConIva(), mpf.getPrecioFinal(), mpf.getObservaciones(),
+				mpf.getModificadoPor(), mpf.getFechaModificacion(), mpf.getIdPro(), mpf.getIdFac());
 	}
 
 	@Override
@@ -140,21 +141,6 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 		return pfList;
 	}
 
-	private ModelProductoFactura mapeo(ResultSet rs) throws SQLException {
-		ModelProductoFactura mpf = new ModelProductoFactura();
-		mpf.setIdPro(rs.getInt("idPro"));
-		mpf.setIdFac(rs.getInt("idFac"));
-		mpf.setCantidad(rs.getInt("cantidad"));
-		mpf.setIvaProducto(rs.getDouble("ivaProducto"));
-		mpf.setPorcentajeDescuento(rs.getDouble("porcentajeDescuento"));
-		mpf.setPrecioUnitSinIva(rs.getDouble("precioUnitSinIva"));
-		mpf.setPrecioUnitConIva(rs.getDouble("precioUnitConIva"));
-		mpf.setPrecioFinal(rs.getDouble("precioFinal"));
-		mpf.setObservaciones(rs.getString("observaciones"));
-
-		return mpf;
-	}
-
 	private List<ProductoFactura> listaModel(String sql) {
 		List<ModelProductoFactura> mpfList = jdbcTemplate.query(sql,
 				BeanPropertyRowMapper.newInstance(ModelProductoFactura.class));
@@ -166,6 +152,23 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 			pfList.add(pf);
 		}
 		return pfList;
+	}
+
+	private ModelProductoFactura mapeo(ResultSet rs) throws SQLException {
+		ModelProductoFactura mpf = new ModelProductoFactura();
+		mpf.setIdPro(rs.getInt("idPro"));
+		mpf.setIdFac(rs.getInt("idFac"));
+		mpf.setCantidad(rs.getInt("cantidad"));
+		mpf.setIvaProducto(rs.getDouble("ivaProducto"));
+		mpf.setPorcentajeDescuento(rs.getDouble("porcentajeDescuento"));
+		mpf.setPrecioUnitSinIva(rs.getDouble("precioUnitSinIva"));
+		mpf.setPrecioUnitConIva(rs.getDouble("precioUnitConIva"));
+		mpf.setPrecioFinal(rs.getDouble("precioFinal"));
+		mpf.setObservaciones(rs.getString("observaciones"));
+		mpf.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
+		mpf.setModificadoPor(rs.getString("modificadoPor"));
+
+		return mpf;
 	}
 
 }

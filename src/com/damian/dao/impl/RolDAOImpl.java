@@ -64,11 +64,11 @@ public class RolDAOImpl implements RolDAO {
 	public void save(Rol rol) {
 		ModelRol mr = converterRol.convert(rol);
 		if (rol.getIdRol() > 0) {
-			String sql = "UPDATE " + TABLA + " SET rol=? WHERE " + KEY + "=?";
-			jdbcTemplate.update(sql, mr.getRol(), mr.getIdRol());
+			String sql = "UPDATE " + TABLA + " SET rol=?, modificadoPor=?, fechaModificacion=? WHERE " + KEY + "=?";
+			jdbcTemplate.update(sql, mr.getRol(), mr.getModificadoPor(), mr.getFechaModificacion(), mr.getIdRol());
 		} else {
-			String sql = "INSERT INTO " + TABLA + " (rol)" + " VALUES (?)";
-			jdbcTemplate.update(sql, mr.getRol());
+			String sql = "INSERT INTO " + TABLA + " (rol, modificadoPor, fechaModificacion)" + " VALUES (?, ?, ?)";
+			jdbcTemplate.update(sql, mr.getRol(), mr.getModificadoPor(), mr.getFechaModificacion());
 		}
 	}
 
@@ -85,23 +85,6 @@ public class RolDAOImpl implements RolDAO {
 		String sql = "SELECT * FROM " + TABLA + " WHERE rol LIKE '" + rolName + "'";
 
 		return lista(sql);
-	}
-
-	private List<Rol> lista(String sql) {
-		List<ModelRol> mrList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelRol.class));
-		List<Rol> rList = new ArrayList<>();
-		for (ModelRol mr : mrList) {
-			rList.add(converterRol.convertAll(mr));
-		}
-
-		return rList;
-	}
-
-	private ModelRol mapeo(ResultSet rs) throws SQLException {
-		ModelRol mr = new ModelRol();
-		mr.setIdRol(rs.getInt("idRol"));
-		mr.setRol(rs.getString("rol"));
-		return mr;
 	}
 
 	@Override
@@ -125,6 +108,25 @@ public class RolDAOImpl implements RolDAO {
 	@Override
 	public int getMaxId() {
 		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
+	private List<Rol> lista(String sql) {
+		List<ModelRol> mrList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelRol.class));
+		List<Rol> rList = new ArrayList<>();
+		for (ModelRol mr : mrList) {
+			rList.add(converterRol.convertAll(mr));
+		}
+
+		return rList;
+	}
+
+	private ModelRol mapeo(ResultSet rs) throws SQLException {
+		ModelRol mr = new ModelRol();
+		mr.setIdRol(rs.getInt("idRol"));
+		mr.setRol(rs.getString("rol"));
+		mr.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
+		mr.setModificadoPor(rs.getString("modificadoPor"));
+		return mr;
 	}
 
 }

@@ -16,9 +16,9 @@ public interface ProductoService {
 
 	public Producto findByIdModel(int id);
 
-	public int save(Producto producto);
+	public int save(Producto producto, HttpServletRequest request);
 
-	public void update(Producto producto);
+	public void update(Producto producto, HttpServletRequest request);
 
 	public int delete(int id) throws NotEmptyException;
 
@@ -29,5 +29,9 @@ public interface ProductoService {
 	public FrontProductoStock fillFrontProductoStock(Producto producto);
 
 	public List<Producto> findSearchAll();
+
+	public List<Producto> findByIdSubModel(int idSub);
+
+	public int getMaxId();
 
 }

@@ -148,15 +148,6 @@ public class ProductoEmpresaDAOImpl implements ProductoEmpresaDAO {
 		return peList;
 	}
 
-	private ModelProductoEmpresa mapeo(ResultSet rs) throws SQLException {
-		ModelProductoEmpresa mue = new ModelProductoEmpresa();
-		mue.setIdPro(rs.getInt("idPro"));
-		mue.setIdEmp(rs.getInt("idEmp"));
-		mue.setFechaCreacion(rs.getDate("fechaCreacion"));
-		mue.setCreadoPor(rs.getString("creadoPor"));
-		return mue;
-	}
-
 	private List<ProductoEmpresa> listaModel(String sql) {
 		List<ModelProductoEmpresa> mpeList = jdbcTemplate.query(sql,
 				BeanPropertyRowMapper.newInstance(ModelProductoEmpresa.class));
@@ -168,6 +159,15 @@ public class ProductoEmpresaDAOImpl implements ProductoEmpresaDAO {
 			upList.add(pe);
 		}
 		return upList;
+	}
+
+	private ModelProductoEmpresa mapeo(ResultSet rs) throws SQLException {
+		ModelProductoEmpresa mue = new ModelProductoEmpresa();
+		mue.setIdPro(rs.getInt("idPro"));
+		mue.setIdEmp(rs.getInt("idEmp"));
+		mue.setFechaCreacion(rs.getDate("fechaCreacion"));
+		mue.setCreadoPor(rs.getString("creadoPor"));
+		return mue;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.damian.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -51,20 +53,20 @@ public class ProductoFacturaController {
 
 	@RequestMapping("/productoFactura/producto/save")
 	public String saveProducto(@ModelAttribute("productoFactura") ModelProductoFactura modelProductoFactura,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, HttpServletRequest request) {
 
 		ProductoFactura productoFactura = converterProductoFactura.convert(modelProductoFactura);
-		productoFacturaService.save(productoFactura);
+		productoFacturaService.save(productoFactura, request);
 
 		return "redirect:/productoFactura/producto/" + modelProductoFactura.getIdPro();
 	}
 
 	@RequestMapping("/productoFactura/factura/save/{idFac}")
 	public String saveFactura(@ModelAttribute("productoFactura") ModelProductoFactura modelProductoFactura,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, HttpServletRequest request) {
 
 		ProductoFactura productoFactura = converterProductoFactura.convert(modelProductoFactura);
-		productoFacturaService.save(productoFactura);
+		productoFacturaService.save(productoFactura, request);
 
 		return "redirect:/productoFactura/factura/" + modelProductoFactura.getIdFac();
 	}

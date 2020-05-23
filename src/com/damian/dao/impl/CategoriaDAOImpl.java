@@ -84,16 +84,23 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 			return update(categoria);
 		} else {
 			ModelCategoria me = converterCategoria.convert(categoria);
-			String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU());
+			String sql = "INSERT INTO " + TABLA
+					+ " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU, modificadoPor, fechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
+					me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getModificadoPor(),
+					me.getFechaModificacion());
 		}
 	}
 
 	@Override
 	public int update(Categoria categoria) {
 		ModelCategoria me = converterCategoria.convert(categoria);
-		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=? " + "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getIdCat());
+		String sql = "UPDATE " + TABLA
+				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, modificadoPor=?, fechaModificacion=? "
+				+ "WHERE " + KEY + "=?";
+		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
+				me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getModificadoPor(),
+				me.getFechaModificacion(), me.getIdCat());
 	}
 
 	@Override
@@ -128,6 +135,8 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		me.setNombreGE(rs.getString("nombreGE"));
 		me.setNombreCA(rs.getString("nombreCA"));
 		me.setNombreEU(rs.getString("nombreEU"));
+		me.setModificadoPor(rs.getString("modificadoPor"));
+		me.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
 		return me;
 	}
 }

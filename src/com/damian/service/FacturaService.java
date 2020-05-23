@@ -19,7 +19,7 @@ public interface FacturaService {
 
 	public int update(Factura factura, HttpServletRequest request);
 
-	public int delete(int id) throws NotEmptyException;
+	public int delete(int id, HttpServletRequest request) throws NotEmptyException;
 
 	public List<Factura> findByIdEstModel(int idEst, String column, HttpServletRequest request);
 

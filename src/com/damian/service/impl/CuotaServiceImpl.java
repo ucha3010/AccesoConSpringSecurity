@@ -1,6 +1,9 @@
 package com.damian.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,12 +40,24 @@ public class CuotaServiceImpl implements CuotaService {
 	}
 
 	@Override
-	public int save(Cuota cuota) {
+	public int save(Cuota cuota, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		cuota.setModificadoPor(context.getAuthentication().getName());
+		cuota.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+		
 		return cuotaDAO.save(cuota);
 	}
 
 	@Override
-	public int update(Cuota cuota) {
+	public int update(Cuota cuota, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		cuota.setModificadoPor(context.getAuthentication().getName());
+		cuota.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+		
 		return cuotaDAO.update(cuota);
 	}
 

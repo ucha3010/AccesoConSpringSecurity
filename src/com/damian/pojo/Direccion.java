@@ -1,13 +1,8 @@
 package com.damian.pojo;
 
-import java.io.Serializable;
+import java.sql.Timestamp;
 
-public class Direccion implements Serializable {
-
-	/**
-	 * Clase Direccion
-	 */
-	private static final long serialVersionUID = 1L;
+public class Direccion {
 
 	private int idDir;
 	private String tipoVia;
@@ -19,6 +14,8 @@ public class Direccion implements Serializable {
 	private String ciudad;
 	private Pais pais;
 	private DatosPersonales datosPersonales;
+	private String modificadoPor;
+	private Timestamp fechaModificacion;
 
 	public Direccion() {
 
@@ -198,6 +195,36 @@ public class Direccion implements Serializable {
 	 */
 	public void setDatosPersonales(DatosPersonales datosPersonales) {
 		this.datosPersonales = datosPersonales;
+	}
+
+	/**
+	 * @return the modificadoPor
+	 */
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	/**
+	 * @param modificadoPor
+	 *            the modificadoPor to set
+	 */
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
+
+	/**
+	 * @return the fechaModificacion
+	 */
+	public Timestamp getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	/**
+	 * @param fechaModificacion
+	 *            the fechaModificacion to set
+	 */
+	public void setFechaModificacion(Timestamp fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 	/*

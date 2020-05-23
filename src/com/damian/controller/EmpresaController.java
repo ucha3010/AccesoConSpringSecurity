@@ -64,7 +64,7 @@ public class EmpresaController {
 
 	@RequestMapping(value = { "/empresa/save" }, method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute("empresa") @Validated(value = SpringFormGroup.class) Empresa empresa,
-			BindingResult result, Model model, RedirectAttributes ra) {
+			BindingResult result, Model model, RedirectAttributes ra, HttpServletRequest request) {
 		if (result.hasErrors()) {
 			System.out.println(result.getAllErrors());
 			// return "empresa";
@@ -73,7 +73,7 @@ public class EmpresaController {
 		if (empresa.getIdEmp() == 0) {
 			nueva = true;
 		}
-		empresaService.save(empresa);
+		empresaService.save(empresa, request);
 		if (nueva) {
 			ra.addFlashAttribute("empresa_agregada", "empresa_agregada");
 		}

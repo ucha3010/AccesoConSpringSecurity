@@ -1,18 +1,13 @@
 package com.damian.pojo;
 
-import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class DatosPersonales implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 130820142307L;
+public class DatosPersonales {
 
 	private int idDatosPers;
 	private String nombre;
@@ -29,6 +24,8 @@ public class DatosPersonales implements Serializable {
 	private String observaciones;
 	private Usuario usuario;
 	private List<Direccion> direcciones = new ArrayList<Direccion>();
+	private String modificadoPor;
+	private Timestamp fechaModificacion;
 
 	public DatosPersonales() {
 
@@ -260,6 +257,36 @@ public class DatosPersonales implements Serializable {
 	 */
 	public void setDirecciones(List<Direccion> direcciones) {
 		this.direcciones = direcciones;
+	}
+
+	/**
+	 * @return the modificadoPor
+	 */
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	/**
+	 * @param modificadoPor
+	 *            the modificadoPor to set
+	 */
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
+
+	/**
+	 * @return the fechaModificacion
+	 */
+	public Timestamp getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	/**
+	 * @param fechaModificacion
+	 *            the fechaModificacion to set
+	 */
+	public void setFechaModificacion(Timestamp fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 	/*

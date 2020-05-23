@@ -2,6 +2,8 @@ package com.damian.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Cuota;
 
@@ -13,9 +15,9 @@ public interface CuotaService {
 
 	public Cuota findByIdModel(int id);
 
-	public int save(Cuota cuota);
+	public int save(Cuota cuota, HttpServletRequest request);
 
-	public int update(Cuota cuota);
+	public int update(Cuota cuota, HttpServletRequest request);
 
 	public int delete(int id) throws NotEmptyException;
 

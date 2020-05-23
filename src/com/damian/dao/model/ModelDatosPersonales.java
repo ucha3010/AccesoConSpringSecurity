@@ -1,14 +1,9 @@
 package com.damian.dao.model;
 
-import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
-public class ModelDatosPersonales implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 130820142307L;
+public class ModelDatosPersonales {
 
 	private int idDatosPers;
 	private String nombre;
@@ -22,6 +17,8 @@ public class ModelDatosPersonales implements Serializable {
 	private String telefono;
 	private String observaciones;
 	private int datospersonales_idUsr;
+	private String modificadoPor;
+	private Timestamp fechaModificacion;
 
 	public ModelDatosPersonales() {
 
@@ -236,6 +233,36 @@ public class ModelDatosPersonales implements Serializable {
 	 */
 	public void setDatospersonales_idUsr(int datospersonales_idUsr) {
 		this.datospersonales_idUsr = datospersonales_idUsr;
+	}
+
+	/**
+	 * @return the modificadoPor
+	 */
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	/**
+	 * @param modificadoPor
+	 *            the modificadoPor to set
+	 */
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
+
+	/**
+	 * @return the fechaModificacion
+	 */
+	public Timestamp getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	/**
+	 * @param fechaModificacion
+	 *            the fechaModificacion to set
+	 */
+	public void setFechaModificacion(Timestamp fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 	/*

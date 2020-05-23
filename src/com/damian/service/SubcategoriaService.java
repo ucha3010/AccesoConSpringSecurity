@@ -2,6 +2,8 @@ package com.damian.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Subcategoria;
 
@@ -13,9 +15,9 @@ public interface SubcategoriaService {
 
 	public Subcategoria findByIdModel(int id);
 
-	public int save(Subcategoria subcategoria);
+	public int save(Subcategoria subcategoria, HttpServletRequest request);
 
-	public int update(Subcategoria subcategoria);
+	public int update(Subcategoria subcategoria, HttpServletRequest request);
 
 	public int delete(int id) throws NotEmptyException;
 

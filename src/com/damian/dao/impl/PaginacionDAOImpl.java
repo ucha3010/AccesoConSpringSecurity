@@ -22,43 +22,43 @@ public class PaginacionDAOImpl implements PaginacionDAO {
 
 	@Override
 	public Paginacion pagination(int paginaInicio, int registrosPorPagina, String tabla) {
-		
+
 		Paginacion paginacion = new Paginacion();
 		int totalRegistros = 0;
-		if(registrosPorPagina > 0) {
+		if (registrosPorPagina > 0) {
 			totalRegistros = totalRows(tabla);
 		}
-		
+
 		paginacion.setActual(paginaInicio);
 		paginacion.setTotalRegistros(totalRegistros);
 		paginacion.setRegistrosPorPagina(registrosPorPagina);
-		if(paginaInicio == 0) {
+		if (paginaInicio == 0) {
 			paginacion.setPrimeraPagina(true);
 			paginacion.setAnterior(0);
 		} else {
 			paginacion.setPrimeraPagina(false);
 			paginacion.setAnterior(paginaInicio - registrosPorPagina);
 		}
-		if(paginaInicio + registrosPorPagina + 1 > totalRegistros) {
+		if (paginaInicio + registrosPorPagina + 1 > totalRegistros) {
 			paginacion.setUltimaPagina(true);
 			paginacion.setSiguiente(0);
 		} else {
 			paginacion.setUltimaPagina(false);
 			paginacion.setSiguiente(paginaInicio + registrosPorPagina);
 		}
-		if(registrosPorPagina > 0) {
-			paginacion.setTotalPaginas((int) Math.ceil((double)totalRegistros/(double)registrosPorPagina));
+		if (registrosPorPagina > 0) {
+			paginacion.setTotalPaginas((int) Math.ceil((double) totalRegistros / (double) registrosPorPagina));
 		} else {
 			paginacion.setTotalPaginas(0);
 		}
 		List<Integer> comienzoPagina = new ArrayList<>();
 		int comienzo = 0;
-		while(registrosPorPagina > 0 && comienzo < totalRegistros) {
+		while (registrosPorPagina > 0 && comienzo < totalRegistros) {
 			comienzoPagina.add(comienzo);
 			comienzo += registrosPorPagina;
 		}
 		paginacion.setComienzaPagina(comienzoPagina);
-		
+
 		return paginacion;
 	}
 

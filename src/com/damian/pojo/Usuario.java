@@ -1,16 +1,10 @@
 package com.damian.pojo;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario implements Serializable {
-
-	/**
-	 * Clase Usuario
-	 */
-	private static final long serialVersionUID = 130820142307L;
+public class Usuario {
 
 	private int idUsr;
 	private String usuario;
@@ -21,11 +15,13 @@ public class Usuario implements Serializable {
 	private boolean habilitado;
 	private List<Foto> fotos;
 	private Timestamp fechaCreacion;
+	private String modificadoPor;
+	private Timestamp fechaModificacion;
 
 	public Usuario() {
 
 	}
-	
+
 	/**
 	 * @param idUsr
 	 */
@@ -189,6 +185,36 @@ public class Usuario implements Serializable {
 	 */
 	public void setFechaCreacion(Timestamp fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
+	}
+
+	/**
+	 * @return the modificadoPor
+	 */
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	/**
+	 * @param modificadoPor
+	 *            the modificadoPor to set
+	 */
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
+
+	/**
+	 * @return the fechaModificacion
+	 */
+	public Timestamp getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	/**
+	 * @param fechaModificacion
+	 *            the fechaModificacion to set
+	 */
+	public void setFechaModificacion(Timestamp fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 	/*

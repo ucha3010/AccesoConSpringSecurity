@@ -1,5 +1,7 @@
 package com.damian.pojo;
 
+import java.sql.Timestamp;
+
 public class ProductoFactura {
 
 	private Producto producto;
@@ -11,6 +13,8 @@ public class ProductoFactura {
 	private double precioUnitConIva;
 	private double precioFinal;
 	private String observaciones;
+	private String modificadoPor;
+	private Timestamp fechaModificacion;
 
 	public ProductoFactura() {
 
@@ -174,6 +178,36 @@ public class ProductoFactura {
 	 */
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
+	}
+
+	/**
+	 * @return the modificadoPor
+	 */
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	/**
+	 * @param modificadoPor
+	 *            the modificadoPor to set
+	 */
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
+
+	/**
+	 * @return the fechaModificacion
+	 */
+	public Timestamp getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	/**
+	 * @param fechaModificacion
+	 *            the fechaModificacion to set
+	 */
+	public void setFechaModificacion(Timestamp fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 	/*

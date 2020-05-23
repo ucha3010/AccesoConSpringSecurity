@@ -1,15 +1,10 @@
 package com.damian.pojo;
 
-import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Empresa implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 130820142307L;
+public class Empresa {
 
 	private int idEmp;
 	private String nombreComercial;
@@ -24,12 +19,14 @@ public class Empresa implements Serializable {
 	private List<UsuarioEmpresa> usuarioEmpresa = new ArrayList<UsuarioEmpresa>();
 	private List<DireccionEmpresa> direccionesEmpresa = new ArrayList<DireccionEmpresa>();
 	private List<ProductoEmpresa> productoEmpresaList;
-	List<Foto> fotos;
-	
+	private List<Foto> fotos;
+	private String modificadoPor;
+	private Timestamp fechaModificacion;
+
 	public Empresa() {
-		
+
 	}
-	
+
 	public Empresa(int idEmp) {
 		this.idEmp = idEmp;
 	}
@@ -242,6 +239,36 @@ public class Empresa implements Serializable {
 	 */
 	public void setFotos(List<Foto> fotos) {
 		this.fotos = fotos;
+	}
+
+	/**
+	 * @return the modificadoPor
+	 */
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	/**
+	 * @param modificadoPor
+	 *            the modificadoPor to set
+	 */
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
+
+	/**
+	 * @return the fechaModificacion
+	 */
+	public Timestamp getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	/**
+	 * @param fechaModificacion
+	 *            the fechaModificacion to set
+	 */
+	public void setFechaModificacion(Timestamp fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 	/*

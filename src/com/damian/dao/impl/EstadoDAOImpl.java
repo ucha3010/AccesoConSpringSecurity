@@ -84,16 +84,23 @@ public class EstadoDAOImpl implements EstadoDAO {
 			return update(estado);
 		} else {
 			ModelEstado me = converterEstado.convert(estado);
-			String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU());
+			String sql = "INSERT INTO " + TABLA
+					+ " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU, modificadoPor, fechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
+					me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getModificadoPor(),
+					me.getFechaModificacion());
 		}
 	}
 
 	@Override
 	public int update(Estado estado) {
 		ModelEstado me = converterEstado.convert(estado);
-		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=? " + "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getIdEst());
+		String sql = "UPDATE " + TABLA
+				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, modificadoPor=?, fechaModificacion=? "
+				+ "WHERE " + KEY + "=?";
+		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
+				me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getModificadoPor(),
+				me.getFechaModificacion(), me.getIdEst());
 	}
 
 	@Override
@@ -128,6 +135,8 @@ public class EstadoDAOImpl implements EstadoDAO {
 		me.setNombreGE(rs.getString("nombreGE"));
 		me.setNombreCA(rs.getString("nombreCA"));
 		me.setNombreEU(rs.getString("nombreEU"));
+		me.setModificadoPor(rs.getString("modificadoPor"));
+		me.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
 		return me;
 	}
 }

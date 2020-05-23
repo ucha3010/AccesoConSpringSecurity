@@ -1,5 +1,6 @@
 package com.damian.dao.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class ModelFactura {
@@ -25,6 +26,8 @@ public class ModelFactura {
 	private double cuotaConIva;
 	private double cuotaSinIva;
 	private double importeFront;
+	private String modificadoPor;
+	private Timestamp fechaModificacion;
 
 	public ModelFactura() {
 
@@ -343,6 +346,36 @@ public class ModelFactura {
 	 */
 	public void setImporteFront(double importeFront) {
 		this.importeFront = importeFront;
+	}
+
+	/**
+	 * @return the modificadoPor
+	 */
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	/**
+	 * @param modificadoPor
+	 *            the modificadoPor to set
+	 */
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
+
+	/**
+	 * @return the fechaModificacion
+	 */
+	public Timestamp getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	/**
+	 * @param fechaModificacion
+	 *            the fechaModificacion to set
+	 */
+	public void setFechaModificacion(Timestamp fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 	/*

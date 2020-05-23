@@ -84,16 +84,23 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 			return update(subcategoria);
 		} else {
 			ModelSubcategoria ms = converterSubcategoria.convert(subcategoria);
-			String sql = "INSERT INTO " + TABLA + " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU, idCat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			return jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getNombrePT(), ms.getNombreFR(), ms.getNombreIT(), ms.getNombreGE(), ms.getNombreCA(), ms.getNombreEU(), ms.getIdCat());
+			String sql = "INSERT INTO " + TABLA
+					+ " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU, idCat, modificadoPor, fechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			return jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getNombrePT(), ms.getNombreFR(),
+					ms.getNombreIT(), ms.getNombreGE(), ms.getNombreCA(), ms.getNombreEU(), ms.getIdCat(),
+					ms.getModificadoPor(), ms.getFechaModificacion());
 		}
 	}
 
 	@Override
 	public int update(Subcategoria subcategoria) {
 		ModelSubcategoria ms = converterSubcategoria.convert(subcategoria);
-		String sql = "UPDATE " + TABLA + " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, idCat=? " + "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getNombrePT(), ms.getNombreFR(), ms.getNombreIT(), ms.getNombreGE(), ms.getNombreCA(), ms.getNombreEU(), ms.getIdCat(), ms.getIdSub());
+		String sql = "UPDATE " + TABLA
+				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, idCat=?, modificadoPor=?, fechaModificacion=? "
+				+ "WHERE " + KEY + "=?";
+		return jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getNombrePT(), ms.getNombreFR(),
+				ms.getNombreIT(), ms.getNombreGE(), ms.getNombreCA(), ms.getNombreEU(), ms.getIdCat(),
+				ms.getModificadoPor(), ms.getFechaModificacion(), ms.getIdSub());
 	}
 
 	@Override
@@ -127,18 +134,20 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 	}
 
 	private ModelSubcategoria mapeo(ResultSet rs) throws SQLException {
-		ModelSubcategoria me = new ModelSubcategoria();
-		me.setIdSub(rs.getInt("idSub"));
-		me.setNombreES(rs.getString("nombreES"));
-		me.setNombreEN(rs.getString("nombreEN"));
-		me.setNombrePT(rs.getString("nombrePT"));
-		me.setNombreFR(rs.getString("nombreFR"));
-		me.setNombreIT(rs.getString("nombreIT"));
-		me.setNombreGE(rs.getString("nombreGE"));
-		me.setNombreCA(rs.getString("nombreCA"));
-		me.setNombreEU(rs.getString("nombreEU"));
-		me.setIdCat(rs.getInt("idCat"));
+		ModelSubcategoria ms = new ModelSubcategoria();
+		ms.setIdSub(rs.getInt("idSub"));
+		ms.setNombreES(rs.getString("nombreES"));
+		ms.setNombreEN(rs.getString("nombreEN"));
+		ms.setNombrePT(rs.getString("nombrePT"));
+		ms.setNombreFR(rs.getString("nombreFR"));
+		ms.setNombreIT(rs.getString("nombreIT"));
+		ms.setNombreGE(rs.getString("nombreGE"));
+		ms.setNombreCA(rs.getString("nombreCA"));
+		ms.setNombreEU(rs.getString("nombreEU"));
+		ms.setIdCat(rs.getInt("idCat"));
+		ms.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
+		ms.setModificadoPor(rs.getString("modificadoPor"));
 
-		return me;
+		return ms;
 	}
 }

@@ -1,5 +1,6 @@
 package com.damian.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +44,13 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
-	public void save(Empresa empresa) {
+	public void save(Empresa empresa, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		empresa.setModificadoPor(context.getAuthentication().getName());
+		empresa.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		empresaDAO.save(empresa);
 	}
 
@@ -53,7 +60,13 @@ public class EmpresaServiceImpl implements EmpresaService {
 	}
 
 	@Override
-	public void update(Empresa empresa) {
+	public void update(Empresa empresa, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		empresa.setModificadoPor(context.getAuthentication().getName());
+		empresa.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		empresaDAO.update(empresa);
 	}
 

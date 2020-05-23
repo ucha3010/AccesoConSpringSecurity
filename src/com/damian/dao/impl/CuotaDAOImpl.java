@@ -84,8 +84,10 @@ public class CuotaDAOImpl implements CuotaDAO {
 			return update(cuota);
 		} else {
 			ModelCuota mc = converterCuota.convert(cuota);
-			String sql = "INSERT INTO " + TABLA + " (cantidadCuotas, comisionAperturaPor, comisionAperturaImp, interesPor, interesImp) VALUES (?, ?, ?, ?, ?)";
-			jdbcTemplate.update(sql, mc.getCantidadCuotas(), mc.getComisionAperturaPor(), mc.getComisionAperturaImp(), mc.getInteresPor(), mc.getInteresImp());
+			String sql = "INSERT INTO " + TABLA
+					+ " (cantidadCuotas, comisionAperturaPor, comisionAperturaImp, interesPor, interesImp, modificadoPor, fechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			jdbcTemplate.update(sql, mc.getCantidadCuotas(), mc.getComisionAperturaPor(), mc.getComisionAperturaImp(),
+					mc.getInteresPor(), mc.getInteresImp(), mc.getModificadoPor(), mc.getFechaModificacion());
 			return getMaxId();
 		}
 	}
@@ -93,8 +95,12 @@ public class CuotaDAOImpl implements CuotaDAO {
 	@Override
 	public int update(Cuota cuota) {
 		ModelCuota mc = converterCuota.convert(cuota);
-		String sql = "UPDATE " + TABLA + " SET cantidadCuotas=?, comisionAperturaPor=?, comisionAperturaImp=?, interesPor=?, interesImp=? " + "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, mc.getCantidadCuotas(), mc.getComisionAperturaPor(), mc.getComisionAperturaImp(), mc.getInteresPor(), mc.getInteresImp(), mc.getIdCuo());
+		String sql = "UPDATE " + TABLA
+				+ " SET cantidadCuotas=?, comisionAperturaPor=?, comisionAperturaImp=?, interesPor=?, interesImp=?, modificadoPor=?, fechaModificacion=? "
+				+ "WHERE " + KEY + "=?";
+		return jdbcTemplate.update(sql, mc.getCantidadCuotas(), mc.getComisionAperturaPor(),
+				mc.getComisionAperturaImp(), mc.getInteresPor(), mc.getInteresImp(), mc.getModificadoPor(),
+				mc.getFechaModificacion(), mc.getIdCuo());
 	}
 
 	@Override
@@ -126,6 +132,8 @@ public class CuotaDAOImpl implements CuotaDAO {
 		mc.setComisionAperturaImp(rs.getDouble("comisionAperturaImp"));
 		mc.setInteresPor(rs.getDouble("interesPor"));
 		mc.setInteresImp(rs.getDouble("interesImp"));
+		mc.setModificadoPor(rs.getString("modificadoPor"));
+		mc.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
 		return mc;
 	}
 }

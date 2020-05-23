@@ -1,5 +1,7 @@
 package com.damian.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +48,7 @@ public class SubcategoriaController {
 
 	@RequestMapping(value = { "/subcategoria/save" }, method = RequestMethod.POST)
 	public String saveSubcategoria(@ModelAttribute("subcategoria") Subcategoria subcategoria, BindingResult result,
-			Model model, RedirectAttributes ra) {
+			Model model, RedirectAttributes ra, HttpServletRequest request) {
 		if (result.hasErrors()) {
 			// System.out.println(result.getAllErrors());
 			// return "subcategoria";
@@ -55,7 +57,7 @@ public class SubcategoriaController {
 		if (subcategoria.getIdSub() == 0) {
 			nueva = true;
 		}
-		subcategoriaService.save(subcategoria);
+		subcategoriaService.save(subcategoria, request);
 		if (nueva) {
 			ra.addFlashAttribute("subcategoria_agregado", "subcategoria_agregado");
 		}

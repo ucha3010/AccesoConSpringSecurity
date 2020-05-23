@@ -143,18 +143,6 @@ public class FacturaEstadoDAOImpl implements FacturaEstadoDAO {
 		return feList;
 	}
 
-	private ModelFacturaEstado mapeo(ResultSet rs) throws SQLException {
-		ModelFacturaEstado mfe = new ModelFacturaEstado();
-		mfe.setId(rs.getInt("id"));
-		mfe.setIdEst(rs.getInt("idEst"));
-		mfe.setIdFac(rs.getInt("idFac"));
-		mfe.setFecha(rs.getTimestamp("fecha"));
-		mfe.setCreadoPor(rs.getString("creadoPor"));
-		mfe.setObservaciones(rs.getString("observaciones"));
-
-		return mfe;
-	}
-
 	private List<FacturaEstado> listaModel(String sql) {
 		List<ModelFacturaEstado> mfeList = jdbcTemplate.query(sql,
 				BeanPropertyRowMapper.newInstance(ModelFacturaEstado.class));
@@ -166,6 +154,18 @@ public class FacturaEstadoDAOImpl implements FacturaEstadoDAO {
 			feList.add(fe);
 		}
 		return feList;
+	}
+
+	private ModelFacturaEstado mapeo(ResultSet rs) throws SQLException {
+		ModelFacturaEstado mfe = new ModelFacturaEstado();
+		mfe.setId(rs.getInt("id"));
+		mfe.setIdEst(rs.getInt("idEst"));
+		mfe.setIdFac(rs.getInt("idFac"));
+		mfe.setFecha(rs.getTimestamp("fecha"));
+		mfe.setCreadoPor(rs.getString("creadoPor"));
+		mfe.setObservaciones(rs.getString("observaciones"));
+
+		return mfe;
 	}
 
 }

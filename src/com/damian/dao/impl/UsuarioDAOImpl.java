@@ -104,15 +104,16 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		if (columnAndOrder != null) {
 
 			String sql = null;
-			if(customer) {
+			if (customer) {
 				sql = "SELECT usuario.idUsr, usuario.usuario, usuario.habilitado, usuario.fechaCreacion, datospersonales.idDatosPers, datospersonales.nombre, "
 						+ "datospersonales.apellido1, datospersonales.apellido2, datospersonales.sexo, datospersonales.fechaNacimiento, datospersonales.nacionalidad_idPais, "
 						+ "datospersonales.dni, datospersonales.email, datospersonales.telefono, datospersonales.observaciones, datospersonales.datospersonales_idUsr "
 						+ "FROM usuario, datospersonales, usuario_rol WHERE usuario.idUsr = datospersonales.datospersonales_idUsr AND usuario.idUsr = usuario_rol.idUsr "
-						+ "AND usuario_rol.idRol = 1 ORDER BY " + columnAndOrder + " LIMIT " + paginaInicio + "," + totalPaginas;
+						+ "AND usuario_rol.idRol = 1 ORDER BY " + columnAndOrder + " LIMIT " + paginaInicio + ","
+						+ totalPaginas;
 			} else {
 				sql = "SELECT * FROM usuario JOIN datospersonales ON usuario.idUsr = datospersonales.datospersonales_idUsr ORDER BY "
-					+ columnAndOrder + " LIMIT " + paginaInicio + "," + totalPaginas;
+						+ columnAndOrder + " LIMIT " + paginaInicio + "," + totalPaginas;
 			}
 
 			List<Map<String, Object>> listJoin = jdbcTemplate.queryForList(sql);
@@ -138,18 +139,22 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			update(usuario);
 		} else {
 			ModelUsuario mu = converterUsuario.convert(usuario);
-			String sql = "INSERT INTO " + TABLA + " (usuario, clave, habilitado, fechaCreacion)"
-					+ " VALUES (?, ?, ?, ?)";
-			jdbcTemplate.update(sql, mu.getUsuario(), mu.getClave(), mu.isHabilitado(), mu.getFechaCreacion());
+			String sql = "INSERT INTO " + TABLA
+					+ " (usuario, clave, habilitado, fechaCreacion, modificadoPor, fechaModificacion)"
+					+ " VALUES (?, ?, ?, ?, ?, ?)";
+			jdbcTemplate.update(sql, mu.getUsuario(), mu.getClave(), mu.isHabilitado(), mu.getFechaCreacion(),
+					mu.getModificadoPor(), mu.getFechaModificacion());
 		}
 	}
 
 	@Override
 	public void update(Usuario usuario) {
 		ModelUsuario mu = converterUsuario.convert(usuario);
-		String sql = "UPDATE " + TABLA + " SET usuario=?, clave=?, habilitado=?, fechaCreacion=? WHERE " + KEY + "=?";
+		String sql = "UPDATE " + TABLA
+				+ " SET usuario=?, clave=?, habilitado=?, fechaCreacion=?, modificadoPor=?, fechaModificacion=? WHERE "
+				+ KEY + "=?";
 		jdbcTemplate.update(sql, mu.getUsuario(), mu.getClave(), mu.isHabilitado(), mu.getFechaCreacion(),
-				mu.getIdUsr());
+				mu.getModificadoPor(), mu.getFechaModificacion(), mu.getIdUsr());
 	}
 
 	@Override
@@ -185,13 +190,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	@Override
 	public List<Usuario> findSearchAll(boolean customer) {
 		String sql = null;
-		if(customer) {
+		if (customer) {
 			sql = "SELECT usuario.idUsr, usuario.usuario FROM usuario, usuario_rol WHERE usuario.idUsr = usuario_rol.idUsr AND usuario_rol.idRol = 1";
 		} else {
 			sql = "SELECT idUsr, usuario FROM " + TABLA;
 		}
-		List<ModelUsuario> muList = jdbcTemplate.query(sql,
-				BeanPropertyRowMapper.newInstance(ModelUsuario.class));
+		List<ModelUsuario> muList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelUsuario.class));
 		List<Usuario> uList = new ArrayList<>();
 		Usuario usuario = null;
 		for (ModelUsuario mu : muList) {
@@ -218,6 +222,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		mu.setClave(rs.getString("clave"));
 		mu.setHabilitado(rs.getBoolean("habilitado"));
 		mu.setFechaCreacion(rs.getTimestamp("fechaCreacion"));
+		mu.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
+		mu.setModificadoPor(rs.getString("modificadoPor"));
 		return mu;
 	}
 

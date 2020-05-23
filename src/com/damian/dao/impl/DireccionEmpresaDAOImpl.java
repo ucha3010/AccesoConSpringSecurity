@@ -75,9 +75,11 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 		if (direccionEmpresa.getIdDirEmp() == 0) {
 			ModelDireccionEmpresa mdp = converterDireccionEmpresa.convert(direccionEmpresa);
 			String sql = "INSERT INTO " + TABLA + " (tipoVia, nombreVia, numero, resto, cp, provincia, "
-					+ "ciudad, pais_idPais, idEmp)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "ciudad, pais_idPais, idEmp, modificadoPor, fechaModificacion)"
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(sql, mdp.getTipoVia(), mdp.getNombreVia(), mdp.getNumero(), mdp.getResto(), mdp.getCp(),
-					mdp.getProvincia(), mdp.getCiudad(), mdp.getPais_idPais(), mdp.getIdEmp());
+					mdp.getProvincia(), mdp.getCiudad(), mdp.getPais_idPais(), mdp.getIdEmp(), mdp.getModificadoPor(),
+					mdp.getFechaModificacion());
 		} else {
 			update(direccionEmpresa);
 		}
@@ -89,9 +91,10 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 
 		ModelDireccionEmpresa mdp = converterDireccionEmpresa.convert(direccionEmpresa);
 		String sql = "UPDATE " + TABLA + " SET tipoVia=?, nombreVia=?, numero=?, " + "resto=?, cp=?, provincia=?, "
-				+ "ciudad=?, pais_idPais=?, idEmp=? " + "WHERE " + KEY + "=?";
+				+ "ciudad=?, pais_idPais=?, idEmp=?, modificadoPor=?, fechaModificacion=? WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, mdp.getTipoVia(), mdp.getNombreVia(), mdp.getNumero(), mdp.getResto(), mdp.getCp(),
-				mdp.getProvincia(), mdp.getCiudad(), mdp.getPais_idPais(), mdp.getIdEmp(), mdp.getIdDirEmp());
+				mdp.getProvincia(), mdp.getCiudad(), mdp.getPais_idPais(), mdp.getIdEmp(), mdp.getModificadoPor(),
+				mdp.getFechaModificacion(), mdp.getIdDirEmp());
 
 	}
 
@@ -117,21 +120,6 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 
 		return dpList;
 
-	}
-
-	private ModelDireccionEmpresa mapeo(ResultSet rs) throws SQLException {
-		ModelDireccionEmpresa mde = new ModelDireccionEmpresa();
-		mde.setIdDirEmp(rs.getInt("idDirEmp"));
-		mde.setTipoVia(rs.getString("tipoVia"));
-		mde.setNombreVia(rs.getString("nombreVia"));
-		mde.setNumero(rs.getString("numero"));
-		mde.setResto(rs.getString("resto"));
-		mde.setCp(rs.getString("cp"));
-		mde.setProvincia(rs.getString("provincia"));
-		mde.setCiudad(rs.getString("ciudad"));
-		mde.setPais_idPais(rs.getInt("pais_idPais"));
-		mde.setIdEmp(rs.getInt("idEmp"));
-		return mde;
 	}
 
 	@Override
@@ -170,6 +158,23 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 	@Override
 	public int getMaxId() {
 		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
+	private ModelDireccionEmpresa mapeo(ResultSet rs) throws SQLException {
+		ModelDireccionEmpresa mde = new ModelDireccionEmpresa();
+		mde.setIdDirEmp(rs.getInt("idDirEmp"));
+		mde.setTipoVia(rs.getString("tipoVia"));
+		mde.setNombreVia(rs.getString("nombreVia"));
+		mde.setNumero(rs.getString("numero"));
+		mde.setResto(rs.getString("resto"));
+		mde.setCp(rs.getString("cp"));
+		mde.setProvincia(rs.getString("provincia"));
+		mde.setCiudad(rs.getString("ciudad"));
+		mde.setPais_idPais(rs.getInt("pais_idPais"));
+		mde.setIdEmp(rs.getInt("idEmp"));
+		mde.setModificadoPor(rs.getString("modificadoPor"));
+		mde.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
+		return mde;
 	}
 
 }

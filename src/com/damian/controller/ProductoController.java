@@ -68,7 +68,7 @@ public class ProductoController {
 
 	@RequestMapping(value = { "/producto/save" }, method = RequestMethod.POST)
 	public String saveProducto(@ModelAttribute("producto") Producto producto, BindingResult result, Model model,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, HttpServletRequest request) {
 		if (result.hasErrors()) {
 			// System.out.println(result.getAllErrors());
 			// return "producto";
@@ -77,7 +77,7 @@ public class ProductoController {
 		if (producto.getIdPro() == 0) {
 			nueva = true;
 		}
-		productoService.save(producto);
+		productoService.save(producto, request);
 		if (nueva) {
 			ra.addFlashAttribute("producto_agregado", "producto_agregado");
 		}

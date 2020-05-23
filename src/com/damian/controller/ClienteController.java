@@ -44,8 +44,9 @@ public class ClienteController {
 			@PathVariable("order") String order, @PathVariable("paginaInicio") int paginaInicio,
 			@PathVariable("totalPaginas") int totalPaginas, HttpServletRequest request) {
 		modelAndView.addObject("roles", rolService.findAll());
-		modelAndView.addObject("usuarios", usuarioService.findCustomers(column, order, paginaInicio, totalPaginas, request));
-		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio,totalPaginas,"usuario"));
+		modelAndView.addObject("usuarios",
+				usuarioService.findCustomers(column, order, paginaInicio, totalPaginas, request));
+		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, "usuario"));
 		modelAndView.addObject("buscarusuarios", usuarioService.findSearchAll(true));
 		modelAndView.addObject("estoy", "cliente");
 		modelAndView.setViewName("clientes");
@@ -137,15 +138,15 @@ public class ClienteController {
 		usuarioService.reset(idUsr);
 		return "redirect:/cliente/all/" + usuarioService.getColumn(request) + "/null/0/100";
 	}
-	
+
 	private ModelAndView fillFiltered(ModelAndView modelAndView) {
 		modelAndView.addObject("roles", rolService.findAll());
-		modelAndView.addObject("paginacion", paginacionService.pagination(0,0,"usuario"));
+		modelAndView.addObject("paginacion", paginacionService.pagination(0, 0, "usuario"));
 		modelAndView.addObject("estoy", "cliente");
 		modelAndView.addObject("buscarusuarios", usuarioService.findSearchAll(true));
 		modelAndView.setViewName("clientes");
 		return modelAndView;
-		
+
 	}
 
 }

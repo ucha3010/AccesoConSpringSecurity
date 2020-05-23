@@ -2,6 +2,8 @@ package com.damian.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +25,7 @@ import com.damian.valid.SpringFormGroup;
 
 @Controller
 @SessionAttributes({ "resultado" }) // los atributos que pueden mantenerse en sesión y verse en distintas
-												// páginas
+									// páginas
 public class RolController {
 
 	@Autowired
@@ -52,16 +54,16 @@ public class RolController {
 
 	@RequestMapping(value = { "/rol/save" }, method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute("rol") @Validated(value = SpringFormGroup.class) Rol rol,
-			BindingResult result, Model model, RedirectAttributes ra) {
+			BindingResult result, Model model, RedirectAttributes ra, HttpServletRequest request) {
 		if (result.hasErrors()) {
-//			System.out.println(result.getAllErrors());
-//			return "rol";
-		}		
+			// System.out.println(result.getAllErrors());
+			// return "rol";
+		}
 		boolean nueva = false;
 		if (rol.getIdRol() == 0) {
 			nueva = true;
 		}
-		rolService.save(rol);
+		rolService.save(rol, request);
 		if (nueva) {
 			ra.addFlashAttribute("rol_agregado", "rol_agregado");
 		}
@@ -72,7 +74,7 @@ public class RolController {
 	public String deleteUser(@PathVariable("idRol") int idRol, RedirectAttributes ra) {
 
 		List<UsuarioRol> usuarioRolList = usuarioRolService.findByIdRol(idRol);
-		if(usuarioRolList == null || usuarioRolList.isEmpty()) {
+		if (usuarioRolList == null || usuarioRolList.isEmpty()) {
 			rolService.delete(idRol);
 			ra.addFlashAttribute("rol_eliminado", "rol_eliminado");
 		} else {

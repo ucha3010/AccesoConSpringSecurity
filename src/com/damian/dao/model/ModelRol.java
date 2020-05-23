@@ -1,16 +1,13 @@
 package com.damian.dao.model;
 
-import java.io.Serializable;
+import java.sql.Timestamp;
 
-public class ModelRol implements Serializable {
-
-	/**
-	 * Clase Roles
-	 */
-	private static final long serialVersionUID = 130820142307L;
+public class ModelRol {
 
 	private int idRol;
 	private String rol;
+	private String modificadoPor;
+	private Timestamp fechaModificacion;
 
 	public ModelRol() {
 
@@ -53,6 +50,36 @@ public class ModelRol implements Serializable {
 	 */
 	public void setRol(String rol) {
 		this.rol = rol;
+	}
+
+	/**
+	 * @return the modificadoPor
+	 */
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	/**
+	 * @param modificadoPor
+	 *            the modificadoPor to set
+	 */
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
+
+	/**
+	 * @return the fechaModificacion
+	 */
+	public Timestamp getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	/**
+	 * @param fechaModificacion
+	 *            the fechaModificacion to set
+	 */
+	public void setFechaModificacion(Timestamp fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 	/*

@@ -1,5 +1,6 @@
 package com.damian.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.damian.dao.EstadoDAO;
-import com.damian.dao.FacturaDAO;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Estado;
 import com.damian.pojo.Factura;
 import com.damian.service.EstadoService;
+import com.damian.service.FacturaService;
 
 @Service
 public class EstadoServiceImpl implements EstadoService {
@@ -21,7 +22,7 @@ public class EstadoServiceImpl implements EstadoService {
 	private EstadoDAO estadoDAO;
 
 	@Autowired
-	private FacturaDAO facturaDAO;
+	private FacturaService facturaService;
 
 	@Override
 	public List<Estado> findAll() {
@@ -39,18 +40,30 @@ public class EstadoServiceImpl implements EstadoService {
 	}
 
 	@Override
-	public int save(Estado estado) {
+	public int save(Estado estado, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		estado.setModificadoPor(context.getAuthentication().getName());
+		estado.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		return estadoDAO.save(estado);
 	}
 
 	@Override
-	public int update(Estado estado) {
+	public int update(Estado estado, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		estado.setModificadoPor(context.getAuthentication().getName());
+		estado.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		return estadoDAO.update(estado);
 	}
 
 	@Override
 	public int delete(int id, String column, HttpServletRequest request) throws NotEmptyException {
-		List<Factura> lista = facturaDAO.findByIdEstModel(id, column, request);
+		List<Factura> lista = facturaService.findByIdEstModel(id, column, request);
 		if (lista != null && !lista.isEmpty()) {
 			throw new NotEmptyException("Tiene asociado facturas");
 		}

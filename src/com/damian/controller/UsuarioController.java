@@ -28,8 +28,9 @@ import com.damian.service.RolService;
 import com.damian.service.impl.UsuarioServiceImpl;
 
 @Controller
-@SessionAttributes({ "resultado", "estoy", "roles", "prinPicUsr" }) // los atributos que pueden mantenerse en sesión y verse en
-														// distintas páginas
+@SessionAttributes({ "resultado", "estoy", "roles", "prinPicUsr" }) // los atributos que pueden mantenerse en sesión y
+																	// verse en
+// distintas páginas
 public class UsuarioController {
 
 	@Autowired

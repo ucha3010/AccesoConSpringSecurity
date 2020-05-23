@@ -1,6 +1,9 @@
 package com.damian.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +24,24 @@ public class ProductoFacturaServiceImpl implements ProductoFacturaService {
 	}
 
 	@Override
-	public void save(ProductoFactura productoFactura) {
+	public void save(ProductoFactura productoFactura, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		productoFactura.setModificadoPor(context.getAuthentication().getName());
+		productoFactura.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+		
 		productoFacturaDAO.save(productoFactura);
 	}
 
 	@Override
-	public void update(ProductoFactura productoFactura) {
+	public void update(ProductoFactura productoFactura, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		productoFactura.setModificadoPor(context.getAuthentication().getName());
+		productoFactura.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+		
 		productoFacturaDAO.update(productoFactura);
 	}
 

@@ -95,9 +95,11 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		} else {
 			ModelEmpresa me = converterEmpresa.convert(empresa);
 			String sql = "INSERT INTO " + TABLA + " (nombreComercial, tipoSociedad, actividad, cif, email, paginaWeb, "
-					+ "telefono, fax, observaciones)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "telefono, fax, observaciones, modificadoPor, fechaModificacion)"
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(sql, me.getNombreComercial(), me.getTipoSociedad(), me.getActividad(), me.getCif(),
-					me.getEmail(), me.getPaginaWeb(), me.getTelefono(), me.getFax(), me.getObservaciones());
+					me.getEmail(), me.getPaginaWeb(), me.getTelefono(), me.getFax(), me.getObservaciones(),
+					me.getModificadoPor(), me.getFechaModificacion());
 		}
 	}
 
@@ -105,9 +107,11 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	public void update(Empresa empresa) {
 		ModelEmpresa me = converterEmpresa.convert(empresa);
 		String sql = "UPDATE " + TABLA + " SET nombreComercial=?, tipoSociedad=?, actividad=?, "
-				+ "cif=?, email=?, paginaWeb=?, " + "telefono=?, fax=?, observaciones=? " + "WHERE " + KEY + "=?";
+				+ "cif=?, email=?, paginaWeb=?, "
+				+ "telefono=?, fax=?, observaciones=?, modificadoPor=?, fechaModificacion=? WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, me.getNombreComercial(), me.getTipoSociedad(), me.getActividad(), me.getCif(),
-				me.getEmail(), me.getPaginaWeb(), me.getTelefono(), me.getFax(), me.getObservaciones(), me.getIdEmp());
+				me.getEmail(), me.getPaginaWeb(), me.getTelefono(), me.getFax(), me.getObservaciones(),
+				me.getModificadoPor(), me.getFechaModificacion(), me.getIdEmp());
 	}
 
 	@Override
@@ -132,21 +136,6 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 			eList.add(converterEmpresa.convert(me));
 		}
 		return eList;
-	}
-
-	private ModelEmpresa mapeo(ResultSet rs) throws SQLException {
-		ModelEmpresa me = new ModelEmpresa();
-		me.setIdEmp(rs.getInt("idEmp"));
-		me.setNombreComercial(rs.getString("nombreComercial"));
-		me.setTipoSociedad(rs.getString("tipoSociedad"));
-		me.setActividad(rs.getString("actividad"));
-		me.setCif(rs.getString("cif"));
-		me.setEmail(rs.getString("email"));
-		me.setPaginaWeb(rs.getString("paginaWeb"));
-		me.setTelefono(rs.getString("telefono"));
-		me.setFax(rs.getString("fax"));
-		me.setObservaciones(rs.getString("observaciones"));
-		return me;
 	}
 
 	@Override
@@ -181,5 +170,22 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 			eList.add(converterEmpresa.convert(me));
 		}
 		return eList;
+	}
+
+	private ModelEmpresa mapeo(ResultSet rs) throws SQLException {
+		ModelEmpresa me = new ModelEmpresa();
+		me.setIdEmp(rs.getInt("idEmp"));
+		me.setNombreComercial(rs.getString("nombreComercial"));
+		me.setTipoSociedad(rs.getString("tipoSociedad"));
+		me.setActividad(rs.getString("actividad"));
+		me.setCif(rs.getString("cif"));
+		me.setEmail(rs.getString("email"));
+		me.setPaginaWeb(rs.getString("paginaWeb"));
+		me.setTelefono(rs.getString("telefono"));
+		me.setFax(rs.getString("fax"));
+		me.setObservaciones(rs.getString("observaciones"));
+		me.setModificadoPor(rs.getString("modificadoPor"));
+		me.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
+		return me;
 	}
 }

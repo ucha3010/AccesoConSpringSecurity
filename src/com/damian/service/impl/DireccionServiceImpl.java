@@ -1,11 +1,13 @@
 package com.damian.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.damian.dao.DatosPersonalesDAO;
 import com.damian.dao.DireccionDao;
 import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
@@ -14,9 +16,6 @@ import com.damian.service.DireccionService;
 
 @Service
 public class DireccionServiceImpl implements DireccionService {
-
-	@Autowired
-	private DatosPersonalesDAO datosPersonalesDAO;
 
 	@Autowired
 	private DireccionDao direccionDao;
@@ -30,10 +29,16 @@ public class DireccionServiceImpl implements DireccionService {
 	}
 
 	@Override
-	public int save(int idUsr, Direccion direccion) {
+	public int save(int idUsr, Direccion direccion, HttpServletRequest request) {
 
 		DatosPersonales datosPersonales = datosPersonalesService.findByUsrId(idUsr);
 		direccion.setDatosPersonales(datosPersonales);
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		direccion.setModificadoPor(context.getAuthentication().getName());
+		direccion.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		direccionDao.save(direccion);
 		return direccionDao.getMaxId();
 
@@ -42,7 +47,7 @@ public class DireccionServiceImpl implements DireccionService {
 	@Override
 	public List<Direccion> findListFromUsuario(int idUsr) {
 
-		DatosPersonales datosPersonales = datosPersonalesDAO.findByUsrId(idUsr);
+		DatosPersonales datosPersonales = datosPersonalesService.findByUsrId(idUsr);
 		return direccionDao.findListFromUsuario(datosPersonales.getIdDatosPers());
 	}
 

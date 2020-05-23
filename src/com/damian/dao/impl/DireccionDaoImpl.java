@@ -59,14 +59,18 @@ public class DireccionDaoImpl implements DireccionDao {
 		ModelDireccion md = converterDireccion.convert(direccion);
 		if (direccion.getIdDir() == 0) {
 			String sql = "INSERT INTO " + TABLA + " (tipoVia, nombreVia, numero, resto, "
-					+ "cp, provincia, ciudad, pais_idPais, idDatosPers)" + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "cp, provincia, ciudad, pais_idPais, idDatosPers, modificadoPor, fechaModificacion)"
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(sql, md.getTipoVia(), md.getNombreVia(), md.getNumero(), md.getResto(), md.getCp(),
-					md.getProvincia(), md.getCiudad(), md.getPais_idPais(), md.getIdDatosPers());
+					md.getProvincia(), md.getCiudad(), md.getPais_idPais(), md.getIdDatosPers(), md.getModificadoPor(),
+					md.getFechaModificacion());
 		} else {
 			String sql = "UPDATE " + TABLA + " SET tipoVia=?, nombreVia=?, numero=?, resto=?, cp=?, provincia=?, "
-					+ "ciudad=?, pais_idPais=?, idDatosPers=? WHERE " + KEY + "=?";
+					+ "ciudad=?, pais_idPais=?, idDatosPers=?, modificadoPor=?, fechaModificacion=? WHERE " + KEY
+					+ "=?";
 			jdbcTemplate.update(sql, md.getTipoVia(), md.getNombreVia(), md.getNumero(), md.getResto(), md.getCp(),
-					md.getProvincia(), md.getCiudad(), md.getPais_idPais(), md.getIdDatosPers(), md.getIdDir());
+					md.getProvincia(), md.getCiudad(), md.getPais_idPais(), md.getIdDatosPers(), md.getModificadoPor(),
+					md.getFechaModificacion(), md.getIdDir());
 
 		}
 	}
@@ -90,21 +94,6 @@ public class DireccionDaoImpl implements DireccionDao {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, id);
-	}
-
-	private ModelDireccion mapeo(ResultSet rs) throws SQLException {
-		ModelDireccion md = new ModelDireccion();
-		md.setIdDir(rs.getInt("idDir"));
-		md.setTipoVia(rs.getString("tipoVia"));
-		md.setNombreVia(rs.getString("nombreVia"));
-		md.setNumero(rs.getString("numero"));
-		md.setResto(rs.getString("resto"));
-		md.setCp(rs.getString("cp"));
-		md.setProvincia(rs.getString("provincia"));
-		md.setCiudad(rs.getString("ciudad"));
-		md.setPais_idPais(rs.getInt("pais_idPais"));
-		md.setIdDatosPers(rs.getInt("idDatosPers"));
-		return md;
 	}
 
 	@Override
@@ -142,6 +131,23 @@ public class DireccionDaoImpl implements DireccionDao {
 	@Override
 	public int getMaxId() {
 		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
+	private ModelDireccion mapeo(ResultSet rs) throws SQLException {
+		ModelDireccion md = new ModelDireccion();
+		md.setIdDir(rs.getInt("idDir"));
+		md.setTipoVia(rs.getString("tipoVia"));
+		md.setNombreVia(rs.getString("nombreVia"));
+		md.setNumero(rs.getString("numero"));
+		md.setResto(rs.getString("resto"));
+		md.setCp(rs.getString("cp"));
+		md.setProvincia(rs.getString("provincia"));
+		md.setCiudad(rs.getString("ciudad"));
+		md.setPais_idPais(rs.getInt("pais_idPais"));
+		md.setIdDatosPers(rs.getInt("idDatosPers"));
+		md.setModificadoPor(rs.getString("modificadoPor"));
+		md.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
+		return md;
 	}
 
 }

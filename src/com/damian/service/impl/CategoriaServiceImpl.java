@@ -1,6 +1,9 @@
 package com.damian.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,12 +40,24 @@ public class CategoriaServiceImpl implements CategoriaService {
 	}
 
 	@Override
-	public int save(Categoria categoria) {
+	public int save(Categoria categoria, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		categoria.setModificadoPor(context.getAuthentication().getName());
+		categoria.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		return categoriaDAO.save(categoria);
 	}
 
 	@Override
-	public int update(Categoria categoria) {
+	public int update(Categoria categoria, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		categoria.setModificadoPor(context.getAuthentication().getName());
+		categoria.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		return categoriaDAO.update(categoria);
 	}
 

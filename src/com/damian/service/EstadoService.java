@@ -15,9 +15,9 @@ public interface EstadoService {
 
 	public Estado findByIdModel(int id);
 
-	public int save(Estado estado);
+	public int save(Estado estado, HttpServletRequest request);
 
-	public int update(Estado estado);
+	public int update(Estado estado, HttpServletRequest request);
 
 	public int delete(int id, String column, HttpServletRequest request) throws NotEmptyException;
 

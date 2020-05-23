@@ -80,13 +80,13 @@ public class FotoServiceImpl implements FotoService {
 		List<Foto> fotos = new ArrayList<>();
 		String llamada = null;
 		int id = 0;
-		if(foto != null) {
-			if(foto.getUsuario() != null && foto.getUsuario().getIdUsr() != 0) {
+		if (foto != null) {
+			if (foto.getUsuario() != null && foto.getUsuario().getIdUsr() != 0) {
 				fotos = findByIdUsr(foto.getUsuario().getIdUsr());
 				llamada = "usuarios";
 				id = foto.getUsuario().getIdUsr();
 			}
-			if(foto.getProducto() != null && foto.getProducto().getIdPro() != 0) {
+			if (foto.getProducto() != null && foto.getProducto().getIdPro() != 0) {
 				id = foto.getProducto().getIdPro();
 				fotos = findByIdPro(id);
 				llamada = "productos";
@@ -95,7 +95,6 @@ public class FotoServiceImpl implements FotoService {
 		if (fotos.isEmpty() || fotos.size() < 4) {
 
 			Ruta ruta = Ruta(llamada, id, request);
-
 
 			try {
 				byte[] bytes = file.getBytes();
@@ -108,7 +107,7 @@ public class FotoServiceImpl implements FotoService {
 				// Create the file on server
 				File serverFile = new File(
 						dir.getAbsolutePath() + System.getProperty("file.separator") + file.getOriginalFilename());
-				if(serverFile.exists()) {
+				if (serverFile.exists()) {
 					// TODO DAMIAN hacer una excepción mejor para acá
 					throw new Exception();
 				}
@@ -130,6 +129,8 @@ public class FotoServiceImpl implements FotoService {
 					.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 			foto.setCreadoPor(context.getAuthentication().getName());
 			foto.setRuta(ruta.getRutaRelativa());
+			foto.setModificadoPor(context.getAuthentication().getName());
+			foto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 			return fotoDAO.save(foto);
 		} else {
@@ -152,17 +153,17 @@ public class FotoServiceImpl implements FotoService {
 		Foto foto = findByIdFot(id);
 		Ruta ruta = null;
 		int idSalida = 0;
-		if(foto != null) {
-			if(foto.getUsuario() != null && foto.getUsuario().getIdUsr() != 0) {
+		if (foto != null) {
+			if (foto.getUsuario() != null && foto.getUsuario().getIdUsr() != 0) {
 				idSalida = foto.getUsuario().getIdUsr();
 				ruta = Ruta("usuarios", idSalida, request);
 			}
-			if(foto.getProducto() != null && foto.getProducto().getIdPro() != 0) {
+			if (foto.getProducto() != null && foto.getProducto().getIdPro() != 0) {
 				idSalida = foto.getProducto().getIdPro();
 				ruta = Ruta("productos", idSalida, request);
 			}
 		}
-		if(ruta != null) {
+		if (ruta != null) {
 			File file = new File(ruta.getRutaAbsoluta() + System.getProperty("file.separator") + foto.getNombre());
 			file.delete();
 			fotoDAO.delete(id);
@@ -179,11 +180,11 @@ public class FotoServiceImpl implements FotoService {
 	public Foto doPrincipal(int idFot, HttpServletRequest request) {
 		Foto foto = findByIdFot(idFot);
 		List<Foto> fotos = new ArrayList<>();
-		if(foto != null) {
-			if(foto.getUsuario() != null && foto.getUsuario().getIdUsr() != 0) {
+		if (foto != null) {
+			if (foto.getUsuario() != null && foto.getUsuario().getIdUsr() != 0) {
 				fotos = findByIdUsr(foto.getUsuario().getIdUsr());
 			}
-			if(foto.getProducto() != null && foto.getProducto().getIdPro() != 0) {
+			if (foto.getProducto() != null && foto.getProducto().getIdPro() != 0) {
 				fotos = findByIdPro(foto.getProducto().getIdPro());
 			}
 		}
@@ -192,7 +193,7 @@ public class FotoServiceImpl implements FotoService {
 		update(foto, request);
 		return foto;
 	}
-	
+
 	public String principalPictureName(List<Foto> fotos) {
 		String nombre = null;
 		for (Foto f : fotos) {
@@ -220,8 +221,7 @@ public class FotoServiceImpl implements FotoService {
 		rutaWorkspace = rutaWorkspace + request.getContextPath().substring(1);
 		// Ruta dentro del proyecto
 		ruta.setRutaRelativa(System.getProperty("file.separator") + "resources" + System.getProperty("file.separator")
-				+ "imgs" + System.getProperty("file.separator") + llamante + System.getProperty("file.separator")
-				+ id);
+				+ "imgs" + System.getProperty("file.separator") + llamante + System.getProperty("file.separator") + id);
 		ruta.setRutaAbsoluta(
 				rutaWorkspace + System.getProperty("file.separator") + "WebContent" + ruta.getRutaRelativa());
 		return ruta;

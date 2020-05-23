@@ -1,5 +1,6 @@
 package com.damian.pojo;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Cuota {
@@ -11,6 +12,8 @@ public class Cuota {
 	private double interesPor;
 	private double interesImp;
 	private List<Factura> facturas;
+	private String modificadoPor;
+	private Timestamp fechaModificacion;
 
 	public Cuota() {
 
@@ -132,10 +135,41 @@ public class Cuota {
 	}
 
 	/**
-	 * @param facturas the facturas to set
+	 * @param facturas
+	 *            the facturas to set
 	 */
 	public void setFacturas(List<Factura> facturas) {
 		this.facturas = facturas;
+	}
+
+	/**
+	 * @return the modificadoPor
+	 */
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	/**
+	 * @param modificadoPor
+	 *            the modificadoPor to set
+	 */
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
+
+	/**
+	 * @return the fechaModificacion
+	 */
+	public Timestamp getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	/**
+	 * @param fechaModificacion
+	 *            the fechaModificacion to set
+	 */
+	public void setFechaModificacion(Timestamp fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 	/*

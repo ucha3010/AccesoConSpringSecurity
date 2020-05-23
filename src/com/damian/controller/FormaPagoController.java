@@ -1,5 +1,7 @@
 package com.damian.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +43,7 @@ public class FormaPagoController {
 
 	@RequestMapping(value = { "/formaPago/save" }, method = RequestMethod.POST)
 	public String saveFormaPago(@ModelAttribute("formaPago") FormaPago formaPago, BindingResult result, Model model,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, HttpServletRequest request) {
 		if (result.hasErrors()) {
 			// System.out.println(result.getAllErrors());
 			// return "formaPago";
@@ -50,7 +52,7 @@ public class FormaPagoController {
 		if (formaPago.getIdFor() == 0) {
 			nueva = true;
 		}
-		formaPagoService.save(formaPago);
+		formaPagoService.save(formaPago, request);
 		if (nueva) {
 			ra.addFlashAttribute("formaPago_agregado", "formaPago_agregado");
 		}

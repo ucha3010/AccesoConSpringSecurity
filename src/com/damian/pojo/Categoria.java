@@ -1,5 +1,6 @@
 package com.damian.pojo;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Categoria {
@@ -14,7 +15,9 @@ public class Categoria {
 	private String nombreCA;
 	private String nombreEU;
 	private List<Subcategoria> subcategorias;
-	Foto foto;
+	private Foto foto;
+	private String modificadoPor;
+	private Timestamp fechaModificacion;
 
 	/**
 	 * 
@@ -203,6 +206,36 @@ public class Categoria {
 	 */
 	public void setFoto(Foto foto) {
 		this.foto = foto;
+	}
+
+	/**
+	 * @return the modificadoPor
+	 */
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	/**
+	 * @param modificadoPor
+	 *            the modificadoPor to set
+	 */
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
+
+	/**
+	 * @return the fechaModificacion
+	 */
+	public Timestamp getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	/**
+	 * @param fechaModificacion
+	 *            the fechaModificacion to set
+	 */
+	public void setFechaModificacion(Timestamp fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 	/*

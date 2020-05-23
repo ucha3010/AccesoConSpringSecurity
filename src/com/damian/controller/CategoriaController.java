@@ -1,5 +1,7 @@
 package com.damian.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +43,7 @@ public class CategoriaController {
 
 	@RequestMapping(value = { "/categoria/save" }, method = RequestMethod.POST)
 	public String saveCategoria(@ModelAttribute("categoria") Categoria categoria, BindingResult result, Model model,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, HttpServletRequest request) {
 		if (result.hasErrors()) {
 			// System.out.println(result.getAllErrors());
 			// return "categoria";
@@ -50,7 +52,7 @@ public class CategoriaController {
 		if (categoria.getIdCat() == 0) {
 			nueva = true;
 		}
-		categoriaService.save(categoria);
+		categoriaService.save(categoria, request);
 		if (nueva) {
 			ra.addFlashAttribute("categoria_agregado", "categoria_agregado");
 		}

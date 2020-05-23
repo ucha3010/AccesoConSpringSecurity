@@ -1,5 +1,7 @@
 package com.damian.dao.model;
 
+import java.sql.Timestamp;
+
 public class ModelProductoFactura {
 
 	private int idPro;
@@ -11,6 +13,8 @@ public class ModelProductoFactura {
 	private double precioUnitConIva;
 	private double precioFinal;
 	private String observaciones;
+	private String modificadoPor;
+	private Timestamp fechaModificacion;
 
 	public ModelProductoFactura() {
 
@@ -173,6 +177,36 @@ public class ModelProductoFactura {
 	 */
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
+	}
+
+	/**
+	 * @return the modificadoPor
+	 */
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	/**
+	 * @param modificadoPor
+	 *            the modificadoPor to set
+	 */
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
+
+	/**
+	 * @return the fechaModificacion
+	 */
+	public Timestamp getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	/**
+	 * @param fechaModificacion
+	 *            the fechaModificacion to set
+	 */
+	public void setFechaModificacion(Timestamp fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 	/*

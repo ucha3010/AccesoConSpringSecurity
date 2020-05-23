@@ -12,11 +12,11 @@ public interface EmpresaService {
 
 	List<Empresa> findByIdList(int id);
 
-	void save(Empresa empresa);
+	void save(Empresa empresa, HttpServletRequest request);
 
 	List<Empresa> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request);
 
-	void update(Empresa empresa);
+	void update(Empresa empresa, HttpServletRequest request);
 
 	boolean delete(int idEmpresa);
 

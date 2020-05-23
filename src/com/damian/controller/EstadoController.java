@@ -43,7 +43,7 @@ public class EstadoController {
 
 	@RequestMapping(value = { "/estado/save" }, method = RequestMethod.POST)
 	public String saveEstado(@ModelAttribute("estado") Estado estado, BindingResult result, Model model,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, HttpServletRequest request) {
 		if (result.hasErrors()) {
 			// System.out.println(result.getAllErrors());
 			// return "estado";
@@ -52,7 +52,7 @@ public class EstadoController {
 		if (estado.getIdEst() == 0) {
 			nueva = true;
 		}
-		estadoService.save(estado);
+		estadoService.save(estado, request);
 		if (nueva) {
 			ra.addFlashAttribute("estado_agregado", "estado_agregado");
 		}

@@ -25,8 +25,8 @@ public class Foto {
 	private String extension;
 	private Timestamp fechaCreacion;
 	private String creadoPor;
-	private Timestamp fechaModificacion;
 	private String modificadoPor;
+	private Timestamp fechaModificacion;
 
 	public Foto() {
 

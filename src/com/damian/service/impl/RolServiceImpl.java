@@ -1,6 +1,9 @@
 package com.damian.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +22,13 @@ public class RolServiceImpl implements RolService {
 		return rolDAO.findById(id);
 	}
 
-	public void save(Rol rol) {
+	public void save(Rol rol, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		rol.setModificadoPor(context.getAuthentication().getName());
+		rol.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		rolDAO.save(rol);
 	}
 

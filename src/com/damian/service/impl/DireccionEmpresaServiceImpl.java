@@ -1,6 +1,9 @@
 package com.damian.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,11 +25,16 @@ public class DireccionEmpresaServiceImpl implements DireccionEmpresaService {
 	}
 
 	@Override
-	public void save(int idEmp, DireccionEmpresa direccionEmpresa) {
+	public void save(int idEmp, DireccionEmpresa direccionEmpresa, HttpServletRequest request) {
 
 		Empresa empresa = new Empresa();
 		empresa.setIdEmp(idEmp);
 		direccionEmpresa.setEmpresa(empresa);
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		direccionEmpresa.setModificadoPor(context.getAuthentication().getName());
+		direccionEmpresa.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		direccionEmpresaDao.save(direccionEmpresa);
 
 	}

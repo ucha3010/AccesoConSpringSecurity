@@ -1,22 +1,25 @@
 package com.damian.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.damian.dao.ProductoDAO;
 import com.damian.dao.SubcategoriaDAO;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Producto;
 import com.damian.pojo.Subcategoria;
+import com.damian.service.ProductoService;
 import com.damian.service.SubcategoriaService;
 
 @Service
 public class SubcategoriaServiceImpl implements SubcategoriaService {
 
 	@Autowired
-	private ProductoDAO productoDAO;
+	private ProductoService productoService;
 
 	@Autowired
 	private SubcategoriaDAO subcategoriaDAO;
@@ -37,18 +40,30 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
 	}
 
 	@Override
-	public int save(Subcategoria subcategoria) {
+	public int save(Subcategoria subcategoria, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		subcategoria.setModificadoPor(context.getAuthentication().getName());
+		subcategoria.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		return subcategoriaDAO.save(subcategoria);
 	}
 
 	@Override
-	public int update(Subcategoria subcategoria) {
+	public int update(Subcategoria subcategoria, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		subcategoria.setModificadoPor(context.getAuthentication().getName());
+		subcategoria.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 		return subcategoriaDAO.update(subcategoria);
 	}
 
 	@Override
 	public int delete(int id) throws NotEmptyException {
-		List<Producto> productoList = productoDAO.findByIdSubModel(id);
+		List<Producto> productoList = productoService.findByIdSubModel(id);
 		if (productoList != null && !productoList.isEmpty()) {
 			throw new NotEmptyException("Tiene asociado productos");
 		}

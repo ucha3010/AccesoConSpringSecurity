@@ -1,5 +1,7 @@
 package com.damian.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,9 +66,9 @@ public class DireccionController {
 
 	@RequestMapping("/direccion/save/{idUsr}")
 	public String save(Model model, RedirectAttributes ra, @ModelAttribute("direccion") Direccion direccion,
-			@PathVariable("idUsr") int idUsr) {
+			@PathVariable("idUsr") int idUsr, HttpServletRequest request) {
 
-		direccionService.save(idUsr, direccion);
+		direccionService.save(idUsr, direccion, request);
 		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
 
 		return "redirect:/direccion/" + idUsr;

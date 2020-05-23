@@ -74,6 +74,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		DatosPersonales dp;
 		dp = usuario.getDatosPersonales();
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		String creador;
+		if (context != null) {
+			creador = context.getAuthentication().getName();
+		} else {
+			creador = "OWN USER";
+		}
+		usuario.setModificadoPor(creador);
+		usuario.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		if (usuario.getIdUsr() == 0) {
 			Usuario verifico = findByUsername(usuario.getUsuario());
@@ -87,24 +97,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 			usuarioDAO.save(usuario);
 			usuario = findByUsername(usuario.getUsuario());
 			dp.setUsuario(usuario);
-			datosPersonalesService.save(dp);
+			datosPersonalesService.save(dp, request);
 		} else {
 			DatosPersonales dpId = datosPersonalesService.findByUsrId(usuario.getIdUsr());
 			dp.setIdDatosPers(dpId.getIdDatosPers());
 			dp.setUsuario(usuario);
-			datosPersonalesService.update(dp);
+			datosPersonalesService.update(dp, request);
 		}
 		if (usuarioRol != null) {
 			eliminarRolesNoSeleccionados(usuarioRol, usuario);
 			String[] nuevosRoles = rolesAGuardar(usuarioRol, usuario);
-			org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-					.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-			String creador;
-			if (context != null) {
-				creador = context.getAuthentication().getName();
-			} else {
-				creador = "OWN USER";
-			}
 			Date ahora = new Date();
 			UsuarioRol ur = null;
 			for (String rolId : nuevosRoles) {
