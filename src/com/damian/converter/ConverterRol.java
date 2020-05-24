@@ -26,6 +26,8 @@ public class ConverterRol {
 		Rol r = new Rol();
 		r.setIdRol(mr.getIdRol());
 		r.setRol(mr.getRol());
+		r.setModificadoPor(mr.getModificadoPor());
+		r.setFechaModificacion(mr.getFechaModificacion());
 
 		return r;
 
@@ -36,6 +38,8 @@ public class ConverterRol {
 		ModelRol mr = new ModelRol();
 		mr.setIdRol(r.getIdRol());
 		mr.setRol(r.getRol());
+		mr.setModificadoPor(r.getModificadoPor());
+		mr.setFechaModificacion(r.getFechaModificacion());
 
 		return mr;
 

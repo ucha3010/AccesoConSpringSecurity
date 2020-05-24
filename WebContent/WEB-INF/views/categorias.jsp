@@ -37,7 +37,7 @@
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<div class="well well-sm text-center h2"><fmt:message key="label.Categories.and.subcategories" /></div>
 		<fmt:message key="language.name" var="nameColSelect"/>
-		<sec:authorize access="hasAnyRole('ROL_ROOT')">
+		<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6 text-center">
 					<c:if test="${not empty categoria_agregado}">

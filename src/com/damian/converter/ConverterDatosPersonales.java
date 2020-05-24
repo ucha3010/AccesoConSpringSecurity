@@ -42,6 +42,8 @@ public class ConverterDatosPersonales {
 		Usuario u = new Usuario();
 		u.setIdUsr(mdp.getDatospersonales_idUsr());
 		dp.setUsuario(u);
+		dp.setModificadoPor(mdp.getModificadoPor());
+		dp.setFechaModificacion(mdp.getFechaModificacion());
 
 		return dp;
 
@@ -66,6 +68,8 @@ public class ConverterDatosPersonales {
 		if (dp.getUsuario() != null) {
 			mdp.setDatospersonales_idUsr(dp.getUsuario().getIdUsr());
 		}
+		mdp.setModificadoPor(dp.getModificadoPor());
+		mdp.setFechaModificacion(dp.getFechaModificacion());
 
 		return mdp;
 

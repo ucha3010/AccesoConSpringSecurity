@@ -44,7 +44,7 @@ public class FormaPagoServiceImpl implements FormaPagoService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		formaPago.setModificadoPor(context.getAuthentication().getName());
+		formaPago.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		formaPago.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return formaPagoDAO.save(formaPago);
@@ -55,7 +55,7 @@ public class FormaPagoServiceImpl implements FormaPagoService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		formaPago.setModificadoPor(context.getAuthentication().getName());
+		formaPago.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		formaPago.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return formaPagoDAO.update(formaPago);

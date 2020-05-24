@@ -54,6 +54,8 @@ public class ConverterFactura {
 		f.setCuotaConIva(mf.getCuotaConIva());
 		f.setCuotaSinIva(mf.getCuotaSinIva());
 		f.setImporteFront(mf.getImporteFront());
+		f.setModificadoPor(mf.getModificadoPor());
+		f.setFechaModificacion(mf.getFechaModificacion());
 
 		return f;
 
@@ -89,6 +91,8 @@ public class ConverterFactura {
 		mf.setCuotaConIva(f.getCuotaConIva());
 		mf.setCuotaSinIva(f.getCuotaSinIva());
 		mf.setImporteFront(f.getImporteFront());
+		mf.setModificadoPor(f.getModificadoPor());
+		mf.setFechaModificacion(f.getFechaModificacion());
 
 		return mf;
 

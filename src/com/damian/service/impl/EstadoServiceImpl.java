@@ -44,7 +44,7 @@ public class EstadoServiceImpl implements EstadoService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		estado.setModificadoPor(context.getAuthentication().getName());
+		estado.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		estado.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return estadoDAO.save(estado);
@@ -55,7 +55,7 @@ public class EstadoServiceImpl implements EstadoService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		estado.setModificadoPor(context.getAuthentication().getName());
+		estado.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		estado.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return estadoDAO.update(estado);

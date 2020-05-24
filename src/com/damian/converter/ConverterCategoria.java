@@ -33,6 +33,8 @@ public class ConverterCategoria {
 		c.setNombreGE(mc.getNombreGE());
 		c.setNombreCA(mc.getNombreCA());
 		c.setNombreEU(mc.getNombreEU());
+		c.setModificadoPor(mc.getModificadoPor());
+		c.setFechaModificacion(mc.getFechaModificacion());
 
 		return c;
 
@@ -50,6 +52,8 @@ public class ConverterCategoria {
 		mc.setNombreGE(c.getNombreGE());
 		mc.setNombreCA(c.getNombreCA());
 		mc.setNombreEU(c.getNombreEU());
+		mc.setModificadoPor(c.getModificadoPor());
+		mc.setFechaModificacion(c.getFechaModificacion());
 
 		return mc;
 

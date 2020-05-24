@@ -129,7 +129,7 @@ public class FotoServiceImpl implements FotoService {
 					.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 			foto.setCreadoPor(context.getAuthentication().getName());
 			foto.setRuta(ruta.getRutaRelativa());
-			foto.setModificadoPor(context.getAuthentication().getName());
+			foto.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 			foto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 			return fotoDAO.save(foto);
@@ -142,7 +142,7 @@ public class FotoServiceImpl implements FotoService {
 	public int update(Foto foto, HttpServletRequest request) {
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		foto.setModificadoPor(context.getAuthentication().getName());
+		foto.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		foto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 		return fotoDAO.update(foto);
 	}

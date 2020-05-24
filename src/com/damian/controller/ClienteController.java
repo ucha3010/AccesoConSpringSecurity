@@ -109,7 +109,7 @@ public class ClienteController {
 		if (nueva) {
 			ra.addFlashAttribute("usuario_agregado", "usuario_agregado");
 		}
-		return "redirect:/cliente/all/" + usuarioService.getColumn(request) + "/null/0/100";
+		return "redirect:/cliente/all/" + usuarioService.getColumn(request) + "/0/100";
 	}
 
 	@RequestMapping("/cliente/{idUsr}/delete")
@@ -118,7 +118,7 @@ public class ClienteController {
 		usuarioService.delete(idUsr);
 		ra.addFlashAttribute("usuario_eliminado", "usuario_eliminado");
 
-		return "redirect:/cliente/all/" + usuarioService.getColumn(request) + "/null/0/100";
+		return "redirect:/cliente/all/" + usuarioService.getColumn(request) + "/0/100";
 
 	}
 
@@ -129,14 +129,14 @@ public class ClienteController {
 		usuario = usuarioService.findById(idUsr);
 		usuario.setHabilitado(!usuario.isHabilitado());
 		usuarioService.update(usuario);
-		return "redirect:/cliente/all/" + usuarioService.getColumn(request) + "/null/0/100";
+		return "redirect:/cliente/all/" + usuarioService.getColumn(request) + "/0/100";
 	}
 
 	@RequestMapping("/cliente/reset/{idUsr}")
 	public String passwordReset(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr,
 			HttpServletRequest request) {
 		usuarioService.reset(idUsr);
-		return "redirect:/cliente/all/" + usuarioService.getColumn(request) + "/null/0/100";
+		return "redirect:/cliente/all/" + usuarioService.getColumn(request) + "/0/100";
 	}
 
 	private ModelAndView fillFiltered(ModelAndView modelAndView) {

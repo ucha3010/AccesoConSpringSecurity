@@ -37,6 +37,8 @@ public class ConverterSubcategoria {
 		Categoria categoria = new Categoria();
 		categoria.setIdCat(ms.getIdCat());
 		s.setCategoria(categoria);
+		s.setModificadoPor(ms.getModificadoPor());
+		s.setFechaModificacion(ms.getFechaModificacion());
 
 		return s;
 
@@ -57,6 +59,8 @@ public class ConverterSubcategoria {
 		if (s.getCategoria() != null) {
 			ms.setIdCat(s.getCategoria().getIdCat());
 		}
+		ms.setModificadoPor(s.getModificadoPor());
+		ms.setFechaModificacion(s.getFechaModificacion());
 
 		return ms;
 

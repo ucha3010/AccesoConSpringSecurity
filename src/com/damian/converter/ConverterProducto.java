@@ -52,6 +52,8 @@ public class ConverterProducto {
 		Subcategoria subcategoria = new Subcategoria();
 		subcategoria.setIdSub(mp.getIdSub());
 		p.setSubcategoria(subcategoria);
+		p.setModificadoPor(mp.getModificadoPor());
+		p.setFechaModificacion(mp.getFechaModificacion());
 
 		return p;
 
@@ -95,6 +97,8 @@ public class ConverterProducto {
 		if (p.getSubcategoria() != null) {
 			mp.setIdSub(p.getSubcategoria().getIdSub());
 		}
+		mp.setModificadoPor(p.getModificadoPor());
+		mp.setFechaModificacion(p.getFechaModificacion());
 
 		return mp;
 

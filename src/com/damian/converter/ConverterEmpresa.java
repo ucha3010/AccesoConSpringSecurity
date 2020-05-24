@@ -34,6 +34,8 @@ public class ConverterEmpresa {
 		e.setTelefono(me.getTelefono());
 		e.setFax(me.getFax());
 		e.setObservaciones(me.getObservaciones());
+		e.setModificadoPor(me.getModificadoPor());
+		e.setFechaModificacion(me.getFechaModificacion());
 
 		return e;
 
@@ -52,6 +54,8 @@ public class ConverterEmpresa {
 		me.setTelefono(e.getTelefono());
 		me.setFax(e.getFax());
 		me.setObservaciones(e.getObservaciones());
+		me.setModificadoPor(e.getModificadoPor());
+		me.setFechaModificacion(e.getFechaModificacion());
 
 		return me;
 

@@ -44,7 +44,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		categoria.setModificadoPor(context.getAuthentication().getName());
+		categoria.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		categoria.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return categoriaDAO.save(categoria);
@@ -55,7 +55,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		categoria.setModificadoPor(context.getAuthentication().getName());
+		categoria.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		categoria.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return categoriaDAO.update(categoria);

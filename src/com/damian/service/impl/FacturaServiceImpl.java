@@ -81,7 +81,7 @@ public class FacturaServiceImpl implements FacturaService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		factura.setModificadoPor(context.getAuthentication().getName());
+		factura.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		factura.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 		facturaDAO.save(factura);
 		factura.setIdFac(facturaDAO.getMaxId());
@@ -95,7 +95,7 @@ public class FacturaServiceImpl implements FacturaService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		factura.setModificadoPor(context.getAuthentication().getName());
+		factura.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		factura.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 		facturaDAO.update(factura);
 		saveFacturaEstado(factura, request);

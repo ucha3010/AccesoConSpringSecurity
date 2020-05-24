@@ -45,6 +45,8 @@ public class ConverterProductoFactura {
 		Factura factura = new Factura();
 		factura.setIdFac(mpf.getIdFac());
 		pf.setFactura(factura);
+		pf.setModificadoPor(mpf.getModificadoPor());
+		pf.setFechaModificacion(mpf.getFechaModificacion());
 
 		return pf;
 
@@ -66,6 +68,8 @@ public class ConverterProductoFactura {
 		mpf.setPrecioUnitConIva(pf.getPrecioUnitConIva());
 		mpf.setPrecioFinal(pf.getPrecioFinal());
 		mpf.setObservaciones(pf.getObservaciones());
+		mpf.setModificadoPor(pf.getModificadoPor());
+		mpf.setFechaModificacion(pf.getFechaModificacion());
 
 		return mpf;
 

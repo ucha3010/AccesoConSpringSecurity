@@ -85,7 +85,7 @@ public class ProductoServiceImpl implements ProductoService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		producto.setModificadoPor(context.getAuthentication().getName());
+		producto.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		producto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		productoDAO.save(producto);
@@ -97,7 +97,7 @@ public class ProductoServiceImpl implements ProductoService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		producto.setModificadoPor(context.getAuthentication().getName());
+		producto.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		producto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		productoDAO.update(producto);

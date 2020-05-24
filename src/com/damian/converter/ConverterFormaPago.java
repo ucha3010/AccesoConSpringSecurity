@@ -33,6 +33,8 @@ public class ConverterFormaPago {
 		f.setNombreGE(mf.getNombreGE());
 		f.setNombreCA(mf.getNombreCA());
 		f.setNombreEU(mf.getNombreEU());
+		f.setModificadoPor(mf.getModificadoPor());
+		f.setFechaModificacion(mf.getFechaModificacion());
 
 		return f;
 
@@ -50,6 +52,8 @@ public class ConverterFormaPago {
 		mf.setNombreGE(f.getNombreGE());
 		mf.setNombreCA(f.getNombreCA());
 		mf.setNombreEU(f.getNombreEU());
+		mf.setModificadoPor(f.getModificadoPor());
+		mf.setFechaModificacion(f.getFechaModificacion());
 
 		return mf;
 

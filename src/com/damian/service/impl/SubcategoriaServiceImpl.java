@@ -44,7 +44,7 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		subcategoria.setModificadoPor(context.getAuthentication().getName());
+		subcategoria.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		subcategoria.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return subcategoriaDAO.save(subcategoria);
@@ -55,7 +55,7 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		subcategoria.setModificadoPor(context.getAuthentication().getName());
+		subcategoria.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		subcategoria.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return subcategoriaDAO.update(subcategoria);

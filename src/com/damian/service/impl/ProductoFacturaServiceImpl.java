@@ -28,7 +28,7 @@ public class ProductoFacturaServiceImpl implements ProductoFacturaService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		productoFactura.setModificadoPor(context.getAuthentication().getName());
+		productoFactura.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		productoFactura.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 		
 		productoFacturaDAO.save(productoFactura);
@@ -39,7 +39,7 @@ public class ProductoFacturaServiceImpl implements ProductoFacturaService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		productoFactura.setModificadoPor(context.getAuthentication().getName());
+		productoFactura.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		productoFactura.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 		
 		productoFacturaDAO.update(productoFactura);

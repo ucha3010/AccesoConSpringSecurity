@@ -32,7 +32,7 @@ public class DireccionEmpresaServiceImpl implements DireccionEmpresaService {
 		direccionEmpresa.setEmpresa(empresa);
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		direccionEmpresa.setModificadoPor(context.getAuthentication().getName());
+		direccionEmpresa.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		direccionEmpresa.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		direccionEmpresaDao.save(direccionEmpresa);

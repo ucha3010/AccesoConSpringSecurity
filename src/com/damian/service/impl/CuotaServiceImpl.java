@@ -44,7 +44,7 @@ public class CuotaServiceImpl implements CuotaService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		cuota.setModificadoPor(context.getAuthentication().getName());
+		cuota.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		cuota.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 		
 		return cuotaDAO.save(cuota);
@@ -55,7 +55,7 @@ public class CuotaServiceImpl implements CuotaService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		cuota.setModificadoPor(context.getAuthentication().getName());
+		cuota.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		cuota.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 		
 		return cuotaDAO.update(cuota);

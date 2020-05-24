@@ -33,6 +33,8 @@ public class ConverterEstado {
 		e.setNombreGE(me.getNombreGE());
 		e.setNombreCA(me.getNombreCA());
 		e.setNombreEU(me.getNombreEU());
+		e.setModificadoPor(me.getModificadoPor());
+		e.setFechaModificacion(me.getFechaModificacion());
 
 		return e;
 
@@ -50,6 +52,8 @@ public class ConverterEstado {
 		me.setNombreGE(e.getNombreGE());
 		me.setNombreCA(e.getNombreCA());
 		me.setNombreEU(e.getNombreEU());
+		me.setModificadoPor(e.getModificadoPor());
+		me.setFechaModificacion(e.getFechaModificacion());
 
 		return me;
 

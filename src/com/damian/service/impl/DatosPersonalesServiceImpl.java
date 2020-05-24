@@ -26,7 +26,7 @@ public class DatosPersonalesServiceImpl implements DatosPersonalesService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		datosPersonales.setModificadoPor(context.getAuthentication().getName());
+		datosPersonales.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		datosPersonales.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		datosPersonalesDAO.save(datosPersonales);
@@ -40,7 +40,7 @@ public class DatosPersonalesServiceImpl implements DatosPersonalesService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		datosPersonales.setModificadoPor(context.getAuthentication().getName());
+		datosPersonales.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		datosPersonales.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		datosPersonalesDAO.update(datosPersonales);

@@ -48,7 +48,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		empresa.setModificadoPor(context.getAuthentication().getName());
+		empresa.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		empresa.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		empresaDAO.save(empresa);
@@ -64,7 +64,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		empresa.setModificadoPor(context.getAuthentication().getName());
+		empresa.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		empresa.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		empresaDAO.update(empresa);

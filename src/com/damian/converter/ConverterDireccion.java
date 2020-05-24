@@ -41,6 +41,8 @@ public class ConverterDireccion {
 		DatosPersonales datosPersonales = new DatosPersonales();
 		datosPersonales.setIdDatosPers(md.getIdDatosPers());
 		d.setDatosPersonales(datosPersonales);
+		d.setModificadoPor(md.getModificadoPor());
+		d.setFechaModificacion(md.getFechaModificacion());
 
 		return d;
 
@@ -61,6 +63,8 @@ public class ConverterDireccion {
 			md.setPais_idPais(d.getPais().getIdPais());
 		}
 		md.setIdDatosPers(d.getDatosPersonales().getIdDatosPers());
+		md.setModificadoPor(d.getModificadoPor());
+		md.setFechaModificacion(d.getFechaModificacion());
 
 		return md;
 

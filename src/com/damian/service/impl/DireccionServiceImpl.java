@@ -36,7 +36,7 @@ public class DireccionServiceImpl implements DireccionService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		direccion.setModificadoPor(context.getAuthentication().getName());
+		direccion.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		direccion.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		direccionDao.save(direccion);

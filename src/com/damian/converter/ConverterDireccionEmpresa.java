@@ -41,6 +41,8 @@ public class ConverterDireccionEmpresa {
 		Empresa empresa = new Empresa();
 		empresa.setIdEmp(mde.getIdEmp());
 		de.setEmpresa(empresa);
+		de.setModificadoPor(mde.getModificadoPor());
+		de.setFechaModificacion(mde.getFechaModificacion());
 
 		return de;
 
@@ -61,6 +63,8 @@ public class ConverterDireccionEmpresa {
 			mde.setPais_idPais(de.getPais().getIdPais());
 		}
 		mde.setIdEmp(de.getEmpresa().getIdEmp());
+		mde.setModificadoPor(de.getModificadoPor());
+		mde.setFechaModificacion(de.getFechaModificacion());
 
 		return mde;
 

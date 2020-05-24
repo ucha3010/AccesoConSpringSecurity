@@ -29,6 +29,8 @@ public class ConverterUsuario {
 		u.setClave(mu.getClave());
 		u.setHabilitado(mu.isHabilitado());
 		u.setFechaCreacion(mu.getFechaCreacion());
+		u.setModificadoPor(mu.getModificadoPor());
+		u.setFechaModificacion(mu.getFechaModificacion());
 
 		return u;
 
@@ -42,6 +44,8 @@ public class ConverterUsuario {
 		mu.setClave(u.getClave());
 		mu.setHabilitado(u.isHabilitado());
 		mu.setFechaCreacion(u.getFechaCreacion());
+		mu.setModificadoPor(u.getModificadoPor());
+		mu.setFechaModificacion(u.getFechaModificacion());
 
 		return mu;
 

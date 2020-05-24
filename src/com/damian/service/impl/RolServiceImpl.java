@@ -26,7 +26,7 @@ public class RolServiceImpl implements RolService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		rol.setModificadoPor(context.getAuthentication().getName());
+		rol.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		rol.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		rolDAO.save(rol);
