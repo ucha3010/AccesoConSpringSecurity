@@ -116,6 +116,7 @@ public class ProductoDAOImpl implements ProductoDAO {
 					mp.getUbicacion(), mp.getEstado(), mp.getPartida(), mp.getFechaCompra(), mp.isEnviar(),
 					mp.isVendible(), mp.getMesesGarantia(), mp.getPeso(), mp.getVolumen(), mp.getIdSub(),
 					mp.getModificadoPor(), mp.getFechaModificacion());
+			LocalLogger.save(TABLA, producto, request);
 		}
 	}
 
@@ -133,6 +134,7 @@ public class ProductoDAOImpl implements ProductoDAO {
 				mp.getUbicacion(), mp.getEstado(), mp.getPartida(), mp.getFechaCompra(), mp.isEnviar(), mp.isVendible(),
 				mp.getMesesGarantia(), mp.getPeso(), mp.getVolumen(), mp.getIdSub(), mp.getModificadoPor(),
 				mp.getFechaModificacion(), mp.getIdPro());
+		LocalLogger.update(TABLA, producto, request);
 	}
 
 	@Override

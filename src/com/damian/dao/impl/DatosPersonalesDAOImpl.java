@@ -75,6 +75,7 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 				mdp.getFechaNacimiento(), mdp.getNacionalidad_idPais(), mdp.getDni(), mdp.getEmail(), mdp.getTelefono(),
 				mdp.getObservaciones(), mdp.getDatospersonales_idUsr(), mdp.getModificadoPor(),
 				mdp.getFechaModificacion());
+		LocalLogger.save(TABLA, datosPersonales, request);
 	}
 
 	@Override
@@ -88,6 +89,7 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 				mdp.getFechaNacimiento(), mdp.getNacionalidad_idPais(), mdp.getDni(), mdp.getEmail(), mdp.getTelefono(),
 				mdp.getObservaciones(), mdp.getDatospersonales_idUsr(), mdp.getModificadoPor(),
 				mdp.getFechaModificacion(), mdp.getIdDatosPers());
+		LocalLogger.update(TABLA, datosPersonales, request);
 	}
 
 	@Override

@@ -88,9 +88,11 @@ public class FormaPagoDAOImpl implements FormaPagoDAO {
 			ModelFormaPago me = converterFormaPago.convert(formaPago);
 			String sql = "INSERT INTO " + TABLA
 					+ " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU, modificadoPor, fechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
-					me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getModificadoPor(),
-					me.getFechaModificacion());
+			int result = jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(),
+					me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(),
+					me.getModificadoPor(), me.getFechaModificacion());
+			LocalLogger.save(TABLA, formaPago, request);
+			return result;
 		}
 	}
 
@@ -100,9 +102,11 @@ public class FormaPagoDAOImpl implements FormaPagoDAO {
 		String sql = "UPDATE " + TABLA
 				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, modificadoPor=?, fechaModificacion=? "
 				+ "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
+		int result = jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
 				me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getModificadoPor(),
 				me.getFechaModificacion(), me.getIdFor());
+		LocalLogger.update(TABLA, formaPago, request);
+		return result;
 	}
 
 	@Override

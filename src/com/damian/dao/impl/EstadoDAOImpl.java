@@ -88,9 +88,11 @@ public class EstadoDAOImpl implements EstadoDAO {
 			ModelEstado me = converterEstado.convert(estado);
 			String sql = "INSERT INTO " + TABLA
 					+ " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU, modificadoPor, fechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
-					me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getModificadoPor(),
-					me.getFechaModificacion());
+			int result = jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(),
+					me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(),
+					me.getModificadoPor(), me.getFechaModificacion());
+			LocalLogger.save(TABLA, estado, request);
+			return result;
 		}
 	}
 
@@ -100,9 +102,11 @@ public class EstadoDAOImpl implements EstadoDAO {
 		String sql = "UPDATE " + TABLA
 				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, modificadoPor=?, fechaModificacion=? "
 				+ "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
+		int result = jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
 				me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getModificadoPor(),
 				me.getFechaModificacion(), me.getIdEst());
+		LocalLogger.update(TABLA, estado, request);
+		return result;
 	}
 
 	@Override

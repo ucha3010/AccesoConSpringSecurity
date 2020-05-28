@@ -68,9 +68,11 @@ public class RolDAOImpl implements RolDAO {
 		if (rol.getIdRol() > 0) {
 			String sql = "UPDATE " + TABLA + " SET rol=?, modificadoPor=?, fechaModificacion=? WHERE " + KEY + "=?";
 			jdbcTemplate.update(sql, mr.getRol(), mr.getModificadoPor(), mr.getFechaModificacion(), mr.getIdRol());
+			LocalLogger.update(TABLA, rol, request);
 		} else {
 			String sql = "INSERT INTO " + TABLA + " (rol, modificadoPor, fechaModificacion)" + " VALUES (?, ?, ?)";
 			jdbcTemplate.update(sql, mr.getRol(), mr.getModificadoPor(), mr.getFechaModificacion());
+			LocalLogger.save(TABLA, rol, request);
 		}
 	}
 

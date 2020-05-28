@@ -77,6 +77,7 @@ public class FacturaEstadoDAOImpl implements FacturaEstadoDAO {
 				+ " VALUES (?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, mfe.getIdEst(), mfe.getIdFac(), mfe.getFecha(), mfe.getCreadoPor(),
 				mfe.getObservaciones());
+		LocalLogger.save(TABLA, estadoFactura, request);
 	}
 
 	@Override
@@ -86,6 +87,7 @@ public class FacturaEstadoDAOImpl implements FacturaEstadoDAO {
 				+ KEY + "=?";
 		jdbcTemplate.update(sql, mfe.getIdEst(), mfe.getIdFac(), mfe.getFecha(), mfe.getCreadoPor(),
 				mfe.getObservaciones(), mfe.getId());
+		LocalLogger.update(TABLA, estadoFactura, request);
 	}
 
 	@Override

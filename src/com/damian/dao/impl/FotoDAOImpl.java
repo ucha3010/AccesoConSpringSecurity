@@ -117,10 +117,12 @@ public class FotoDAOImpl implements FotoDAO {
 			String sql = "INSERT INTO " + TABLA
 					+ " (idUsr, idPro, idEmp, idCat, idSub, idPais, idFor, idEst, idRol, nombre, ruta, descripcion, peso, principal, "
 					+ "extension, fechaCreacion, creadoPor, fechaModificacion, modificadoPor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			return jdbcTemplate.update(sql, mf.getIdUsr(), mf.getIdPro(), mf.getIdEmp(), mf.getIdCat(), mf.getIdSub(),
-					mf.getIdPais(), mf.getIdFor(), mf.getIdEst(), mf.getIdRol(), mf.getNombre(), mf.getRuta(),
-					mf.getDescripcion(), mf.getPeso(), mf.isPrincipal(), mf.getExtension(), mf.getFechaCreacion(),
-					mf.getCreadoPor(), mf.getFechaModificacion(), mf.getModificadoPor());
+			int result = jdbcTemplate.update(sql, mf.getIdUsr(), mf.getIdPro(), mf.getIdEmp(), mf.getIdCat(),
+					mf.getIdSub(), mf.getIdPais(), mf.getIdFor(), mf.getIdEst(), mf.getIdRol(), mf.getNombre(),
+					mf.getRuta(), mf.getDescripcion(), mf.getPeso(), mf.isPrincipal(), mf.getExtension(),
+					mf.getFechaCreacion(), mf.getCreadoPor(), mf.getFechaModificacion(), mf.getModificadoPor());
+			LocalLogger.save(TABLA, foto, request);
+			return result;
 		}
 	}
 
@@ -131,10 +133,12 @@ public class FotoDAOImpl implements FotoDAO {
 				+ " SET idUsr=?, idPro=?, idEmp=?, idCat=?, idSub=?, idPais=?, idFor=?, idEst=?, idRol=?, nombre=?, ruta=?, descripcion=?, "
 				+ "peso=?, principal=?, extension=?, fechaCreacion=?, creadoPor=?, fechaModificacion=?, modificadoPor=? "
 				+ "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, mf.getIdUsr(), mf.getIdPro(), mf.getIdEmp(), mf.getIdCat(), mf.getIdSub(),
+		int result = jdbcTemplate.update(sql, mf.getIdUsr(), mf.getIdPro(), mf.getIdEmp(), mf.getIdCat(), mf.getIdSub(),
 				mf.getIdPais(), mf.getIdFor(), mf.getIdEst(), mf.getIdRol(), mf.getNombre(), mf.getRuta(),
 				mf.getDescripcion(), mf.getPeso(), mf.isPrincipal(), mf.getExtension(), mf.getFechaCreacion(),
 				mf.getCreadoPor(), mf.getFechaModificacion(), mf.getModificadoPor(), mf.getIdFot());
+		LocalLogger.update(TABLA, foto, request);
+		return result;
 	}
 
 	@Override

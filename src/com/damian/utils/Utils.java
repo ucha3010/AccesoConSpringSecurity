@@ -31,7 +31,7 @@ public class Utils {
 		if (StringUtils.isNullOrEmpty(column) || column.equals("null")) {
 			if (uo == null) {
 				uo = new ModelUsuarioOrden(0, usuario.getIdUsr(), table, defaultColumn, defaultOrder);
-				usuarioOrdenDAO.save(uo);
+				usuarioOrdenDAO.save(uo, request);
 				dataOut = columnOrder;
 			} else {
 				dataOut = uo.getColumna().concat(" ").concat(uo.getOrden() == null ? defaultOrder : uo.getOrden());
@@ -39,13 +39,13 @@ public class Utils {
 		} else {
 			if (uo == null) {
 				uo = new ModelUsuarioOrden(0, usuario.getIdUsr(), table, column, defaultOrder);
-				usuarioOrdenDAO.save(uo);
+				usuarioOrdenDAO.save(uo, request);
 				dataOut = column + " " + defaultOrder;
 			} else {
 				String order = defineOrder(uo, column, orderObl, defaultOrder);
 				uo.setColumna(column);
 				uo.setOrden(order);
-				usuarioOrdenDAO.update(uo);
+				usuarioOrdenDAO.update(uo, request);
 				dataOut = uo.getColumna().concat(" ").concat(uo.getOrden());
 			}
 		}
@@ -122,9 +122,9 @@ public class Utils {
 	}
 
 	public static String rutaDentroResources(HttpServletRequest request, String carpeta) {
-		
-		String ruta = rutaHastaWebContent(request) + System.getProperty("file.separator") + "resources" + System.getProperty("file.separator") + carpeta
-		+ System.getProperty("file.separator");
+
+		String ruta = rutaHastaWebContent(request) + System.getProperty("file.separator") + "resources"
+				+ System.getProperty("file.separator") + carpeta + System.getProperty("file.separator");
 		return ruta;
 	}
 

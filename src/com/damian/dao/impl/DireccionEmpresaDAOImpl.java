@@ -82,6 +82,7 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 			jdbcTemplate.update(sql, mdp.getTipoVia(), mdp.getNombreVia(), mdp.getNumero(), mdp.getResto(), mdp.getCp(),
 					mdp.getProvincia(), mdp.getCiudad(), mdp.getPais_idPais(), mdp.getIdEmp(), mdp.getModificadoPor(),
 					mdp.getFechaModificacion());
+			LocalLogger.save(TABLA, direccionEmpresa, request);
 		} else {
 			update(direccionEmpresa, request);
 		}
@@ -97,6 +98,7 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 		jdbcTemplate.update(sql, mdp.getTipoVia(), mdp.getNombreVia(), mdp.getNumero(), mdp.getResto(), mdp.getCp(),
 				mdp.getProvincia(), mdp.getCiudad(), mdp.getPais_idPais(), mdp.getIdEmp(), mdp.getModificadoPor(),
 				mdp.getFechaModificacion(), mdp.getIdDirEmp());
+		LocalLogger.update(TABLA, direccionEmpresa, request);
 
 	}
 

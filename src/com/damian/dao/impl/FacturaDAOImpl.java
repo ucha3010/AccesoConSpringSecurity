@@ -110,12 +110,14 @@ public class FacturaDAOImpl implements FacturaDAO {
 					+ " (compra, ivaTotal, ivaImporteTotal, descuentoTotal, descuentoImporteTotal, importeTotal, fechaCompra, fechaEntrega, idEst, direccionEntrega, "
 					+ "observaciones, idFor, creadoPor, idCuo, numeroCuota, interesCuotaImporte, importeCuotaTotal, cuotaConIva, cuotaSinIva, importeFront, modificadoPor, fechaModificacion) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
+			int result = jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
 					mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(), mf.getFechaCompra(),
 					mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(),
 					mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(),
 					mf.getImporteCuotaTotal(), mf.getCuotaConIva(), mf.getCuotaSinIva(), mf.getImporteFront(),
 					mf.getModificadoPor(), mf.getFechaModificacion());
+			LocalLogger.save(TABLA, factura, request);
+			return result;
 		}
 	}
 
@@ -126,12 +128,14 @@ public class FacturaDAOImpl implements FacturaDAO {
 				+ " SET compra=?, ivaTotal=?, ivaImporteTotal=?, descuentoTotal=?, descuentoImporteTotal=?, importeTotal=?, fechaCompra=?, fechaEntrega=?, idEst=?, "
 				+ "direccionEntrega=?, observaciones=?, idFor=?, creadoPor=?, idCuo=?, numeroCuota=?, interesCuotaImporte=?, importeCuotaTotal=?, cuotaConIva=?, cuotaSinIva=?, "
 				+ "importeFront=?, modificadoPor=?, fechaModificacion=? WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
+		int result = jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
 				mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(), mf.getFechaCompra(),
 				mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(),
 				mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(),
 				mf.getImporteCuotaTotal(), mf.getCuotaConIva(), mf.getCuotaSinIva(), mf.getImporteFront(),
 				mf.getModificadoPor(), mf.getFechaModificacion(), mf.getIdFac());
+		LocalLogger.update(TABLA, factura, request);
+		return result;
 	}
 
 	@Override

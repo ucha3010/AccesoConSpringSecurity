@@ -88,9 +88,11 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 			ModelSubcategoria ms = converterSubcategoria.convert(subcategoria);
 			String sql = "INSERT INTO " + TABLA
 					+ " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU, idCat, modificadoPor, fechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			return jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getNombrePT(), ms.getNombreFR(),
-					ms.getNombreIT(), ms.getNombreGE(), ms.getNombreCA(), ms.getNombreEU(), ms.getIdCat(),
-					ms.getModificadoPor(), ms.getFechaModificacion());
+			int result = jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getNombrePT(),
+					ms.getNombreFR(), ms.getNombreIT(), ms.getNombreGE(), ms.getNombreCA(), ms.getNombreEU(),
+					ms.getIdCat(), ms.getModificadoPor(), ms.getFechaModificacion());
+			LocalLogger.save(TABLA, subcategoria, request);
+			return result;
 		}
 	}
 
@@ -100,9 +102,11 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 		String sql = "UPDATE " + TABLA
 				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, idCat=?, modificadoPor=?, fechaModificacion=? "
 				+ "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getNombrePT(), ms.getNombreFR(),
+		int result = jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getNombrePT(), ms.getNombreFR(),
 				ms.getNombreIT(), ms.getNombreGE(), ms.getNombreCA(), ms.getNombreEU(), ms.getIdCat(),
 				ms.getModificadoPor(), ms.getFechaModificacion(), ms.getIdSub());
+		LocalLogger.update(TABLA, subcategoria, request);
+		return result;
 	}
 
 	@Override

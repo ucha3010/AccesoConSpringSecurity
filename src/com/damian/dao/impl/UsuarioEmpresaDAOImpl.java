@@ -60,6 +60,7 @@ public class UsuarioEmpresaDAOImpl implements UsuarioEmpresaDAO {
 		ModelUsuarioEmpresa mue = converterUsuarioEmpresa.convert(usuarioEmpresa);
 		String sql = "INSERT INTO " + TABLA + " (idUsr, idEmp, fechaCreacion, creadoPor)" + " VALUES (?, ?, ?, ?)";
 		jdbcTemplate.update(sql, mue.getIdUsr(), mue.getIdEmp(), mue.getFechaCreacion(), mue.getCreadoPor());
+		LocalLogger.save(TABLA, usuarioEmpresa, request);
 	}
 
 	@Override
@@ -68,6 +69,7 @@ public class UsuarioEmpresaDAOImpl implements UsuarioEmpresaDAO {
 		String sql = "UPDATE " + TABLA + " SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
 				+ "=?";
 		jdbcTemplate.update(sql, mue.getFechaCreacion(), mue.getCreadoPor(), mue.getIdUsr(), mue.getIdEmp());
+		LocalLogger.update(TABLA, usuarioEmpresa, request);
 	}
 
 	@Override

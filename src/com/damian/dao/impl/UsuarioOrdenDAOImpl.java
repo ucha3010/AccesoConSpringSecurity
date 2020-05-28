@@ -3,6 +3,7 @@ package com.damian.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.dao.DataAccessException;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import com.damian.dao.UsuarioOrdenDAO;
 import com.damian.dao.model.ModelUsuarioOrden;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class UsuarioOrdenDAOImpl implements UsuarioOrdenDAO {
@@ -47,16 +49,20 @@ public class UsuarioOrdenDAOImpl implements UsuarioOrdenDAO {
 	}
 
 	@Override
-	public int save(ModelUsuarioOrden uo) {
+	public int save(ModelUsuarioOrden uo, HttpServletRequest request) {
 		String sql = "INSERT INTO " + TABLA + " (idUsr, tabla, columna, orden) VALUES (?, ?, ?, ?)";
-		return jdbcTemplate.update(sql, uo.getIdUsr(), uo.getTabla(), uo.getColumna(), uo.getOrden());
+		int result = jdbcTemplate.update(sql, uo.getIdUsr(), uo.getTabla(), uo.getColumna(), uo.getOrden());
+		LocalLogger.save(TABLA, uo, request);
+		return result;
 
 	}
 
 	@Override
-	public int update(ModelUsuarioOrden uo) {
+	public int update(ModelUsuarioOrden uo, HttpServletRequest request) {
 		String sql = "UPDATE " + TABLA + " SET idUsr=?, tabla=?, columna=?, orden=? " + "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, uo.getIdUsr(), uo.getTabla(), uo.getColumna(), uo.getOrden(), uo.getId());
+		int result = jdbcTemplate.update(sql, uo.getIdUsr(), uo.getTabla(), uo.getColumna(), uo.getOrden(), uo.getId());
+		LocalLogger.update(TABLA, uo, request);
+		return result;
 	}
 
 	@Override

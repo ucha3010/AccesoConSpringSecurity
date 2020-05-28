@@ -90,6 +90,7 @@ public class CuotaDAOImpl implements CuotaDAO {
 					+ " (cantidadCuotas, comisionAperturaPor, comisionAperturaImp, interesPor, interesImp, modificadoPor, fechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(sql, mc.getCantidadCuotas(), mc.getComisionAperturaPor(), mc.getComisionAperturaImp(),
 					mc.getInteresPor(), mc.getInteresImp(), mc.getModificadoPor(), mc.getFechaModificacion());
+			LocalLogger.save(TABLA, cuota, request);
 			return getMaxId();
 		}
 	}
@@ -100,9 +101,11 @@ public class CuotaDAOImpl implements CuotaDAO {
 		String sql = "UPDATE " + TABLA
 				+ " SET cantidadCuotas=?, comisionAperturaPor=?, comisionAperturaImp=?, interesPor=?, interesImp=?, modificadoPor=?, fechaModificacion=? "
 				+ "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, mc.getCantidadCuotas(), mc.getComisionAperturaPor(),
+		int result = jdbcTemplate.update(sql, mc.getCantidadCuotas(), mc.getComisionAperturaPor(),
 				mc.getComisionAperturaImp(), mc.getInteresPor(), mc.getInteresImp(), mc.getModificadoPor(),
 				mc.getFechaModificacion(), mc.getIdCuo());
+		LocalLogger.update(TABLA, cuota, request);
+		return result;
 	}
 
 	@Override

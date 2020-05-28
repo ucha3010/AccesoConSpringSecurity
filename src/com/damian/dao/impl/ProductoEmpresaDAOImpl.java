@@ -60,6 +60,7 @@ public class ProductoEmpresaDAOImpl implements ProductoEmpresaDAO {
 		String sql = "INSERT INTO " + TABLA + " (idPro, idEmp, fechaCreacion, creadoPor)" + " VALUES (?, ?, ?, ?)";
 		jdbcTemplate.update(sql, productoEmpresa.getProducto().getIdPro(), productoEmpresa.getEmpresa().getIdEmp(),
 				productoEmpresa.getFechaCreacion(), productoEmpresa.getCreadoPor());
+		LocalLogger.save(TABLA, productoEmpresa, request);
 	}
 
 	@Override
@@ -68,6 +69,7 @@ public class ProductoEmpresaDAOImpl implements ProductoEmpresaDAO {
 				+ "=?";
 		jdbcTemplate.update(sql, productoEmpresa.getFechaCreacion(), productoEmpresa.getCreadoPor(),
 				productoEmpresa.getProducto().getIdPro(), productoEmpresa.getEmpresa().getIdEmp());
+		LocalLogger.update(TABLA, productoEmpresa, request);
 	}
 
 	@Override
