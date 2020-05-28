@@ -83,7 +83,7 @@ public class FacturaServiceImpl implements FacturaService {
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 		factura.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		factura.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
-		facturaDAO.save(factura);
+		facturaDAO.save(factura, request);
 		factura.setIdFac(facturaDAO.getMaxId());
 		saveFacturaEstado(factura, request);
 		return factura.getIdFac();
@@ -97,7 +97,7 @@ public class FacturaServiceImpl implements FacturaService {
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 		factura.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		factura.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
-		facturaDAO.update(factura);
+		facturaDAO.update(factura, request);
 		saveFacturaEstado(factura, request);
 		return factura.getIdFac();
 	}
@@ -115,7 +115,7 @@ public class FacturaServiceImpl implements FacturaService {
 				if (facturas != null && facturas.size() == 1) {
 					Producto producto = verificoStock(productoFacturaList.get(0), factura);
 					actualizoStock(productoFacturaList.get(0), factura, producto, request);
-					cuotaService.delete(factura.getCuota().getIdCuo());
+					cuotaService.delete(factura.getCuota().getIdCuo(), request);
 				} else if (facturas != null && facturas.size() > 1 && productoFacturaList != null
 						&& !productoFacturaList.isEmpty() && productoFacturaList.get(0).getCantidad() != 0) {
 					for (Factura f : facturas) {
@@ -124,7 +124,7 @@ public class FacturaServiceImpl implements FacturaService {
 						if (pf.getCantidad() == 0) {
 							pf.setCantidad(productoFacturaList.get(0).getCantidad());
 							productoFacturaService.update(pf, request);
-							asignarDatosFactura(f, factura);
+							asignarDatosFactura(f, factura, request);
 							break;
 						}
 					}
@@ -146,14 +146,14 @@ public class FacturaServiceImpl implements FacturaService {
 		if (continuo) {
 			if (productoFacturaList != null) {
 				for (ProductoFactura pf : productoFacturaList) {
-					productoFacturaService.delete(pf.getProducto().getIdPro(), id);
+					productoFacturaService.delete(pf.getProducto().getIdPro(), id, request);
 				}
 			}
 			List<FacturaEstado> facturaEstadoList = facturaEstadoService.findByIdFacModel(id);
 			for (FacturaEstado fe : facturaEstadoList) {
-				facturaEstadoService.delete(fe.getId());
+				facturaEstadoService.delete(fe.getId(), request);
 			}
-			borrada = facturaDAO.delete(id);
+			borrada = facturaDAO.delete(id, request);
 		}
 		return borrada;
 	}
@@ -230,7 +230,7 @@ public class FacturaServiceImpl implements FacturaService {
 
 	}
 
-	private void asignarDatosFactura(Factura f, Factura factura) {
+	private void asignarDatosFactura(Factura f, Factura factura, HttpServletRequest request) {
 		f.setIvaTotal(factura.getIvaTotal());
 		f.setIvaImporteTotal(factura.getIvaImporteTotal());
 		f.setDescuentoTotal(factura.getDescuentoTotal());
@@ -239,7 +239,7 @@ public class FacturaServiceImpl implements FacturaService {
 		f.setObservaciones(factura.getObservaciones());
 		f.setNumeroCuota(factura.getNumeroCuota());
 		f.setImporteFront(factura.getImporteFront());
-		facturaDAO.update(f);
+		facturaDAO.update(f, request);
 	}
 
 	private Producto verificoStock(ProductoFactura pf, Factura factura) throws NegativeStockException {

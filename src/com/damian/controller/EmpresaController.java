@@ -81,9 +81,9 @@ public class EmpresaController {
 	}
 
 	@RequestMapping("/empresa/{idEmp}/delete")
-	public String deleteUser(@PathVariable("idEmp") int idEmp, RedirectAttributes ra) {
+	public String deleteUser(@PathVariable("idEmp") int idEmp, RedirectAttributes ra, HttpServletRequest request) {
 
-		if (empresaService.delete(idEmp)) {
+		if (empresaService.delete(idEmp, request)) {
 			ra.addFlashAttribute("empresa_eliminada", "empresa_eliminada");
 		} else {
 			ra.addFlashAttribute("resultado", "No se ha podido borrar la empresa");

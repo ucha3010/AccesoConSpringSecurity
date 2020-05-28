@@ -226,7 +226,8 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [idUsr=" + idUsr + ", usuario=" + usuario + ", clave=" + clave + ", usuarioRol=" + usuarioRol
 				+ ", usuarioEmpresa=" + usuarioEmpresa + ", datosPersonales=" + datosPersonales + ", habilitado="
-				+ habilitado + ", fotos=" + fotos + ", fechaCreacion=" + fechaCreacion + "]";
+				+ habilitado + ", fotos=" + fotos + ", fechaCreacion=" + fechaCreacion + ", modificadoPor="
+				+ modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

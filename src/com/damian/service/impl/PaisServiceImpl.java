@@ -2,6 +2,8 @@ package com.damian.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,21 +21,21 @@ public class PaisServiceImpl implements PaisService {
 		return paisDAO.findById(id);
 	}
 
-	public void save(Pais pais) {
-		paisDAO.save(pais);
+	public void save(Pais pais, HttpServletRequest request) {
+		paisDAO.save(pais, request);
 	}
 
 	public List<Pais> findAll() {
 		return paisDAO.findAll();
 	}
 
-	public void update(Pais pais) {
-		paisDAO.update(pais);
+	public void update(Pais pais, HttpServletRequest request) {
+		paisDAO.update(pais, request);
 	}
 
-	public void delete(int idUsr) {
+	public void delete(int idUsr, HttpServletRequest request) {
 		Pais pais = findById(idUsr);
-		paisDAO.delete(pais.getIdPais());
+		paisDAO.delete(pais.getIdPais(), request);
 	}
 
 	@Override

@@ -46,8 +46,8 @@ public class CuotaServiceImpl implements CuotaService {
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 		cuota.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		cuota.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
-		
-		return cuotaDAO.save(cuota);
+
+		return cuotaDAO.save(cuota, request);
 	}
 
 	@Override
@@ -57,17 +57,17 @@ public class CuotaServiceImpl implements CuotaService {
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 		cuota.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		cuota.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
-		
-		return cuotaDAO.update(cuota);
+
+		return cuotaDAO.update(cuota, request);
 	}
 
 	@Override
-	public int delete(int id) throws NotEmptyException {
+	public int delete(int id, HttpServletRequest request) throws NotEmptyException {
 		List<Factura> facturaList = facturaService.findByIdCuo(id);
 		if (facturaList != null && !facturaList.isEmpty()) {
 			throw new NotEmptyException("Tiene asociado facturas");
 		}
-		return cuotaDAO.delete(id);
+		return cuotaDAO.delete(id, request);
 	}
 
 }

@@ -60,10 +60,10 @@ public class CategoriaController {
 	}
 
 	@RequestMapping("/categoria/delete/{idCat}")
-	public String deleteCategoria(@PathVariable("idCat") int idCat, RedirectAttributes ra) {
+	public String deleteCategoria(@PathVariable("idCat") int idCat, RedirectAttributes ra, HttpServletRequest request) {
 
 		try {
-			categoriaService.delete(idCat);
+			categoriaService.delete(idCat, request);
 			ra.addFlashAttribute("categoria_eliminado", "categoria_eliminado");
 		} catch (NotEmptyException e) {
 			ra.addFlashAttribute("categoria_asociado", "categoria_asociado");

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.damian.converter.ConverterCategoria;
 import com.damian.dao.CategoriaDAO;
 import com.damian.dao.model.ModelCategoria;
 import com.damian.pojo.Categoria;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class CategoriaDAOImpl implements CategoriaDAO {
@@ -79,35 +81,42 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 	}
 
 	@Override
-	public int save(Categoria categoria) {
+	public int save(Categoria categoria, HttpServletRequest request) {
 		if (categoria.getIdCat() > 0) {
-			return update(categoria);
+			return update(categoria, request);
 		} else {
 			ModelCategoria me = converterCategoria.convert(categoria);
 			String sql = "INSERT INTO " + TABLA
 					+ " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU, modificadoPor, fechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
-					me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getModificadoPor(),
-					me.getFechaModificacion());
+			int result = jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(),
+					me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(),
+					me.getModificadoPor(), me.getFechaModificacion());
+			LocalLogger.save(TABLA, categoria, request);
+			return result;
 		}
 	}
 
 	@Override
-	public int update(Categoria categoria) {
+	public int update(Categoria categoria, HttpServletRequest request) {
 		ModelCategoria me = converterCategoria.convert(categoria);
 		String sql = "UPDATE " + TABLA
 				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, modificadoPor=?, fechaModificacion=? "
 				+ "WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
+		int result = jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
 				me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getModificadoPor(),
 				me.getFechaModificacion(), me.getIdCat());
+		LocalLogger.update(TABLA, categoria, request);
+		return result;
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, id);
+		int result = jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
+		return result;
 	}
 
 	@Override

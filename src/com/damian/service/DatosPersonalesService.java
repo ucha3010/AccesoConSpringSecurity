@@ -16,7 +16,7 @@ public interface DatosPersonalesService {
 
 	void update(DatosPersonales datosPersonales, HttpServletRequest request);
 
-	void delete(int idDatosPersonales);
+	void delete(int idDatosPersonales, HttpServletRequest request);
 
 	DatosPersonales findByUsrId(int datosUsrId);
 

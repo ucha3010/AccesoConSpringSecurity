@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.damian.dao.FacturaDAO;
 import com.damian.dao.FacturaEstadoDAO;
 import com.damian.dao.model.ModelFacturaEstado;
 import com.damian.pojo.FacturaEstado;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class FacturaEstadoDAOImpl implements FacturaEstadoDAO {
@@ -69,7 +71,7 @@ public class FacturaEstadoDAOImpl implements FacturaEstadoDAO {
 	}
 
 	@Override
-	public void save(FacturaEstado estadoFactura) {
+	public void save(FacturaEstado estadoFactura, HttpServletRequest request) {
 		ModelFacturaEstado mfe = converterFacturaEstado.convert(estadoFactura);
 		String sql = "INSERT INTO " + TABLA + " (idEst, idFac, fecha, creadoPor, observaciones)"
 				+ " VALUES (?, ?, ?, ?, ?)";
@@ -78,7 +80,7 @@ public class FacturaEstadoDAOImpl implements FacturaEstadoDAO {
 	}
 
 	@Override
-	public void update(FacturaEstado estadoFactura) {
+	public void update(FacturaEstado estadoFactura, HttpServletRequest request) {
 		ModelFacturaEstado mfe = converterFacturaEstado.convert(estadoFactura);
 		String sql = "UPDATE " + TABLA + " SET idEst=?, idFac=?, fecha=?, creadoPor=?, observaciones=? " + "WHERE "
 				+ KEY + "=?";
@@ -87,10 +89,12 @@ public class FacturaEstadoDAOImpl implements FacturaEstadoDAO {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
 	}
 
 	@Override

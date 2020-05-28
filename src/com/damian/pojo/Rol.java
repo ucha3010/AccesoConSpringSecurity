@@ -131,6 +131,7 @@ public class Rol {
 	 */
 	@Override
 	public String toString() {
-		return "Rol [idRol=" + idRol + ", rol=" + rol + ", usuarioRol=" + usuarioRol + ", foto=" + foto + "]";
+		return "Rol [idRol=" + idRol + ", rol=" + rol + ", usuarioRol=" + usuarioRol + ", foto=" + foto
+				+ ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 }

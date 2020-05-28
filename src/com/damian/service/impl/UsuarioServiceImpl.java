@@ -94,7 +94,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 			usuario.setHabilitado(true);
 			String claveUsr = usuario.getClave();
 			usuario.setClave(passwordEncoder.encode(claveUsr));
-			usuarioDAO.save(usuario);
+			usuarioDAO.save(usuario, request);
 			usuario = findByUsername(usuario.getUsuario());
 			dp.setUsuario(usuario);
 			datosPersonalesService.save(dp, request);
@@ -105,7 +105,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 			datosPersonalesService.update(dp, request);
 		}
 		if (usuarioRol != null) {
-			eliminarRolesNoSeleccionados(usuarioRol, usuario);
+			eliminarRolesNoSeleccionados(usuarioRol, usuario, request);
 			String[] nuevosRoles = rolesAGuardar(usuarioRol, usuario);
 			Date ahora = new Date();
 			UsuarioRol ur = null;
@@ -117,18 +117,18 @@ public class UsuarioServiceImpl implements UsuarioService {
 				ur.setUsuario(usuario);
 				ur.setFechaCreacion(ahora);
 				ur.setCreadoPor(creador);
-				usuarioRolService.save(ur);
+				usuarioRolService.save(ur, request);
 			}
 		}
 	}
 
 	@Override
-	public void saveChangePassword(Usuario usuario) {
+	public void saveChangePassword(Usuario usuario, HttpServletRequest request) {
 
 		String claveUsr = usuario.getClave();
 		usuario = findById(usuario.getIdUsr());
 		usuario.setClave(passwordEncoder.encode(claveUsr));
-		update(usuario);
+		update(usuario, request);
 
 	}
 
@@ -139,33 +139,33 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public void update(Usuario usuario) {
-		usuarioDAO.update(usuario);
+	public void update(Usuario usuario, HttpServletRequest request) {
+		usuarioDAO.update(usuario, request);
 	}
 
 	@Override
-	public void delete(int idUsr) {
+	public void delete(int idUsr, HttpServletRequest request) {
 		List<Direccion> direccionList = direccionService.findListFromUsuario(idUsr);
 		if (direccionList != null) {
 			for (Direccion direccion : direccionList) {
-				direccionService.delete(direccion.getIdDir());
+				direccionService.delete(direccion.getIdDir(), request);
 			}
 		}
 		DatosPersonales datosPersonales = datosPersonalesService.findByUsrId(idUsr);
-		datosPersonalesService.delete(datosPersonales.getIdDatosPers());
+		datosPersonalesService.delete(datosPersonales.getIdDatosPers(), request);
 		List<UsuarioEmpresa> ueList = usuarioEmpresaService.findByIdUsr(idUsr);
 		if (ueList != null) {
 			for (UsuarioEmpresa ue : ueList) {
-				usuarioEmpresaService.delete(idUsr, ue.getEmpresa().getIdEmp());
+				usuarioEmpresaService.delete(idUsr, ue.getEmpresa().getIdEmp(), request);
 			}
 		}
 		List<UsuarioRol> urList = usuarioRolService.findByIdUsr(idUsr);
 		if (urList != null) {
 			for (UsuarioRol ur : urList) {
-				usuarioRolService.delete(idUsr, ur.getRol().getIdRol());
+				usuarioRolService.delete(idUsr, ur.getRol().getIdRol(), request);
 			}
 		}
-		usuarioDAO.delete(idUsr);
+		usuarioDAO.delete(idUsr, request);
 	}
 
 	@Override
@@ -212,10 +212,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 
 	@Override
-	public Usuario reset(int idUsr) {
+	public Usuario reset(int idUsr, HttpServletRequest request) {
 		Usuario usuario = findById(idUsr);
 		usuario.setClave(passwordEncoder.encode("Superman1"));
-		update(usuario);
+		update(usuario, request);
 		return usuario;
 	}
 
@@ -238,7 +238,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuarioDAO.findSearchAll(customer);
 	}
 
-	private void eliminarRolesNoSeleccionados(String[] usuarioRol, Usuario usuario) {
+	private void eliminarRolesNoSeleccionados(String[] usuarioRol, Usuario usuario, HttpServletRequest request) {
 		List<UsuarioRol> rolesQueTraia = usuarioRolService.findByIdUsr(usuario.getIdUsr());
 		List<Integer> rolesABorrar = new ArrayList<>();
 		Boolean estaba;
@@ -255,7 +255,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		}
 		if (!rolesABorrar.isEmpty()) {
 			for (Integer idRol : rolesABorrar) {
-				usuarioRolService.delete(usuario.getIdUsr(), idRol);
+				usuarioRolService.delete(usuario.getIdUsr(), idRol, request);
 			}
 		}
 	}

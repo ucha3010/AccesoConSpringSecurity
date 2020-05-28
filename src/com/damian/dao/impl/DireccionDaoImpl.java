@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.damian.converter.ConverterDireccion;
 import com.damian.dao.DireccionDao;
 import com.damian.dao.model.ModelDireccion;
 import com.damian.pojo.Direccion;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class DireccionDaoImpl implements DireccionDao {
@@ -54,7 +56,7 @@ public class DireccionDaoImpl implements DireccionDao {
 	}
 
 	@Override
-	public void save(Direccion direccion) {
+	public void save(Direccion direccion, HttpServletRequest request) {
 
 		ModelDireccion md = converterDireccion.convert(direccion);
 		if (direccion.getIdDir() == 0) {
@@ -73,6 +75,7 @@ public class DireccionDaoImpl implements DireccionDao {
 					md.getFechaModificacion(), md.getIdDir());
 
 		}
+		LocalLogger.save(TABLA, direccion, request);
 	}
 
 	@Override
@@ -90,10 +93,12 @@ public class DireccionDaoImpl implements DireccionDao {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
 	}
 
 	@Override

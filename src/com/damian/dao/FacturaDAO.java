@@ -14,11 +14,11 @@ public interface FacturaDAO {
 
 	public Factura findByIdModel(int id);
 
-	public int save(Factura factura);
+	public int save(Factura factura, HttpServletRequest request);
 
-	public int update(Factura factura);
+	public int update(Factura factura, HttpServletRequest request);
 
-	public int delete(int id);
+	public int delete(int id, HttpServletRequest request);
 
 	public List<Factura> findByIdEstModel(int idEst, String column, HttpServletRequest request);
 

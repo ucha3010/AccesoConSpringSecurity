@@ -2,6 +2,8 @@ package com.damian.service.impl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +18,8 @@ public class UsuarioRolServiceImpl implements UsuarioRolService {
 	private UsuarioRolDAO usuarioRolDAO;
 
 	@Override
-	public void save(UsuarioRol usuarioRol) {
-		usuarioRolDAO.save(usuarioRol);
+	public void save(UsuarioRol usuarioRol, HttpServletRequest request) {
+		usuarioRolDAO.save(usuarioRol, request);
 	}
 
 	@Override
@@ -26,15 +28,15 @@ public class UsuarioRolServiceImpl implements UsuarioRolService {
 	}
 
 	@Override
-	public void update(UsuarioRol usuarioRol) {
-		usuarioRolDAO.update(usuarioRol);
+	public void update(UsuarioRol usuarioRol, HttpServletRequest request) {
+		usuarioRolDAO.update(usuarioRol, request);
 	}
 
 	@Override
-	public void delete(int idUsr, int idRol) {
+	public void delete(int idUsr, int idRol, HttpServletRequest request) {
 		UsuarioRol usuarioRol = findByIdUsrAndIdRol(idUsr, idRol);
 		if (usuarioRol != null) {
-			usuarioRolDAO.delete(usuarioRol);
+			usuarioRolDAO.delete(usuarioRol, request);
 		}
 	}
 

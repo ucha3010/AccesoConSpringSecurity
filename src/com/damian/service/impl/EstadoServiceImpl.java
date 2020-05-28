@@ -47,7 +47,7 @@ public class EstadoServiceImpl implements EstadoService {
 		estado.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		estado.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		return estadoDAO.save(estado);
+		return estadoDAO.save(estado, request);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class EstadoServiceImpl implements EstadoService {
 		estado.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		estado.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		return estadoDAO.update(estado);
+		return estadoDAO.update(estado, request);
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class EstadoServiceImpl implements EstadoService {
 		if (lista != null && !lista.isEmpty()) {
 			throw new NotEmptyException("Tiene asociado facturas");
 		}
-		return estadoDAO.delete(id);
+		return estadoDAO.delete(id, request);
 	}
 
 }

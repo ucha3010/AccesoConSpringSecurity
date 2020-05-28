@@ -277,7 +277,8 @@ public class Subcategoria {
 		return "Subcategoria [idSub=" + idSub + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", nombrePT="
 				+ nombrePT + ", nombreFR=" + nombreFR + ", nombreIT=" + nombreIT + ", nombreGE=" + nombreGE
 				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + ", categoria=" + categoria + ", productos="
-				+ productos + ", foto=" + foto + "]";
+				+ productos + ", foto=" + foto + ", modificadoPor=" + modificadoPor + ", fechaModificacion="
+				+ fechaModificacion + "]";
 	}
 
 }

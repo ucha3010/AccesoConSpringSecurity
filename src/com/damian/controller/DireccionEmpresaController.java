@@ -73,9 +73,9 @@ public class DireccionEmpresaController {
 
 	@RequestMapping("/direccionEmpresa/delete/{idDirEmp}/{idEmp}")
 	public String deleteUser(@PathVariable("idDirEmp") int idDirEmp, @PathVariable("idEmp") int idEmp,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, HttpServletRequest request) {
 
-		direccionEmpresaService.delete(idDirEmp);
+		direccionEmpresaService.delete(idDirEmp, request);
 		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
 
 		return "redirect:/direccionEmpresa/" + idEmp;

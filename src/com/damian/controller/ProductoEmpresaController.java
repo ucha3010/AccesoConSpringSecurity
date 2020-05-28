@@ -79,9 +79,9 @@ public class ProductoEmpresaController {
 
 	@RequestMapping("/productoEmpresa/producto/delete/{idPro}/{idEmp}")
 	public String deleteProducto(@PathVariable("idPro") int idPro, @PathVariable("idEmp") int idEmp,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, HttpServletRequest request) {
 
-		productoEmpresaService.delete(idPro, idEmp);
+		productoEmpresaService.delete(idPro, idEmp, request);
 		ra.addFlashAttribute("productoEmpresa_deleted", true);
 
 		return "redirect:/productoEmpresa/producto/" + idPro;
@@ -90,9 +90,9 @@ public class ProductoEmpresaController {
 
 	@RequestMapping("/productoEmpresa/empresa/delete/{idPro}/{idEmp}")
 	public String deleteEmpresa(@PathVariable("idPro") int idPro, @PathVariable("idEmp") int idEmp,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, HttpServletRequest request) {
 
-		productoEmpresaService.delete(idPro, idEmp);
+		productoEmpresaService.delete(idPro, idEmp, request);
 		ra.addFlashAttribute("productoEmpresa_deleted", true);
 
 		return "redirect:/productoEmpresa/empresa/" + idEmp;

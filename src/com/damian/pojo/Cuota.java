@@ -181,7 +181,8 @@ public class Cuota {
 	public String toString() {
 		return "Cuota [idCuo=" + idCuo + ", cantidadCuotas=" + cantidadCuotas + ", comisionAperturaPor="
 				+ comisionAperturaPor + ", comisionAperturaImp=" + comisionAperturaImp + ", interesPor=" + interesPor
-				+ ", interesImp=" + interesImp + "]";
+				+ ", interesImp=" + interesImp + ", facturas=" + facturas + ", modificadoPor=" + modificadoPor
+				+ ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

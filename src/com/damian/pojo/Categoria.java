@@ -248,7 +248,7 @@ public class Categoria {
 		return "Categoria [idCat=" + idCat + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", nombrePT="
 				+ nombrePT + ", nombreFR=" + nombreFR + ", nombreIT=" + nombreIT + ", nombreGE=" + nombreGE
 				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + ", subcategorias=" + subcategorias + ", foto="
-				+ foto + "]";
+				+ foto + ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import com.damian.dao.UsuarioDAO;
 import com.damian.dao.UsuarioEmpresaDAO;
 import com.damian.dao.model.ModelUsuarioEmpresa;
 import com.damian.pojo.UsuarioEmpresa;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class UsuarioEmpresaDAOImpl implements UsuarioEmpresaDAO {
@@ -54,14 +56,14 @@ public class UsuarioEmpresaDAOImpl implements UsuarioEmpresaDAO {
 	}
 
 	@Override
-	public void save(UsuarioEmpresa usuarioEmpresa) {
+	public void save(UsuarioEmpresa usuarioEmpresa, HttpServletRequest request) {
 		ModelUsuarioEmpresa mue = converterUsuarioEmpresa.convert(usuarioEmpresa);
 		String sql = "INSERT INTO " + TABLA + " (idUsr, idEmp, fechaCreacion, creadoPor)" + " VALUES (?, ?, ?, ?)";
 		jdbcTemplate.update(sql, mue.getIdUsr(), mue.getIdEmp(), mue.getFechaCreacion(), mue.getCreadoPor());
 	}
 
 	@Override
-	public void update(UsuarioEmpresa usuarioEmpresa) {
+	public void update(UsuarioEmpresa usuarioEmpresa, HttpServletRequest request) {
 		ModelUsuarioEmpresa mue = converterUsuarioEmpresa.convert(usuarioEmpresa);
 		String sql = "UPDATE " + TABLA + " SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
 				+ "=?";
@@ -69,10 +71,11 @@ public class UsuarioEmpresaDAOImpl implements UsuarioEmpresaDAO {
 	}
 
 	@Override
-	public void delete(UsuarioEmpresa usuarioEmpresa) {
+	public void delete(UsuarioEmpresa usuarioEmpresa, HttpServletRequest request) {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY1 + "=? AND " + KEY2 + "=?";
 		jdbcTemplate.update(sql, usuarioEmpresa.getUsuario().getIdUsr(), usuarioEmpresa.getEmpresa().getIdEmp());
+		LocalLogger.delete(TABLA, usuarioEmpresa, request);
 	}
 
 	@Override

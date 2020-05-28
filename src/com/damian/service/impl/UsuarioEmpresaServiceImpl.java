@@ -34,7 +34,7 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 		usuarioEmpresa.setCreadoPor(context.getAuthentication().getName());
 		usuarioEmpresa.setFechaCreacion(new Date());
-		usuarioEmpresaDAO.save(usuarioEmpresa);
+		usuarioEmpresaDAO.save(usuarioEmpresa, request);
 	}
 
 	@Override
@@ -43,15 +43,15 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
 	}
 
 	@Override
-	public void update(UsuarioEmpresa usuarioEmpresa) {
-		usuarioEmpresaDAO.update(usuarioEmpresa);
+	public void update(UsuarioEmpresa usuarioEmpresa, HttpServletRequest request) {
+		usuarioEmpresaDAO.update(usuarioEmpresa, request);
 	}
 
 	@Override
-	public void delete(int idUsr, int idEmp) {
+	public void delete(int idUsr, int idEmp, HttpServletRequest request) {
 		UsuarioEmpresa usuarioEmpresa = findByIdUsrAndIdEmp(idUsr, idEmp);
 		if (usuarioEmpresa != null) {
-			usuarioEmpresaDAO.delete(usuarioEmpresa);
+			usuarioEmpresaDAO.delete(usuarioEmpresa, request);
 		}
 	}
 

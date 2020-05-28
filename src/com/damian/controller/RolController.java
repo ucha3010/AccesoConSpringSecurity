@@ -71,11 +71,11 @@ public class RolController {
 	}
 
 	@RequestMapping("/rol/delete/{idRol}")
-	public String deleteUser(@PathVariable("idRol") int idRol, RedirectAttributes ra) {
+	public String deleteUser(@PathVariable("idRol") int idRol, RedirectAttributes ra, HttpServletRequest request) {
 
 		List<UsuarioRol> usuarioRolList = usuarioRolService.findByIdRol(idRol);
 		if (usuarioRolList == null || usuarioRolList.isEmpty()) {
-			rolService.delete(idRol);
+			rolService.delete(idRol, request);
 			ra.addFlashAttribute("rol_eliminado", "rol_eliminado");
 		} else {
 			ra.addFlashAttribute("rol_asociado", "rol_asociado");

@@ -14,7 +14,7 @@ public interface ProductoFacturaService {
 
 	public void update(ProductoFactura productoFactura, HttpServletRequest request);
 
-	public void delete(int idPro, int idFac);
+	public void delete(int idPro, int idFac, HttpServletRequest request);
 
 	public List<ProductoFactura> findByIdPro(int idPro);
 

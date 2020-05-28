@@ -29,15 +29,15 @@ public class RolServiceImpl implements RolService {
 		rol.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		rol.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		rolDAO.save(rol);
+		rolDAO.save(rol, request);
 	}
 
 	public List<Rol> findAll() {
 		return rolDAO.findAll();
 	}
 
-	public void delete(int idRol) {
-		rolDAO.delete(idRol);
+	public void delete(int idRol, HttpServletRequest request) {
+		rolDAO.delete(idRol, request);
 	}
 
 	@Override

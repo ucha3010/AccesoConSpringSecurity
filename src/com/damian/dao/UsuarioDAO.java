@@ -10,14 +10,14 @@ public interface UsuarioDAO {
 
 	public Usuario findByUsername(String usuario);
 
-	public void save(Usuario usuario);
+	public void save(Usuario usuario, HttpServletRequest request);
 
 	public List<Usuario> findAll(boolean customer, String column, String order, int paginaInicio, int totalPaginas,
 			HttpServletRequest request);
 
-	public void update(Usuario usuario);
+	public void update(Usuario usuario, HttpServletRequest request);
 
-	public void delete(int id);
+	public void delete(int id, HttpServletRequest request);
 
 	public Usuario findById(int id);
 

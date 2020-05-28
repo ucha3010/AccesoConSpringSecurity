@@ -2,6 +2,8 @@ package com.damian.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.pojo.Subcategoria;
 
 public interface SubcategoriaDAO {
@@ -12,11 +14,11 @@ public interface SubcategoriaDAO {
 
 	public Subcategoria findByIdModel(int id);
 
-	public int save(Subcategoria subcategoria);
+	public int save(Subcategoria subcategoria, HttpServletRequest request);
 
-	public int update(Subcategoria subcategoria);
+	public int update(Subcategoria subcategoria, HttpServletRequest request);
 
-	public int delete(int id);
+	public int delete(int id, HttpServletRequest request);
 
 	public List<Subcategoria> findByIdCatModel(int idCat);
 

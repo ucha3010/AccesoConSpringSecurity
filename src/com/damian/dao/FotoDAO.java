@@ -2,6 +2,8 @@ package com.damian.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.pojo.Foto;
 
 public interface FotoDAO {
@@ -26,11 +28,11 @@ public interface FotoDAO {
 
 	public List<Foto> findByIdRol(int idRol);
 
-	public int save(Foto foto);
+	public int save(Foto foto, HttpServletRequest request);
 
-	public int update(Foto foto);
+	public int update(Foto foto, HttpServletRequest request);
 
-	public int delete(int id);
+	public int delete(int id, HttpServletRequest request);
 
 	public int getMaxId();
 

@@ -39,7 +39,7 @@ public class DireccionServiceImpl implements DireccionService {
 		direccion.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		direccion.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		direccionDao.save(direccion);
+		direccionDao.save(direccion, request);
 		return direccionDao.getMaxId();
 
 	}
@@ -52,8 +52,8 @@ public class DireccionServiceImpl implements DireccionService {
 	}
 
 	@Override
-	public void delete(int idDir) {
-		direccionDao.delete(idDir);
+	public void delete(int idDir, HttpServletRequest request) {
+		direccionDao.delete(idDir, request);
 	}
 
 }

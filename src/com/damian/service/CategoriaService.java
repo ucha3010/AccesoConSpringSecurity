@@ -19,6 +19,6 @@ public interface CategoriaService {
 
 	public int update(Categoria categoria, HttpServletRequest request);
 
-	public int delete(int id) throws NotEmptyException;
+	public int delete(int id, HttpServletRequest request) throws NotEmptyException;
 
 }

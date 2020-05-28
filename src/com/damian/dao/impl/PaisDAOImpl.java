@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.damian.converter.ConverterPais;
 import com.damian.dao.PaisDAO;
 import com.damian.dao.model.ModelPais;
 import com.damian.pojo.Pais;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class PaisDAOImpl implements PaisDAO {
@@ -61,7 +63,7 @@ public class PaisDAOImpl implements PaisDAO {
 	}
 
 	@Override
-	public void save(Pais pais) {
+	public void save(Pais pais, HttpServletRequest request) {
 
 		ModelPais mp = converterPais.convert(pais);
 		String sql = "INSERT INTO " + TABLA
@@ -72,7 +74,7 @@ public class PaisDAOImpl implements PaisDAO {
 	}
 
 	@Override
-	public void update(Pais pais) {
+	public void update(Pais pais, HttpServletRequest request) {
 
 		ModelPais mp = converterPais.convert(pais);
 		String sql = "UPDATE " + TABLA
@@ -83,10 +85,12 @@ public class PaisDAOImpl implements PaisDAO {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
 	}
 
 	@Override

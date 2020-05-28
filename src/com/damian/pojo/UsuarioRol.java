@@ -98,7 +98,8 @@ public class UsuarioRol implements java.io.Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "UsuarioRol [fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor + "]";
+		return "UsuarioRol [usuario=" + usuario + ", rol=" + rol + ", fechaCreacion=" + fechaCreacion + ", creadoPor="
+				+ creadoPor + "]";
 	}
 
 }

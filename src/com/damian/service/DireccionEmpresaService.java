@@ -14,6 +14,6 @@ public interface DireccionEmpresaService {
 
 	List<DireccionEmpresa> findListFromEmpresa(int idEmp);
 
-	void delete(int idDirEmp);
+	void delete(int idDirEmp, HttpServletRequest request);
 
 }

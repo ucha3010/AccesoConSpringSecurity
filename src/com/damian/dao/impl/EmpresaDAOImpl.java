@@ -21,6 +21,7 @@ import com.damian.dao.UsuarioDAO;
 import com.damian.dao.UsuarioOrdenDAO;
 import com.damian.dao.model.ModelEmpresa;
 import com.damian.pojo.Empresa;
+import com.damian.utils.LocalLogger;
 import com.damian.utils.Utils;
 
 @Repository
@@ -89,9 +90,9 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	}
 
 	@Override
-	public void save(Empresa empresa) {
+	public void save(Empresa empresa, HttpServletRequest request) {
 		if (empresa.getIdEmp() > 0) {
-			update(empresa);
+			update(empresa, request);
 		} else {
 			ModelEmpresa me = converterEmpresa.convert(empresa);
 			String sql = "INSERT INTO " + TABLA + " (nombreComercial, tipoSociedad, actividad, cif, email, paginaWeb, "
@@ -104,7 +105,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	}
 
 	@Override
-	public void update(Empresa empresa) {
+	public void update(Empresa empresa, HttpServletRequest request) {
 		ModelEmpresa me = converterEmpresa.convert(empresa);
 		String sql = "UPDATE " + TABLA + " SET nombreComercial=?, tipoSociedad=?, actividad=?, "
 				+ "cif=?, email=?, paginaWeb=?, "
@@ -115,10 +116,13 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, id);
+		int result = jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
+		return result;
 	}
 
 	@Override

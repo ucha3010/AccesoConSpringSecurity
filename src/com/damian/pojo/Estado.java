@@ -244,7 +244,8 @@ public class Estado {
 	public String toString() {
 		return "Estado [idEst=" + idEst + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", nombrePT=" + nombrePT
 				+ ", nombreFR=" + nombreFR + ", nombreIT=" + nombreIT + ", nombreGE=" + nombreGE + ", nombreCA="
-				+ nombreCA + ", nombreEU=" + nombreEU + ", facturas=" + facturas + ", foto=" + foto + "]";
+				+ nombreCA + ", nombreEU=" + nombreEU + ", facturas=" + facturas + ", foto=" + foto + ", modificadoPor="
+				+ modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

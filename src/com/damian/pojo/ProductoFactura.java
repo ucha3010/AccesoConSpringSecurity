@@ -217,9 +217,11 @@ public class ProductoFactura {
 	 */
 	@Override
 	public String toString() {
-		return "ProductoFactura [cantidad=" + cantidad + ", ivaProducto=" + ivaProducto + ", porcentajeDescuento="
-				+ porcentajeDescuento + ", precioUnitSinIva=" + precioUnitSinIva + ", precioUnitConIva="
-				+ precioUnitConIva + ", precioFinal=" + precioFinal + ", observaciones=" + observaciones + "]";
+		return "ProductoFactura [producto=" + producto + ", factura=" + factura + ", cantidad=" + cantidad
+				+ ", ivaProducto=" + ivaProducto + ", porcentajeDescuento=" + porcentajeDescuento
+				+ ", precioUnitSinIva=" + precioUnitSinIva + ", precioUnitConIva=" + precioUnitConIva + ", precioFinal="
+				+ precioFinal + ", observaciones=" + observaciones + ", modificadoPor=" + modificadoPor
+				+ ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

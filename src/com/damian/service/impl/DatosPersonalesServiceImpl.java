@@ -29,7 +29,7 @@ public class DatosPersonalesServiceImpl implements DatosPersonalesService {
 		datosPersonales.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		datosPersonales.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		datosPersonalesDAO.save(datosPersonales);
+		datosPersonalesDAO.save(datosPersonales, request);
 	}
 
 	public List<DatosPersonales> findAll() {
@@ -43,12 +43,12 @@ public class DatosPersonalesServiceImpl implements DatosPersonalesService {
 		datosPersonales.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		datosPersonales.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		datosPersonalesDAO.update(datosPersonales);
+		datosPersonalesDAO.update(datosPersonales, request);
 	}
 
-	public void delete(int idUsr) {
+	public void delete(int idUsr, HttpServletRequest request) {
 		DatosPersonales datosPersonales = findById(idUsr);
-		datosPersonalesDAO.delete(datosPersonales.getIdDatosPers());
+		datosPersonalesDAO.delete(datosPersonales.getIdDatosPers(), request);
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.damian.converter.ConverterEstado;
 import com.damian.dao.EstadoDAO;
 import com.damian.dao.model.ModelEstado;
 import com.damian.pojo.Estado;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class EstadoDAOImpl implements EstadoDAO {
@@ -79,9 +81,9 @@ public class EstadoDAOImpl implements EstadoDAO {
 	}
 
 	@Override
-	public int save(Estado estado) {
+	public int save(Estado estado, HttpServletRequest request) {
 		if (estado.getIdEst() > 0) {
-			return update(estado);
+			return update(estado, request);
 		} else {
 			ModelEstado me = converterEstado.convert(estado);
 			String sql = "INSERT INTO " + TABLA
@@ -93,7 +95,7 @@ public class EstadoDAOImpl implements EstadoDAO {
 	}
 
 	@Override
-	public int update(Estado estado) {
+	public int update(Estado estado, HttpServletRequest request) {
 		ModelEstado me = converterEstado.convert(estado);
 		String sql = "UPDATE " + TABLA
 				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, modificadoPor=?, fechaModificacion=? "
@@ -104,10 +106,13 @@ public class EstadoDAOImpl implements EstadoDAO {
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, id);
+		int result = jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
+		return result;
 	}
 
 	@Override

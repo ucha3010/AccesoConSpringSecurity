@@ -14,7 +14,7 @@ public interface RolService {
 
 	List<Rol> findAll();
 
-	void delete(int idRol);
+	void delete(int idRol, HttpServletRequest request);
 
 	List<Rol> findByRolName(String rolName);
 

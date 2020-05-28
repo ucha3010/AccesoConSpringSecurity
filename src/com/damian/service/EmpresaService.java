@@ -18,7 +18,7 @@ public interface EmpresaService {
 
 	void update(Empresa empresa, HttpServletRequest request);
 
-	boolean delete(int idEmpresa);
+	boolean delete(int idEmpresa, HttpServletRequest request);
 
 	List<Empresa> findByEmpresaName(String empresaName);
 

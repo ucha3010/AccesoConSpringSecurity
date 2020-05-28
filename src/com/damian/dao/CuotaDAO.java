@@ -2,6 +2,8 @@ package com.damian.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.pojo.Cuota;
 
 public interface CuotaDAO {
@@ -12,11 +14,11 @@ public interface CuotaDAO {
 
 	public Cuota findByIdModel(int id);
 
-	public int save(Cuota cuota);
+	public int save(Cuota cuota, HttpServletRequest request);
 
-	public int update(Cuota cuota);
+	public int update(Cuota cuota, HttpServletRequest request);
 
-	public int delete(int id);
+	public int delete(int id, HttpServletRequest request);
 
 	public int getMaxId();
 

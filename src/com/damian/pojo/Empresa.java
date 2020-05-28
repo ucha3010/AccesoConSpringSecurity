@@ -282,7 +282,8 @@ public class Empresa {
 				+ ", actividad=" + actividad + ", cif=" + cif + ", email=" + email + ", paginaWeb=" + paginaWeb
 				+ ", telefono=" + telefono + ", fax=" + fax + ", observaciones=" + observaciones + ", usuarioEmpresa="
 				+ usuarioEmpresa + ", direccionesEmpresa=" + direccionesEmpresa + ", productoEmpresaList="
-				+ productoEmpresaList + ", fotos=" + fotos + "]";
+				+ productoEmpresaList + ", fotos=" + fotos + ", modificadoPor=" + modificadoPor + ", fechaModificacion="
+				+ fechaModificacion + "]";
 	}
 
 }

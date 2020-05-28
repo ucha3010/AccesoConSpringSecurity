@@ -47,7 +47,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 		categoria.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		categoria.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		return categoriaDAO.save(categoria);
+		return categoriaDAO.save(categoria, request);
 	}
 
 	@Override
@@ -58,16 +58,16 @@ public class CategoriaServiceImpl implements CategoriaService {
 		categoria.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		categoria.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		return categoriaDAO.update(categoria);
+		return categoriaDAO.update(categoria, request);
 	}
 
 	@Override
-	public int delete(int id) throws NotEmptyException {
+	public int delete(int id, HttpServletRequest request) throws NotEmptyException {
 		List<Subcategoria> subcategoriaList = subcategoriaService.findByIdCatModel(id);
 		if (subcategoriaList != null && !subcategoriaList.isEmpty()) {
 			throw new NotEmptyException("Tiene asociado subcategorias");
 		}
-		return categoriaDAO.delete(id);
+		return categoriaDAO.delete(id, request);
 	}
 
 }

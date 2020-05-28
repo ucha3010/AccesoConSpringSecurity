@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import com.damian.dao.ProductoDAO;
 import com.damian.dao.ProductoEmpresaDAO;
 import com.damian.dao.model.ModelProductoEmpresa;
 import com.damian.pojo.ProductoEmpresa;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class ProductoEmpresaDAOImpl implements ProductoEmpresaDAO {
@@ -54,14 +56,14 @@ public class ProductoEmpresaDAOImpl implements ProductoEmpresaDAO {
 	}
 
 	@Override
-	public void save(ProductoEmpresa productoEmpresa) {
+	public void save(ProductoEmpresa productoEmpresa, HttpServletRequest request) {
 		String sql = "INSERT INTO " + TABLA + " (idPro, idEmp, fechaCreacion, creadoPor)" + " VALUES (?, ?, ?, ?)";
 		jdbcTemplate.update(sql, productoEmpresa.getProducto().getIdPro(), productoEmpresa.getEmpresa().getIdEmp(),
 				productoEmpresa.getFechaCreacion(), productoEmpresa.getCreadoPor());
 	}
 
 	@Override
-	public void update(ProductoEmpresa productoEmpresa) {
+	public void update(ProductoEmpresa productoEmpresa, HttpServletRequest request) {
 		String sql = "UPDATE " + TABLA + " SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
 				+ "=?";
 		jdbcTemplate.update(sql, productoEmpresa.getFechaCreacion(), productoEmpresa.getCreadoPor(),
@@ -69,10 +71,12 @@ public class ProductoEmpresaDAOImpl implements ProductoEmpresaDAO {
 	}
 
 	@Override
-	public void delete(int idPro, int idEmp) {
+	public void delete(int idPro, int idEmp, HttpServletRequest request) {
 
+		Object object = findByIdProAndIdEmp(idPro, idEmp);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY1 + "=? AND " + KEY2 + "=?";
 		jdbcTemplate.update(sql, idPro, idEmp);
+		LocalLogger.delete(TABLA, object, request);
 	}
 
 	@Override

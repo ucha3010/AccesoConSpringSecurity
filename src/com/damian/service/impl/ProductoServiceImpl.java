@@ -88,7 +88,7 @@ public class ProductoServiceImpl implements ProductoService {
 		producto.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		producto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		productoDAO.save(producto);
+		productoDAO.save(producto, request);
 		return productoDAO.getMaxId();
 	}
 
@@ -100,11 +100,11 @@ public class ProductoServiceImpl implements ProductoService {
 		producto.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		producto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		productoDAO.update(producto);
+		productoDAO.update(producto, request);
 	}
 
 	@Override
-	public int delete(int id) throws NotEmptyException {
+	public int delete(int id, HttpServletRequest request) throws NotEmptyException {
 		List<ProductoFactura> productoFacturaList = productoFacturaService.findByIdPro(id);
 		if (productoFacturaList != null && !productoFacturaList.isEmpty()) {
 			throw new NotEmptyException("Tiene asociado facturas");
@@ -112,10 +112,10 @@ public class ProductoServiceImpl implements ProductoService {
 		List<ProductoEmpresa> productoEmpresaList = productoEmpresaService.findByIdPro(id);
 		if (productoEmpresaList != null) {
 			for (ProductoEmpresa p : productoEmpresaList) {
-				productoEmpresaService.delete(id, p.getEmpresa().getIdEmp());
+				productoEmpresaService.delete(id, p.getEmpresa().getIdEmp(), request);
 			}
 		}
-		return productoDAO.delete(id);
+		return productoDAO.delete(id, request);
 	}
 
 	@Override
@@ -148,7 +148,7 @@ public class ProductoServiceImpl implements ProductoService {
 		} else {
 			producto.setUnidades(producto.getUnidades() - frontProductoStock.getCantidad());
 		}
-		productoDAO.save(producto);
+		productoDAO.save(producto, request);
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");

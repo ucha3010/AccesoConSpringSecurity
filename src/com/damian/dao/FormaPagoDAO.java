@@ -2,6 +2,8 @@ package com.damian.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.pojo.FormaPago;
 
 public interface FormaPagoDAO {
@@ -12,11 +14,11 @@ public interface FormaPagoDAO {
 
 	public FormaPago findByIdModel(int id);
 
-	public int save(FormaPago formaPago);
+	public int save(FormaPago formaPago, HttpServletRequest request);
 
-	public int update(FormaPago formaPago);
+	public int update(FormaPago formaPago, HttpServletRequest request);
 
-	public int delete(int id);
+	public int delete(int id, HttpServletRequest request);
 
 	public int getMaxId();
 

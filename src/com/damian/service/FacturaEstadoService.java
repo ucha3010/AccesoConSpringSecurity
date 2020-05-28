@@ -16,7 +16,7 @@ public interface FacturaEstadoService {
 
 	public void update(FacturaEstado facturaEstado, HttpServletRequest request);
 
-	public void delete(int id);
+	public void delete(int id, HttpServletRequest request);
 
 	public List<FacturaEstado> findByIdEst(int idEst);
 

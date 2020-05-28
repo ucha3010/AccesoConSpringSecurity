@@ -19,6 +19,6 @@ public interface FormaPagoService {
 
 	public int update(FormaPago formaPago, HttpServletRequest request);
 
-	public int delete(int id) throws NotEmptyException;
+	public int delete(int id, HttpServletRequest request) throws NotEmptyException;
 
 }

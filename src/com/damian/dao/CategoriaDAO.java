@@ -2,6 +2,8 @@ package com.damian.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.pojo.Categoria;
 
 public interface CategoriaDAO {
@@ -12,11 +14,11 @@ public interface CategoriaDAO {
 
 	public Categoria findByIdModel(int id);
 
-	public int save(Categoria categoria);
+	public int save(Categoria categoria, HttpServletRequest request);
 
-	public int update(Categoria categoria);
+	public int update(Categoria categoria, HttpServletRequest request);
 
-	public int delete(int id);
+	public int delete(int id, HttpServletRequest request);
 
 	public int getMaxId();
 

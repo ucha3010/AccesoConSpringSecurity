@@ -15,13 +15,13 @@ public interface UsuarioService {
 
 	void save(Usuario usuario, String[] usuarioRol, HttpServletRequest request) throws RepeatedUsernameException;
 
-	void saveChangePassword(Usuario usuario);
+	void saveChangePassword(Usuario usuario, HttpServletRequest request);
 
 	List<Usuario> findAll(String column, String order, int paginaInicio, int totalPaginas, HttpServletRequest request);
 
-	void update(Usuario usuario);
+	void update(Usuario usuario, HttpServletRequest request);
 
-	void delete(int idUsr);
+	void delete(int idUsr, HttpServletRequest request);
 
 	List<Usuario> findCustomers(String column, String order, int paginaInicio, int totalPaginas,
 			HttpServletRequest request);
@@ -32,12 +32,12 @@ public interface UsuarioService {
 
 	void fillExistingUser(Usuario usuario);
 
-	Usuario reset(int idUsr);
+	Usuario reset(int idUsr, HttpServletRequest request);
 
 	public Usuario findByUsername(String usuario);
 
 	public String getColumn(HttpServletRequest request);
-	
+
 	public List<Usuario> findSearchAll(boolean customer);
 
 }

@@ -115,7 +115,7 @@ public class ClienteController {
 	@RequestMapping("/cliente/{idUsr}/delete")
 	public String deleteUser(@PathVariable("idUsr") int idUsr, RedirectAttributes ra, HttpServletRequest request) {
 
-		usuarioService.delete(idUsr);
+		usuarioService.delete(idUsr, request);
 		ra.addFlashAttribute("usuario_eliminado", "usuario_eliminado");
 
 		return "redirect:/cliente/all/" + usuarioService.getColumn(request) + "/0/100";
@@ -128,14 +128,14 @@ public class ClienteController {
 		Usuario usuario = new Usuario();
 		usuario = usuarioService.findById(idUsr);
 		usuario.setHabilitado(!usuario.isHabilitado());
-		usuarioService.update(usuario);
+		usuarioService.update(usuario, request);
 		return "redirect:/cliente/all/" + usuarioService.getColumn(request) + "/0/100";
 	}
 
 	@RequestMapping("/cliente/reset/{idUsr}")
 	public String passwordReset(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr,
 			HttpServletRequest request) {
-		usuarioService.reset(idUsr);
+		usuarioService.reset(idUsr, request);
 		return "redirect:/cliente/all/" + usuarioService.getColumn(request) + "/0/100";
 	}
 

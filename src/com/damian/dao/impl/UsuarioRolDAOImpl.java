@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.damian.dao.UsuarioDAO;
 import com.damian.dao.UsuarioRolDAO;
 import com.damian.dao.model.ModelUsuarioRol;
 import com.damian.pojo.UsuarioRol;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class UsuarioRolDAOImpl implements UsuarioRolDAO {
@@ -52,14 +54,14 @@ public class UsuarioRolDAOImpl implements UsuarioRolDAO {
 	}
 
 	@Override
-	public void save(UsuarioRol usuarioRol) {
+	public void save(UsuarioRol usuarioRol, HttpServletRequest request) {
 		ModelUsuarioRol mur = converterUsuarioRol.convert(usuarioRol);
 		String sql = "INSERT INTO " + TABLA + " (idUsr, idRol, fechaCreacion, creadoPor)" + " VALUES (?, ?, ?, ?)";
 		jdbcTemplate.update(sql, mur.getIdUsr(), mur.getIdRol(), mur.getFechaCreacion(), mur.getCreadoPor());
 	}
 
 	@Override
-	public void update(UsuarioRol usuarioRol) {
+	public void update(UsuarioRol usuarioRol, HttpServletRequest request) {
 		ModelUsuarioRol mur = converterUsuarioRol.convert(usuarioRol);
 		String sql = "UPDATE " + TABLA + " SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
 				+ "=?";
@@ -67,10 +69,11 @@ public class UsuarioRolDAOImpl implements UsuarioRolDAO {
 	}
 
 	@Override
-	public void delete(UsuarioRol usuarioRol) {
+	public void delete(UsuarioRol usuarioRol, HttpServletRequest request) {
 
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY1 + "=? AND " + KEY2 + "=?";
 		jdbcTemplate.update(sql, usuarioRol.getUsuario().getIdUsr(), usuarioRol.getRol().getIdRol());
+		LocalLogger.delete(TABLA, usuarioRol, request);
 	}
 
 	@Override

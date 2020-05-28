@@ -19,7 +19,7 @@ public interface SubcategoriaService {
 
 	public int update(Subcategoria subcategoria, HttpServletRequest request);
 
-	public int delete(int id) throws NotEmptyException;
+	public int delete(int id, HttpServletRequest request) throws NotEmptyException;
 
 	public List<Subcategoria> findByIdCatModel(int idCat);
 

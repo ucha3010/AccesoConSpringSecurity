@@ -21,6 +21,7 @@ import com.damian.dao.UsuarioDAO;
 import com.damian.dao.UsuarioOrdenDAO;
 import com.damian.dao.model.ModelProducto;
 import com.damian.pojo.Producto;
+import com.damian.utils.LocalLogger;
 import com.damian.utils.Utils;
 
 @Repository
@@ -100,9 +101,9 @@ public class ProductoDAOImpl implements ProductoDAO {
 	}
 
 	@Override
-	public void save(Producto producto) {
+	public void save(Producto producto, HttpServletRequest request) {
 		if (producto.getIdPro() > 0) {
-			update(producto);
+			update(producto, request);
 		} else {
 			ModelProducto mp = converterProducto.convert(producto);
 			String sql = "INSERT INTO " + TABLA
@@ -119,7 +120,7 @@ public class ProductoDAOImpl implements ProductoDAO {
 	}
 
 	@Override
-	public void update(Producto producto) {
+	public void update(Producto producto, HttpServletRequest request) {
 		ModelProducto mp = converterProducto.convert(producto);
 		String sql = "UPDATE " + TABLA
 				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, unidades=?, precioVenta=?, precioCompra=?, marca=?, "
@@ -135,10 +136,13 @@ public class ProductoDAOImpl implements ProductoDAO {
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, id);
+		int result = jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
+		return result;
 	}
 
 	@Override

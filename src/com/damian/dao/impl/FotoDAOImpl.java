@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.damian.converter.ConverterFoto;
 import com.damian.dao.FotoDAO;
 import com.damian.dao.model.ModelFoto;
 import com.damian.pojo.Foto;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class FotoDAOImpl implements FotoDAO {
@@ -107,9 +109,9 @@ public class FotoDAOImpl implements FotoDAO {
 	}
 
 	@Override
-	public int save(Foto foto) {
+	public int save(Foto foto, HttpServletRequest request) {
 		if (foto.getIdFot() > 0) {
-			return update(foto);
+			return update(foto, request);
 		} else {
 			ModelFoto mf = converterFoto.convert(foto);
 			String sql = "INSERT INTO " + TABLA
@@ -123,7 +125,7 @@ public class FotoDAOImpl implements FotoDAO {
 	}
 
 	@Override
-	public int update(Foto foto) {
+	public int update(Foto foto, HttpServletRequest request) {
 		ModelFoto mf = converterFoto.convert(foto);
 		String sql = "UPDATE " + TABLA
 				+ " SET idUsr=?, idPro=?, idEmp=?, idCat=?, idSub=?, idPais=?, idFor=?, idEst=?, idRol=?, nombre=?, ruta=?, descripcion=?, "
@@ -136,10 +138,13 @@ public class FotoDAOImpl implements FotoDAO {
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int id, HttpServletRequest request) {
 
+		Object object = findByIdFot(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, id);
+		int result = jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
+		return result;
 	}
 
 	@Override

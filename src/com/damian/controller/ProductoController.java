@@ -85,10 +85,10 @@ public class ProductoController {
 	}
 
 	@RequestMapping("/producto/delete/{idPro}")
-	public String deleteUser(@PathVariable("idPro") int idPro, RedirectAttributes ra) {
+	public String deleteUser(@PathVariable("idPro") int idPro, RedirectAttributes ra, HttpServletRequest request) {
 
 		try {
-			productoService.delete(idPro);
+			productoService.delete(idPro, request);
 			ra.addFlashAttribute("producto_eliminado", "producto_eliminado");
 		} catch (NotEmptyException e) {
 			ra.addFlashAttribute("producto_asociado", "producto_asociado");

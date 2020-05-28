@@ -12,9 +12,9 @@ public interface UsuarioEmpresaService {
 
 	List<UsuarioEmpresa> findAll();
 
-	void update(UsuarioEmpresa usuarioEmpresa);
+	void update(UsuarioEmpresa usuarioEmpresa, HttpServletRequest request);
 
-	void delete(int idUsr, int idEmp);
+	void delete(int idUsr, int idEmp, HttpServletRequest request);
 
 	List<UsuarioEmpresa> findByIdUsr(int idUsr);
 

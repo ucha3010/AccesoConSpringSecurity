@@ -246,7 +246,7 @@ public class FormaPago {
 		return "FormaPago [idFor=" + idFor + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", nombrePT="
 				+ nombrePT + ", nombreFR=" + nombreFR + ", nombreIT=" + nombreIT + ", nombreGE=" + nombreGE
 				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + ", facturas=" + facturas + ", foto=" + foto
-				+ "]";
+				+ ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import com.damian.converter.ConverterDatosPersonales;
 import com.damian.dao.DatosPersonalesDAO;
 import com.damian.dao.model.ModelDatosPersonales;
 import com.damian.pojo.DatosPersonales;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
@@ -62,7 +64,7 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 	}
 
 	@Override
-	public void save(DatosPersonales datosPersonales) {
+	public void save(DatosPersonales datosPersonales, HttpServletRequest request) {
 
 		ModelDatosPersonales mdp = converterDatosPersonales.convert(datosPersonales);
 		String sql = "INSERT INTO " + TABLA
@@ -76,7 +78,7 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 	}
 
 	@Override
-	public void update(DatosPersonales datosPersonales) {
+	public void update(DatosPersonales datosPersonales, HttpServletRequest request) {
 
 		ModelDatosPersonales mdp = converterDatosPersonales.convert(datosPersonales);
 		String sql = "UPDATE " + TABLA + " SET nombre=?, apellido1=?, apellido2=?, "
@@ -89,10 +91,12 @@ public class DatosPersonalesDAOImpl implements DatosPersonalesDAO {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
 	}
 
 	@Override

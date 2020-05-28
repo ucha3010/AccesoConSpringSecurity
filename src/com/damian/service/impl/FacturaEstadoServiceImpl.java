@@ -29,17 +29,17 @@ public class FacturaEstadoServiceImpl implements FacturaEstadoService {
 
 	@Override
 	public void save(FacturaEstado facturaEstado, HttpServletRequest request) {
-		facturaEstadoDAO.save(facturaEstado);
+		facturaEstadoDAO.save(facturaEstado, request);
 	}
 
 	@Override
 	public void update(FacturaEstado facturaEstado, HttpServletRequest request) {
-		facturaEstadoDAO.update(facturaEstado);
+		facturaEstadoDAO.update(facturaEstado, request);
 	}
 
 	@Override
-	public void delete(int id) {
-		facturaEstadoDAO.delete(id);
+	public void delete(int id, HttpServletRequest request) {
+		facturaEstadoDAO.delete(id, request);
 	}
 
 	@Override

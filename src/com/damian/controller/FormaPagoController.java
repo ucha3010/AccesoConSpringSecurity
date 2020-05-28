@@ -60,10 +60,10 @@ public class FormaPagoController {
 	}
 
 	@RequestMapping("/formaPago/delete/{idFor}")
-	public String deleteUser(@PathVariable("idFor") int idFor, RedirectAttributes ra) {
+	public String deleteUser(@PathVariable("idFor") int idFor, RedirectAttributes ra, HttpServletRequest request) {
 
 		try {
-			formaPagoService.delete(idFor);
+			formaPagoService.delete(idFor, request);
 			ra.addFlashAttribute("formaPago_eliminado", "formaPago_eliminado");
 		} catch (NotEmptyException e) {
 			ra.addFlashAttribute("formaPago_asociado", "formaPago_asociado");

@@ -1,5 +1,8 @@
 package com.damian.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.core.userdetails.User;
@@ -93,6 +96,36 @@ public class Utils {
 		}
 		return usuarioDAO.findByUsername(creador);
 
+	}
+
+	public static String getDate(long milliSeconds, String dateFormat) {
+		SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(milliSeconds);
+		return formatter.format(calendar.getTime());
+	}
+
+	public static String rutaHastaWebContent(HttpServletRequest request) {
+
+		// TODO DAMIAN por algún motivo el comando System.getProperty("user.dir") me
+		// está devolviendo la ruta donde está instalado el Eclipse en lugar
+		// de devolver la ruta de workspace (según leí, esa es la ruta que debería
+		// devolver). Con lo cual utilizo esto de abajo.
+		String rutaWorkspace = System.getProperty("catalina.base");
+		int finWorkspace = rutaWorkspace.indexOf(".metadata");
+		// Ruta hasta el workspace
+		rutaWorkspace = rutaWorkspace.substring(0, finWorkspace);
+		// Ruta hasta el proyecto
+		rutaWorkspace = rutaWorkspace + request.getContextPath().substring(1);
+		// Ruta dentro del proyecto
+		return rutaWorkspace + System.getProperty("file.separator") + "WebContent";
+	}
+
+	public static String rutaDentroResources(HttpServletRequest request, String carpeta) {
+		
+		String ruta = rutaHastaWebContent(request) + System.getProperty("file.separator") + "resources" + System.getProperty("file.separator") + carpeta
+		+ System.getProperty("file.separator");
+		return ruta;
 	}
 
 }

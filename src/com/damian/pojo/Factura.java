@@ -410,7 +410,8 @@ public class Factura {
 				+ ", estado=" + estado + ", formaPago=" + formaPago + ", cuota=" + cuota + ", numeroCuota="
 				+ numeroCuota + ", interesCuotaImporte=" + interesCuotaImporte + ", importeCuotaTotal="
 				+ importeCuotaTotal + ", cuotaConIva=" + cuotaConIva + ", cuotaSinIva=" + cuotaSinIva
-				+ ", importeFront=" + importeFront + "]";
+				+ ", importeFront=" + importeFront + ", modificadoPor=" + modificadoPor + ", fechaModificacion="
+				+ fechaModificacion + "]";
 	}
 
 }

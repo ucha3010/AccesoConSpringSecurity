@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.damian.converter.ConverterCuota;
 import com.damian.dao.CuotaDAO;
 import com.damian.dao.model.ModelCuota;
 import com.damian.pojo.Cuota;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class CuotaDAOImpl implements CuotaDAO {
@@ -79,9 +81,9 @@ public class CuotaDAOImpl implements CuotaDAO {
 	}
 
 	@Override
-	public int save(Cuota cuota) {
+	public int save(Cuota cuota, HttpServletRequest request) {
 		if (cuota.getIdCuo() > 0) {
-			return update(cuota);
+			return update(cuota, request);
 		} else {
 			ModelCuota mc = converterCuota.convert(cuota);
 			String sql = "INSERT INTO " + TABLA
@@ -93,7 +95,7 @@ public class CuotaDAOImpl implements CuotaDAO {
 	}
 
 	@Override
-	public int update(Cuota cuota) {
+	public int update(Cuota cuota, HttpServletRequest request) {
 		ModelCuota mc = converterCuota.convert(cuota);
 		String sql = "UPDATE " + TABLA
 				+ " SET cantidadCuotas=?, comisionAperturaPor=?, comisionAperturaImp=?, interesPor=?, interesImp=?, modificadoPor=?, fechaModificacion=? "
@@ -104,10 +106,13 @@ public class CuotaDAOImpl implements CuotaDAO {
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, id);
+		int result = jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
+		return result;
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public class DireccionEmpresaServiceImpl implements DireccionEmpresaService {
 		direccionEmpresa.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		direccionEmpresa.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		direccionEmpresaDao.save(direccionEmpresa);
+		direccionEmpresaDao.save(direccionEmpresa, request);
 
 	}
 
@@ -46,8 +46,8 @@ public class DireccionEmpresaServiceImpl implements DireccionEmpresaService {
 	}
 
 	@Override
-	public void delete(int idDirEmp) {
-		direccionEmpresaDao.delete(idDirEmp);
+	public void delete(int idDirEmp, HttpServletRequest request) {
+		direccionEmpresaDao.delete(idDirEmp, request);
 	}
 
 }

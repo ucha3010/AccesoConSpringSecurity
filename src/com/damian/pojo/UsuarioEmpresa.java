@@ -98,7 +98,8 @@ public class UsuarioEmpresa implements java.io.Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "UsuarioEmpresa [fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor + "]";
+		return "UsuarioEmpresa [usuario=" + usuario + ", empresa=" + empresa + ", fechaCreacion=" + fechaCreacion
+				+ ", creadoPor=" + creadoPor + "]";
 	}
 
 }

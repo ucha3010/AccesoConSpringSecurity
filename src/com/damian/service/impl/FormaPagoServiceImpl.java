@@ -47,7 +47,7 @@ public class FormaPagoServiceImpl implements FormaPagoService {
 		formaPago.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		formaPago.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		return formaPagoDAO.save(formaPago);
+		return formaPagoDAO.save(formaPago, request);
 	}
 
 	@Override
@@ -58,16 +58,16 @@ public class FormaPagoServiceImpl implements FormaPagoService {
 		formaPago.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		formaPago.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		return formaPagoDAO.update(formaPago);
+		return formaPagoDAO.update(formaPago, request);
 	}
 
 	@Override
-	public int delete(int id) throws NotEmptyException {
+	public int delete(int id, HttpServletRequest request) throws NotEmptyException {
 		List<Factura> lista = facturaService.findByIdForModel(id);
 		if (lista != null && !lista.isEmpty()) {
 			throw new NotEmptyException("Tiene asociado facturas");
 		}
-		return formaPagoDAO.delete(id);
+		return formaPagoDAO.delete(id, request);
 	}
 
 }

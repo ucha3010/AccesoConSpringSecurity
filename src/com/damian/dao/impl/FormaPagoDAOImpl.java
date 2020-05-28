@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.damian.converter.ConverterFormaPago;
 import com.damian.dao.FormaPagoDAO;
 import com.damian.dao.model.ModelFormaPago;
 import com.damian.pojo.FormaPago;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class FormaPagoDAOImpl implements FormaPagoDAO {
@@ -79,9 +81,9 @@ public class FormaPagoDAOImpl implements FormaPagoDAO {
 	}
 
 	@Override
-	public int save(FormaPago formaPago) {
+	public int save(FormaPago formaPago, HttpServletRequest request) {
 		if (formaPago.getIdFor() > 0) {
-			return update(formaPago);
+			return update(formaPago, request);
 		} else {
 			ModelFormaPago me = converterFormaPago.convert(formaPago);
 			String sql = "INSERT INTO " + TABLA
@@ -93,7 +95,7 @@ public class FormaPagoDAOImpl implements FormaPagoDAO {
 	}
 
 	@Override
-	public int update(FormaPago formaPago) {
+	public int update(FormaPago formaPago, HttpServletRequest request) {
 		ModelFormaPago me = converterFormaPago.convert(formaPago);
 		String sql = "UPDATE " + TABLA
 				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, modificadoPor=?, fechaModificacion=? "
@@ -104,10 +106,13 @@ public class FormaPagoDAOImpl implements FormaPagoDAO {
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, id);
+		int result = jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
+		return result;
 	}
 
 	@Override

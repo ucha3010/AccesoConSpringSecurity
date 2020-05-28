@@ -17,6 +17,7 @@ import com.damian.dao.FotoDAO;
 import com.damian.pojo.Foto;
 import com.damian.service.FotoService;
 import com.damian.utils.Ruta;
+import com.damian.utils.Utils;
 
 @Service
 public class FotoServiceImpl implements FotoService {
@@ -132,7 +133,7 @@ public class FotoServiceImpl implements FotoService {
 			foto.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 			foto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-			return fotoDAO.save(foto);
+			return fotoDAO.save(foto, request);
 		} else {
 			return 0;
 		}
@@ -144,7 +145,7 @@ public class FotoServiceImpl implements FotoService {
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 		foto.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		foto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
-		return fotoDAO.update(foto);
+		return fotoDAO.update(foto, request);
 	}
 
 	@Override
@@ -166,7 +167,7 @@ public class FotoServiceImpl implements FotoService {
 		if (ruta != null) {
 			File file = new File(ruta.getRutaAbsoluta() + System.getProperty("file.separator") + foto.getNombre());
 			file.delete();
-			fotoDAO.delete(id);
+			fotoDAO.delete(id, request);
 		}
 		return foto;
 	}
@@ -209,21 +210,9 @@ public class FotoServiceImpl implements FotoService {
 
 		Ruta ruta = new Ruta();
 
-		// TODO DAMIAN por algún motivo el comando System.getProperty("user.dir") me
-		// está devolviendo la ruta donde está instalado el Eclipse en lugar
-		// de devolver la ruta de workspace (según leí, esa es la ruta que debería
-		// devolver). Con lo cual utilizo esto de abajo.
-		String rutaWorkspace = System.getProperty("catalina.base");
-		int finWorkspace = rutaWorkspace.indexOf(".metadata");
-		// Ruta hasta el workspace
-		rutaWorkspace = rutaWorkspace.substring(0, finWorkspace);
-		// Ruta hasta el proyecto
-		rutaWorkspace = rutaWorkspace + request.getContextPath().substring(1);
-		// Ruta dentro del proyecto
 		ruta.setRutaRelativa(System.getProperty("file.separator") + "resources" + System.getProperty("file.separator")
 				+ "imgs" + System.getProperty("file.separator") + llamante + System.getProperty("file.separator") + id);
-		ruta.setRutaAbsoluta(
-				rutaWorkspace + System.getProperty("file.separator") + "WebContent" + ruta.getRutaRelativa());
+		ruta.setRutaAbsoluta(Utils.rutaHastaWebContent(request) + ruta.getRutaRelativa());
 		return ruta;
 	}
 

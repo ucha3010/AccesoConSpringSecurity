@@ -26,6 +26,7 @@ import com.damian.mapper.MapperDatosPersonales;
 import com.damian.mapper.MapperUsuario;
 import com.damian.pojo.Usuario;
 import com.damian.service.DatosPersonalesService;
+import com.damian.utils.LocalLogger;
 import com.damian.utils.Utils;
 
 @Repository
@@ -134,9 +135,9 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public void save(Usuario usuario) {
+	public void save(Usuario usuario, HttpServletRequest request) {
 		if (usuario.getIdUsr() > 0) {
-			update(usuario);
+			update(usuario, request);
 		} else {
 			ModelUsuario mu = converterUsuario.convert(usuario);
 			String sql = "INSERT INTO " + TABLA
@@ -148,7 +149,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public void update(Usuario usuario) {
+	public void update(Usuario usuario, HttpServletRequest request) {
 		ModelUsuario mu = converterUsuario.convert(usuario);
 		String sql = "UPDATE " + TABLA
 				+ " SET usuario=?, clave=?, habilitado=?, fechaCreacion=?, modificadoPor=?, fechaModificacion=? WHERE "
@@ -158,10 +159,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
 	}
 
 	@Override

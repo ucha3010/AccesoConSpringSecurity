@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.damian.converter.ConverterDireccionEmpresa;
 import com.damian.dao.DireccionEmpresaDAO;
 import com.damian.dao.model.ModelDireccionEmpresa;
 import com.damian.pojo.DireccionEmpresa;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
@@ -70,7 +72,7 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 	}
 
 	@Override
-	public void save(DireccionEmpresa direccionEmpresa) {
+	public void save(DireccionEmpresa direccionEmpresa, HttpServletRequest request) {
 
 		if (direccionEmpresa.getIdDirEmp() == 0) {
 			ModelDireccionEmpresa mdp = converterDireccionEmpresa.convert(direccionEmpresa);
@@ -81,13 +83,13 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 					mdp.getProvincia(), mdp.getCiudad(), mdp.getPais_idPais(), mdp.getIdEmp(), mdp.getModificadoPor(),
 					mdp.getFechaModificacion());
 		} else {
-			update(direccionEmpresa);
+			update(direccionEmpresa, request);
 		}
 
 	}
 
 	@Override
-	public void update(DireccionEmpresa direccionEmpresa) {
+	public void update(DireccionEmpresa direccionEmpresa, HttpServletRequest request) {
 
 		ModelDireccionEmpresa mdp = converterDireccionEmpresa.convert(direccionEmpresa);
 		String sql = "UPDATE " + TABLA + " SET tipoVia=?, nombreVia=?, numero=?, " + "resto=?, cp=?, provincia=?, "
@@ -99,11 +101,12 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, id);
-
+		LocalLogger.delete(TABLA, object, request);
 	}
 
 	@Override

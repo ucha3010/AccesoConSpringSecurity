@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.damian.converter.ConverterRol;
 import com.damian.dao.RolDAO;
 import com.damian.dao.model.ModelRol;
 import com.damian.pojo.Rol;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class RolDAOImpl implements RolDAO {
@@ -61,7 +63,7 @@ public class RolDAOImpl implements RolDAO {
 	}
 
 	@Override
-	public void save(Rol rol) {
+	public void save(Rol rol, HttpServletRequest request) {
 		ModelRol mr = converterRol.convert(rol);
 		if (rol.getIdRol() > 0) {
 			String sql = "UPDATE " + TABLA + " SET rol=?, modificadoPor=?, fechaModificacion=? WHERE " + KEY + "=?";
@@ -73,10 +75,12 @@ public class RolDAOImpl implements RolDAO {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
 		jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
 	}
 
 	@Override

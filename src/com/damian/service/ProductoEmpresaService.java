@@ -12,9 +12,9 @@ public interface ProductoEmpresaService {
 
 	public void save(int idPro, int idEmp, HttpServletRequest request);
 
-	public void update(ProductoEmpresa productoEmpresa);
+	public void update(ProductoEmpresa productoEmpresa, HttpServletRequest request);
 
-	public void delete(int idPro, int idEmp);
+	public void delete(int idPro, int idEmp, HttpServletRequest request);
 
 	public List<ProductoEmpresa> findByIdPro(int idPro);
 

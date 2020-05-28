@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.damian.converter.ConverterSubcategoria;
 import com.damian.dao.SubcategoriaDAO;
 import com.damian.dao.model.ModelSubcategoria;
 import com.damian.pojo.Subcategoria;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class SubcategoriaDAOImpl implements SubcategoriaDAO {
@@ -79,9 +81,9 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 	}
 
 	@Override
-	public int save(Subcategoria subcategoria) {
+	public int save(Subcategoria subcategoria, HttpServletRequest request) {
 		if (subcategoria.getIdSub() > 0) {
-			return update(subcategoria);
+			return update(subcategoria, request);
 		} else {
 			ModelSubcategoria ms = converterSubcategoria.convert(subcategoria);
 			String sql = "INSERT INTO " + TABLA
@@ -93,7 +95,7 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 	}
 
 	@Override
-	public int update(Subcategoria subcategoria) {
+	public int update(Subcategoria subcategoria, HttpServletRequest request) {
 		ModelSubcategoria ms = converterSubcategoria.convert(subcategoria);
 		String sql = "UPDATE " + TABLA
 				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, idCat=?, modificadoPor=?, fechaModificacion=? "
@@ -104,10 +106,13 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, id);
+		int result = jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
+		return result;
 	}
 
 	@Override

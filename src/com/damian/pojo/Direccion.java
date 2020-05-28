@@ -236,7 +236,8 @@ public class Direccion {
 	public String toString() {
 		return "Direccion [idDir=" + idDir + ", tipoVia=" + tipoVia + ", nombreVia=" + nombreVia + ", numero=" + numero
 				+ ", resto=" + resto + ", cp=" + cp + ", provincia=" + provincia + ", ciudad=" + ciudad + ", pais="
-				+ pais + ", datosPersonales=" + datosPersonales + "]";
+				+ pais + ", datosPersonales=" + datosPersonales + ", modificadoPor=" + modificadoPor
+				+ ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

@@ -14,11 +14,11 @@ public interface ProductoDAO {
 
 	public Producto findByIdModel(int id);
 
-	public void save(Producto producto);
+	public void save(Producto producto, HttpServletRequest request);
 
-	public void update(Producto producto);
+	public void update(Producto producto, HttpServletRequest request);
 
-	public int delete(int id);
+	public int delete(int id, HttpServletRequest request);
 
 	public List<Producto> findByIdSubModel(int idSub);
 

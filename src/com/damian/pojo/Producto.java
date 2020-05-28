@@ -515,10 +515,11 @@ public class Producto {
 				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + ", unidades=" + unidades + ", precioVenta="
 				+ precioVenta + ", precioCompra=" + precioCompra + ", marca=" + marca + ", modelo=" + modelo
 				+ ", serie=" + serie + ", ubicacion=" + ubicacion + ", estado=" + estado + ", partida=" + partida
-				+ ", fechaCompra=" + fechaCompra + ", enviar=" + enviar + ", fotos=" + fotos + ", vendible=" + vendible
-				+ ", mesesGarantia=" + mesesGarantia + ", peso=" + peso + ", volumen=" + volumen
-				+ ", productoEmpresaList=" + productoEmpresaList + ", subcategoria=" + subcategoria
-				+ ", productoFacturaList=" + productoFacturaList + "]";
+				+ ", fechaCompra=" + fechaCompra + ", enviar=" + enviar + ", vendible=" + vendible + ", mesesGarantia="
+				+ mesesGarantia + ", peso=" + peso + ", volumen=" + volumen + ", productoEmpresaList="
+				+ productoEmpresaList + ", subcategoria=" + subcategoria + ", productoFacturaList="
+				+ productoFacturaList + ", fotos=" + fotos + ", modificadoPor=" + modificadoPor + ", fechaModificacion="
+				+ fechaModificacion + "]";
 	}
 
 }

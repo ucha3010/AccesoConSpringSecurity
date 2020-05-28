@@ -19,6 +19,6 @@ public interface CuotaService {
 
 	public int update(Cuota cuota, HttpServletRequest request);
 
-	public int delete(int id) throws NotEmptyException;
+	public int delete(int id, HttpServletRequest request) throws NotEmptyException;
 
 }

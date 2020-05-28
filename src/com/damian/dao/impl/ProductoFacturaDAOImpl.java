@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.damian.dao.ProductoDAO;
 import com.damian.dao.ProductoFacturaDAO;
 import com.damian.dao.model.ModelProductoFactura;
 import com.damian.pojo.ProductoFactura;
+import com.damian.utils.LocalLogger;
 
 @Repository
 public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
@@ -52,7 +54,7 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 	}
 
 	@Override
-	public void save(ProductoFactura productoFactura) {
+	public void save(ProductoFactura productoFactura, HttpServletRequest request) {
 		ModelProductoFactura mpf = converterProductoFactura.convert(productoFactura);
 		String sql = "INSERT INTO " + TABLA
 				+ " (idPro, idFac, cantidad, ivaProducto, porcentajeDescuento, precioUnitSinIva, precioUnitConIva, precioFinal, observaciones, modificadoPor, fechaModificacion)"
@@ -63,7 +65,7 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 	}
 
 	@Override
-	public void update(ProductoFactura productoFactura) {
+	public void update(ProductoFactura productoFactura, HttpServletRequest request) {
 		ModelProductoFactura mpf = converterProductoFactura.convert(productoFactura);
 		String sql = "UPDATE " + TABLA
 				+ " SET cantidad=?, ivaProducto=?, porcentajeDescuento=?, precioUnitSinIva=?, precioUnitConIva=?, precioFinal=?, observaciones=?, modificadoPor=?, fechaModificacion=? "
@@ -74,10 +76,12 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 	}
 
 	@Override
-	public void delete(int idPro, int idFac) {
+	public void delete(int idPro, int idFac, HttpServletRequest request) {
 
+		Object object = findByIdProAndIdFac(idPro, idFac);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY1 + "=? AND " + KEY2 + "=?";
 		jdbcTemplate.update(sql, idPro, idFac);
+		LocalLogger.delete(TABLA, object, request);
 	}
 
 	@Override

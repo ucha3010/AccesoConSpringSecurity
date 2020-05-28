@@ -47,7 +47,7 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
 		subcategoria.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		subcategoria.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		return subcategoriaDAO.save(subcategoria);
+		return subcategoriaDAO.save(subcategoria, request);
 	}
 
 	@Override
@@ -58,16 +58,16 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
 		subcategoria.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		subcategoria.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
-		return subcategoriaDAO.update(subcategoria);
+		return subcategoriaDAO.update(subcategoria, request);
 	}
 
 	@Override
-	public int delete(int id) throws NotEmptyException {
+	public int delete(int id, HttpServletRequest request) throws NotEmptyException {
 		List<Producto> productoList = productoService.findByIdSubModel(id);
 		if (productoList != null && !productoList.isEmpty()) {
 			throw new NotEmptyException("Tiene asociado productos");
 		}
-		return subcategoriaDAO.delete(id);
+		return subcategoriaDAO.delete(id, request);
 	}
 
 	@Override

@@ -49,17 +49,17 @@ public class ProductoEmpresaServiceImpl implements ProductoEmpresaService {
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 		productoEmpresa.setCreadoPor(context.getAuthentication().getName());
 		productoEmpresa.setFechaCreacion(new Date());
-		productoEmpresaDAO.save(productoEmpresa);
+		productoEmpresaDAO.save(productoEmpresa, request);
 	}
 
 	@Override
-	public void update(ProductoEmpresa productoEmpresa) {
-		productoEmpresaDAO.update(productoEmpresa);
+	public void update(ProductoEmpresa productoEmpresa, HttpServletRequest request) {
+		productoEmpresaDAO.update(productoEmpresa, request);
 	}
 
 	@Override
-	public void delete(int idPro, int idEmp) {
-		productoEmpresaDAO.delete(idPro, idEmp);
+	public void delete(int idPro, int idEmp, HttpServletRequest request) {
+		productoEmpresaDAO.delete(idPro, idEmp, request);
 	}
 
 	@Override

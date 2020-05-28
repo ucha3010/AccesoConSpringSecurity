@@ -65,10 +65,10 @@ public class SubcategoriaController {
 	}
 
 	@RequestMapping("/subcategoria/delete/{idSub}")
-	public String deleteUser(@PathVariable("idSub") int idSub, RedirectAttributes ra) {
+	public String deleteUser(@PathVariable("idSub") int idSub, RedirectAttributes ra, HttpServletRequest request) {
 
 		try {
-			subcategoriaService.delete(idSub);
+			subcategoriaService.delete(idSub, request);
 			ra.addFlashAttribute("subcategoria_eliminado", "subcategoria_eliminado");
 		} catch (NotEmptyException e) {
 			ra.addFlashAttribute("subcategoria_asociado", "subcategoria_asociado");

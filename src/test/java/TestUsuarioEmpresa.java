@@ -3,7 +3,11 @@ package test.java;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+
+import com.damian.utils.LocalLogger;
 
 public class TestUsuarioEmpresa {
 
@@ -50,13 +54,23 @@ public class TestUsuarioEmpresa {
 		System.out.println("***********************************************************");
 		String sql = "SELECT * FROM usuario ORDER BY usuario ASC LIMIT 0,10";
 		System.out.println(sql.indexOf("BY usuario"));
-		directorioActual();
+		
+//		LocalLogger.log(TestUsuarioEmpresa.class.getName(), "usuario", "el primer mensaje a poner en el archivo");
+//		LocalLogger.save("tablaUsuario", "usuario.toString()");
+//		LocalLogger.update("tablaUsuario", "usuario.toString()");
+//		LocalLogger.delete("usuario", "tablaUsuario", 15);
+//		LocalLogger.logInUser("usuario_logueado");
+//		LocalLogger.logError(TestUsuarioEmpresa.class.getName(), "te mandaste una cagada");
+		
+		System.out.println(getDate(new Date().getTime(),"yyyyMMdd"));
+		
 	}
 	
-	private static void directorioActual() {
-		String ruta = System.getProperty("user.dir") + System.getProperty("file.separator") + "WebContent"
-				+ System.getProperty("file.separator") + "resources" + System.getProperty("file.separator") + "imgs";
-		System.out.println("Ruta: " + ruta);
+	public static String getDate(long milliSeconds, String dateFormat){
+	    SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
+	    Calendar calendar = Calendar.getInstance();
+	    calendar.setTimeInMillis(milliSeconds);
+	    return formatter.format(calendar.getTime());
 	}
 
 	private static BigDecimal cortaADosDecimales(BigDecimal num) {

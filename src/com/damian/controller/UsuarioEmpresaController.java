@@ -80,9 +80,9 @@ public class UsuarioEmpresaController {
 
 	@RequestMapping("/usuarioEmpresa/usuario/delete/{idUsr}/{idEmp}")
 	public String deleteUserRelation(@PathVariable("idUsr") int idUsr, @PathVariable("idEmp") int idEmp,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, HttpServletRequest request) {
 
-		usuarioEmpresaService.delete(idUsr, idEmp);
+		usuarioEmpresaService.delete(idUsr, idEmp, request);
 		ra.addFlashAttribute("usuarioEmpresa_deleted", true);
 
 		return "redirect:/usuarioEmpresa/usuario/" + idUsr;
@@ -91,9 +91,9 @@ public class UsuarioEmpresaController {
 
 	@RequestMapping("/usuarioEmpresa/empresa/delete/{idUsr}/{idEmp}")
 	public String deleteCompanyRelation(@PathVariable("idUsr") int idUsr, @PathVariable("idEmp") int idEmp,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, HttpServletRequest request) {
 
-		usuarioEmpresaService.delete(idUsr, idEmp);
+		usuarioEmpresaService.delete(idUsr, idEmp, request);
 		ra.addFlashAttribute("usuarioEmpresa_deleted", true);
 
 		return "redirect:/usuarioEmpresa/empresa/" + idEmp;

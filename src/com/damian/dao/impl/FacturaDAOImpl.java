@@ -21,6 +21,7 @@ import com.damian.dao.UsuarioDAO;
 import com.damian.dao.UsuarioOrdenDAO;
 import com.damian.dao.model.ModelFactura;
 import com.damian.pojo.Factura;
+import com.damian.utils.LocalLogger;
 import com.damian.utils.Utils;
 
 @Repository
@@ -100,9 +101,9 @@ public class FacturaDAOImpl implements FacturaDAO {
 	}
 
 	@Override
-	public int save(Factura factura) {
+	public int save(Factura factura, HttpServletRequest request) {
 		if (factura.getIdFac() > 0) {
-			return update(factura);
+			return update(factura, request);
 		} else {
 			ModelFactura mf = converterFactura.convert(factura);
 			String sql = "INSERT INTO " + TABLA
@@ -113,12 +114,13 @@ public class FacturaDAOImpl implements FacturaDAO {
 					mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(), mf.getFechaCompra(),
 					mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(),
 					mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(),
-					mf.getImporteCuotaTotal(), mf.getCuotaConIva(), mf.getCuotaSinIva(), mf.getImporteFront(), mf.getModificadoPor(), mf.getFechaModificacion());
+					mf.getImporteCuotaTotal(), mf.getCuotaConIva(), mf.getCuotaSinIva(), mf.getImporteFront(),
+					mf.getModificadoPor(), mf.getFechaModificacion());
 		}
 	}
 
 	@Override
-	public int update(Factura factura) {
+	public int update(Factura factura, HttpServletRequest request) {
 		ModelFactura mf = converterFactura.convert(factura);
 		String sql = "UPDATE " + TABLA
 				+ " SET compra=?, ivaTotal=?, ivaImporteTotal=?, descuentoTotal=?, descuentoImporteTotal=?, importeTotal=?, fechaCompra=?, fechaEntrega=?, idEst=?, "
@@ -128,15 +130,18 @@ public class FacturaDAOImpl implements FacturaDAO {
 				mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(), mf.getFechaCompra(),
 				mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(),
 				mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(),
-				mf.getImporteCuotaTotal(), mf.getCuotaConIva(), mf.getCuotaSinIva(), mf.getImporteFront(), mf.getModificadoPor(), mf.getFechaModificacion(),
-				mf.getIdFac());
+				mf.getImporteCuotaTotal(), mf.getCuotaConIva(), mf.getCuotaSinIva(), mf.getImporteFront(),
+				mf.getModificadoPor(), mf.getFechaModificacion(), mf.getIdFac());
 	}
 
 	@Override
-	public int delete(int id) {
+	public int delete(int id, HttpServletRequest request) {
 
+		Object object = findById(id);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY + "=?";
-		return jdbcTemplate.update(sql, id);
+		int result = jdbcTemplate.update(sql, id);
+		LocalLogger.delete(TABLA, object, request);
+		return result;
 	}
 
 	@Override

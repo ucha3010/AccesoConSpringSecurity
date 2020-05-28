@@ -2,6 +2,8 @@ package com.damian.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.damian.pojo.FacturaEstado;
 
 public interface FacturaEstadoDAO {
@@ -10,11 +12,11 @@ public interface FacturaEstadoDAO {
 
 	public FacturaEstado findById(int id);
 
-	public void save(FacturaEstado facturaEstado);
+	public void save(FacturaEstado facturaEstado, HttpServletRequest request);
 
-	public void update(FacturaEstado facturaEstado);
+	public void update(FacturaEstado facturaEstado, HttpServletRequest request);
 
-	public void delete(int id);
+	public void delete(int id, HttpServletRequest request);
 
 	public List<FacturaEstado> findByIdEst(int idEst);
 

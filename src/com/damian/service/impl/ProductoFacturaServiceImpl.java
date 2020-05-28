@@ -30,8 +30,8 @@ public class ProductoFacturaServiceImpl implements ProductoFacturaService {
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 		productoFactura.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		productoFactura.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
-		
-		productoFacturaDAO.save(productoFactura);
+
+		productoFacturaDAO.save(productoFactura, request);
 	}
 
 	@Override
@@ -41,13 +41,13 @@ public class ProductoFacturaServiceImpl implements ProductoFacturaService {
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 		productoFactura.setModificadoPor(context.getAuthentication().getPrincipal().toString());
 		productoFactura.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
-		
-		productoFacturaDAO.update(productoFactura);
+
+		productoFacturaDAO.update(productoFactura, request);
 	}
 
 	@Override
-	public void delete(int idPro, int idFac) {
-		productoFacturaDAO.delete(idPro, idFac);
+	public void delete(int idPro, int idFac, HttpServletRequest request) {
+		productoFacturaDAO.delete(idPro, idFac, request);
 	}
 
 	@Override

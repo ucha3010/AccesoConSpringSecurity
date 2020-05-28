@@ -14,6 +14,6 @@ public interface DireccionService {
 
 	List<Direccion> findListFromUsuario(int idUsr);
 
-	void delete(int idDir);
+	void delete(int idDir, HttpServletRequest request);
 
 }

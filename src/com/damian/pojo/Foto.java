@@ -361,12 +361,12 @@ public class Foto {
 	 */
 	@Override
 	public String toString() {
-		return "Foto [idFot=" + idFot + ", usuario=" + usuario + ", producto=" + producto + ", empresa=" + empresa
-				+ ", categoria=" + categoria + ", subcategoria=" + subcategoria + ", pais=" + pais + ", formaPago="
-				+ formaPago + ", estado=" + estado + ", rol=" + rol + ", nombre=" + nombre + ", ruta=" + ruta
-				+ ", descripcion=" + descripcion + ", peso=" + peso + ", principal=" + principal + ", extension="
-				+ extension + ", fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor + ", fechaModificacion="
-				+ fechaModificacion + ", modificadoPor=" + modificadoPor + "]";
+		return "Foto [idFot=" + idFot + ", archivo=" + archivo + ", usuario=" + usuario + ", producto=" + producto
+				+ ", empresa=" + empresa + ", categoria=" + categoria + ", subcategoria=" + subcategoria + ", pais="
+				+ pais + ", formaPago=" + formaPago + ", estado=" + estado + ", rol=" + rol + ", nombre=" + nombre
+				+ ", ruta=" + ruta + ", descripcion=" + descripcion + ", peso=" + peso + ", principal=" + principal
+				+ ", extension=" + extension + ", fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor
+				+ ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

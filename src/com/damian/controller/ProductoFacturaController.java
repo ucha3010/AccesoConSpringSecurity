@@ -73,9 +73,9 @@ public class ProductoFacturaController {
 
 	@RequestMapping("/productoFactura/producto/delete/{idPro}/{idFac}")
 	public String deleteProducto(@PathVariable("idPro") int idPro, @PathVariable("idFac") int idFac,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, HttpServletRequest request) {
 
-		productoFacturaService.delete(idPro, idFac);
+		productoFacturaService.delete(idPro, idFac, request);
 		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
 
 		return "redirect:/productoFactura/producto/" + idPro;
@@ -84,9 +84,9 @@ public class ProductoFacturaController {
 
 	@RequestMapping("/productoFactura/factura/delete/{idPro}/{idFac}")
 	public String deleteFactura(@PathVariable("idPro") int idPro, @PathVariable("idFac") int idFac,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, HttpServletRequest request) {
 
-		productoFacturaService.delete(idPro, idFac);
+		productoFacturaService.delete(idPro, idFac, request);
 		ra.addFlashAttribute("resultado", "Cambios realizados con éxito");
 
 		return "redirect:/productoFactura/factura/" + idFac;

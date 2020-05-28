@@ -20,7 +20,7 @@ public interface ProductoService {
 
 	public void update(Producto producto, HttpServletRequest request);
 
-	public int delete(int id) throws NotEmptyException;
+	public int delete(int id, HttpServletRequest request) throws NotEmptyException;
 
 	public List<Producto> findByIdList(int id);
 

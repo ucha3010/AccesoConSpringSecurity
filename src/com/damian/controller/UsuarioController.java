@@ -188,9 +188,9 @@ public class UsuarioController {
 
 	@RequestMapping(value = { "/usuario/logged/changePass/save" }, method = RequestMethod.POST)
 	public String saveChangeUserPass(@ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model,
-			RedirectAttributes ra) {
+			RedirectAttributes ra, HttpServletRequest request) {
 
-		usuarioService.saveChangePassword(usuario);
+		usuarioService.saveChangePassword(usuario, request);
 		ra.addFlashAttribute("passChanged", "label.Passwrod.change.success");
 		return "redirect:/usuario/logged/" + usuario.getIdUsr();
 	}
@@ -198,7 +198,7 @@ public class UsuarioController {
 	@RequestMapping("/usuario/{idUsr}/delete")
 	public String deleteUser(@PathVariable("idUsr") int idUsr, RedirectAttributes ra, HttpServletRequest request) {
 
-		usuarioService.delete(idUsr);
+		usuarioService.delete(idUsr, request);
 		ra.addFlashAttribute("usuario_eliminado", "usuario_eliminado");
 
 		return "redirect:/usuario/all/" + usuarioService.getColumn(request) + "/0/100";
@@ -211,14 +211,14 @@ public class UsuarioController {
 		Usuario usuario = new Usuario();
 		usuario = usuarioService.findById(idUsr);
 		usuario.setHabilitado(!usuario.isHabilitado());
-		usuarioService.update(usuario);
+		usuarioService.update(usuario, request);
 		return "redirect:/usuario/all/" + usuarioService.getColumn(request) + "/0/100";
 	}
 
 	@RequestMapping("/usuario/reset/{idUsr}")
 	public String passwordReset(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr,
 			HttpServletRequest request) {
-		usuarioService.reset(idUsr);
+		usuarioService.reset(idUsr, request);
 		return "redirect:/usuario/all/" + usuarioService.getColumn(request) + "/0/100";
 	}
 
