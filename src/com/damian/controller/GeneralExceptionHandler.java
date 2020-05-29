@@ -1,6 +1,8 @@
 package com.damian.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -54,8 +56,10 @@ public class GeneralExceptionHandler {
 	}
 
 	private ModelAndView mensaje(Exception ex, HttpServletRequest request) {
-		ModelAndView model = new ModelAndView();
-		LocalLogger.logError(ex.toString(), request);
+		ModelAndView model = new ModelAndView();StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
+		ex.printStackTrace(pw);
+		LocalLogger.logError(sw.toString(), request);
 		model.addObject("errorLog", ex.toString());
 		model.setViewName("error");
 		return model;
