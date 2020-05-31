@@ -17,6 +17,7 @@ public class Usuario {
 	private Timestamp fechaCreacion;
 	private String modificadoPor;
 	private Timestamp fechaModificacion;
+	private List<String> anda = new ArrayList<>();
 
 	public Usuario() {
 
@@ -215,6 +216,21 @@ public class Usuario {
 	 */
 	public void setFechaModificacion(Timestamp fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
+	}
+
+	/**
+	 * @return the anda
+	 */
+	public List<String> getAnda() {
+		return anda;
+	}
+
+	/**
+	 * @param anda
+	 *            the anda to set
+	 */
+	public void setAnda(List<String> anda) {
+		this.anda = anda;
 	}
 
 	/*

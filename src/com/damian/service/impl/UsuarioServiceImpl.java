@@ -82,8 +82,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 		} else {
 			creador = "OWN USER";
 		}
-		usuario.setModificadoPor(creador);
-		usuario.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		if (usuario.getIdUsr() == 0) {
 			Usuario verifico = findByUsername(usuario.getUsuario());
@@ -94,6 +92,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 			usuario.setHabilitado(true);
 			String claveUsr = usuario.getClave();
 			usuario.setClave(passwordEncoder.encode(claveUsr));
+			usuario.setModificadoPor(creador);
+			usuario.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 			usuarioDAO.save(usuario, request);
 			usuario = findByUsername(usuario.getUsuario());
 			dp.setUsuario(usuario);

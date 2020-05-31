@@ -24,7 +24,7 @@ public class IndexServiceImpl implements IndexService {
 	private UsuarioService usuarioService;
 
 	@Override
-	public ModelAndView manageIndex(ModelAndView model) {
+	public ModelAndView manageIndex(ModelAndView model) throws Exception {
 
 		idUserLogged(model);
 		model.addObject("estoy", "index");
@@ -33,7 +33,7 @@ public class IndexServiceImpl implements IndexService {
 	}
 
 	@Override
-	public ModelAndView manageAbout(ModelAndView model, String estoy) {
+	public ModelAndView manageAbout(ModelAndView model, String estoy) throws Exception {
 
 		idUserLogged(model);
 		model.addObject("estoy", "about");
@@ -41,7 +41,7 @@ public class IndexServiceImpl implements IndexService {
 		return model;
 	}
 	
-	private void idUserLogged(ModelAndView model) {
+	private void idUserLogged(ModelAndView model) throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if(!authentication.getName().equals("anonymousUser")) {
 			Usuario usuario = usuarioService.findByUsername(authentication.getName());

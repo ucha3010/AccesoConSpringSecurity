@@ -43,7 +43,7 @@
 						<c:import url="/WEB-INF/views/menuDropdownAdmin.jsp" />
 					</sec:authorize>
 				</sec:authorize>
-				<sec:authorize access="hasAnyRole('ROL_USUARIO')">
+				<sec:authorize access="hasAnyRole('ROL_USUARIO') and !hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 					<div class="hidden-sm">
 						<ul class="nav navbar-nav">
 							<sec:authorize access="isRememberMe()">
@@ -83,7 +83,12 @@
 						<li>
 							<span>
 								<a title="${nameUsrLogged}" href='<c:url value="/usuario/logged/${idUsrLogged}"/>'>
-									<img src='<c:url value="/resources/imgs/usuario.png"/>' alt="${nameUsrLogged}" class="usuarioImg">
+									<c:if test="${prinPicUsr == null}">
+										<img src='<c:url value="/resources/imgs/usuario.png"/>' alt="${nameUsrLogged}" class="usuarioImg">
+									</c:if>
+									<c:if test="${prinPicUsr != null}">
+										<img src='<c:url value="/resources/imgs/usuarios/${idUsrLogged}/${prinPicUsr}"/>' alt="${nameUsrLogged}" class="usuarioImgSize img-circle">
+									</c:if>
 								</a>
 							</span>
 						</li>

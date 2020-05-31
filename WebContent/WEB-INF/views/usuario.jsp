@@ -257,6 +257,25 @@
 					</div>
 				</div>
 				<br>
+			</sec:authorize>
+			<sec:authorize access="!hasAnyRole('ROL_ROOT')">
+				<span class="d-none">
+					<sf:select path="anda">
+						<c:forEach var="item" items="${roles}">
+							<c:set var="seleccionado" value="false" scope="page" />
+							<c:forEach var="ur" items="${usuario.usuarioRol}">
+						        <c:if test="${ur.rol.idRol == item.getIdRol()}">					            
+									<c:set var="seleccionado" value="true" scope="page" />
+						        </c:if>
+						    </c:forEach>
+						    <c:choose>
+						    	<c:when test="${seleccionado}">
+							    	<sf:option selected="true" value="${item.getIdRol()}" />
+						    	</c:when>
+					        </c:choose>
+						</c:forEach>
+					</sf:select>
+				</span>
 			</sec:authorize>	
 			<div class="row">
 				<div class="hidden-xs col-sm-1">

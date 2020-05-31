@@ -30,12 +30,12 @@ public class indexController {
 	// método private
 
 	@RequestMapping("/")
-	public ModelAndView showIndex(ModelAndView model) {
+	public ModelAndView showIndex(ModelAndView model) throws Exception {
 		return indexService.manageIndex(model);
 	}
 
 	@RequestMapping("/private/index")
-	public ModelAndView showPrivateIndex(ModelAndView model) {
+	public ModelAndView showPrivateIndex(ModelAndView model) throws Exception {
 		return indexService.manageIndex(model);
 	}
 
@@ -43,7 +43,7 @@ public class indexController {
 	// ////////////////////////////////////////////////////////////////////////////////////////////
 
 	@RequestMapping("/about")
-	public ModelAndView showAbout(ModelAndView model, HttpServletRequest request) {
+	public ModelAndView showAbout(ModelAndView model, HttpServletRequest request) throws Exception {
 		Object estoy = request.getSession().getAttribute("estoy");
 		if (estoy == null) {
 			model.addObject("estoy", "about");
@@ -53,7 +53,7 @@ public class indexController {
 	}
 
 	@RequestMapping("/private/about")
-	public ModelAndView showPrivateAbout(ModelAndView model, HttpServletRequest request) {
+	public ModelAndView showPrivateAbout(ModelAndView model, HttpServletRequest request) throws Exception {
 		Object estoy = request.getSession().getAttribute("estoy");
 		if (estoy == null) {
 			model.addObject("estoy", "about");

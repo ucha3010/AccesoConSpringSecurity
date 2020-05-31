@@ -66,11 +66,11 @@
 
 		<sf:form method="post" action="${pageContext.request.contextPath}/usuario/logged/save" modelAttribute="usuario" onsubmit="return validar()">
 			<c:if test="${(not empty usuario.clave) && (empty username_existente)}">
-				<sf:hidden path="usuario"/>
 				<sf:hidden path="clave"/>
 				<sf:hidden path="idUsr"/>
 				<sf:hidden path="habilitado"/>
 				<sf:hidden path="fechaCreacion"/>
+				<sf:hidden path="usuario"/>
 			</c:if>
 			<fmt:message key="Country.item.column" var="itemSelect"/>
 			<fmt:message key="Select.country" var="selectCountry" />
@@ -149,14 +149,14 @@
 				</div>
 				<div class="col-xs-12 col-sm-2">
 					<div class="radio">
-						<label for="customRadioInline2">
-							<sf:radiobutton id="customRadioInline2" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Mujer"/>
+						<label for="female">
+							<sf:radiobutton id="female" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Mujer"/>
 							<fmt:message key="label.Female" />
 						</label>
 					</div>
 					<div class="radio">
-						<label for="customRadioInline1">
-							<sf:radiobutton id="customRadioInline1" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Hombre"/>
+						<label for="male">
+							<sf:radiobutton id="male" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Hombre"/>
 							<fmt:message key="label.Male" />
 						</label>
 					</div>
@@ -194,40 +194,28 @@
 					<label for="email"><fmt:message key="label.Email" /> *</label>
 					<sf:input path="datosPersonales.email" type="text" class="form-control" id="email" />
 					<span id="emailError" name="errorSpan"></span>
-				</div>
-				<div class="col-xs-12 col-sm-5">
-					<sec:authorize access="hasAnyRole('ROL_ROOT')">
-						<label for="rol"><fmt:message key="label.roles.press.ctrl" /></label>
-						<div>
-							<sf:select path="usuarioRol">
-								<c:forEach var="item" items="${roles}">
-									<c:set var="seleccionado" value="false" scope="page" />
-									<c:forEach var="ur" items="${usuario.usuarioRol}">
-								        <c:if test="${ur.rol.idRol == item.getIdRol()}">					            
-											<c:set var="seleccionado" value="true" scope="page" />
-								        </c:if>
-								    </c:forEach>
-								    <c:choose>
-								    	<c:when test="${seleccionado}">
-									    	<sf:option selected="true" value="${item.getIdRol()}">
-										    	<c:out value="${item.getRol()}"></c:out>
-								            </sf:option>
-								    	</c:when>
-								    	<c:otherwise>
-								            <sf:option value="${item.getIdRol()}">
-												<c:out value="${item.getRol()}"></c:out>
-								            </sf:option>
-								    	</c:otherwise>
-							        </c:choose>
-								</c:forEach>
-							</sf:select>
-						</div>
-					</sec:authorize>
 				</div>		
 				<div class="hidden-xs col-sm-1">
 				</div>
 			</div>
 			<br/>
+			<span class="d-none">
+				<sf:select path="anda">
+					<c:forEach var="item" items="${roles}">
+						<c:set var="seleccionado" value="false" scope="page" />
+						<c:forEach var="ur" items="${usuario.usuarioRol}">
+					        <c:if test="${ur.rol.idRol == item.getIdRol()}">					            
+								<c:set var="seleccionado" value="true" scope="page" />
+					        </c:if>
+					    </c:forEach>
+					    <c:choose>
+					    	<c:when test="${seleccionado}">
+						    	<sf:option selected="true" value="${item.getIdRol()}" />
+					    	</c:when>
+				        </c:choose>
+					</c:forEach>
+				</sf:select>
+			</span>
 			<div class="row">		
 				<div class="hidden-xs col-sm-1">
 				</div>

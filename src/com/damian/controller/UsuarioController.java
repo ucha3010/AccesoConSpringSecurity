@@ -114,15 +114,18 @@ public class UsuarioController {
 
 	@RequestMapping(value = { "/usuario/save" }, method = RequestMethod.POST)
 	public String saveUser(@ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model,
-			@RequestParam(value = "usuarioRol", required = false) String[] usuarioRol, HttpServletRequest request,
+			@RequestParam(value = "usuarioRol", required = false) String[] usuarioRol,
+			@RequestParam(value = "anda", required = false) String[] anda, HttpServletRequest request,
 			RedirectAttributes ra) {
 		if (result.hasErrors()) {
 			// System.out.println(result.getAllErrors());
 			// return "usuario";
 		}
-		if (usuarioRol == null) {
+		if (usuarioRol == null && anda == null) {
 			usuarioRol = new String[1];
 			usuarioRol[0] = "1";
+		} else if (anda != null) {
+			usuarioRol = anda;
 		}
 		boolean nueva = false;
 		if (usuario.getIdUsr() == 0) {
@@ -173,14 +176,14 @@ public class UsuarioController {
 
 	@RequestMapping(value = { "/usuario/logged/save" }, method = RequestMethod.POST)
 	public String saveLoggedUser(@ModelAttribute("usuario") Usuario usuario, BindingResult result, Model model,
-			@RequestParam(value = "usuarioRol", required = false) String[] usuarioRol, HttpServletRequest request) {
+			@RequestParam(value = "anda", required = false) String[] anda, HttpServletRequest request) {
 
-		if (usuarioRol == null) {
-			usuarioRol = new String[1];
-			usuarioRol[0] = "1";
+		if (anda == null) {
+			anda = new String[1];
+			anda[0] = "1";
 		}
 		try {
-			usuarioService.save(usuario, usuarioRol, request);
+			usuarioService.save(usuario, anda, request);
 		} catch (RepeatedUsernameException e) {
 		}
 		return "redirect:/";

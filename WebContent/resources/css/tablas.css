@@ -232,3 +232,7 @@
 .zindex-100 {
 	z-index: 100;
 }
+
+.d-none {
+	display: none;
+}
