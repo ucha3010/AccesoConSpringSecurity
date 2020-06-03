@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.jasper.JasperException;
 import org.apache.jasper.el.JspPropertyNotFoundException;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
@@ -37,11 +36,6 @@ public class GeneralExceptionHandler {
 
 	@ExceptionHandler(DataIntegrityViolationException.class)
 	public ModelAndView handlerDataIntegrityViolationException(DataIntegrityViolationException ex, HttpServletRequest request) {
-		return mensaje(ex, request);
-	}
-
-	@ExceptionHandler(ConstraintViolationException.class)
-	public ModelAndView handlerConstraintViolationException(ConstraintViolationException ex, HttpServletRequest request) {
 		return mensaje(ex, request);
 	}
 
