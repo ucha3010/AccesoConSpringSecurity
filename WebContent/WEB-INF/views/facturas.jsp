@@ -178,6 +178,8 @@
 								</a>
 								<a title="<fmt:message key="label.State.historical" />" href='<c:url value='/facturaEstado/factura/${factura.idFac}' />'>
 									<img src='<c:url value="/resources/imgs/states.png"/>' class="tamanio_imagen">
+								</a><a title="Imprimir" href='<c:url value='/factura/pdf/${factura.idFac}' />' target="_blank">
+									<span class="glyphicon glyphicon-print tamanio_imagen"></span>
 								</a>
 							</td>
 					    </tr>

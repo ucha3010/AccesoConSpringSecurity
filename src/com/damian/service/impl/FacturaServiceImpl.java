@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -268,6 +269,11 @@ public class FacturaServiceImpl implements FacturaService {
 		producto.setUnidades(stockFinal);
 		productoService.update(producto, request);
 
+	}
+
+	@Override
+	public List<Map<String, Object>> facturaMap(int idFac) {
+		return facturaDAO.facturaMap(idFac);
 	}
 
 }

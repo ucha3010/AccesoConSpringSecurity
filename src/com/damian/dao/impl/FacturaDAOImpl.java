@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
@@ -237,6 +238,12 @@ public class FacturaDAOImpl implements FacturaDAO {
 		mf.setModificadoPor(rs.getString("modificadoPor"));
 		mf.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
 		return mf;
+	}
+
+	@Override
+	public List<Map<String, Object>> facturaMap(int id) {
+		String sql = "SELECT * FROM " + TABLA + " WHERE " + KEY + "=" + id;
+		return jdbcTemplate.queryForList(sql);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.damian.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,5 +32,7 @@ public interface FacturaDAO {
 	public List<Factura> findByIdCuo(int idCuo);
 
 	public List<Factura> findSearchAll();
+
+	public List<Map<String, Object>> facturaMap(int id);
 
 }

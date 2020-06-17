@@ -1,6 +1,7 @@
 package com.damian.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,5 +35,7 @@ public interface FacturaService {
 	public List<Factura> selectExpire(List<Factura> facturas);
 
 	public List<Factura> findSearchAll();
+	
+	public List<Map<String, Object>> facturaMap(int idFac);
 
 }
