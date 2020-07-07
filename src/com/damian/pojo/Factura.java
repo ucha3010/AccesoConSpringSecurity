@@ -12,24 +12,18 @@ public class Factura {
 	private double ivaImporteTotal;
 	private double descuentoTotal;
 	private double descuentoImporteTotal;
+	private double importeEnvioSinIva;
 	private double importeTotal;
 	private Date fechaCompra;
 	private Date fechaEntrega;
-	private String direccionEntrega;
-	private String observaciones;
-	private String creadoPor;
-	private List<ProductoFactura> productoFacturaList;
 	private Estado estado;
+	private String observaciones;
 	private FormaPago formaPago;
+	private String creadoPor;
 	private Cuota cuota;
-	private int numeroCuota;
-	private double interesCuotaImporte;
-	private double importeCuotaTotal;
-	private double cuotaConIva;
-	private double cuotaSinIva;
-	private double importeFront;
 	private String modificadoPor;
 	private Timestamp fechaModificacion;
+	private List<ProductoFactura> productoFacturaList;
 
 	public Factura() {
 
@@ -126,6 +120,21 @@ public class Factura {
 	}
 
 	/**
+	 * @return the importeEnvioSinIva
+	 */
+	public double getImporteEnvioSinIva() {
+		return importeEnvioSinIva;
+	}
+
+	/**
+	 * @param importeEnvioSinIva
+	 *            the importeEnvioSinIva to set
+	 */
+	public void setImporteEnvioSinIva(double importeEnvioSinIva) {
+		this.importeEnvioSinIva = importeEnvioSinIva;
+	}
+
+	/**
 	 * @return the importeTotal
 	 */
 	public double getImporteTotal() {
@@ -171,18 +180,18 @@ public class Factura {
 	}
 
 	/**
-	 * @return the direccionEntrega
+	 * @return the estado
 	 */
-	public String getDireccionEntrega() {
-		return direccionEntrega;
+	public Estado getEstado() {
+		return estado;
 	}
 
 	/**
-	 * @param direccionEntrega
-	 *            the direccionEntrega to set
+	 * @param estado
+	 *            the estado to set
 	 */
-	public void setDireccionEntrega(String direccionEntrega) {
-		this.direccionEntrega = direccionEntrega;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	/**
@@ -201,51 +210,6 @@ public class Factura {
 	}
 
 	/**
-	 * @return the creadoPor
-	 */
-	public String getCreadoPor() {
-		return creadoPor;
-	}
-
-	/**
-	 * @param creadoPor
-	 *            the creadoPor to set
-	 */
-	public void setCreadoPor(String creadoPor) {
-		this.creadoPor = creadoPor;
-	}
-
-	/**
-	 * @return the productoFacturaList
-	 */
-	public List<ProductoFactura> getProductoFacturaList() {
-		return productoFacturaList;
-	}
-
-	/**
-	 * @param productoFacturaList
-	 *            the productoFacturaList to set
-	 */
-	public void setProductoFacturaList(List<ProductoFactura> productoFacturaList) {
-		this.productoFacturaList = productoFacturaList;
-	}
-
-	/**
-	 * @return the estado
-	 */
-	public Estado getEstado() {
-		return estado;
-	}
-
-	/**
-	 * @param estado
-	 *            the estado to set
-	 */
-	public void setEstado(Estado estado) {
-		this.estado = estado;
-	}
-
-	/**
 	 * @return the formaPago
 	 */
 	public FormaPago getFormaPago() {
@@ -261,6 +225,21 @@ public class Factura {
 	}
 
 	/**
+	 * @return the creadoPor
+	 */
+	public String getCreadoPor() {
+		return creadoPor;
+	}
+
+	/**
+	 * @param creadoPor
+	 *            the creadoPor to set
+	 */
+	public void setCreadoPor(String creadoPor) {
+		this.creadoPor = creadoPor;
+	}
+
+	/**
 	 * @return the cuota
 	 */
 	public Cuota getCuota() {
@@ -273,96 +252,6 @@ public class Factura {
 	 */
 	public void setCuota(Cuota cuota) {
 		this.cuota = cuota;
-	}
-
-	/**
-	 * @return the numeroCuota
-	 */
-	public int getNumeroCuota() {
-		return numeroCuota;
-	}
-
-	/**
-	 * @param numeroCuota
-	 *            the numeroCuota to set
-	 */
-	public void setNumeroCuota(int numeroCuota) {
-		this.numeroCuota = numeroCuota;
-	}
-
-	/**
-	 * @return the interesCuotaImporte
-	 */
-	public double getInteresCuotaImporte() {
-		return interesCuotaImporte;
-	}
-
-	/**
-	 * @param interesCuotaImporte
-	 *            the interesCuotaImporte to set
-	 */
-	public void setInteresCuotaImporte(double interesCuotaImporte) {
-		this.interesCuotaImporte = interesCuotaImporte;
-	}
-
-	/**
-	 * @return the importeCuotaTotal
-	 */
-	public double getImporteCuotaTotal() {
-		return importeCuotaTotal;
-	}
-
-	/**
-	 * @param importeCuotaTotal
-	 *            the importeCuotaTotal to set
-	 */
-	public void setImporteCuotaTotal(double importeCuotaTotal) {
-		this.importeCuotaTotal = importeCuotaTotal;
-	}
-
-	/**
-	 * @return the cuotaConIva
-	 */
-	public double getCuotaConIva() {
-		return cuotaConIva;
-	}
-
-	/**
-	 * @param cuotaConIva
-	 *            the cuotaConIva to set
-	 */
-	public void setCuotaConIva(double cuotaConIva) {
-		this.cuotaConIva = cuotaConIva;
-	}
-
-	/**
-	 * @return the cuotaSinIva
-	 */
-	public double getCuotaSinIva() {
-		return cuotaSinIva;
-	}
-
-	/**
-	 * @param cuotaSinIva
-	 *            the cuotaSinIva to set
-	 */
-	public void setCuotaSinIva(double cuotaSinIva) {
-		this.cuotaSinIva = cuotaSinIva;
-	}
-
-	/**
-	 * @return the importeFront
-	 */
-	public double getImporteFront() {
-		return importeFront;
-	}
-
-	/**
-	 * @param importeFront
-	 *            the importeFront to set
-	 */
-	public void setImporteFront(double importeFront) {
-		this.importeFront = importeFront;
 	}
 
 	/**
@@ -395,6 +284,21 @@ public class Factura {
 		this.fechaModificacion = fechaModificacion;
 	}
 
+	/**
+	 * @return the productoFacturaList
+	 */
+	public List<ProductoFactura> getProductoFacturaList() {
+		return productoFacturaList;
+	}
+
+	/**
+	 * @param productoFacturaList
+	 *            the productoFacturaList to set
+	 */
+	public void setProductoFacturaList(List<ProductoFactura> productoFacturaList) {
+		this.productoFacturaList = productoFacturaList;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -404,14 +308,11 @@ public class Factura {
 	public String toString() {
 		return "Factura [idFac=" + idFac + ", compra=" + compra + ", ivaTotal=" + ivaTotal + ", ivaImporteTotal="
 				+ ivaImporteTotal + ", descuentoTotal=" + descuentoTotal + ", descuentoImporteTotal="
-				+ descuentoImporteTotal + ", importeTotal=" + importeTotal + ", fechaCompra=" + fechaCompra
-				+ ", fechaEntrega=" + fechaEntrega + ", direccionEntrega=" + direccionEntrega + ", observaciones="
-				+ observaciones + ", creadoPor=" + creadoPor + ", productoFacturaList=" + productoFacturaList
-				+ ", estado=" + estado + ", formaPago=" + formaPago + ", cuota=" + cuota + ", numeroCuota="
-				+ numeroCuota + ", interesCuotaImporte=" + interesCuotaImporte + ", importeCuotaTotal="
-				+ importeCuotaTotal + ", cuotaConIva=" + cuotaConIva + ", cuotaSinIva=" + cuotaSinIva
-				+ ", importeFront=" + importeFront + ", modificadoPor=" + modificadoPor + ", fechaModificacion="
-				+ fechaModificacion + "]";
+				+ descuentoImporteTotal + ", importeEnvioSinIva=" + importeEnvioSinIva + ", importeTotal="
+				+ importeTotal + ", fechaCompra=" + fechaCompra + ", fechaEntrega=" + fechaEntrega + ", estado="
+				+ estado + ", observaciones=" + observaciones + ", formaPago=" + formaPago + ", creadoPor=" + creadoPor
+				+ ", cuota=" + cuota + ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion
+				+ ", productoFacturaList=" + productoFacturaList + "]";
 	}
 
 }

@@ -26,7 +26,11 @@ public class DatosPersonalesServiceImpl implements DatosPersonalesService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		datosPersonales.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		if (context != null) {
+			datosPersonales.setModificadoPor(context.getAuthentication().getName());
+		} else {
+			datosPersonales.setModificadoPor("OWN USER");
+		}
 		datosPersonales.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		datosPersonalesDAO.save(datosPersonales, request);

@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import com.damian.dao.CuotaDAO;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Cuota;
-import com.damian.pojo.Factura;
+import com.damian.pojo.CuotaDetalle;
+import com.damian.service.CuotaDetalleService;
 import com.damian.service.CuotaService;
-import com.damian.service.FacturaService;
 
 @Service
 public class CuotaServiceImpl implements CuotaService {
@@ -22,7 +22,7 @@ public class CuotaServiceImpl implements CuotaService {
 	private CuotaDAO cuotaDAO;
 
 	@Autowired
-	private FacturaService facturaService;
+	private CuotaDetalleService cuotaDetalleService;
 
 	@Override
 	public List<Cuota> findAll() {
@@ -63,9 +63,9 @@ public class CuotaServiceImpl implements CuotaService {
 
 	@Override
 	public int delete(int id, HttpServletRequest request) throws NotEmptyException {
-		List<Factura> facturaList = facturaService.findByIdCuo(id);
-		if (facturaList != null && !facturaList.isEmpty()) {
-			throw new NotEmptyException("Tiene asociado facturas");
+		List<CuotaDetalle> cuotaDetalleList = cuotaDetalleService.findByIdCuo(id);
+		for(CuotaDetalle cd: cuotaDetalleList) {
+			cuotaDetalleService.delete(cd.getIdCuDe(), request);
 		}
 		return cuotaDAO.delete(id, request);
 	}

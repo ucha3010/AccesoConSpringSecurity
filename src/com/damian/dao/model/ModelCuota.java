@@ -10,6 +10,7 @@ public class ModelCuota {
 	private double comisionAperturaImp;
 	private double interesPor;
 	private double interesImp;
+	private double totalCompletoAPagar;
 	private String modificadoPor;
 	private Timestamp fechaModificacion;
 
@@ -126,6 +127,21 @@ public class ModelCuota {
 	}
 
 	/**
+	 * @return the totalCompletoAPagar
+	 */
+	public double getTotalCompletoAPagar() {
+		return totalCompletoAPagar;
+	}
+
+	/**
+	 * @param totalCompletoAPagar
+	 *            the totalCompletoAPagar to set
+	 */
+	public void setTotalCompletoAPagar(double totalCompletoAPagar) {
+		this.totalCompletoAPagar = totalCompletoAPagar;
+	}
+
+	/**
 	 * @return the modificadoPor
 	 */
 	public String getModificadoPor() {
@@ -164,7 +180,7 @@ public class ModelCuota {
 	public String toString() {
 		return "ModelCuota [idCuo=" + idCuo + ", cantidadCuotas=" + cantidadCuotas + ", comisionAperturaPor="
 				+ comisionAperturaPor + ", comisionAperturaImp=" + comisionAperturaImp + ", interesPor=" + interesPor
-				+ ", interesImp=" + interesImp + "]";
+				+ ", interesImp=" + interesImp + ", totalCompletoAPagar=" + totalCompletoAPagar + "]";
 	}
 
 }

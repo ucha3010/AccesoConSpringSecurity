@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.damian.dao.CategoriaDAO;
 import com.damian.dao.CuotaDAO;
+import com.damian.dao.CuotaDetalleDAO;
 import com.damian.dao.DatosPersonalesDAO;
 import com.damian.dao.DireccionDao;
 import com.damian.dao.DireccionEmpresaDAO;
@@ -71,6 +72,9 @@ public class ConverterRellenaObjeto {
 	
 	@Autowired
 	private CuotaDAO cuotaDAO;
+	
+	@Autowired
+	private CuotaDetalleDAO cuotaDetalleDAO;
 
 	@Autowired
 	private DireccionDao direccionDao;
@@ -304,7 +308,7 @@ public class ConverterRellenaObjeto {
 
 	public void rellenaCuota(Cuota c, ModelCuota mc) {
 		
-		c.setFacturas(facturaDAO.findByIdCuo(mc.getIdCuo()));
+		c.setCuotaDetalles(cuotaDetalleDAO.findByIdCuo(mc.getIdCuo()));
 		
 	}
 

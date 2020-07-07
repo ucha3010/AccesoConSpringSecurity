@@ -11,30 +11,13 @@ public class Cuota {
 	private double comisionAperturaImp;
 	private double interesPor;
 	private double interesImp;
-	private List<Factura> facturas;
+	private double totalCompletoAPagar;
+	private List<CuotaDetalle> cuotaDetalles;
 	private String modificadoPor;
 	private Timestamp fechaModificacion;
 
 	public Cuota() {
 
-	}
-
-	/**
-	 * @param idCuo
-	 * @param cantidadCuotas
-	 * @param comisionAperturaPor
-	 * @param comisionAperturaImp
-	 * @param interesPor
-	 * @param interesImp
-	 */
-	public Cuota(int idCuo, int cantidadCuotas, double comisionAperturaPor, double comisionAperturaImp,
-			double interesPor, double interesImp) {
-		this.idCuo = idCuo;
-		this.cantidadCuotas = cantidadCuotas;
-		this.comisionAperturaPor = comisionAperturaPor;
-		this.comisionAperturaImp = comisionAperturaImp;
-		this.interesPor = interesPor;
-		this.interesImp = interesImp;
 	}
 
 	/**
@@ -128,18 +111,33 @@ public class Cuota {
 	}
 
 	/**
-	 * @return the facturas
+	 * @return the totalCompletoAPagar
 	 */
-	public List<Factura> getFacturas() {
-		return facturas;
+	public double getTotalCompletoAPagar() {
+		return totalCompletoAPagar;
 	}
 
 	/**
-	 * @param facturas
-	 *            the facturas to set
+	 * @param totalCompletoAPagar
+	 *            the totalCompletoAPagar to set
 	 */
-	public void setFacturas(List<Factura> facturas) {
-		this.facturas = facturas;
+	public void setTotalCompletoAPagar(double totalCompletoAPagar) {
+		this.totalCompletoAPagar = totalCompletoAPagar;
+	}
+
+	/**
+	 * @return the cuotaDetalles
+	 */
+	public List<CuotaDetalle> getCuotaDetalles() {
+		return cuotaDetalles;
+	}
+
+	/**
+	 * @param cuotaDetalles
+	 *            the cuotaDetalles to set
+	 */
+	public void setCuotaDetalles(List<CuotaDetalle> cuotaDetalles) {
+		this.cuotaDetalles = cuotaDetalles;
 	}
 
 	/**
@@ -181,8 +179,8 @@ public class Cuota {
 	public String toString() {
 		return "Cuota [idCuo=" + idCuo + ", cantidadCuotas=" + cantidadCuotas + ", comisionAperturaPor="
 				+ comisionAperturaPor + ", comisionAperturaImp=" + comisionAperturaImp + ", interesPor=" + interesPor
-				+ ", interesImp=" + interesImp + ", facturas=" + facturas + ", modificadoPor=" + modificadoPor
-				+ ", fechaModificacion=" + fechaModificacion + "]";
+				+ ", interesImp=" + interesImp + ", totalCompletoAPagar=" + totalCompletoAPagar + ", cuotaDetalles="
+				+ cuotaDetalles + ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

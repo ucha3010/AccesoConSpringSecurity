@@ -87,9 +87,10 @@ public class CuotaDAOImpl implements CuotaDAO {
 		} else {
 			ModelCuota mc = converterCuota.convert(cuota);
 			String sql = "INSERT INTO " + TABLA
-					+ " (cantidadCuotas, comisionAperturaPor, comisionAperturaImp, interesPor, interesImp, modificadoPor, fechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?)";
+					+ " (cantidadCuotas, comisionAperturaPor, comisionAperturaImp, interesPor, interesImp, totalCompletoAPagar, modificadoPor, fechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(sql, mc.getCantidadCuotas(), mc.getComisionAperturaPor(), mc.getComisionAperturaImp(),
-					mc.getInteresPor(), mc.getInteresImp(), mc.getModificadoPor(), mc.getFechaModificacion());
+					mc.getInteresPor(), mc.getInteresImp(), mc.getTotalCompletoAPagar(), mc.getModificadoPor(),
+					mc.getFechaModificacion());
 			LocalLogger.save(TABLA, cuota, request);
 			return getMaxId();
 		}
@@ -99,11 +100,11 @@ public class CuotaDAOImpl implements CuotaDAO {
 	public int update(Cuota cuota, HttpServletRequest request) {
 		ModelCuota mc = converterCuota.convert(cuota);
 		String sql = "UPDATE " + TABLA
-				+ " SET cantidadCuotas=?, comisionAperturaPor=?, comisionAperturaImp=?, interesPor=?, interesImp=?, modificadoPor=?, fechaModificacion=? "
+				+ " SET cantidadCuotas=?, comisionAperturaPor=?, comisionAperturaImp=?, interesPor=?, interesImp=?, totalCompletoAPagar=?, modificadoPor=?, fechaModificacion=? "
 				+ "WHERE " + KEY + "=?";
 		int result = jdbcTemplate.update(sql, mc.getCantidadCuotas(), mc.getComisionAperturaPor(),
-				mc.getComisionAperturaImp(), mc.getInteresPor(), mc.getInteresImp(), mc.getModificadoPor(),
-				mc.getFechaModificacion(), mc.getIdCuo());
+				mc.getComisionAperturaImp(), mc.getInteresPor(), mc.getInteresImp(), mc.getTotalCompletoAPagar(),
+				mc.getModificadoPor(), mc.getFechaModificacion(), mc.getIdCuo());
 		LocalLogger.update(TABLA, cuota, request);
 		return result;
 	}
@@ -140,6 +141,7 @@ public class CuotaDAOImpl implements CuotaDAO {
 		mc.setComisionAperturaImp(rs.getDouble("comisionAperturaImp"));
 		mc.setInteresPor(rs.getDouble("interesPor"));
 		mc.setInteresImp(rs.getDouble("interesImp"));
+		mc.setTotalCompletoAPagar(rs.getDouble("totalCompletoAPagar"));
 		mc.setModificadoPor(rs.getString("modificadoPor"));
 		mc.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
 		return mc;

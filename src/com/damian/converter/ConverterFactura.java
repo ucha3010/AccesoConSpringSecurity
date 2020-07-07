@@ -33,10 +33,10 @@ public class ConverterFactura {
 		f.setIvaImporteTotal(mf.getIvaImporteTotal());
 		f.setDescuentoTotal(mf.getDescuentoTotal());
 		f.setDescuentoImporteTotal(mf.getDescuentoImporteTotal());
+		f.setImporteEnvioSinIva(mf.getImporteEnvioSinIva());
 		f.setImporteTotal(mf.getImporteTotal());
 		f.setFechaCompra(mf.getFechaCompra());
 		f.setFechaEntrega(mf.getFechaEntrega());
-		f.setDireccionEntrega(mf.getDireccionEntrega());
 		f.setObservaciones(mf.getObservaciones());
 		f.setCreadoPor(mf.getCreadoPor());
 		Estado estado = new Estado();
@@ -48,12 +48,6 @@ public class ConverterFactura {
 		Cuota cuota = new Cuota();
 		cuota.setIdCuo(mf.getIdCuo());
 		f.setCuota(cuota);
-		f.setNumeroCuota(mf.getNumeroCuota());
-		f.setInteresCuotaImporte(mf.getInteresCuotaImporte());
-		f.setImporteCuotaTotal(mf.getImporteCuotaTotal());
-		f.setCuotaConIva(mf.getCuotaConIva());
-		f.setCuotaSinIva(mf.getCuotaSinIva());
-		f.setImporteFront(mf.getImporteFront());
 		f.setModificadoPor(mf.getModificadoPor());
 		f.setFechaModificacion(mf.getFechaModificacion());
 
@@ -70,13 +64,13 @@ public class ConverterFactura {
 		mf.setIvaImporteTotal(f.getIvaImporteTotal());
 		mf.setDescuentoTotal(f.getDescuentoTotal());
 		mf.setDescuentoImporteTotal(f.getDescuentoImporteTotal());
+		mf.setImporteEnvioSinIva(f.getImporteEnvioSinIva());
 		mf.setImporteTotal(f.getImporteTotal());
 		mf.setFechaCompra(f.getFechaCompra());
 		mf.setFechaEntrega(f.getFechaEntrega());
 		if (f.getEstado() != null) {
 			mf.setIdEst(f.getEstado().getIdEst());
 		}
-		mf.setDireccionEntrega(f.getDireccionEntrega());
 		mf.setObservaciones(f.getObservaciones());
 		mf.setCreadoPor(f.getCreadoPor());
 		if (f.getFormaPago() != null) {
@@ -85,12 +79,6 @@ public class ConverterFactura {
 		if (f.getCuota() != null) {
 			mf.setIdCuo(f.getCuota().getIdCuo());
 		}
-		mf.setNumeroCuota(f.getNumeroCuota());
-		mf.setInteresCuotaImporte(f.getInteresCuotaImporte());
-		mf.setImporteCuotaTotal(f.getImporteCuotaTotal());
-		mf.setCuotaConIva(f.getCuotaConIva());
-		mf.setCuotaSinIva(f.getCuotaSinIva());
-		mf.setImporteFront(f.getImporteFront());
 		mf.setModificadoPor(f.getModificadoPor());
 		mf.setFechaModificacion(f.getFechaModificacion());
 

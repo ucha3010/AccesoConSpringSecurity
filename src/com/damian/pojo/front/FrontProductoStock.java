@@ -24,9 +24,13 @@ public class FrontProductoStock {
 	// Factura
 	private boolean compra;
 	private String observaciones;
+	
+	// Cuota
 	private double comisionAperturaPor;
 	private double interesPor;
 	private int cantidadCuotas;
+	
+	// CuotaDetalle
 	private List<FrontCuota> cuotas;
 
 	public FrontProductoStock() {

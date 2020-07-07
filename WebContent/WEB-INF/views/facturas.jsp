@@ -29,7 +29,7 @@
 			location.href=url;
 		}
 		function ordenaTabla(numCol,actual,total){
-			var columnas = ['idFac','compra','fechaCompra','descuentoTotal','ivaTotal','importeFront'];
+			var columnas = ['idFac','compra','fechaCompra','descuentoTotal','ivaTotal','importeTotal'];
 			var url = "<c:url value='/factura/all/"+columnas[numCol]+"/"+actual+"/"+total+"' />";
 			location.href=url;			
 		}
@@ -45,10 +45,10 @@
 					var idString = idNum.toString();
 					var d = new Date("${fac.fechaCompra}");
 					var fechaString = ddmmyyyy(d);
-					var importeNum = ${fac.importeFront};
+					var importeNum = ${fac.importeTotal};
 					var importeString = importeNum.toString();
 					if(importeString.indexOf(texto) !== -1 || idString.indexOf(texto) !== -1 || fechaString.indexOf(texto) !== -1){
-						resultado.innerHTML += "<a href=\"<c:url value='/factura/filtered/${fac.idFac}' />\"><fmt:message key="label.Bill.id" />: ${fac.idFac} // <fmt:message key='label.Date' />: "+fechaString+" // <fmt:message key='label.Total.amount' />: ${fac.importeFront}</a>";
+						resultado.innerHTML += "<a href=\"<c:url value='/factura/filtered/${fac.idFac}' />\"><fmt:message key="label.Bill.id" />: ${fac.idFac} // <fmt:message key='label.Date' />: "+fechaString+" // <fmt:message key='label.Total.amount' />: ${fac.importeTotal}</a>";
 					}
 				</c:forEach>
 				$(".collapse").collapse('show');
@@ -142,7 +142,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${facturas}" var="factura">
-					    <tr title='<fmt:message key="label.Delivery.date" />: <fmt:formatDate value="${factura.fechaEntrega}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.Delivery.address" />: <c:out value="${factura.direccionEntrega}" />&#xA;<fmt:message key="label.Observations" />: <c:out value="${factura.observaciones}" />&#xA;<fmt:message key="label.Payment.method" />: <c:out value="${factura.formaPago[nameColSelect]}" />&#xA;<fmt:message key="label.Creator" />: <c:out value="${factura.creadoPor}" /><c:if test="${factura.numeroCuota > 0}">&#xA;<fmt:message key="label.Installment.number" />: <c:out value="${factura.numeroCuota}" /></c:if>'>
+					    <tr title='<fmt:message key="label.Delivery.date" />: <fmt:formatDate value="${factura.fechaEntrega}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.Delivery.address" />: &#xA;<fmt:message key="label.Observations" />: <c:out value="${factura.observaciones}" />&#xA;<fmt:message key="label.Payment.method" />: <c:out value="${factura.formaPago[nameColSelect]}" />&#xA;<fmt:message key="label.Creator" />: <c:out value="${factura.creadoPor}" />'>
 							<sec:authorize access="hasAnyRole('ROL_ROOT')">
 								<td class="extraAdmin-td">
 									<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${factura.idFac})">
@@ -160,7 +160,7 @@
 							<td class="text-center"><fmt:formatDate value="${factura.fechaCompra}" pattern="dd/MM/yyyy"/></td>
 							<td class="text-center"><fmt:formatNumber type="number" value="${factura.descuentoTotal}" minFractionDigits="2" />%</td>
 							<td class="text-center"><fmt:formatNumber type="number" value="${factura.ivaTotal}" minFractionDigits="2" />%</td>
-							<td class="text-right"><fmt:formatNumber type="currency" value="${factura.importeFront}" /></td>
+							<td class="text-right"><fmt:formatNumber type="currency" value="${factura.importeTotal}" /></td>
 							<td class="width-15"></td>
 							<td>
 								<fmt:message key="label.state.column.name" var="itemSelect"/>
@@ -226,7 +226,7 @@
 											<td class="text-center"><fmt:formatDate value="${vence.fechaCompra}" pattern="dd/MM/yyyy"/></td>
 											<td class="text-center"><fmt:formatNumber type="number" value="${vence.descuentoTotal}" minFractionDigits="2" />%</td>
 											<td class="text-center"><fmt:formatNumber type="number" value="${vence.ivaTotal}" minFractionDigits="2" />%</td>
-											<td class="text-right"><fmt:formatNumber type="currency" value="${vence.importeFront}" /></td>
+											<td class="text-right"><fmt:formatNumber type="currency" value="${vence.importeTotal}" /></td>
 											<td class="width-15"></td>
 											<td>
 												<c:forEach items="${estados}" var="est">
@@ -285,7 +285,7 @@
 												<td class="text-center"><fmt:message key="label.Sale" /></td>
 											</c:if>
 											<td class="text-center"><fmt:formatDate value="${vence.fechaCompra}" pattern="dd/MM/yyyy"/></td>
-											<td class="text-right"><fmt:formatNumber type="currency" value="${vence.importeFront}" /></td>
+											<td class="text-right"><fmt:formatNumber type="currency" value="${vence.importeTotal}" /></td>
 											<td class="width-15"></td>
 											<td>
 												<c:forEach items="${estados}" var="est">

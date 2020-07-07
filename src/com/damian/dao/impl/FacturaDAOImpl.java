@@ -108,15 +108,14 @@ public class FacturaDAOImpl implements FacturaDAO {
 		} else {
 			ModelFactura mf = converterFactura.convert(factura);
 			String sql = "INSERT INTO " + TABLA
-					+ " (compra, ivaTotal, ivaImporteTotal, descuentoTotal, descuentoImporteTotal, importeTotal, fechaCompra, fechaEntrega, idEst, direccionEntrega, "
-					+ "observaciones, idFor, creadoPor, idCuo, numeroCuota, interesCuotaImporte, importeCuotaTotal, cuotaConIva, cuotaSinIva, importeFront, modificadoPor, fechaModificacion) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ " (compra, ivaTotal, ivaImporteTotal, descuentoTotal, descuentoImporteTotal, importeEnvioSinIva, importeTotal, fechaCompra, "
+					+ "fechaEntrega, idEst, observaciones, idFor, creadoPor, idCuo, modificadoPor, fechaModificacion) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			int result = jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
-					mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(), mf.getFechaCompra(),
-					mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(),
-					mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(),
-					mf.getImporteCuotaTotal(), mf.getCuotaConIva(), mf.getCuotaSinIva(), mf.getImporteFront(),
-					mf.getModificadoPor(), mf.getFechaModificacion());
+					mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteEnvioSinIva(),
+					mf.getImporteTotal(), mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(),
+					mf.getObservaciones(), mf.getIdFor(), mf.getCreadoPor(), mf.getIdCuo(), mf.getModificadoPor(),
+					mf.getFechaModificacion());
 			LocalLogger.save(TABLA, factura, request);
 			return result;
 		}
@@ -126,15 +125,13 @@ public class FacturaDAOImpl implements FacturaDAO {
 	public int update(Factura factura, HttpServletRequest request) {
 		ModelFactura mf = converterFactura.convert(factura);
 		String sql = "UPDATE " + TABLA
-				+ " SET compra=?, ivaTotal=?, ivaImporteTotal=?, descuentoTotal=?, descuentoImporteTotal=?, importeTotal=?, fechaCompra=?, fechaEntrega=?, idEst=?, "
-				+ "direccionEntrega=?, observaciones=?, idFor=?, creadoPor=?, idCuo=?, numeroCuota=?, interesCuotaImporte=?, importeCuotaTotal=?, cuotaConIva=?, cuotaSinIva=?, "
-				+ "importeFront=?, modificadoPor=?, fechaModificacion=? WHERE " + KEY + "=?";
+				+ " SET compra=?, ivaTotal=?, ivaImporteTotal=?, descuentoTotal=?, descuentoImporteTotal=?, importeEnvioSinIva=?, importeTotal=?, "
+				+ "fechaCompra=?, fechaEntrega=?, idEst=?, observaciones=?, idFor=?, creadoPor=?, idCuo=?, modificadoPor=?, "
+				+ "fechaModificacion=? WHERE " + KEY + "=?";
 		int result = jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
-				mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteTotal(), mf.getFechaCompra(),
-				mf.getFechaEntrega(), mf.getIdEst(), mf.getDireccionEntrega(), mf.getObservaciones(), mf.getIdFor(),
-				mf.getCreadoPor(), mf.getIdCuo(), mf.getNumeroCuota(), mf.getInteresCuotaImporte(),
-				mf.getImporteCuotaTotal(), mf.getCuotaConIva(), mf.getCuotaSinIva(), mf.getImporteFront(),
-				mf.getModificadoPor(), mf.getFechaModificacion(), mf.getIdFac());
+				mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteEnvioSinIva(), mf.getImporteTotal(),
+				mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(), mf.getObservaciones(), mf.getIdFor(),
+				mf.getCreadoPor(), mf.getIdCuo(), mf.getModificadoPor(), mf.getFechaModificacion(), mf.getIdFac());
 		LocalLogger.update(TABLA, factura, request);
 		return result;
 	}
@@ -194,7 +191,7 @@ public class FacturaDAOImpl implements FacturaDAO {
 
 	@Override
 	public List<Factura> findSearchAll() {
-		List<ModelFactura> mfList = jdbcTemplate.query("SELECT idFac, fechaCompra, importeFront FROM " + TABLA,
+		List<ModelFactura> mfList = jdbcTemplate.query("SELECT idFac, fechaCompra, importeTotal FROM " + TABLA,
 				BeanPropertyRowMapper.newInstance(ModelFactura.class));
 		List<Factura> fList = new ArrayList<>();
 		for (ModelFactura mf : mfList) {
@@ -219,22 +216,16 @@ public class FacturaDAOImpl implements FacturaDAO {
 		mf.setIvaTotal(rs.getDouble("ivaTotal"));
 		mf.setIvaImporteTotal(rs.getDouble("ivaImporteTotal"));
 		mf.setDescuentoImporteTotal(rs.getDouble("descuentoImporteTotal"));
+		mf.setImporteEnvioSinIva(rs.getDouble("importeEnvioSinIva"));
 		mf.setDescuentoTotal(rs.getDouble("descuentoTotal"));
 		mf.setImporteTotal(rs.getDouble("importeTotal"));
 		mf.setFechaCompra(rs.getDate("fechaCompra"));
 		mf.setFechaEntrega(rs.getDate("fechaEntrega"));
 		mf.setIdEst(rs.getInt("idEst"));
-		mf.setDireccionEntrega(rs.getString("direccionEntrega"));
 		mf.setObservaciones(rs.getString("observaciones"));
 		mf.setCreadoPor(rs.getString("creadoPor"));
 		mf.setIdFor(rs.getInt("idFor"));
 		mf.setIdCuo(rs.getInt("idCuo"));
-		mf.setNumeroCuota(rs.getInt("numeroCuota"));
-		mf.setInteresCuotaImporte(rs.getDouble("interesCuotaImporte"));
-		mf.setImporteCuotaTotal(rs.getDouble("importeCuotaTotal"));
-		mf.setCuotaConIva(rs.getDouble("cuotaConIva"));
-		mf.setCuotaSinIva(rs.getDouble("cuotaSinIva"));
-		mf.setImporteFront(rs.getDouble("importeFront"));
 		mf.setModificadoPor(rs.getString("modificadoPor"));
 		mf.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
 		return mf;

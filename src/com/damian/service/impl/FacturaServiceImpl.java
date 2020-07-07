@@ -16,12 +16,14 @@ import com.damian.exceptions.NegativeStockException;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Estado;
 import com.damian.pojo.Factura;
+import com.damian.pojo.FacturaEnviarFacturar;
 import com.damian.pojo.FacturaEstado;
 import com.damian.pojo.FormaPago;
 import com.damian.pojo.Producto;
 import com.damian.pojo.ProductoFactura;
 import com.damian.service.CuotaService;
 import com.damian.service.EstadoService;
+import com.damian.service.FacturaEnviarFacturarService;
 import com.damian.service.FacturaEstadoService;
 import com.damian.service.FacturaService;
 import com.damian.service.FormaPagoService;
@@ -39,6 +41,9 @@ public class FacturaServiceImpl implements FacturaService {
 
 	@Autowired
 	private EstadoService estadoService;
+
+	@Autowired
+	private FacturaEnviarFacturarService facturaEnviarFacturarService;
 
 	@Autowired
 	private FacturaEstadoService facturaEstadoService;
@@ -105,46 +110,21 @@ public class FacturaServiceImpl implements FacturaService {
 
 	@Override
 	public int delete(int id, HttpServletRequest request) throws NotEmptyException {
-		List<ProductoFactura> productoFacturaList = productoFacturaService.findByIdFacModel(id);
-		Factura factura = findByIdModel(id);
+
 		int borrada = 0;
-		boolean continuo = true;
-
 		try {
-			if (factura.getCuota() != null && factura.getCuota().getIdCuo() != 0) {
-				List<Factura> facturas = findByIdCuo(factura.getCuota().getIdCuo());
-				if (facturas != null && facturas.size() == 1) {
-					Producto producto = verificoStock(productoFacturaList.get(0), factura);
-					actualizoStock(productoFacturaList.get(0), factura, producto, request);
-					cuotaService.delete(factura.getCuota().getIdCuo(), request);
-				} else if (facturas != null && facturas.size() > 1 && productoFacturaList != null
-						&& !productoFacturaList.isEmpty() && productoFacturaList.get(0).getCantidad() != 0) {
-					for (Factura f : facturas) {
-						ProductoFactura pf = productoFacturaService
-								.findByIdProAndIdFac(productoFacturaList.get(0).getProducto().getIdPro(), f.getIdFac());
-						if (pf.getCantidad() == 0) {
-							pf.setCantidad(productoFacturaList.get(0).getCantidad());
-							productoFacturaService.update(pf, request);
-							asignarDatosFactura(f, factura, request);
-							break;
-						}
-					}
-				}
-			} else {
-				for (ProductoFactura pf : productoFacturaList) {
-					Producto producto = verificoStock(pf, factura);
-					pf.setProducto(producto);
-				}
-				for (ProductoFactura pf : productoFacturaList) {
-					actualizoStock(pf, factura, pf.getProducto(), request);
-				}
+			List<ProductoFactura> productoFacturaList = productoFacturaService.findByIdFacModel(id);
+			Factura factura = findByIdModel(id);
+			for (ProductoFactura pf : productoFacturaList) {
+				Producto producto = verificoStock(pf, factura);
+				pf.setProducto(producto);
 			}
-		} catch (NegativeStockException e) {
-			System.out.println(e.getMessage());
-			continuo = false;
-		}
-
-		if (continuo) {
+			for (ProductoFactura pf : productoFacturaList) {
+				actualizoStock(pf, factura, pf.getProducto(), request);
+			}
+			if (factura.getCuota() != null && factura.getCuota().getIdCuo() != 0) {
+				cuotaService.delete(factura.getCuota().getIdCuo(), request);
+			}
 			if (productoFacturaList != null) {
 				for (ProductoFactura pf : productoFacturaList) {
 					productoFacturaService.delete(pf.getProducto().getIdPro(), id, request);
@@ -154,7 +134,13 @@ public class FacturaServiceImpl implements FacturaService {
 			for (FacturaEstado fe : facturaEstadoList) {
 				facturaEstadoService.delete(fe.getId(), request);
 			}
+			List<FacturaEnviarFacturar> facturaEnviarFacturarList = facturaEnviarFacturarService.findByIdFac(id);
+			for (FacturaEnviarFacturar fef : facturaEnviarFacturarList) {
+				facturaEnviarFacturarService.delete(fef.getIdEnFa(), request);
+			}
 			borrada = facturaDAO.delete(id, request);
+		} catch (NegativeStockException e) {
+			System.out.println(e.getMessage());
 		}
 		return borrada;
 	}
@@ -181,6 +167,9 @@ public class FacturaServiceImpl implements FacturaService {
 		for (Factura factura : facturas) {
 			factura.setEstado(estado);
 			factura.setFormaPago(formaPagoService.findById(factura.getFormaPago().getIdFor()));
+			if (factura.getCuota().getIdCuo() != 0) {
+				factura.setCuota(cuotaService.findById(factura.getCuota().getIdCuo()));
+			}
 		}
 		return facturas;
 	}
@@ -209,6 +198,11 @@ public class FacturaServiceImpl implements FacturaService {
 		return facturaDAO.findSearchAll();
 	}
 
+	@Override
+	public List<Map<String, Object>> facturaMap(int idFac) {
+		return facturaDAO.facturaMap(idFac);
+	}
+
 	private void saveFacturaEstado(Factura factura, HttpServletRequest request) {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
@@ -231,28 +225,12 @@ public class FacturaServiceImpl implements FacturaService {
 
 	}
 
-	private void asignarDatosFactura(Factura f, Factura factura, HttpServletRequest request) {
-		f.setIvaTotal(factura.getIvaTotal());
-		f.setIvaImporteTotal(factura.getIvaImporteTotal());
-		f.setDescuentoTotal(factura.getDescuentoTotal());
-		f.setDescuentoImporteTotal(factura.getDescuentoImporteTotal());
-		f.setImporteTotal(factura.getImporteTotal());
-		f.setObservaciones(factura.getObservaciones());
-		f.setNumeroCuota(factura.getNumeroCuota());
-		f.setImporteFront(factura.getImporteFront());
-		facturaDAO.update(f, request);
-	}
-
 	private Producto verificoStock(ProductoFactura pf, Factura factura) throws NegativeStockException {
 		Producto producto = productoService.findByIdModel(pf.getProducto().getIdPro());
-		int stockFinal;
-		if (factura.isCompra()) {
-			stockFinal = producto.getUnidades() - pf.getCantidad();
-		} else {
-			stockFinal = producto.getUnidades() + pf.getCantidad();
-		}
+		int stockFinal = calculoStockFinal(factura, producto, pf);
 		if (stockFinal < 0) {
-			throw new NegativeStockException("La cantidad de stock final sería: " + stockFinal);
+			throw new NegativeStockException(
+					"FacturaService.actualizoStock - La cantidad de stock final sería: " + stockFinal);
 		}
 		return producto;
 	}
@@ -260,20 +238,17 @@ public class FacturaServiceImpl implements FacturaService {
 	private void actualizoStock(ProductoFactura pf, Factura factura, Producto producto, HttpServletRequest request)
 			throws NegativeStockException {
 
-		int stockFinal;
-		if (factura.isCompra()) {
-			stockFinal = producto.getUnidades() - pf.getCantidad();
-		} else {
-			stockFinal = producto.getUnidades() + pf.getCantidad();
-		}
-		producto.setUnidades(stockFinal);
+		producto.setUnidades(calculoStockFinal(factura, producto, pf));
 		productoService.update(producto, request);
 
 	}
 
-	@Override
-	public List<Map<String, Object>> facturaMap(int idFac) {
-		return facturaDAO.facturaMap(idFac);
+	private int calculoStockFinal(Factura factura, Producto producto, ProductoFactura pf) {
+		if (factura.isCompra()) {
+			return producto.getUnidades() - pf.getCantidad();
+		} else {
+			return producto.getUnidades() + pf.getCantidad();
+		}
 	}
 
 }

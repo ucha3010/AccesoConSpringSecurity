@@ -296,7 +296,7 @@ public class DatosPersonales {
 	 */
 	@Override
 	public String toString() {
-		return "DatosPersonales [idDatosPers=" + idDatosPers + ", usuario=" + usuario.getUsuario() + ", nombre="
+		return "DatosPersonales [idDatosPers=" + idDatosPers + ", nombre="
 				+ nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", sexo=" + sexo
 				+ ", fechaNacimiento=" + fechaNacimiento + ", nacionalidad=" + nacionalidad + ", dni=" + dni
 				+ ", email=" + email + ", telefono=" + telefono + ", observaciones=" + observaciones

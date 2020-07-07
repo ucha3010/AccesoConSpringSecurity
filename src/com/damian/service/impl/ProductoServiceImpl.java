@@ -17,6 +17,7 @@ import com.damian.dao.ProductoDAO;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Categoria;
 import com.damian.pojo.Cuota;
+import com.damian.pojo.CuotaDetalle;
 import com.damian.pojo.Estado;
 import com.damian.pojo.Factura;
 import com.damian.pojo.FormaPago;
@@ -28,6 +29,7 @@ import com.damian.pojo.Subcategoria;
 import com.damian.pojo.front.FrontCuota;
 import com.damian.pojo.front.FrontProductoStock;
 import com.damian.service.CategoriaService;
+import com.damian.service.CuotaDetalleService;
 import com.damian.service.CuotaService;
 import com.damian.service.FacturaService;
 import com.damian.service.FotoService;
@@ -45,6 +47,9 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
 	private CuotaService cuotaService;
+
+	@Autowired
+	private CuotaDetalleService cuotaDetalleService;
 
 	@Autowired
 	private FacturaService facturaService;
@@ -152,62 +157,64 @@ public class ProductoServiceImpl implements ProductoService {
 
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		Factura factura = null;
+		Factura factura = new Factura();
+		rellenaFacturaComun(factura, frontProductoStock, precioUnitConIva, precioUnitSinIva, context);
+		factura.setImporteTotal(frontProductoStock.getPrecioFinal());
+		if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
+			factura.setIvaImporteTotal(((precioUnitConIva.subtract(precioUnitSinIva))
+					.multiply(new BigDecimal(frontProductoStock.getCantidad(), MathContext.DECIMAL64)))
+							.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+		}
+		factura.setFechaCompra(new Date());
 
-		if (frontProductoStock.getCuotas() == null) {
-
-			factura = new Factura();
-			rellenaFacturaComun(factura, frontProductoStock, precioUnitConIva, precioUnitSinIva, context);
-			factura.setImporteTotal(frontProductoStock.getPrecioFinal());
-			factura.setImporteFront(frontProductoStock.getPrecioFinal());
-			if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
-				factura.setIvaImporteTotal(((precioUnitConIva.subtract(precioUnitSinIva))
-						.multiply(new BigDecimal(frontProductoStock.getCantidad(), MathContext.DECIMAL64)))
-								.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-			}
-			factura.setFechaCompra(new Date());
-
-			int idFac = facturaService.save(factura, request);
-			factura.setIdFac(idFac);
-			ProductoFactura productoFactura = new ProductoFactura();
-			productoFactura.setProducto(producto);
-			productoFactura.setFactura(factura);
-			productoFactura.setCantidad(frontProductoStock.getCantidad());
-			productoFactura.setIvaProducto(frontProductoStock.getIva());
+		int idFac = facturaService.save(factura, request);
+		factura.setIdFac(idFac);
+		ProductoFactura productoFactura = new ProductoFactura();
+		productoFactura.setProducto(producto);
+		productoFactura.setFactura(factura);
+		productoFactura.setCantidad(frontProductoStock.getCantidad());
+		productoFactura.setIvaProducto(frontProductoStock.getIva());
+		productoFactura
+				.setPrecioUnitConIva(precioUnitConIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+		if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
 			productoFactura
-					.setPrecioUnitConIva(precioUnitConIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-			if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
-				productoFactura.setPrecioUnitSinIva(
-						precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-			} else {
-				productoFactura.setPrecioUnitSinIva(
-						precioUnitConIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-
-			}
-			productoFactura.setPrecioFinal(frontProductoStock.getPrecioFinal());
-			productoFacturaService.save(productoFactura, request);
+					.setPrecioUnitSinIva(precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
 		} else {
+			productoFactura
+					.setPrecioUnitSinIva(precioUnitConIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+
+		}
+		productoFactura.setPrecioFinal(frontProductoStock.getPrecioFinal());
+		productoFacturaService.save(productoFactura, request);
+
+		if (frontProductoStock.getCuotas() != null) {
+
 			BigDecimal comisionAperturaPor = new BigDecimal(frontProductoStock.getComisionAperturaPor(),
 					MathContext.DECIMAL64);
-			Cuota cuota = new Cuota();
-			ProductoFactura productoFactura = new ProductoFactura();
-			cuota.setCantidadCuotas(frontProductoStock.getCantidadCuotas());
-			cuota.setComisionAperturaPor(frontProductoStock.getComisionAperturaPor());
-			cuota.setInteresPor(frontProductoStock.getInteresPor());
 			BigDecimal comisionAperturaImp = comisionAperturaPor.multiply(precioFinal).multiply(comaCeroUno);
-			cuota.setComisionAperturaImp(Math.round(comisionAperturaImp.doubleValue() * 100.0) / 100.0);
 			BigDecimal totalCompletoAPagar = new BigDecimal(0.0, MathContext.DECIMAL64);
+			BigDecimal interesImp = new BigDecimal(0.0, MathContext.DECIMAL64);
 			for (FrontCuota fc : frontProductoStock.getCuotas()) {
 				totalCompletoAPagar = totalCompletoAPagar
 						.add(new BigDecimal(fc.getImporteTotal(), MathContext.DECIMAL64));
 			}
 			if (frontProductoStock.getInteresPor() != 0) {
-				BigDecimal interesImp = totalCompletoAPagar.subtract(comisionAperturaImp)
+				interesImp = totalCompletoAPagar.subtract(comisionAperturaImp)
 						.subtract(new BigDecimal(frontProductoStock.getPrecioFinal(), MathContext.DECIMAL64));
-				cuota.setInteresImp(interesImp.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
 			}
+
+			Cuota cuota = new Cuota();
+			cuota.setCantidadCuotas(frontProductoStock.getCantidadCuotas());
+			cuota.setComisionAperturaPor(frontProductoStock.getComisionAperturaPor());
+			cuota.setComisionAperturaImp(Math.round(comisionAperturaImp.doubleValue() * 100.0) / 100.0);
+			cuota.setInteresPor(frontProductoStock.getInteresPor());
+			cuota.setInteresImp(interesImp.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+			cuota.setTotalCompletoAPagar(totalCompletoAPagar.doubleValue());
+
 			int idCuo = cuotaService.save(cuota, request);
 			cuota.setIdCuo(idCuo);
+			factura.setCuota(cuota);
+			facturaService.update(factura, request);
 
 			BigDecimal cuotaSinInteres = precioFinal.divide(
 					new BigDecimal(frontProductoStock.getCuotas().size(), MathContext.DECIMAL64), 5,
@@ -221,73 +228,38 @@ public class ProductoServiceImpl implements ProductoService {
 					.multiply(new BigDecimal(frontProductoStock.getCuotas().size(), MathContext.DECIMAL64));
 			BigDecimal sumarUltimaCuota = new BigDecimal(Math.round(residuoSumar.doubleValue()), MathContext.DECIMAL64);
 			sumarUltimaCuota = sumarUltimaCuota.multiply(comaCeroUno);
+			BigDecimal capitalPendiente = new BigDecimal(0, MathContext.DECIMAL64);
 
 			for (FrontCuota fc : frontProductoStock.getCuotas()) {
 
-				productoFactura = new ProductoFactura();
-				factura = new Factura();
-				rellenaFacturaComun(factura, frontProductoStock, precioUnitConIva, precioUnitSinIva, context);
-				factura.setFechaCompra(fc.getFechaCompra());
-
-				factura.setCuota(cuota);
-				factura.setImporteCuotaTotal(fc.getImporteTotal());
-				factura.setImporteFront(fc.getImporteTotal());
-				factura.setNumeroCuota(fc.getNumeroCuota());
-
-				BigDecimal cuotaSinIva = new BigDecimal(0, MathContext.DECIMAL64);
-				BigDecimal cuotaConIva = new BigDecimal(0, MathContext.DECIMAL64);
 				BigDecimal importeCuotaTotal = new BigDecimal(fc.getImporteTotal(), MathContext.DECIMAL64);
+				BigDecimal importeCuotaSinInteres = new BigDecimal(0, MathContext.DECIMAL64);
 				BigDecimal interesCuotaImporte = new BigDecimal(0, MathContext.DECIMAL64);
 
 				if (fc.getNumeroCuota() == 1) {
-					factura.setImporteTotal(frontProductoStock.getPrecioFinal());
-					if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
-						factura.setIvaImporteTotal(((precioUnitConIva.subtract(precioUnitSinIva))
-								.multiply(new BigDecimal(frontProductoStock.getCantidad(), MathContext.DECIMAL64)))
-										.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-					}
+					capitalPendiente = precioFinal;
 					interesCuotaImporte = importeCuotaTotal.subtract(comisionAperturaImp).subtract(cuotaSinInteres);
-					productoFactura.setCantidad(frontProductoStock.getCantidad());
-					productoFactura.setPrecioFinal(frontProductoStock.getPrecioFinal());
 				} else if (fc.getNumeroCuota() == frontProductoStock.getCuotas().size()) {
 					interesCuotaImporte = importeCuotaTotal.subtract(cuotaSinInteres.add(sumarUltimaCuota));
-					productoFactura.setCantidad(0);
-					productoFactura.setPrecioFinal(0);
 				} else {
 					interesCuotaImporte = importeCuotaTotal.subtract(cuotaSinInteres);
-					productoFactura.setCantidad(0);
-					productoFactura.setPrecioFinal(0);
 				}
-				if (frontProductoStock.getInteresPor() != 0) {
-					factura.setInteresCuotaImporte(
-							interesCuotaImporte.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-				}
+				importeCuotaSinInteres = importeCuotaTotal.subtract(interesCuotaImporte);
 
-				cuotaConIva = cuotaSinInteres;
-				cuotaSinIva = cuotaSinInteres.divide(((comaCeroUno.multiply(iva)).add(uno)), 5, RoundingMode.HALF_UP);
-				if (fc.getNumeroCuota() == frontProductoStock.getCuotas().size()) {
-					cuotaConIva = cuotaConIva.add(sumarUltimaCuota);
-					cuotaSinIva = cuotaSinIva.add(sumarUltimaCuota);
-				}
-				factura.setCuotaConIva(cuotaConIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-				factura.setCuotaSinIva(cuotaSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+				CuotaDetalle cuotaDetalle = new CuotaDetalle();
+				cuotaDetalle.setImporteSinInteres(
+						importeCuotaSinInteres.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+				cuotaDetalle.setImporteInteres(
+						interesCuotaImporte.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+				cuotaDetalle.setImporteCuota(fc.getImporteTotal());
+				cuotaDetalle.setFecha(fc.getFechaCobro());
+				cuotaDetalle.setCapitalPendienteAntes(capitalPendiente.doubleValue());
+				capitalPendiente = capitalPendiente.subtract(importeCuotaSinInteres);
+				cuotaDetalle.setCapitalPendienteDespues(capitalPendiente.doubleValue());
+				cuotaDetalle.setNumeroCuota(fc.getNumeroCuota());
+				cuotaDetalle.setCuota(cuota);
 
-				int idFac = facturaService.save(factura, request);
-				factura.setIdFac(idFac);
-
-				productoFactura.setProducto(producto);
-				productoFactura.setFactura(factura);
-				productoFactura.setIvaProducto(frontProductoStock.getIva());
-				productoFactura.setPrecioUnitConIva(precioUnitConIva.doubleValue());
-				if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
-					productoFactura.setPrecioUnitSinIva(
-							precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-				} else {
-					productoFactura.setPrecioUnitSinIva(
-							precioUnitConIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-
-				}
-				productoFacturaService.save(productoFactura, request);
+				cuotaDetalleService.save(cuotaDetalle, request);
 			}
 		}
 

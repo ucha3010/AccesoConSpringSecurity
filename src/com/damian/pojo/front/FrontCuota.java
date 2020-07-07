@@ -7,23 +7,23 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class FrontCuota {
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date fechaCompra;
+	private Date fechaCobro;
 	private double importeTotal;
 	private int numeroCuota;
 
 	/**
-	 * @return the fechaCompra
+	 * @return the fechaCobro
 	 */
-	public Date getFechaCompra() {
-		return fechaCompra;
+	public Date getFechaCobro() {
+		return fechaCobro;
 	}
 
 	/**
-	 * @param fechaCompra
-	 *            the fechaCompra to set
+	 * @param fechaCobro
+	 *            the fechaCobro to set
 	 */
-	public void setFechaCompra(Date fechaCompra) {
-		this.fechaCompra = fechaCompra;
+	public void setFechaCobro(Date fechaCobro) {
+		this.fechaCobro = fechaCobro;
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class FrontCuota {
 	 */
 	@Override
 	public String toString() {
-		return "FrontCuota [fechaCompra=" + fechaCompra + ", importeTotal=" + importeTotal + ", numeroCuota="
+		return "FrontCuota [fechaCobro=" + fechaCobro + ", importeTotal=" + importeTotal + ", numeroCuota="
 				+ numeroCuota + "]";
 	}
 

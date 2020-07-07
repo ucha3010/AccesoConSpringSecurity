@@ -129,7 +129,7 @@
 				'<input type="hidden" name="cuotas['+i+'].numeroCuota" value="'+(i+1)+'" />' +
 				'</div></div>' +
 				'<div class="row margin-b-5"><div class="col-xs-12">' +
-				'<fmt:message key="label.Date" /> <input type="date" name="cuotas['+i+'].fechaCompra" class="width-130" value="'+ calculaFecha(i) + '" />' +
+				'<fmt:message key="label.Date" /> <input type="date" name="cuotas['+i+'].fechaCobro" class="width-130" value="'+ calculaFecha(i) + '" />' +
 				'</div></div>' +
 				'<div class="row"><div class="col-xs-12">' +
 				'<fmt:message key="label.Amount" /> <input type="text" name="cuotas['+i+'].importeTotal" class="width-80-align-rigth installment-verify form-validacion"';

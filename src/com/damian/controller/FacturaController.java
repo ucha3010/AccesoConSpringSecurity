@@ -106,7 +106,7 @@ public class FacturaController {
 			@PathVariable("paginaInicio") int paginaInicio, @PathVariable("totalPaginas") int totalPaginas,
 			@PathVariable("from") String from, @PathVariable("idEstView") int idEstView, HttpServletRequest request) {
 		Factura factura = new Factura();
-		factura = facturaService.findById(idFac);
+		factura = facturaService.findByIdModel(idFac);
 		factura.getEstado().setIdEst(idEst);
 		facturaService.update(factura, request);
 		if (from != null && from.equalsIgnoreCase("facturasFilteredEstado")) {

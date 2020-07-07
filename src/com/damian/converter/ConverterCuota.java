@@ -30,6 +30,7 @@ public class ConverterCuota {
 		c.setComisionAperturaImp(mc.getComisionAperturaImp());
 		c.setInteresPor(mc.getInteresPor());
 		c.setInteresImp(mc.getInteresImp());
+		c.setTotalCompletoAPagar(mc.getTotalCompletoAPagar());
 		c.setModificadoPor(mc.getModificadoPor());
 		c.setFechaModificacion(mc.getFechaModificacion());
 
@@ -46,6 +47,7 @@ public class ConverterCuota {
 		mc.setComisionAperturaImp(c.getComisionAperturaImp());
 		mc.setInteresPor(c.getInteresPor());
 		mc.setInteresImp(c.getInteresImp());
+		mc.setTotalCompletoAPagar(c.getTotalCompletoAPagar());
 		mc.setModificadoPor(c.getModificadoPor());
 		mc.setFechaModificacion(c.getFechaModificacion());
 
