@@ -29,4 +29,6 @@ public interface UsuarioDAO {
 
 	public List<Usuario> findSearchAll(boolean customer);
 
+	public int countCustomers();
+
 }

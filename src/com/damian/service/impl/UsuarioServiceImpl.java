@@ -237,6 +237,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public List<Usuario> findSearchAll(boolean customer) {
 		return usuarioDAO.findSearchAll(customer);
 	}
+	
+	@Override
+	public int countCustomers() {
+		return usuarioDAO.countCustomers();
+	}
 
 	private void eliminarRolesNoSeleccionados(String[] usuarioRol, Usuario usuario, HttpServletRequest request) {
 		List<UsuarioRol> rolesQueTraia = usuarioRolService.findByIdUsr(usuario.getIdUsr());

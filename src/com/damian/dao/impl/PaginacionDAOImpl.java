@@ -22,12 +22,19 @@ public class PaginacionDAOImpl implements PaginacionDAO {
 
 	@Override
 	public Paginacion pagination(int paginaInicio, int registrosPorPagina, String tabla) {
-
-		Paginacion paginacion = new Paginacion();
+		
 		int totalRegistros = 0;
 		if (registrosPorPagina > 0) {
 			totalRegistros = totalRows(tabla);
 		}
+		
+		return pagination(paginaInicio, registrosPorPagina, totalRegistros);
+	}
+
+	@Override
+	public Paginacion pagination(int paginaInicio, int registrosPorPagina, int totalRegistros) {
+
+		Paginacion paginacion = new Paginacion();
 
 		paginacion.setActual(paginaInicio);
 		paginacion.setTotalRegistros(totalRegistros);

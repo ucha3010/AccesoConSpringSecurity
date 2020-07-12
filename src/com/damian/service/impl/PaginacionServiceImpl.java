@@ -18,4 +18,9 @@ public class PaginacionServiceImpl implements PaginacionService {
 		return paginacionDAO.pagination(paginaInicio, totalPaginas, tabla);
 	}
 
+	@Override
+	public Paginacion pagination(int paginaInicio, int registrosPorPagina, int totalRegistros) {
+		return paginacionDAO.pagination(paginaInicio, registrosPorPagina, totalRegistros);
+	}
+
 }

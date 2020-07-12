@@ -44,9 +44,8 @@ public class ClienteController {
 			@PathVariable("order") String order, @PathVariable("paginaInicio") int paginaInicio,
 			@PathVariable("totalPaginas") int totalPaginas, HttpServletRequest request) {
 		modelAndView.addObject("roles", rolService.findAll());
-		modelAndView.addObject("usuarios",
-				usuarioService.findCustomers(column, order, paginaInicio, totalPaginas, request));
-		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, "usuario"));
+		modelAndView.addObject("usuarios", usuarioService.findCustomers(column, order, paginaInicio, totalPaginas, request));
+		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, usuarioService.countCustomers()));
 		modelAndView.addObject("buscarusuarios", usuarioService.findSearchAll(true));
 		modelAndView.addObject("estoy", "cliente");
 		modelAndView.setViewName("clientes");

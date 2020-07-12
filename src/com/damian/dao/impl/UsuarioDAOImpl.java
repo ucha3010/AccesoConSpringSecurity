@@ -211,6 +211,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		return uList;
 	}
 
+	@Override
+	public int countCustomers() {
+
+		String 	sql = "SELECT COUNT(usuario.idUsr) FROM usuario, usuario_rol "
+				+ "WHERE  usuario.idUsr = usuario_rol.idUsr AND usuario_rol.idRol = 1";
+
+		return jdbcTemplate.queryForObject(sql, Integer.class);
+	}
+
 	private List<Usuario> lista(String sql) {
 		List<ModelUsuario> muList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelUsuario.class));
 		List<Usuario> uList = new ArrayList<>();
