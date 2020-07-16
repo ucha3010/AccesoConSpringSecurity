@@ -24,15 +24,7 @@ public class DatosPersonalesServiceImpl implements DatosPersonalesService {
 
 	public void save(DatosPersonales datosPersonales, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		if (context != null) {
-			datosPersonales.setModificadoPor(context.getAuthentication().getName());
-		} else {
-			datosPersonales.setModificadoPor("OWN USER");
-		}
-		datosPersonales.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
-
+		fillModificadoPor(datosPersonales, request);
 		datosPersonalesDAO.save(datosPersonales, request);
 	}
 
@@ -42,11 +34,7 @@ public class DatosPersonalesServiceImpl implements DatosPersonalesService {
 
 	public void update(DatosPersonales datosPersonales, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		datosPersonales.setModificadoPor(context.getAuthentication().getPrincipal().toString());
-		datosPersonales.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
-
+		fillModificadoPor(datosPersonales, request);
 		datosPersonalesDAO.update(datosPersonales, request);
 	}
 
@@ -63,6 +51,19 @@ public class DatosPersonalesServiceImpl implements DatosPersonalesService {
 	@Override
 	public DatosPersonales findByUsrIdSearch(int datosUsrId) {
 		return datosPersonalesDAO.findByUsrIdSearch(datosUsrId);
+	}
+
+	private void fillModificadoPor(DatosPersonales datosPersonales, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		if (context != null) {
+			datosPersonales.setModificadoPor(context.getAuthentication().getName());
+		} else {
+			datosPersonales.setModificadoPor("OWN USER");
+		}
+		datosPersonales.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 	}
 
 }

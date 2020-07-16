@@ -182,7 +182,7 @@
 					</div>
 					<div class="radio">
 						<label for="male">
-							<sf:radiobutton id="male" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Mujer" />
+							<sf:radiobutton id="male" name="customRadioInline1" class="custom-control-input" path="datosPersonales.sexo" value="Hombre" />
 							<fmt:message key="label.Male" />
 						</label>
 					</div>

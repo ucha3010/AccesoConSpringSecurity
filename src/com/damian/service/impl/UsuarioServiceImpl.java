@@ -74,14 +74,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 		DatosPersonales dp;
 		dp = usuario.getDatosPersonales();
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		String creador;
-		if (context != null) {
-			creador = context.getAuthentication().getName();
-		} else {
-			creador = "OWN USER";
-		}
 
 		if (usuario.getIdUsr() == 0) {
 			Usuario verifico = findByUsername(usuario.getUsuario());
@@ -92,8 +84,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 			usuario.setHabilitado(true);
 			String claveUsr = usuario.getClave();
 			usuario.setClave(passwordEncoder.encode(claveUsr));
-			usuario.setModificadoPor(creador);
-			usuario.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+			fillModificadoPor(usuario, request);
 			usuarioDAO.save(usuario, request);
 			usuario = findByUsername(usuario.getUsuario());
 			dp.setUsuario(usuario);
@@ -109,6 +100,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 			String[] nuevosRoles = rolesAGuardar(usuarioRol, usuario);
 			Date ahora = new Date();
 			UsuarioRol ur = null;
+			org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+					.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+			String creador;
+			if (context != null) {
+				creador = context.getAuthentication().getName();
+			} else {
+				creador = "OWN USER";
+			}
 			for (String rolId : nuevosRoles) {
 				Rol rol = new Rol();
 				rol.setIdRol(Integer.parseInt(rolId));
@@ -140,6 +139,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public void update(Usuario usuario, HttpServletRequest request) {
+		fillModificadoPor(usuario, request);
 		usuarioDAO.update(usuario, request);
 	}
 
@@ -237,7 +237,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 	public List<Usuario> findSearchAll(boolean customer) {
 		return usuarioDAO.findSearchAll(customer);
 	}
-	
+
 	@Override
 	public int countCustomers() {
 		return usuarioDAO.countCustomers();
@@ -285,6 +285,19 @@ public class UsuarioServiceImpl implements UsuarioService {
 			}
 			return agregar.toArray(new String[0]);
 		}
+	}
+
+	private void fillModificadoPor(Usuario usuario, HttpServletRequest request) {
+
+		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
+				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
+		if (context != null) {
+			usuario.setModificadoPor(context.getAuthentication().getName());
+		} else {
+			usuario.setModificadoPor("OWN USER");
+		}
+		usuario.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+
 	}
 
 }
