@@ -10,39 +10,12 @@ public class ProductoFactura {
 	private double ivaProducto;
 	private double porcentajeDescuento;
 	private double precioUnitSinIva;
-	private double precioUnitConIva;
-	private double precioFinal;
 	private String observaciones;
 	private String modificadoPor;
 	private Timestamp fechaModificacion;
 
 	public ProductoFactura() {
 
-	}
-
-	/**
-	 * @param producto
-	 * @param factura
-	 * @param cantidad
-	 * @param ivaProducto
-	 * @param porcentajeDescuento
-	 * @param precioUnitSinIva
-	 * @param precioUnitConIva
-	 * @param precioFinal
-	 * @param observaciones
-	 */
-	public ProductoFactura(Producto producto, Factura factura, int cantidad, double ivaProducto,
-			double porcentajeDescuento, double precioUnitSinIva, double precioUnitConIva, double precioFinal,
-			String observaciones) {
-		this.producto = producto;
-		this.factura = factura;
-		this.cantidad = cantidad;
-		this.ivaProducto = ivaProducto;
-		this.porcentajeDescuento = porcentajeDescuento;
-		this.precioUnitSinIva = precioUnitSinIva;
-		this.precioUnitConIva = precioUnitConIva;
-		this.precioFinal = precioFinal;
-		this.observaciones = observaciones;
 	}
 
 	/**
@@ -136,36 +109,6 @@ public class ProductoFactura {
 	}
 
 	/**
-	 * @return the precioUnitConIva
-	 */
-	public double getPrecioUnitConIva() {
-		return precioUnitConIva;
-	}
-
-	/**
-	 * @param precioUnitConIva
-	 *            the precioUnitConIva to set
-	 */
-	public void setPrecioUnitConIva(double precioUnitConIva) {
-		this.precioUnitConIva = precioUnitConIva;
-	}
-
-	/**
-	 * @return the precioFinal
-	 */
-	public double getPrecioFinal() {
-		return precioFinal;
-	}
-
-	/**
-	 * @param precioFinal
-	 *            the precioFinal to set
-	 */
-	public void setPrecioFinal(double precioFinal) {
-		this.precioFinal = precioFinal;
-	}
-
-	/**
 	 * @return the observaciones
 	 */
 	public String getObservaciones() {
@@ -219,9 +162,8 @@ public class ProductoFactura {
 	public String toString() {
 		return "ProductoFactura [producto=" + producto + ", factura=" + factura + ", cantidad=" + cantidad
 				+ ", ivaProducto=" + ivaProducto + ", porcentajeDescuento=" + porcentajeDescuento
-				+ ", precioUnitSinIva=" + precioUnitSinIva + ", precioUnitConIva=" + precioUnitConIva + ", precioFinal="
-				+ precioFinal + ", observaciones=" + observaciones + ", modificadoPor=" + modificadoPor
-				+ ", fechaModificacion=" + fechaModificacion + "]";
+				+ ", precioUnitSinIva=" + precioUnitSinIva + ", observaciones=" + observaciones + ", modificadoPor="
+				+ modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

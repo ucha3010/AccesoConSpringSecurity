@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.damian.pojo.ProductoFactura;
+import com.damian.pojo.front.FrontProducto;
 
 public interface ProductoFacturaService {
 
@@ -25,5 +26,7 @@ public interface ProductoFacturaService {
 	public List<ProductoFactura> findByIdFacModel(int idFac);
 
 	public ProductoFactura findByIdProAndIdFac(int idPro, int idFac);
+
+	public List<FrontProducto> findByIdFacFront(int idFac);
 
 }

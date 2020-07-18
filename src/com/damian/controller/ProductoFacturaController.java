@@ -46,7 +46,7 @@ public class ProductoFacturaController {
 	@RequestMapping("/productoFactura/factura/{idFac}")
 	public ModelAndView getFacturas(ModelAndView modelAndView, @PathVariable("idFac") int idFac) {
 		modelAndView.addObject("factura", facturaService.findById(idFac));
-		modelAndView.addObject("productoFacturas", productoFacturaService.findByIdFac(idFac));
+		modelAndView.addObject("productoFacturas", productoFacturaService.findByIdFacFront(idFac));
 		modelAndView.setViewName("facturaProducto");
 		return modelAndView;
 	}

@@ -34,9 +34,15 @@ public class FrontProducto {
 	private String nombreSubcategoria;
 
 	// ProductoFactura
-	private int cantidadInOut;
-	private double ivaProducto;
-	private double porcentajeDescuento;
+	private double precioUnit;
+	private double descuentoPor;
+	private double descuentoImp;
+	private double precioUnitConDescuento;
+	private double ivaProductoPor;
+	private double ivaProductoImp;
+	private double precioUnitFinal;
+	private double precioFinal;
+	private int cantidad;
 	private String observaciones;
 
 	// Factura
@@ -447,48 +453,138 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @return the cantidadInOut
+	 * @return the precioUnit
 	 */
-	public int getCantidadInOut() {
-		return cantidadInOut;
+	public double getPrecioUnit() {
+		return precioUnit;
 	}
 
 	/**
-	 * @param cantidadInOut
-	 *            the cantidadInOut to set
+	 * @param precioUnit
+	 *            the precioUnit to set
 	 */
-	public void setCantidadInOut(int cantidadInOut) {
-		this.cantidadInOut = cantidadInOut;
+	public void setPrecioUnit(double precioUnit) {
+		this.precioUnit = precioUnit;
 	}
 
 	/**
-	 * @return the ivaProducto
+	 * @return the descuentoPor
 	 */
-	public double getIvaProducto() {
-		return ivaProducto;
+	public double getDescuentoPor() {
+		return descuentoPor;
 	}
 
 	/**
-	 * @param ivaProducto
-	 *            the ivaProducto to set
+	 * @param descuentoPor
+	 *            the descuentoPor to set
 	 */
-	public void setIvaProducto(double ivaProducto) {
-		this.ivaProducto = ivaProducto;
+	public void setDescuentoPor(double descuentoPor) {
+		this.descuentoPor = descuentoPor;
 	}
 
 	/**
-	 * @return the porcentajeDescuento
+	 * @return the descuentoImp
 	 */
-	public double getPorcentajeDescuento() {
-		return porcentajeDescuento;
+	public double getDescuentoImp() {
+		return descuentoImp;
 	}
 
 	/**
-	 * @param porcentajeDescuento
-	 *            the porcentajeDescuento to set
+	 * @param descuentoImp
+	 *            the descuentoImp to set
 	 */
-	public void setPorcentajeDescuento(double porcentajeDescuento) {
-		this.porcentajeDescuento = porcentajeDescuento;
+	public void setDescuentoImp(double descuentoImp) {
+		this.descuentoImp = descuentoImp;
+	}
+
+	/**
+	 * @return the precioUnitConDescuento
+	 */
+	public double getPrecioUnitConDescuento() {
+		return precioUnitConDescuento;
+	}
+
+	/**
+	 * @param precioUnitConDescuento
+	 *            the precioUnitConDescuento to set
+	 */
+	public void setPrecioUnitConDescuento(double precioUnitConDescuento) {
+		this.precioUnitConDescuento = precioUnitConDescuento;
+	}
+
+	/**
+	 * @return the ivaProductoPor
+	 */
+	public double getIvaProductoPor() {
+		return ivaProductoPor;
+	}
+
+	/**
+	 * @param ivaProductoPor
+	 *            the ivaProductoPor to set
+	 */
+	public void setIvaProductoPor(double ivaProductoPor) {
+		this.ivaProductoPor = ivaProductoPor;
+	}
+
+	/**
+	 * @return the ivaProductoImp
+	 */
+	public double getIvaProductoImp() {
+		return ivaProductoImp;
+	}
+
+	/**
+	 * @param ivaProductoImp
+	 *            the ivaProductoImp to set
+	 */
+	public void setIvaProductoImp(double ivaProductoImp) {
+		this.ivaProductoImp = ivaProductoImp;
+	}
+
+	/**
+	 * @return the precioUnitFinal
+	 */
+	public double getPrecioUnitFinal() {
+		return precioUnitFinal;
+	}
+
+	/**
+	 * @param precioUnitFinal
+	 *            the precioUnitFinal to set
+	 */
+	public void setPrecioUnitFinal(double precioUnitFinal) {
+		this.precioUnitFinal = precioUnitFinal;
+	}
+
+	/**
+	 * @return the precioFinal
+	 */
+	public double getPrecioFinal() {
+		return precioFinal;
+	}
+
+	/**
+	 * @param precioFinal
+	 *            the precioFinal to set
+	 */
+	public void setPrecioFinal(double precioFinal) {
+		this.precioFinal = precioFinal;
+	}
+
+	/**
+	 * @return the cantidad
+	 */
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	/**
+	 * @param cantidad
+	 *            the cantidad to set
+	 */
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 
 	/**
@@ -685,9 +781,11 @@ public class FrontProducto {
 				+ ", serie=" + serie + ", ubicacion=" + ubicacion + ", enviar=" + enviar + ", vendible=" + vendible
 				+ ", mesesGarantia=" + mesesGarantia + ", peso=" + peso + ", volumen=" + volumen + ", idEmpList="
 				+ idEmpList + ", idCat=" + idCat + ", nombreCategoria=" + nombreCategoria + ", idSub=" + idSub
-				+ ", nombreSubcategoria=" + nombreSubcategoria + ", cantidadInOut=" + cantidadInOut + ", ivaProducto="
-				+ ivaProducto + ", porcentajeDescuento=" + porcentajeDescuento + ", observaciones=" + observaciones
-				+ ", compra=" + compra + ", ivaTotal=" + ivaTotal + ", descuentoTotal=" + descuentoTotal
+				+ ", nombreSubcategoria=" + nombreSubcategoria + ", precioUnit=" + precioUnit + ", descuentoPor="
+				+ descuentoPor + ", descuentoImp=" + descuentoImp + ", precioUnitConDescuento=" + precioUnitConDescuento
+				+ ", ivaProductoPor=" + ivaProductoPor + ", ivaProductoImp=" + ivaProductoImp + ", precioUnitFinal="
+				+ precioUnitFinal + ", precioFinal=" + precioFinal + ", cantidad=" + cantidad + ", observaciones="
+				+ observaciones + ", compra=" + compra + ", ivaTotal=" + ivaTotal + ", descuentoTotal=" + descuentoTotal
 				+ ", fechaCompra=" + fechaCompra + ", fechaEntrega=" + fechaEntrega + ", direccionEntrega="
 				+ direccionEntrega + ", creadoPor=" + creadoPor + ", idEst=" + idEst + ", nombreEstado=" + nombreEstado
 				+ ", idFor=" + idFor + ", nombreFormaPago=" + nombreFormaPago + "]";

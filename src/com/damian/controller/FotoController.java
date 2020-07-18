@@ -82,13 +82,7 @@ public class FotoController {
 	public String saveUsuario(@RequestParam("file") MultipartFile file, @ModelAttribute("foto") Foto foto,
 			RedirectAttributes ra, HttpServletRequest request) {
 
-		if (!file.isEmpty()) {
-			fotoService.save(foto, file, request);
-			ra.addFlashAttribute("foto_agregada", true);
-		} else {
-			ra.addFlashAttribute("foto_agregada", false);
-		}
-
+		saveFoto(foto, file, request, ra);
 		return "redirect:/foto/usuarioLogged/" + foto.getUsuario().getIdUsr();
 	}
 
@@ -96,13 +90,7 @@ public class FotoController {
 	public String saveProducto(@RequestParam("file") MultipartFile file, @ModelAttribute("foto") Foto foto,
 			RedirectAttributes ra, HttpServletRequest request) {
 
-		if (!file.isEmpty()) {
-			fotoService.save(foto, file, request);
-			ra.addFlashAttribute("foto_agregada", true);
-		} else {
-			ra.addFlashAttribute("foto_agregada", false);
-		}
-
+		saveFoto(foto, file, request, ra);
 		return "redirect:/foto/producto/" + foto.getProducto().getIdPro();
 	}
 
@@ -140,6 +128,20 @@ public class FotoController {
 		Foto foto = fotoService.doPrincipal(idFot, request);
 		return "redirect:/foto/producto/" + foto.getProducto().getIdPro();
 
+	}
+	
+	private void saveFoto(Foto foto, MultipartFile file, HttpServletRequest request, RedirectAttributes ra) {
+
+		int agregada = 0;
+		if (!file.isEmpty()) {
+			agregada = fotoService.save(foto, file, request);
+		}
+		if (agregada > 0) {
+			ra.addFlashAttribute("foto_agregada", true);
+		} else {
+			ra.addFlashAttribute("foto_agregada", false);
+		}
+		
 	}
 
 }

@@ -1,6 +1,10 @@
 package com.damian.service.impl;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.damian.dao.ProductoFacturaDAO;
 import com.damian.pojo.ProductoFactura;
+import com.damian.pojo.front.FrontProducto;
 import com.damian.service.ProductoFacturaService;
 
 @Service
@@ -73,6 +78,60 @@ public class ProductoFacturaServiceImpl implements ProductoFacturaService {
 	@Override
 	public ProductoFactura findByIdProAndIdFac(int idPro, int idFac) {
 		return productoFacturaDAO.findByIdProAndIdFac(idPro, idFac);
+	}
+
+	@Override
+	public List<FrontProducto> findByIdFacFront(int idFac) {
+		List<ProductoFactura> productoFacturas = findByIdFac(idFac);
+		List<FrontProducto> pfFront = new ArrayList<>();
+		FrontProducto fp;
+		BigDecimal comaCeroUno = new BigDecimal(0.01, MathContext.DECIMAL64);
+		BigDecimal descuentoImp = new BigDecimal(0);
+		BigDecimal ivaProductoPor = new BigDecimal(0);
+		BigDecimal ivaProductoImp = new BigDecimal(0);
+		BigDecimal precioUnitSinIva = new BigDecimal(0);
+		BigDecimal precioUnitFinal = new BigDecimal(0);
+		BigDecimal cantidad = new BigDecimal(0);
+		BigDecimal precioFinal = new BigDecimal(0);
+		for(ProductoFactura pf: productoFacturas) {
+			fp = new FrontProducto();
+			fp.setObservaciones(pf.getObservaciones());
+			fp.setIdPro(pf.getProducto().getIdPro());
+			fp.setNombreES(pf.getProducto().getNombreES());
+			fp.setNombreCA(pf.getProducto().getNombreCA());
+			fp.setNombreEN(pf.getProducto().getNombreEN());
+			fp.setNombreEU(pf.getProducto().getNombreEU());
+			fp.setNombreFR(pf.getProducto().getNombreFR());
+			fp.setNombreGE(pf.getProducto().getNombreGE());
+			fp.setNombreIT(pf.getProducto().getNombreIT());
+			fp.setNombrePT(pf.getProducto().getNombrePT());
+			precioUnitSinIva = new BigDecimal(pf.getPrecioUnitSinIva(), MathContext.DECIMAL64);
+			fp.setPrecioUnit(precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+			fp.setDescuentoPor(pf.getPorcentajeDescuento());
+			if(pf.getPorcentajeDescuento() != 0.0) {
+				BigDecimal descuentoPor = new BigDecimal(pf.getPorcentajeDescuento(), MathContext.DECIMAL64);
+				descuentoImp = precioUnitSinIva.multiply(descuentoPor).multiply(comaCeroUno);				
+				fp.setDescuentoImp(descuentoImp.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+				precioUnitSinIva = precioUnitSinIva.subtract(descuentoImp);
+				fp.setPrecioUnitConDescuento(precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+			} else {
+				fp.setDescuentoImp(0.0);
+				fp.setPrecioUnitConDescuento(precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+			}
+			fp.setIvaProductoPor(pf.getIvaProducto());
+			ivaProductoPor = new BigDecimal(pf.getIvaProducto(), MathContext.DECIMAL64);
+			ivaProductoImp = precioUnitSinIva.multiply(ivaProductoPor).multiply(comaCeroUno);
+			fp.setIvaProductoImp(ivaProductoImp.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+			cantidad = new BigDecimal(pf.getCantidad());
+			fp.setPrecioUnitFinal(precioUnitSinIva.multiply(cantidad).divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+			fp.setCantidad(pf.getCantidad());
+			precioUnitFinal =precioUnitSinIva.add(ivaProductoImp);
+			precioFinal = precioUnitFinal.multiply(cantidad);
+			fp.setPrecioFinal(precioFinal.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+			
+			pfFront.add(fp);
+		}
+		return pfFront;
 	}
 
 }

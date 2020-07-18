@@ -158,14 +158,7 @@ public class ProductoServiceImpl implements ProductoService {
 		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
 				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 		Factura factura = new Factura();
-		rellenaFacturaComun(factura, frontProductoStock, precioUnitConIva, precioUnitSinIva, context);
-		factura.setImporteTotal(frontProductoStock.getPrecioFinal());
-		if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
-			factura.setIvaImporteTotal(((precioUnitConIva.subtract(precioUnitSinIva))
-					.multiply(new BigDecimal(frontProductoStock.getCantidad(), MathContext.DECIMAL64)))
-							.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-		}
-		factura.setFechaCompra(new Date());
+		fillFactura(factura, frontProductoStock, precioUnitConIva, precioUnitSinIva, context);
 
 		int idFac = facturaService.save(factura, request);
 		factura.setIdFac(idFac);
@@ -174,8 +167,6 @@ public class ProductoServiceImpl implements ProductoService {
 		productoFactura.setFactura(factura);
 		productoFactura.setCantidad(frontProductoStock.getCantidad());
 		productoFactura.setIvaProducto(frontProductoStock.getIva());
-		productoFactura
-				.setPrecioUnitConIva(precioUnitConIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
 		if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
 			productoFactura
 					.setPrecioUnitSinIva(precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
@@ -184,7 +175,6 @@ public class ProductoServiceImpl implements ProductoService {
 					.setPrecioUnitSinIva(precioUnitConIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
 
 		}
-		productoFactura.setPrecioFinal(frontProductoStock.getPrecioFinal());
 		productoFacturaService.save(productoFactura, request);
 
 		if (frontProductoStock.getCuotas() != null) {
@@ -299,7 +289,7 @@ public class ProductoServiceImpl implements ProductoService {
 		return productoDAO.getMaxId();
 	}
 
-	private void rellenaFacturaComun(Factura factura, FrontProductoStock frontProductoStock,
+	private void fillFactura(Factura factura, FrontProductoStock frontProductoStock,
 			BigDecimal precioUnitConIva, BigDecimal precioUnitSinIva,
 			org.springframework.security.core.context.SecurityContextImpl context) {
 
@@ -313,6 +303,13 @@ public class ProductoServiceImpl implements ProductoService {
 		} else {
 			factura.setEstado(new Estado(Constantes.QUITAR_STOCK, null, null));
 		}
+		factura.setImporteTotal(frontProductoStock.getPrecioFinal());
+		if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
+			factura.setIvaImporteTotal(((precioUnitConIva.subtract(precioUnitSinIva))
+					.multiply(new BigDecimal(frontProductoStock.getCantidad(), MathContext.DECIMAL64)))
+							.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+		}
+		factura.setFechaCompra(new Date());
 
 	}
 
