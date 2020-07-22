@@ -41,15 +41,20 @@ public class FrontProducto {
 	private double ivaProductoPor;
 	private double ivaProductoImp;
 	private double precioUnitFinal;
+	private double ivaProductosCantidadImp;
 	private double precioFinal;
 	private int cantidad;
 	private String observaciones;
 
 	// Factura
-	private boolean compra;
-	private double ivaTotal;
-	private double descuentoTotal;
+	private int idFac;
 	private Date fechaCompra;
+	private double descuentoImporteTotal;
+	private double ivaImporteTotal;
+	private double importeTotal;
+	private double ivaTotal;
+	private boolean compra;
+	private double descuentoTotal;
 	private Date fechaEntrega;
 	private String direccionEntrega;
 	private String creadoPor;
@@ -57,6 +62,8 @@ public class FrontProducto {
 	private String nombreEstado;
 	private int idFor;
 	private String nombreFormaPago;
+
+	private List<FrontCuota> cuotas;
 
 	public FrontProducto() {
 
@@ -558,6 +565,21 @@ public class FrontProducto {
 	}
 
 	/**
+	 * @return the ivaProductosCantidadImp
+	 */
+	public double getIvaProductosCantidadImp() {
+		return ivaProductosCantidadImp;
+	}
+
+	/**
+	 * @param ivaProductosCantidadImp
+	 *            the ivaProductosCantidadImp to set
+	 */
+	public void setIvaProductosCantidadImp(double ivaProductosCantidadImp) {
+		this.ivaProductosCantidadImp = ivaProductosCantidadImp;
+	}
+
+	/**
 	 * @return the precioFinal
 	 */
 	public double getPrecioFinal() {
@@ -603,18 +625,78 @@ public class FrontProducto {
 	}
 
 	/**
-	 * @return the compra
+	 * @return the idFac
 	 */
-	public boolean isCompra() {
-		return compra;
+	public int getIdFac() {
+		return idFac;
 	}
 
 	/**
-	 * @param compra
-	 *            the compra to set
+	 * @param idFac
+	 *            the idFac to set
 	 */
-	public void setCompra(boolean compra) {
-		this.compra = compra;
+	public void setIdFac(int idFac) {
+		this.idFac = idFac;
+	}
+
+	/**
+	 * @return the fechaCompra
+	 */
+	public Date getFechaCompra() {
+		return fechaCompra;
+	}
+
+	/**
+	 * @param fechaCompra
+	 *            the fechaCompra to set
+	 */
+	public void setFechaCompra(Date fechaCompra) {
+		this.fechaCompra = fechaCompra;
+	}
+
+	/**
+	 * @return the descuentoImporteTotal
+	 */
+	public double getDescuentoImporteTotal() {
+		return descuentoImporteTotal;
+	}
+
+	/**
+	 * @param descuentoImporteTotal
+	 *            the descuentoImporteTotal to set
+	 */
+	public void setDescuentoImporteTotal(double descuentoImporteTotal) {
+		this.descuentoImporteTotal = descuentoImporteTotal;
+	}
+
+	/**
+	 * @return the ivaImporteTotal
+	 */
+	public double getIvaImporteTotal() {
+		return ivaImporteTotal;
+	}
+
+	/**
+	 * @param ivaImporteTotal
+	 *            the ivaImporteTotal to set
+	 */
+	public void setIvaImporteTotal(double ivaImporteTotal) {
+		this.ivaImporteTotal = ivaImporteTotal;
+	}
+
+	/**
+	 * @return the importeTotal
+	 */
+	public double getImporteTotal() {
+		return importeTotal;
+	}
+
+	/**
+	 * @param importeTotal
+	 *            the importeTotal to set
+	 */
+	public void setImporteTotal(double importeTotal) {
+		this.importeTotal = importeTotal;
 	}
 
 	/**
@@ -633,6 +715,21 @@ public class FrontProducto {
 	}
 
 	/**
+	 * @return the compra
+	 */
+	public boolean isCompra() {
+		return compra;
+	}
+
+	/**
+	 * @param compra
+	 *            the compra to set
+	 */
+	public void setCompra(boolean compra) {
+		this.compra = compra;
+	}
+
+	/**
 	 * @return the descuentoTotal
 	 */
 	public double getDescuentoTotal() {
@@ -645,21 +742,6 @@ public class FrontProducto {
 	 */
 	public void setDescuentoTotal(double descuentoTotal) {
 		this.descuentoTotal = descuentoTotal;
-	}
-
-	/**
-	 * @return the fechaCompra
-	 */
-	public Date getFechaCompra() {
-		return fechaCompra;
-	}
-
-	/**
-	 * @param fechaCompra
-	 *            the fechaCompra to set
-	 */
-	public void setFechaCompra(Date fechaCompra) {
-		this.fechaCompra = fechaCompra;
 	}
 
 	/**
@@ -767,6 +849,21 @@ public class FrontProducto {
 		this.nombreFormaPago = nombreFormaPago;
 	}
 
+	/**
+	 * @return the cuotas
+	 */
+	public List<FrontCuota> getCuotas() {
+		return cuotas;
+	}
+
+	/**
+	 * @param cuotas
+	 *            the cuotas to set
+	 */
+	public void setCuotas(List<FrontCuota> cuotas) {
+		this.cuotas = cuotas;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -784,11 +881,13 @@ public class FrontProducto {
 				+ ", nombreSubcategoria=" + nombreSubcategoria + ", precioUnit=" + precioUnit + ", descuentoPor="
 				+ descuentoPor + ", descuentoImp=" + descuentoImp + ", precioUnitConDescuento=" + precioUnitConDescuento
 				+ ", ivaProductoPor=" + ivaProductoPor + ", ivaProductoImp=" + ivaProductoImp + ", precioUnitFinal="
-				+ precioUnitFinal + ", precioFinal=" + precioFinal + ", cantidad=" + cantidad + ", observaciones="
-				+ observaciones + ", compra=" + compra + ", ivaTotal=" + ivaTotal + ", descuentoTotal=" + descuentoTotal
-				+ ", fechaCompra=" + fechaCompra + ", fechaEntrega=" + fechaEntrega + ", direccionEntrega="
-				+ direccionEntrega + ", creadoPor=" + creadoPor + ", idEst=" + idEst + ", nombreEstado=" + nombreEstado
-				+ ", idFor=" + idFor + ", nombreFormaPago=" + nombreFormaPago + "]";
+				+ precioUnitFinal + ", ivaProductosCantidadImp=" + ivaProductosCantidadImp + ", precioFinal="
+				+ precioFinal + ", cantidad=" + cantidad + ", observaciones=" + observaciones + ", idFac=" + idFac
+				+ ", fechaCompra=" + fechaCompra + ", descuentoImporteTotal=" + descuentoImporteTotal
+				+ ", ivaImporteTotal=" + ivaImporteTotal + ", importeTotal=" + importeTotal + ", ivaTotal=" + ivaTotal
+				+ ", compra=" + compra + ", descuentoTotal=" + descuentoTotal + ", fechaEntrega=" + fechaEntrega
+				+ ", direccionEntrega=" + direccionEntrega + ", creadoPor=" + creadoPor + ", idEst=" + idEst
+				+ ", nombreEstado=" + nombreEstado + ", idFor=" + idFor + ", nombreFormaPago=" + nombreFormaPago + "]";
 	}
 
 }

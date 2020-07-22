@@ -208,8 +208,16 @@
 	display: inline-block;
 }
 
+.min-width-20 {
+	min-width: 20px;
+}
+
 .min-width-60 {
 	min-width: 60px;
+}
+
+.min-width-100 {
+	min-width: 100px;
 }
 
 .extraAdmin-th {

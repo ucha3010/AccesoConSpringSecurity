@@ -57,10 +57,10 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 	public void save(ProductoFactura productoFactura, HttpServletRequest request) {
 		ModelProductoFactura mpf = converterProductoFactura.convert(productoFactura);
 		String sql = "INSERT INTO " + TABLA
-				+ " (idPro, idFac, cantidad, ivaProducto, porcentajeDescuento, precioUnitSinIva, observaciones, modificadoPor, fechaModificacion)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ " (idPro, idFac, cantidad, ivaProducto, porcentajeDescuento, precioUnitSinIva, precioFinalRecibidoPagado, observaciones, modificadoPor, fechaModificacion)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, mpf.getIdPro(), mpf.getIdFac(), mpf.getCantidad(), mpf.getIvaProducto(),
-				mpf.getPorcentajeDescuento(), mpf.getPrecioUnitSinIva(), mpf.getObservaciones(), mpf.getModificadoPor(),
+				mpf.getPorcentajeDescuento(), mpf.getPrecioUnitSinIva(), mpf.getPrecioFinalRecibidoPagado(), mpf.getObservaciones(), mpf.getModificadoPor(),
 				mpf.getFechaModificacion());
 		LocalLogger.save(TABLA, productoFactura, request);
 	}
@@ -69,10 +69,10 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 	public void update(ProductoFactura productoFactura, HttpServletRequest request) {
 		ModelProductoFactura mpf = converterProductoFactura.convert(productoFactura);
 		String sql = "UPDATE " + TABLA
-				+ " SET cantidad=?, ivaProducto=?, porcentajeDescuento=?, precioUnitSinIva=?, observaciones=?, modificadoPor=?, fechaModificacion=? "
+				+ " SET cantidad=?, ivaProducto=?, porcentajeDescuento=?, precioUnitSinIva=?, precioFinalRecibidoPagado=?, observaciones=?, modificadoPor=?, fechaModificacion=? "
 				+ "WHERE " + KEY1 + "=? AND " + KEY2 + "=?";
 		jdbcTemplate.update(sql, mpf.getCantidad(), mpf.getIvaProducto(), mpf.getPorcentajeDescuento(),
-				mpf.getPrecioUnitSinIva(), mpf.getObservaciones(), mpf.getModificadoPor(), mpf.getFechaModificacion(),
+				mpf.getPrecioUnitSinIva(), mpf.getPrecioFinalRecibidoPagado(), mpf.getObservaciones(), mpf.getModificadoPor(), mpf.getFechaModificacion(),
 				mpf.getIdPro(), mpf.getIdFac());
 		LocalLogger.update(TABLA, productoFactura, request);
 	}
@@ -168,6 +168,7 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 		mpf.setIvaProducto(rs.getDouble("ivaProducto"));
 		mpf.setPorcentajeDescuento(rs.getDouble("porcentajeDescuento"));
 		mpf.setPrecioUnitSinIva(rs.getDouble("precioUnitSinIva"));
+		mpf.setPrecioFinalRecibidoPagado(rs.getDouble("precioFinalRecibidoPagado"));		
 		mpf.setObservaciones(rs.getString("observaciones"));
 		mpf.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
 		mpf.setModificadoPor(rs.getString("modificadoPor"));

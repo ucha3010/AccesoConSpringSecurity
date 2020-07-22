@@ -173,8 +173,8 @@ public class ProductoServiceImpl implements ProductoService {
 		} else {
 			productoFactura
 					.setPrecioUnitSinIva(precioUnitConIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-
 		}
+		productoFactura.setPrecioFinalRecibidoPagado(frontProductoStock.getPrecioFinal());
 		productoFacturaService.save(productoFactura, request);
 
 		if (frontProductoStock.getCuotas() != null) {
@@ -190,7 +190,7 @@ public class ProductoServiceImpl implements ProductoService {
 			}
 			if (frontProductoStock.getInteresPor() != 0) {
 				interesImp = totalCompletoAPagar.subtract(comisionAperturaImp)
-						.subtract(new BigDecimal(frontProductoStock.getPrecioFinal(), MathContext.DECIMAL64));
+						.subtract(precioFinal);
 			}
 
 			Cuota cuota = new Cuota();
@@ -229,12 +229,14 @@ public class ProductoServiceImpl implements ProductoService {
 				if (fc.getNumeroCuota() == 1) {
 					capitalPendiente = precioFinal;
 					interesCuotaImporte = importeCuotaTotal.subtract(comisionAperturaImp).subtract(cuotaSinInteres);
+					importeCuotaSinInteres = importeCuotaTotal.subtract(interesCuotaImporte).subtract(comisionAperturaImp);
 				} else if (fc.getNumeroCuota() == frontProductoStock.getCuotas().size()) {
 					interesCuotaImporte = importeCuotaTotal.subtract(cuotaSinInteres.add(sumarUltimaCuota));
+					importeCuotaSinInteres = importeCuotaTotal.subtract(interesCuotaImporte);
 				} else {
 					interesCuotaImporte = importeCuotaTotal.subtract(cuotaSinInteres);
+					importeCuotaSinInteres = importeCuotaTotal.subtract(interesCuotaImporte);
 				}
-				importeCuotaSinInteres = importeCuotaTotal.subtract(interesCuotaImporte);
 
 				CuotaDetalle cuotaDetalle = new CuotaDetalle();
 				cuotaDetalle.setImporteSinInteres(

@@ -87,11 +87,11 @@ public class CuotaDetalleDAOImpl implements CuotaDetalleDAO {
 		} else {
 			ModelCuotaDetalle mc = converterCuotaDetalle.convert(cuotaDetalle);
 			String sql = "INSERT INTO " + TABLA
-					+ " (idCuo, importeSinInteres, importeInteres, importeCuota, fecha, capitalPendienteAntes, capitalPendienteDespues)"
-					+ " VALUES (?, ?, ?, ?, ?, ?, ?)";
+					+ " (idCuo, importeSinInteres, importeInteres, importeCuota, fecha, capitalPendienteAntes, capitalPendienteDespues, numeroCuota)"
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(sql, mc.getIdCuo(), mc.getImporteSinInteres(), mc.getImporteInteres(),
 					mc.getImporteCuota(), mc.getFecha(), mc.getCapitalPendienteAntes(),
-					mc.getCapitalPendienteDespues());
+					mc.getCapitalPendienteDespues(), mc.getNumeroCuota());
 			LocalLogger.save(TABLA, cuotaDetalle, request);
 			return getMaxId();
 		}
@@ -101,10 +101,10 @@ public class CuotaDetalleDAOImpl implements CuotaDetalleDAO {
 	public int update(CuotaDetalle cuotaDetalle, HttpServletRequest request) {
 		ModelCuotaDetalle mc = converterCuotaDetalle.convert(cuotaDetalle);
 		String sql = "UPDATE " + TABLA
-				+ " SET idCuo=?, importeSinInteres=?, importeInteres=?, importeCuota=?, fecha=?, capitalPendienteAntes=?, capitalPendienteDespues=? "
+				+ " SET idCuo=?, importeSinInteres=?, importeInteres=?, importeCuota=?, fecha=?, capitalPendienteAntes=?, capitalPendienteDespues=?, numeroCuota=? "
 				+ "WHERE " + KEY + "=?";
 		int result = jdbcTemplate.update(sql, mc.getIdCuo(), mc.getImporteSinInteres(), mc.getImporteInteres(),
-				mc.getImporteCuota(), mc.getFecha(), mc.getCapitalPendienteAntes(), mc.getCapitalPendienteDespues(),
+				mc.getImporteCuota(), mc.getFecha(), mc.getCapitalPendienteAntes(), mc.getCapitalPendienteDespues(), mc.getNumeroCuota(),
 				mc.getIdCuDe());
 		LocalLogger.update(TABLA, cuotaDetalle, request);
 		return result;

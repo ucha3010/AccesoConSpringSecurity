@@ -10,6 +10,7 @@ public class ProductoFactura {
 	private double ivaProducto;
 	private double porcentajeDescuento;
 	private double precioUnitSinIva;
+	private double precioFinalRecibidoPagado;
 	private String observaciones;
 	private String modificadoPor;
 	private Timestamp fechaModificacion;
@@ -101,6 +102,21 @@ public class ProductoFactura {
 	}
 
 	/**
+	 * @return the precioFinalRecibidoPagado
+	 */
+	public double getPrecioFinalRecibidoPagado() {
+		return precioFinalRecibidoPagado;
+	}
+
+	/**
+	 * @param precioFinalRecibidoPagado
+	 *            the precioFinalRecibidoPagado to set
+	 */
+	public void setPrecioFinalRecibidoPagado(double precioFinalRecibidoPagado) {
+		this.precioFinalRecibidoPagado = precioFinalRecibidoPagado;
+	}
+
+	/**
 	 * @param precioUnitSinIva
 	 *            the precioUnitSinIva to set
 	 */
@@ -160,10 +176,10 @@ public class ProductoFactura {
 	 */
 	@Override
 	public String toString() {
-		return "ProductoFactura [producto=" + producto + ", factura=" + factura + ", cantidad=" + cantidad
-				+ ", ivaProducto=" + ivaProducto + ", porcentajeDescuento=" + porcentajeDescuento
-				+ ", precioUnitSinIva=" + precioUnitSinIva + ", observaciones=" + observaciones + ", modificadoPor="
-				+ modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
+		return "ProductoFactura [cantidad=" + cantidad + ", ivaProducto=" + ivaProducto + ", porcentajeDescuento="
+				+ porcentajeDescuento + ", precioUnitSinIva=" + precioUnitSinIva + ", precioFinalRecibidoPagado="
+				+ precioFinalRecibidoPagado + ", observaciones=" + observaciones + ", modificadoPor=" + modificadoPor
+				+ ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

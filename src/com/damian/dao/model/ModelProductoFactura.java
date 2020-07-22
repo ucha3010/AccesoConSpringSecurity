@@ -10,6 +10,7 @@ public class ModelProductoFactura {
 	private double ivaProducto;
 	private double porcentajeDescuento;
 	private double precioUnitSinIva;
+	private double precioFinalRecibidoPagado;
 	private String observaciones;
 	private String modificadoPor;
 	private Timestamp fechaModificacion;
@@ -109,6 +110,21 @@ public class ModelProductoFactura {
 	}
 
 	/**
+	 * @return the precioFinalRecibidoPagado
+	 */
+	public double getPrecioFinalRecibidoPagado() {
+		return precioFinalRecibidoPagado;
+	}
+
+	/**
+	 * @param precioFinalRecibidoPagado
+	 *            the precioFinalRecibidoPagado to set
+	 */
+	public void setPrecioFinalRecibidoPagado(double precioFinalRecibidoPagado) {
+		this.precioFinalRecibidoPagado = precioFinalRecibidoPagado;
+	}
+
+	/**
 	 * @return the observaciones
 	 */
 	public String getObservaciones() {
@@ -162,7 +178,8 @@ public class ModelProductoFactura {
 	public String toString() {
 		return "ModelProductoFactura [idPro=" + idPro + ", idFac=" + idFac + ", cantidad=" + cantidad + ", ivaProducto="
 				+ ivaProducto + ", porcentajeDescuento=" + porcentajeDescuento + ", precioUnitSinIva="
-				+ precioUnitSinIva + ", observaciones=" + observaciones + "]";
+				+ precioUnitSinIva + ", precioFinalRecibidoPagado=" + precioFinalRecibidoPagado + ", observaciones="
+				+ observaciones + ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

@@ -86,14 +86,16 @@ public class ProductoFacturaServiceImpl implements ProductoFacturaService {
 		List<FrontProducto> pfFront = new ArrayList<>();
 		FrontProducto fp;
 		BigDecimal comaCeroUno = new BigDecimal(0.01, MathContext.DECIMAL64);
+		BigDecimal cien = new BigDecimal(100, MathContext.DECIMAL64);
 		BigDecimal descuentoImp = new BigDecimal(0);
 		BigDecimal ivaProductoPor = new BigDecimal(0);
 		BigDecimal ivaProductoImp = new BigDecimal(0);
+		BigDecimal ivaProductosCantidadImp = new BigDecimal(0);
 		BigDecimal precioUnitSinIva = new BigDecimal(0);
 		BigDecimal precioUnitFinal = new BigDecimal(0);
 		BigDecimal cantidad = new BigDecimal(0);
 		BigDecimal precioFinal = new BigDecimal(0);
-		for(ProductoFactura pf: productoFacturas) {
+		for (ProductoFactura pf : productoFacturas) {
 			fp = new FrontProducto();
 			fp.setObservaciones(pf.getObservaciones());
 			fp.setIdPro(pf.getProducto().getIdPro());
@@ -108,27 +110,41 @@ public class ProductoFacturaServiceImpl implements ProductoFacturaService {
 			precioUnitSinIva = new BigDecimal(pf.getPrecioUnitSinIva(), MathContext.DECIMAL64);
 			fp.setPrecioUnit(precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
 			fp.setDescuentoPor(pf.getPorcentajeDescuento());
-			if(pf.getPorcentajeDescuento() != 0.0) {
+			if (pf.getPorcentajeDescuento() != 0.0) {
 				BigDecimal descuentoPor = new BigDecimal(pf.getPorcentajeDescuento(), MathContext.DECIMAL64);
-				descuentoImp = precioUnitSinIva.multiply(descuentoPor).multiply(comaCeroUno);				
+				descuentoImp = precioUnitSinIva.multiply(descuentoPor).multiply(comaCeroUno);
 				fp.setDescuentoImp(descuentoImp.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
 				precioUnitSinIva = precioUnitSinIva.subtract(descuentoImp);
-				fp.setPrecioUnitConDescuento(precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+				fp.setPrecioUnitConDescuento(
+						precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
 			} else {
 				fp.setDescuentoImp(0.0);
-				fp.setPrecioUnitConDescuento(precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+				fp.setPrecioUnitConDescuento(
+						precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
 			}
 			fp.setIvaProductoPor(pf.getIvaProducto());
 			ivaProductoPor = new BigDecimal(pf.getIvaProducto(), MathContext.DECIMAL64);
 			ivaProductoImp = precioUnitSinIva.multiply(ivaProductoPor).multiply(comaCeroUno);
+			ivaProductosCantidadImp = ivaProductoImp.multiply(cantidad);
 			fp.setIvaProductoImp(ivaProductoImp.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
 			cantidad = new BigDecimal(pf.getCantidad());
-			fp.setPrecioUnitFinal(precioUnitSinIva.multiply(cantidad).divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+			fp.setPrecioUnitFinal(
+					precioUnitSinIva.multiply(cantidad).divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
 			fp.setCantidad(pf.getCantidad());
-			precioUnitFinal =precioUnitSinIva.add(ivaProductoImp);
+			precioUnitFinal = precioUnitSinIva.add(ivaProductoImp);
 			precioFinal = precioUnitFinal.multiply(cantidad);
-			fp.setPrecioFinal(precioFinal.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-			
+			if (pf.getPrecioFinalRecibidoPagado() != 0.0) {
+				fp.setPrecioFinal(pf.getPrecioFinalRecibidoPagado());
+				BigDecimal precioFinalRecibidoPagado = new BigDecimal(pf.getPrecioFinalRecibidoPagado(),
+						MathContext.DECIMAL64);
+				BigDecimal ivaMasCien = ivaProductoPor.add(cien);
+				ivaProductosCantidadImp = ivaProductoPor.multiply(precioFinalRecibidoPagado).divide(ivaMasCien, 2, RoundingMode.DOWN);
+			} else {
+				fp.setPrecioFinal(precioFinal.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+			}
+			fp.setIvaProductosCantidadImp(
+					ivaProductosCantidadImp.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+
 			pfFront.add(fp);
 		}
 		return pfFront;
