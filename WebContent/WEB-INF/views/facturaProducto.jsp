@@ -111,7 +111,12 @@
 								<td></td>
 								<td class="text-center"><fmt:formatNumber type="currency" value="${cuotaDetalle.importeSinInteres}" /></td>
 								<td class="text-center"><fmt:formatNumber type="currency" value="${cuotaDetalle.importeInteres}" /></td>
-								<td class="text-center"><fmt:formatNumber type="currency" value="${cuotaDetalle.importeCuota}" /></td>
+								<td class="text-center">
+									<fmt:formatNumber type="currency" value="${cuotaDetalle.importeCuota}" />
+									<c:if test="${cuotaDetalle.numeroCuota == 1 && factura.cuota.comisionAperturaImp > 0}">
+										<span title='<fmt:message key="label.Opening.commission" />: <fmt:formatNumber type="currency" value="${factura.cuota.comisionAperturaImp}" />'class="glyphicon glyphicon-info-sign"></span>
+									</c:if>
+								</td>
 								<td class="text-center"><fmt:formatNumber type="currency" value="${cuotaDetalle.capitalPendienteAntes}" /></td>
 								<td></td>
 								<td class="text-center"><fmt:formatNumber type="currency" value="${cuotaDetalle.capitalPendienteDespues}" /></td>

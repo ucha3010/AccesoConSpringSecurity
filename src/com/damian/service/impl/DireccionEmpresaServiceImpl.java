@@ -12,6 +12,7 @@ import com.damian.dao.DireccionEmpresaDAO;
 import com.damian.pojo.DireccionEmpresa;
 import com.damian.pojo.Empresa;
 import com.damian.service.DireccionEmpresaService;
+import com.damian.utils.Utils;
 
 @Service
 public class DireccionEmpresaServiceImpl implements DireccionEmpresaService {
@@ -30,9 +31,7 @@ public class DireccionEmpresaServiceImpl implements DireccionEmpresaService {
 		Empresa empresa = new Empresa();
 		empresa.setIdEmp(idEmp);
 		direccionEmpresa.setEmpresa(empresa);
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		direccionEmpresa.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		direccionEmpresa.setModificadoPor(Utils.getLoggedUser(request));
 		direccionEmpresa.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		direccionEmpresaDao.save(direccionEmpresa, request);

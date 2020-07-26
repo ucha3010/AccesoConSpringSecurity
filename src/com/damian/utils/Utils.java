@@ -74,28 +74,7 @@ public class Utils {
 
 	public static Usuario getLoggedUser(HttpServletRequest request, UsuarioDAO usuarioDAO) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = null;
-		if (request != null) {
-			context = (org.springframework.security.core.context.SecurityContextImpl) request.getSession()
-					.getAttribute("SPRING_SECURITY_CONTEXT");
-		}
-		String creador;
-		if (context != null && context.getAuthentication() != null && context.getAuthentication().getPrincipal() != null
-				&& !context.getAuthentication().getPrincipal().toString().isEmpty() && !context.getAuthentication()
-						.getPrincipal().toString().startsWith("org.springframework.security.core.userdetails.User")) {
-			creador = context.getAuthentication().getPrincipal().toString();
-		} else if (context != null && context.getAuthentication() != null
-				&& context.getAuthentication().getPrincipal() != null
-				&& !context.getAuthentication().getPrincipal().toString().isEmpty() && context.getAuthentication()
-						.getPrincipal().toString().startsWith("org.springframework.security.core.userdetails.User")) {
-			org.springframework.security.core.userdetails.User usuario = (User) context.getAuthentication()
-					.getPrincipal();
-			creador = usuario.getUsername();
-		} else {
-			creador = "OWN USER";
-		}
-		return usuarioDAO.findByUsername(creador);
-
+		return usuarioDAO.findByUsername(getLoggedUser(request));
 	}
 
 	public static String getDate(long milliSeconds, String dateFormat) {
@@ -126,6 +105,34 @@ public class Utils {
 		String ruta = rutaHastaWebContent(request) + System.getProperty("file.separator") + "resources"
 				+ System.getProperty("file.separator") + carpeta + System.getProperty("file.separator");
 		return ruta;
+	}
+
+	public static String getLoggedUser(HttpServletRequest request) {
+
+		String loggedUser = "OWN USER";
+		org.springframework.security.core.context.SecurityContextImpl context = null;
+		if (request != null) {
+			context = (org.springframework.security.core.context.SecurityContextImpl) request.getSession()
+					.getAttribute("SPRING_SECURITY_CONTEXT");
+		} else {
+			return loggedUser;
+		}
+		if (context != null && context.getAuthentication() != null && context.getAuthentication().getName() != null) {
+			loggedUser = context.getAuthentication().getName();
+		} else if (context != null && context.getAuthentication() != null
+				&& context.getAuthentication().getPrincipal() != null
+				&& !context.getAuthentication().getPrincipal().toString().isEmpty() && !context.getAuthentication()
+						.getPrincipal().toString().startsWith("org.springframework.security.core.userdetails.User")) {
+			loggedUser = context.getAuthentication().getPrincipal().toString();
+		} else if (context != null && context.getAuthentication() != null
+				&& context.getAuthentication().getPrincipal() != null
+				&& !context.getAuthentication().getPrincipal().toString().isEmpty() && context.getAuthentication()
+						.getPrincipal().toString().startsWith("org.springframework.security.core.userdetails.User")) {
+			org.springframework.security.core.userdetails.User usuario = (User) context.getAuthentication()
+					.getPrincipal();
+			loggedUser = usuario.getUsername();
+		}
+		return loggedUser;
 	}
 
 }

@@ -13,6 +13,7 @@ import com.damian.pojo.Empresa;
 import com.damian.pojo.Usuario;
 import com.damian.pojo.UsuarioEmpresa;
 import com.damian.service.UsuarioEmpresaService;
+import com.damian.utils.Utils;
 
 @Service
 public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
@@ -30,9 +31,7 @@ public class UsuarioEmpresaServiceImpl implements UsuarioEmpresaService {
 		UsuarioEmpresa usuarioEmpresa = new UsuarioEmpresa();
 		usuarioEmpresa.setUsuario(usuario);
 		usuarioEmpresa.setEmpresa(empresa);
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		usuarioEmpresa.setCreadoPor(context.getAuthentication().getName());
+		usuarioEmpresa.setCreadoPor(Utils.getLoggedUser(request));
 		usuarioEmpresa.setFechaCreacion(new Date());
 		usuarioEmpresaDAO.save(usuarioEmpresa, request);
 	}

@@ -17,6 +17,7 @@ import com.damian.pojo.Producto;
 import com.damian.pojo.ProductoEmpresa;
 import com.damian.pojo.Subcategoria;
 import com.damian.service.ProductoEmpresaService;
+import com.damian.utils.Utils;
 
 @Service
 public class ProductoEmpresaServiceImpl implements ProductoEmpresaService {
@@ -45,9 +46,7 @@ public class ProductoEmpresaServiceImpl implements ProductoEmpresaService {
 		ProductoEmpresa productoEmpresa = new ProductoEmpresa();
 		productoEmpresa.setProducto(producto);
 		productoEmpresa.setEmpresa(empresa);
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		productoEmpresa.setCreadoPor(context.getAuthentication().getName());
+		productoEmpresa.setCreadoPor(Utils.getLoggedUser(request));
 		productoEmpresa.setFechaCreacion(new Date());
 		productoEmpresaDAO.save(productoEmpresa, request);
 	}

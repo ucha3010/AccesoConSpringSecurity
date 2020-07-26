@@ -17,10 +17,8 @@ public class LocalLogger {
 	}
 
 	public static void delete(String tabla, Object object, HttpServletRequest request) {
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 		ArchivoTexto.escribirEnArchivoLog(Hora.ahora() + "DELETE - [user deleting: "
-				+ context.getAuthentication().getPrincipal().toString() + "] - table:" + tabla + " - " + object,
+				+ Utils.getLoggedUser(request) + "] - table:" + tabla + " - " + object,
 				request);
 	}
 

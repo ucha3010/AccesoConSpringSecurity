@@ -38,6 +38,7 @@ import com.damian.service.ProductoFacturaService;
 import com.damian.service.ProductoService;
 import com.damian.service.SubcategoriaService;
 import com.damian.utils.Constantes;
+import com.damian.utils.Utils;
 
 @Service
 public class ProductoServiceImpl implements ProductoService {
@@ -88,9 +89,7 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public int save(Producto producto, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		producto.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		producto.setModificadoPor(Utils.getLoggedUser(request));
 		producto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		productoDAO.save(producto, request);
@@ -100,9 +99,7 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public void update(Producto producto, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		producto.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		producto.setModificadoPor(Utils.getLoggedUser(request));
 		producto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		productoDAO.update(producto, request);
@@ -155,10 +152,8 @@ public class ProductoServiceImpl implements ProductoService {
 		}
 		productoDAO.save(producto, request);
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
 		Factura factura = new Factura();
-		fillFactura(factura, frontProductoStock, precioUnitConIva, precioUnitSinIva, context);
+		fillFactura(factura, frontProductoStock, precioUnitConIva, precioUnitSinIva, request);
 
 		int idFac = facturaService.save(factura, request);
 		factura.setIdFac(idFac);
@@ -293,13 +288,13 @@ public class ProductoServiceImpl implements ProductoService {
 
 	private void fillFactura(Factura factura, FrontProductoStock frontProductoStock,
 			BigDecimal precioUnitConIva, BigDecimal precioUnitSinIva,
-			org.springframework.security.core.context.SecurityContextImpl context) {
+			HttpServletRequest request) {
 
 		factura.setCompra(frontProductoStock.isCompra());
 		factura.setIvaTotal(frontProductoStock.getIva());
 		factura.setObservaciones(frontProductoStock.getObservaciones());
 		factura.setFormaPago(new FormaPago(Constantes.MOVIMIENTO_STOCK, null, null));
-		factura.setCreadoPor(context.getAuthentication().getName());
+		factura.setCreadoPor(Utils.getLoggedUser(request));
 		if (frontProductoStock.isCompra()) {
 			factura.setEstado(new Estado(Constantes.AGREGAR_STOCK, null, null));
 		} else {

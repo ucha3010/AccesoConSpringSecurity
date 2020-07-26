@@ -16,6 +16,7 @@ import com.damian.dao.ProductoFacturaDAO;
 import com.damian.pojo.ProductoFactura;
 import com.damian.pojo.front.FrontProducto;
 import com.damian.service.ProductoFacturaService;
+import com.damian.utils.Utils;
 
 @Service
 public class ProductoFacturaServiceImpl implements ProductoFacturaService {
@@ -31,9 +32,7 @@ public class ProductoFacturaServiceImpl implements ProductoFacturaService {
 	@Override
 	public void save(ProductoFactura productoFactura, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		productoFactura.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		productoFactura.setModificadoPor(Utils.getLoggedUser(request));
 		productoFactura.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		productoFacturaDAO.save(productoFactura, request);
@@ -42,9 +41,7 @@ public class ProductoFacturaServiceImpl implements ProductoFacturaService {
 	@Override
 	public void update(ProductoFactura productoFactura, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		productoFactura.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		productoFactura.setModificadoPor(Utils.getLoggedUser(request));
 		productoFactura.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		productoFacturaDAO.update(productoFactura, request);

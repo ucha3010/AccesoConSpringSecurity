@@ -17,6 +17,7 @@ import com.damian.service.DireccionEmpresaService;
 import com.damian.service.EmpresaService;
 import com.damian.service.ProductoEmpresaService;
 import com.damian.service.UsuarioEmpresaService;
+import com.damian.utils.Utils;
 
 @Service
 public class EmpresaServiceImpl implements EmpresaService {
@@ -46,9 +47,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 	@Override
 	public void save(Empresa empresa, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		empresa.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		empresa.setModificadoPor(Utils.getLoggedUser(request));
 		empresa.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		empresaDAO.save(empresa, request);
@@ -62,9 +61,7 @@ public class EmpresaServiceImpl implements EmpresaService {
 	@Override
 	public void update(Empresa empresa, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		empresa.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		empresa.setModificadoPor(Utils.getLoggedUser(request));
 		empresa.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		empresaDAO.update(empresa, request);

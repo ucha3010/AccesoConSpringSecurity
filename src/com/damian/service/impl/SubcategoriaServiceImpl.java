@@ -14,6 +14,7 @@ import com.damian.pojo.Producto;
 import com.damian.pojo.Subcategoria;
 import com.damian.service.ProductoService;
 import com.damian.service.SubcategoriaService;
+import com.damian.utils.Utils;
 
 @Service
 public class SubcategoriaServiceImpl implements SubcategoriaService {
@@ -42,9 +43,7 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
 	@Override
 	public int save(Subcategoria subcategoria, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		subcategoria.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		subcategoria.setModificadoPor(Utils.getLoggedUser(request));
 		subcategoria.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return subcategoriaDAO.save(subcategoria, request);
@@ -53,9 +52,7 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
 	@Override
 	public int update(Subcategoria subcategoria, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		subcategoria.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		subcategoria.setModificadoPor(Utils.getLoggedUser(request));
 		subcategoria.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return subcategoriaDAO.update(subcategoria, request);

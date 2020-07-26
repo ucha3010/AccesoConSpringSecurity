@@ -14,6 +14,7 @@ import com.damian.pojo.Cuota;
 import com.damian.pojo.CuotaDetalle;
 import com.damian.service.CuotaDetalleService;
 import com.damian.service.CuotaService;
+import com.damian.utils.Utils;
 
 @Service
 public class CuotaServiceImpl implements CuotaService {
@@ -42,9 +43,7 @@ public class CuotaServiceImpl implements CuotaService {
 	@Override
 	public int save(Cuota cuota, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		cuota.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		cuota.setModificadoPor(Utils.getLoggedUser(request));
 		cuota.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return cuotaDAO.save(cuota, request);
@@ -53,9 +52,7 @@ public class CuotaServiceImpl implements CuotaService {
 	@Override
 	public int update(Cuota cuota, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		cuota.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		cuota.setModificadoPor(Utils.getLoggedUser(request));
 		cuota.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return cuotaDAO.update(cuota, request);

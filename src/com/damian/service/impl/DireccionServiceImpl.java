@@ -13,6 +13,7 @@ import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
 import com.damian.service.DatosPersonalesService;
 import com.damian.service.DireccionService;
+import com.damian.utils.Utils;
 
 @Service
 public class DireccionServiceImpl implements DireccionService {
@@ -33,12 +34,8 @@ public class DireccionServiceImpl implements DireccionService {
 
 		DatosPersonales datosPersonales = datosPersonalesService.findByUsrId(idUsr);
 		direccion.setDatosPersonales(datosPersonales);
-
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		direccion.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		direccion.setModificadoPor(Utils.getLoggedUser(request));
 		direccion.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
-
 		direccionDao.save(direccion, request);
 		return direccionDao.getMaxId();
 

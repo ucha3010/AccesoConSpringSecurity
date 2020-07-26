@@ -15,6 +15,10 @@
 	
 	<script type="text/javascript" src='<c:url value="/resources/js/validaciones.js" />'></script>
 	<script type="text/javascript">
+	
+		var primeraCuota;
+		var sumarUltimaCuota;
+		
 		function validar(){
 
 			restablecer();
@@ -63,6 +67,23 @@
 					errorCuotas.style.color="red";				
 					validado = false;					
 				}
+				
+				var cuotaDelMedio = rellenarCuotas(cuotas.length);
+				var totalReal = 0;
+				for (var i = 0; i < cuotas.length; i++) {
+					totalReal += cuotaDelMedio;
+				}
+				totalReal = (totalReal + primeraCuota + sumarUltimaCuota).toFixed(2);
+				totalCuotas = totalCuotas.toFixed(2);
+				if(totalCuotas > totalReal) {
+					var mensajeCuotasSuperiores = "<fmt:message key='warning.Real.amount' /> " + totalReal + ", <fmt:message key='warning.Sum.of.installments' /> " + totalCuotas;
+					if(!confirm(mensajeCuotasSuperiores + ". <fmt:message key='label.Do.you.wish.continue' />")){
+						var errorCuotas = document.getElementById("errorCuotas");
+						errorCuotas.innerHTML = mensajeCuotasSuperiores;	
+						errorCuotas.style.color="orange";				
+						validado = false;					
+					}
+				}
 			}
 			
 			if(validado){
@@ -71,6 +92,7 @@
 				return false;
 			}
 		}
+		
 		function restablecer(){
 			var errorSpan = document.getElementsByName('errorSpan');
 			for (var i = 0; i < errorSpan.length; i++) {
@@ -81,6 +103,7 @@
 				campos[i].style.borderColor="#ced4da";
 			}
 		}
+		
 		function mensaje(valor,max){
 			if(valor == "true"){
 				document.getElementById("queHacer").innerHTML="<fmt:message key='label.added' />";
@@ -93,9 +116,6 @@
 			}
 			document.getElementById("cantidad").max=max;
 		}
-		
-		var primeraCuota;
-		var sumarUltimaCuota;
 		
 		function cuotas(cb) {
 			var selectCuotas = document.getElementById("cantidadCuotas");
@@ -152,6 +172,7 @@
 			}
 			datosCuotas.innerHTML=datos;
 		}
+		
 		function rellenarCuotas(num) {
 			
 			var precioFinal = document.getElementById("precioFinal").value;
@@ -205,6 +226,7 @@
 		    }
 		    return salida;
 		}
+		
 		function redondear(value, decimals) {
 		  return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 		}

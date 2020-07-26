@@ -14,6 +14,7 @@ import com.damian.pojo.Estado;
 import com.damian.pojo.Factura;
 import com.damian.service.EstadoService;
 import com.damian.service.FacturaService;
+import com.damian.utils.Utils;
 
 @Service
 public class EstadoServiceImpl implements EstadoService {
@@ -42,9 +43,7 @@ public class EstadoServiceImpl implements EstadoService {
 	@Override
 	public int save(Estado estado, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		estado.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		estado.setModificadoPor(Utils.getLoggedUser(request));
 		estado.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return estadoDAO.save(estado, request);
@@ -53,9 +52,7 @@ public class EstadoServiceImpl implements EstadoService {
 	@Override
 	public int update(Estado estado, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		estado.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		estado.setModificadoPor(Utils.getLoggedUser(request));
 		estado.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return estadoDAO.update(estado, request);

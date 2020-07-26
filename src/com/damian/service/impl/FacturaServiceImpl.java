@@ -29,6 +29,7 @@ import com.damian.service.FacturaService;
 import com.damian.service.FormaPagoService;
 import com.damian.service.ProductoFacturaService;
 import com.damian.service.ProductoService;
+import com.damian.utils.Utils;
 
 @Service
 public class FacturaServiceImpl implements FacturaService {
@@ -85,9 +86,7 @@ public class FacturaServiceImpl implements FacturaService {
 	@Override
 	public int save(Factura factura, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		factura.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		factura.setModificadoPor(Utils.getLoggedUser(request));
 		factura.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 		facturaDAO.save(factura, request);
 		factura.setIdFac(facturaDAO.getMaxId());
@@ -99,9 +98,7 @@ public class FacturaServiceImpl implements FacturaService {
 	@Override
 	public int update(Factura factura, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		factura.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		factura.setModificadoPor(Utils.getLoggedUser(request));
 		factura.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 		facturaDAO.update(factura, request);
 		saveFacturaEstado(factura, request);
@@ -205,22 +202,13 @@ public class FacturaServiceImpl implements FacturaService {
 
 	private void saveFacturaEstado(Factura factura, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		String creador;
-		if (context != null && context.getAuthentication() != null && context.getAuthentication().getName() != null
-				&& !context.getAuthentication().getName().isEmpty()) {
-			creador = context.getAuthentication().getName();
-		} else {
-			creador = "OWN USER";
-		}
 		FacturaEstado facturaEstado = new FacturaEstado();
 		facturaEstado.setFactura(factura);
 		facturaEstado.setEstado(factura.getEstado());
 		Date utilDate = new Date();
 		long lnMilisegundos = utilDate.getTime();
 		facturaEstado.setFecha(new Timestamp(lnMilisegundos));
-		facturaEstado.setCreadoPor(creador);
+		facturaEstado.setCreadoPor(Utils.getLoggedUser(request));
 		facturaEstadoService.save(facturaEstado, request);
 
 	}

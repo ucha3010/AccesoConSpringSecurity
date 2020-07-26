@@ -14,6 +14,7 @@ import com.damian.pojo.Factura;
 import com.damian.pojo.FormaPago;
 import com.damian.service.FacturaService;
 import com.damian.service.FormaPagoService;
+import com.damian.utils.Utils;
 
 @Service
 public class FormaPagoServiceImpl implements FormaPagoService {
@@ -42,9 +43,7 @@ public class FormaPagoServiceImpl implements FormaPagoService {
 	@Override
 	public int save(FormaPago formaPago, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		formaPago.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		formaPago.setModificadoPor(Utils.getLoggedUser(request));
 		formaPago.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return formaPagoDAO.save(formaPago, request);
@@ -53,9 +52,7 @@ public class FormaPagoServiceImpl implements FormaPagoService {
 	@Override
 	public int update(FormaPago formaPago, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		formaPago.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		formaPago.setModificadoPor(Utils.getLoggedUser(request));
 		formaPago.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		return formaPagoDAO.update(formaPago, request);

@@ -100,14 +100,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 			String[] nuevosRoles = rolesAGuardar(usuarioRol, usuario);
 			Date ahora = new Date();
 			UsuarioRol ur = null;
-			org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-					.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-			String creador;
-			if (context != null) {
-				creador = context.getAuthentication().getName();
-			} else {
-				creador = "OWN USER";
-			}
+			String creador = Utils.getLoggedUser(request);
 			for (String rolId : nuevosRoles) {
 				Rol rol = new Rol();
 				rol.setIdRol(Integer.parseInt(rolId));
@@ -289,13 +282,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	private void fillModificadoPor(Usuario usuario, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		if (context != null) {
-			usuario.setModificadoPor(context.getAuthentication().getName());
-		} else {
-			usuario.setModificadoPor("OWN USER");
-		}
+		usuario.setModificadoPor(Utils.getLoggedUser(request));
 		usuario.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 	}

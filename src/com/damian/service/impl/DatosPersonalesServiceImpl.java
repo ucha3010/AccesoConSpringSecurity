@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.damian.dao.DatosPersonalesDAO;
 import com.damian.pojo.DatosPersonales;
 import com.damian.service.DatosPersonalesService;
+import com.damian.utils.Utils;
 
 @Service
 public class DatosPersonalesServiceImpl implements DatosPersonalesService {
@@ -55,13 +56,7 @@ public class DatosPersonalesServiceImpl implements DatosPersonalesService {
 
 	private void fillModificadoPor(DatosPersonales datosPersonales, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		if (context != null) {
-			datosPersonales.setModificadoPor(context.getAuthentication().getName());
-		} else {
-			datosPersonales.setModificadoPor("OWN USER");
-		}
+		datosPersonales.setModificadoPor(Utils.getLoggedUser(request));
 		datosPersonales.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 	}

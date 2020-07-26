@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.damian.dao.RolDAO;
 import com.damian.pojo.Rol;
 import com.damian.service.RolService;
+import com.damian.utils.Utils;
 
 @Service
 public class RolServiceImpl implements RolService {
@@ -24,9 +25,7 @@ public class RolServiceImpl implements RolService {
 
 	public void save(Rol rol, HttpServletRequest request) {
 
-		org.springframework.security.core.context.SecurityContextImpl context = (org.springframework.security.core.context.SecurityContextImpl) request
-				.getSession().getAttribute("SPRING_SECURITY_CONTEXT");
-		rol.setModificadoPor(context.getAuthentication().getPrincipal().toString());
+		rol.setModificadoPor(Utils.getLoggedUser(request));
 		rol.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		rolDAO.save(rol, request);
