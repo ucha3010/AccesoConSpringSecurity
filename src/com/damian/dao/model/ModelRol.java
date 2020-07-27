@@ -89,6 +89,7 @@ public class ModelRol {
 	 */
 	@Override
 	public String toString() {
-		return "Rol [idRol=" + idRol + ", rol=" + rol + "]";
+		return "ModelRol [idRol=" + idRol + ", rol=" + rol + ", modificadoPor=" + modificadoPor + ", fechaModificacion="
+				+ fechaModificacion + "]";
 	}
 }

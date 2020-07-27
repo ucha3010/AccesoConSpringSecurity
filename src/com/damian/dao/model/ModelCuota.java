@@ -180,7 +180,8 @@ public class ModelCuota {
 	public String toString() {
 		return "ModelCuota [idCuo=" + idCuo + ", cantidadCuotas=" + cantidadCuotas + ", comisionAperturaPor="
 				+ comisionAperturaPor + ", comisionAperturaImp=" + comisionAperturaImp + ", interesPor=" + interesPor
-				+ ", interesImp=" + interesImp + ", totalCompletoAPagar=" + totalCompletoAPagar + "]";
+				+ ", interesImp=" + interesImp + ", totalCompletoAPagar=" + totalCompletoAPagar + ", modificadoPor="
+				+ modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

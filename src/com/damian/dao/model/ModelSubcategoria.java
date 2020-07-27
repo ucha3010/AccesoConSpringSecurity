@@ -223,7 +223,8 @@ public class ModelSubcategoria {
 	public String toString() {
 		return "ModelSubcategoria [idSub=" + idSub + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", nombrePT="
 				+ nombrePT + ", nombreFR=" + nombreFR + ", nombreIT=" + nombreIT + ", nombreGE=" + nombreGE
-				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + ", idCat=" + idCat + "]";
+				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + ", idCat=" + idCat + ", modificadoPor="
+				+ modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

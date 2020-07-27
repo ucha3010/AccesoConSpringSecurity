@@ -236,7 +236,8 @@ public class ModelDireccion {
 	public String toString() {
 		return "ModelDireccion [idDir=" + idDir + ", tipoVia=" + tipoVia + ", nombreVia=" + nombreVia + ", numero="
 				+ numero + ", resto=" + resto + ", cp=" + cp + ", provincia=" + provincia + ", ciudad=" + ciudad
-				+ ", pais_idPais=" + pais_idPais + ", idDatosPers=" + idDatosPers + "]";
+				+ ", pais_idPais=" + pais_idPais + ", idDatosPers=" + idDatosPers + ", modificadoPor=" + modificadoPor
+				+ ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

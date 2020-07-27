@@ -116,7 +116,7 @@ public class FacturaDAOImpl implements FacturaDAO {
 					mf.getImporteTotal(), mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(),
 					mf.getObservaciones(), mf.getIdFor(), mf.getCreadoPor(), mf.getIdCuo(), mf.getModificadoPor(),
 					mf.getFechaModificacion());
-			LocalLogger.save(TABLA, factura, request);
+			LocalLogger.save(TABLA, mf, request);
 			return result;
 		}
 	}
@@ -132,7 +132,7 @@ public class FacturaDAOImpl implements FacturaDAO {
 				mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteEnvioSinIva(), mf.getImporteTotal(),
 				mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(), mf.getObservaciones(), mf.getIdFor(),
 				mf.getCreadoPor(), mf.getIdCuo(), mf.getModificadoPor(), mf.getFechaModificacion(), mf.getIdFac());
-		LocalLogger.update(TABLA, factura, request);
+		LocalLogger.update(TABLA, mf, request);
 		return result;
 	}
 

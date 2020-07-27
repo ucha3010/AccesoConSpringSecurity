@@ -66,7 +66,7 @@ public class DireccionDaoImpl implements DireccionDao {
 			jdbcTemplate.update(sql, md.getTipoVia(), md.getNombreVia(), md.getNumero(), md.getResto(), md.getCp(),
 					md.getProvincia(), md.getCiudad(), md.getPais_idPais(), md.getIdDatosPers(), md.getModificadoPor(),
 					md.getFechaModificacion());
-			LocalLogger.save(TABLA, direccion, request);
+			LocalLogger.save(TABLA, md, request);
 		} else {
 			String sql = "UPDATE " + TABLA + " SET tipoVia=?, nombreVia=?, numero=?, resto=?, cp=?, provincia=?, "
 					+ "ciudad=?, pais_idPais=?, idDatosPers=?, modificadoPor=?, fechaModificacion=? WHERE " + KEY
@@ -74,7 +74,7 @@ public class DireccionDaoImpl implements DireccionDao {
 			jdbcTemplate.update(sql, md.getTipoVia(), md.getNombreVia(), md.getNumero(), md.getResto(), md.getCp(),
 					md.getProvincia(), md.getCiudad(), md.getPais_idPais(), md.getIdDatosPers(), md.getModificadoPor(),
 					md.getFechaModificacion(), md.getIdDir());
-			LocalLogger.update(TABLA, direccion, request);
+			LocalLogger.update(TABLA, md, request);
 
 		}
 	}

@@ -121,7 +121,7 @@ public class FotoDAOImpl implements FotoDAO {
 					mf.getIdSub(), mf.getIdPais(), mf.getIdFor(), mf.getIdEst(), mf.getIdRol(), mf.getNombre(),
 					mf.getRuta(), mf.getDescripcion(), mf.getPeso(), mf.isPrincipal(), mf.getExtension(),
 					mf.getFechaCreacion(), mf.getCreadoPor(), mf.getFechaModificacion(), mf.getModificadoPor());
-			LocalLogger.save(TABLA, foto, request);
+			LocalLogger.save(TABLA, mf, request);
 			return result;
 		}
 	}
@@ -137,7 +137,7 @@ public class FotoDAOImpl implements FotoDAO {
 				mf.getIdPais(), mf.getIdFor(), mf.getIdEst(), mf.getIdRol(), mf.getNombre(), mf.getRuta(),
 				mf.getDescripcion(), mf.getPeso(), mf.isPrincipal(), mf.getExtension(), mf.getFechaCreacion(),
 				mf.getCreadoPor(), mf.getFechaModificacion(), mf.getModificadoPor(), mf.getIdFot());
-		LocalLogger.update(TABLA, foto, request);
+		LocalLogger.update(TABLA, mf, request);
 		return result;
 	}
 

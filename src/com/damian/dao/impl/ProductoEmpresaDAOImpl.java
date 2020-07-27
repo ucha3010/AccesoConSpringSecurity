@@ -57,19 +57,19 @@ public class ProductoEmpresaDAOImpl implements ProductoEmpresaDAO {
 
 	@Override
 	public void save(ProductoEmpresa productoEmpresa, HttpServletRequest request) {
+		ModelProductoEmpresa mpe = converterProductoEmpresa.convert(productoEmpresa);
 		String sql = "INSERT INTO " + TABLA + " (idPro, idEmp, fechaCreacion, creadoPor)" + " VALUES (?, ?, ?, ?)";
-		jdbcTemplate.update(sql, productoEmpresa.getProducto().getIdPro(), productoEmpresa.getEmpresa().getIdEmp(),
-				productoEmpresa.getFechaCreacion(), productoEmpresa.getCreadoPor());
-		LocalLogger.save(TABLA, productoEmpresa, request);
+		jdbcTemplate.update(sql, mpe.getIdPro(), mpe.getIdEmp(), mpe.getFechaCreacion(), mpe.getCreadoPor());
+		LocalLogger.save(TABLA, mpe, request);
 	}
 
 	@Override
 	public void update(ProductoEmpresa productoEmpresa, HttpServletRequest request) {
+		ModelProductoEmpresa mpe = converterProductoEmpresa.convert(productoEmpresa);
 		String sql = "UPDATE " + TABLA + " SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
 				+ "=?";
-		jdbcTemplate.update(sql, productoEmpresa.getFechaCreacion(), productoEmpresa.getCreadoPor(),
-				productoEmpresa.getProducto().getIdPro(), productoEmpresa.getEmpresa().getIdEmp());
-		LocalLogger.update(TABLA, productoEmpresa, request);
+		jdbcTemplate.update(sql, mpe.getFechaCreacion(), mpe.getCreadoPor(), mpe.getIdPro(), mpe.getIdEmp());
+		LocalLogger.update(TABLA, mpe, request);
 	}
 
 	@Override

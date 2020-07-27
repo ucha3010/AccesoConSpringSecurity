@@ -234,9 +234,10 @@ public class ModelEmpresa {
 	 */
 	@Override
 	public String toString() {
-		return "Empresa [idEmp=" + idEmp + ", nombreComercial=" + nombreComercial + ", tipoSociedad=" + tipoSociedad
-				+ ", actividad=" + actividad + ", cif=" + cif + ", email=" + email + ", paginaWeb=" + paginaWeb
-				+ ", telefono=" + telefono + ", fax=" + fax + ", observaciones=" + observaciones + "]";
+		return "ModelEmpresa [idEmp=" + idEmp + ", nombreComercial=" + nombreComercial + ", tipoSociedad="
+				+ tipoSociedad + ", actividad=" + actividad + ", cif=" + cif + ", email=" + email + ", paginaWeb="
+				+ paginaWeb + ", telefono=" + telefono + ", fax=" + fax + ", observaciones=" + observaciones
+				+ ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

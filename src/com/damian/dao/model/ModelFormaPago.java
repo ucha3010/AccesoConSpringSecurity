@@ -205,6 +205,7 @@ public class ModelFormaPago {
 	public String toString() {
 		return "ModelFormaPago [idFor=" + idFor + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", nombrePT="
 				+ nombrePT + ", nombreFR=" + nombreFR + ", nombreIT=" + nombreIT + ", nombreGE=" + nombreGE
-				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + "]";
+				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + ", modificadoPor=" + modificadoPor
+				+ ", fechaModificacion=" + fechaModificacion + "]";
 	}
 }

@@ -145,7 +145,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 					+ " VALUES (?, ?, ?, ?, ?, ?)";
 			jdbcTemplate.update(sql, mu.getUsuario(), mu.getClave(), mu.isHabilitado(), mu.getFechaCreacion(),
 					mu.getModificadoPor(), mu.getFechaModificacion());
-			LocalLogger.save(TABLA, usuario, request);
+			LocalLogger.save(TABLA, mu, request);
 		}
 	}
 
@@ -157,7 +157,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				+ KEY + "=?";
 		jdbcTemplate.update(sql, mu.getUsuario(), mu.getClave(), mu.isHabilitado(), mu.getFechaCreacion(),
 				mu.getModificadoPor(), mu.getFechaModificacion(), mu.getIdUsr());
-		LocalLogger.update(TABLA, usuario, request);
+		LocalLogger.update(TABLA, mu, request);
 	}
 
 	@Override

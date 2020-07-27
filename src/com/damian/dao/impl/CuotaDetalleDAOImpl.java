@@ -85,28 +85,28 @@ public class CuotaDetalleDAOImpl implements CuotaDetalleDAO {
 		if (cuotaDetalle.getIdCuDe() > 0) {
 			return update(cuotaDetalle, request);
 		} else {
-			ModelCuotaDetalle mc = converterCuotaDetalle.convert(cuotaDetalle);
+			ModelCuotaDetalle mcd = converterCuotaDetalle.convert(cuotaDetalle);
 			String sql = "INSERT INTO " + TABLA
 					+ " (idCuo, importeSinInteres, importeInteres, importeCuota, fecha, capitalPendienteAntes, capitalPendienteDespues, numeroCuota)"
 					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-			jdbcTemplate.update(sql, mc.getIdCuo(), mc.getImporteSinInteres(), mc.getImporteInteres(),
-					mc.getImporteCuota(), mc.getFecha(), mc.getCapitalPendienteAntes(),
-					mc.getCapitalPendienteDespues(), mc.getNumeroCuota());
-			LocalLogger.save(TABLA, cuotaDetalle, request);
+			jdbcTemplate.update(sql, mcd.getIdCuo(), mcd.getImporteSinInteres(), mcd.getImporteInteres(),
+					mcd.getImporteCuota(), mcd.getFecha(), mcd.getCapitalPendienteAntes(),
+					mcd.getCapitalPendienteDespues(), mcd.getNumeroCuota());
+			LocalLogger.save(TABLA, mcd, request);
 			return getMaxId();
 		}
 	}
 
 	@Override
 	public int update(CuotaDetalle cuotaDetalle, HttpServletRequest request) {
-		ModelCuotaDetalle mc = converterCuotaDetalle.convert(cuotaDetalle);
+		ModelCuotaDetalle mcd = converterCuotaDetalle.convert(cuotaDetalle);
 		String sql = "UPDATE " + TABLA
 				+ " SET idCuo=?, importeSinInteres=?, importeInteres=?, importeCuota=?, fecha=?, capitalPendienteAntes=?, capitalPendienteDespues=?, numeroCuota=? "
 				+ "WHERE " + KEY + "=?";
-		int result = jdbcTemplate.update(sql, mc.getIdCuo(), mc.getImporteSinInteres(), mc.getImporteInteres(),
-				mc.getImporteCuota(), mc.getFecha(), mc.getCapitalPendienteAntes(), mc.getCapitalPendienteDespues(), mc.getNumeroCuota(),
-				mc.getIdCuDe());
-		LocalLogger.update(TABLA, cuotaDetalle, request);
+		int result = jdbcTemplate.update(sql, mcd.getIdCuo(), mcd.getImporteSinInteres(), mcd.getImporteInteres(),
+				mcd.getImporteCuota(), mcd.getFecha(), mcd.getCapitalPendienteAntes(), mcd.getCapitalPendienteDespues(), mcd.getNumeroCuota(),
+				mcd.getIdCuDe());
+		LocalLogger.update(TABLA, mcd, request);
 		return result;
 	}
 

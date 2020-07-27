@@ -336,4 +336,19 @@ public class ModelFoto {
 		this.modificadoPor = modificadoPor;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "ModelFoto [idFot=" + idFot + ", idUsr=" + idUsr + ", idPro=" + idPro + ", idEmp=" + idEmp + ", idCat="
+				+ idCat + ", idSub=" + idSub + ", idPais=" + idPais + ", idFor=" + idFor + ", idEst=" + idEst
+				+ ", idRol=" + idRol + ", nombre=" + nombre + ", ruta=" + ruta + ", descripcion=" + descripcion
+				+ ", peso=" + peso + ", principal=" + principal + ", extension=" + extension + ", fechaCreacion="
+				+ fechaCreacion + ", creadoPor=" + creadoPor + ", modificadoPor=" + modificadoPor
+				+ ", fechaModificacion=" + fechaModificacion + "]";
+	}
+
 }

@@ -91,7 +91,7 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 			int result = jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getNombrePT(),
 					ms.getNombreFR(), ms.getNombreIT(), ms.getNombreGE(), ms.getNombreCA(), ms.getNombreEU(),
 					ms.getIdCat(), ms.getModificadoPor(), ms.getFechaModificacion());
-			LocalLogger.save(TABLA, subcategoria, request);
+			LocalLogger.save(TABLA, ms, request);
 			return result;
 		}
 	}
@@ -105,7 +105,7 @@ public class SubcategoriaDAOImpl implements SubcategoriaDAO {
 		int result = jdbcTemplate.update(sql, ms.getNombreES(), ms.getNombreEN(), ms.getNombrePT(), ms.getNombreFR(),
 				ms.getNombreIT(), ms.getNombreGE(), ms.getNombreCA(), ms.getNombreEU(), ms.getIdCat(),
 				ms.getModificadoPor(), ms.getFechaModificacion(), ms.getIdSub());
-		LocalLogger.update(TABLA, subcategoria, request);
+		LocalLogger.update(TABLA, ms, request);
 		return result;
 	}
 

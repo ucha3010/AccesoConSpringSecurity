@@ -98,7 +98,7 @@ public class ModelProductoEmpresa implements java.io.Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "ModelUsuarioEmpresa [idPro=" + idPro + ", idEmp=" + idEmp + ", fechaCreacion=" + fechaCreacion
+		return "ModelProductoEmpresa [idPro=" + idPro + ", idEmp=" + idEmp + ", fechaCreacion=" + fechaCreacion
 				+ ", creadoPor=" + creadoPor + "]";
 	}
 }

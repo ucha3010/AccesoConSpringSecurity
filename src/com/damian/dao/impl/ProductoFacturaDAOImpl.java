@@ -62,7 +62,7 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 		jdbcTemplate.update(sql, mpf.getIdPro(), mpf.getIdFac(), mpf.getCantidad(), mpf.getIvaProducto(),
 				mpf.getPorcentajeDescuento(), mpf.getPrecioUnitSinIva(), mpf.getPrecioFinalRecibidoPagado(), mpf.getObservaciones(), mpf.getModificadoPor(),
 				mpf.getFechaModificacion());
-		LocalLogger.save(TABLA, productoFactura, request);
+		LocalLogger.save(TABLA, mpf, request);
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 		jdbcTemplate.update(sql, mpf.getCantidad(), mpf.getIvaProducto(), mpf.getPorcentajeDescuento(),
 				mpf.getPrecioUnitSinIva(), mpf.getPrecioFinalRecibidoPagado(), mpf.getObservaciones(), mpf.getModificadoPor(), mpf.getFechaModificacion(),
 				mpf.getIdPro(), mpf.getIdFac());
-		LocalLogger.update(TABLA, productoFactura, request);
+		LocalLogger.update(TABLA, mpf, request);
 	}
 
 	@Override

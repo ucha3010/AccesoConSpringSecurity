@@ -143,8 +143,9 @@ public class ModelUsuario {
 	 */
 	@Override
 	public String toString() {
-		return "Usuario [idUsr=" + idUsr + ", usuario=" + usuario + ", clave=" + clave + ", habilitado=" + habilitado
-				+ ", fechaCreacion=" + fechaCreacion + "]";
+		return "ModelUsuario [idUsr=" + idUsr + ", usuario=" + usuario + ", clave=" + clave + ", habilitado="
+				+ habilitado + ", fechaCreacion=" + fechaCreacion + ", modificadoPor=" + modificadoPor
+				+ ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

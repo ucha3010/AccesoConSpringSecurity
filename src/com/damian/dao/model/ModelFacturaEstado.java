@@ -129,8 +129,8 @@ public class ModelFacturaEstado {
 	 */
 	@Override
 	public String toString() {
-		return "ModelFacturaEstado [id=" + id + ", idFac=" + idFac + ", idEst=" + idEst + ", creadoPor=" + creadoPor
-				+ ", observaciones=" + observaciones + "]";
+		return "ModelFacturaEstado [id=" + id + ", idFac=" + idFac + ", idEst=" + idEst + ", fecha=" + fecha
+				+ ", creadoPor=" + creadoPor + ", observaciones=" + observaciones + "]";
 	}
 
 }

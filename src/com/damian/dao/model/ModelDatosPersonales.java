@@ -272,11 +272,11 @@ public class ModelDatosPersonales {
 	 */
 	@Override
 	public String toString() {
-		return "DatosPersonales [idDatosPers=" + idDatosPers + ", nombre=" + nombre + ", apellido1=" + apellido1
+		return "ModelDatosPersonales [idDatosPers=" + idDatosPers + ", nombre=" + nombre + ", apellido1=" + apellido1
 				+ ", apellido2=" + apellido2 + ", sexo=" + sexo + ", fechaNacimiento=" + fechaNacimiento
 				+ ", nacionalidad_idPais=" + nacionalidad_idPais + ", dni=" + dni + ", email=" + email + ", telefono="
 				+ telefono + ", observaciones=" + observaciones + ", datospersonales_idUsr=" + datospersonales_idUsr
-				+ "]";
+				+ ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

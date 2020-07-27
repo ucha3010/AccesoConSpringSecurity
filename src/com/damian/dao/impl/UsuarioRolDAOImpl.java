@@ -58,7 +58,7 @@ public class UsuarioRolDAOImpl implements UsuarioRolDAO {
 		ModelUsuarioRol mur = converterUsuarioRol.convert(usuarioRol);
 		String sql = "INSERT INTO " + TABLA + " (idUsr, idRol, fechaCreacion, creadoPor)" + " VALUES (?, ?, ?, ?)";
 		jdbcTemplate.update(sql, mur.getIdUsr(), mur.getIdRol(), mur.getFechaCreacion(), mur.getCreadoPor());
-		LocalLogger.save(TABLA, usuarioRol, request);
+		LocalLogger.save(TABLA, mur, request);
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class UsuarioRolDAOImpl implements UsuarioRolDAO {
 		String sql = "UPDATE " + TABLA + " SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
 				+ "=?";
 		jdbcTemplate.update(sql, mur.getFechaCreacion(), mur.getCreadoPor(), mur.getIdUsr(), mur.getIdRol());
-		LocalLogger.save(TABLA, usuarioRol, request);
+		LocalLogger.update(TABLA, mur, request);
 	}
 
 	@Override

@@ -48,8 +48,12 @@ public class ConverterProductoEmpresa {
 	public ModelProductoEmpresa convert(ProductoEmpresa pe) {
 
 		ModelProductoEmpresa mpe = new ModelProductoEmpresa();
-		mpe.setIdPro(pe.getProducto().getIdPro());
-		mpe.setIdEmp(pe.getEmpresa().getIdEmp());
+		if (pe.getProducto() != null) {
+			mpe.setIdPro(pe.getProducto().getIdPro());
+		}
+		if (pe.getEmpresa() != null) {
+			mpe.setIdEmp(pe.getEmpresa().getIdEmp());
+		}
 		mpe.setFechaCreacion(pe.getFechaCreacion());
 		mpe.setCreadoPor(pe.getCreadoPor());
 

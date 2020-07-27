@@ -66,7 +66,7 @@ public class FacturaEnviarFacturarDAOImpl implements FacturaEnviarFacturarDAO {
 			int result = jdbcTemplate.update(sql, mfef.getNombre(), mfef.getDireccion(), mfef.getCp(), mfef.getCiudad(),
 					mfef.getProvincia(), mfef.getPais(), mfef.getTelefono(), mfef.isFacturar(), mfef.isEnviar(),
 					mfef.getIdFac());
-			LocalLogger.save(TABLA, facturaEnviarFacturar, request);
+			LocalLogger.save(TABLA, mfef, request);
 			return result;
 		}
 	}
@@ -80,7 +80,7 @@ public class FacturaEnviarFacturarDAOImpl implements FacturaEnviarFacturarDAO {
 		int result = jdbcTemplate.update(sql, mfef.getNombre(), mfef.getDireccion(), mfef.getCp(), mfef.getCiudad(),
 				mfef.getProvincia(), mfef.getPais(), mfef.getTelefono(), mfef.isFacturar(), mfef.isEnviar(),
 				mfef.getIdFac(), mfef.getIdEnFa());
-		LocalLogger.update(TABLA, facturaEnviarFacturar, request);
+		LocalLogger.update(TABLA, mfef, request);
 		return result;
 	}
 

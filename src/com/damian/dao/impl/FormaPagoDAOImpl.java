@@ -85,27 +85,27 @@ public class FormaPagoDAOImpl implements FormaPagoDAO {
 		if (formaPago.getIdFor() > 0) {
 			return update(formaPago, request);
 		} else {
-			ModelFormaPago me = converterFormaPago.convert(formaPago);
+			ModelFormaPago mfp = converterFormaPago.convert(formaPago);
 			String sql = "INSERT INTO " + TABLA
 					+ " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU, modificadoPor, fechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			int result = jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(),
-					me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(),
-					me.getModificadoPor(), me.getFechaModificacion());
-			LocalLogger.save(TABLA, formaPago, request);
+			int result = jdbcTemplate.update(sql, mfp.getNombreES(), mfp.getNombreEN(), mfp.getNombrePT(),
+					mfp.getNombreFR(), mfp.getNombreIT(), mfp.getNombreGE(), mfp.getNombreCA(), mfp.getNombreEU(),
+					mfp.getModificadoPor(), mfp.getFechaModificacion());
+			LocalLogger.save(TABLA, mfp, request);
 			return result;
 		}
 	}
 
 	@Override
 	public int update(FormaPago formaPago, HttpServletRequest request) {
-		ModelFormaPago me = converterFormaPago.convert(formaPago);
+		ModelFormaPago mfp = converterFormaPago.convert(formaPago);
 		String sql = "UPDATE " + TABLA
 				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, modificadoPor=?, fechaModificacion=? "
 				+ "WHERE " + KEY + "=?";
-		int result = jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
-				me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getModificadoPor(),
-				me.getFechaModificacion(), me.getIdFor());
-		LocalLogger.update(TABLA, formaPago, request);
+		int result = jdbcTemplate.update(sql, mfp.getNombreES(), mfp.getNombreEN(), mfp.getNombrePT(), mfp.getNombreFR(),
+				mfp.getNombreIT(), mfp.getNombreGE(), mfp.getNombreCA(), mfp.getNombreEU(), mfp.getModificadoPor(),
+				mfp.getFechaModificacion(), mfp.getIdFor());
+		LocalLogger.update(TABLA, mfp, request);
 		return result;
 	}
 

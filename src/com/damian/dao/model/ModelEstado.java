@@ -205,7 +205,8 @@ public class ModelEstado {
 	public String toString() {
 		return "ModelEstado [idEst=" + idEst + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", nombrePT="
 				+ nombrePT + ", nombreFR=" + nombreFR + ", nombreIT=" + nombreIT + ", nombreGE=" + nombreGE
-				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + "]";
+				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + ", modificadoPor=" + modificadoPor
+				+ ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

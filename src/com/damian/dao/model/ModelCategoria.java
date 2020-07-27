@@ -207,7 +207,8 @@ public class ModelCategoria {
 	public String toString() {
 		return "ModelCategoria [idCat=" + idCat + ", nombreES=" + nombreES + ", nombreEN=" + nombreEN + ", nombrePT="
 				+ nombrePT + ", nombreFR=" + nombreFR + ", nombreIT=" + nombreIT + ", nombreGE=" + nombreGE
-				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + "]";
+				+ ", nombreCA=" + nombreCA + ", nombreEU=" + nombreEU + ", modificadoPor=" + modificadoPor
+				+ ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

@@ -101,7 +101,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 			jdbcTemplate.update(sql, me.getNombreComercial(), me.getTipoSociedad(), me.getActividad(), me.getCif(),
 					me.getEmail(), me.getPaginaWeb(), me.getTelefono(), me.getFax(), me.getObservaciones(),
 					me.getModificadoPor(), me.getFechaModificacion());
-			LocalLogger.save(TABLA, empresa, request);
+			LocalLogger.save(TABLA, me, request);
 		}
 	}
 
@@ -114,7 +114,7 @@ public class EmpresaDAOImpl implements EmpresaDAO {
 		jdbcTemplate.update(sql, me.getNombreComercial(), me.getTipoSociedad(), me.getActividad(), me.getCif(),
 				me.getEmail(), me.getPaginaWeb(), me.getTelefono(), me.getFax(), me.getObservaciones(),
 				me.getModificadoPor(), me.getFechaModificacion(), me.getIdEmp());
-		LocalLogger.update(TABLA, empresa, request);
+		LocalLogger.update(TABLA, me, request);
 	}
 
 	@Override

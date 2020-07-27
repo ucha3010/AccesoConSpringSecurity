@@ -91,7 +91,7 @@ public class EstadoDAOImpl implements EstadoDAO {
 			int result = jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(),
 					me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(),
 					me.getModificadoPor(), me.getFechaModificacion());
-			LocalLogger.save(TABLA, estado, request);
+			LocalLogger.save(TABLA, me, request);
 			return result;
 		}
 	}
@@ -105,7 +105,7 @@ public class EstadoDAOImpl implements EstadoDAO {
 		int result = jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
 				me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getModificadoPor(),
 				me.getFechaModificacion(), me.getIdEst());
-		LocalLogger.update(TABLA, estado, request);
+		LocalLogger.update(TABLA, me, request);
 		return result;
 	}
 

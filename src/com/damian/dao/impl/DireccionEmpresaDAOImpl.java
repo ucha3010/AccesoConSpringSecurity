@@ -75,14 +75,14 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 	public void save(DireccionEmpresa direccionEmpresa, HttpServletRequest request) {
 
 		if (direccionEmpresa.getIdDirEmp() == 0) {
-			ModelDireccionEmpresa mdp = converterDireccionEmpresa.convert(direccionEmpresa);
+			ModelDireccionEmpresa mde = converterDireccionEmpresa.convert(direccionEmpresa);
 			String sql = "INSERT INTO " + TABLA + " (tipoVia, nombreVia, numero, resto, cp, provincia, "
 					+ "ciudad, pais_idPais, idEmp, modificadoPor, fechaModificacion)"
 					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			jdbcTemplate.update(sql, mdp.getTipoVia(), mdp.getNombreVia(), mdp.getNumero(), mdp.getResto(), mdp.getCp(),
-					mdp.getProvincia(), mdp.getCiudad(), mdp.getPais_idPais(), mdp.getIdEmp(), mdp.getModificadoPor(),
-					mdp.getFechaModificacion());
-			LocalLogger.save(TABLA, direccionEmpresa, request);
+			jdbcTemplate.update(sql, mde.getTipoVia(), mde.getNombreVia(), mde.getNumero(), mde.getResto(), mde.getCp(),
+					mde.getProvincia(), mde.getCiudad(), mde.getPais_idPais(), mde.getIdEmp(), mde.getModificadoPor(),
+					mde.getFechaModificacion());
+			LocalLogger.save(TABLA, mde, request);
 		} else {
 			update(direccionEmpresa, request);
 		}
@@ -92,13 +92,13 @@ public class DireccionEmpresaDAOImpl implements DireccionEmpresaDAO {
 	@Override
 	public void update(DireccionEmpresa direccionEmpresa, HttpServletRequest request) {
 
-		ModelDireccionEmpresa mdp = converterDireccionEmpresa.convert(direccionEmpresa);
+		ModelDireccionEmpresa mde = converterDireccionEmpresa.convert(direccionEmpresa);
 		String sql = "UPDATE " + TABLA + " SET tipoVia=?, nombreVia=?, numero=?, " + "resto=?, cp=?, provincia=?, "
 				+ "ciudad=?, pais_idPais=?, idEmp=?, modificadoPor=?, fechaModificacion=? WHERE " + KEY + "=?";
-		jdbcTemplate.update(sql, mdp.getTipoVia(), mdp.getNombreVia(), mdp.getNumero(), mdp.getResto(), mdp.getCp(),
-				mdp.getProvincia(), mdp.getCiudad(), mdp.getPais_idPais(), mdp.getIdEmp(), mdp.getModificadoPor(),
-				mdp.getFechaModificacion(), mdp.getIdDirEmp());
-		LocalLogger.update(TABLA, direccionEmpresa, request);
+		jdbcTemplate.update(sql, mde.getTipoVia(), mde.getNombreVia(), mde.getNumero(), mde.getResto(), mde.getCp(),
+				mde.getProvincia(), mde.getCiudad(), mde.getPais_idPais(), mde.getIdEmp(), mde.getModificadoPor(),
+				mde.getFechaModificacion(), mde.getIdDirEmp());
+		LocalLogger.update(TABLA, mde, request);
 
 	}
 

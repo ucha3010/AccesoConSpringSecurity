@@ -71,7 +71,7 @@ public class PaisDAOImpl implements PaisDAO {
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getNombrePT(), mp.getNombreFR(),
 				mp.getNombreIT(), mp.getNombreGE(), mp.getNombreCA(), mp.getNombreEU());
-		LocalLogger.save(TABLA, pais, request);
+		LocalLogger.save(TABLA, mp, request);
 	}
 
 	@Override
@@ -83,7 +83,7 @@ public class PaisDAOImpl implements PaisDAO {
 				+ KEY + "=?";
 		jdbcTemplate.update(sql, mp.getNombreES(), mp.getNombreEN(), mp.getNombrePT(), mp.getNombreFR(),
 				mp.getNombreIT(), mp.getNombreGE(), mp.getNombreCA(), mp.getNombreEU(), mp.getIdPais());
-		LocalLogger.update(TABLA, pais, request);
+		LocalLogger.update(TABLA, mp, request);
 	}
 
 	@Override

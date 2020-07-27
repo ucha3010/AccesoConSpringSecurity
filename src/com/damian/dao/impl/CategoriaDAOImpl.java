@@ -85,27 +85,27 @@ public class CategoriaDAOImpl implements CategoriaDAO {
 		if (categoria.getIdCat() > 0) {
 			return update(categoria, request);
 		} else {
-			ModelCategoria me = converterCategoria.convert(categoria);
+			ModelCategoria mc = converterCategoria.convert(categoria);
 			String sql = "INSERT INTO " + TABLA
 					+ " (nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU, modificadoPor, fechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			int result = jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(),
-					me.getNombreFR(), me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(),
-					me.getModificadoPor(), me.getFechaModificacion());
-			LocalLogger.save(TABLA, categoria, request);
+			int result = jdbcTemplate.update(sql, mc.getNombreES(), mc.getNombreEN(), mc.getNombrePT(),
+					mc.getNombreFR(), mc.getNombreIT(), mc.getNombreGE(), mc.getNombreCA(), mc.getNombreEU(),
+					mc.getModificadoPor(), mc.getFechaModificacion());
+			LocalLogger.save(TABLA, mc, request);
 			return result;
 		}
 	}
 
 	@Override
 	public int update(Categoria categoria, HttpServletRequest request) {
-		ModelCategoria me = converterCategoria.convert(categoria);
+		ModelCategoria mc = converterCategoria.convert(categoria);
 		String sql = "UPDATE " + TABLA
 				+ " SET nombreES=?, nombreEN=?, nombrePT=?, nombreFR=?, nombreIT=?, nombreGE=?, nombreCA=?, nombreEU=?, modificadoPor=?, fechaModificacion=? "
 				+ "WHERE " + KEY + "=?";
-		int result = jdbcTemplate.update(sql, me.getNombreES(), me.getNombreEN(), me.getNombrePT(), me.getNombreFR(),
-				me.getNombreIT(), me.getNombreGE(), me.getNombreCA(), me.getNombreEU(), me.getModificadoPor(),
-				me.getFechaModificacion(), me.getIdCat());
-		LocalLogger.update(TABLA, categoria, request);
+		int result = jdbcTemplate.update(sql, mc.getNombreES(), mc.getNombreEN(), mc.getNombrePT(), mc.getNombreFR(),
+				mc.getNombreIT(), mc.getNombreGE(), mc.getNombreCA(), mc.getNombreEU(), mc.getModificadoPor(),
+				mc.getFechaModificacion(), mc.getIdCat());
+		LocalLogger.update(TABLA, mc, request);
 		return result;
 	}
 

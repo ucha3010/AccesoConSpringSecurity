@@ -501,7 +501,8 @@ public class ModelProducto {
 				+ precioVenta + ", precioCompra=" + precioCompra + ", marca=" + marca + ", modelo=" + modelo
 				+ ", serie=" + serie + ", ubicacion=" + ubicacion + ", estado=" + estado + ", partida=" + partida
 				+ ", fechaCompra=" + fechaCompra + ", enviar=" + enviar + ", vendible=" + vendible + ", mesesGarantia="
-				+ mesesGarantia + ", peso=" + peso + ", volumen=" + volumen + ", idSub=" + idSub + "]";
+				+ mesesGarantia + ", peso=" + peso + ", volumen=" + volumen + ", idSub=" + idSub + ", modificadoPor="
+				+ modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

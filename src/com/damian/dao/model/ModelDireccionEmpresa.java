@@ -236,7 +236,7 @@ public class ModelDireccionEmpresa {
 	public String toString() {
 		return "ModelDireccionEmpresa [idDirEmp=" + idDirEmp + ", tipoVia=" + tipoVia + ", nombreVia=" + nombreVia
 				+ ", numero=" + numero + ", resto=" + resto + ", cp=" + cp + ", provincia=" + provincia + ", ciudad="
-				+ ciudad + ", pais_idPais=" + pais_idPais + ", idEmp=" + idEmp + "]";
+				+ ciudad + ", pais_idPais=" + pais_idPais + ", idEmp=" + idEmp + ", modificadoPor=" + modificadoPor
+				+ ", fechaModificacion=" + fechaModificacion + "]";
 	}
-
 }

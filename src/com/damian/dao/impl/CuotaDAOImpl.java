@@ -91,7 +91,7 @@ public class CuotaDAOImpl implements CuotaDAO {
 			jdbcTemplate.update(sql, mc.getCantidadCuotas(), mc.getComisionAperturaPor(), mc.getComisionAperturaImp(),
 					mc.getInteresPor(), mc.getInteresImp(), mc.getTotalCompletoAPagar(), mc.getModificadoPor(),
 					mc.getFechaModificacion());
-			LocalLogger.save(TABLA, cuota, request);
+			LocalLogger.save(TABLA, mc, request);
 			return getMaxId();
 		}
 	}
@@ -105,7 +105,7 @@ public class CuotaDAOImpl implements CuotaDAO {
 		int result = jdbcTemplate.update(sql, mc.getCantidadCuotas(), mc.getComisionAperturaPor(),
 				mc.getComisionAperturaImp(), mc.getInteresPor(), mc.getInteresImp(), mc.getTotalCompletoAPagar(),
 				mc.getModificadoPor(), mc.getFechaModificacion(), mc.getIdCuo());
-		LocalLogger.update(TABLA, cuota, request);
+		LocalLogger.update(TABLA, mc, request);
 		return result;
 	}
 

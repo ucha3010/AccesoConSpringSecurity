@@ -49,19 +49,19 @@ public class UsuarioOrdenDAOImpl implements UsuarioOrdenDAO {
 	}
 
 	@Override
-	public int save(ModelUsuarioOrden uo, HttpServletRequest request) {
+	public int save(ModelUsuarioOrden muo, HttpServletRequest request) {
 		String sql = "INSERT INTO " + TABLA + " (idUsr, tabla, columna, orden) VALUES (?, ?, ?, ?)";
-		int result = jdbcTemplate.update(sql, uo.getIdUsr(), uo.getTabla(), uo.getColumna(), uo.getOrden());
-		LocalLogger.save(TABLA, uo, request);
+		int result = jdbcTemplate.update(sql, muo.getIdUsr(), muo.getTabla(), muo.getColumna(), muo.getOrden());
+		LocalLogger.save(TABLA, muo, request);
 		return result;
 
 	}
 
 	@Override
-	public int update(ModelUsuarioOrden uo, HttpServletRequest request) {
+	public int update(ModelUsuarioOrden muo, HttpServletRequest request) {
 		String sql = "UPDATE " + TABLA + " SET idUsr=?, tabla=?, columna=?, orden=? " + "WHERE " + KEY + "=?";
-		int result = jdbcTemplate.update(sql, uo.getIdUsr(), uo.getTabla(), uo.getColumna(), uo.getOrden(), uo.getId());
-		LocalLogger.update(TABLA, uo, request);
+		int result = jdbcTemplate.update(sql, muo.getIdUsr(), muo.getTabla(), muo.getColumna(), muo.getOrden(), muo.getId());
+		LocalLogger.update(TABLA, muo, request);
 		return result;
 	}
 
