@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.damian.dao.FacturaDAO;
+import com.damian.dao.model.ModelFactura;
 import com.damian.exceptions.NegativeStockException;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Estado;
@@ -198,6 +199,11 @@ public class FacturaServiceImpl implements FacturaService {
 	@Override
 	public List<Map<String, Object>> facturaMap(int idFac) {
 		return facturaDAO.facturaMap(idFac);
+	}
+
+	@Override
+	public ModelFactura findModelById(int idFac) {
+		return facturaDAO.findModelById(idFac);
 	}
 
 	private void saveFacturaEstado(Factura factura, HttpServletRequest request) {

@@ -2,7 +2,6 @@ package com.damian.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.damian.dao.model.ModelCuotaDetalle;
+import com.damian.dao.model.ModelFactura;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Factura;
+import com.damian.service.CuotaDetalleService;
 import com.damian.service.EstadoService;
 import com.damian.service.FacturaService;
 import com.damian.service.PaginacionService;
@@ -25,6 +27,9 @@ public class FacturaController {
 
 	@Autowired
 	private FacturaService facturaService;
+
+	@Autowired
+	private CuotaDetalleService cuotaDetalleService;
 
 	@Autowired
 	private EstadoService estadoService;
@@ -119,11 +124,17 @@ public class FacturaController {
 
 	@RequestMapping("/factura/pdf/{idFac}")
 	public String getAll(ModelMap modelAndView, @PathVariable("idFac") int idFac) {
-		List<Map<String, Object>> facturaMap = new ArrayList<Map<String, Object>>();
+		ModelFactura factura = new ModelFactura();
+		List<ModelCuotaDetalle> cuotaDetalleList = new ArrayList<>();
 		if (idFac > 0) {
-			facturaMap = facturaService.facturaMap(idFac);
+			factura = facturaService.findModelById(idFac);
+			if (factura.getIdCuo() != 0) {
+				cuotaDetalleList = cuotaDetalleService.findModelByIdCuo(factura.getIdCuo());
+			}
 		}
-		modelAndView.put("factura", facturaMap);
+		modelAndView.put("cuotaDetalleList", cuotaDetalleList);
+		modelAndView.put("factura", factura);
+
 		return "facturaPDF";
 	}
 

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.damian.dao.model.ModelFactura;
 import com.damian.pojo.Factura;
 
 public interface FacturaDAO {
@@ -34,5 +35,7 @@ public interface FacturaDAO {
 	public List<Factura> findSearchAll();
 
 	public List<Map<String, Object>> facturaMap(int id);
+
+	public ModelFactura findModelById(int idFac);
 
 }

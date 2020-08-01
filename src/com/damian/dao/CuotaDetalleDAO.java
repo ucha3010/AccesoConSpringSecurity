@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.damian.dao.model.ModelCuotaDetalle;
 import com.damian.pojo.CuotaDetalle;
 
 public interface CuotaDetalleDAO {
@@ -23,5 +24,7 @@ public interface CuotaDetalleDAO {
 	public int getMaxId();
 
 	public List<CuotaDetalle> findByIdCuo(int idCuo);
+
+	public List<ModelCuotaDetalle> findModelByIdCuo(int idCuo);
 
 }

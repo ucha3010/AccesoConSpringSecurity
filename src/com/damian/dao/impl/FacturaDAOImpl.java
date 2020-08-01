@@ -200,6 +200,18 @@ public class FacturaDAOImpl implements FacturaDAO {
 		return fList;
 	}
 
+	@Override
+	public ModelFactura findModelById(int idFac) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE " + KEY + "=" + idFac;		
+		List<ModelFactura> facturas = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelFactura.class));
+		if(facturas != null) {
+			return facturas.get(0);
+		} else {
+			return new ModelFactura();
+		}
+	}
+
 	private List<Factura> lista(String sql) {
 		List<ModelFactura> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelFactura.class));
 		List<Factura> eList = new ArrayList<>();

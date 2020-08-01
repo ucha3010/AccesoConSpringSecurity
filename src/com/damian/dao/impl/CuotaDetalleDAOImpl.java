@@ -104,8 +104,8 @@ public class CuotaDetalleDAOImpl implements CuotaDetalleDAO {
 				+ " SET idCuo=?, importeSinInteres=?, importeInteres=?, importeCuota=?, fecha=?, capitalPendienteAntes=?, capitalPendienteDespues=?, numeroCuota=? "
 				+ "WHERE " + KEY + "=?";
 		int result = jdbcTemplate.update(sql, mcd.getIdCuo(), mcd.getImporteSinInteres(), mcd.getImporteInteres(),
-				mcd.getImporteCuota(), mcd.getFecha(), mcd.getCapitalPendienteAntes(), mcd.getCapitalPendienteDespues(), mcd.getNumeroCuota(),
-				mcd.getIdCuDe());
+				mcd.getImporteCuota(), mcd.getFecha(), mcd.getCapitalPendienteAntes(), mcd.getCapitalPendienteDespues(),
+				mcd.getNumeroCuota(), mcd.getIdCuDe());
 		LocalLogger.update(TABLA, mcd, request);
 		return result;
 	}
@@ -131,6 +131,14 @@ public class CuotaDetalleDAOImpl implements CuotaDetalleDAO {
 		String sql = "SELECT * FROM " + TABLA + " WHERE idCuo=" + idCuo;
 
 		return lista(sql);
+	}
+
+	@Override
+	public List<ModelCuotaDetalle> findModelByIdCuo(int idCuo) {
+
+		String sql = "SELECT * FROM " + TABLA + " WHERE idCuo=" + idCuo;
+		
+		return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelCuotaDetalle.class));
 	}
 
 	private List<CuotaDetalle> lista(String sql) {

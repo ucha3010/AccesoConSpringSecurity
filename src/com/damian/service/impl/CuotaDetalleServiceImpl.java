@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.damian.dao.CuotaDetalleDAO;
+import com.damian.dao.model.ModelCuotaDetalle;
 import com.damian.pojo.CuotaDetalle;
 import com.damian.service.CuotaDetalleService;
 
@@ -55,6 +56,11 @@ public class CuotaDetalleServiceImpl implements CuotaDetalleService {
 	@Override
 	public List<CuotaDetalle> findByIdCuo(int idCuo) {
 		return cuotaDetalleDAO.findByIdCuo(idCuo);
+	}
+
+	@Override
+	public List<ModelCuotaDetalle> findModelByIdCuo(int idCuo) {
+		return cuotaDetalleDAO.findModelByIdCuo(idCuo);
 	}
 
 }
