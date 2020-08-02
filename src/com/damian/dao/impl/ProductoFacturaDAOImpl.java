@@ -16,8 +16,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
 import com.damian.converter.ConverterProductoFactura;
-import com.damian.dao.FacturaDAO;
-import com.damian.dao.ProductoDAO;
 import com.damian.dao.ProductoFacturaDAO;
 import com.damian.dao.model.ModelProductoFactura;
 import com.damian.pojo.ProductoFactura;
@@ -39,12 +37,6 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 	@Autowired
 	private ConverterProductoFactura converterProductoFactura;
 
-	@Autowired
-	private FacturaDAO facturaDAO;
-
-	@Autowired
-	private ProductoDAO productoDAO;
-
 	@Override
 	public List<ProductoFactura> findAll() {
 
@@ -60,8 +52,8 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 				+ " (idPro, idFac, cantidad, ivaProducto, porcentajeDescuento, precioUnitSinIva, precioFinalRecibidoPagado, observaciones, modificadoPor, fechaModificacion)"
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		jdbcTemplate.update(sql, mpf.getIdPro(), mpf.getIdFac(), mpf.getCantidad(), mpf.getIvaProducto(),
-				mpf.getPorcentajeDescuento(), mpf.getPrecioUnitSinIva(), mpf.getPrecioFinalRecibidoPagado(), mpf.getObservaciones(), mpf.getModificadoPor(),
-				mpf.getFechaModificacion());
+				mpf.getPorcentajeDescuento(), mpf.getPrecioUnitSinIva(), mpf.getPrecioFinalRecibidoPagado(),
+				mpf.getObservaciones(), mpf.getModificadoPor(), mpf.getFechaModificacion());
 		LocalLogger.save(TABLA, mpf, request);
 	}
 
@@ -72,8 +64,8 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 				+ " SET cantidad=?, ivaProducto=?, porcentajeDescuento=?, precioUnitSinIva=?, precioFinalRecibidoPagado=?, observaciones=?, modificadoPor=?, fechaModificacion=? "
 				+ "WHERE " + KEY1 + "=? AND " + KEY2 + "=?";
 		jdbcTemplate.update(sql, mpf.getCantidad(), mpf.getIvaProducto(), mpf.getPorcentajeDescuento(),
-				mpf.getPrecioUnitSinIva(), mpf.getPrecioFinalRecibidoPagado(), mpf.getObservaciones(), mpf.getModificadoPor(), mpf.getFechaModificacion(),
-				mpf.getIdPro(), mpf.getIdFac());
+				mpf.getPrecioUnitSinIva(), mpf.getPrecioFinalRecibidoPagado(), mpf.getObservaciones(),
+				mpf.getModificadoPor(), mpf.getFechaModificacion(), mpf.getIdPro(), mpf.getIdFac());
 		LocalLogger.update(TABLA, mpf, request);
 	}
 
@@ -152,10 +144,7 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 				BeanPropertyRowMapper.newInstance(ModelProductoFactura.class));
 		List<ProductoFactura> pfList = new ArrayList<>();
 		for (ModelProductoFactura mpf : mpfList) {
-			ProductoFactura pf = converterProductoFactura.convert(mpf);
-			pf.setProducto(productoDAO.findByIdModel(mpf.getIdPro()));
-			pf.setFactura(facturaDAO.findByIdModel(mpf.getIdFac()));
-			pfList.add(pf);
+			pfList.add(converterProductoFactura.convert(mpf));
 		}
 		return pfList;
 	}
@@ -168,7 +157,7 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 		mpf.setIvaProducto(rs.getDouble("ivaProducto"));
 		mpf.setPorcentajeDescuento(rs.getDouble("porcentajeDescuento"));
 		mpf.setPrecioUnitSinIva(rs.getDouble("precioUnitSinIva"));
-		mpf.setPrecioFinalRecibidoPagado(rs.getDouble("precioFinalRecibidoPagado"));		
+		mpf.setPrecioFinalRecibidoPagado(rs.getDouble("precioFinalRecibidoPagado"));
 		mpf.setObservaciones(rs.getString("observaciones"));
 		mpf.setFechaModificacion(rs.getTimestamp("fechaModificacion"));
 		mpf.setModificadoPor(rs.getString("modificadoPor"));

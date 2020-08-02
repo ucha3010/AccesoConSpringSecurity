@@ -1,5 +1,8 @@
 package com.damian.service.impl;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,6 +18,9 @@ import com.damian.dao.FacturaDAO;
 import com.damian.dao.model.ModelFactura;
 import com.damian.exceptions.NegativeStockException;
 import com.damian.exceptions.NotEmptyException;
+import com.damian.pojo.Cuota;
+import com.damian.pojo.DireccionEmpresa;
+import com.damian.pojo.EmpresaPropia;
 import com.damian.pojo.Estado;
 import com.damian.pojo.Factura;
 import com.damian.pojo.FacturaEnviarFacturar;
@@ -22,7 +28,10 @@ import com.damian.pojo.FacturaEstado;
 import com.damian.pojo.FormaPago;
 import com.damian.pojo.Producto;
 import com.damian.pojo.ProductoFactura;
+import com.damian.pojo.front.ImpresionFactura;
+import com.damian.pojo.front.ImpresionProducto;
 import com.damian.service.CuotaService;
+import com.damian.service.EmpresaPropiaService;
 import com.damian.service.EstadoService;
 import com.damian.service.FacturaEnviarFacturarService;
 import com.damian.service.FacturaEstadoService;
@@ -40,6 +49,9 @@ public class FacturaServiceImpl implements FacturaService {
 
 	@Autowired
 	private CuotaService cuotaService;
+
+	@Autowired
+	private EmpresaPropiaService empresaPropiaService;
 
 	@Autowired
 	private EstadoService estadoService;
@@ -202,8 +214,23 @@ public class FacturaServiceImpl implements FacturaService {
 	}
 
 	@Override
-	public ModelFactura findModelById(int idFac) {
-		return facturaDAO.findModelById(idFac);
+	public ImpresionFactura findImpresionFacturaById(int idFac) {
+		ModelFactura factura = facturaDAO.findModelById(idFac);
+		FormaPago formaPago = formaPagoService.findByIdModel(factura.getIdFor());
+		List<FacturaEnviarFacturar> facturaEnviarFacturarList = facturaEnviarFacturarService.findByIdFac(idFac);
+		Cuota cuota = null;
+		if (factura.getIdCuo() != 0) {
+			cuota = cuotaService.findByIdModel(factura.getIdCuo());
+		}
+		List<EmpresaPropia> empresaPropiaList = empresaPropiaService.findAll();
+		EmpresaPropia empresaPropia = new EmpresaPropia();
+		if(!empresaPropiaList.isEmpty()) {
+			empresaPropia = empresaPropiaList.get(0);
+		}
+		List<ProductoFactura> productoFacturaList = productoFacturaService.findByIdFacModel(idFac);
+
+		return rellenarImpresionFactura(factura, formaPago, facturaEnviarFacturarList, cuota, empresaPropia,
+				productoFacturaList);
 	}
 
 	private void saveFacturaEstado(Factura factura, HttpServletRequest request) {
@@ -243,6 +270,115 @@ public class FacturaServiceImpl implements FacturaService {
 		} else {
 			return producto.getUnidades() + pf.getCantidad();
 		}
+	}
+
+	private ImpresionFactura rellenarImpresionFactura(ModelFactura factura, FormaPago formaPago,
+			List<FacturaEnviarFacturar> facturaEnviarFacturarList, Cuota cuota, EmpresaPropia empresaPropia,
+			List<ProductoFactura> productoFacturaList) {
+
+		ImpresionFactura impresionFactura = new ImpresionFactura();
+		impresionFactura.setFechaCompra(factura.getFechaCompra());
+		impresionFactura.setIdFac(factura.getIdFac());
+		for (FacturaEnviarFacturar fef : facturaEnviarFacturarList) {
+			if (fef.isEnviar()) {
+				impresionFactura.setEntrega_nombre(fef.getNombre());
+				if (fef.getDireccion() != null) {
+					if (fef.getDireccion().length() > 100) {
+						impresionFactura.setEntrega_direccion1(fef.getDireccion().substring(0, 100));
+						impresionFactura.setEntrega_direccion2(fef.getDireccion().substring(100));
+					} else {
+						impresionFactura.setEntrega_direccion1(fef.getDireccion());
+					}
+				}
+				impresionFactura.setEntrega_cp(fef.getCp());
+				impresionFactura.setEntrega_ciudad(fef.getCiudad());
+				impresionFactura.setEntrega_provincia(fef.getProvincia());
+				impresionFactura.setEntrega_pais(fef.getPais()); // multiidioma
+				impresionFactura.setEntrega_telefono(fef.getTelefono());
+
+			}
+			if (fef.isFacturar()) {
+				impresionFactura.setFactura_nombre(fef.getNombre());
+				if (fef.getDireccion() != null) {
+					if (fef.getDireccion().length() > 100) {
+						impresionFactura.setFactura_direccion1(fef.getDireccion().substring(0, 100));
+						impresionFactura.setFactura_direccion2(fef.getDireccion().substring(100));
+					} else {
+						impresionFactura.setFactura_direccion1(fef.getDireccion());
+					}
+				}
+				impresionFactura.setFactura_cp(fef.getCp());
+				impresionFactura.setFactura_ciudad(fef.getCiudad());
+				impresionFactura.setFactura_provincia(fef.getProvincia());
+				impresionFactura.setFactura_pais(fef.getPais()); // multiidioma
+				impresionFactura.setFactura_telefono(fef.getTelefono());
+
+			}
+		}
+		impresionFactura.setFormaPago_nombre(formaPago.getNombreES()); // multiidioma
+		impresionFactura.setFactura_observaciones(factura.getObservaciones());
+		BigDecimal totalProductos = new BigDecimal(0);
+		BigDecimal totalSinIva = new BigDecimal(0);
+		BigDecimal precioUnitSinIva = new BigDecimal(0);
+		BigDecimal cantidad = new BigDecimal(0);
+		BigDecimal importeEnvioSinIva = new BigDecimal(factura.getImporteEnvioSinIva(), MathContext.DECIMAL64);
+		BigDecimal descuentoImporteTotal = new BigDecimal(factura.getDescuentoImporteTotal(), MathContext.DECIMAL64);
+		BigDecimal ivaImporteTotal = new BigDecimal(factura.getIvaImporteTotal(), MathContext.DECIMAL64);
+		List<ImpresionProducto> impresionProductoList = new ArrayList<>();
+		ImpresionProducto ip;
+		Producto producto;
+		for (ProductoFactura pf : productoFacturaList) {
+			precioUnitSinIva = new BigDecimal(pf.getPrecioUnitSinIva(), MathContext.DECIMAL64);
+			cantidad = new BigDecimal(pf.getCantidad(), MathContext.DECIMAL64);
+			totalProductos = totalProductos.add(precioUnitSinIva.multiply(cantidad));
+			ip = new ImpresionProducto();
+			ip.setIdPro(pf.getProducto().getIdPro());
+			producto = productoService.findById(pf.getProducto().getIdPro());
+			ip.setProducto_nombre(producto.getNombreES()); // multiidioma
+			ip.setPorcentajeDescuento(pf.getPorcentajeDescuento());
+			ip.setPrecioUnitSinIva(pf.getPrecioUnitSinIva());
+			ip.setIvaProducto(pf.getIvaProducto());
+			ip.setCantidad(pf.getCantidad());
+			ip.setPrecioFinalRecibidoPagado(pf.getPrecioFinalRecibidoPagado());
+			ip.setProducto_observaciones(pf.getObservaciones());
+			impresionProductoList.add(ip);
+		}
+		impresionFactura.setImpresionProductoList(impresionProductoList);
+		impresionFactura.setTotalProductos(totalProductos.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+		impresionFactura.setImporteEnvioSinIva(factura.getImporteEnvioSinIva());
+		impresionFactura.setDescuentoTotal(factura.getDescuentoTotal());
+		impresionFactura.setDescuentoImporteTotal(factura.getDescuentoImporteTotal());
+		totalSinIva = totalProductos.add(importeEnvioSinIva).subtract(descuentoImporteTotal);
+		impresionFactura.setTotalSinIva(totalSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+		impresionFactura.setIvaImporteTotal(factura.getIvaImporteTotal());
+		impresionFactura.setImporteTotal(
+				(totalSinIva.add(ivaImporteTotal)).divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+		if (cuota == null) {
+			impresionFactura.setHayCuotas(false);
+			impresionFactura.setIdCuo(0);
+		} else {
+			impresionFactura.setHayCuotas(true);
+			impresionFactura.setIdCuo(cuota.getIdCuo());
+			impresionFactura.setComisionAperturaPor(cuota.getComisionAperturaPor());
+			impresionFactura.setInteresPor(cuota.getInteresPor());
+		}
+		if (empresaPropia.getDireccionEmpresa() != null && empresaPropia.getDireccionEmpresa().getIdDirEmp() != 0) {
+			DireccionEmpresa de = empresaPropia.getDireccionEmpresa();
+			impresionFactura.setTipoVia(de.getTipoVia());
+			impresionFactura.setNombreVia(de.getNombreVia());
+			impresionFactura.setNumero(de.getNumero());
+			impresionFactura.setResto(de.getResto());
+			impresionFactura.setCp(de.getCp());
+			impresionFactura.setCiudad(de.getCiudad());
+			impresionFactura.setProvincia(de.getProvincia());
+			if (de.getPais() != null) {
+				impresionFactura.setPais(de.getPais().getNombreES()); // multiidioma
+			}
+		}
+		impresionFactura.setCif(empresaPropia.getCif());
+		impresionFactura.setTelefono(empresaPropia.getTelefono());
+
+		return impresionFactura;
 	}
 
 }

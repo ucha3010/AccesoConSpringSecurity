@@ -14,9 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.dao.model.ModelCuotaDetalle;
-import com.damian.dao.model.ModelFactura;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Factura;
+import com.damian.pojo.front.ImpresionFactura;
 import com.damian.service.CuotaDetalleService;
 import com.damian.service.EstadoService;
 import com.damian.service.FacturaService;
@@ -124,11 +124,11 @@ public class FacturaController {
 
 	@RequestMapping("/factura/pdf/{idFac}")
 	public String getAll(ModelMap modelAndView, @PathVariable("idFac") int idFac) {
-		ModelFactura factura = new ModelFactura();
+		ImpresionFactura factura = new ImpresionFactura();
 		List<ModelCuotaDetalle> cuotaDetalleList = new ArrayList<>();
 		if (idFac > 0) {
-			factura = facturaService.findModelById(idFac);
-			if (factura.getIdCuo() != 0) {
+			factura = facturaService.findImpresionFacturaById(idFac);
+			if (factura.isHayCuotas()) {
 				cuotaDetalleList = cuotaDetalleService.findModelByIdCuo(factura.getIdCuo());
 			}
 		}

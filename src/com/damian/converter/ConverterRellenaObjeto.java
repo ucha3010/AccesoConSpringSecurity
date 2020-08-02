@@ -29,6 +29,7 @@ import com.damian.dao.model.ModelDatosPersonales;
 import com.damian.dao.model.ModelDireccion;
 import com.damian.dao.model.ModelDireccionEmpresa;
 import com.damian.dao.model.ModelEmpresa;
+import com.damian.dao.model.ModelEmpresaPropia;
 import com.damian.dao.model.ModelEstado;
 import com.damian.dao.model.ModelFactura;
 import com.damian.dao.model.ModelFormaPago;
@@ -42,6 +43,7 @@ import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
 import com.damian.pojo.DireccionEmpresa;
 import com.damian.pojo.Empresa;
+import com.damian.pojo.EmpresaPropia;
 import com.damian.pojo.Estado;
 import com.damian.pojo.Factura;
 import com.damian.pojo.FormaPago;
@@ -63,16 +65,16 @@ public class ConverterRellenaObjeto {
 
 	@Autowired
 	private CategoriaDAO categoriaDAO;
-	
+
 	@Autowired
 	private ConverterDatosPersonales converterDatosPersonales;
-	
+
 	@Autowired
 	private ConverterUsuario converterUsuario;
-	
+
 	@Autowired
 	private CuotaDAO cuotaDAO;
-	
+
 	@Autowired
 	private CuotaDetalleDAO cuotaDetalleDAO;
 
@@ -93,7 +95,7 @@ public class ConverterRellenaObjeto {
 
 	@Autowired
 	private FormaPagoDAO formaPagoDAO;
-	
+
 	@Autowired
 	private FotoService fotoService;
 
@@ -242,7 +244,7 @@ public class ConverterRellenaObjeto {
 		Usuario u = converterUsuario.convert(mu);
 		u.setUsuarioRol(usuarioRolDAO.findByIdUsrModel(mu.getIdUsr()));
 		u.setDatosPersonales(dp);
-		
+
 		return u;
 	}
 
@@ -285,7 +287,7 @@ public class ConverterRellenaObjeto {
 		f.setProductoFacturaList(productoFacturaDAO.findByIdFacModel(mf.getIdFac()));
 		f.setEstado(estadoDAO.findById(mf.getIdEst()));
 		f.setFormaPago(formaPagoDAO.findById(mf.getIdFor()));
-		if(mf.getIdCuo() != 0) {
+		if (mf.getIdCuo() != 0) {
 			f.setCuota(cuotaDAO.findById(mf.getIdCuo()));
 		}
 
@@ -307,9 +309,16 @@ public class ConverterRellenaObjeto {
 	}
 
 	public void rellenaCuota(Cuota c, ModelCuota mc) {
-		
+
 		c.setCuotaDetalles(cuotaDetalleDAO.findByIdCuo(mc.getIdCuo()));
-		
+
+	}
+
+	public void rellenaEmpresaPropia(EmpresaPropia e, ModelEmpresaPropia me) {
+
+		DireccionEmpresa direccionEmpresa = direccionEmpresaDAO.findByIdModel(me.getIdDirEmp());
+		e.setDireccionEmpresa(direccionEmpresa);
+
 	}
 
 }

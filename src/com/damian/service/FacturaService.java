@@ -5,9 +5,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.damian.dao.model.ModelFactura;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Factura;
+import com.damian.pojo.front.ImpresionFactura;
 
 public interface FacturaService {
 
@@ -39,6 +39,6 @@ public interface FacturaService {
 	
 	public List<Map<String, Object>> facturaMap(int idFac);
 
-	public ModelFactura findModelById(int idFac);
+	public ImpresionFactura findImpresionFacturaById(int idFac);
 
 }
