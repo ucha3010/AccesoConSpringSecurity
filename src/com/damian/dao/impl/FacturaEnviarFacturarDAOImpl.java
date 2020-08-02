@@ -61,7 +61,7 @@ public class FacturaEnviarFacturarDAOImpl implements FacturaEnviarFacturarDAO {
 		} else {
 			ModelFacturaEnviarFacturar mfef = converterFacturaEnviarFacturar.convert(facturaEnviarFacturar);
 			String sql = "INSERT INTO " + TABLA
-					+ " (nombre, direccion, cp, ciudad, provincia, pais, telefono, facturar, " + "enviar, idFac) "
+					+ " (nombre, direccion, cp, ciudad, provincia, pais, telefono, facturar, enviar, idFac) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			int result = jdbcTemplate.update(sql, mfef.getNombre(), mfef.getDireccion(), mfef.getCp(), mfef.getCiudad(),
 					mfef.getProvincia(), mfef.getPais(), mfef.getTelefono(), mfef.isFacturar(), mfef.isEnviar(),

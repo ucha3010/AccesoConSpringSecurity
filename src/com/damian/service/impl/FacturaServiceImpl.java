@@ -277,15 +277,16 @@ public class FacturaServiceImpl implements FacturaService {
 			List<ProductoFactura> productoFacturaList) {
 
 		ImpresionFactura impresionFactura = new ImpresionFactura();
+		int limiteDirección = 50;
 		impresionFactura.setFechaCompra(factura.getFechaCompra());
 		impresionFactura.setIdFac(factura.getIdFac());
 		for (FacturaEnviarFacturar fef : facturaEnviarFacturarList) {
 			if (fef.isEnviar()) {
 				impresionFactura.setEntrega_nombre(fef.getNombre());
 				if (fef.getDireccion() != null) {
-					if (fef.getDireccion().length() > 100) {
-						impresionFactura.setEntrega_direccion1(fef.getDireccion().substring(0, 100));
-						impresionFactura.setEntrega_direccion2(fef.getDireccion().substring(100));
+					if (fef.getDireccion().length() > limiteDirección) {
+						impresionFactura.setEntrega_direccion1(fef.getDireccion().substring(0, limiteDirección));
+						impresionFactura.setEntrega_direccion2(fef.getDireccion().substring(limiteDirección));
 					} else {
 						impresionFactura.setEntrega_direccion1(fef.getDireccion());
 					}
@@ -300,9 +301,9 @@ public class FacturaServiceImpl implements FacturaService {
 			if (fef.isFacturar()) {
 				impresionFactura.setFactura_nombre(fef.getNombre());
 				if (fef.getDireccion() != null) {
-					if (fef.getDireccion().length() > 100) {
-						impresionFactura.setFactura_direccion1(fef.getDireccion().substring(0, 100));
-						impresionFactura.setFactura_direccion2(fef.getDireccion().substring(100));
+					if (fef.getDireccion().length() > limiteDirección) {
+						impresionFactura.setFactura_direccion1(fef.getDireccion().substring(0, limiteDirección));
+						impresionFactura.setFactura_direccion2(fef.getDireccion().substring(limiteDirección));
 					} else {
 						impresionFactura.setFactura_direccion1(fef.getDireccion());
 					}

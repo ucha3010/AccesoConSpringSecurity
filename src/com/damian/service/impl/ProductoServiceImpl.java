@@ -18,8 +18,11 @@ import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Categoria;
 import com.damian.pojo.Cuota;
 import com.damian.pojo.CuotaDetalle;
+import com.damian.pojo.DireccionEmpresa;
+import com.damian.pojo.EmpresaPropia;
 import com.damian.pojo.Estado;
 import com.damian.pojo.Factura;
+import com.damian.pojo.FacturaEnviarFacturar;
 import com.damian.pojo.FormaPago;
 import com.damian.pojo.Foto;
 import com.damian.pojo.Producto;
@@ -31,6 +34,9 @@ import com.damian.pojo.front.FrontProductoStock;
 import com.damian.service.CategoriaService;
 import com.damian.service.CuotaDetalleService;
 import com.damian.service.CuotaService;
+import com.damian.service.DireccionEmpresaService;
+import com.damian.service.EmpresaPropiaService;
+import com.damian.service.FacturaEnviarFacturarService;
 import com.damian.service.FacturaService;
 import com.damian.service.FotoService;
 import com.damian.service.ProductoEmpresaService;
@@ -51,6 +57,15 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
 	private CuotaDetalleService cuotaDetalleService;
+	
+	@Autowired
+	private DireccionEmpresaService direccionEmpresaService;
+	
+	@Autowired
+	private EmpresaPropiaService empresaPropiaService;
+	
+	@Autowired
+	private FacturaEnviarFacturarService facturaEnviarFacturarService;
 
 	@Autowired
 	private FacturaService facturaService;
@@ -157,6 +172,17 @@ public class ProductoServiceImpl implements ProductoService {
 
 		int idFac = facturaService.save(factura, request);
 		factura.setIdFac(idFac);
+
+		List<EmpresaPropia> empresaPropiaList = empresaPropiaService.findAll();
+		EmpresaPropia empresaPropia = new EmpresaPropia();
+		if(!empresaPropiaList.isEmpty()) {
+			empresaPropia = empresaPropiaList.get(0);
+			empresaPropia.setDireccionEmpresa(direccionEmpresaService.findById(empresaPropia.getDireccionEmpresa().getIdDirEmp()));
+		}
+		FacturaEnviarFacturar facturaEnviarFacturar = fillFacturaEnviarFacturar(empresaPropia, factura);
+		if(facturaEnviarFacturar.getFactura() != null) {
+			facturaEnviarFacturarService.save(facturaEnviarFacturar, request);
+		}
 		ProductoFactura productoFactura = new ProductoFactura();
 		productoFactura.setProducto(producto);
 		productoFactura.setFactura(factura);
@@ -333,6 +359,34 @@ public class ProductoServiceImpl implements ProductoService {
 			}
 		}
 		return fotoPrincipal;
+	}
+
+	private FacturaEnviarFacturar fillFacturaEnviarFacturar(EmpresaPropia empresaPropia, Factura factura) {
+		
+		FacturaEnviarFacturar facturaEnviarFacturar = new FacturaEnviarFacturar();
+		if(empresaPropia.getIdPropia() != 0) {
+			facturaEnviarFacturar.setNombre(empresaPropia.getRazonSocial());
+			if(empresaPropia.getDireccionEmpresa() != null) {
+				DireccionEmpresa de = empresaPropia.getDireccionEmpresa();
+				facturaEnviarFacturar.setDireccion(
+						Utils.entradaOVacio(de.getTipoVia()).concat(" ").concat(Utils.entradaOVacio(de.getNombreVia()))
+								.concat(" ").concat(Utils.entradaOVacio(de.getNumero())).concat(" ")
+								.concat(Utils.entradaOVacio(de.getResto())));
+				facturaEnviarFacturar.setCp(de.getCp());
+				facturaEnviarFacturar.setCiudad(de.getCiudad());
+				facturaEnviarFacturar.setProvincia(de.getProvincia());
+				if(de.getPais() != null) {
+					facturaEnviarFacturar.setPais(de.getPais().getNombreES());
+				}
+			}
+			facturaEnviarFacturar.setTelefono(empresaPropia.getTelefono());
+			facturaEnviarFacturar.setFacturar(true);
+			facturaEnviarFacturar.setEnviar(true);
+			facturaEnviarFacturar.setFactura(factura);
+		}
+		
+		
+		return facturaEnviarFacturar;
 	}
 
 }

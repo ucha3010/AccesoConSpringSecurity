@@ -134,5 +134,9 @@ public class Utils {
 		}
 		return loggedUser;
 	}
+	
+	public static String entradaOVacio(String entrada) {
+		return (entrada == null) ? "": entrada;
+	}
 
 }
