@@ -319,10 +319,13 @@ public class FacturaServiceImpl implements FacturaService {
 		impresionFactura.setFormaPago_nombre(formaPago.getNombreES()); // multiidioma
 		impresionFactura.setFactura_observaciones(factura.getObservaciones());
 		BigDecimal totalProductos = new BigDecimal(0);
+		BigDecimal cien = new BigDecimal(100);
 		BigDecimal totalSinIva = new BigDecimal(0);
 		BigDecimal precioUnitSinIva = new BigDecimal(0);
 		BigDecimal cantidad = new BigDecimal(0);
 		BigDecimal importeEnvioSinIva = new BigDecimal(factura.getImporteEnvioSinIva(), MathContext.DECIMAL64);
+		BigDecimal porcentajeDescuento = new BigDecimal(0);
+		BigDecimal ivaProducto = new BigDecimal(0);
 		BigDecimal descuentoImporteTotal = new BigDecimal(factura.getDescuentoImporteTotal(), MathContext.DECIMAL64);
 		BigDecimal ivaImporteTotal = new BigDecimal(factura.getIvaImporteTotal(), MathContext.DECIMAL64);
 		List<ImpresionProducto> impresionProductoList = new ArrayList<>();
@@ -332,13 +335,16 @@ public class FacturaServiceImpl implements FacturaService {
 			precioUnitSinIva = new BigDecimal(pf.getPrecioUnitSinIva(), MathContext.DECIMAL64);
 			cantidad = new BigDecimal(pf.getCantidad(), MathContext.DECIMAL64);
 			totalProductos = totalProductos.add(precioUnitSinIva.multiply(cantidad));
+			porcentajeDescuento = new BigDecimal(pf.getPorcentajeDescuento(), MathContext.DECIMAL64);
+			ivaProducto = new BigDecimal(pf.getIvaProducto(), MathContext.DECIMAL64);
 			ip = new ImpresionProducto();
 			ip.setIdPro(pf.getProducto().getIdPro());
 			producto = productoService.findById(pf.getProducto().getIdPro());
 			ip.setProducto_nombre(producto.getNombreES()); // multiidioma
-			ip.setPorcentajeDescuento(pf.getPorcentajeDescuento());
+			//como el pattern de jasperrepot me multiplica este número por 100 tengo que hacer esto
+			ip.setPorcentajeDescuento(porcentajeDescuento.divide(cien, 4, RoundingMode.DOWN).doubleValue());
 			ip.setPrecioUnitSinIva(pf.getPrecioUnitSinIva());
-			ip.setIvaProducto(pf.getIvaProducto());
+			ip.setIvaProducto(ivaProducto.divide(cien, 4, RoundingMode.DOWN).doubleValue());
 			ip.setCantidad(pf.getCantidad());
 			ip.setPrecioFinalRecibidoPagado(pf.getPrecioFinalRecibidoPagado());
 			ip.setProducto_observaciones(pf.getObservaciones());
