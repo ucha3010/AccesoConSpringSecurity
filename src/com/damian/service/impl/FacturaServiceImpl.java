@@ -326,6 +326,7 @@ public class FacturaServiceImpl implements FacturaService {
 		BigDecimal importeEnvioSinIva = new BigDecimal(factura.getImporteEnvioSinIva(), MathContext.DECIMAL64);
 		BigDecimal porcentajeDescuento = new BigDecimal(0);
 		BigDecimal ivaProducto = new BigDecimal(0);
+		BigDecimal descuentoTotal = new BigDecimal(factura.getDescuentoTotal(), MathContext.DECIMAL64);
 		BigDecimal descuentoImporteTotal = new BigDecimal(factura.getDescuentoImporteTotal(), MathContext.DECIMAL64);
 		BigDecimal ivaImporteTotal = new BigDecimal(factura.getIvaImporteTotal(), MathContext.DECIMAL64);
 		List<ImpresionProducto> impresionProductoList = new ArrayList<>();
@@ -353,7 +354,7 @@ public class FacturaServiceImpl implements FacturaService {
 		impresionFactura.setImpresionProductoList(impresionProductoList);
 		impresionFactura.setTotalProductos(totalProductos.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
 		impresionFactura.setImporteEnvioSinIva(factura.getImporteEnvioSinIva());
-		impresionFactura.setDescuentoTotal(factura.getDescuentoTotal());
+		impresionFactura.setDescuentoTotal(descuentoTotal.divide(cien, 4, RoundingMode.DOWN).doubleValue());
 		impresionFactura.setDescuentoImporteTotal(factura.getDescuentoImporteTotal());
 		totalSinIva = totalProductos.add(importeEnvioSinIva).subtract(descuentoImporteTotal);
 		impresionFactura.setTotalSinIva(totalSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
