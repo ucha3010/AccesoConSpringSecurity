@@ -365,10 +365,12 @@ public class FacturaServiceImpl implements FacturaService {
 			impresionFactura.setHayCuotas(false);
 			impresionFactura.setIdCuo(0);
 		} else {
+			BigDecimal comisionAperturaPor = new BigDecimal(cuota.getComisionAperturaPor(), MathContext.DECIMAL64);
+			BigDecimal interesPor = new BigDecimal(cuota.getInteresPor(), MathContext.DECIMAL64);
 			impresionFactura.setHayCuotas(true);
 			impresionFactura.setIdCuo(cuota.getIdCuo());
-			impresionFactura.setComisionAperturaPor(cuota.getComisionAperturaPor());
-			impresionFactura.setInteresPor(cuota.getInteresPor());
+			impresionFactura.setComisionAperturaPor(comisionAperturaPor.divide(cien, 4, RoundingMode.DOWN).doubleValue());
+			impresionFactura.setInteresPor(interesPor.divide(cien, 4, RoundingMode.DOWN).doubleValue());
 		}
 		if (empresaPropia.getDireccionEmpresa() != null && empresaPropia.getDireccionEmpresa().getIdDirEmp() != 0) {
 			DireccionEmpresa de = empresaPropia.getDireccionEmpresa();
