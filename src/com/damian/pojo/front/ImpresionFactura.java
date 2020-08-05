@@ -48,16 +48,9 @@ public class ImpresionFactura {
 	private double interesPor;
 
 	// page footer
-	private String tipoVia;
-	private String nombreVia;
-	private String numero;
-	private String resto;
-	private String cp;
-	private String provincia;
-	private String ciudad;
-	private String pais;
-	private String cif;
-	private String telefono;
+	private String primerRenglon;
+	private String segundoRenglon;
+	private String tercerRenglon;
 
 	public ImpresionFactura() {
 	}
@@ -543,153 +536,48 @@ public class ImpresionFactura {
 	}
 
 	/**
-	 * @return the tipoVia
+	 * @return the primerRenglon
 	 */
-	public String getTipoVia() {
-		return tipoVia;
+	public String getPrimerRenglon() {
+		return primerRenglon;
 	}
 
 	/**
-	 * @param tipoVia
-	 *            the tipoVia to set
+	 * @param primerRenglon
+	 *            the primerRenglon to set
 	 */
-	public void setTipoVia(String tipoVia) {
-		this.tipoVia = tipoVia;
+	public void setPrimerRenglon(String primerRenglon) {
+		this.primerRenglon = primerRenglon;
 	}
 
 	/**
-	 * @return the nombreVia
+	 * @return the segundoRenglon
 	 */
-	public String getNombreVia() {
-		return nombreVia;
+	public String getSegundoRenglon() {
+		return segundoRenglon;
 	}
 
 	/**
-	 * @param nombreVia
-	 *            the nombreVia to set
+	 * @param segundoRenglon
+	 *            the segundoRenglon to set
 	 */
-	public void setNombreVia(String nombreVia) {
-		this.nombreVia = nombreVia;
+	public void setSegundoRenglon(String segundoRenglon) {
+		this.segundoRenglon = segundoRenglon;
 	}
 
 	/**
-	 * @return the numero
+	 * @return the tercerRenglon
 	 */
-	public String getNumero() {
-		return numero;
+	public String getTercerRenglon() {
+		return tercerRenglon;
 	}
 
 	/**
-	 * @param numero
-	 *            the numero to set
+	 * @param tercerRenglon
+	 *            the tercerRenglon to set
 	 */
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	/**
-	 * @return the resto
-	 */
-	public String getResto() {
-		return resto;
-	}
-
-	/**
-	 * @param resto
-	 *            the resto to set
-	 */
-	public void setResto(String resto) {
-		this.resto = resto;
-	}
-
-	/**
-	 * @return the cp
-	 */
-	public String getCp() {
-		return cp;
-	}
-
-	/**
-	 * @param cp
-	 *            the cp to set
-	 */
-	public void setCp(String cp) {
-		this.cp = cp;
-	}
-
-	/**
-	 * @return the provincia
-	 */
-	public String getProvincia() {
-		return provincia;
-	}
-
-	/**
-	 * @param provincia
-	 *            the provincia to set
-	 */
-	public void setProvincia(String provincia) {
-		this.provincia = provincia;
-	}
-
-	/**
-	 * @return the ciudad
-	 */
-	public String getCiudad() {
-		return ciudad;
-	}
-
-	/**
-	 * @param ciudad
-	 *            the ciudad to set
-	 */
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
-	}
-
-	/**
-	 * @return the pais
-	 */
-	public String getPais() {
-		return pais;
-	}
-
-	/**
-	 * @param pais
-	 *            the pais to set
-	 */
-	public void setPais(String pais) {
-		this.pais = pais;
-	}
-
-	/**
-	 * @return the cif
-	 */
-	public String getCif() {
-		return cif;
-	}
-
-	/**
-	 * @param cif
-	 *            the cif to set
-	 */
-	public void setCif(String cif) {
-		this.cif = cif;
-	}
-
-	/**
-	 * @return the telefono
-	 */
-	public String getTelefono() {
-		return telefono;
-	}
-
-	/**
-	 * @param telefono
-	 *            the telefono to set
-	 */
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setTercerRenglon(String tercerRenglon) {
+		this.tercerRenglon = tercerRenglon;
 	}
 
 	/*
@@ -706,15 +594,14 @@ public class ImpresionFactura {
 				+ entrega_telefono + ", factura_nombre=" + factura_nombre + ", factura_direccion1=" + factura_direccion1
 				+ ", factura_direccion2=" + factura_direccion2 + ", factura_cp=" + factura_cp + ", factura_ciudad="
 				+ factura_ciudad + ", factura_provincia=" + factura_provincia + ", factura_pais=" + factura_pais
-				+ ", factura_telefono=" + factura_telefono + ", formaPago_nombre=" + formaPago_nombre
-				+ ", factura_observaciones=" + factura_observaciones + ", totalProductos=" + totalProductos
-				+ ", importeEnvioSinIva=" + importeEnvioSinIva + ", descuentoTotal=" + descuentoTotal
-				+ ", descuentoImporteTotal=" + descuentoImporteTotal + ", totalSinIva=" + totalSinIva
-				+ ", ivaImporteTotal=" + ivaImporteTotal + ", importeTotal=" + importeTotal + ", hayCuotas=" + hayCuotas
-				+ ", idCuo=" + idCuo + ", comisionAperturaPor=" + comisionAperturaPor + ", interesPor=" + interesPor
-				+ ", tipoVia=" + tipoVia + ", nombreVia=" + nombreVia + ", numero=" + numero + ", resto=" + resto
-				+ ", cp=" + cp + ", provincia=" + provincia + ", ciudad=" + ciudad + ", pais=" + pais + ", cif=" + cif
-				+ ", telefono=" + telefono + "]";
+				+ ", factura_telefono=" + factura_telefono + ", impresionProductoList=" + impresionProductoList
+				+ ", formaPago_nombre=" + formaPago_nombre + ", factura_observaciones=" + factura_observaciones
+				+ ", totalProductos=" + totalProductos + ", importeEnvioSinIva=" + importeEnvioSinIva
+				+ ", descuentoTotal=" + descuentoTotal + ", descuentoImporteTotal=" + descuentoImporteTotal
+				+ ", totalSinIva=" + totalSinIva + ", ivaImporteTotal=" + ivaImporteTotal + ", importeTotal="
+				+ importeTotal + ", hayCuotas=" + hayCuotas + ", idCuo=" + idCuo + ", comisionAperturaPor="
+				+ comisionAperturaPor + ", interesPor=" + interesPor + ", primerRenglon=" + primerRenglon
+				+ ", segundoRenglon=" + segundoRenglon + ", tercerRenglon=" + tercerRenglon + "]";
 	}
 
 }

@@ -372,21 +372,35 @@ public class FacturaServiceImpl implements FacturaService {
 			impresionFactura.setComisionAperturaPor(comisionAperturaPor.divide(cien, 4, RoundingMode.DOWN).doubleValue());
 			impresionFactura.setInteresPor(interesPor.divide(cien, 4, RoundingMode.DOWN).doubleValue());
 		}
+		StringBuilder primerRenglon = new StringBuilder();
+		StringBuilder segundoRenglon = new StringBuilder();
+		StringBuilder tercerRenglon = new StringBuilder();
 		if (empresaPropia.getDireccionEmpresa() != null && empresaPropia.getDireccionEmpresa().getIdDirEmp() != 0) {
 			DireccionEmpresa de = empresaPropia.getDireccionEmpresa();
-			impresionFactura.setTipoVia(de.getTipoVia());
-			impresionFactura.setNombreVia(de.getNombreVia());
-			impresionFactura.setNumero(de.getNumero());
-			impresionFactura.setResto(de.getResto());
-			impresionFactura.setCp(de.getCp());
-			impresionFactura.setCiudad(de.getCiudad());
-			impresionFactura.setProvincia(de.getProvincia());
+			primerRenglon.append(Utils.entradaOVacio(de.getTipoVia()));
+			primerRenglon.append(Utils.siHayDatoAgregoEspacio(de.getTipoVia()));
+			primerRenglon.append(Utils.entradaOVacio(de.getNombreVia()));
+			primerRenglon.append(Utils.siHayDatoAgregoEspacio(de.getNombreVia()));
+			primerRenglon.append(Utils.entradaOVacio(de.getNumero()));
+			primerRenglon.append(Utils.siHayDatoAgregoEspacio(de.getNumero()));
+			primerRenglon.append(Utils.entradaOVacio(de.getResto()));
+			segundoRenglon.append(Utils.entradaOVacio(de.getCp()));
+			segundoRenglon.append(Utils.siHayDatoAgregoEspacio(de.getCp()));
+			segundoRenglon.append(Utils.entradaOVacio(de.getCiudad()));
+			segundoRenglon.append(Utils.siHayDatoAgregoEspacio(de.getCiudad()));
+			segundoRenglon.append(Utils.entradaOVacio(de.getProvincia()));
+			segundoRenglon.append(Utils.siHayDatoAgregoEspacio(de.getProvincia()));
 			if (de.getPais() != null) {
-				impresionFactura.setPais(de.getPais().getNombreES()); // multiidioma
+				segundoRenglon.append(de.getPais().getNombreES()); // multiidioma
 			}
 		}
-		impresionFactura.setCif(empresaPropia.getCif());
-		impresionFactura.setTelefono(empresaPropia.getTelefono());
+		tercerRenglon.append("CIF: " + Utils.entradaOVacio(empresaPropia.getCif()));
+		String espacioCif = Utils.siHayDatoAgregoEspacio(empresaPropia.getCif());
+		tercerRenglon.append(espacioCif + espacioCif + espacioCif + espacioCif);
+		tercerRenglon.append(Utils.entradaOVacio(empresaPropia.getTelefono()));
+		impresionFactura.setPrimerRenglon(primerRenglon.toString());
+		impresionFactura.setSegundoRenglon(segundoRenglon.toString());
+		impresionFactura.setTercerRenglon(tercerRenglon.toString());
 
 		return impresionFactura;
 	}

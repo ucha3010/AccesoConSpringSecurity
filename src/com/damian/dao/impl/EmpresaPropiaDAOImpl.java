@@ -127,7 +127,7 @@ public class EmpresaPropiaDAOImpl implements EmpresaPropiaDAO {
 				BeanPropertyRowMapper.newInstance(ModelEmpresaPropia.class));
 		List<EmpresaPropia> eList = new ArrayList<>();
 		for (ModelEmpresaPropia me : mpList) {
-			eList.add(converterEmpresaPropia.convert(me));
+			eList.add(converterEmpresaPropia.convertAll(me));
 		}
 		return eList;
 	}

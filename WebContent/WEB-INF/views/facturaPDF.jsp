@@ -43,16 +43,9 @@
 		params.put("idCuo", factura.getIdCuo());
 		params.put("comisionAperturaPor", factura.getComisionAperturaPor());
 		params.put("interesPor", factura.getInteresPor());
-		params.put("tipoVia", factura.getTipoVia());
-		params.put("nombreVia", factura.getNombreVia());
-		params.put("numero", factura.getNumero());
-		params.put("resto", factura.getResto());
-		params.put("cp", factura.getCp());
-		params.put("provincia", factura.getProvincia());
-		params.put("ciudad", factura.getCiudad());
-		params.put("pais", factura.getPais());
-		params.put("cif", factura.getCif());
-		params.put("telefono", factura.getTelefono());
+		params.put("primerRenglon", factura.getPrimerRenglon());
+		params.put("segundoRenglon", factura.getSegundoRenglon());
+		params.put("tercerRenglon", factura.getTercerRenglon());
 		
 		params.put("impresionProductoList", factura.getImpresionProductoList());
 

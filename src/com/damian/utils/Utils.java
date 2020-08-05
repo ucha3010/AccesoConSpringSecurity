@@ -138,5 +138,9 @@ public class Utils {
 	public static String entradaOVacio(String entrada) {
 		return (entrada == null) ? "": entrada;
 	}
+	
+	public static String siHayDatoAgregoEspacio(String entrada) {
+		return (entradaOVacio(entrada).length() == 0) ? "" : " ";
+	}
 
 }
