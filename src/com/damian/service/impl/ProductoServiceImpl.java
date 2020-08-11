@@ -368,6 +368,7 @@ public class ProductoServiceImpl implements ProductoService {
 			facturaEnviarFacturar.setNombre(empresaPropia.getRazonSocial());
 			if(empresaPropia.getDireccionEmpresa() != null) {
 				DireccionEmpresa de = empresaPropia.getDireccionEmpresa();
+				//TODO DAMIAN el tipo de vía hay que ponerlo bien
 				facturaEnviarFacturar.setDireccion(
 						Utils.entradaOVacio(de.getTipoVia()).concat(" ").concat(Utils.entradaOVacio(de.getNombreVia()))
 								.concat(" ").concat(Utils.entradaOVacio(de.getNumero())).concat(" ")

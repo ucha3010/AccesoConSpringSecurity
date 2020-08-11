@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,6 +38,7 @@ import com.damian.service.FacturaEnviarFacturarService;
 import com.damian.service.FacturaEstadoService;
 import com.damian.service.FacturaService;
 import com.damian.service.FormaPagoService;
+import com.damian.service.LanguageService;
 import com.damian.service.ProductoFacturaService;
 import com.damian.service.ProductoService;
 import com.damian.utils.Utils;
@@ -64,6 +66,9 @@ public class FacturaServiceImpl implements FacturaService {
 
 	@Autowired
 	private FormaPagoService formaPagoService;
+	
+	@Autowired
+	private LanguageService languageService;
 
 	@Autowired
 	private ProductoService productoService;
@@ -214,7 +219,7 @@ public class FacturaServiceImpl implements FacturaService {
 	}
 
 	@Override
-	public ImpresionFactura findImpresionFacturaById(int idFac) {
+	public ImpresionFactura findImpresionFacturaById(int idFac, HttpServletRequest request) {
 		ModelFactura factura = facturaDAO.findModelById(idFac);
 		FormaPago formaPago = formaPagoService.findByIdModel(factura.getIdFor());
 		List<FacturaEnviarFacturar> facturaEnviarFacturarList = facturaEnviarFacturarService.findByIdFac(idFac);
@@ -230,7 +235,7 @@ public class FacturaServiceImpl implements FacturaService {
 		List<ProductoFactura> productoFacturaList = productoFacturaService.findByIdFacModel(idFac);
 
 		return rellenarImpresionFactura(factura, formaPago, facturaEnviarFacturarList, cuota, empresaPropia,
-				productoFacturaList);
+				productoFacturaList, request);
 	}
 
 	private void saveFacturaEstado(Factura factura, HttpServletRequest request) {
@@ -274,7 +279,7 @@ public class FacturaServiceImpl implements FacturaService {
 
 	private ImpresionFactura rellenarImpresionFactura(ModelFactura factura, FormaPago formaPago,
 			List<FacturaEnviarFacturar> facturaEnviarFacturarList, Cuota cuota, EmpresaPropia empresaPropia,
-			List<ProductoFactura> productoFacturaList) {
+			List<ProductoFactura> productoFacturaList, HttpServletRequest request) {
 
 		ImpresionFactura impresionFactura = new ImpresionFactura();
 		int limiteDirección = 50;
@@ -377,7 +382,9 @@ public class FacturaServiceImpl implements FacturaService {
 		StringBuilder tercerRenglon = new StringBuilder();
 		if (empresaPropia.getDireccionEmpresa() != null && empresaPropia.getDireccionEmpresa().getIdDirEmp() != 0) {
 			DireccionEmpresa de = empresaPropia.getDireccionEmpresa();
-			primerRenglon.append(Utils.entradaOVacio(de.getTipoVia()));
+			//TODO DAMIAN poner bien tipo de vía
+			String via = languageService.getMessage(de.getTipoVia(), new Locale("es","ES"), request);
+			primerRenglon.append(Utils.entradaOVacio(via));
 			primerRenglon.append(Utils.siHayDatoAgregoEspacio(de.getTipoVia()));
 			primerRenglon.append(Utils.entradaOVacio(de.getNombreVia()));
 			primerRenglon.append(Utils.siHayDatoAgregoEspacio(de.getNombreVia()));

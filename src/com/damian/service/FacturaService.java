@@ -39,6 +39,6 @@ public interface FacturaService {
 	
 	public List<Map<String, Object>> facturaMap(int idFac);
 
-	public ImpresionFactura findImpresionFacturaById(int idFac);
+	public ImpresionFactura findImpresionFacturaById(int idFac, HttpServletRequest request);
 
 }

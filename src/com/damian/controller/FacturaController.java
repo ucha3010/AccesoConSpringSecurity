@@ -123,11 +123,11 @@ public class FacturaController {
 	}
 
 	@RequestMapping("/factura/pdf/{idFac}")
-	public String getAll(ModelMap modelAndView, @PathVariable("idFac") int idFac) {
+	public String getPdf(ModelMap modelAndView, @PathVariable("idFac") int idFac, HttpServletRequest request) {
 		ImpresionFactura factura = new ImpresionFactura();
 		List<ModelCuotaDetalle> cuotaDetalleList = new ArrayList<>();
 		if (idFac > 0) {
-			factura = facturaService.findImpresionFacturaById(idFac);
+			factura = facturaService.findImpresionFacturaById(idFac, request);
 			if (factura.isHayCuotas()) {
 				cuotaDetalleList = cuotaDetalleService.findModelByIdCuo(factura.getIdCuo());
 			}

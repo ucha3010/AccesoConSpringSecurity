@@ -83,9 +83,9 @@ public class Utils {
 		calendar.setTimeInMillis(milliSeconds);
 		return formatter.format(calendar.getTime());
 	}
-
-	public static String rutaHastaWebContent(HttpServletRequest request) {
-
+	
+	public static String rutaHastaProyecto(HttpServletRequest request) {
+		
 		// TODO DAMIAN por algún motivo el comando System.getProperty("user.dir") me
 		// está devolviendo la ruta donde está instalado el Eclipse en lugar
 		// de devolver la ruta de workspace (según leí, esa es la ruta que debería
@@ -97,7 +97,13 @@ public class Utils {
 		// Ruta hasta el proyecto
 		rutaWorkspace = rutaWorkspace + request.getContextPath().substring(1);
 		// Ruta dentro del proyecto
-		return rutaWorkspace + System.getProperty("file.separator") + "WebContent";
+		return rutaWorkspace;
+		
+	}
+
+	public static String rutaHastaWebContent(HttpServletRequest request) {
+
+		 return rutaHastaProyecto(request) + System.getProperty("file.separator") + "WebContent";
 	}
 
 	public static String rutaDentroResources(HttpServletRequest request, String carpeta) {

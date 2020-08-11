@@ -1,15 +1,20 @@
 package test.java;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.Locale;
+import java.util.Properties;
 
 public class TestUsuarioEmpresa {
 
 	public static void main(String[] args) {
+		try {
 		BigDecimal cienConVeintiCinco = new BigDecimal(100.25, MathContext.DECIMAL64);
 		BigDecimal veinte = new BigDecimal(30, MathContext.DECIMAL64);
 		System.out.println(cienConVeintiCinco.remainder(veinte));
@@ -61,6 +66,25 @@ public class TestUsuarioEmpresa {
 //		LocalLogger.logError(TestUsuarioEmpresa.class.getName(), "te mandaste una cagada");
 		
 		System.out.println(getDate(new Date().getTime(),"yyyyMMdd"));
+		System.out.println("***********************************************************");
+		
+		Locale locale = new Locale("es", "ES", "AL");
+		String basePath = new File("").getAbsolutePath();
+		System.out.println(basePath);
+		System.out.println("***********************************************************");
+		
+		Properties properties = System.getProperties();
+		Enumeration<Object> enumeration = properties.keys();
+		for (int i = 0; i < properties.size(); i++) {
+		    Object obj = enumeration.nextElement();
+		    System.out.println("Key: "+obj+"\tOutPut= "+System.getProperty(obj.toString()));
+		}
+		System.out.println("***********************************************************");
+		System.out.println(System.getProperty("user.dir"));
+		
+		} catch (Exception e) {
+			
+		}
 		
 	}
 	
