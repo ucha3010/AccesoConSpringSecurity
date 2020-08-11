@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 
 import com.damian.service.LanguageService;
+import com.damian.utils.LocalLogger;
 import com.damian.utils.Utils;
 
 @Service
@@ -19,7 +20,7 @@ public class LanguageServiceImpl implements LanguageService {
 	private String MULTILANGUAGE = "multilanguage";
 	private String PROPERTIES = ".properties";
 	private String SEPARATOR = System.getProperty("file.separator");
-	private String LOCAL_PACKAGE = "damian"; // TODO DAMIAN nombre a modificar según cliente
+	private String LOCAL_PACKAGE = "damian"; // TODO DAMIAN ANOTACION nombre a modificar según cliente
 
 	@Override
 	public String getMessage(String key, Locale locale, HttpServletRequest request) {
@@ -39,11 +40,9 @@ public class LanguageServiceImpl implements LanguageService {
 					.concat("com").concat(SEPARATOR).concat(LOCAL_PACKAGE).concat(SEPARATOR).concat("utils")
 					.concat(SEPARATOR).concat(filename)));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LocalLogger.logError(e.toString(), request);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LocalLogger.logError(e.toString(), request);
 		}
 		return p;
 	}

@@ -35,12 +35,14 @@ public class GeneralExceptionHandler {
 	}
 
 	@ExceptionHandler(DataIntegrityViolationException.class)
-	public ModelAndView handlerDataIntegrityViolationException(DataIntegrityViolationException ex, HttpServletRequest request) {
+	public ModelAndView handlerDataIntegrityViolationException(DataIntegrityViolationException ex,
+			HttpServletRequest request) {
 		return mensaje(ex, request);
 	}
 
 	@ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
-	public ModelAndView handleHttpMediaTypeNotAcceptableException(HttpMediaTypeNotAcceptableException ex, HttpServletRequest request) {
+	public ModelAndView handleHttpMediaTypeNotAcceptableException(HttpMediaTypeNotAcceptableException ex,
+			HttpServletRequest request) {
 		return mensaje(ex, request);
 	}
 
@@ -50,7 +52,8 @@ public class GeneralExceptionHandler {
 	}
 
 	@ExceptionHandler(JspPropertyNotFoundException.class)
-	public ModelAndView handleJspPropertyNotFoundException(JspPropertyNotFoundException ex, HttpServletRequest request) {
+	public ModelAndView handleJspPropertyNotFoundException(JspPropertyNotFoundException ex,
+			HttpServletRequest request) {
 		return mensaje(ex, request);
 	}
 
@@ -64,7 +67,7 @@ public class GeneralExceptionHandler {
 			indexService.manageIndex(model);
 		} catch (Exception e) {
 			model.addObject("errorLog", ex.toString());
-			model.setViewName("error");			
+			model.setViewName("error");
 		}
 		return model;
 

@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,6 +40,7 @@ import com.damian.service.EmpresaPropiaService;
 import com.damian.service.FacturaEnviarFacturarService;
 import com.damian.service.FacturaService;
 import com.damian.service.FotoService;
+import com.damian.service.LanguageService;
 import com.damian.service.ProductoEmpresaService;
 import com.damian.service.ProductoFacturaService;
 import com.damian.service.ProductoService;
@@ -57,13 +59,13 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
 	private CuotaDetalleService cuotaDetalleService;
-	
+
 	@Autowired
 	private DireccionEmpresaService direccionEmpresaService;
-	
+
 	@Autowired
 	private EmpresaPropiaService empresaPropiaService;
-	
+
 	@Autowired
 	private FacturaEnviarFacturarService facturaEnviarFacturarService;
 
@@ -72,6 +74,9 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
 	private FotoService fotoService;
+
+	@Autowired
+	private LanguageService languageService;
 
 	@Autowired
 	private ProductoDAO productoDAO;
@@ -175,12 +180,13 @@ public class ProductoServiceImpl implements ProductoService {
 
 		List<EmpresaPropia> empresaPropiaList = empresaPropiaService.findAll();
 		EmpresaPropia empresaPropia = new EmpresaPropia();
-		if(!empresaPropiaList.isEmpty()) {
+		if (!empresaPropiaList.isEmpty()) {
 			empresaPropia = empresaPropiaList.get(0);
-			empresaPropia.setDireccionEmpresa(direccionEmpresaService.findById(empresaPropia.getDireccionEmpresa().getIdDirEmp()));
+			empresaPropia.setDireccionEmpresa(
+					direccionEmpresaService.findById(empresaPropia.getDireccionEmpresa().getIdDirEmp()));
 		}
-		FacturaEnviarFacturar facturaEnviarFacturar = fillFacturaEnviarFacturar(empresaPropia, factura);
-		if(facturaEnviarFacturar.getFactura() != null) {
+		FacturaEnviarFacturar facturaEnviarFacturar = fillFacturaEnviarFacturar(empresaPropia, factura, request);
+		if (facturaEnviarFacturar.getFactura() != null) {
 			facturaEnviarFacturarService.save(facturaEnviarFacturar, request);
 		}
 		ProductoFactura productoFactura = new ProductoFactura();
@@ -210,8 +216,7 @@ public class ProductoServiceImpl implements ProductoService {
 						.add(new BigDecimal(fc.getImporteTotal(), MathContext.DECIMAL64));
 			}
 			if (frontProductoStock.getInteresPor() != 0) {
-				interesImp = totalCompletoAPagar.subtract(comisionAperturaImp)
-						.subtract(precioFinal);
+				interesImp = totalCompletoAPagar.subtract(comisionAperturaImp).subtract(precioFinal);
 			}
 
 			Cuota cuota = new Cuota();
@@ -250,7 +255,8 @@ public class ProductoServiceImpl implements ProductoService {
 				if (fc.getNumeroCuota() == 1) {
 					capitalPendiente = precioFinal;
 					interesCuotaImporte = importeCuotaTotal.subtract(comisionAperturaImp).subtract(cuotaSinInteres);
-					importeCuotaSinInteres = importeCuotaTotal.subtract(interesCuotaImporte).subtract(comisionAperturaImp);
+					importeCuotaSinInteres = importeCuotaTotal.subtract(interesCuotaImporte)
+							.subtract(comisionAperturaImp);
 				} else if (fc.getNumeroCuota() == frontProductoStock.getCuotas().size()) {
 					interesCuotaImporte = importeCuotaTotal.subtract(cuotaSinInteres.add(sumarUltimaCuota));
 					importeCuotaSinInteres = importeCuotaTotal.subtract(interesCuotaImporte);
@@ -312,9 +318,8 @@ public class ProductoServiceImpl implements ProductoService {
 		return productoDAO.getMaxId();
 	}
 
-	private void fillFactura(Factura factura, FrontProductoStock frontProductoStock,
-			BigDecimal precioUnitConIva, BigDecimal precioUnitSinIva,
-			HttpServletRequest request) {
+	private void fillFactura(Factura factura, FrontProductoStock frontProductoStock, BigDecimal precioUnitConIva,
+			BigDecimal precioUnitSinIva, HttpServletRequest request) {
 
 		factura.setCompra(frontProductoStock.isCompra());
 		factura.setIvaTotal(frontProductoStock.getIva());
@@ -361,22 +366,24 @@ public class ProductoServiceImpl implements ProductoService {
 		return fotoPrincipal;
 	}
 
-	private FacturaEnviarFacturar fillFacturaEnviarFacturar(EmpresaPropia empresaPropia, Factura factura) {
-		
+	private FacturaEnviarFacturar fillFacturaEnviarFacturar(EmpresaPropia empresaPropia, Factura factura,
+			HttpServletRequest request) {
+
 		FacturaEnviarFacturar facturaEnviarFacturar = new FacturaEnviarFacturar();
-		if(empresaPropia.getIdPropia() != 0) {
+		if (empresaPropia.getIdPropia() != 0) {
 			facturaEnviarFacturar.setNombre(empresaPropia.getRazonSocial());
-			if(empresaPropia.getDireccionEmpresa() != null) {
+			if (empresaPropia.getDireccionEmpresa() != null) {
 				DireccionEmpresa de = empresaPropia.getDireccionEmpresa();
-				//TODO DAMIAN el tipo de vía hay que ponerlo bien
+
+				String via = languageService.getMessage(de.getTipoVia(), new Locale("es", "ES"), request);
 				facturaEnviarFacturar.setDireccion(
-						Utils.entradaOVacio(de.getTipoVia()).concat(" ").concat(Utils.entradaOVacio(de.getNombreVia()))
-								.concat(" ").concat(Utils.entradaOVacio(de.getNumero())).concat(" ")
+						Utils.entradaOVacio(via).concat(" ").concat(Utils.entradaOVacio(de.getNombreVia())).concat(" ")
+								.concat(Utils.entradaOVacio(de.getNumero())).concat(" ")
 								.concat(Utils.entradaOVacio(de.getResto())));
 				facturaEnviarFacturar.setCp(de.getCp());
 				facturaEnviarFacturar.setCiudad(de.getCiudad());
 				facturaEnviarFacturar.setProvincia(de.getProvincia());
-				if(de.getPais() != null) {
+				if (de.getPais() != null) {
 					facturaEnviarFacturar.setPais(de.getPais().getNombreES());
 				}
 			}
@@ -385,8 +392,7 @@ public class ProductoServiceImpl implements ProductoService {
 			facturaEnviarFacturar.setEnviar(true);
 			facturaEnviarFacturar.setFactura(factura);
 		}
-		
-		
+
 		return facturaEnviarFacturar;
 	}
 

@@ -66,7 +66,7 @@ public class FacturaServiceImpl implements FacturaService {
 
 	@Autowired
 	private FormaPagoService formaPagoService;
-	
+
 	@Autowired
 	private LanguageService languageService;
 
@@ -229,7 +229,7 @@ public class FacturaServiceImpl implements FacturaService {
 		}
 		List<EmpresaPropia> empresaPropiaList = empresaPropiaService.findAll();
 		EmpresaPropia empresaPropia = new EmpresaPropia();
-		if(!empresaPropiaList.isEmpty()) {
+		if (!empresaPropiaList.isEmpty()) {
 			empresaPropia = empresaPropiaList.get(0);
 		}
 		List<ProductoFactura> productoFacturaList = productoFacturaService.findByIdFacModel(idFac);
@@ -347,7 +347,8 @@ public class FacturaServiceImpl implements FacturaService {
 			ip.setIdPro(pf.getProducto().getIdPro());
 			producto = productoService.findById(pf.getProducto().getIdPro());
 			ip.setProducto_nombre(producto.getNombreES()); // multiidioma
-			//como el pattern de jasperrepot me multiplica este número por 100 tengo que hacer esto
+			// como el pattern de jasperrepot me multiplica este número por 100 tengo que
+			// hacer esto
 			ip.setPorcentajeDescuento(porcentajeDescuento.divide(cien, 4, RoundingMode.DOWN).doubleValue());
 			ip.setPrecioUnitSinIva(pf.getPrecioUnitSinIva());
 			ip.setIvaProducto(ivaProducto.divide(cien, 4, RoundingMode.DOWN).doubleValue());
@@ -374,7 +375,8 @@ public class FacturaServiceImpl implements FacturaService {
 			BigDecimal interesPor = new BigDecimal(cuota.getInteresPor(), MathContext.DECIMAL64);
 			impresionFactura.setHayCuotas(true);
 			impresionFactura.setIdCuo(cuota.getIdCuo());
-			impresionFactura.setComisionAperturaPor(comisionAperturaPor.divide(cien, 4, RoundingMode.DOWN).doubleValue());
+			impresionFactura
+					.setComisionAperturaPor(comisionAperturaPor.divide(cien, 4, RoundingMode.DOWN).doubleValue());
 			impresionFactura.setInteresPor(interesPor.divide(cien, 4, RoundingMode.DOWN).doubleValue());
 		}
 		StringBuilder primerRenglon = new StringBuilder();
@@ -382,8 +384,7 @@ public class FacturaServiceImpl implements FacturaService {
 		StringBuilder tercerRenglon = new StringBuilder();
 		if (empresaPropia.getDireccionEmpresa() != null && empresaPropia.getDireccionEmpresa().getIdDirEmp() != 0) {
 			DireccionEmpresa de = empresaPropia.getDireccionEmpresa();
-			//TODO DAMIAN poner bien tipo de vía
-			String via = languageService.getMessage(de.getTipoVia(), new Locale("es","ES"), request);
+			String via = languageService.getMessage(de.getTipoVia(), new Locale("es", "ES"), request);
 			primerRenglon.append(Utils.entradaOVacio(via));
 			primerRenglon.append(Utils.siHayDatoAgregoEspacio(de.getTipoVia()));
 			primerRenglon.append(Utils.entradaOVacio(de.getNombreVia()));
