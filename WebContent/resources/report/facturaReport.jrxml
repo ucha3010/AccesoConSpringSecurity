@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="facturaReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0fd57da2-4f2f-4bf4-8f07-cb4359d01b9c">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="facturaReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="0fd57da2-4f2f-4bf4-8f07-cb4359d01b9c">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<style name="arial-9-l" vTextAlign="Middle" fontName="Arial" fontSize="9"/>
 	<style name="arialBlack-10-c-white" forecolor="#FFFFFF" hTextAlign="Center" vTextAlign="Middle" fontName="Arial Black" fontSize="10"/>
 	<style name="arialBlack-12-c-white" forecolor="#FFFFFF" hTextAlign="Center" vTextAlign="Middle" fontName="Arial Black" fontSize="12"/>
@@ -81,7 +82,7 @@
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<pageHeader>
+	<title>
 		<band height="245" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="281" height="80" uuid="898c0c4d-1d46-4cf1-ad2e-dd5113c6799c"/>
@@ -187,7 +188,7 @@
 				<textFieldExpression><![CDATA[$P{factura_telefono}]]></textFieldExpression>
 			</textField>
 		</band>
-	</pageHeader>
+	</title>
 	<columnHeader>
 		<band height="40" splitType="Stretch">
 			<rectangle>
@@ -273,46 +274,23 @@
 			</componentElement>
 		</band>
 	</detail>
-	<pageFooter>
-		<band height="70" splitType="Stretch">
-			<rectangle radius="10">
-				<reportElement x="0" y="0" width="555" height="70" forecolor="#F2991E" backcolor="#F2991E" uuid="195dcc59-ee74-4927-849e-9f2c2bc831b9"/>
-			</rectangle>
-			<textField>
-				<reportElement style="sans-11-c" x="0" y="5" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
-				<textFieldExpression><![CDATA[$P{primerRenglon}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="sans-11-c" x="0" y="25" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
-				<textFieldExpression><![CDATA[$P{segundoRenglon}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement style="sans-11-c" x="0" y="45" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
-				<textFieldExpression><![CDATA[$P{tercerRenglon}]]></textFieldExpression>
-			</textField>
-		</band>
-	</pageFooter>
 	<lastPageFooter>
-		<band height="70" splitType="Stretch">
+		<band height="320">
 			<rectangle radius="10">
-				<reportElement x="0" y="0" width="555" height="70" forecolor="#F2991E" backcolor="#F2991E" uuid="195dcc59-ee74-4927-849e-9f2c2bc831b9"/>
+				<reportElement x="0" y="250" width="555" height="70" forecolor="#F2991E" backcolor="#F2991E" uuid="195dcc59-ee74-4927-849e-9f2c2bc831b9"/>
 			</rectangle>
 			<textField>
-				<reportElement style="sans-11-c" x="0" y="5" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
+				<reportElement style="sans-11-c" x="0" y="255" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
 				<textFieldExpression><![CDATA[$P{primerRenglon}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="sans-11-c" x="0" y="25" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
+				<reportElement style="sans-11-c" x="0" y="275" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
 				<textFieldExpression><![CDATA[$P{segundoRenglon}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="sans-11-c" x="0" y="45" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
+				<reportElement style="sans-11-c" x="0" y="295" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
 				<textFieldExpression><![CDATA[$P{tercerRenglon}]]></textFieldExpression>
 			</textField>
-		</band>
-	</lastPageFooter>
-	<summary>
-		<band height="247" splitType="Stretch">
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="10" forecolor="#F2991E" backcolor="#F2991E" uuid="4497d468-e4e9-43ed-995b-56624da27b06"/>
 			</rectangle>
@@ -547,5 +525,5 @@
 				<textFieldExpression><![CDATA[$P{importeTotal}]]></textFieldExpression>
 			</textField>
 		</band>
-	</summary>
+	</lastPageFooter>
 </jasperReport>
