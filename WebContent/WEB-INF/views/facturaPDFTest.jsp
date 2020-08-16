@@ -55,7 +55,7 @@
 			params.put("cuotaDetalleList", cuotaDetalleList);
 		}
 
-		String jrxmlFile = session.getServletContext().getRealPath("/resources/report/" + factura.getJrxml() + ".jrxml");
+		String jrxmlFile = session.getServletContext().getRealPath("/resources/report/facturaReportTest.jrxml");
 		InputStream input = new FileInputStream(new File(jrxmlFile));
 		JasperReport jasperReport = JasperCompileManager.compileReport(input);
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, new JREmptyDataSource());

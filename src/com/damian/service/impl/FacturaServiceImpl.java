@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.damian.dao.FacturaDAO;
+import com.damian.dao.model.ModelCuotaDetalle;
 import com.damian.dao.model.ModelFactura;
 import com.damian.exceptions.NegativeStockException;
 import com.damian.exceptions.NotEmptyException;
@@ -411,6 +412,36 @@ public class FacturaServiceImpl implements FacturaService {
 		impresionFactura.setTercerRenglon(tercerRenglon.toString());
 
 		return impresionFactura;
+	}
+
+	@Override
+	public void defineJrxml(ImpresionFactura factura, List<ModelCuotaDetalle> cuotaDetalleList) {
+		
+		boolean envio = factura.getImporteEnvioSinIva() != 0.0;
+		boolean descuento = factura.getDescuentoImporteTotal() != 0.0;
+		int cantidadCuotas = cuotaDetalleList.size();
+		
+		if(cantidadCuotas > 0) {
+			if(cantidadCuotas <= 3) {
+				factura.setJrxml("facturaReportCuotas03");
+			} else if(cantidadCuotas <= 6) {
+				factura.setJrxml("facturaReportCuotas06");
+			} else if(cantidadCuotas <= 9) {
+				factura.setJrxml("facturaReportCuotas09");
+			} else if(cantidadCuotas <= 12) {
+				factura.setJrxml("facturaReportCuotas12");
+			}			
+		} else {
+			if (envio && descuento) {
+				factura.setJrxml("facturaReportSiEySiD");
+			} else if (envio && !descuento) {
+				factura.setJrxml("facturaReportSiEyNoD");
+			} else if (!envio && descuento) {
+				factura.setJrxml("facturaReportNoEySiD");
+			} else if (!envio && !descuento) {
+				factura.setJrxml("facturaReportNoEyNoD");
+			}
+		}		
 	}
 
 }

@@ -52,6 +52,8 @@ public class ImpresionFactura {
 	private String segundoRenglon;
 	private String tercerRenglon;
 
+	private String jrxml;
+
 	public ImpresionFactura() {
 	}
 
@@ -580,11 +582,14 @@ public class ImpresionFactura {
 		this.tercerRenglon = tercerRenglon;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
+	public String getJrxml() {
+		return jrxml;
+	}
+
+	public void setJrxml(String jrxml) {
+		this.jrxml = jrxml;
+	}
+
 	@Override
 	public String toString() {
 		return "ImpresionFactura [fechaCompra=" + fechaCompra + ", idFac=" + idFac + ", entrega_nombre="
@@ -601,7 +606,7 @@ public class ImpresionFactura {
 				+ ", totalSinIva=" + totalSinIva + ", ivaImporteTotal=" + ivaImporteTotal + ", importeTotal="
 				+ importeTotal + ", hayCuotas=" + hayCuotas + ", idCuo=" + idCuo + ", comisionAperturaPor="
 				+ comisionAperturaPor + ", interesPor=" + interesPor + ", primerRenglon=" + primerRenglon
-				+ ", segundoRenglon=" + segundoRenglon + ", tercerRenglon=" + tercerRenglon + "]";
+				+ ", segundoRenglon=" + segundoRenglon + ", tercerRenglon=" + tercerRenglon + ", jrxml=" + jrxml + "]";
 	}
 
 }

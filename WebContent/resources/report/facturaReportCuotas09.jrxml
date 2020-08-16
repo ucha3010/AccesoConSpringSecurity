@@ -275,20 +275,20 @@
 		</band>
 	</detail>
 	<lastPageFooter>
-		<band height="320">
+		<band height="285">
 			<rectangle radius="10">
-				<reportElement x="0" y="250" width="555" height="70" forecolor="#F2991E" backcolor="#F2991E" uuid="195dcc59-ee74-4927-849e-9f2c2bc831b9"/>
+				<reportElement x="0" y="215" width="555" height="70" forecolor="#F2991E" backcolor="#F2991E" uuid="195dcc59-ee74-4927-849e-9f2c2bc831b9"/>
 			</rectangle>
 			<textField>
-				<reportElement style="sans-11-c" x="0" y="255" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
+				<reportElement style="sans-11-c" x="0" y="220" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
 				<textFieldExpression><![CDATA[$P{primerRenglon}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="sans-11-c" x="0" y="275" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
+				<reportElement style="sans-11-c" x="0" y="240" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
 				<textFieldExpression><![CDATA[$P{segundoRenglon}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement style="sans-11-c" x="0" y="295" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
+				<reportElement style="sans-11-c" x="0" y="260" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
 				<textFieldExpression><![CDATA[$P{tercerRenglon}]]></textFieldExpression>
 			</textField>
 			<rectangle>

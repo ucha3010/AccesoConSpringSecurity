@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.damian.dao.model.ModelCuotaDetalle;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Factura;
 import com.damian.pojo.front.ImpresionFactura;
@@ -36,9 +37,11 @@ public interface FacturaService {
 	public List<Factura> selectExpire(List<Factura> facturas);
 
 	public List<Factura> findSearchAll();
-	
+
 	public List<Map<String, Object>> facturaMap(int idFac);
 
 	public ImpresionFactura findImpresionFacturaById(int idFac, HttpServletRequest request);
+
+	public void defineJrxml(ImpresionFactura factura, List<ModelCuotaDetalle> cuotaDetalleList);
 
 }

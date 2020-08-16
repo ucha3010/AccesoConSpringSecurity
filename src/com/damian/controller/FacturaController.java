@@ -132,6 +132,7 @@ public class FacturaController {
 				cuotaDetalleList = cuotaDetalleService.findModelByIdCuo(factura.getIdCuo());
 			}
 		}
+		facturaService.defineJrxml(factura, cuotaDetalleList);
 		modelAndView.put("cuotaDetalleList", cuotaDetalleList);
 		modelAndView.put("factura", factura);
 
