@@ -524,6 +524,14 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{importeTotal}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="0" y="220" width="100" height="30" uuid="280ef9bd-75fb-44e1-b78c-a57aa937ad21"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="220" width="100" height="30" uuid="817d6a7e-45eb-4726-ae84-ba7e04e08dbb"/>
+				<textFieldExpression><![CDATA[$V{PAGE_COUNT}]]></textFieldExpression>
+			</textField>
 		</band>
 	</lastPageFooter>
 </jasperReport>

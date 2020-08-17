@@ -189,6 +189,26 @@
 			</textField>
 		</band>
 	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement style="sans-9-r" x="50" y="0" width="50" height="20" uuid="fe82b983-38e5-40c9-aeb9-a83b83082c1e"/>
+				<text><![CDATA[Factura:]]></text>
+			</staticText>
+			<textField pattern="#00000000">
+				<reportElement style="sans-9-c" x="100" y="0" width="50" height="20" uuid="3663742b-3ff1-42a0-9cdd-160d3edebbfb"/>
+				<textFieldExpression><![CDATA[$P{idFac}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="sans-9-r" x="435" y="0" width="50" height="20" uuid="f9b424ab-dc60-448e-92e9-9638c3cd182d"/>
+				<text><![CDATA[Página: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="sans-9-c" x="485" y="0" width="20" height="20" uuid="a99c191d-2d6d-472e-8efd-fdb4160cb619"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
 	<columnHeader>
 		<band height="40" splitType="Stretch">
 			<rectangle>
@@ -274,6 +294,25 @@
 			</componentElement>
 		</band>
 	</detail>
+	<pageFooter>
+		<band height="70" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="0" y="0" width="555" height="70" forecolor="#F2991E" backcolor="#F2991E" uuid="195dcc59-ee74-4927-849e-9f2c2bc831b9"/>
+			</rectangle>
+			<textField>
+				<reportElement style="sans-11-c" x="0" y="5" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
+				<textFieldExpression><![CDATA[$P{primerRenglon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="sans-11-c" x="0" y="25" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
+				<textFieldExpression><![CDATA[$P{segundoRenglon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="sans-11-c" x="0" y="45" width="555" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
+				<textFieldExpression><![CDATA[$P{tercerRenglon}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 	<lastPageFooter>
 		<band height="160">
 			<rectangle radius="10">
