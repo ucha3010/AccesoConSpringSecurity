@@ -13,51 +13,53 @@
 		<security:intercept-url pattern="/about" access="permitAll" />
 		<security:intercept-url pattern="/index2" access="isAuthenticated()" />
 		<security:intercept-url pattern="/index3" access="isAuthenticated()" />
-		<security:intercept-url pattern="/private/**" access="isAuthenticated()" />
-		<security:intercept-url pattern="/usuario" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/usuario/filtered/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/usuario/nuevo" access="permitAll" />
-		<security:intercept-url pattern="/usuario/nuevo/**" access="permitAll" />
-		<security:intercept-url pattern="/usuario/logged/**" access="isAuthenticated()" />
-		<security:intercept-url pattern="/usuario/cliente" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/usuario/cliente/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/usuario/reset" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
-		<security:intercept-url pattern="/usuario/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/admin" access="isAuthenticated()" />
 		<security:intercept-url pattern="/admin/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
-		<security:intercept-url pattern="/direccionEmpresa/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/direccionEmpresa/formulario/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
-		<security:intercept-url pattern="/direccionEmpresa/save" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
-		<security:intercept-url pattern="/direccionEmpresa/delete/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
-		<security:intercept-url pattern="/direccion/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/direccion/formulario/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
-		<security:intercept-url pattern="/direccion/save" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
-		<security:intercept-url pattern="/direccion/delete/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
-		<security:intercept-url pattern="/empresa" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/empresa/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/usuarioEmpresa" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/usuarioEmpresa/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/rol" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
-		<security:intercept-url pattern="/rol/**" access="hasAnyRole({'ROL_ROOT'})" />
-		<security:intercept-url pattern="/estado" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
-		<security:intercept-url pattern="/estado/**" access="hasAnyRole({'ROL_ROOT'})" />
-		<security:intercept-url pattern="/formaPago" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
-		<security:intercept-url pattern="/formaPago/**" access="hasAnyRole({'ROL_ROOT'})" />
 		<security:intercept-url pattern="/categoria" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/categoria/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/subcategoria" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/subcategoria/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/producto" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/producto/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/productoEmpresa/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/productoFactura/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/cliente" access="permitAll" />
+		<security:intercept-url pattern="/cliente/**" access="permitAll" />
+		<security:intercept-url pattern="/direccion/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/direccion/delete/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/direccion/formulario/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/direccion/save" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/direccionEmpresa/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/direccionEmpresa/delete/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/direccionEmpresa/formulario/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/direccionEmpresa/save" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/empresa" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/empresa/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/empresaPropia" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/empresaPropia/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/estado" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/estado/**" access="hasAnyRole({'ROL_ROOT'})" />
 		<security:intercept-url pattern="/factura" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/factura/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/factura/delete/**" access="hasAnyRole({'ROL_ROOT'})" />
 		<security:intercept-url pattern="/facturaEstado/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
-		<security:intercept-url pattern="/cliente" access="permitAll" />
-		<security:intercept-url pattern="/cliente/**" access="permitAll" />
+		<security:intercept-url pattern="/formaPago" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/formaPago/**" access="hasAnyRole({'ROL_ROOT'})" />
 		<security:intercept-url pattern="/foto/**" access="permitAll" />
+		<security:intercept-url pattern="/private/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/producto" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/producto/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/productoEmpresa/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/productoFactura/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/rol" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/rol/**" access="hasAnyRole({'ROL_ROOT'})" />
+		<security:intercept-url pattern="/subcategoria" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/subcategoria/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/usuario" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/usuario/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/usuario/cliente" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/usuario/cliente/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/usuario/filtered/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/usuario/logged/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/usuario/nuevo" access="permitAll" />
+		<security:intercept-url pattern="/usuario/nuevo/**" access="permitAll" />
+		<security:intercept-url pattern="/usuario/reset" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/usuarioEmpresa" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/usuarioEmpresa/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/**" access="denyAll" />
 		<security:form-login login-page="/login"
 			password-parameter="clave" username-parameter="usuario"

@@ -1,0 +1,82 @@
+package com.damian.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.damian.pojo.EmpresaPropia;
+import com.damian.service.EmpresaPropiaService;
+
+@Controller
+public class EmpresaPropiaController {
+
+	@Autowired
+	private EmpresaPropiaService empresaPropiaService;
+
+	@RequestMapping("/empresaPropia")
+	public ModelAndView getAll(ModelAndView modelAndView) {
+		modelAndView.addObject("empresaPropias", empresaPropiaService.findAll());
+		modelAndView.setViewName("empresaPropias");
+		return modelAndView;
+	}
+
+	@RequestMapping("/empresaPropia/{idPropia}")
+	public ModelAndView getEmpresaPropia(ModelAndView modelAndView, @PathVariable("idPropia") int idPropia) {
+		EmpresaPropia empresaPropia = new EmpresaPropia();
+		if (idPropia > 0) {
+			empresaPropia = empresaPropiaService.findById(idPropia);
+		}
+		modelAndView.addObject("empresaPropia", empresaPropia);
+		modelAndView.setViewName("empresaPropia"); //TODO DAMIAN en esta página que se pueda ingresar/actualizar también la dirección
+		return modelAndView;
+	}
+
+	@RequestMapping(value = { "/empresaPropia/save" }, method = RequestMethod.POST)
+	public String saveEmpresaPropia(@ModelAttribute("empresaPropia") EmpresaPropia empresaPropia, BindingResult result,
+			Model model, RedirectAttributes ra, HttpServletRequest request) {
+
+		empresaPropiaService.save(empresaPropia, request);
+		if (empresaPropia.getIdPropia() == 0) {
+			ra.addFlashAttribute("empresaPropia_agregado", "empresaPropia_agregado");
+		}
+		return "redirect:/empresaPropia";
+	}
+
+	@RequestMapping("/empresaPropia/delete/{idPropia}")
+	public String deleteUser(@PathVariable("idPropia") int idPropia, RedirectAttributes ra,
+			HttpServletRequest request) {
+
+		empresaPropiaService.delete(idPropia, request);
+		ra.addFlashAttribute("empresaPropia_eliminado", "empresaPropia_eliminado");
+		return "redirect:/empresaPropia";
+
+	}
+
+	@RequestMapping("/empresaPropia/available/{idPropia}")
+	public ModelAndView changeAvailable(ModelAndView modelAndView, @PathVariable("idPropia") int idPropia, HttpServletRequest request) {
+		List<EmpresaPropia> empresasPropias = empresaPropiaService.findAll();
+		for(EmpresaPropia ep: empresasPropias) {
+			if(ep.isFacturacion()) {
+				ep.setFacturacion(false);
+				empresaPropiaService.update(ep, request);
+			}
+		}
+		EmpresaPropia empresaPropia = empresaPropiaService.findById(idPropia);
+		empresaPropia.setFacturacion(true);
+		empresaPropiaService.update(empresaPropia, request);
+		
+		return getAll(modelAndView);
+	}
+
+}

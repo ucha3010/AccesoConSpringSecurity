@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.damian.dao.EmpresaPropiaDAO;
-import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.EmpresaPropia;
 import com.damian.service.DireccionEmpresaService;
 import com.damian.service.EmpresaPropiaService;
@@ -48,7 +47,7 @@ public class EmpresaPropiaServiceImpl implements EmpresaPropiaService {
 	}
 
 	@Override
-	public int delete(int id, String column, HttpServletRequest request) throws NotEmptyException {
+	public int delete(int id, HttpServletRequest request) {
 		EmpresaPropia empresaPropia = findByIdModel(id);
 		if (empresaPropia.getDireccionEmpresa().getIdDirEmp() != 0) {
 			direccionEmpresaService.delete(empresaPropia.getDireccionEmpresa().getIdDirEmp(), request);

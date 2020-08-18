@@ -61,13 +61,18 @@
 						formulario.addEventListener('keyup', filtrar);
 					</script>
 				</div>
-				<div class="hidden-xs col-sm-3 col-md-6">
+				<div class="hidden-xs col-sm-2 col-md-4">
 					<div class="dropdown collapse">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-3 col-md-2">
+				<div class="col-sm-2 col-md-2">
+					<button type="button" class="btn btn-warning ml-1 border-color-dam" onclick='location.href="<c:url value='/empresaPropia'/>"'>
+						<fmt:message key="Own.company" />
+					</button>
+				</div>
+				<div class="col-sm-2 col-md-2">
 					<c:if test="${not empty empresa_agregada}">
 						<span style="color: green;">
 							<fmt:message key="Company.added" />

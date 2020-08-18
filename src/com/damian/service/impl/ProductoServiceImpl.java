@@ -181,7 +181,11 @@ public class ProductoServiceImpl implements ProductoService {
 		List<EmpresaPropia> empresaPropiaList = empresaPropiaService.findAll();
 		EmpresaPropia empresaPropia = new EmpresaPropia();
 		if (!empresaPropiaList.isEmpty()) {
-			empresaPropia = empresaPropiaList.get(0);
+			for(EmpresaPropia ep: empresaPropiaList) {
+				if(ep.isFacturacion()) {
+					empresaPropia = ep;
+				}
+			}
 			empresaPropia.setDireccionEmpresa(
 					direccionEmpresaService.findById(empresaPropia.getDireccionEmpresa().getIdDirEmp()));
 		}

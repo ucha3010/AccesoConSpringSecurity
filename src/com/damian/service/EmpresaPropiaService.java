@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.EmpresaPropia;
 
 public interface EmpresaPropiaService {
@@ -19,6 +18,6 @@ public interface EmpresaPropiaService {
 
 	public int update(EmpresaPropia estado, HttpServletRequest request);
 
-	public int delete(int id, String column, HttpServletRequest request) throws NotEmptyException;
+	public int delete(int id, HttpServletRequest request);
 
 }
