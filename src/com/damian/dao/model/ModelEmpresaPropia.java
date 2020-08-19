@@ -9,7 +9,6 @@ public class ModelEmpresaPropia {
 	private String fax;
 	private String email;
 	private boolean facturacion;
-	private int idDirEmp;
 
 	public ModelEmpresaPropia() {
 
@@ -120,21 +119,6 @@ public class ModelEmpresaPropia {
 		this.facturacion = facturacion;
 	}
 
-	/**
-	 * @return the idDirEmp
-	 */
-	public int getIdDirEmp() {
-		return idDirEmp;
-	}
-
-	/**
-	 * @param idDirEmp
-	 *            the idDirEmp to set
-	 */
-	public void setIdDirEmp(int idDirEmp) {
-		this.idDirEmp = idDirEmp;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -143,8 +127,7 @@ public class ModelEmpresaPropia {
 	@Override
 	public String toString() {
 		return "ModelEmpresaPropia [idPropia=" + idPropia + ", razonSocial=" + razonSocial + ", cif=" + cif
-				+ ", telefono=" + telefono + ", fax=" + fax + ", email=" + email + ", facturacion=" + facturacion
-				+ ", idDirEmp=" + idDirEmp + "]";
+				+ ", telefono=" + telefono + ", fax=" + fax + ", email=" + email + ", facturacion=" + facturacion + "]";
 	}
 
 }

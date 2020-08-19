@@ -87,9 +87,9 @@ public class EmpresaPropiaDAOImpl implements EmpresaPropiaDAO {
 		} else {
 			ModelEmpresaPropia me = converterEmpresaPropia.convert(empresaPropia);
 			String sql = "INSERT INTO " + TABLA
-					+ " (razonSocial, cif, telefono, fax, email, facturacion, idDirEmp) VALUES (?, ?, ?, ?, ?, ?, ?)";
+					+ " (razonSocial, cif, telefono, fax, email, facturacion) VALUES (?, ?, ?, ?, ?, ?)";
 			int result = jdbcTemplate.update(sql, me.getRazonSocial(), me.getCif(), me.getTelefono(), me.getFax(),
-					me.getEmail(), me.isFacturacion(), me.getIdDirEmp());
+					me.getEmail(), me.isFacturacion());
 			LocalLogger.save(TABLA, me, request);
 			return result;
 		}
@@ -98,11 +98,10 @@ public class EmpresaPropiaDAOImpl implements EmpresaPropiaDAO {
 	@Override
 	public int update(EmpresaPropia empresaPropia, HttpServletRequest request) {
 		ModelEmpresaPropia me = converterEmpresaPropia.convert(empresaPropia);
-		String sql = "UPDATE " + TABLA
-				+ " SET razonSocial=?, cif=?, telefono=?, fax=?, email=?, facturacion=?, idDirEmp=? " + "WHERE " + KEY
-				+ "=?";
+		String sql = "UPDATE " + TABLA + " SET razonSocial=?, cif=?, telefono=?, fax=?, email=?, facturacion=? "
+				+ "WHERE " + KEY + "=?";
 		int result = jdbcTemplate.update(sql, me.getRazonSocial(), me.getCif(), me.getTelefono(), me.getFax(),
-				me.getEmail(), me.isFacturacion(), me.getIdDirEmp(), me.getIdPropia());
+				me.getEmail(), me.isFacturacion(), me.getIdPropia());
 		LocalLogger.update(TABLA, me, request);
 		return result;
 	}
@@ -141,7 +140,6 @@ public class EmpresaPropiaDAOImpl implements EmpresaPropiaDAO {
 		me.setFax(rs.getString("fax"));
 		me.setEmail(rs.getString("email"));
 		me.setFacturacion(rs.getBoolean("facturacion"));
-		me.setIdDirEmp(rs.getInt("idDirEmp"));
 		return me;
 	}
 }

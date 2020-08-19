@@ -17,12 +17,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.pojo.EmpresaPropia;
 import com.damian.service.EmpresaPropiaService;
+import com.damian.service.PaisService;
 
 @Controller
 public class EmpresaPropiaController {
 
 	@Autowired
 	private EmpresaPropiaService empresaPropiaService;
+
+	@Autowired
+	private PaisService paisService;
 
 	@RequestMapping("/empresaPropia")
 	public ModelAndView getAll(ModelAndView modelAndView) {
@@ -38,7 +42,9 @@ public class EmpresaPropiaController {
 			empresaPropia = empresaPropiaService.findById(idPropia);
 		}
 		modelAndView.addObject("empresaPropia", empresaPropia);
-		modelAndView.setViewName("empresaPropia"); //TODO DAMIAN en esta página que se pueda ingresar/actualizar también la dirección
+		modelAndView.addObject("estoy", "empresaPropia");
+		modelAndView.addObject("paises", paisService.findAll());
+		modelAndView.setViewName("empresaPropia");
 		return modelAndView;
 	}
 
@@ -64,10 +70,11 @@ public class EmpresaPropiaController {
 	}
 
 	@RequestMapping("/empresaPropia/available/{idPropia}")
-	public ModelAndView changeAvailable(ModelAndView modelAndView, @PathVariable("idPropia") int idPropia, HttpServletRequest request) {
+	public ModelAndView changeAvailable(ModelAndView modelAndView, @PathVariable("idPropia") int idPropia,
+			HttpServletRequest request) {
 		List<EmpresaPropia> empresasPropias = empresaPropiaService.findAll();
-		for(EmpresaPropia ep: empresasPropias) {
-			if(ep.isFacturacion()) {
+		for (EmpresaPropia ep : empresasPropias) {
+			if (ep.isFacturacion()) {
 				ep.setFacturacion(false);
 				empresaPropiaService.update(ep, request);
 			}
@@ -75,7 +82,7 @@ public class EmpresaPropiaController {
 		EmpresaPropia empresaPropia = empresaPropiaService.findById(idPropia);
 		empresaPropia.setFacturacion(true);
 		empresaPropiaService.update(empresaPropia, request);
-		
+
 		return getAll(modelAndView);
 	}
 

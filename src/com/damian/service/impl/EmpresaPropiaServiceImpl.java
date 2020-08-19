@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.damian.dao.EmpresaPropiaDAO;
+import com.damian.pojo.DireccionEmpresaPropia;
 import com.damian.pojo.EmpresaPropia;
-import com.damian.service.DireccionEmpresaService;
+import com.damian.service.DireccionEmpresaPropiaService;
 import com.damian.service.EmpresaPropiaService;
 
 @Service
@@ -19,7 +20,7 @@ public class EmpresaPropiaServiceImpl implements EmpresaPropiaService {
 	private EmpresaPropiaDAO empresaPropiaDAO;
 
 	@Autowired
-	private DireccionEmpresaService direccionEmpresaService;
+	private DireccionEmpresaPropiaService direccionEmpresaPropiaService;
 
 	@Override
 	public List<EmpresaPropia> findAll() {
@@ -38,7 +39,20 @@ public class EmpresaPropiaServiceImpl implements EmpresaPropiaService {
 
 	@Override
 	public int save(EmpresaPropia empresaPropia, HttpServletRequest request) {
-		return empresaPropiaDAO.save(empresaPropia, request);
+		int resultado = empresaPropiaDAO.save(empresaPropia, request);
+		if (empresaPropia.getDireccionEmpresaPropia() != null) {
+			DireccionEmpresaPropia direccionEmpresaPropia = empresaPropia.getDireccionEmpresaPropia();
+			int maxId = getMaxId();
+			if (empresaPropia.getIdPropia() == 0) {
+				direccionEmpresaPropia.setIdDirPropia(maxId);
+				empresaPropia.setIdPropia(maxId);
+			} else {
+				direccionEmpresaPropia.setIdDirPropia(empresaPropia.getIdPropia());
+			}
+			direccionEmpresaPropia.setEmpresaPropia(empresaPropia);
+			direccionEmpresaPropiaService.save(direccionEmpresaPropia, request);
+		}
+		return resultado;
 	}
 
 	@Override
@@ -49,10 +63,16 @@ public class EmpresaPropiaServiceImpl implements EmpresaPropiaService {
 	@Override
 	public int delete(int id, HttpServletRequest request) {
 		EmpresaPropia empresaPropia = findByIdModel(id);
-		if (empresaPropia.getDireccionEmpresa().getIdDirEmp() != 0) {
-			direccionEmpresaService.delete(empresaPropia.getDireccionEmpresa().getIdDirEmp(), request);
+		if (empresaPropia.getDireccionEmpresaPropia() != null
+				&& empresaPropia.getDireccionEmpresaPropia().getIdDirPropia() != 0) {
+			direccionEmpresaPropiaService.delete(empresaPropia.getDireccionEmpresaPropia().getIdDirPropia(), request);
 		}
 		return empresaPropiaDAO.delete(id, request);
+	}
+
+	@Override
+	public int getMaxId() {
+		return empresaPropiaDAO.getMaxId();
 	}
 
 }

@@ -1,0 +1,137 @@
+Thu Aug 20 00:00:01 CEST 2020 - ERROR [pepe] - org.springframework.dao.TransientDataAccessResourceException: PreparedStatementCallback; SQL [REPLACE INTO direccionempresapropia (idDirPropia, tipoVia, nombreVia, numero, resto, cp, provincia, ciudad, pais_idPais, idPropia, modificadoPor, fechaModificacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)Parameter index out of range (12 > number of parameters, which is 11).; nested exception is java.sql.SQLException: Parameter index out of range (12 > number of parameters, which is 11).
+	at org.springframework.jdbc.support.SQLStateSQLExceptionTranslator.doTranslate(SQLStateSQLExceptionTranslator.java:110)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:81)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:81)
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1402)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:620)
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:850)
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:905)
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:915)
+	at com.damian.dao.impl.DireccionEmpresaPropiaDAOImpl.save(DireccionEmpresaPropiaDAOImpl.java:115)
+	at com.damian.service.impl.DireccionEmpresaPropiaServiceImpl.save(DireccionEmpresaPropiaServiceImpl.java:47)
+	at com.damian.service.impl.EmpresaPropiaServiceImpl.save(EmpresaPropiaServiceImpl.java:50)
+	at com.damian.controller.EmpresaPropiaController.saveEmpresaPropia(EmpresaPropiaController.java:55)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:330)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:118)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:84)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:113)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:103)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:113)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter.doFilter(RememberMeAuthenticationFilter.java:146)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:154)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:45)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:199)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:50)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:87)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:192)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:160)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:668)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.sql.SQLException: Parameter index out of range (12 > number of parameters, which is 11).
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:996)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:935)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:924)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:870)
+	at com.mysql.jdbc.PreparedStatement.checkBounds(PreparedStatement.java:3391)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3376)
+	at com.mysql.jdbc.PreparedStatement.setInternal(PreparedStatement.java:3413)
+	at com.mysql.jdbc.PreparedStatement.setTimestampInternal(PreparedStatement.java:4319)
+	at com.mysql.jdbc.PreparedStatement.setTimestamp(PreparedStatement.java:4262)
+	at com.mysql.jdbc.PreparedStatement.setObject(PreparedStatement.java:3613)
+	at org.apache.tomcat.dbcp.dbcp2.DelegatingPreparedStatement.setObject(DelegatingPreparedStatement.java:519)
+	at org.apache.tomcat.dbcp.dbcp2.DelegatingPreparedStatement.setObject(DelegatingPreparedStatement.java:519)
+	at org.springframework.jdbc.core.StatementCreatorUtils.setValue(StatementCreatorUtils.java:411)
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValueInternal(StatementCreatorUtils.java:232)
+	at org.springframework.jdbc.core.StatementCreatorUtils.setParameterValue(StatementCreatorUtils.java:163)
+	at org.springframework.jdbc.core.ArgumentPreparedStatementSetter.doSetValue(ArgumentPreparedStatementSetter.java:69)
+	at org.springframework.jdbc.core.ArgumentPreparedStatementSetter.setValues(ArgumentPreparedStatementSetter.java:50)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$update$0(JdbcTemplate.java:853)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:605)
+	... 81 more
+
+Thu Aug 20 00:01:07 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777777, email=empresapropia@gmail.com, facturacion=false]
+Thu Aug 20 00:05:17 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777777, email=empresapropia@gmail.com, facturacion=false]
+Thu Aug 20 00:05:21 CEST 2020 - SAVE [OWN USER] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=2, tipoVia=road.Street, nombreVia=Castellana, numero=102, resto=, cp=28034, provincia=Madrid, ciudad=Madrid, pais_idPais=1, idPropia=0, modificadoPor=pepe, fechaModificacion=2020-08-20 00:05:17.322]
+Thu Aug 20 00:06:40 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777700, email=empresapropia@gmail.com, facturacion=false]
+Thu Aug 20 00:06:45 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=2, tipoVia=road.Street, nombreVia=Castellana, numero=104, resto=, cp=28034, provincia=Madrid, ciudad=Madrid, pais_idPais=1, idPropia=0, modificadoPor=pepe, fechaModificacion=2020-08-20 00:06:40.781]
+Thu Aug 20 00:08:51 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777700, email=empresapropia@gmail.com, facturacion=false]
+Thu Aug 20 00:12:01 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=2, tipoVia=road.Paseo, nombreVia=Castellana, numero=102, resto=, cp=28006, provincia=Madrid, ciudad=Madrid, pais_idPais=1, idPropia=0, modificadoPor=pepe, fechaModificacion=2020-08-20 00:08:51.039]
+Thu Aug 20 00:12:58 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777700, email=empresapropia@gmail.com, facturacion=false]
+Thu Aug 20 00:13:51 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=2, tipoVia=road.Paseo, nombreVia=Castellana, numero=104, resto=, cp=28006, provincia=Madrid, ciudad=Madrid, pais_idPais=1, idPropia=2, modificadoPor=pepe, fechaModificacion=2020-08-20 00:12:58.45]
+Thu Aug 20 00:16:12 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777700, email=empresapropia@gmail.com, facturacion=false]
+Thu Aug 20 00:16:16 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=1, tipoVia=road.Avenue, nombreVia=Castellana, numero=106, resto=, cp=28006, provincia=Madrid, ciudad=Madrid, pais_idPais=1, idPropia=1, modificadoPor=pepe, fechaModificacion=2020-08-20 00:16:12.088]
+Thu Aug 20 00:17:12 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=2, razonSocial=Empresa Propia 2, cif=C51494045, telefono=+34 916666600, fax=+34 916666601, email=empresapropia2@gmail.com, facturacion=false]
+Thu Aug 20 00:17:19 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=2, tipoVia=road.Street, nombreVia=Sarmiento, numero=2, resto=, cp=24004, provincia=Valladolid, ciudad=Valladolid, pais_idPais=1, idPropia=2, modificadoPor=pepe, fechaModificacion=2020-08-20 00:17:12.576]
+Thu Aug 20 00:17:46 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777700, email=empresapropia@gmail.com, facturacion=false]
+Thu Aug 20 00:17:46 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=1, tipoVia=road.Paseo, nombreVia=Castellana, numero=106, resto=, cp=28006, provincia=Madrid, ciudad=Madrid, pais_idPais=1, idPropia=1, modificadoPor=pepe, fechaModificacion=2020-08-20 00:17:46.608]
+Thu Aug 20 00:18:00 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777700, email=empresapropia@gmail.com, facturacion=true]
+Thu Aug 20 00:18:11 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777700, email=empresapropia@gmail.com, facturacion=false]
+Thu Aug 20 00:18:11 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=1, tipoVia=road.Paseo, nombreVia=Castellana, numero=110, resto=, cp=28006, provincia=Madrid, ciudad=Madrid, pais_idPais=1, idPropia=1, modificadoPor=pepe, fechaModificacion=2020-08-20 00:18:11.224]
+Thu Aug 20 00:20:13 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777700, email=empresapropia@gmail.com, facturacion=true]
+Thu Aug 20 00:20:25 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777777, email=empresapropia@gmail.com, facturacion=true]
+Thu Aug 20 00:20:25 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=1, tipoVia=road.Paseo, nombreVia=Castellana, numero=110, resto=, cp=28006, provincia=Madrid, ciudad=Madrid, pais_idPais=1, idPropia=1, modificadoPor=pepe, fechaModificacion=2020-08-20 00:20:25.215]
+Thu Aug 20 00:20:28 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777777, email=empresapropia@gmail.com, facturacion=false]
+Thu Aug 20 00:20:28 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=2, razonSocial=Empresa Propia 2, cif=C51494045, telefono=+34 916666600, fax=+34 916666601, email=empresapropia2@gmail.com, facturacion=true]
+Thu Aug 20 00:20:36 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777770, email=empresapropia@gmail.com, facturacion=false]
+Thu Aug 20 00:20:36 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=1, tipoVia=road.Paseo, nombreVia=Castellana, numero=110, resto=, cp=28006, provincia=Madrid, ciudad=Madrid, pais_idPais=1, idPropia=1, modificadoPor=pepe, fechaModificacion=2020-08-20 00:20:36.408]
+Thu Aug 20 00:20:43 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=2, razonSocial=Empresa Propia 2, cif=C51494045, telefono=+34 916666600, fax=+34 916666601, email=empresapropia2@gmail.com, facturacion=true]
+Thu Aug 20 00:20:43 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=2, tipoVia=road.Street, nombreVia=Sarmiento, numero=21, resto=, cp=24004, provincia=Valladolid, ciudad=Valladolid, pais_idPais=1, idPropia=2, modificadoPor=pepe, fechaModificacion=2020-08-20 00:20:43.347]

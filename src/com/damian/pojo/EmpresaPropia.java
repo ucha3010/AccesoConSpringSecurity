@@ -9,7 +9,7 @@ public class EmpresaPropia {
 	private String fax;
 	private String email;
 	private boolean facturacion;
-	private DireccionEmpresa direccionEmpresa;
+	private DireccionEmpresaPropia direccionEmpresaPropia;
 
 	public EmpresaPropia() {
 
@@ -120,30 +120,19 @@ public class EmpresaPropia {
 		this.facturacion = facturacion;
 	}
 
-	/**
-	 * @return the direccionEmpresa
-	 */
-	public DireccionEmpresa getDireccionEmpresa() {
-		return direccionEmpresa;
+	public DireccionEmpresaPropia getDireccionEmpresaPropia() {
+		return direccionEmpresaPropia;
 	}
 
-	/**
-	 * @param direccionEmpresa
-	 *            the direccionEmpresa to set
-	 */
-	public void setDireccionEmpresa(DireccionEmpresa direccionEmpresa) {
-		this.direccionEmpresa = direccionEmpresa;
+	public void setDireccionEmpresaPropia(DireccionEmpresaPropia direccionEmpresaPropia) {
+		this.direccionEmpresaPropia = direccionEmpresaPropia;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "ModelEmpresaPropia [idPropia=" + idPropia + ", razonSocial=" + razonSocial + ", cif=" + cif
-				+ ", telefono=" + telefono + ", fax=" + fax + ", email=" + email + ", facturacion=" + facturacion + "]";
+		return "EmpresaPropia [idPropia=" + idPropia + ", razonSocial=" + razonSocial + ", cif=" + cif + ", telefono="
+				+ telefono + ", fax=" + fax + ", email=" + email + ", facturacion=" + facturacion
+				+ ", direccionEmpresaPropia=" + direccionEmpresaPropia + "]";
 	}
 
 }

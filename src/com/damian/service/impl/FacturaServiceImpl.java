@@ -21,7 +21,7 @@ import com.damian.dao.model.ModelFactura;
 import com.damian.exceptions.NegativeStockException;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Cuota;
-import com.damian.pojo.DireccionEmpresa;
+import com.damian.pojo.DireccionEmpresaPropia;
 import com.damian.pojo.EmpresaPropia;
 import com.damian.pojo.Estado;
 import com.damian.pojo.Factura;
@@ -230,8 +230,10 @@ public class FacturaServiceImpl implements FacturaService {
 		}
 		List<EmpresaPropia> empresaPropiaList = empresaPropiaService.findAll();
 		EmpresaPropia empresaPropia = new EmpresaPropia();
-		if (!empresaPropiaList.isEmpty()) {
-			empresaPropia = empresaPropiaList.get(0);
+		for (EmpresaPropia ep: empresaPropiaList) {
+			if(ep.isFacturacion()) {
+				empresaPropia = ep;
+			}
 		}
 		List<ProductoFactura> productoFacturaList = productoFacturaService.findByIdFacModel(idFac);
 
@@ -383,24 +385,25 @@ public class FacturaServiceImpl implements FacturaService {
 		StringBuilder primerRenglon = new StringBuilder();
 		StringBuilder segundoRenglon = new StringBuilder();
 		StringBuilder tercerRenglon = new StringBuilder();
-		if (empresaPropia.getDireccionEmpresa() != null && empresaPropia.getDireccionEmpresa().getIdDirEmp() != 0) {
-			DireccionEmpresa de = empresaPropia.getDireccionEmpresa();
-			String via = languageService.getMessage(de.getTipoVia(), new Locale("es", "ES"), request);
+		if (empresaPropia.getDireccionEmpresaPropia() != null
+				&& empresaPropia.getDireccionEmpresaPropia().getIdDirPropia() != 0) {
+			DireccionEmpresaPropia dep = empresaPropia.getDireccionEmpresaPropia();
+			String via = languageService.getMessage(dep.getTipoVia(), new Locale("es", "ES"), request);
 			primerRenglon.append(Utils.entradaOVacio(via));
-			primerRenglon.append(Utils.siHayDatoAgregoEspacio(de.getTipoVia()));
-			primerRenglon.append(Utils.entradaOVacio(de.getNombreVia()));
-			primerRenglon.append(Utils.siHayDatoAgregoEspacio(de.getNombreVia()));
-			primerRenglon.append(Utils.entradaOVacio(de.getNumero()));
-			primerRenglon.append(Utils.siHayDatoAgregoEspacio(de.getNumero()));
-			primerRenglon.append(Utils.entradaOVacio(de.getResto()));
-			segundoRenglon.append(Utils.entradaOVacio(de.getCp()));
-			segundoRenglon.append(Utils.siHayDatoAgregoEspacio(de.getCp()));
-			segundoRenglon.append(Utils.entradaOVacio(de.getCiudad()));
-			segundoRenglon.append(Utils.siHayDatoAgregoEspacio(de.getCiudad()));
-			segundoRenglon.append(Utils.entradaOVacio(de.getProvincia()));
-			segundoRenglon.append(Utils.siHayDatoAgregoEspacio(de.getProvincia()));
-			if (de.getPais() != null) {
-				segundoRenglon.append(de.getPais().getNombreES()); // multiidioma
+			primerRenglon.append(Utils.siHayDatoAgregoEspacio(dep.getTipoVia()));
+			primerRenglon.append(Utils.entradaOVacio(dep.getNombreVia()));
+			primerRenglon.append(Utils.siHayDatoAgregoEspacio(dep.getNombreVia()));
+			primerRenglon.append(Utils.entradaOVacio(dep.getNumero()));
+			primerRenglon.append(Utils.siHayDatoAgregoEspacio(dep.getNumero()));
+			primerRenglon.append(Utils.entradaOVacio(dep.getResto()));
+			segundoRenglon.append(Utils.entradaOVacio(dep.getCp()));
+			segundoRenglon.append(Utils.siHayDatoAgregoEspacio(dep.getCp()));
+			segundoRenglon.append(Utils.entradaOVacio(dep.getCiudad()));
+			segundoRenglon.append(Utils.siHayDatoAgregoEspacio(dep.getCiudad()));
+			segundoRenglon.append(Utils.entradaOVacio(dep.getProvincia()));
+			segundoRenglon.append(Utils.siHayDatoAgregoEspacio(dep.getProvincia()));
+			if (dep.getPais() != null) {
+				segundoRenglon.append(dep.getPais().getNombreES()); // multiidioma
 			}
 		}
 		tercerRenglon.append("CIF: " + Utils.entradaOVacio(empresaPropia.getCif()));
@@ -416,21 +419,21 @@ public class FacturaServiceImpl implements FacturaService {
 
 	@Override
 	public void defineJrxml(ImpresionFactura factura, List<ModelCuotaDetalle> cuotaDetalleList) {
-		
+
 		boolean envio = factura.getImporteEnvioSinIva() != 0.0;
 		boolean descuento = factura.getDescuentoImporteTotal() != 0.0;
 		int cantidadCuotas = cuotaDetalleList.size();
-		
-		if(cantidadCuotas > 0) {
-			if(cantidadCuotas <= 3) {
+
+		if (cantidadCuotas > 0) {
+			if (cantidadCuotas <= 3) {
 				factura.setJrxml("facturaReportCuotas03");
-			} else if(cantidadCuotas <= 6) {
+			} else if (cantidadCuotas <= 6) {
 				factura.setJrxml("facturaReportCuotas06");
-			} else if(cantidadCuotas <= 9) {
+			} else if (cantidadCuotas <= 9) {
 				factura.setJrxml("facturaReportCuotas09");
-			} else if(cantidadCuotas <= 12) {
+			} else if (cantidadCuotas <= 12) {
 				factura.setJrxml("facturaReportCuotas12");
-			}			
+			}
 		} else {
 			if (envio && descuento) {
 				factura.setJrxml("facturaReportSiEySiD");
@@ -441,7 +444,7 @@ public class FacturaServiceImpl implements FacturaService {
 			} else if (!envio && !descuento) {
 				factura.setJrxml("facturaReportNoEyNoD");
 			}
-		}		
+		}
 	}
 
 }
