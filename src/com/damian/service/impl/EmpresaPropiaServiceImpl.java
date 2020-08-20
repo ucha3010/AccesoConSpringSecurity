@@ -67,7 +67,26 @@ public class EmpresaPropiaServiceImpl implements EmpresaPropiaService {
 				&& empresaPropia.getDireccionEmpresaPropia().getIdDirPropia() != 0) {
 			direccionEmpresaPropiaService.delete(empresaPropia.getDireccionEmpresaPropia().getIdDirPropia(), request);
 		}
-		return empresaPropiaDAO.delete(id, request);
+		int resultado = empresaPropiaDAO.delete(id, request);
+		if (empresaPropia.isFacturacion()) {
+			changeAvailable(getMaxId(), request);
+		}
+		return resultado;
+	}
+
+	@Override
+	public void changeAvailable(int idPropia, HttpServletRequest request) {
+
+		List<EmpresaPropia> empresasPropias = findAll();
+		for (EmpresaPropia ep : empresasPropias) {
+			if (ep.isFacturacion()) {
+				ep.setFacturacion(false);
+				update(ep, request);
+			}
+		}
+		EmpresaPropia empresaPropia = findById(idPropia);
+		empresaPropia.setFacturacion(true);
+		update(empresaPropia, request);
 	}
 
 	@Override

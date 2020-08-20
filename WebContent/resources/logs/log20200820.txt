@@ -135,3 +135,112 @@ Thu Aug 20 00:20:36 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpre
 Thu Aug 20 00:20:36 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=1, tipoVia=road.Paseo, nombreVia=Castellana, numero=110, resto=, cp=28006, provincia=Madrid, ciudad=Madrid, pais_idPais=1, idPropia=1, modificadoPor=pepe, fechaModificacion=2020-08-20 00:20:36.408]
 Thu Aug 20 00:20:43 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=2, razonSocial=Empresa Propia 2, cif=C51494045, telefono=+34 916666600, fax=+34 916666601, email=empresapropia2@gmail.com, facturacion=true]
 Thu Aug 20 00:20:43 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=2, tipoVia=road.Street, nombreVia=Sarmiento, numero=21, resto=, cp=24004, provincia=Valladolid, ciudad=Valladolid, pais_idPais=1, idPropia=2, modificadoPor=pepe, fechaModificacion=2020-08-20 00:20:43.347]
+Thu Aug 20 19:03:50 CEST 2020 - SAVE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=0, razonSocial=Empresa propia 3, cif=F64684038, telefono=945558888, fax=945558899, email=empresa.propia3@gmail.com, facturacion=false]
+Thu Aug 20 19:03:50 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=3, tipoVia=road.Street, nombreVia=San Ildefonso, numero=2, resto=, cp=34057, provincia=Lugo, ciudad=Lugo, pais_idPais=1, idPropia=3, modificadoPor=pepe, fechaModificacion=2020-08-20 19:03:50.817]
+Thu Aug 20 19:04:14 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=3, razonSocial=Empresa propia 3, cif=F64684038, telefono=945558888, fax=945558899, email=empresa.propia3@gmail.com, facturacion=false]
+Thu Aug 20 19:04:14 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=3, tipoVia=road.Paseo, nombreVia=San Ildefonso, numero=2, resto=, cp=34057, provincia=Lugo, ciudad=Lugo, pais_idPais=1, idPropia=3, modificadoPor=pepe, fechaModificacion=2020-08-20 19:04:14.955]
+Thu Aug 20 19:04:26 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=2, razonSocial=Empresa Propia 2, cif=C51494045, telefono=+34 916666600, fax=+34 916666601, email=empresapropia2@gmail.com, facturacion=false]
+Thu Aug 20 19:04:26 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=3, razonSocial=Empresa propia 3, cif=F64684038, telefono=945558888, fax=945558899, email=empresa.propia3@gmail.com, facturacion=true]
+Thu Aug 20 19:04:56 CEST 2020 - DELETE [pepe] - table:empresapropia - EmpresaPropia [idPropia=2, razonSocial=Empresa Propia 2, cif=C51494045, telefono=+34 916666600, fax=+34 916666601, email=empresapropia2@gmail.com, facturacion=false, direccionEmpresaPropia=DireccionEmpresaPropia [idDirPropia=2, tipoVia=road.Street, nombreVia=Sarmiento, numero=21, resto=, cp=24004, provincia=Valladolid, ciudad=Valladolid, pais=Pais [idPais=1, nombreES=España, nombreEN=Spain, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, foto=null], modificadoPor=pepe, fechaModificacion=2020-08-20 00:20:43.0]]
+Thu Aug 20 19:05:06 CEST 2020 - DELETE [pepe] - table:empresapropia - EmpresaPropia [idPropia=3, razonSocial=Empresa propia 3, cif=F64684038, telefono=945558888, fax=945558899, email=empresa.propia3@gmail.com, facturacion=true, direccionEmpresaPropia=DireccionEmpresaPropia [idDirPropia=3, tipoVia=road.Paseo, nombreVia=San Ildefonso, numero=2, resto=, cp=34057, provincia=Lugo, ciudad=Lugo, pais=Pais [idPais=1, nombreES=España, nombreEN=Spain, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, foto=null], modificadoPor=pepe, fechaModificacion=2020-08-20 19:04:14.0]]
+Thu Aug 20 19:05:06 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777770, email=empresapropia@gmail.com, facturacion=true]
+Thu Aug 20 19:05:56 CEST 2020 - SAVE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=0, razonSocial=Empresa Propia 2, cif=J32245813, telefono=620358429, fax=915235237, email=prueba@organizacion.com, facturacion=false]
+Thu Aug 20 19:05:56 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=4, tipoVia=road.Street, nombreVia=Castellana, numero=2, resto=asdfasdfasdf, cp=28050, provincia=Madrid, ciudad=MADRID, pais_idPais=1, idPropia=4, modificadoPor=pepe, fechaModificacion=2020-08-20 19:05:56.636]
+Thu Aug 20 19:06:37 CEST 2020 - SAVE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=0, razonSocial=Empresa Propia 3, cif=U39746391, telefono=637955254, fax=+34 917777777, email=quali@software.com, facturacion=false]
+Thu Aug 20 19:06:37 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=5, tipoVia=road.Route, nombreVia=27, numero=21, resto=dsafsadf, cp=28050, provincia=MADRID, ciudad=MADRID, pais_idPais=1, idPropia=5, modificadoPor=pepe, fechaModificacion=2020-08-20 19:06:37.427]
+Thu Aug 20 19:06:54 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777770, email=empresapropia@gmail.com, facturacion=false]
+Thu Aug 20 19:06:54 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=5, razonSocial=Empresa Propia 3, cif=U39746391, telefono=637955254, fax=+34 917777777, email=quali@software.com, facturacion=true]
+Thu Aug 20 19:07:02 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=5, razonSocial=Empresa Propia 3, cif=U39746391, telefono=637955254, fax=+34 917777777, email=quali@software.com, facturacion=false]
+Thu Aug 20 19:07:02 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=4, razonSocial=Empresa Propia 2, cif=J32245813, telefono=620358429, fax=915235237, email=prueba@organizacion.com, facturacion=true]
+Thu Aug 20 19:07:07 CEST 2020 - DELETE [pepe] - table:empresapropia - EmpresaPropia [idPropia=4, razonSocial=Empresa Propia 2, cif=J32245813, telefono=620358429, fax=915235237, email=prueba@organizacion.com, facturacion=true, direccionEmpresaPropia=DireccionEmpresaPropia [idDirPropia=4, tipoVia=road.Street, nombreVia=Castellana, numero=2, resto=asdfasdfasdf, cp=28050, provincia=Madrid, ciudad=MADRID, pais=Pais [idPais=1, nombreES=España, nombreEN=Spain, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, foto=null], modificadoPor=pepe, fechaModificacion=2020-08-20 19:05:56.0]]
+Thu Aug 20 19:07:07 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=5, razonSocial=Empresa Propia 3, cif=U39746391, telefono=637955254, fax=+34 917777777, email=quali@software.com, facturacion=true]
+Thu Aug 20 19:07:14 CEST 2020 - DELETE [pepe] - table:empresapropia - EmpresaPropia [idPropia=5, razonSocial=Empresa Propia 3, cif=U39746391, telefono=637955254, fax=+34 917777777, email=quali@software.com, facturacion=true, direccionEmpresaPropia=DireccionEmpresaPropia [idDirPropia=5, tipoVia=road.Route, nombreVia=27, numero=21, resto=dsafsadf, cp=28050, provincia=MADRID, ciudad=MADRID, pais=Pais [idPais=1, nombreES=España, nombreEN=Spain, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, foto=null], modificadoPor=pepe, fechaModificacion=2020-08-20 19:06:37.0]]
+Thu Aug 20 19:07:14 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777770, email=empresapropia@gmail.com, facturacion=true]
+Thu Aug 20 19:22:23 CEST 2020 - DELETE [pepe] - table:empresapropia - EmpresaPropia [idPropia=1, razonSocial=Empresa propia, cif=C54583802, telefono=+34 916666666, fax=+34 917777770, email=empresapropia@gmail.com, facturacion=true, direccionEmpresaPropia=DireccionEmpresaPropia [idDirPropia=1, tipoVia=road.Paseo, nombreVia=Castellana, numero=110, resto=, cp=28006, provincia=Madrid, ciudad=Madrid, pais=Pais [idPais=1, nombreES=España, nombreEN=Spain, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, foto=null], modificadoPor=pepe, fechaModificacion=2020-08-20 00:20:36.0]]
+Thu Aug 20 19:22:23 CEST 2020 - ERROR [pepe] - java.lang.NullPointerException
+	at com.damian.dao.impl.EmpresaPropiaDAOImpl.getMaxId(EmpresaPropiaDAOImpl.java:121)
+	at com.damian.service.impl.EmpresaPropiaServiceImpl.getMaxId(EmpresaPropiaServiceImpl.java:94)
+	at com.damian.service.impl.EmpresaPropiaServiceImpl.delete(EmpresaPropiaServiceImpl.java:72)
+	at com.damian.controller.EmpresaPropiaController.deleteUser(EmpresaPropiaController.java:64)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:330)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:118)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:84)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:113)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:103)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:113)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter.doFilter(RememberMeAuthenticationFilter.java:146)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:154)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:45)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:199)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:50)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:87)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:192)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:160)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:668)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+
+Thu Aug 20 19:24:28 CEST 2020 - SAVE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=0, razonSocial=Company, cif=F25564477, telefono=914564567, fax=914564568, email=company@company.es, facturacion=false]
+Thu Aug 20 19:24:28 CEST 2020 - SAVE [pepe] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=6, tipoVia=road.Paseo, nombreVia=Castellana, numero=72, resto=planta 4, cp=28006, provincia=Madrid, ciudad=Madrid, pais_idPais=1, idPropia=6, modificadoPor=pepe, fechaModificacion=2020-08-20 19:24:28.379]
+Thu Aug 20 19:24:40 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=6, razonSocial=Company, cif=F25564477, telefono=914564567, fax=914564568, email=company@company.es, facturacion=true]
+Thu Aug 20 19:27:18 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=6, razonSocial=Company, cif=F25564477, telefono=914564567, fax=914564568, email=company@company.es, facturacion=false]
+Thu Aug 20 19:27:18 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=6, razonSocial=Company, cif=F25564477, telefono=914564567, fax=914564568, email=company@company.es, facturacion=true]
+Thu Aug 20 19:28:05 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=6, razonSocial=Company, cif=F25564477, telefono=914564567, fax=914564568, email=company@company.es, facturacion=false]
+Thu Aug 20 19:28:05 CEST 2020 - UPDATE [pepe] - table:empresapropia - ModelEmpresaPropia [idPropia=6, razonSocial=Company, cif=F25564477, telefono=914564567, fax=914564568, email=company@company.es, facturacion=true]

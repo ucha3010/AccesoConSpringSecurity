@@ -71,7 +71,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${empresaPropias}" var="empresaPropia">
-					    <tr title='<fmt:message key='${empresaPropia.direccionEmpresaPropia.tipoVia}' />&#xA;<c:out value="${empresaPropia.direccionEmpresaPropia.nombreVia}" />&#xA;<c:out value="${empresaPropia.direccionEmpresaPropia.numero}" />&#xA;<c:out value="${empresaPropia.direccionEmpresaPropia.resto}" />&#xA;(<c:out value="${empresaPropia.direccionEmpresaPropia.cp}" />) <c:out value="${empresaPropia.direccionEmpresaPropia.ciudad}" />&#xA;<c:out value="${empresaPropia.direccionEmpresaPropia.provincia}" />&#xA;<c:out value="${empresaPropia.direccionEmpresaPropia.pais[nameColSelect]}" />'>
+					    <tr title='<fmt:message key='${empresaPropia.direccionEmpresaPropia.tipoVia}' />&#x20;<c:out value="${empresaPropia.direccionEmpresaPropia.nombreVia}" />&#x20;<c:out value="${empresaPropia.direccionEmpresaPropia.numero}" />&#x20;<c:out value="${empresaPropia.direccionEmpresaPropia.resto}" />&#xA;(<c:out value="${empresaPropia.direccionEmpresaPropia.cp}" />) <c:out value="${empresaPropia.direccionEmpresaPropia.ciudad}" />&#xA;<c:out value="${empresaPropia.direccionEmpresaPropia.provincia}" />&#xA;<c:out value="${empresaPropia.direccionEmpresaPropia.pais[nameColSelect]}" />'>
 							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 								<td class="extraAdmin-td">
 									<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/empresaPropia/${empresaPropia.idPropia}' />"'>

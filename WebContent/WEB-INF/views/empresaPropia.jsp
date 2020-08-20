@@ -83,7 +83,7 @@
 				<div class="hidden-xs col-sm-1">
 				</div>
 				<div class="col-xs-12 col-sm-5">
-					<label for="razonSocial"><fmt:message key="label.Company.name" /></label> 
+					<label for="razonSocial"><fmt:message key="label.Company.name" /> *</label> 
 					<sf:input path="razonSocial" class="form-control" id="razonSocial" />
 					<span id="razonSocialError" name="errorSpan"></span>
 				</div>

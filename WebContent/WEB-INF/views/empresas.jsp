@@ -68,9 +68,16 @@
 					</div>
 				</div>
 				<div class="col-sm-2 col-md-2">
-					<button type="button" class="btn btn-warning ml-1 border-color-dam" onclick='location.href="<c:url value='/empresaPropia'/>"'>
-						<fmt:message key="Own.company" />
-					</button>
+					<c:if test="${hayEmpresaPropia}">
+						<button type="button" class="btn btn-warning ml-1 border-color-dam" onclick='location.href="<c:url value='/empresaPropia'/>"'>
+							<fmt:message key="Own.company" />
+						</button>
+					</c:if>
+					<c:if test="${not hayEmpresaPropia}">
+						<button type="button" class="btn btn-danger ml-1 border-color-dam" onclick='location.href="<c:url value='/empresaPropia'/>"'>
+							<fmt:message key="Own.company" />
+						</button>
+					</c:if>
 				</div>
 				<div class="col-sm-2 col-md-2">
 					<c:if test="${not empty empresa_agregada}">

@@ -1,7 +1,5 @@
 package com.damian.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,17 +70,8 @@ public class EmpresaPropiaController {
 	@RequestMapping("/empresaPropia/available/{idPropia}")
 	public ModelAndView changeAvailable(ModelAndView modelAndView, @PathVariable("idPropia") int idPropia,
 			HttpServletRequest request) {
-		List<EmpresaPropia> empresasPropias = empresaPropiaService.findAll();
-		for (EmpresaPropia ep : empresasPropias) {
-			if (ep.isFacturacion()) {
-				ep.setFacturacion(false);
-				empresaPropiaService.update(ep, request);
-			}
-		}
-		EmpresaPropia empresaPropia = empresaPropiaService.findById(idPropia);
-		empresaPropia.setFacturacion(true);
-		empresaPropiaService.update(empresaPropia, request);
 
+		empresaPropiaService.changeAvailable(idPropia, request);
 		return getAll(modelAndView);
 	}
 

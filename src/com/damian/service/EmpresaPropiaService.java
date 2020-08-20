@@ -20,6 +20,8 @@ public interface EmpresaPropiaService {
 
 	public int delete(int id, HttpServletRequest request);
 
+	public void changeAvailable(int idPropia, HttpServletRequest request);
+
 	public int getMaxId();
 
 }

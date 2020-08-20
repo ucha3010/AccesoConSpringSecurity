@@ -1,5 +1,7 @@
 package com.damian.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.pojo.Empresa;
+import com.damian.pojo.EmpresaPropia;
+import com.damian.service.EmpresaPropiaService;
 import com.damian.service.EmpresaService;
 import com.damian.service.PaginacionService;
 import com.damian.valid.SpringFormGroup;
@@ -27,6 +31,9 @@ public class EmpresaController {
 
 	@Autowired
 	private EmpresaService empresaService;
+	
+	@Autowired
+	private EmpresaPropiaService empresaPropiaService;
 
 	@Autowired
 	private PaginacionService paginacionService;
@@ -38,6 +45,7 @@ public class EmpresaController {
 		modelAndView.addObject("empresas", empresaService.findAll(column, paginaInicio, totalPaginas, request));
 		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, "empresa"));
 		modelAndView.addObject("buscarempresas", empresaService.findSearchAll());
+		modelAndView.addObject("hayEmpresaPropia", hayEmpresaPropia());
 		modelAndView.setViewName("empresas");
 		return modelAndView;
 	}
@@ -47,6 +55,7 @@ public class EmpresaController {
 		modelAndView.addObject("empresas", empresaService.findByIdList(idEmp));
 		modelAndView.addObject("paginacion", paginacionService.pagination(0, 0, "empresa"));
 		modelAndView.addObject("buscarempresas", empresaService.findSearchAll());
+		modelAndView.addObject("hayEmpresaPropia", hayEmpresaPropia());
 		modelAndView.setViewName("empresas");
 		return modelAndView;
 	}
@@ -91,6 +100,11 @@ public class EmpresaController {
 
 		return "redirect:/empresa/all/null/0/100";
 
+	}
+	
+	private boolean hayEmpresaPropia() {
+		List<EmpresaPropia> empresaPropiaList = empresaPropiaService.findAll();
+		return !empresaPropiaList.isEmpty();
 	}
 
 }
