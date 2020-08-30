@@ -34,8 +34,12 @@ public class ConverterProductoFactura {
 		ProductoFactura pf = new ProductoFactura();
 		pf.setCantidad(mpf.getCantidad());
 		pf.setIvaProducto(mpf.getIvaProducto());
+		pf.setIvaImporteTotal(mpf.getIvaImporteTotal());
 		pf.setPorcentajeDescuento(mpf.getPorcentajeDescuento());
 		pf.setPrecioUnitSinIva(mpf.getPrecioUnitSinIva());
+		pf.setPrecioUnitSinIvaConDesc(mpf.getPrecioUnitSinIvaConDesc());
+		pf.setPrecioUnitario(mpf.getPrecioUnitario());
+		pf.setPrecioFinalSinIva(mpf.getPrecioFinalSinIva());
 		pf.setPrecioFinalRecibidoPagado(mpf.getPrecioFinalRecibidoPagado());
 		pf.setObservaciones(mpf.getObservaciones());
 		Producto producto = new Producto();
@@ -62,8 +66,12 @@ public class ConverterProductoFactura {
 		}
 		mpf.setCantidad(pf.getCantidad());
 		mpf.setIvaProducto(pf.getIvaProducto());
+		mpf.setIvaImporteTotal(pf.getIvaImporteTotal());
 		mpf.setPorcentajeDescuento(pf.getPorcentajeDescuento());
 		mpf.setPrecioUnitSinIva(pf.getPrecioUnitSinIva());
+		mpf.setPrecioUnitSinIvaConDesc(pf.getPrecioUnitSinIvaConDesc());
+		mpf.setPrecioUnitario(pf.getPrecioUnitario());
+		mpf.setPrecioFinalSinIva(pf.getPrecioFinalSinIva());
 		mpf.setPrecioFinalRecibidoPagado(pf.getPrecioFinalRecibidoPagado());
 		mpf.setObservaciones(pf.getObservaciones());
 		mpf.setModificadoPor(pf.getModificadoPor());

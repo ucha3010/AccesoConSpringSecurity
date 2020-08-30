@@ -49,11 +49,12 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 	public void save(ProductoFactura productoFactura, HttpServletRequest request) {
 		ModelProductoFactura mpf = converterProductoFactura.convert(productoFactura);
 		String sql = "INSERT INTO " + TABLA
-				+ " (idPro, idFac, cantidad, ivaProducto, porcentajeDescuento, precioUnitSinIva, precioFinalRecibidoPagado, observaciones, modificadoPor, fechaModificacion)"
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sql, mpf.getIdPro(), mpf.getIdFac(), mpf.getCantidad(), mpf.getIvaProducto(),
-				mpf.getPorcentajeDescuento(), mpf.getPrecioUnitSinIva(), mpf.getPrecioFinalRecibidoPagado(),
-				mpf.getObservaciones(), mpf.getModificadoPor(), mpf.getFechaModificacion());
+				+ " (idPro, idFac, cantidad, ivaProducto, ivaImporteTotal, porcentajeDescuento, precioUnitSinIva, precioUnitSinIvaConDesc, "
+				+ "precioUnitario, precioFinalSinIva, precioFinalRecibidoPagado, observaciones, modificadoPor, fechaModificacion)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		jdbcTemplate.update(sql, mpf.getIdPro(), mpf.getIdFac(), mpf.getCantidad(), mpf.getIvaProducto(), mpf.getIvaImporteTotal(),
+				mpf.getPorcentajeDescuento(), mpf.getPrecioUnitSinIva(), mpf.getPrecioUnitSinIvaConDesc(), mpf.getPrecioUnitario(), 
+				mpf.getPrecioFinalSinIva(), mpf.getPrecioFinalRecibidoPagado(),mpf.getObservaciones(), mpf.getModificadoPor(), mpf.getFechaModificacion());
 		LocalLogger.save(TABLA, mpf, request);
 	}
 
@@ -61,11 +62,13 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 	public void update(ProductoFactura productoFactura, HttpServletRequest request) {
 		ModelProductoFactura mpf = converterProductoFactura.convert(productoFactura);
 		String sql = "UPDATE " + TABLA
-				+ " SET cantidad=?, ivaProducto=?, porcentajeDescuento=?, precioUnitSinIva=?, precioFinalRecibidoPagado=?, observaciones=?, modificadoPor=?, fechaModificacion=? "
+				+ " SET cantidad=?, ivaProducto=?, ivaImporteTotal=?, porcentajeDescuento=?, precioUnitSinIva=?, precioUnitSinIvaConDesc=?,"
+				+ "precioUnitario=?, precioFinalSinIva=?, precioFinalRecibidoPagado=?, observaciones=?, modificadoPor=?, fechaModificacion=? "
 				+ "WHERE " + KEY1 + "=? AND " + KEY2 + "=?";
-		jdbcTemplate.update(sql, mpf.getCantidad(), mpf.getIvaProducto(), mpf.getPorcentajeDescuento(),
-				mpf.getPrecioUnitSinIva(), mpf.getPrecioFinalRecibidoPagado(), mpf.getObservaciones(),
-				mpf.getModificadoPor(), mpf.getFechaModificacion(), mpf.getIdPro(), mpf.getIdFac());
+		jdbcTemplate.update(sql, mpf.getCantidad(), mpf.getIvaProducto(), mpf.getIvaImporteTotal(), mpf.getPorcentajeDescuento(),
+				mpf.getPrecioUnitSinIva(), mpf.getPrecioUnitSinIvaConDesc(), mpf.getPrecioUnitario(), mpf.getPrecioFinalSinIva(), 
+				mpf.getPrecioFinalRecibidoPagado(), mpf.getObservaciones(), mpf.getModificadoPor(), mpf.getFechaModificacion(), 
+				mpf.getIdPro(), mpf.getIdFac());
 		LocalLogger.update(TABLA, mpf, request);
 	}
 
@@ -155,8 +158,12 @@ public class ProductoFacturaDAOImpl implements ProductoFacturaDAO {
 		mpf.setIdFac(rs.getInt("idFac"));
 		mpf.setCantidad(rs.getInt("cantidad"));
 		mpf.setIvaProducto(rs.getDouble("ivaProducto"));
+		mpf.setIvaImporteTotal(rs.getDouble("ivaImporteTotal"));
 		mpf.setPorcentajeDescuento(rs.getDouble("porcentajeDescuento"));
 		mpf.setPrecioUnitSinIva(rs.getDouble("precioUnitSinIva"));
+		mpf.setPrecioUnitSinIvaConDesc(rs.getDouble("precioUnitSinIvaConDesc"));
+		mpf.setPrecioUnitario(rs.getDouble("precioUnitario"));
+		mpf.setPrecioFinalSinIva(rs.getDouble("precioFinalSinIva"));
 		mpf.setPrecioFinalRecibidoPagado(rs.getDouble("precioFinalRecibidoPagado"));
 		mpf.setObservaciones(rs.getString("observaciones"));
 		mpf.setFechaModificacion(rs.getTimestamp("fechaModificacion"));

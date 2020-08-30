@@ -8,11 +8,13 @@ public class Factura {
 
 	private int idFac;
 	private boolean compra;
-	private double ivaTotal;
-	private double ivaImporteTotal;
+	private double totalSinIvaEnvDescfac;
 	private double descuentoTotal;
 	private double descuentoImporteTotal;
 	private double importeEnvioSinIva;
+	private double totalSinIvaConDescfac;
+	private double ivaTotal;
+	private double ivaImporteTotal;
 	private double importeTotal;
 	private Date fechaCompra;
 	private Date fechaEntrega;
@@ -60,33 +62,18 @@ public class Factura {
 	}
 
 	/**
-	 * @return the ivaTotal
+	 * @return the totalSinIvaEnvDescfac
 	 */
-	public double getIvaTotal() {
-		return ivaTotal;
+	public double getTotalSinIvaEnvDescfac() {
+		return totalSinIvaEnvDescfac;
 	}
 
 	/**
-	 * @param ivaTotal
-	 *            the ivaTotal to set
+	 * @param totalSinIvaEnvDescfac
+	 *            the totalSinIvaEnvDescfac to set
 	 */
-	public void setIvaTotal(double ivaTotal) {
-		this.ivaTotal = ivaTotal;
-	}
-
-	/**
-	 * @return the ivaImporteTotal
-	 */
-	public double getIvaImporteTotal() {
-		return ivaImporteTotal;
-	}
-
-	/**
-	 * @param ivaImporteTotal
-	 *            the ivaImporteTotal to set
-	 */
-	public void setIvaImporteTotal(double ivaImporteTotal) {
-		this.ivaImporteTotal = ivaImporteTotal;
+	public void setTotalSinIvaEnvDescfac(double totalSinIvaEnvDescfac) {
+		this.totalSinIvaEnvDescfac = totalSinIvaEnvDescfac;
 	}
 
 	/**
@@ -132,6 +119,51 @@ public class Factura {
 	 */
 	public void setImporteEnvioSinIva(double importeEnvioSinIva) {
 		this.importeEnvioSinIva = importeEnvioSinIva;
+	}
+
+	/**
+	 * @return the totalSinIvaConDescfac
+	 */
+	public double getTotalSinIvaConDescfac() {
+		return totalSinIvaConDescfac;
+	}
+
+	/**
+	 * @param totalSinIvaConDescfac
+	 *            the totalSinIvaConDescfac to set
+	 */
+	public void setTotalSinIvaConDescfac(double totalSinIvaConDescfac) {
+		this.totalSinIvaConDescfac = totalSinIvaConDescfac;
+	}
+
+	/**
+	 * @return the ivaTotal
+	 */
+	public double getIvaTotal() {
+		return ivaTotal;
+	}
+
+	/**
+	 * @param ivaTotal
+	 *            the ivaTotal to set
+	 */
+	public void setIvaTotal(double ivaTotal) {
+		this.ivaTotal = ivaTotal;
+	}
+
+	/**
+	 * @return the ivaImporteTotal
+	 */
+	public double getIvaImporteTotal() {
+		return ivaImporteTotal;
+	}
+
+	/**
+	 * @param ivaImporteTotal
+	 *            the ivaImporteTotal to set
+	 */
+	public void setIvaImporteTotal(double ivaImporteTotal) {
+		this.ivaImporteTotal = ivaImporteTotal;
 	}
 
 	/**
@@ -306,13 +338,13 @@ public class Factura {
 	 */
 	@Override
 	public String toString() {
-		return "Factura [idFac=" + idFac + ", compra=" + compra + ", ivaTotal=" + ivaTotal + ", ivaImporteTotal="
-				+ ivaImporteTotal + ", descuentoTotal=" + descuentoTotal + ", descuentoImporteTotal="
-				+ descuentoImporteTotal + ", importeEnvioSinIva=" + importeEnvioSinIva + ", importeTotal="
-				+ importeTotal + ", fechaCompra=" + fechaCompra + ", fechaEntrega=" + fechaEntrega + ", estado="
-				+ estado + ", observaciones=" + observaciones + ", formaPago=" + formaPago + ", creadoPor=" + creadoPor
-				+ ", cuota=" + cuota + ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion
-				+ ", productoFacturaList=" + productoFacturaList + "]";
+		return "Factura [idFac=" + idFac + ", compra=" + compra + ", totalSinIvaEnvDescfac=" + totalSinIvaEnvDescfac
+				+ ", descuentoTotal=" + descuentoTotal + ", descuentoImporteTotal=" + descuentoImporteTotal
+				+ ", importeEnvioSinIva=" + importeEnvioSinIva + ", totalSinIvaConDescfac=" + totalSinIvaConDescfac
+				+ ", ivaTotal=" + ivaTotal + ", ivaImporteTotal=" + ivaImporteTotal + ", importeTotal=" + importeTotal
+				+ ", fechaCompra=" + fechaCompra + ", fechaEntrega=" + fechaEntrega + ", observaciones=" + observaciones
+				+ ", creadoPor=" + creadoPor + ", modificadoPor=" + modificadoPor + ", fechaModificacion="
+				+ fechaModificacion + "]";
 	}
 
 }

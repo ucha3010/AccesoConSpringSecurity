@@ -8,8 +8,12 @@ public class ModelProductoFactura {
 	private int idFac;
 	private int cantidad;
 	private double ivaProducto;
+	private double ivaImporteTotal;
 	private double porcentajeDescuento;
 	private double precioUnitSinIva;
+	private double precioUnitSinIvaConDesc;
+	private double precioUnitario;
+	private double precioFinalSinIva;
 	private double precioFinalRecibidoPagado;
 	private String observaciones;
 	private String modificadoPor;
@@ -80,6 +84,21 @@ public class ModelProductoFactura {
 	}
 
 	/**
+	 * @return the ivaImporteTotal
+	 */
+	public double getIvaImporteTotal() {
+		return ivaImporteTotal;
+	}
+
+	/**
+	 * @param ivaImporteTotal
+	 *            the ivaImporteTotal to set
+	 */
+	public void setIvaImporteTotal(double ivaImporteTotal) {
+		this.ivaImporteTotal = ivaImporteTotal;
+	}
+
+	/**
 	 * @return the porcentajeDescuento
 	 */
 	public double getPorcentajeDescuento() {
@@ -107,6 +126,51 @@ public class ModelProductoFactura {
 	 */
 	public void setPrecioUnitSinIva(double precioUnitSinIva) {
 		this.precioUnitSinIva = precioUnitSinIva;
+	}
+
+	/**
+	 * @return the precioUnitSinIvaConDesc
+	 */
+	public double getPrecioUnitSinIvaConDesc() {
+		return precioUnitSinIvaConDesc;
+	}
+
+	/**
+	 * @param precioUnitSinIvaConDesc
+	 *            the precioUnitSinIvaConDesc to set
+	 */
+	public void setPrecioUnitSinIvaConDesc(double precioUnitSinIvaConDesc) {
+		this.precioUnitSinIvaConDesc = precioUnitSinIvaConDesc;
+	}
+
+	/**
+	 * @return the precioUnitario
+	 */
+	public double getPrecioUnitario() {
+		return precioUnitario;
+	}
+
+	/**
+	 * @param precioUnitario
+	 *            the precioUnitario to set
+	 */
+	public void setPrecioUnitario(double precioUnitario) {
+		this.precioUnitario = precioUnitario;
+	}
+
+	/**
+	 * @return the precioFinalSinIva
+	 */
+	public double getPrecioFinalSinIva() {
+		return precioFinalSinIva;
+	}
+
+	/**
+	 * @param precioFinalSinIva
+	 *            the precioFinalSinIva to set
+	 */
+	public void setPrecioFinalSinIva(double precioFinalSinIva) {
+		this.precioFinalSinIva = precioFinalSinIva;
 	}
 
 	/**
@@ -177,9 +241,11 @@ public class ModelProductoFactura {
 	@Override
 	public String toString() {
 		return "ModelProductoFactura [idPro=" + idPro + ", idFac=" + idFac + ", cantidad=" + cantidad + ", ivaProducto="
-				+ ivaProducto + ", porcentajeDescuento=" + porcentajeDescuento + ", precioUnitSinIva="
-				+ precioUnitSinIva + ", precioFinalRecibidoPagado=" + precioFinalRecibidoPagado + ", observaciones="
-				+ observaciones + ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
+				+ ivaProducto + ", ivaImporteTotal=" + ivaImporteTotal + ", porcentajeDescuento=" + porcentajeDescuento
+				+ ", precioUnitSinIva=" + precioUnitSinIva + ", precioUnitSinIvaConDesc=" + precioUnitSinIvaConDesc
+				+ ", precioUnitario=" + precioUnitario + ", precioFinalSinIva=" + precioFinalSinIva
+				+ ", precioFinalRecibidoPagado=" + precioFinalRecibidoPagado + ", observaciones=" + observaciones
+				+ ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

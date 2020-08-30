@@ -108,11 +108,11 @@ public class FacturaDAOImpl implements FacturaDAO {
 		} else {
 			ModelFactura mf = converterFactura.convert(factura);
 			String sql = "INSERT INTO " + TABLA
-					+ " (compra, ivaTotal, ivaImporteTotal, descuentoTotal, descuentoImporteTotal, importeEnvioSinIva, importeTotal, fechaCompra, "
+					+ " (compra, totalSinIvaEnvDescfac, descuentoTotal, descuentoImporteTotal, importeEnvioSinIva, totalSinIvaConDescfac, ivaTotal, ivaImporteTotal, importeTotal, fechaCompra, "
 					+ "fechaEntrega, idEst, observaciones, idFor, creadoPor, idCuo, modificadoPor, fechaModificacion) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			int result = jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
-					mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteEnvioSinIva(),
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			int result = jdbcTemplate.update(sql, mf.isCompra(), mf.getTotalSinIvaEnvDescfac(), 
+					mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteEnvioSinIva(), mf.getTotalSinIvaConDescfac(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
 					mf.getImporteTotal(), mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(),
 					mf.getObservaciones(), mf.getIdFor(), mf.getCreadoPor(), mf.getIdCuo(), mf.getModificadoPor(),
 					mf.getFechaModificacion());
@@ -125,11 +125,11 @@ public class FacturaDAOImpl implements FacturaDAO {
 	public int update(Factura factura, HttpServletRequest request) {
 		ModelFactura mf = converterFactura.convert(factura);
 		String sql = "UPDATE " + TABLA
-				+ " SET compra=?, ivaTotal=?, ivaImporteTotal=?, descuentoTotal=?, descuentoImporteTotal=?, importeEnvioSinIva=?, importeTotal=?, "
+				+ " SET compra=?, totalSinIvaEnvDescfac=?, descuentoTotal=?, descuentoImporteTotal=?, importeEnvioSinIva=?, totalSinIvaConDescfac=?, ivaTotal=?, ivaImporteTotal=?, importeTotal=?, "
 				+ "fechaCompra=?, fechaEntrega=?, idEst=?, observaciones=?, idFor=?, creadoPor=?, idCuo=?, modificadoPor=?, "
 				+ "fechaModificacion=? WHERE " + KEY + "=?";
-		int result = jdbcTemplate.update(sql, mf.isCompra(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
-				mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteEnvioSinIva(), mf.getImporteTotal(),
+		int result = jdbcTemplate.update(sql, mf.isCompra(), mf.getTotalSinIvaEnvDescfac(), 
+				mf.getDescuentoTotal(), mf.getDescuentoImporteTotal(), mf.getImporteEnvioSinIva(), mf.getTotalSinIvaConDescfac(), mf.getIvaTotal(), mf.getIvaImporteTotal(), mf.getImporteTotal(),
 				mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(), mf.getObservaciones(), mf.getIdFor(),
 				mf.getCreadoPor(), mf.getIdCuo(), mf.getModificadoPor(), mf.getFechaModificacion(), mf.getIdFac());
 		LocalLogger.update(TABLA, mf, request);
@@ -225,11 +225,13 @@ public class FacturaDAOImpl implements FacturaDAO {
 		ModelFactura mf = new ModelFactura();
 		mf.setIdFac(rs.getInt("idFac"));
 		mf.setCompra(rs.getBoolean("compra"));
-		mf.setIvaTotal(rs.getDouble("ivaTotal"));
-		mf.setIvaImporteTotal(rs.getDouble("ivaImporteTotal"));
+		mf.setTotalSinIvaEnvDescfac(rs.getDouble("totalSinIvaEnvDescfac"));
+		mf.setDescuentoTotal(rs.getDouble("descuentoTotal"));
 		mf.setDescuentoImporteTotal(rs.getDouble("descuentoImporteTotal"));
 		mf.setImporteEnvioSinIva(rs.getDouble("importeEnvioSinIva"));
-		mf.setDescuentoTotal(rs.getDouble("descuentoTotal"));
+		mf.setTotalSinIvaConDescfac(rs.getDouble("totalSinIvaConDescfac"));
+		mf.setIvaTotal(rs.getDouble("ivaTotal"));
+		mf.setIvaImporteTotal(rs.getDouble("ivaImporteTotal"));
 		mf.setImporteTotal(rs.getDouble("importeTotal"));
 		mf.setFechaCompra(rs.getDate("fechaCompra"));
 		mf.setFechaEntrega(rs.getDate("fechaEntrega"));
