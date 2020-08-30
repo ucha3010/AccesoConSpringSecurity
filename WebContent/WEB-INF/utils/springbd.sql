@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-08-2020 a las 18:51:06
--- Versión del servidor: 10.1.13-MariaDB
--- Versión de PHP: 5.6.20
+-- Tiempo de generación: 31-08-2020 a las 01:28:45
+-- Versión del servidor: 10.4.13-MariaDB
+-- Versión de PHP: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -71,7 +72,7 @@ CREATE TABLE `categoria` (
   `nombreCA` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombreEU` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -84,7 +85,8 @@ INSERT INTO `categoria` (`idCat`, `nombreES`, `nombreEN`, `nombrePT`, `nombreFR`
 (6, 'otra', 'Other', NULL, NULL, NULL, NULL, NULL, NULL, '', '2020-05-23 23:57:37'),
 (7, 'Coches', 'Cars', NULL, NULL, NULL, NULL, NULL, NULL, '', '2020-05-23 23:57:37'),
 (8, '0 Otros', '0 Others', NULL, NULL, NULL, NULL, NULL, NULL, '', '2020-05-23 23:57:37'),
-(9, 'Ropa', 'Clothe', NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '2020-05-24 18:26:28');
+(9, 'Ropa', 'Clothe', NULL, NULL, NULL, NULL, NULL, NULL, 'admin', '2020-05-24 18:26:28'),
+(10, 'Juegos', 'Games', NULL, NULL, NULL, NULL, NULL, NULL, 'pepe', '2020-08-13 15:18:16');
 
 -- --------------------------------------------------------
 
@@ -101,7 +103,7 @@ CREATE TABLE `cuota` (
   `interesImp` double NOT NULL,
   `totalCompletoAPagar` double NOT NULL,
   `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -141,7 +143,11 @@ INSERT INTO `cuota` (`idCuo`, `cantidadCuotas`, `comisionAperturaPor`, `comision
 (55, 10, 1, 1.8, 2.5, 2.07, 183.87, 'pepe', '2020-07-26 21:30:11'),
 (56, 4, 0, 0, 1, 5.42, 205.42, 'pepe', '2020-07-26 22:00:44'),
 (57, 4, 0, 0, 1, 0.42, 200.42, 'pepe', '2020-07-26 22:01:37'),
-(58, 12, 25.5, 51, 25.5, 28.69, 279.69, 'pepe', '2020-08-04 22:04:11');
+(58, 12, 25.5, 51, 25.5, 28.69, 279.69, 'pepe', '2020-08-04 22:04:11'),
+(59, 8, 0, 0, 0, 0, 20, 'pepe', '2020-08-16 21:24:51'),
+(60, 4, 0, 0, 3, 0.13, 20.13, 'pepe', '2020-08-16 21:27:09'),
+(61, 2, 2, 0.4, 0, 0, 20.4, 'pepe', '2020-08-16 21:27:46'),
+(62, 4, 0.7, 0.17, 0.3, 0.02, 24.39, 'admin', '2020-08-30 23:21:36');
 
 -- --------------------------------------------------------
 
@@ -253,7 +259,25 @@ INSERT INTO `cuotadetalle` (`idCuDe`, `idCuo`, `importeSinInteres`, `importeInte
 (85, 58, 16.66, 2.39, 19.05, '2021-05-01', 66.72, 50.06, 9),
 (86, 58, 16.66, 2.39, 19.05, '2021-06-01', 50.06, 33.4, 10),
 (87, 58, 16.66, 2.39, 19.05, '2021-07-01', 33.4, 16.74, 11),
-(88, 58, 16.74, 2.4, 19.14, '2021-08-01', 16.74, 0, 12);
+(88, 58, 16.74, 2.4, 19.14, '2021-08-01', 16.74, 0, 12),
+(89, 59, 2.5, 0, 2.5, '2020-09-01', 20, 17.5, 1),
+(90, 59, 2.5, 0, 2.5, '2020-10-01', 17.5, 15, 2),
+(91, 59, 2.5, 0, 2.5, '2020-11-01', 15, 12.5, 3),
+(92, 59, 2.5, 0, 2.5, '2020-12-01', 12.5, 10, 4),
+(93, 59, 2.5, 0, 2.5, '2021-01-01', 10, 7.5, 5),
+(94, 59, 2.5, 0, 2.5, '2021-02-01', 7.5, 5, 6),
+(95, 59, 2.5, 0, 2.5, '2021-03-01', 5, 2.5, 7),
+(96, 59, 2.5, 0, 2.5, '2021-04-01', 2.5, 0, 8),
+(97, 60, 5, 0.03, 5.03, '2020-09-01', 20, 15, 1),
+(98, 60, 5, 0.03, 5.03, '2020-10-01', 15, 10, 2),
+(99, 60, 5, 0.03, 5.03, '2020-11-01', 10, 5, 3),
+(100, 60, 5, 0.04, 5.04, '2020-12-01', 5, 0, 4),
+(101, 61, 10, 0, 10.4, '2020-09-01', 20, 10, 1),
+(102, 61, 10, 0, 10, '2020-10-01', 10, 0, 2),
+(103, 62, 6.05, 0, 6.22, '2020-09-01', 24.2, 18.15, 1),
+(104, 62, 6.05, 0, 6.05, '2020-10-01', 18.15, 12.1, 2),
+(105, 62, 6.05, 0, 6.05, '2020-11-01', 12.1, 6.05, 3),
+(106, 62, 6.05, 0.02, 6.07, '2020-12-01', 6.05, 0, 4);
 
 -- --------------------------------------------------------
 
@@ -272,10 +296,10 @@ CREATE TABLE `datospersonales` (
   `dni` varchar(15) COLLATE utf8_spanish_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `observaciones` text COLLATE utf8_spanish_ci,
+  `observaciones` text COLLATE utf8_spanish_ci DEFAULT NULL,
   `datospersonales_idUsr` int(11) NOT NULL,
   `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -333,7 +357,7 @@ CREATE TABLE `direccion` (
   `pais_idPais` int(30) NOT NULL,
   `idDatosPers` int(11) NOT NULL,
   `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -374,7 +398,7 @@ CREATE TABLE `direccionempresa` (
   `pais_idPais` int(30) NOT NULL,
   `idEmp` int(10) NOT NULL,
   `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -388,7 +412,41 @@ INSERT INTO `direccionempresa` (`idDirEmp`, `tipoVia`, `nombreVia`, `numero`, `r
 (4, 'road.Road', 'San Jerónimo', '2', '', '28006', 'Madrid', 'Madrid', 1, 1, '', '2020-05-24 00:00:36'),
 (5, 'road.Square', 'Manuel Becerra', '5', '', '47024', 'León', 'Cardales', 1, 8, 'admin', '2020-05-24 18:39:35'),
 (6, 'road.Paseo', 'San Jerónimo', '4', '', '28007', 'Madrid', 'Madrid', 1, 9, 'pepe', '2020-07-07 20:36:16'),
-(7, 'road.Paseo', 'Colón', '10', '', '28004', '', 'Madrid', 0, 12, 'pepe', '2020-07-07 20:36:51');
+(7, 'road.Paseo', 'Colón', '10', '', '28004', '', 'Madrid', 0, 12, 'pepe', '2020-07-07 20:36:51'),
+(8, 'road.Street', 'San Jerónimo', '10', '', '28006', 'Madrid', 'Madrid', 1, 16, 'pepe', '2020-08-18 21:37:21');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `direccionempresapropia`
+--
+
+CREATE TABLE `direccionempresapropia` (
+  `idDirPropia` int(11) NOT NULL,
+  `tipoVia` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreVia` varchar(45) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `numero` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `resto` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cp` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `provincia` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `ciudad` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pais_idPais` int(11) NOT NULL,
+  `idPropia` int(11) NOT NULL,
+  `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `direccionempresapropia`
+--
+
+INSERT INTO `direccionempresapropia` (`idDirPropia`, `tipoVia`, `nombreVia`, `numero`, `resto`, `cp`, `provincia`, `ciudad`, `pais_idPais`, `idPropia`, `modificadoPor`, `fechaModificacion`) VALUES
+(1, 'road.Paseo', 'Castellana', '110', '', '28006', 'Madrid', 'Madrid', 1, 1, 'pepe', '2020-08-19 22:20:36'),
+(2, 'road.Street', 'Sarmiento', '21', '', '24004', 'Valladolid', 'Valladolid', 1, 2, 'pepe', '2020-08-19 22:20:43'),
+(3, 'road.Paseo', 'San Ildefonso', '2', '', '34057', 'Lugo', 'Lugo', 1, 3, 'pepe', '2020-08-20 17:04:14'),
+(4, 'road.Street', 'Castellana', '2', 'asdfasdfasdf', '28050', 'Madrid', 'MADRID', 1, 4, 'pepe', '2020-08-20 17:05:56'),
+(5, 'road.Route', '27', '21', 'dsafsadf', '28050', 'MADRID', 'MADRID', 1, 5, 'pepe', '2020-08-20 17:06:37'),
+(6, 'road.Paseo', 'Castellana', '72', 'planta 4', '28006', 'Madrid', 'Madrid', 1, 6, 'pepe', '2020-08-20 17:24:28');
 
 -- --------------------------------------------------------
 
@@ -400,15 +458,15 @@ CREATE TABLE `empresa` (
   `idEmp` int(11) NOT NULL,
   `nombreComercial` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `tipoSociedad` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `actividad` text COLLATE utf8_spanish_ci,
+  `actividad` text COLLATE utf8_spanish_ci DEFAULT NULL,
   `cif` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `paginaWeb` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `fax` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `observaciones` text COLLATE utf8_spanish_ci,
+  `observaciones` text COLLATE utf8_spanish_ci DEFAULT NULL,
   `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -426,7 +484,12 @@ INSERT INTO `empresa` (`idEmp`, `nombreComercial`, `tipoSociedad`, `actividad`, 
 (11, 'Muebles Eladio', 'SL', '', '', '', '', '', '', '', '', '2020-05-24 00:01:07'),
 (12, 'Peluquería Bernarda', 'SL', '', '', '', '', '', '', '', '', '2020-05-24 00:01:07'),
 (14, 'Sinesio Peluqueros', 'SL', 'Peluquería', '', '', '', '', '', '', 'admin', '2020-05-24 18:40:33'),
-(15, 'Embotelladora Serinada', 'SA', '', 'R9710960G', 'serinada@serinada.es', 'www.serinada.es', '918528520', '', '', 'admin', '2020-07-27 16:43:10');
+(15, 'Embotelladora Serinada', 'SA', '', 'R9710960G', 'serinada@serinada.es', 'www.serinada.es', '918528520', '', '', 'admin', '2020-07-27 16:43:10'),
+(16, 'Cristales Beirut', 'SL', 'Cristalería', 'C48473946', 'beirut@gmail.com', 'www.cristaleriabeirut.com', '915554444', '915554443', 'Empresa dedicada a la instalación de cristales de todo tipo', 'pepe', '2020-08-18 20:06:56'),
+(17, 'Inmobiliaria Careti', 'SL', '', '', '', '', '', '', '', 'pepe', '2020-08-18 20:11:54'),
+(18, 'Soldadores Urriaga', 'SL', '', '', '', '', '', '', '', 'pepe', '2020-08-18 20:14:16'),
+(19, 'Vivero Almareque', 'SL', '', '', '', '', '', '', '', 'pepe', '2020-08-18 20:16:13'),
+(20, 'Cerraduras Kenedy', 'SL', '', '', '', '', '', '', '', 'pepe', '2020-08-18 20:17:48');
 
 -- --------------------------------------------------------
 
@@ -441,16 +504,15 @@ CREATE TABLE `empresapropia` (
   `telefono` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `fax` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
-  `facturacion` tinyint(4) NOT NULL,
-  `idDirEmp` int(11) NOT NULL
+  `facturacion` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `empresapropia`
 --
 
-INSERT INTO `empresapropia` (`idPropia`, `razonSocial`, `cif`, `telefono`, `fax`, `email`, `facturacion`, `idDirEmp`) VALUES
-(1, 'Empresa propia', 'C54583802', '+34 916666666', '+34 917777777', 'empresapropia@gmail.com', 1, 2);
+INSERT INTO `empresapropia` (`idPropia`, `razonSocial`, `cif`, `telefono`, `fax`, `email`, `facturacion`) VALUES
+(6, 'Company', 'F25564477', '914564567', '914564568', 'company@company.es', 1);
 
 -- --------------------------------------------------------
 
@@ -469,7 +531,7 @@ CREATE TABLE `estado` (
   `nombreCA` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombreEU` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -494,11 +556,13 @@ INSERT INTO `estado` (`idEst`, `nombreES`, `nombreEN`, `nombrePT`, `nombreFR`, `
 CREATE TABLE `factura` (
   `idFac` int(11) NOT NULL,
   `compra` tinyint(1) NOT NULL,
-  `ivaTotal` double NOT NULL,
-  `ivaImporteTotal` double NOT NULL,
+  `totalSinIvaEnvDescfac` double NOT NULL,
   `descuentoTotal` double NOT NULL,
   `descuentoImporteTotal` double NOT NULL,
   `importeEnvioSinIva` double NOT NULL,
+  `totalSinIvaConDescfac` double NOT NULL,
+  `ivaTotal` double NOT NULL,
+  `ivaImporteTotal` double NOT NULL,
   `importeTotal` double NOT NULL,
   `fechaCompra` datetime NOT NULL,
   `fechaEntrega` datetime DEFAULT NULL,
@@ -508,91 +572,104 @@ CREATE TABLE `factura` (
   `creadoPor` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `idCuo` int(11) NOT NULL,
   `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `factura`
 --
 
-INSERT INTO `factura` (`idFac`, `compra`, `ivaTotal`, `ivaImporteTotal`, `descuentoTotal`, `descuentoImporteTotal`, `importeEnvioSinIva`, `importeTotal`, `fechaCompra`, `fechaEntrega`, `idEst`, `observaciones`, `idFor`, `creadoPor`, `idCuo`, `modificadoPor`, `fechaModificacion`) VALUES
-(7, 1, 10, 49.5, 0, 0, 0, 495, '2020-01-17 20:51:06', NULL, 6, '', 4, 'admin', 0, '', '2020-05-24 00:02:04'),
-(8, 0, 21, 50.82, 0, 0, 0, 242, '2020-01-18 00:00:00', NULL, 7, 'Primera prueba QUITAR unidades. TV Sanyo 15 pulgadas. Saco 1 unidad. Importe 242€. IVA 21%', 4, 'admin', 0, '', '2020-05-24 00:02:04'),
-(9, 0, 21, 42, 0, 0, 0, 242, '2020-03-28 00:00:00', NULL, 1, '', 4, 'admin', 0, '', '2020-05-24 00:02:04'),
-(64, 1, 21, 118.93, 0, 0, 0, 685.27, '2020-03-01 00:00:00', NULL, 6, '', 4, 'pepe', 24, '', '2020-05-24 00:02:04'),
-(66, 1, 21, 0, 0, 0, 0, 0, '2020-05-01 00:00:00', NULL, 1, '', 4, 'pepe', 24, '', '2020-05-24 00:02:04'),
-(67, 1, 21, 0, 0, 0, 0, 0, '2020-06-01 00:00:00', NULL, 8, '', 4, 'pepe', 24, '', '2020-05-24 00:02:04'),
-(68, 1, 21, 0, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 8, '', 4, 'pepe', 24, '', '2020-05-24 00:02:04'),
-(69, 1, 21, 0, 0, 0, 0, 0, '2020-08-01 00:00:00', NULL, 8, '', 4, 'pepe', 24, '', '2020-05-24 00:02:04'),
-(72, 1, 0, 0, 0, 0, 0, 7, '2020-03-22 00:00:00', NULL, 3, '', 4, 'pepe', 0, '', '2020-05-24 00:02:04'),
-(74, 1, 0, 0, 0, 0, 0, 8, '2020-02-15 00:00:00', NULL, 8, '', 4, 'pepe', 0, '', '2020-05-24 00:02:04'),
-(75, 0, 0, 0, 0, 0, 0, 0, '2020-02-15 11:40:35', NULL, 7, '', 4, 'pepe', 0, '', '2020-05-24 00:02:04'),
-(85, 1, 0, 0, 0, 0, 0, 12, '2020-06-01 00:00:00', NULL, 6, '', 4, 'pepe', 26, '', '2020-05-24 00:02:04'),
-(86, 1, 0, 0, 0, 0, 0, 9, '2020-02-15 14:38:39', NULL, 6, '', 4, 'pepe', 0, '', '2020-05-24 00:02:04'),
-(87, 0, 0, 0, 0, 0, 0, 20, '2020-02-15 14:38:53', NULL, 7, '', 4, 'pepe', 0, '', '2020-05-24 00:02:04'),
-(88, 1, 21, 26.03, 0, 0, 0, 150, '2020-03-16 23:18:40', NULL, 6, '', 4, 'pepe', 0, '', '2020-05-24 00:02:04'),
-(90, 1, 0, 0, 0, 0, 0, 20, '2020-05-01 00:00:00', NULL, 6, '', 4, 'pepe', 27, '', '2020-05-24 00:02:04'),
-(91, 1, 0, 0, 0, 0, 0, 0, '2020-06-01 00:00:00', NULL, 6, '', 4, 'pepe', 27, '', '2020-05-24 00:02:04'),
-(92, 1, 0, 0, 0, 0, 0, 15, '2020-05-01 00:00:00', NULL, 6, '', 4, 'pepe', 28, '', '2020-05-24 00:02:04'),
-(94, 1, 0, 0, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 6, '', 4, 'pepe', 28, '', '2020-05-24 00:02:04'),
-(95, 1, 0, 0, 0, 0, 0, 0, '2020-08-01 00:00:00', NULL, 6, '', 4, 'pepe', 28, '', '2020-05-24 00:02:04'),
-(96, 1, 0, 0, 0, 0, 0, 0, '2020-09-01 00:00:00', NULL, 6, '', 4, 'pepe', 28, '', '2020-05-24 00:02:04'),
-(100, 1, 6, 3.96, 0, 0, 0, 70, '2020-05-01 00:00:00', NULL, 1, 'Con la pantalla minimizada', 4, 'pepe', 30, '', '2020-05-24 00:02:04'),
-(101, 1, 6, 0, 0, 0, 0, 0, '2020-06-01 00:00:00', NULL, 6, 'Con la pantalla minimizada', 4, 'pepe', 30, '', '2020-05-24 00:02:04'),
-(102, 1, 6, 0, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 6, 'Con la pantalla minimizada', 4, 'pepe', 30, '', '2020-05-24 00:02:04'),
-(103, 1, 5, 2.85, 0, 0, 0, 60, '2020-05-01 00:00:00', NULL, 6, 'Observación de agregado castañas', 4, 'pepe', 31, '', '2020-05-24 00:02:04'),
-(104, 1, 5, 0, 0, 0, 0, 0, '2020-06-01 00:00:00', NULL, 6, 'Observación de agregado castañas', 4, 'pepe', 31, '', '2020-05-24 00:02:04'),
-(105, 1, 5, 0, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 6, 'Observación de agregado castañas', 4, 'pepe', 31, '', '2020-05-24 00:02:04'),
-(106, 1, 0, 0, 0, 0, 0, 1, '2020-05-03 00:00:00', NULL, 6, '', 4, 'pepe', 32, '', '2020-05-24 00:02:04'),
-(107, 1, 0, 0, 0, 0, 0, 2, '2020-05-03 00:00:00', NULL, 8, '', 4, 'pepe', 33, '', '2020-05-24 00:02:04'),
-(108, 1, 21, 2.6, 0, 0, 0, 15, '2020-06-01 00:00:00', NULL, 6, '', 4, 'pepe', 34, '', '2020-05-24 00:02:04'),
-(109, 1, 21, 0, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 1, '', 4, 'pepe', 34, '', '2020-05-24 00:02:04'),
-(110, 1, 21, 0, 0, 0, 0, 0, '2020-08-01 00:00:00', NULL, 6, '', 4, 'pepe', 34, '', '2020-05-24 00:02:04'),
-(111, 1, 0, 0, 0, 0, 0, 0, '2020-06-01 00:00:00', NULL, 6, '', 4, 'pepe', 35, '', '2020-05-24 00:02:04'),
-(112, 1, 0, 0, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 6, '', 4, 'pepe', 35, '', '2020-05-24 00:02:04'),
-(113, 1, 0, 0, 0, 0, 0, 0, '2020-05-03 14:02:22', NULL, 6, '', 4, 'pepe', 0, '', '2020-05-24 00:02:04'),
-(114, 1, 0, 0, 0, 0, 0, 20, '2020-06-01 00:00:00', NULL, 3, '', 4, 'pepe', 36, 'pepe', '2020-07-07 21:04:29'),
-(115, 1, 0, 0, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 6, '', 4, 'pepe', 36, '', '2020-05-24 00:02:04'),
-(116, 1, 0, 0, 0, 0, 0, 10, '2020-05-24 20:42:23', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-05-24 18:42:23'),
-(117, 1, 21, 10.41, 0, 0, 0, 60, '2020-07-18 00:22:45', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-17 22:22:45'),
-(118, 1, 21, 23.42, 0, 0, 0, 135, '2020-07-18 21:02:02', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-18 19:02:02'),
-(119, 1, 21, 31.23, 0, 0, 0, 180, '2020-07-20 13:35:03', NULL, 6, '', 4, 'pepe', 37, 'pepe', '2020-07-20 11:35:03'),
-(120, 1, 21, 26.03, 0, 0, 0, 150, '2020-07-21 20:53:42', NULL, 6, 'Agrego 3 unidades por 150 euros con un IVA del 21%', 4, 'pepe', 0, 'pepe', '2020-07-21 18:54:34'),
-(121, 1, 21, 36.44, 0, 0, 0, 210, '2020-07-21 21:14:53', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-21 19:14:53'),
-(122, 1, 0, 0, 0, 0, 0, 40, '2020-07-21 21:19:13', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-21 19:19:14'),
-(123, 0, 0, 0, 0, 0, 0, 40, '2020-07-21 21:22:40', NULL, 7, '', 4, 'pepe', 0, 'pepe', '2020-07-21 19:22:40'),
-(124, 1, 21, 5.2, 0, 0, 0, 30, '2020-07-21 21:31:06', NULL, 6, 'Se agrega 1 por 30 euros y 21% de IVA en 3 cuotas sin interés ni comisión de apertura', 4, 'pepe', 38, 'pepe', '2020-07-21 19:41:07'),
-(125, 1, 21, 20.82, 0, 0, 0, 120, '2020-07-22 17:39:45', NULL, 6, '', 4, 'pepe', 39, 'pepe', '2020-07-22 15:39:52'),
-(126, 0, 0, 0, 0, 0, 0, 0, '2020-07-22 17:54:20', NULL, 7, '', 4, 'pepe', 0, 'pepe', '2020-07-22 15:54:20'),
-(127, 1, 21, 24.29, 0, 0, 0, 140, '2020-07-22 17:54:50', NULL, 6, '', 4, 'pepe', 40, 'pepe', '2020-07-22 15:54:50'),
-(128, 1, 21, 17.35, 0, 0, 0, 100, '2020-07-22 20:06:45', NULL, 6, '', 4, 'pepe', 41, 'pepe', '2020-07-22 18:06:45'),
-(129, 1, 21, 17.35, 0, 0, 0, 100, '2020-07-22 20:30:09', NULL, 6, '', 4, 'pepe', 42, 'pepe', '2020-07-22 18:30:09'),
-(130, 1, 21, 28.51, 0, 0, 0, 164.28, '2020-07-22 20:32:10', NULL, 6, '', 4, 'pepe', 43, 'pepe', '2020-07-22 18:32:10'),
-(131, 1, 21, 11.01, 0, 0, 0, 63.47, '2020-07-22 20:35:14', NULL, 6, '', 4, 'pepe', 44, 'pepe', '2020-07-22 18:35:14'),
-(132, 1, 21, 17.35, 0, 0, 0, 100, '2020-07-22 20:41:39', NULL, 6, '', 4, 'pepe', 45, 'pepe', '2020-07-22 18:41:39'),
-(133, 1, 21, 11.01, 0, 0, 0, 63.47, '2020-07-22 20:42:44', NULL, 6, '', 4, 'pepe', 46, 'pepe', '2020-07-22 18:42:45'),
-(134, 1, 21, 17.35, 0, 0, 0, 100, '2020-07-22 20:44:50', NULL, 6, '', 4, 'pepe', 47, 'pepe', '2020-07-22 18:44:50'),
-(135, 1, 21, 17.35, 0, 0, 0, 100, '2020-07-22 21:02:40', NULL, 6, '', 4, 'pepe', 48, 'pepe', '2020-07-22 19:02:40'),
-(136, 1, 21, 17.35, 0, 0, 0, 100, '2020-07-22 21:03:40', NULL, 6, '', 4, 'pepe', 49, 'pepe', '2020-07-22 19:03:40'),
-(137, 1, 0, 0, 0, 0, 0, 90, '2020-07-26 14:26:00', NULL, 6, '', 4, 'pepe', 50, 'pepe', '2020-07-26 12:26:00'),
-(138, 1, 0, 0, 0, 0, 0, 90, '2020-07-26 16:26:18', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-26 14:26:18'),
-(139, 1, 0, 0, 0, 0, 0, 90, '2020-07-26 16:27:10', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-26 14:27:10'),
-(140, 1, 0, 0, 0, 0, 0, 90, '2020-07-26 16:28:50', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-26 14:28:50'),
-(141, 1, 0, 0, 0, 0, 0, 90, '2020-07-26 21:43:59', NULL, 6, '', 4, 'pepe', 51, 'pepe', '2020-07-26 19:46:09'),
-(142, 1, 0, 0, 0, 0, 0, 90, '2020-07-26 21:49:20', NULL, 6, '', 4, 'pepe', 52, 'pepe', '2020-07-26 19:50:36'),
-(143, 1, 0, 0, 0, 0, 0, 90, '2020-07-26 22:10:14', NULL, 6, '', 4, 'pepe', 53, 'pepe', '2020-07-26 20:10:54'),
-(144, 1, 21, 26.03, 0, 0, 0, 150, '2020-07-26 23:17:12', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-26 21:17:12'),
-(145, 1, 0, 0, 0, 0, 0, 150, '2020-07-26 23:18:08', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-26 21:18:08'),
-(146, 1, 21, 27.76, 0, 0, 0, 160, '2020-07-26 23:29:00', NULL, 6, '', 4, 'pepe', 54, 'pepe', '2020-07-26 21:29:13'),
-(147, 1, 21, 31.23, 0, 0, 0, 180, '2020-07-26 23:30:11', NULL, 6, '', 4, 'pepe', 55, 'pepe', '2020-07-26 21:30:11'),
-(148, 1, 21, 34.71, 0, 0, 0, 200, '2020-07-27 00:00:44', NULL, 6, '', 4, 'pepe', 56, 'pepe', '2020-07-26 22:00:44'),
-(149, 1, 21, 34.71, 22.5, 88.65, 0, 200, '2020-07-27 00:01:37', NULL, 6, 'Voy a poner unas observaciones para intentar que se pase del ancho y que salte a la segunda línea', 4, 'pepe', 57, 'pepe', '2020-08-04 17:43:29'),
-(150, 1, 21, 19.09, 0, 0, 0, 110, '2020-08-01 13:52:29', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-08-01 11:52:29'),
-(153, 1, 10, 6.36, 0, 0, 0, 70, '2020-08-02 23:41:37', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-08-02 21:41:37'),
-(159, 1, 0, 0, 0, 0, 0, 67, '2020-08-03 00:03:55', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-08-02 22:03:55'),
-(160, 1, 21, 451.23, 0, 0, 0, 2600, '2020-08-03 18:01:28', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-08-03 16:01:28'),
-(161, 1, 21, 43469.65, 0, 0, 0, 250468, '2020-08-03 18:19:04', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-08-03 16:19:04'),
-(162, 1, 21, 34.71, 0, 0, 0, 200, '2020-08-05 00:04:11', NULL, 6, '', 4, 'pepe', 58, 'pepe', '2020-08-04 22:04:11');
+INSERT INTO `factura` (`idFac`, `compra`, `totalSinIvaEnvDescfac`, `descuentoTotal`, `descuentoImporteTotal`, `importeEnvioSinIva`, `totalSinIvaConDescfac`, `ivaTotal`, `ivaImporteTotal`, `importeTotal`, `fechaCompra`, `fechaEntrega`, `idEst`, `observaciones`, `idFor`, `creadoPor`, `idCuo`, `modificadoPor`, `fechaModificacion`) VALUES
+(7, 1, 0, 0, 0, 0, 0, 10, 49.5, 495, '2020-01-17 20:51:06', NULL, 6, '', 4, 'admin', 0, '', '2020-05-24 00:02:04'),
+(8, 0, 0, 0, 0, 0, 0, 21, 50.82, 242, '2020-01-18 00:00:00', NULL, 7, 'Primera prueba QUITAR unidades. TV Sanyo 15 pulgadas. Saco 1 unidad. Importe 242€. IVA 21%', 4, 'admin', 0, '', '2020-05-24 00:02:04'),
+(9, 0, 0, 0, 0, 0, 0, 21, 42, 242, '2020-03-28 00:00:00', NULL, 1, '', 4, 'admin', 0, '', '2020-05-24 00:02:04'),
+(64, 1, 0, 0, 0, 0, 0, 21, 118.93, 685.27, '2020-03-01 00:00:00', NULL, 6, '', 4, 'pepe', 24, '', '2020-05-24 00:02:04'),
+(66, 1, 0, 0, 0, 0, 0, 21, 0, 0, '2020-05-01 00:00:00', NULL, 1, '', 4, 'pepe', 24, '', '2020-05-24 00:02:04'),
+(67, 1, 0, 0, 0, 0, 0, 21, 0, 0, '2020-06-01 00:00:00', NULL, 8, '', 4, 'pepe', 24, '', '2020-05-24 00:02:04'),
+(68, 1, 0, 0, 0, 0, 0, 21, 0, 0, '2020-07-01 00:00:00', NULL, 8, '', 4, 'pepe', 24, '', '2020-05-24 00:02:04'),
+(69, 1, 0, 0, 0, 0, 0, 21, 0, 0, '2020-08-01 00:00:00', NULL, 8, '', 4, 'pepe', 24, '', '2020-05-24 00:02:04'),
+(72, 1, 0, 0, 0, 0, 0, 0, 0, 7, '2020-03-22 00:00:00', NULL, 3, '', 4, 'pepe', 0, '', '2020-05-24 00:02:04'),
+(74, 1, 0, 0, 0, 0, 0, 0, 0, 8, '2020-02-15 00:00:00', NULL, 8, '', 4, 'pepe', 0, '', '2020-05-24 00:02:04'),
+(75, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2020-02-15 11:40:35', NULL, 7, '', 4, 'pepe', 0, '', '2020-05-24 00:02:04'),
+(85, 1, 0, 0, 0, 0, 0, 0, 0, 12, '2020-06-01 00:00:00', NULL, 6, '', 4, 'pepe', 26, '', '2020-05-24 00:02:04'),
+(86, 1, 0, 0, 0, 0, 0, 0, 0, 9, '2020-02-15 14:38:39', NULL, 6, '', 4, 'pepe', 0, '', '2020-05-24 00:02:04'),
+(87, 0, 0, 0, 0, 0, 0, 0, 0, 20, '2020-02-15 14:38:53', NULL, 7, '', 4, 'pepe', 0, '', '2020-05-24 00:02:04'),
+(88, 1, 0, 0, 0, 0, 0, 21, 26.03, 150, '2020-03-16 23:18:40', NULL, 6, '', 4, 'pepe', 0, '', '2020-05-24 00:02:04'),
+(90, 1, 0, 0, 0, 0, 0, 0, 0, 20, '2020-05-01 00:00:00', NULL, 6, '', 4, 'pepe', 27, '', '2020-05-24 00:02:04'),
+(91, 1, 0, 0, 0, 0, 0, 0, 0, 0, '2020-06-01 00:00:00', NULL, 6, '', 4, 'pepe', 27, '', '2020-05-24 00:02:04'),
+(92, 1, 0, 0, 0, 0, 0, 0, 0, 15, '2020-05-01 00:00:00', NULL, 6, '', 4, 'pepe', 28, '', '2020-05-24 00:02:04'),
+(94, 1, 0, 0, 0, 0, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 6, '', 4, 'pepe', 28, '', '2020-05-24 00:02:04'),
+(95, 1, 0, 0, 0, 0, 0, 0, 0, 0, '2020-08-01 00:00:00', NULL, 6, '', 4, 'pepe', 28, '', '2020-05-24 00:02:04'),
+(96, 1, 0, 0, 0, 0, 0, 0, 0, 0, '2020-09-01 00:00:00', NULL, 6, '', 4, 'pepe', 28, '', '2020-05-24 00:02:04'),
+(100, 1, 0, 0, 0, 0, 0, 6, 3.96, 70, '2020-05-01 00:00:00', NULL, 1, 'Con la pantalla minimizada', 4, 'pepe', 30, '', '2020-05-24 00:02:04'),
+(101, 1, 0, 0, 0, 0, 0, 6, 0, 0, '2020-06-01 00:00:00', NULL, 6, 'Con la pantalla minimizada', 4, 'pepe', 30, '', '2020-05-24 00:02:04'),
+(102, 1, 0, 0, 0, 0, 0, 6, 0, 0, '2020-07-01 00:00:00', NULL, 6, 'Con la pantalla minimizada', 4, 'pepe', 30, '', '2020-05-24 00:02:04'),
+(103, 1, 0, 0, 0, 0, 0, 5, 2.85, 60, '2020-05-01 00:00:00', NULL, 6, 'Observación de agregado castañas', 4, 'pepe', 31, '', '2020-05-24 00:02:04'),
+(104, 1, 0, 0, 0, 0, 0, 5, 0, 0, '2020-06-01 00:00:00', NULL, 6, 'Observación de agregado castañas', 4, 'pepe', 31, '', '2020-05-24 00:02:04'),
+(105, 1, 0, 0, 0, 0, 0, 5, 0, 0, '2020-07-01 00:00:00', NULL, 6, 'Observación de agregado castañas', 4, 'pepe', 31, '', '2020-05-24 00:02:04'),
+(106, 1, 0, 0, 0, 0, 0, 0, 0, 1, '2020-05-03 00:00:00', NULL, 6, '', 4, 'pepe', 32, '', '2020-05-24 00:02:04'),
+(107, 1, 0, 0, 0, 0, 0, 0, 0, 2, '2020-05-03 00:00:00', NULL, 8, '', 4, 'pepe', 33, '', '2020-05-24 00:02:04'),
+(108, 1, 0, 0, 0, 0, 0, 21, 2.6, 15, '2020-06-01 00:00:00', NULL, 6, '', 4, 'pepe', 34, '', '2020-05-24 00:02:04'),
+(109, 1, 0, 0, 0, 0, 0, 21, 0, 0, '2020-07-01 00:00:00', NULL, 1, '', 4, 'pepe', 34, '', '2020-05-24 00:02:04'),
+(110, 1, 0, 0, 0, 0, 0, 21, 0, 0, '2020-08-01 00:00:00', NULL, 6, '', 4, 'pepe', 34, '', '2020-05-24 00:02:04'),
+(111, 1, 0, 0, 0, 0, 0, 0, 0, 0, '2020-06-01 00:00:00', NULL, 6, '', 4, 'pepe', 35, '', '2020-05-24 00:02:04'),
+(112, 1, 0, 0, 0, 0, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 6, '', 4, 'pepe', 35, '', '2020-05-24 00:02:04'),
+(113, 1, 0, 0, 0, 0, 0, 0, 0, 0, '2020-05-03 14:02:22', NULL, 6, '', 4, 'pepe', 0, '', '2020-05-24 00:02:04'),
+(114, 1, 0, 0, 0, 0, 0, 0, 0, 20, '2020-06-01 00:00:00', NULL, 3, '', 4, 'pepe', 36, 'pepe', '2020-07-07 21:04:29'),
+(115, 1, 0, 0, 0, 0, 0, 0, 0, 0, '2020-07-01 00:00:00', NULL, 6, '', 4, 'pepe', 36, '', '2020-05-24 00:02:04'),
+(116, 1, 0, 0, 0, 0, 0, 0, 0, 10, '2020-05-24 20:42:23', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-05-24 18:42:23'),
+(117, 1, 0, 0, 0, 0, 0, 21, 10.41, 60, '2020-07-18 00:22:45', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-17 22:22:45'),
+(118, 1, 0, 0, 0, 0, 0, 21, 23.42, 135, '2020-07-18 21:02:02', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-18 19:02:02'),
+(119, 1, 0, 0, 0, 0, 0, 21, 31.23, 180, '2020-07-20 13:35:03', NULL, 6, '', 4, 'pepe', 37, 'pepe', '2020-07-20 11:35:03'),
+(120, 1, 0, 0, 0, 0, 0, 21, 26.03, 150, '2020-07-21 20:53:42', NULL, 6, 'Agrego 3 unidades por 150 euros con un IVA del 21%', 4, 'pepe', 0, 'pepe', '2020-07-21 18:54:34'),
+(121, 1, 0, 0, 0, 0, 0, 21, 36.44, 210, '2020-07-21 21:14:53', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-21 19:14:53'),
+(122, 1, 0, 0, 0, 0, 0, 0, 0, 40, '2020-07-21 21:19:13', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-21 19:19:14'),
+(123, 0, 0, 0, 0, 0, 0, 0, 0, 40, '2020-07-21 21:22:40', NULL, 7, '', 4, 'pepe', 0, 'pepe', '2020-07-21 19:22:40'),
+(124, 1, 0, 0, 0, 0, 0, 21, 5.2, 30, '2020-07-21 21:31:06', NULL, 6, 'Se agrega 1 por 30 euros y 21% de IVA en 3 cuotas sin interés ni comisión de apertura', 4, 'pepe', 38, 'pepe', '2020-07-21 19:41:07'),
+(125, 1, 0, 0, 0, 0, 0, 21, 20.82, 120, '2020-07-22 17:39:45', NULL, 6, '', 4, 'pepe', 39, 'pepe', '2020-07-22 15:39:52'),
+(126, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2020-07-22 17:54:20', NULL, 7, '', 4, 'pepe', 0, 'pepe', '2020-07-22 15:54:20'),
+(127, 1, 0, 0, 0, 0, 0, 21, 24.29, 140, '2020-07-22 17:54:50', NULL, 6, '', 4, 'pepe', 40, 'pepe', '2020-07-22 15:54:50'),
+(128, 1, 0, 0, 0, 0, 0, 21, 17.35, 100, '2020-07-22 20:06:45', NULL, 6, '', 4, 'pepe', 41, 'pepe', '2020-07-22 18:06:45'),
+(129, 1, 0, 0, 0, 0, 0, 21, 17.35, 100, '2020-07-22 20:30:09', NULL, 6, '', 4, 'pepe', 42, 'pepe', '2020-07-22 18:30:09'),
+(130, 1, 0, 0, 0, 0, 0, 21, 28.51, 164.28, '2020-07-22 20:32:10', NULL, 6, '', 4, 'pepe', 43, 'pepe', '2020-07-22 18:32:10'),
+(131, 1, 0, 0, 0, 0, 0, 21, 11.01, 63.47, '2020-07-22 20:35:14', NULL, 6, '', 4, 'pepe', 44, 'pepe', '2020-07-22 18:35:14'),
+(132, 1, 0, 0, 0, 0, 0, 21, 17.35, 100, '2020-07-22 20:41:39', NULL, 6, '', 4, 'pepe', 45, 'pepe', '2020-07-22 18:41:39'),
+(133, 1, 0, 0, 0, 0, 0, 21, 11.01, 63.47, '2020-07-22 20:42:44', NULL, 6, '', 4, 'pepe', 46, 'pepe', '2020-07-22 18:42:45'),
+(134, 1, 0, 0, 0, 0, 0, 21, 17.35, 100, '2020-07-22 20:44:50', NULL, 6, '', 4, 'pepe', 47, 'pepe', '2020-07-22 18:44:50'),
+(135, 1, 0, 0, 0, 0, 0, 21, 17.35, 100, '2020-07-22 21:02:40', NULL, 6, '', 4, 'pepe', 48, 'pepe', '2020-07-22 19:02:40'),
+(136, 1, 0, 0, 0, 0, 0, 21, 17.35, 100, '2020-07-22 21:03:40', NULL, 6, '', 4, 'pepe', 49, 'pepe', '2020-07-22 19:03:40'),
+(137, 1, 0, 0, 0, 0, 0, 0, 0, 90, '2020-07-26 14:26:00', NULL, 6, '', 4, 'pepe', 50, 'pepe', '2020-07-26 12:26:00'),
+(138, 1, 0, 0, 0, 0, 0, 0, 0, 90, '2020-07-26 16:26:18', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-26 14:26:18'),
+(139, 1, 0, 0, 0, 0, 0, 0, 0, 90, '2020-07-26 16:27:10', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-26 14:27:10'),
+(140, 1, 0, 0, 0, 0, 0, 0, 0, 90, '2020-07-26 16:28:50', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-26 14:28:50'),
+(141, 1, 0, 0, 0, 0, 0, 0, 0, 90, '2020-07-26 21:43:59', NULL, 6, '', 4, 'pepe', 51, 'pepe', '2020-07-26 19:46:09'),
+(142, 1, 0, 0, 0, 0, 0, 0, 0, 90, '2020-07-26 21:49:20', NULL, 6, '', 4, 'pepe', 52, 'pepe', '2020-07-26 19:50:36'),
+(143, 1, 0, 0, 0, 0, 0, 0, 0, 90, '2020-07-26 22:10:14', NULL, 6, '', 4, 'pepe', 53, 'pepe', '2020-07-26 20:10:54'),
+(144, 1, 0, 0, 0, 0, 0, 21, 26.03, 150, '2020-07-26 23:17:12', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-26 21:17:12'),
+(145, 1, 0, 0, 0, 0, 0, 0, 0, 150, '2020-07-26 23:18:08', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-07-26 21:18:08'),
+(146, 1, 0, 0, 0, 0, 0, 21, 27.76, 160, '2020-07-26 23:29:00', NULL, 6, '', 4, 'pepe', 54, 'pepe', '2020-07-26 21:29:13'),
+(147, 1, 0, 0, 0, 0, 0, 21, 31.23, 180, '2020-07-26 23:30:11', NULL, 6, '', 4, 'pepe', 55, 'pepe', '2020-07-26 21:30:11'),
+(148, 1, 0, 0, 0, 0, 0, 21, 34.71, 200, '2020-07-27 00:00:44', NULL, 6, '', 4, 'pepe', 56, 'pepe', '2020-07-26 22:00:44'),
+(149, 1, 0, 22.5, 88.65, 0, 0, 21, 34.71, 200, '2020-07-27 00:01:37', NULL, 6, 'Voy a poner unas observaciones para intentar que se pase del ancho y que salte a la segunda línea', 4, 'pepe', 57, 'pepe', '2020-08-04 17:43:29'),
+(150, 1, 0, 0, 0, 0, 0, 21, 19.09, 110, '2020-08-01 13:52:29', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-08-01 11:52:29'),
+(153, 1, 0, 5, 3.5, 4, 0, 10, 6.36, 70, '2020-08-02 23:41:37', NULL, 6, 'Sin cuotas, con envío y con descuento', 4, 'pepe', 0, 'pepe', '2020-08-16 21:22:36'),
+(159, 1, 0, 0, 0, 3, 0, 0, 0, 67, '2020-08-03 00:03:55', NULL, 6, 'Sin cuotas, con envío, sin descuento', 4, 'pepe', 0, 'pepe', '2020-08-16 21:21:32'),
+(160, 1, 0, 0, 0, 0, 0, 21, 451.23, 2600, '2020-08-03 18:01:28', NULL, 6, '', 4, 'pepe', 0, 'pepe', '2020-08-03 16:01:28'),
+(161, 1, 0, 10, 1000, 0, 0, 21, 43469.65, 250468, '2020-08-03 18:19:04', NULL, 6, 'Sin cuotas, sin envío, con descuento', 4, 'pepe', 0, 'pepe', '2020-08-16 21:21:10'),
+(162, 1, 0, 0, 0, 0, 0, 21, 34.71, 200, '2020-08-05 00:04:11', NULL, 6, 'Con 12 cuotas', 4, 'pepe', 58, 'pepe', '2020-08-16 21:20:32'),
+(163, 1, 0, 0, 0, 0, 0, 10, 3.45, 38, '2020-08-11 15:37:31', NULL, 6, 'Sin cuotas, sin envío y sin descuento', 4, 'pepe', 0, 'pepe', '2020-08-16 21:20:13'),
+(164, 1, 0, 0, 0, 0, 0, 10, 1.81, 20, '2020-08-16 23:24:51', NULL, 6, 'Con 8 cuotas', 4, 'pepe', 59, 'pepe', '2020-08-16 21:24:51'),
+(165, 1, 0, 0, 0, 0, 0, 21, 3.47, 20, '2020-08-16 23:27:09', NULL, 6, 'Con 4 cuotas', 4, 'pepe', 60, 'pepe', '2020-08-16 21:27:09'),
+(166, 1, 0, 0, 0, 0, 0, 21, 3.47, 20, '2020-08-16 23:27:46', NULL, 6, 'Con 2 cuotas', 4, 'pepe', 61, 'pepe', '2020-08-16 21:27:46'),
+(167, 1, 20, 0, 0, 0, 20, 21, 4.2, 24.2, '2020-08-31 00:27:56', NULL, 6, 'Probando factura modificada. Agrego 2 unidades de 10€ sin iva. El iva es 21%. Total 24,20€. Sin cuotas.', 4, 'admin', 0, 'admin', '2020-08-30 22:27:56'),
+(168, 0, 53.71, 0, 0, 0, 53.71, 21, 11.28, 65, '2020-08-31 00:33:11', NULL, 7, 'Quito 2 unidades ingresando 65€ con un iva del 21%. Tendría que ser 53,72@ de producto y 11,28€ de iva. El valor del producto individual sin iva sería 26,86€', 4, 'admin', 0, 'admin', '2020-08-30 22:33:11'),
+(169, 1, 68.6, 0, 0, 0, 68.6, 21, 14.4, 83, '2020-08-31 00:43:46', NULL, 6, '', 4, 'admin', 0, 'admin', '2020-08-30 22:43:46'),
+(170, 0, 53.72, 0, 0, 0, 53.72, 21, 11.28, 65, '2020-08-31 00:45:11', NULL, 7, 'Quito 2 unidades ingresando 65€ con un iva del 21%. Tendría que ser 53,72€ de producto y 11,28€ de iva. El valor del producto individual sin iva sería 26,86€', 4, 'admin', 0, 'admin', '2020-08-30 22:45:11'),
+(171, 1, 20, 0, 0, 0, 20, 0, 0, 20, '2020-08-31 00:54:11', NULL, 6, '', 4, 'admin', 0, 'admin', '2020-08-30 22:54:11'),
+(172, 1, 20, 0, 0, 0, 20, 0, 0, 20, '2020-08-31 01:13:44', NULL, 6, '', 4, 'admin', 0, 'admin', '2020-08-30 23:13:44'),
+(173, 1, 20, 0, 0, 0, 20, 21, 4.2, 24.2, '2020-08-31 01:14:12', NULL, 6, '', 4, 'admin', 0, 'admin', '2020-08-30 23:14:12'),
+(174, 0, 53.72, 0, 0, 0, 53.72, 21, 11.28, 65, '2020-08-31 01:15:02', NULL, 7, 'Quito 2 unidades ingresando 65€ con un iva del 21%. Tendría que ser 53,72@ de producto y 11,28€ de iva. El valor del producto individual sin iva sería 26,86€', 4, 'admin', 0, 'admin', '2020-08-30 23:15:02'),
+(175, 1, 20, 0, 0, 0, 20, 21, 4.2, 24.2, '2020-08-31 01:21:36', NULL, 6, '', 4, 'admin', 62, 'admin', '2020-08-30 23:21:36');
 
 -- --------------------------------------------------------
 
@@ -620,10 +697,23 @@ CREATE TABLE `facturaenviarfacturar` (
 
 INSERT INTO `facturaenviarfacturar` (`idEnFa`, `nombre`, `direccion`, `cp`, `ciudad`, `provincia`, `pais`, `telefono`, `facturar`, `enviar`, `idFac`) VALUES
 (1, 'Miguel Angel De Los Montes Rodriguez-Santillana', 'Avenida de la princesa del país de las maravillas que queda junto a la casa del enano, 1285, entrando por el pasillo principal a la derecha la tercera puerta', '28004', 'San Sebastián de los Reyes', 'Madrid', 'España', '+571 586 1234567890', 1, 1, 149),
-(4, 'Empresa propia', 'road.Avenue Manuel Becerra Bajo 3 ', '47024', 'Cardales', 'León', 'España', '+34 916666666', 1, 1, 159),
-(5, 'Empresa propia', 'road.Avenue Manuel Becerra Bajo 3 ', '47024', 'Cardales', 'León', 'España', '+34 916666666', 1, 1, 160),
-(6, 'Empresa propia', 'road.Avenue Manuel Becerra Bajo 3 ', '47024', 'Cardales', 'León', 'España', '+34 916666666', 1, 1, 161),
-(7, 'Empresa propia', 'road.Avenue Manuel Becerra Bajo 3 ', '47024', 'Cardales', 'León', 'España', '+34 916666666', 1, 1, 162);
+(4, 'Empresa propia', 'Avenida Manuel Becerra Bajo 3 ', '47024', 'Cardales', 'León', 'España', '+34 916666666', 1, 1, 159),
+(5, 'Empresa propia', 'Avenida Manuel Becerra Bajo 3 ', '47024', 'Cardales', 'León', 'España', '+34 916666666', 1, 1, 160),
+(6, 'Empresa propia', 'Avenida Manuel Becerra Bajo 3 ', '47024', 'Cardales', 'León', 'España', '+34 916666666', 1, 1, 161),
+(7, 'Empresa propia', 'Avenida Manuel Becerra Bajo 3 ', '47024', 'Cardales', 'León', 'España', '+34 916666666', 1, 1, 162),
+(8, 'Empresa propia', 'Avenida Manuel Becerra Bajo 3 ', '47024', 'Cardales', 'León', 'España', '+34 916666666', 1, 1, 163),
+(9, 'Empresa propia', 'Avenida Manuel Becerra Bajo 3 ', '47024', 'Cardales', 'León', 'España', '+34 916666666', 1, 1, 164),
+(10, 'Empresa propia', 'Avenida Manuel Becerra Bajo 3 ', '47024', 'Cardales', 'León', 'España', '+34 916666666', 1, 1, 165),
+(11, 'Empresa propia', 'Avenida Manuel Becerra Bajo 3 ', '47024', 'Cardales', 'León', 'España', '+34 916666666', 1, 1, 166),
+(12, 'Company', 'Paseo Castellana 72 planta 4', '28006', 'Madrid', 'Madrid', 'España', '914564567', 1, 1, 167),
+(13, 'Company', 'Paseo Castellana 72 planta 4', '28006', 'Madrid', 'Madrid', 'España', '914564567', 1, 1, 168),
+(14, 'Company', 'Paseo Castellana 72 planta 4', '28006', 'Madrid', 'Madrid', 'España', '914564567', 1, 1, 169),
+(15, 'Company', 'Paseo Castellana 72 planta 4', '28006', 'Madrid', 'Madrid', 'España', '914564567', 1, 1, 170),
+(16, 'Company', 'Paseo Castellana 72 planta 4', '28006', 'Madrid', 'Madrid', 'España', '914564567', 1, 1, 171),
+(17, 'Company', 'Paseo Castellana 72 planta 4', '28006', 'Madrid', 'Madrid', 'España', '914564567', 1, 1, 172),
+(18, 'Company', 'Paseo Castellana 72 planta 4', '28006', 'Madrid', 'Madrid', 'España', '914564567', 1, 1, 173),
+(19, 'Company', 'Paseo Castellana 72 planta 4', '28006', 'Madrid', 'Madrid', 'España', '914564567', 1, 1, 174),
+(20, 'Company', 'Paseo Castellana 72 planta 4', '28006', 'Madrid', 'Madrid', 'España', '914564567', 1, 1, 175);
 
 -- --------------------------------------------------------
 
@@ -637,7 +727,7 @@ CREATE TABLE `factura_estado` (
   `idEst` int(11) NOT NULL,
   `fecha` datetime NOT NULL,
   `creadoPor` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
-  `observaciones` text COLLATE utf8_spanish_ci
+  `observaciones` text COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -780,7 +870,24 @@ INSERT INTO `factura_estado` (`id`, `idFac`, `idEst`, `fecha`, `creadoPor`, `obs
 (212, 160, 6, '2020-08-03 18:01:28', 'pepe', NULL),
 (213, 161, 6, '2020-08-03 18:19:04', 'pepe', NULL),
 (214, 162, 6, '2020-08-05 00:04:11', 'pepe', NULL),
-(215, 162, 6, '2020-08-05 00:04:11', 'pepe', NULL);
+(215, 162, 6, '2020-08-05 00:04:11', 'pepe', NULL),
+(216, 163, 6, '2020-08-11 15:37:31', 'pepe', NULL),
+(217, 164, 6, '2020-08-16 23:24:51', 'pepe', NULL),
+(218, 164, 6, '2020-08-16 23:24:51', 'pepe', NULL),
+(219, 165, 6, '2020-08-16 23:27:09', 'pepe', NULL),
+(220, 165, 6, '2020-08-16 23:27:09', 'pepe', NULL),
+(221, 166, 6, '2020-08-16 23:27:46', 'pepe', NULL),
+(222, 166, 6, '2020-08-16 23:27:46', 'pepe', NULL),
+(223, 167, 6, '2020-08-31 00:27:56', 'admin', NULL),
+(224, 168, 7, '2020-08-31 00:33:11', 'admin', NULL),
+(225, 169, 6, '2020-08-31 00:43:46', 'admin', NULL),
+(226, 170, 7, '2020-08-31 00:45:11', 'admin', NULL),
+(227, 171, 6, '2020-08-31 00:54:11', 'admin', NULL),
+(228, 172, 6, '2020-08-31 01:13:44', 'admin', NULL),
+(229, 173, 6, '2020-08-31 01:14:13', 'admin', NULL),
+(230, 174, 7, '2020-08-31 01:15:02', 'admin', NULL),
+(231, 175, 6, '2020-08-31 01:21:36', 'admin', NULL),
+(232, 175, 6, '2020-08-31 01:21:36', 'admin', NULL);
 
 -- --------------------------------------------------------
 
@@ -799,7 +906,7 @@ CREATE TABLE `formapago` (
   `nombreCA` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombreEU` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -833,7 +940,7 @@ CREATE TABLE `foto` (
   `idRol` int(11) NOT NULL,
   `nombre` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
   `ruta` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
-  `descripcion` text COLLATE utf8_spanish_ci,
+  `descripcion` text COLLATE utf8_spanish_ci DEFAULT NULL,
   `peso` bigint(20) NOT NULL,
   `principal` tinyint(4) NOT NULL,
   `extension` varchar(30) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -914,12 +1021,12 @@ CREATE TABLE `producto` (
   `idPro` int(11) NOT NULL,
   `nombreES` text COLLATE utf8_spanish_ci NOT NULL,
   `nombreEN` text COLLATE utf8_spanish_ci NOT NULL,
-  `nombrePT` text COLLATE utf8_spanish_ci,
-  `nombreFR` text COLLATE utf8_spanish_ci,
-  `nombreIT` text COLLATE utf8_spanish_ci,
-  `nombreGE` text COLLATE utf8_spanish_ci,
-  `nombreCA` text COLLATE utf8_spanish_ci,
-  `nombreEU` text COLLATE utf8_spanish_ci,
+  `nombrePT` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreFR` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreIT` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreGE` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreCA` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombreEU` text COLLATE utf8_spanish_ci DEFAULT NULL,
   `unidades` int(11) NOT NULL,
   `precioVenta` double NOT NULL,
   `precioCompra` double NOT NULL,
@@ -937,7 +1044,7 @@ CREATE TABLE `producto` (
   `volumen` double NOT NULL,
   `idSub` int(11) NOT NULL,
   `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -950,13 +1057,20 @@ INSERT INTO `producto` (`idPro`, `nombreES`, `nombreEN`, `nombrePT`, `nombreFR`,
 (3, 'Papel higiénico Higienol', 'Toilet paper Higienol', NULL, NULL, NULL, NULL, NULL, NULL, 6, 1.5, 0.95, 'Higienol', '', '', '', 'ACTIVE', NULL, NULL, 1, 1, 2.5, 0.3, 0.29, 9, '', '2020-05-24 00:03:08'),
 (4, 'Castañas Gallegas', 'Chestnuts from Galicia', NULL, NULL, NULL, NULL, NULL, NULL, 8, 2, 0.4, 'La castañera', 'Bolsa L', '', '', 'INACTIVE', NULL, NULL, 0, 1, 0, 2, 0, 18, '', '2020-05-24 00:03:08'),
 (5, 'Monitor Samsung 27 pulgadas', 'Monitor Samsung 27 inches', NULL, NULL, NULL, NULL, NULL, NULL, 0, 250, 180, 'Samsung', 'Energy', '158159126', '', 'ACTIVE', NULL, NULL, 1, 1, 12, 2, 1, 16, '', '2020-05-24 00:03:08'),
-(6, 'Estantería de madera color roble', 'Oak wood shelving', NULL, NULL, NULL, NULL, NULL, NULL, 406, 45, 32, 'Ikea', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 6, 0, 0, 17, 'pepe', '2020-08-02 22:03:40'),
+(6, 'Estantería de madera color roble', 'Oak wood shelving', NULL, NULL, NULL, NULL, NULL, NULL, 411, 45, 32, 'Ikea', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 6, 0, 0, 17, 'pepe', '2020-08-02 22:03:40'),
 (7, 'Taza Star Wars negra', 'Star Wars Mug Black', NULL, NULL, NULL, NULL, NULL, NULL, 9, 2.5, 0.7, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 0, 0, 0, 15, 'pepe', '2020-07-07 21:06:45'),
 (8, 'Reloj temperatura', 'Temperature clock', NULL, NULL, NULL, NULL, NULL, NULL, 0, 12.5, 7, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 0, 0, 0, 0, 15, 'admin', '2020-05-28 21:20:04'),
 (9, 'Cable USB', 'USB cable', NULL, NULL, NULL, NULL, NULL, NULL, 0, 2, 1, 'IBM', 'X26', '12358', 'Pasillo 3', 'INACTIVE', NULL, NULL, 0, 1, 3, 0.2, 0.6, 2, '', '2020-05-24 00:03:08'),
 (10, 'Jamón ibérico', 'Jam', NULL, NULL, NULL, NULL, NULL, NULL, 12, 12, 0, '4J', '', '', '', 'ACTIVE', NULL, NULL, 0, 0, 0, 0, 0, 18, 'pepe', '2020-07-07 21:08:13'),
 (11, 'Mesa redonda', 'Circle table', NULL, NULL, NULL, NULL, NULL, NULL, 1, 30, 0, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 0, 0, 7, 0, 5, '', '2020-05-24 00:03:08'),
-(12, 'Queso Casanto', 'Casanto Chees', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1.2, 0.84, 'Casanto', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 0, 0.12, 0, 19, 'pepe', '2020-05-24 18:45:09');
+(12, 'Queso Casanto', 'Casanto Chees', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1.2, 0.84, 'Casanto', '', '', '', 'ACTIVE', NULL, NULL, 0, 1, 0, 0.12, 0, 19, 'pepe', '2020-05-24 18:45:09'),
+(13, 'Juego Lo sabe no lo sabe', 'Juego Lo sabe no lo sabe', NULL, NULL, NULL, NULL, NULL, NULL, 0, 10, 0, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 0, 0, 0, 0, 21, 'pepe', '2020-08-13 15:18:55'),
+(14, 'Ajedrés', 'Chess', NULL, NULL, NULL, NULL, NULL, NULL, 2, 4, 0, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 0, 0, 0, 0, 21, 'pepe', '2020-08-13 15:19:25'),
+(15, 'Impresora Canon DU20', 'Printer Canon DU20', NULL, NULL, NULL, NULL, NULL, NULL, 0, 80, 0, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 0, 0, 0, 0, 22, 'pepe', '2020-08-13 15:21:53'),
+(16, 'Dados', 'Dados', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1.5, 0, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 0, 0, 0, 0, 21, 'pepe', '2020-08-13 15:20:26'),
+(17, 'Botella 1,5L transparente', 'Botella 1,5L transparente', NULL, NULL, NULL, NULL, NULL, NULL, 0, 1.2, 0, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 0, 0, 0, 0, 18, 'pepe', '2020-08-13 15:28:42'),
+(18, 'Queso de untar finas hiervas', 'Queso de untar finas hiervas', NULL, NULL, NULL, NULL, NULL, NULL, 0, 0.9, 0, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 0, 0, 0, 0, 18, 'pepe', '2020-08-13 15:29:18'),
+(19, 'Cola cao 500g', 'Cola cao 500g', NULL, NULL, NULL, NULL, NULL, NULL, 0, 2.3, 0, '', '', '', '', 'ACTIVE', NULL, NULL, 0, 0, 0, 0, 0, 18, 'pepe', '2020-08-13 15:29:50');
 
 -- --------------------------------------------------------
 
@@ -996,93 +1110,129 @@ CREATE TABLE `producto_factura` (
   `idPro` int(11) NOT NULL,
   `idFac` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `ivaProducto` double DEFAULT NULL,
-  `porcentajeDescuento` double DEFAULT NULL,
+  `ivaProducto` double NOT NULL,
+  `ivaImporteTotal` double NOT NULL,
+  `porcentajeDescuento` double NOT NULL,
   `precioUnitSinIva` double NOT NULL,
+  `precioUnitSinIvaConDesc` double NOT NULL,
+  `precioUnitario` double NOT NULL,
+  `precioFinalSinIva` double NOT NULL,
   `precioFinalRecibidoPagado` double NOT NULL,
   `observaciones` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `producto_factura`
 --
 
-INSERT INTO `producto_factura` (`idPro`, `idFac`, `cantidad`, `ivaProducto`, `porcentajeDescuento`, `precioUnitSinIva`, `precioFinalRecibidoPagado`, `observaciones`, `modificadoPor`, `fechaModificacion`) VALUES
-(1, 7, 5, 10, 0, 90, 0, NULL, '', '2020-05-24 00:03:38'),
-(1, 8, 1, 21, 0, 200, 0, NULL, '', '2020-05-24 00:03:38'),
-(1, 9, 1, 21, 0, 200, 0, NULL, '', '2020-05-24 00:03:38'),
-(3, 72, 5, 0, 0, 1.4, 0, NULL, '', '2020-05-24 00:03:38'),
-(3, 74, 5, 0, 0, 1.6, 0, NULL, '', '2020-05-24 00:03:38'),
-(3, 75, 7, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
-(3, 100, 2, 6, 0, 33.01, 0, NULL, '', '2020-05-24 00:03:38'),
-(3, 101, 0, 6, 0, 33.01, 0, NULL, '', '2020-05-24 00:03:38'),
-(3, 102, 0, 6, 0, 33.01, 0, NULL, '', '2020-05-24 00:03:38'),
-(3, 106, 1, 0, 0, 1, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 92, 2, 0, 0, 7.5, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 94, 0, 0, 0, 7.5, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 95, 0, 0, 0, 7.5, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 96, 0, 0, 0, 7.5, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 103, 3, 5, 0, 19.04, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 104, 0, 5, 0, 19.04, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 105, 0, 5, 0, 19.04, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 108, 2, 21, 0, 6.19, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 109, 0, 21, 0, 6.19, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 110, 0, 21, 0, 6.19, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 111, 0, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 112, 0, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 113, 0, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 114, 1, 0, 0, 20, 0, NULL, '', '2020-05-24 00:03:38'),
-(4, 115, 0, 0, 0, 20, 0, NULL, '', '2020-05-24 00:03:38'),
-(6, 64, 1, 21, 0, 566.33, 0, NULL, '', '2020-05-24 00:03:38'),
-(6, 66, 0, 21, 0, 566.33, 0, NULL, '', '2020-05-24 00:03:38'),
-(6, 67, 0, 21, 0, 566.33, 0, NULL, '', '2020-05-24 00:03:38'),
-(6, 68, 0, 21, 0, 566.33, 0, NULL, '', '2020-05-24 00:03:38'),
-(6, 69, 0, 21, 0, 566.33, 0, NULL, '', '2020-05-24 00:03:38'),
-(6, 88, 2, 21, 0, 61.98, 0, NULL, '', '2020-05-24 00:03:38'),
-(6, 117, 2, 21, 0, 24.79, 60, NULL, 'pepe', '2020-07-18 18:37:44'),
-(6, 118, 3, 21, 0, 37.19, 135, NULL, 'pepe', '2020-07-18 19:02:02'),
-(6, 128, 2, 21, 0, 41.32, 100, NULL, 'pepe', '2020-07-22 18:06:45'),
-(6, 129, 2, 21, 0, 41.32, 100, NULL, 'pepe', '2020-07-22 18:30:09'),
-(6, 130, 7, 21, 0, 19.39, 164.28, NULL, 'pepe', '2020-07-22 18:32:10'),
-(6, 131, 2, 21, 0, 26.22, 63.47, NULL, 'pepe', '2020-07-22 18:35:14'),
-(6, 132, 2, 21, 0, 41.32, 100, NULL, 'pepe', '2020-07-22 18:41:39'),
-(6, 133, 2, 21, 0, 26.22, 63.47, NULL, 'pepe', '2020-07-22 18:42:44'),
-(6, 134, 1, 21, 0, 82.64, 100, NULL, 'pepe', '2020-07-22 18:44:50'),
-(6, 135, 1, 21, 0, 82.64, 100, NULL, 'pepe', '2020-07-22 19:02:40'),
-(6, 136, 1, 21, 0, 82.64, 100, NULL, 'pepe', '2020-07-22 19:03:40'),
-(6, 137, 1, 0, 0, 90, 90, NULL, 'pepe', '2020-07-26 12:26:00'),
-(6, 141, 1, 0, 0, 90, 90, NULL, 'pepe', '2020-07-26 19:46:08'),
-(6, 142, 1, 0, 0, 90, 90, NULL, 'pepe', '2020-07-26 19:50:35'),
-(6, 143, 1, 0, 0, 90, 90, NULL, 'pepe', '2020-07-26 20:10:49'),
-(6, 146, 5, 21, 0, 26.44, 160, NULL, 'pepe', '2020-07-26 21:29:00'),
-(6, 147, 9, 21, 0, 16.52, 180, NULL, 'pepe', '2020-07-26 21:30:11'),
-(6, 148, 5, 21, 0, 33.05, 200, NULL, 'pepe', '2020-07-26 22:00:44'),
-(6, 149, 5, 21, 0, 33.05, 200, NULL, 'pepe', '2020-07-26 22:01:37'),
-(6, 150, 2, 21, 0, 45.45, 110, NULL, 'pepe', '2020-08-01 11:52:29'),
-(6, 153, 2, 10, 0, 31.81, 70, NULL, 'pepe', '2020-08-02 21:41:37'),
-(6, 159, 1, 0, 0, 67, 67, NULL, 'pepe', '2020-08-02 22:03:55'),
-(6, 160, 10, 21, 0, 214.87, 2600, 'Estas son las observaciones puestas para el otro producto', 'pepe', '2020-08-03 16:32:47'),
-(6, 161, 300, 21, 0, 689.99, 250468, NULL, 'pepe', '2020-08-03 16:19:04'),
-(6, 162, 2, 21, 0, 82.64, 200, NULL, 'pepe', '2020-08-04 22:04:11'),
-(7, 85, 4, 0, 0, 3, 0, NULL, '', '2020-05-24 00:03:38'),
-(7, 86, 3, 0, 0, 3, 0, NULL, '', '2020-05-24 00:03:38'),
-(7, 87, 2, 0, 0, 10, 0, NULL, '', '2020-05-24 00:03:38'),
-(7, 90, 2, 0, 0, 10, 0, NULL, '', '2020-05-24 00:03:38'),
-(7, 91, 0, 0, 0, 10, 0, NULL, '', '2020-05-24 00:03:38'),
-(7, 107, 1, 0, 0, 2, 0, NULL, '', '2020-05-24 00:03:38'),
-(7, 116, 1, 0, 0, 10, 0, NULL, 'pepe', '2020-05-24 18:42:23'),
-(8, 160, 3, 10, 50, 60, 99, 'Estas son las observaciones puestas para uno de los productos', 'admin', '2020-08-03 16:32:22'),
-(10, 119, 2, 21, 0, 74.38, 180, NULL, 'pepe', '2020-07-20 11:35:03'),
-(10, 121, 3, 21, 0, 57.85, 210, NULL, 'pepe', '2020-07-21 19:15:01'),
-(10, 122, 4, 0, 0, 10, 40, NULL, 'pepe', '2020-07-21 19:19:21'),
-(10, 123, 4, 0, 0, 10, 40, NULL, 'pepe', '2020-07-21 19:22:40'),
-(10, 125, 4, 21, 0, 24.79, 120, NULL, 'pepe', '2020-07-22 15:39:45'),
-(10, 126, 4, 0, 0, 0, 0, NULL, 'pepe', '2020-07-22 15:54:20'),
-(10, 127, 4, 21, 0, 28.92, 140, NULL, 'pepe', '2020-07-22 15:54:50'),
-(10, 161, 60, 10, 0, 6, 396, NULL, 'admin', '2020-08-03 16:38:31'),
-(11, 124, 1, 21, 0, 24.79, 30, NULL, 'pepe', '2020-07-21 19:34:59');
+INSERT INTO `producto_factura` (`idPro`, `idFac`, `cantidad`, `ivaProducto`, `ivaImporteTotal`, `porcentajeDescuento`, `precioUnitSinIva`, `precioUnitSinIvaConDesc`, `precioUnitario`, `precioFinalSinIva`, `precioFinalRecibidoPagado`, `observaciones`, `modificadoPor`, `fechaModificacion`) VALUES
+(1, 7, 5, 10, 0, 0, 90, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(1, 8, 1, 21, 0, 0, 200, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(1, 9, 1, 21, 0, 0, 200, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(1, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 20:50:25'),
+(1, 160, 1, 10, 0, 0, 170, 0, 0, 0, 177, NULL, 'pepe', '2020-08-11 16:30:18'),
+(2, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 20:51:29'),
+(2, 160, 1, 0, 0, 0, 150, 0, 0, 0, 181.5, NULL, 'pepe', '2020-08-12 22:02:02'),
+(3, 72, 5, 0, 0, 0, 1.4, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(3, 74, 5, 0, 0, 0, 1.6, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(3, 75, 7, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(3, 100, 2, 6, 0, 0, 33.01, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(3, 101, 0, 6, 0, 0, 33.01, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(3, 102, 0, 6, 0, 0, 33.01, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(3, 106, 1, 0, 0, 0, 1, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(3, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 20:51:43'),
+(3, 160, 12, 21, 0, 0, 6, 0, 0, 0, 7.26, NULL, 'pepe', '2020-08-11 16:30:32'),
+(4, 92, 2, 0, 0, 0, 7.5, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 94, 0, 0, 0, 0, 7.5, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 95, 0, 0, 0, 0, 7.5, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 96, 0, 0, 0, 0, 7.5, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 103, 3, 5, 0, 0, 19.04, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 104, 0, 5, 0, 0, 19.04, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 105, 0, 5, 0, 0, 19.04, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 108, 2, 21, 0, 0, 6.19, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 109, 0, 21, 0, 0, 6.19, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 110, 0, 21, 0, 0, 6.19, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 111, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 112, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 113, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 114, 1, 0, 0, 0, 20, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 115, 0, 0, 0, 0, 20, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(4, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 20:51:50'),
+(4, 160, 1, 0, 0, 0, 6, 0, 0, 0, 6, NULL, 'pepe', '2020-08-12 22:02:34'),
+(5, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 20:51:58'),
+(6, 64, 1, 21, 0, 0, 566.33, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(6, 66, 0, 21, 0, 0, 566.33, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(6, 67, 0, 21, 0, 0, 566.33, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(6, 68, 0, 21, 0, 0, 566.33, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(6, 69, 0, 21, 0, 0, 566.33, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(6, 88, 2, 21, 0, 0, 61.98, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(6, 117, 2, 21, 0, 0, 24.79, 0, 0, 0, 60, NULL, 'pepe', '2020-07-18 18:37:44'),
+(6, 118, 3, 21, 0, 0, 37.19, 0, 0, 0, 135, NULL, 'pepe', '2020-07-18 19:02:02'),
+(6, 128, 2, 21, 0, 0, 41.32, 0, 0, 0, 100, NULL, 'pepe', '2020-07-22 18:06:45'),
+(6, 129, 2, 21, 0, 0, 41.32, 0, 0, 0, 100, NULL, 'pepe', '2020-07-22 18:30:09'),
+(6, 130, 7, 21, 0, 0, 19.39, 0, 0, 0, 164.28, NULL, 'pepe', '2020-07-22 18:32:10'),
+(6, 131, 2, 21, 0, 0, 26.22, 0, 0, 0, 63.47, NULL, 'pepe', '2020-07-22 18:35:14'),
+(6, 132, 2, 21, 0, 0, 41.32, 0, 0, 0, 100, NULL, 'pepe', '2020-07-22 18:41:39'),
+(6, 133, 2, 21, 0, 0, 26.22, 0, 0, 0, 63.47, NULL, 'pepe', '2020-07-22 18:42:44'),
+(6, 134, 1, 21, 0, 0, 82.64, 0, 0, 0, 100, NULL, 'pepe', '2020-07-22 18:44:50'),
+(6, 135, 1, 21, 0, 0, 82.64, 0, 0, 0, 100, NULL, 'pepe', '2020-07-22 19:02:40'),
+(6, 136, 1, 21, 0, 0, 82.64, 0, 0, 0, 100, NULL, 'pepe', '2020-07-22 19:03:40'),
+(6, 137, 1, 0, 0, 0, 90, 0, 0, 0, 90, NULL, 'pepe', '2020-07-26 12:26:00'),
+(6, 141, 1, 0, 0, 0, 90, 0, 0, 0, 90, NULL, 'pepe', '2020-07-26 19:46:08'),
+(6, 142, 1, 0, 0, 0, 90, 0, 0, 0, 90, NULL, 'pepe', '2020-07-26 19:50:35'),
+(6, 143, 1, 0, 0, 0, 90, 0, 0, 0, 90, NULL, 'pepe', '2020-07-26 20:10:49'),
+(6, 146, 5, 21, 0, 0, 26.44, 0, 0, 0, 160, NULL, 'pepe', '2020-07-26 21:29:00'),
+(6, 147, 9, 21, 0, 0, 16.52, 0, 0, 0, 180, NULL, 'pepe', '2020-07-26 21:30:11'),
+(6, 148, 5, 21, 0, 0, 33.05, 0, 0, 0, 200, NULL, 'pepe', '2020-07-26 22:00:44'),
+(6, 149, 5, 21, 0, 0, 33.05, 0, 0, 0, 200, NULL, 'pepe', '2020-07-26 22:01:37'),
+(6, 150, 2, 21, 0, 0, 45.45, 0, 0, 0, 110, NULL, 'pepe', '2020-08-01 11:52:29'),
+(6, 153, 2, 10, 0, 0, 31.81, 0, 0, 0, 70, NULL, 'pepe', '2020-08-02 21:41:37'),
+(6, 159, 1, 0, 0, 0, 67, 0, 0, 0, 67, NULL, 'pepe', '2020-08-02 22:03:55'),
+(6, 160, 10, 21, 0, 0, 214.87, 0, 0, 0, 2600, 'Estas son las observaciones puestas para el otro producto', 'pepe', '2020-08-03 16:32:47'),
+(6, 161, 300, 21, 0, 0, 689.99, 0, 0, 0, 250468, NULL, 'pepe', '2020-08-03 16:19:04'),
+(6, 162, 2, 21, 0, 0, 82.64, 0, 0, 0, 200, NULL, 'pepe', '2020-08-04 22:04:11'),
+(6, 163, 2, 10, 0, 0, 17.27, 0, 0, 0, 38, NULL, 'pepe', '2020-08-11 13:37:31'),
+(6, 164, 1, 10, 0, 0, 18.18, 0, 0, 0, 20, NULL, 'pepe', '2020-08-16 21:24:51'),
+(6, 165, 1, 21, 0, 0, 16.52, 0, 0, 0, 20, NULL, 'pepe', '2020-08-16 21:27:09'),
+(6, 166, 1, 21, 0, 0, 16.52, 0, 0, 0, 20, NULL, 'pepe', '2020-08-16 21:27:46'),
+(7, 85, 4, 0, 0, 0, 3, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(7, 86, 3, 0, 0, 0, 3, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(7, 87, 2, 0, 0, 0, 10, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(7, 90, 2, 0, 0, 0, 10, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(7, 91, 0, 0, 0, 0, 10, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(7, 107, 1, 0, 0, 0, 2, 0, 0, 0, 0, NULL, '', '2020-05-24 00:03:38'),
+(7, 116, 1, 0, 0, 0, 10, 0, 0, 0, 0, NULL, 'pepe', '2020-05-24 18:42:23'),
+(7, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 20:52:05'),
+(8, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 20:52:41'),
+(8, 160, 3, 10, 0, 50, 60, 0, 0, 0, 99, 'Estas son las observaciones puestas para uno de los productos', 'admin', '2020-08-03 16:32:22'),
+(9, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 20:52:48'),
+(10, 119, 2, 21, 0, 0, 74.38, 0, 0, 0, 180, NULL, 'pepe', '2020-07-20 11:35:03'),
+(10, 121, 3, 21, 0, 0, 57.85, 0, 0, 0, 210, NULL, 'pepe', '2020-07-21 19:15:01'),
+(10, 122, 4, 0, 0, 0, 10, 0, 0, 0, 40, NULL, 'pepe', '2020-07-21 19:19:21'),
+(10, 123, 4, 0, 0, 0, 10, 0, 0, 0, 40, NULL, 'pepe', '2020-07-21 19:22:40'),
+(10, 125, 4, 21, 0, 0, 24.79, 0, 0, 0, 120, NULL, 'pepe', '2020-07-22 15:39:45'),
+(10, 126, 4, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 'pepe', '2020-07-22 15:54:20'),
+(10, 127, 4, 21, 0, 0, 28.92, 0, 0, 0, 140, NULL, 'pepe', '2020-07-22 15:54:50'),
+(10, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 20:52:55'),
+(10, 161, 60, 10, 0, 0, 6, 0, 0, 0, 396, NULL, 'admin', '2020-08-03 16:38:31'),
+(11, 124, 1, 21, 0, 0, 24.79, 0, 0, 0, 30, NULL, 'pepe', '2020-07-21 19:34:59'),
+(11, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 20:58:59'),
+(12, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 20:59:50'),
+(13, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 21:00:01'),
+(14, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 21:00:10'),
+(14, 167, 2, 21, 4.2, 0, 10, 10, 12.1, 20, 24.2, '', 'admin', '2020-08-30 22:27:56'),
+(14, 168, 2, 21, 11.28, 0, 26.85, 26.85, 32.5, 53.71, 65, '', 'admin', '2020-08-30 22:33:11'),
+(14, 169, 2, 21, 14.4, 0, 34.29, 34.29, 41.5, 68.6, 83, '', 'admin', '2020-08-30 22:43:46'),
+(14, 170, 2, 21, 11.28, 0, 26.85, 26.85, 32.5, 53.72, 65, '', 'admin', '2020-08-30 22:45:11'),
+(14, 171, 0, 0, 0, 0, 20, 20, 20, 20, 20, '', 'admin', '2020-08-30 22:54:11'),
+(14, 172, 0, 0, 0, 0, 0, 0, 0, 20, 20, '', 'admin', '2020-08-30 23:13:44'),
+(14, 173, 2, 21, 4.2, 0, 10, 10, 12.1, 20, 24.2, '', 'admin', '2020-08-30 23:14:13'),
+(14, 174, 2, 21, 11.28, 0, 26.86, 26.86, 32.5, 53.72, 65, '', 'admin', '2020-08-30 23:15:02'),
+(14, 175, 2, 21, 4.2, 0, 10, 10, 12.1, 20, 24.2, '', 'admin', '2020-08-30 23:21:36'),
+(15, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 21:00:30'),
+(16, 153, 1, 0, 0, 0, 10, 0, 0, 0, 10, NULL, 'pepe', '2020-08-17 21:00:37');
 
 -- --------------------------------------------------------
 
@@ -1094,7 +1244,7 @@ CREATE TABLE `rol` (
   `idRol` int(11) NOT NULL,
   `rol` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -1125,7 +1275,7 @@ CREATE TABLE `subcategoria` (
   `nombreEU` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `idCat` int(11) NOT NULL,
   `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -1148,7 +1298,9 @@ INSERT INTO `subcategoria` (`idSub`, `nombreES`, `nombreEN`, `nombrePT`, `nombre
 (17, 'Estanterías', 'Shelves', NULL, NULL, NULL, NULL, NULL, NULL, 2, '', '2020-05-24 00:04:37'),
 (18, 'Alimento', 'Food', NULL, NULL, NULL, NULL, NULL, NULL, 2, '', '2020-05-24 00:04:37'),
 (19, 'Pantalones', 'Throusers', NULL, NULL, NULL, NULL, NULL, NULL, 9, 'admin', '2020-05-24 18:26:18'),
-(20, 'Camisas', 'Shirts', NULL, NULL, NULL, NULL, NULL, NULL, 9, 'admin', '2020-06-03 20:52:12');
+(20, 'Camisas', 'Shirts', NULL, NULL, NULL, NULL, NULL, NULL, 9, 'admin', '2020-06-03 20:52:12'),
+(21, 'Juegos de mesa', 'Table games', NULL, NULL, NULL, NULL, NULL, NULL, 10, 'pepe', '2020-08-13 15:18:39'),
+(22, 'Impresoras', 'Printers', NULL, NULL, NULL, NULL, NULL, NULL, 1, 'pepe', '2020-08-13 15:21:39');
 
 -- --------------------------------------------------------
 
@@ -1163,7 +1315,7 @@ CREATE TABLE `usuario` (
   `habilitado` tinyint(4) NOT NULL,
   `fechaCreacion` datetime NOT NULL,
   `modificadoPor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fechaModificacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `fechaModificacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
@@ -1230,12 +1382,12 @@ INSERT INTO `usuarioorden` (`id`, `idUsr`, `tabla`, `columna`, `orden`) VALUES
 (6, 85, 'producto', 'nombreEN', 'ASC'),
 (7, 85, 'empresa', 'nombreComercial', 'ASC'),
 (8, 83, 'factura', 'fechaCompra', 'DESC'),
-(9, 85, 'factura', 'importeFront', 'DESC'),
 (11, 85, 'usuario', 'usuario', 'ASC'),
 (12, 83, 'usuario', 'datosPersonales.nombre', 'ASC'),
 (13, 1, 'usuario', 'usuario.usuario', 'ASC'),
 (14, 69, 'usuario', 'usuario', 'ASC'),
-(15, 81, 'usuario', 'usuario', 'ASC');
+(15, 81, 'usuario', 'usuario', 'ASC'),
+(16, 85, 'factura', 'idFac', 'DESC');
 
 -- --------------------------------------------------------
 
@@ -1380,6 +1532,13 @@ ALTER TABLE `direccionempresa`
   ADD KEY `FK_idEmp` (`idEmp`) USING BTREE;
 
 --
+-- Indices de la tabla `direccionempresapropia`
+--
+ALTER TABLE `direccionempresapropia`
+  ADD PRIMARY KEY (`idDirPropia`),
+  ADD KEY `idPropia` (`idPropia`);
+
+--
 -- Indices de la tabla `empresa`
 --
 ALTER TABLE `empresa`
@@ -1505,106 +1664,133 @@ ALTER TABLE `usuario_rol`
 --
 ALTER TABLE `admin`
   MODIFY `idAd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idCat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT de la tabla `cuota`
 --
 ALTER TABLE `cuota`
-  MODIFY `idCuo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `idCuo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
 --
 -- AUTO_INCREMENT de la tabla `cuotadetalle`
 --
 ALTER TABLE `cuotadetalle`
-  MODIFY `idCuDe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `idCuDe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+
 --
 -- AUTO_INCREMENT de la tabla `datospersonales`
 --
 ALTER TABLE `datospersonales`
   MODIFY `idDatosPers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+
 --
 -- AUTO_INCREMENT de la tabla `direccion`
 --
 ALTER TABLE `direccion`
   MODIFY `idDir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
 --
 -- AUTO_INCREMENT de la tabla `direccionempresa`
 --
 ALTER TABLE `direccionempresa`
-  MODIFY `idDirEmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idDirEmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `direccionempresapropia`
+--
+ALTER TABLE `direccionempresapropia`
+  MODIFY `idDirPropia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `idEmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idEmp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
 --
 -- AUTO_INCREMENT de la tabla `empresapropia`
 --
 ALTER TABLE `empresapropia`
-  MODIFY `idPropia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idPropia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `estado`
 --
 ALTER TABLE `estado`
   MODIFY `idEst` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `idFac` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
+  MODIFY `idFac` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
+
 --
 -- AUTO_INCREMENT de la tabla `facturaenviarfacturar`
 --
 ALTER TABLE `facturaenviarfacturar`
-  MODIFY `idEnFa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idEnFa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
 --
 -- AUTO_INCREMENT de la tabla `factura_estado`
 --
 ALTER TABLE `factura_estado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=233;
+
 --
 -- AUTO_INCREMENT de la tabla `formapago`
 --
 ALTER TABLE `formapago`
   MODIFY `idFor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `foto`
 --
 ALTER TABLE `foto`
   MODIFY `idFot` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+
 --
 -- AUTO_INCREMENT de la tabla `paises`
 --
 ALTER TABLE `paises`
   MODIFY `idPais` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idPro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
 ALTER TABLE `rol`
   MODIFY `idRol` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `subcategoria`
 --
 ALTER TABLE `subcategoria`
-  MODIFY `idSub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idSub` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `idUsr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+
 --
 -- AUTO_INCREMENT de la tabla `usuarioorden`
 --
 ALTER TABLE `usuarioorden`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -1685,6 +1871,7 @@ ALTER TABLE `usuario_empresa`
 ALTER TABLE `usuario_rol`
   ADD CONSTRAINT `FK_idRol` FOREIGN KEY (`idRol`) REFERENCES `rol` (`idRol`),
   ADD CONSTRAINT `FK_idUsr` FOREIGN KEY (`idUsr`) REFERENCES `usuario` (`idUsr`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
