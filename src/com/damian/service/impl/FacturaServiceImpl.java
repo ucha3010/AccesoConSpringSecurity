@@ -350,6 +350,8 @@ public class FacturaServiceImpl implements FacturaService {
 		impresionFactura.setDescuentoTotal(descuentoTotal.divide(cien, 4, RoundingMode.DOWN).doubleValue());
 		impresionFactura.setDescuentoImporteFactura(factura.getDescuentoImporteFactura());
 		impresionFactura.setTotalSinIvaConDescfac(factura.getTotalSinIvaConDescfac());
+		impresionFactura.setEnvioIvaImp(factura.getEnvioIvaImp());
+		impresionFactura.setProductosIvaImp(factura.getProductosIvaImp());
 		impresionFactura.setIvaImporteTotal(factura.getIvaImporteTotal());
 		impresionFactura.setImporteTotal(factura.getImporteTotal());
 

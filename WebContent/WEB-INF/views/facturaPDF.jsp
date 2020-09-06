@@ -37,6 +37,8 @@
 		params.put("descuentoTotal", factura.getDescuentoTotal());
 		params.put("descuentoImporteFactura", factura.getDescuentoImporteFactura());
 		params.put("totalSinIvaConDescfac", factura.getTotalSinIvaConDescfac());
+		params.put("envioIvaImp", factura.getEnvioIvaImp());
+		params.put("productosIvaImp", factura.getProductosIvaImp());
 		params.put("ivaImporteTotal", factura.getIvaImporteTotal());
 		params.put("importeTotal", factura.getImporteTotal());
 		params.put("hayCuotas", factura.isHayCuotas());

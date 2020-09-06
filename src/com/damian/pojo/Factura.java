@@ -16,6 +16,7 @@ public class Factura {
 	private double importeEnvioSinIva;
 	private double envioIvaPor;
 	private double envioIvaImp;
+	private double productosIvaImp;
 	private double totalSinIvaConDescfac;
 	private double ivaTotal;
 	private double ivaImporteTotal;
@@ -183,6 +184,21 @@ public class Factura {
 	 */
 	public void setEnvioIvaImp(double envioIvaImp) {
 		this.envioIvaImp = envioIvaImp;
+	}
+
+	/**
+	 * @return the productosIvaImp
+	 */
+	public double getProductosIvaImp() {
+		return productosIvaImp;
+	}
+
+	/**
+	 * @param productosIvaImp
+	 *            the productosIvaImp to set
+	 */
+	public void setProductosIvaImp(double productosIvaImp) {
+		this.productosIvaImp = productosIvaImp;
 	}
 
 	/**
@@ -406,11 +422,11 @@ public class Factura {
 				+ ", descuentoTotal=" + descuentoTotal + ", descuentoImporteProductos=" + descuentoImporteProductos
 				+ ", descuentoImporteFactura=" + descuentoImporteFactura + ", descuentoImporteTotal="
 				+ descuentoImporteTotal + ", importeEnvioSinIva=" + importeEnvioSinIva + ", envioIvaPor=" + envioIvaPor
-				+ ", envioIvaImp=" + envioIvaImp + ", totalSinIvaConDescfac=" + totalSinIvaConDescfac + ", ivaTotal="
-				+ ivaTotal + ", ivaImporteTotal=" + ivaImporteTotal + ", importeTotal=" + importeTotal
-				+ ", fechaCompra=" + fechaCompra + ", fechaEntrega=" + fechaEntrega + ", observaciones=" + observaciones
-				+ ", creadoPor=" + creadoPor + ", modificadoPor=" + modificadoPor + ", fechaModificacion="
-				+ fechaModificacion + "]";
+				+ ", envioIvaImp=" + envioIvaImp + ", productosIvaImp=" + productosIvaImp + ", totalSinIvaConDescfac="
+				+ totalSinIvaConDescfac + ", ivaTotal=" + ivaTotal + ", ivaImporteTotal=" + ivaImporteTotal
+				+ ", importeTotal=" + importeTotal + ", fechaCompra=" + fechaCompra + ", fechaEntrega=" + fechaEntrega
+				+ ", observaciones=" + observaciones + ", creadoPor=" + creadoPor + ", modificadoPor=" + modificadoPor
+				+ ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

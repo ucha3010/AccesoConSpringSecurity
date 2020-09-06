@@ -108,11 +108,11 @@ public class FacturaDAOImpl implements FacturaDAO {
 		} else {
 			ModelFactura mf = converterFactura.convert(factura);
 			String sql = "INSERT INTO " + TABLA
-					+ " (compra, totalSinIvaEnvDescfac, descuentoTotal, descuentoImporteProductos, descuentoImporteFactura, descuentoImporteTotal, importeEnvioSinIva, envioIvaPor, envioIvaImp, totalSinIvaConDescfac, ivaTotal, ivaImporteTotal, importeTotal, fechaCompra, "
+					+ " (compra, totalSinIvaEnvDescfac, descuentoTotal, descuentoImporteProductos, descuentoImporteFactura, descuentoImporteTotal, importeEnvioSinIva, envioIvaPor, envioIvaImp, productosIvaImp, totalSinIvaConDescfac, ivaTotal, ivaImporteTotal, importeTotal, fechaCompra, "
 					+ "fechaEntrega, idEst, observaciones, idFor, creadoPor, idCuo, modificadoPor, fechaModificacion) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			int result = jdbcTemplate.update(sql, mf.isCompra(), mf.getTotalSinIvaEnvDescfac(), 
-					mf.getDescuentoTotal(), mf.getDescuentoImporteProductos(), mf.getDescuentoImporteFactura(), mf.getDescuentoImporteTotal(), mf.getImporteEnvioSinIva(), mf.getEnvioIvaPor(), mf.getEnvioIvaImp(), mf.getTotalSinIvaConDescfac(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
+					mf.getDescuentoTotal(), mf.getDescuentoImporteProductos(), mf.getDescuentoImporteFactura(), mf.getDescuentoImporteTotal(), mf.getImporteEnvioSinIva(), mf.getEnvioIvaPor(), mf.getEnvioIvaImp(), mf.getProductosIvaImp(), mf.getTotalSinIvaConDescfac(), mf.getIvaTotal(), mf.getIvaImporteTotal(),
 					mf.getImporteTotal(), mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(),
 					mf.getObservaciones(), mf.getIdFor(), mf.getCreadoPor(), mf.getIdCuo(), mf.getModificadoPor(),
 					mf.getFechaModificacion());
@@ -125,11 +125,11 @@ public class FacturaDAOImpl implements FacturaDAO {
 	public int update(Factura factura, HttpServletRequest request) {
 		ModelFactura mf = converterFactura.convert(factura);
 		String sql = "UPDATE " + TABLA
-				+ " SET compra=?, totalSinIvaEnvDescfac=?, descuentoTotal=?, descuentoImporteProductos=?, descuentoImporteFactura=?, descuentoImporteTotal=?, importeEnvioSinIva=?, envioIvaPor=?, envioIvaImp=?, totalSinIvaConDescfac=?, ivaTotal=?, ivaImporteTotal=?, importeTotal=?, "
+				+ " SET compra=?, totalSinIvaEnvDescfac=?, descuentoTotal=?, descuentoImporteProductos=?, descuentoImporteFactura=?, descuentoImporteTotal=?, importeEnvioSinIva=?, envioIvaPor=?, envioIvaImp=?, productosIvaImp=?, totalSinIvaConDescfac=?, ivaTotal=?, ivaImporteTotal=?, importeTotal=?, "
 				+ "fechaCompra=?, fechaEntrega=?, idEst=?, observaciones=?, idFor=?, creadoPor=?, idCuo=?, modificadoPor=?, "
 				+ "fechaModificacion=? WHERE " + KEY + "=?";
 		int result = jdbcTemplate.update(sql, mf.isCompra(), mf.getTotalSinIvaEnvDescfac(), 
-				mf.getDescuentoTotal(), mf.getDescuentoImporteProductos(), mf.getDescuentoImporteFactura(), mf.getDescuentoImporteTotal(), mf.getImporteEnvioSinIva(), mf.getEnvioIvaPor(), mf.getEnvioIvaImp(), mf.getTotalSinIvaConDescfac(), mf.getIvaTotal(), mf.getIvaImporteTotal(), mf.getImporteTotal(),
+				mf.getDescuentoTotal(), mf.getDescuentoImporteProductos(), mf.getDescuentoImporteFactura(), mf.getDescuentoImporteTotal(), mf.getImporteEnvioSinIva(), mf.getEnvioIvaPor(), mf.getEnvioIvaImp(), mf.getProductosIvaImp(), mf.getTotalSinIvaConDescfac(), mf.getIvaTotal(), mf.getIvaImporteTotal(), mf.getImporteTotal(),
 				mf.getFechaCompra(), mf.getFechaEntrega(), mf.getIdEst(), mf.getObservaciones(), mf.getIdFor(),
 				mf.getCreadoPor(), mf.getIdCuo(), mf.getModificadoPor(), mf.getFechaModificacion(), mf.getIdFac());
 		LocalLogger.update(TABLA, mf, request);
@@ -233,6 +233,7 @@ public class FacturaDAOImpl implements FacturaDAO {
 		mf.setImporteEnvioSinIva(rs.getDouble("importeEnvioSinIva"));
 		mf.setEnvioIvaPor(rs.getDouble("envioIvaPor"));
 		mf.setEnvioIvaImp(rs.getDouble("envioIvaImp"));
+		mf.setProductosIvaImp(rs.getDouble("productosIvaImp"));
 		mf.setTotalSinIvaConDescfac(rs.getDouble("totalSinIvaConDescfac"));
 		mf.setIvaTotal(rs.getDouble("ivaTotal"));
 		mf.setIvaImporteTotal(rs.getDouble("ivaImporteTotal"));

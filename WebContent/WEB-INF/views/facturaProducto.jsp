@@ -84,7 +84,7 @@
 							<td class="width-35"></td>
 						</tr>
 		<!-- 				IVA -->
-						<tr>
+						<tr title='<fmt:message key="label.Vat.products" />: <fmt:formatNumber type="currency" value="${factura.productosIvaImp}" />&#xA;<fmt:message key="label.Vat.delivery" />: <fmt:formatNumber type="currency" value="${factura.envioIvaImp}" />'>
 							<td colspan="5"></td>
 							<td><strong><fmt:message key="label.Total.vat" /></strong></td>
 							<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.ivaImporteTotal}" /></strong></td>

@@ -39,6 +39,8 @@ public class ImpresionFactura {
 	private double descuentoImporteFactura;
 	private double descuentoImporteTotal;
 	private double totalSinIvaConDescfac;
+	private double envioIvaImp;
+	private double productosIvaImp;
 	private double ivaImporteTotal;
 	private double importeTotal;
 
@@ -464,6 +466,36 @@ public class ImpresionFactura {
 	}
 
 	/**
+	 * @return the envioIvaImp
+	 */
+	public double getEnvioIvaImp() {
+		return envioIvaImp;
+	}
+
+	/**
+	 * @param envioIvaImp
+	 *            the envioIvaImp to set
+	 */
+	public void setEnvioIvaImp(double envioIvaImp) {
+		this.envioIvaImp = envioIvaImp;
+	}
+
+	/**
+	 * @return the productosIvaImp
+	 */
+	public double getProductosIvaImp() {
+		return productosIvaImp;
+	}
+
+	/**
+	 * @param productosIvaImp
+	 *            the productosIvaImp to set
+	 */
+	public void setProductosIvaImp(double productosIvaImp) {
+		this.productosIvaImp = productosIvaImp;
+	}
+
+	/**
 	 * @return the ivaImporteTotal
 	 */
 	public double getIvaImporteTotal() {
@@ -632,10 +664,11 @@ public class ImpresionFactura {
 				+ ", totalSinIvaEnvDescfac=" + totalSinIvaEnvDescfac + ", importeEnvioSinIva=" + importeEnvioSinIva
 				+ ", descuentoTotal=" + descuentoTotal + ", descuentoImporteFactura=" + descuentoImporteFactura
 				+ ", descuentoImporteTotal=" + descuentoImporteTotal + ", totalSinIvaConDescfac="
-				+ totalSinIvaConDescfac + ", ivaImporteTotal=" + ivaImporteTotal + ", importeTotal=" + importeTotal
-				+ ", hayCuotas=" + hayCuotas + ", idCuo=" + idCuo + ", comisionAperturaPor=" + comisionAperturaPor
-				+ ", interesPor=" + interesPor + ", primerRenglon=" + primerRenglon + ", segundoRenglon="
-				+ segundoRenglon + ", tercerRenglon=" + tercerRenglon + ", jrxml=" + jrxml + "]";
+				+ totalSinIvaConDescfac + ", envioIvaImp=" + envioIvaImp + ", productosIvaImp=" + productosIvaImp
+				+ ", ivaImporteTotal=" + ivaImporteTotal + ", importeTotal=" + importeTotal + ", hayCuotas=" + hayCuotas
+				+ ", idCuo=" + idCuo + ", comisionAperturaPor=" + comisionAperturaPor + ", interesPor=" + interesPor
+				+ ", primerRenglon=" + primerRenglon + ", segundoRenglon=" + segundoRenglon + ", tercerRenglon="
+				+ tercerRenglon + ", jrxml=" + jrxml + "]";
 	}
 
 }

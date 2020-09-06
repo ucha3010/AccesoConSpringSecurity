@@ -37,6 +37,7 @@ public class ConverterFactura {
 		f.setImporteEnvioSinIva(mf.getImporteEnvioSinIva());
 		f.setEnvioIvaPor(mf.getEnvioIvaPor());
 		f.setEnvioIvaImp(mf.getEnvioIvaImp());
+		f.setProductosIvaImp(mf.getProductosIvaImp());
 		f.setTotalSinIvaConDescfac(mf.getTotalSinIvaConDescfac());
 		f.setIvaTotal(mf.getIvaTotal());
 		f.setIvaImporteTotal(mf.getIvaImporteTotal());
@@ -74,6 +75,7 @@ public class ConverterFactura {
 		mf.setImporteEnvioSinIva(f.getImporteEnvioSinIva());
 		mf.setEnvioIvaPor(f.getEnvioIvaPor());
 		mf.setEnvioIvaImp(f.getEnvioIvaImp());
+		mf.setProductosIvaImp(f.getProductosIvaImp());
 		mf.setTotalSinIvaConDescfac(f.getTotalSinIvaConDescfac());
 		mf.setIvaTotal(f.getIvaTotal());
 		mf.setIvaImporteTotal(f.getIvaImporteTotal());

@@ -15,6 +15,7 @@ public class ModelFactura {
 	private double importeEnvioSinIva;
 	private double envioIvaPor;
 	private double envioIvaImp;
+	private double productosIvaImp;
 	private double totalSinIvaConDescfac;
 	private double ivaTotal;
 	private double ivaImporteTotal;
@@ -181,6 +182,21 @@ public class ModelFactura {
 	 */
 	public void setEnvioIvaImp(double envioIvaImp) {
 		this.envioIvaImp = envioIvaImp;
+	}
+
+	/**
+	 * @return the productosIvaImp
+	 */
+	public double getProductosIvaImp() {
+		return productosIvaImp;
+	}
+
+	/**
+	 * @param productosIvaImp
+	 *            the productosIvaImp to set
+	 */
+	public void setProductosIvaImp(double productosIvaImp) {
+		this.productosIvaImp = productosIvaImp;
 	}
 
 	/**
@@ -389,12 +405,12 @@ public class ModelFactura {
 				+ totalSinIvaEnvDescfac + ", descuentoTotal=" + descuentoTotal + ", descuentoImporteProductos="
 				+ descuentoImporteProductos + ", descuentoImporteFactura=" + descuentoImporteFactura
 				+ ", descuentoImporteTotal=" + descuentoImporteTotal + ", importeEnvioSinIva=" + importeEnvioSinIva
-				+ ", envioIvaPor=" + envioIvaPor + ", envioIvaImp=" + envioIvaImp + ", totalSinIvaConDescfac="
-				+ totalSinIvaConDescfac + ", ivaTotal=" + ivaTotal + ", ivaImporteTotal=" + ivaImporteTotal
-				+ ", importeTotal=" + importeTotal + ", fechaCompra=" + fechaCompra + ", fechaEntrega=" + fechaEntrega
-				+ ", idEst=" + idEst + ", observaciones=" + observaciones + ", idFor=" + idFor + ", creadoPor="
-				+ creadoPor + ", idCuo=" + idCuo + ", modificadoPor=" + modificadoPor + ", fechaModificacion="
-				+ fechaModificacion + "]";
+				+ ", envioIvaPor=" + envioIvaPor + ", envioIvaImp=" + envioIvaImp + ", productosIvaImp="
+				+ productosIvaImp + ", totalSinIvaConDescfac=" + totalSinIvaConDescfac + ", ivaTotal=" + ivaTotal
+				+ ", ivaImporteTotal=" + ivaImporteTotal + ", importeTotal=" + importeTotal + ", fechaCompra="
+				+ fechaCompra + ", fechaEntrega=" + fechaEntrega + ", idEst=" + idEst + ", observaciones="
+				+ observaciones + ", idFor=" + idFor + ", creadoPor=" + creadoPor + ", idCuo=" + idCuo
+				+ ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

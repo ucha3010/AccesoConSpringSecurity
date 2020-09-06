@@ -1,8 +1,8 @@
-package com.damian.pojo;
+package com.damian.dao.model;
 
 import java.sql.Timestamp;
 
-public class Constantes {
+public class ModelConstantes {
 
 	private String clave;
 	private double valorDouble;
@@ -11,7 +11,10 @@ public class Constantes {
 	private String modificadoPor;
 	private Timestamp fechaModificacion;
 
-	public Constantes() {
+	/**
+	 * 
+	 */
+	public ModelConstantes() {
 	}
 
 	/**
@@ -111,8 +114,9 @@ public class Constantes {
 	 */
 	@Override
 	public String toString() {
-		return "Constantes [clave=" + clave + ", valorDouble=" + valorDouble + ", valorString100=" + valorString100
+		return "ModelConstantes [clave=" + clave + ", valorDouble=" + valorDouble + ", valorString100=" + valorString100
 				+ ", valorText=" + valorText + ", modificadoPor=" + modificadoPor + ", fechaModificacion="
 				+ fechaModificacion + "]";
 	}
+
 }

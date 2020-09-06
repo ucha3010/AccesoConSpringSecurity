@@ -16,6 +16,10 @@
 	<style name="sans-10-l-bold" style="sans-10-l" isBold="true"/>
 	<style name="sans-10-r" hTextAlign="Right" hImageAlign="Right" vTextAlign="Middle" vImageAlign="Middle" fontName="SansSerif" fontSize="10"/>
 	<style name="sans-11-c" hTextAlign="Center" hImageAlign="Center" vTextAlign="Middle" vImageAlign="Middle" fontName="SansSerif" fontSize="11"/>
+	<style name="sans-12-c" hTextAlign="Center" hImageAlign="Center" vTextAlign="Middle" vImageAlign="Middle" fontName="SansSerif" fontSize="12"/>
+	<style name="sans-12-l" hTextAlign="Left" hImageAlign="Left" vTextAlign="Middle" vImageAlign="Middle" fontName="SansSerif" fontSize="12"/>
+	<style name="sans-12-l-bold" style="sans-12-l" isBold="true"/>
+	<style name="sans-12-r" hTextAlign="Right" hImageAlign="Right" vTextAlign="Middle" vImageAlign="Middle" fontName="SansSerif" fontSize="12"/>
 	<style name="sans-14-l" hTextAlign="Left" hImageAlign="Left" vTextAlign="Middle" vImageAlign="Middle" fontName="SansSerif" fontSize="14"/>
 	<style name="sans-14-r" hTextAlign="Right" hImageAlign="Right" vTextAlign="Middle" vImageAlign="Middle" fontName="SansSerif" fontSize="14" isBold="false"/>
 	<style name="sans-14-l-bold" style="sans-14-l" isBold="true"/>
@@ -361,114 +365,81 @@
 				<textFieldExpression><![CDATA[$P{factura_observaciones}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="sans-10-r" x="310" y="15" width="150" height="20" uuid="852707b0-ceba-4ecf-b3a0-4118a78e140c">
+				<reportElement style="sans-12-r" x="310" y="15" width="150" height="20" uuid="852707b0-ceba-4ecf-b3a0-4118a78e140c">
 					<printWhenExpression><![CDATA[$V{muestroTotalProductos} > 0]]></printWhenExpression>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="false"/>
-				</textElement>
 				<text><![CDATA[Productos (sin IVA)]]></text>
 			</staticText>
 			<textField pattern="#,##0.00€">
-				<reportElement style="sans-10-r" x="460" y="15" width="95" height="20" uuid="b7b7b138-e751-4774-a28d-1d7c89856050">
+				<reportElement style="sans-12-r" x="460" y="15" width="95" height="20" uuid="b7b7b138-e751-4774-a28d-1d7c89856050">
 					<printWhenExpression><![CDATA[$V{muestroTotalProductos} > 0]]></printWhenExpression>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="false"/>
-				</textElement>
 				<textFieldExpression><![CDATA[$P{totalSinIvaEnvDescfac}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="sans-10-r" x="310" y="35" width="150" height="20" uuid="42040863-145b-4b65-a8ce-7cd9d42a8101">
-					<printWhenExpression><![CDATA[$P{importeEnvioSinIva} > 0]]></printWhenExpression>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Coste del envío]]></text>
-			</staticText>
-			<textField pattern="#,##0.00€">
-				<reportElement style="sans-10-r" x="460" y="35" width="95" height="20" uuid="bddd9f36-d68f-449a-9003-35634ac7029d">
-					<printWhenExpression><![CDATA[$P{importeEnvioSinIva} > 0]]></printWhenExpression>
-				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="false"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{importeEnvioSinIva}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement style="sans-10-r" x="300" y="55" width="115" height="20" uuid="eebe0b80-c501-42fe-ac21-d5e5c76092e4">
+				<reportElement style="sans-12-r" x="300" y="35" width="115" height="20" uuid="eebe0b80-c501-42fe-ac21-d5e5c76092e4">
 					<printWhenExpression><![CDATA[$P{descuentoTotal} > 0]]></printWhenExpression>
 				</reportElement>
-				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="false"/>
-				</textElement>
 				<text><![CDATA[Desc. sobre prod. (]]></text>
 			</staticText>
 			<textField pattern="#,##0.##%">
-				<reportElement style="sans-10-c" x="415" y="55" width="40" height="20" isPrintWhenDetailOverflows="true" uuid="8ff03c69-03d6-4a0a-b002-dc99b1811c07">
+				<reportElement style="sans-12-c" x="415" y="35" width="40" height="20" isPrintWhenDetailOverflows="true" uuid="8ff03c69-03d6-4a0a-b002-dc99b1811c07">
 					<printWhenExpression><![CDATA[$P{descuentoTotal} > 0]]></printWhenExpression>
 				</reportElement>
 				<textFieldExpression><![CDATA[$P{descuentoTotal}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="sans-10-r" x="450" y="55" width="10" height="20" uuid="c31f3762-af92-40ea-83dd-dde76c33de26">
+				<reportElement style="sans-12-r" x="450" y="35" width="10" height="20" uuid="c31f3762-af92-40ea-83dd-dde76c33de26">
 					<printWhenExpression><![CDATA[$P{descuentoTotal} > 0]]></printWhenExpression>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="false"/>
-				</textElement>
 				<text><![CDATA[)]]></text>
 			</staticText>
-			<textField pattern="#,##0.00€">
-				<reportElement style="sans-10-r" x="460" y="55" width="95" height="20" uuid="bbe05133-ab84-426d-b069-0b2692b1dda7">
-					<printWhenExpression><![CDATA[$P{descuentoTotal} > 0]]></printWhenExpression>
+			<staticText>
+				<reportElement style="sans-12-r" x="310" y="35" width="150" height="20" uuid="42040863-145b-4b65-a8ce-7cd9d42a8101">
+					<printWhenExpression><![CDATA[$P{descuentoTotal} == 0.0 && $P{descuentoImporteFactura} > 0]]></printWhenExpression>
 				</reportElement>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="false"/>
-				</textElement>
+				<text><![CDATA[Desc. sobre prod.]]></text>
+			</staticText>
+			<textField pattern="#,##0.00€">
+				<reportElement style="sans-12-r" x="460" y="35" width="95" height="20" uuid="bbe05133-ab84-426d-b069-0b2692b1dda7">
+					<printWhenExpression><![CDATA[$P{descuentoImporteFactura} > 0]]></printWhenExpression>
+				</reportElement>
 				<textFieldExpression><![CDATA[$P{descuentoImporteFactura}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="sans-10-r" x="360" y="75" width="100" height="20" uuid="6ed508ac-0b91-4850-839e-b5a3d20ed5e8"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="false"/>
-				</textElement>
+				<reportElement style="sans-12-r" x="310" y="55" width="150" height="20" uuid="42040863-145b-4b65-a8ce-7cd9d42a8101">
+					<printWhenExpression><![CDATA[$P{importeEnvioSinIva} > 0]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Coste del envío (sin IVA)]]></text>
+			</staticText>
+			<textField pattern="#,##0.00€">
+				<reportElement style="sans-12-r" x="460" y="55" width="95" height="20" uuid="bddd9f36-d68f-449a-9003-35634ac7029d">
+					<printWhenExpression><![CDATA[$P{importeEnvioSinIva} > 0]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$P{importeEnvioSinIva}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="sans-12-r" x="360" y="75" width="100" height="20" uuid="6ed508ac-0b91-4850-839e-b5a3d20ed5e8"/>
 				<text><![CDATA[Total (sin IVA)]]></text>
 			</staticText>
 			<textField pattern="#,##0.00€">
-				<reportElement style="sans-10-r" x="460" y="75" width="95" height="20" uuid="a1e3e23c-7160-4362-8a9d-a7c077ec5370"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="false"/>
-				</textElement>
+				<reportElement style="sans-12-r" x="460" y="75" width="95" height="20" uuid="a1e3e23c-7160-4362-8a9d-a7c077ec5370"/>
 				<textFieldExpression><![CDATA[$P{totalSinIvaConDescfac}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="sans-10-r" x="360" y="95" width="100" height="20" uuid="06401179-0f75-4fe1-91e7-64db2238fe34"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="false"/>
-				</textElement>
+				<reportElement style="sans-12-r" x="360" y="95" width="100" height="20" uuid="06401179-0f75-4fe1-91e7-64db2238fe34"/>
 				<text><![CDATA[IVA]]></text>
 			</staticText>
 			<textField pattern="#,##0.00€">
-				<reportElement style="sans-10-r" x="460" y="95" width="95" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="false"/>
-				</textElement>
+				<reportElement style="sans-12-r" x="460" y="95" width="95" height="20" uuid="7a9c4446-980e-41f6-9c9f-83ef24f73f35"/>
 				<textFieldExpression><![CDATA[$P{ivaImporteTotal}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement style="sans-14-r-bold" x="360" y="130" width="100" height="20" uuid="fa893217-159f-4bee-8e22-16baa3b22620"/>
-				<textElement>
-					<font isBold="false"/>
-				</textElement>
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 			<textField pattern="#,##0.00€">
 				<reportElement style="sans-14-r-bold" x="460" y="130" width="95" height="20" uuid="d3b6c568-90b7-4f14-a562-3d9c56932258"/>
-				<textElement>
-					<font isBold="false"/>
-				</textElement>
 				<textFieldExpression><![CDATA[$P{importeTotal}]]></textFieldExpression>
 			</textField>
 		</band>
