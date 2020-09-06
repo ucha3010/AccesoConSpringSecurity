@@ -53,20 +53,34 @@
 						<tr title='<c:out value="${productoFactura.observaciones}" />'>
 							<td><a href="<c:url value='/productoFactura/producto/${productoFactura.idPro}' />"><c:out value="${productoFactura[nameColSelect]}" /></a></td>
 							<td class="text-center"><fmt:formatNumber type="currency" value="${productoFactura.precioUnit}"/></td>
-							<td class="text-center"><fmt:formatNumber type="number" value="${productoFactura.descuentoPor}" minFractionDigits="2" />% (<fmt:formatNumber type="currency" value="${productoFactura.descuentoImp}"/>)</td>
+							<td class="text-center"><fmt:formatNumber type="number" value="${productoFactura.descuentoPor}" minFractionDigits="2" />%</td>
 							<td class="text-center"><fmt:formatNumber type="currency" value="${productoFactura.precioUnitConDescuento}"/></td>
 							<td class="text-center"><c:out value="${productoFactura.cantidad}" /></td>
-							<td class="text-center">(<fmt:formatNumber type="number" value="${productoFactura.ivaProductoPor}" minFractionDigits="1" />%) <fmt:formatNumber type="currency" value="${productoFactura.ivaProductosCantidadImp}"/></td>
+							<td class="text-center"><fmt:formatNumber type="number" value="${productoFactura.ivaProductoPor}" minFractionDigits="1" />%</td>
 							<td class="text-right"><fmt:formatNumber type="currency" value="${productoFactura.precioFinal}" /></td>
 							<td class="width-35"></td>
 						</tr>
 					</c:forEach>
 					<tr><td colspan="8" class="text-center">***************************************************</td></tr>
-		<!-- 				DESCUENTO -->
+		<!-- 				TOTAL PRODUCTOS SIN IVA NI DESCUENTO FACTURA -->
 						<tr>
 							<td colspan="5"></td>
-							<td><strong><fmt:message key="label.Total.dicount" /></strong></td>
-							<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.descuentoImporteTotal}" /></strong></td>
+							<td><strong><fmt:message key="Products" /></strong></td>
+							<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.totalSinIvaEnvDescfac}" /></strong></td>
+							<td class="width-35"></td>
+						</tr>
+		<!-- 				DESCUENTO SOBRE LA FACTURA -->
+						<tr>
+							<td colspan="5"></td>
+							<td><strong><fmt:message key="label.Bill.dicount" /></strong></td>
+							<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.descuentoImporteFactura}" /></strong></td>
+							<td class="width-35"></td>
+						</tr>
+		<!-- 				ENVIO -->
+						<tr>
+							<td colspan="5"></td>
+							<td><strong><fmt:message key="label.delivery.amount" /></strong></td>
+							<td class="text-right"><strong><fmt:formatNumber type="currency" value="${factura.importeEnvioSinIva}" /></strong></td>
 							<td class="width-35"></td>
 						</tr>
 		<!-- 				IVA -->

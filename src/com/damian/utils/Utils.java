@@ -148,5 +148,18 @@ public class Utils {
 	public static String siHayDatoAgregoEspacio(String entrada) {
 		return (entradaOVacio(entrada).length() == 0) ? "" : " ";
 	}
+	
+	public static String cortaCadena(String cadena, int comienzo, int fin) {
+
+		String salida = "";
+		if (cadena != null) {
+			if (cadena.length() >= fin) {
+				salida = cadena.substring(comienzo, fin);
+			} else if (cadena.length() > comienzo) {
+				salida = cadena.substring(comienzo);
+			}
+		}
+		return salida;
+	}
 
 }

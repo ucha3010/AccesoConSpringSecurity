@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.damian.dao.ProductoFacturaDAO;
 import com.damian.pojo.ProductoFactura;
-import com.damian.pojo.front.FrontProducto;
+import com.damian.pojo.front.FrontProductoFactura;
 import com.damian.service.ProductoFacturaService;
 import com.damian.utils.Utils;
 
@@ -78,22 +78,24 @@ public class ProductoFacturaServiceImpl implements ProductoFacturaService {
 	}
 
 	@Override
-	public List<FrontProducto> findByIdFacFront(int idFac) {
+	public List<FrontProductoFactura> findByIdFacFront(int idFac) {
 		List<ProductoFactura> productoFacturas = findByIdFac(idFac);
-		List<FrontProducto> pfFront = new ArrayList<>();
-		FrontProducto fp;
+		List<FrontProductoFactura> pfFront = new ArrayList<>();
+		FrontProductoFactura fp;
 		BigDecimal comaCeroUno = new BigDecimal(0.01, MathContext.DECIMAL64);
-		BigDecimal cien = new BigDecimal(100, MathContext.DECIMAL64);
-		BigDecimal descuentoImp = new BigDecimal(0);
+		BigDecimal descuentoUnitarioImp = new BigDecimal(0);
 		BigDecimal ivaProductoPor = new BigDecimal(0);
-		BigDecimal ivaProductoImp = new BigDecimal(0);
-		BigDecimal ivaProductosCantidadImp = new BigDecimal(0);
+		BigDecimal ivaProductoUnitarioImp = new BigDecimal(0);
 		BigDecimal precioUnitSinIva = new BigDecimal(0);
-		BigDecimal precioUnitFinal = new BigDecimal(0);
-		BigDecimal cantidad = new BigDecimal(0);
-		BigDecimal precioFinal = new BigDecimal(0);
+		BigDecimal precioUnitSinIvaConDescuento = new BigDecimal(0);
 		for (ProductoFactura pf : productoFacturas) {
-			fp = new FrontProducto();
+			precioUnitSinIva = new BigDecimal(pf.getPrecioUnitSinIva(), MathContext.DECIMAL64);
+			precioUnitSinIvaConDescuento = new BigDecimal(pf.getPrecioUnitSinIvaConDesc(), MathContext.DECIMAL64);
+			descuentoUnitarioImp = precioUnitSinIvaConDescuento.subtract(precioUnitSinIva);
+			ivaProductoPor = new BigDecimal(pf.getIvaProducto(), MathContext.DECIMAL64);
+			ivaProductoUnitarioImp = precioUnitSinIva.multiply(ivaProductoPor).multiply(comaCeroUno);
+
+			fp = new FrontProductoFactura();
 			fp.setObservaciones(pf.getObservaciones());
 			fp.setIdPro(pf.getProducto().getIdPro());
 			fp.setNombreES(pf.getProducto().getNombreES());
@@ -104,43 +106,17 @@ public class ProductoFacturaServiceImpl implements ProductoFacturaService {
 			fp.setNombreGE(pf.getProducto().getNombreGE());
 			fp.setNombreIT(pf.getProducto().getNombreIT());
 			fp.setNombrePT(pf.getProducto().getNombrePT());
-			precioUnitSinIva = new BigDecimal(pf.getPrecioUnitSinIva(), MathContext.DECIMAL64);
-			fp.setPrecioUnit(precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-			fp.setDescuentoPor(pf.getPorcentajeDescuento());
-			if (pf.getPorcentajeDescuento() != 0.0) {
-				BigDecimal descuentoPor = new BigDecimal(pf.getPorcentajeDescuento(), MathContext.DECIMAL64);
-				descuentoImp = precioUnitSinIva.multiply(descuentoPor).multiply(comaCeroUno);
-				fp.setDescuentoImp(descuentoImp.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-				precioUnitSinIva = precioUnitSinIva.subtract(descuentoImp);
-				fp.setPrecioUnitConDescuento(
-						precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-			} else {
-				fp.setDescuentoImp(0.0);
-				fp.setPrecioUnitConDescuento(
-						precioUnitSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-			}
+			fp.setPrecioUnit(pf.getPrecioUnitSinIva());
+			fp.setDescuentoPor(pf.getDescuentoPor());
+			fp.setDescuentoImp(descuentoUnitarioImp.divide(BigDecimal.ONE, 2, RoundingMode.HALF_UP).doubleValue());
+			fp.setDescuentoCantidadImp(pf.getDescuentoImporteTotal());
+			fp.setPrecioUnitConDescuento(pf.getPrecioUnitSinIvaConDesc());
 			fp.setIvaProductoPor(pf.getIvaProducto());
-			ivaProductoPor = new BigDecimal(pf.getIvaProducto(), MathContext.DECIMAL64);
-			ivaProductoImp = precioUnitSinIva.multiply(ivaProductoPor).multiply(comaCeroUno);
-			ivaProductosCantidadImp = ivaProductoImp.multiply(cantidad);
-			fp.setIvaProductoImp(ivaProductoImp.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-			cantidad = new BigDecimal(pf.getCantidad());
-			fp.setPrecioUnitFinal(
-					precioUnitSinIva.multiply(cantidad).divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+			fp.setIvaProductoImp(ivaProductoUnitarioImp.divide(BigDecimal.ONE, 2, RoundingMode.HALF_UP).doubleValue());
+			fp.setIvaProductosCantidadImp(pf.getIvaImporteTotal());
+			fp.setPrecioUnitFinal(pf.getPrecioUnitario());
 			fp.setCantidad(pf.getCantidad());
-			precioUnitFinal = precioUnitSinIva.add(ivaProductoImp);
-			precioFinal = precioUnitFinal.multiply(cantidad);
-			if (pf.getPrecioFinalRecibidoPagado() != 0.0) {
-				fp.setPrecioFinal(pf.getPrecioFinalRecibidoPagado());
-				BigDecimal precioFinalRecibidoPagado = new BigDecimal(pf.getPrecioFinalRecibidoPagado(),
-						MathContext.DECIMAL64);
-				BigDecimal ivaMasCien = ivaProductoPor.add(cien);
-				ivaProductosCantidadImp = ivaProductoPor.multiply(precioFinalRecibidoPagado).divide(ivaMasCien, 2, RoundingMode.DOWN);
-			} else {
-				fp.setPrecioFinal(precioFinal.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-			}
-			fp.setIvaProductosCantidadImp(
-					ivaProductosCantidadImp.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+			fp.setPrecioFinal(pf.getPrecioFinalRecibidoPagado());
 
 			pfFront.add(fp);
 		}

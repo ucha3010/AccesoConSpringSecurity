@@ -31,8 +31,12 @@ public class ConverterFactura {
 		f.setCompra(mf.isCompra());
 		f.setTotalSinIvaEnvDescfac(mf.getTotalSinIvaEnvDescfac());
 		f.setDescuentoTotal(mf.getDescuentoTotal());
+		f.setDescuentoImporteProductos(mf.getDescuentoImporteProductos());
+		f.setDescuentoImporteFactura(mf.getDescuentoImporteFactura());
 		f.setDescuentoImporteTotal(mf.getDescuentoImporteTotal());
 		f.setImporteEnvioSinIva(mf.getImporteEnvioSinIva());
+		f.setEnvioIvaPor(mf.getEnvioIvaPor());
+		f.setEnvioIvaImp(mf.getEnvioIvaImp());
 		f.setTotalSinIvaConDescfac(mf.getTotalSinIvaConDescfac());
 		f.setIvaTotal(mf.getIvaTotal());
 		f.setIvaImporteTotal(mf.getIvaImporteTotal());
@@ -64,8 +68,12 @@ public class ConverterFactura {
 		mf.setCompra(f.isCompra());
 		mf.setTotalSinIvaEnvDescfac(f.getTotalSinIvaEnvDescfac());
 		mf.setDescuentoTotal(f.getDescuentoTotal());
+		mf.setDescuentoImporteProductos(f.getDescuentoImporteProductos());
+		mf.setDescuentoImporteFactura(f.getDescuentoImporteFactura());
 		mf.setDescuentoImporteTotal(f.getDescuentoImporteTotal());
 		mf.setImporteEnvioSinIva(f.getImporteEnvioSinIva());
+		mf.setEnvioIvaPor(f.getEnvioIvaPor());
+		mf.setEnvioIvaImp(f.getEnvioIvaImp());
 		mf.setTotalSinIvaConDescfac(f.getTotalSinIvaConDescfac());
 		mf.setIvaTotal(f.getIvaTotal());
 		mf.setIvaImporteTotal(f.getIvaImporteTotal());

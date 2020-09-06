@@ -33,11 +33,12 @@ public class ImpresionFactura {
 	// column footer
 	private String formaPago_nombre;
 	private String factura_observaciones;
-	private double totalProductos;
+	private double totalSinIvaEnvDescfac;
 	private double importeEnvioSinIva;
 	private double descuentoTotal;
+	private double descuentoImporteFactura;
 	private double descuentoImporteTotal;
-	private double totalSinIva;
+	private double totalSinIvaConDescfac;
 	private double ivaImporteTotal;
 	private double importeTotal;
 
@@ -373,18 +374,18 @@ public class ImpresionFactura {
 	}
 
 	/**
-	 * @return the totalProductos
+	 * @return the totalSinIvaEnvDescfac
 	 */
-	public double getTotalProductos() {
-		return totalProductos;
+	public double getTotalSinIvaEnvDescfac() {
+		return totalSinIvaEnvDescfac;
 	}
 
 	/**
-	 * @param totalProductos
-	 *            the totalProductos to set
+	 * @param totalSinIvaEnvDescfac
+	 *            the totalSinIvaEnvDescfac to set
 	 */
-	public void setTotalProductos(double totalProductos) {
-		this.totalProductos = totalProductos;
+	public void setTotalSinIvaEnvDescfac(double totalSinIvaEnvDescfac) {
+		this.totalSinIvaEnvDescfac = totalSinIvaEnvDescfac;
 	}
 
 	/**
@@ -418,6 +419,21 @@ public class ImpresionFactura {
 	}
 
 	/**
+	 * @return the descuentoImporteFactura
+	 */
+	public double getDescuentoImporteFactura() {
+		return descuentoImporteFactura;
+	}
+
+	/**
+	 * @param descuentoImporteFactura
+	 *            the descuentoImporteFactura to set
+	 */
+	public void setDescuentoImporteFactura(double descuentoImporteFactura) {
+		this.descuentoImporteFactura = descuentoImporteFactura;
+	}
+
+	/**
 	 * @return the descuentoImporteTotal
 	 */
 	public double getDescuentoImporteTotal() {
@@ -433,18 +449,18 @@ public class ImpresionFactura {
 	}
 
 	/**
-	 * @return the totalSinIva
+	 * @return the totalSinIvaConDescfac
 	 */
-	public double getTotalSinIva() {
-		return totalSinIva;
+	public double getTotalSinIvaConDescfac() {
+		return totalSinIvaConDescfac;
 	}
 
 	/**
-	 * @param totalSinIva
-	 *            the totalSinIva to set
+	 * @param totalSinIvaConDescfac
+	 *            the totalSinIvaConDescfac to set
 	 */
-	public void setTotalSinIva(double totalSinIva) {
-		this.totalSinIva = totalSinIva;
+	public void setTotalSinIvaConDescfac(double totalSinIvaConDescfac) {
+		this.totalSinIvaConDescfac = totalSinIvaConDescfac;
 	}
 
 	/**
@@ -582,14 +598,26 @@ public class ImpresionFactura {
 		this.tercerRenglon = tercerRenglon;
 	}
 
+	/**
+	 * @return the jrxml
+	 */
 	public String getJrxml() {
 		return jrxml;
 	}
 
+	/**
+	 * @param jrxml
+	 *            the jrxml to set
+	 */
 	public void setJrxml(String jrxml) {
 		this.jrxml = jrxml;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "ImpresionFactura [fechaCompra=" + fechaCompra + ", idFac=" + idFac + ", entrega_nombre="
@@ -601,12 +629,13 @@ public class ImpresionFactura {
 				+ factura_ciudad + ", factura_provincia=" + factura_provincia + ", factura_pais=" + factura_pais
 				+ ", factura_telefono=" + factura_telefono + ", impresionProductoList=" + impresionProductoList
 				+ ", formaPago_nombre=" + formaPago_nombre + ", factura_observaciones=" + factura_observaciones
-				+ ", totalProductos=" + totalProductos + ", importeEnvioSinIva=" + importeEnvioSinIva
-				+ ", descuentoTotal=" + descuentoTotal + ", descuentoImporteTotal=" + descuentoImporteTotal
-				+ ", totalSinIva=" + totalSinIva + ", ivaImporteTotal=" + ivaImporteTotal + ", importeTotal="
-				+ importeTotal + ", hayCuotas=" + hayCuotas + ", idCuo=" + idCuo + ", comisionAperturaPor="
-				+ comisionAperturaPor + ", interesPor=" + interesPor + ", primerRenglon=" + primerRenglon
-				+ ", segundoRenglon=" + segundoRenglon + ", tercerRenglon=" + tercerRenglon + ", jrxml=" + jrxml + "]";
+				+ ", totalSinIvaEnvDescfac=" + totalSinIvaEnvDescfac + ", importeEnvioSinIva=" + importeEnvioSinIva
+				+ ", descuentoTotal=" + descuentoTotal + ", descuentoImporteFactura=" + descuentoImporteFactura
+				+ ", descuentoImporteTotal=" + descuentoImporteTotal + ", totalSinIvaConDescfac="
+				+ totalSinIvaConDescfac + ", ivaImporteTotal=" + ivaImporteTotal + ", importeTotal=" + importeTotal
+				+ ", hayCuotas=" + hayCuotas + ", idCuo=" + idCuo + ", comisionAperturaPor=" + comisionAperturaPor
+				+ ", interesPor=" + interesPor + ", primerRenglon=" + primerRenglon + ", segundoRenglon="
+				+ segundoRenglon + ", tercerRenglon=" + tercerRenglon + ", jrxml=" + jrxml + "]";
 	}
 
 }

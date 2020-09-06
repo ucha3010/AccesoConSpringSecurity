@@ -230,8 +230,8 @@ public class FacturaServiceImpl implements FacturaService {
 		}
 		List<EmpresaPropia> empresaPropiaList = empresaPropiaService.findAll();
 		EmpresaPropia empresaPropia = new EmpresaPropia();
-		for (EmpresaPropia ep: empresaPropiaList) {
-			if(ep.isFacturacion()) {
+		for (EmpresaPropia ep : empresaPropiaList) {
+			if (ep.isFacturacion()) {
 				empresaPropia = ep;
 			}
 		}
@@ -285,20 +285,20 @@ public class FacturaServiceImpl implements FacturaService {
 			List<ProductoFactura> productoFacturaList, HttpServletRequest request) {
 
 		ImpresionFactura impresionFactura = new ImpresionFactura();
-		int limiteDirección = 50;
+		BigDecimal cien = new BigDecimal(100);
+		BigDecimal porcentajeDescuento = new BigDecimal(0);
+		BigDecimal ivaProducto = new BigDecimal(0);
+		BigDecimal descuentoTotal = new BigDecimal(factura.getDescuentoTotal(), MathContext.DECIMAL64);
+		int limiteDireccion = 50;
+
 		impresionFactura.setFechaCompra(factura.getFechaCompra());
 		impresionFactura.setIdFac(factura.getIdFac());
 		for (FacturaEnviarFacturar fef : facturaEnviarFacturarList) {
 			if (fef.isEnviar()) {
 				impresionFactura.setEntrega_nombre(fef.getNombre());
-				if (fef.getDireccion() != null) {
-					if (fef.getDireccion().length() > limiteDirección) {
-						impresionFactura.setEntrega_direccion1(fef.getDireccion().substring(0, limiteDirección));
-						impresionFactura.setEntrega_direccion2(fef.getDireccion().substring(limiteDirección));
-					} else {
-						impresionFactura.setEntrega_direccion1(fef.getDireccion());
-					}
-				}
+				impresionFactura.setEntrega_direccion1(Utils.cortaCadena(fef.getDireccion(), 0, limiteDireccion));
+				impresionFactura.setEntrega_direccion2(
+						Utils.cortaCadena(fef.getDireccion(), limiteDireccion, limiteDireccion * 2));
 				impresionFactura.setEntrega_cp(fef.getCp());
 				impresionFactura.setEntrega_ciudad(fef.getCiudad());
 				impresionFactura.setEntrega_provincia(fef.getProvincia());
@@ -308,14 +308,9 @@ public class FacturaServiceImpl implements FacturaService {
 			}
 			if (fef.isFacturar()) {
 				impresionFactura.setFactura_nombre(fef.getNombre());
-				if (fef.getDireccion() != null) {
-					if (fef.getDireccion().length() > limiteDirección) {
-						impresionFactura.setFactura_direccion1(fef.getDireccion().substring(0, limiteDirección));
-						impresionFactura.setFactura_direccion2(fef.getDireccion().substring(limiteDirección));
-					} else {
-						impresionFactura.setFactura_direccion1(fef.getDireccion());
-					}
-				}
+				impresionFactura.setFactura_direccion1(Utils.cortaCadena(fef.getDireccion(), 0, limiteDireccion));
+				impresionFactura.setFactura_direccion2(
+						Utils.cortaCadena(fef.getDireccion(), limiteDireccion, limiteDireccion * 2));
 				impresionFactura.setFactura_cp(fef.getCp());
 				impresionFactura.setFactura_ciudad(fef.getCiudad());
 				impresionFactura.setFactura_provincia(fef.getProvincia());
@@ -326,34 +321,22 @@ public class FacturaServiceImpl implements FacturaService {
 		}
 		impresionFactura.setFormaPago_nombre(formaPago.getNombreES()); // multiidioma
 		impresionFactura.setFactura_observaciones(factura.getObservaciones());
-		BigDecimal totalProductos = new BigDecimal(0);
-		BigDecimal cien = new BigDecimal(100);
-		BigDecimal totalSinIva = new BigDecimal(0);
-		BigDecimal precioUnitSinIva = new BigDecimal(0);
-		BigDecimal cantidad = new BigDecimal(0);
-		BigDecimal importeEnvioSinIva = new BigDecimal(factura.getImporteEnvioSinIva(), MathContext.DECIMAL64);
-		BigDecimal porcentajeDescuento = new BigDecimal(0);
-		BigDecimal ivaProducto = new BigDecimal(0);
-		BigDecimal descuentoTotal = new BigDecimal(factura.getDescuentoTotal(), MathContext.DECIMAL64);
-		BigDecimal descuentoImporteTotal = new BigDecimal(factura.getDescuentoImporteTotal(), MathContext.DECIMAL64);
-		BigDecimal ivaImporteTotal = new BigDecimal(factura.getIvaImporteTotal(), MathContext.DECIMAL64);
+
 		List<ImpresionProducto> impresionProductoList = new ArrayList<>();
 		ImpresionProducto ip;
 		Producto producto;
 		for (ProductoFactura pf : productoFacturaList) {
-			precioUnitSinIva = new BigDecimal(pf.getPrecioUnitSinIva(), MathContext.DECIMAL64);
-			cantidad = new BigDecimal(pf.getCantidad(), MathContext.DECIMAL64);
-			totalProductos = totalProductos.add(precioUnitSinIva.multiply(cantidad));
-			porcentajeDescuento = new BigDecimal(pf.getPorcentajeDescuento(), MathContext.DECIMAL64);
+			porcentajeDescuento = new BigDecimal(pf.getDescuentoPor(), MathContext.DECIMAL64);
 			ivaProducto = new BigDecimal(pf.getIvaProducto(), MathContext.DECIMAL64);
 			ip = new ImpresionProducto();
 			ip.setIdPro(pf.getProducto().getIdPro());
 			producto = productoService.findById(pf.getProducto().getIdPro());
 			ip.setProducto_nombre(producto.getNombreES()); // multiidioma
+			ip.setPrecioUnitSinIva(pf.getPrecioUnitSinIva());
 			// como el pattern de jasperrepot me multiplica este número por 100 tengo que
 			// hacer esto
 			ip.setPorcentajeDescuento(porcentajeDescuento.divide(cien, 4, RoundingMode.DOWN).doubleValue());
-			ip.setPrecioUnitSinIva(pf.getPrecioUnitSinIva());
+			ip.setPrecioUnitSinIvaConDesc(pf.getPrecioUnitSinIvaConDesc());
 			ip.setIvaProducto(ivaProducto.divide(cien, 4, RoundingMode.DOWN).doubleValue());
 			ip.setCantidad(pf.getCantidad());
 			ip.setPrecioFinalRecibidoPagado(pf.getPrecioFinalRecibidoPagado());
@@ -361,15 +344,15 @@ public class FacturaServiceImpl implements FacturaService {
 			impresionProductoList.add(ip);
 		}
 		impresionFactura.setImpresionProductoList(impresionProductoList);
-		impresionFactura.setTotalProductos(totalProductos.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+
+		impresionFactura.setTotalSinIvaEnvDescfac(factura.getTotalSinIvaEnvDescfac());
 		impresionFactura.setImporteEnvioSinIva(factura.getImporteEnvioSinIva());
 		impresionFactura.setDescuentoTotal(descuentoTotal.divide(cien, 4, RoundingMode.DOWN).doubleValue());
-		impresionFactura.setDescuentoImporteTotal(factura.getDescuentoImporteTotal());
-		totalSinIva = totalProductos.add(importeEnvioSinIva).subtract(descuentoImporteTotal);
-		impresionFactura.setTotalSinIva(totalSinIva.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+		impresionFactura.setDescuentoImporteFactura(factura.getDescuentoImporteFactura());
+		impresionFactura.setTotalSinIvaConDescfac(factura.getTotalSinIvaConDescfac());
 		impresionFactura.setIvaImporteTotal(factura.getIvaImporteTotal());
-		impresionFactura.setImporteTotal(
-				(totalSinIva.add(ivaImporteTotal)).divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
+		impresionFactura.setImporteTotal(factura.getImporteTotal());
+
 		if (cuota == null) {
 			impresionFactura.setHayCuotas(false);
 			impresionFactura.setIdCuo(0);
@@ -421,7 +404,7 @@ public class FacturaServiceImpl implements FacturaService {
 	public void defineJrxml(ImpresionFactura factura, List<ModelCuotaDetalle> cuotaDetalleList) {
 
 		boolean envio = factura.getImporteEnvioSinIva() != 0.0;
-		boolean descuento = factura.getDescuentoImporteTotal() != 0.0;
+		boolean descuento = factura.getDescuentoImporteFactura() != 0.0;
 		int cantidadCuotas = cuotaDetalleList.size();
 
 		if (cantidadCuotas > 0) {

@@ -9,7 +9,8 @@ public class ProductoFactura {
 	private int cantidad;
 	private double ivaProducto;
 	private double ivaImporteTotal;
-	private double porcentajeDescuento;
+	private double descuentoPor;
+	private double descuentoImporteTotal;
 	private double precioUnitSinIva;
 	private double precioUnitSinIvaConDesc;
 	private double precioUnitario;
@@ -99,18 +100,33 @@ public class ProductoFactura {
 	}
 
 	/**
-	 * @return the porcentajeDescuento
+	 * @return the descuentoPor
 	 */
-	public double getPorcentajeDescuento() {
-		return porcentajeDescuento;
+	public double getDescuentoPor() {
+		return descuentoPor;
 	}
 
 	/**
-	 * @param porcentajeDescuento
-	 *            the porcentajeDescuento to set
+	 * @param descuentoPor
+	 *            the descuentoPor to set
 	 */
-	public void setPorcentajeDescuento(double porcentajeDescuento) {
-		this.porcentajeDescuento = porcentajeDescuento;
+	public void setDescuentoPor(double descuentoPor) {
+		this.descuentoPor = descuentoPor;
+	}
+
+	/**
+	 * @return the descuentoImporteTotal
+	 */
+	public double getDescuentoImporteTotal() {
+		return descuentoImporteTotal;
+	}
+
+	/**
+	 * @param descuentoImporteTotal
+	 *            the descuentoImporteTotal to set
+	 */
+	public void setDescuentoImporteTotal(double descuentoImporteTotal) {
+		this.descuentoImporteTotal = descuentoImporteTotal;
 	}
 
 	/**
@@ -241,11 +257,11 @@ public class ProductoFactura {
 	@Override
 	public String toString() {
 		return "ProductoFactura [cantidad=" + cantidad + ", ivaProducto=" + ivaProducto + ", ivaImporteTotal="
-				+ ivaImporteTotal + ", porcentajeDescuento=" + porcentajeDescuento + ", precioUnitSinIva="
-				+ precioUnitSinIva + ", precioUnitSinIvaConDesc=" + precioUnitSinIvaConDesc + ", precioUnitario="
-				+ precioUnitario + ", precioFinalSinIva=" + precioFinalSinIva + ", precioFinalRecibidoPagado="
-				+ precioFinalRecibidoPagado + ", observaciones=" + observaciones + ", modificadoPor=" + modificadoPor
-				+ ", fechaModificacion=" + fechaModificacion + "]";
+				+ ivaImporteTotal + ", descuentoPor=" + descuentoPor + ", descuentoImporteTotal="
+				+ descuentoImporteTotal + ", precioUnitSinIva=" + precioUnitSinIva + ", precioUnitSinIvaConDesc="
+				+ precioUnitSinIvaConDesc + ", precioUnitario=" + precioUnitario + ", precioFinalSinIva="
+				+ precioFinalSinIva + ", precioFinalRecibidoPagado=" + precioFinalRecibidoPagado + ", observaciones="
+				+ observaciones + ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

@@ -32,11 +32,11 @@
 		params.put("factura_telefono", factura.getFactura_telefono());
 		params.put("formaPago_nombre", factura.getFormaPago_nombre());
 		params.put("factura_observaciones", factura.getFactura_observaciones());
-		params.put("totalProductos", factura.getTotalProductos());
+		params.put("totalSinIvaEnvDescfac", factura.getTotalSinIvaEnvDescfac());
 		params.put("importeEnvioSinIva", factura.getImporteEnvioSinIva());
 		params.put("descuentoTotal", factura.getDescuentoTotal());
-		params.put("descuentoImporteTotal", factura.getDescuentoImporteTotal());
-		params.put("totalSinIva", factura.getTotalSinIva());
+		params.put("descuentoImporteFactura", factura.getDescuentoImporteFactura());
+		params.put("totalSinIvaConDescfac", factura.getTotalSinIvaConDescfac());
 		params.put("ivaImporteTotal", factura.getIvaImporteTotal());
 		params.put("importeTotal", factura.getImporteTotal());
 		params.put("hayCuotas", factura.isHayCuotas());

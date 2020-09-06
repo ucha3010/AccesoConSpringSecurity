@@ -207,7 +207,8 @@ public class ProductoServiceImpl implements ProductoService {
 		productoFactura.setCantidad(frontProductoStock.getCantidad());
 		productoFactura.setIvaProducto(frontProductoStock.getIva());
 		productoFactura.setIvaImporteTotal(ivaImporteTotal.divide(BigDecimal.ONE, 2, RoundingMode.DOWN).doubleValue());
-		productoFactura.setPorcentajeDescuento(0);
+		productoFactura.setDescuentoPor(0);
+		productoFactura.setDescuentoImporteTotal(0);
 		if (frontProductoStock.getIva() > 0 && frontProductoStock.getPrecioFinal() > 0) {
 			productoFactura.setPrecioUnitSinIva(precioUnitSinIva.doubleValue());
 		} else {

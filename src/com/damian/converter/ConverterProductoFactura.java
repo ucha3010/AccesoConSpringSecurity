@@ -35,7 +35,8 @@ public class ConverterProductoFactura {
 		pf.setCantidad(mpf.getCantidad());
 		pf.setIvaProducto(mpf.getIvaProducto());
 		pf.setIvaImporteTotal(mpf.getIvaImporteTotal());
-		pf.setPorcentajeDescuento(mpf.getPorcentajeDescuento());
+		pf.setDescuentoPor(mpf.getDescuentoPor());
+		pf.setDescuentoImporteTotal(mpf.getDescuentoImporteTotal());
 		pf.setPrecioUnitSinIva(mpf.getPrecioUnitSinIva());
 		pf.setPrecioUnitSinIvaConDesc(mpf.getPrecioUnitSinIvaConDesc());
 		pf.setPrecioUnitario(mpf.getPrecioUnitario());
@@ -67,7 +68,8 @@ public class ConverterProductoFactura {
 		mpf.setCantidad(pf.getCantidad());
 		mpf.setIvaProducto(pf.getIvaProducto());
 		mpf.setIvaImporteTotal(pf.getIvaImporteTotal());
-		mpf.setPorcentajeDescuento(pf.getPorcentajeDescuento());
+		mpf.setDescuentoPor(pf.getDescuentoPor());
+		mpf.setDescuentoImporteTotal(pf.getDescuentoImporteTotal());
 		mpf.setPrecioUnitSinIva(pf.getPrecioUnitSinIva());
 		mpf.setPrecioUnitSinIvaConDesc(pf.getPrecioUnitSinIvaConDesc());
 		mpf.setPrecioUnitario(pf.getPrecioUnitario());

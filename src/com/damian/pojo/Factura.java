@@ -10,8 +10,12 @@ public class Factura {
 	private boolean compra;
 	private double totalSinIvaEnvDescfac;
 	private double descuentoTotal;
+	private double descuentoImporteProductos;
+	private double descuentoImporteFactura;
 	private double descuentoImporteTotal;
 	private double importeEnvioSinIva;
+	private double envioIvaPor;
+	private double envioIvaImp;
 	private double totalSinIvaConDescfac;
 	private double ivaTotal;
 	private double ivaImporteTotal;
@@ -92,6 +96,36 @@ public class Factura {
 	}
 
 	/**
+	 * @return the descuentoImporteProductos
+	 */
+	public double getDescuentoImporteProductos() {
+		return descuentoImporteProductos;
+	}
+
+	/**
+	 * @param descuentoImporteProductos
+	 *            the descuentoImporteProductos to set
+	 */
+	public void setDescuentoImporteProductos(double descuentoImporteProductos) {
+		this.descuentoImporteProductos = descuentoImporteProductos;
+	}
+
+	/**
+	 * @return the descuentoImporteFactura
+	 */
+	public double getDescuentoImporteFactura() {
+		return descuentoImporteFactura;
+	}
+
+	/**
+	 * @param descuentoImporteFactura
+	 *            the descuentoImporteFactura to set
+	 */
+	public void setDescuentoImporteFactura(double descuentoImporteFactura) {
+		this.descuentoImporteFactura = descuentoImporteFactura;
+	}
+
+	/**
 	 * @return the descuentoImporteTotal
 	 */
 	public double getDescuentoImporteTotal() {
@@ -119,6 +153,36 @@ public class Factura {
 	 */
 	public void setImporteEnvioSinIva(double importeEnvioSinIva) {
 		this.importeEnvioSinIva = importeEnvioSinIva;
+	}
+
+	/**
+	 * @return the envioIvaPor
+	 */
+	public double getEnvioIvaPor() {
+		return envioIvaPor;
+	}
+
+	/**
+	 * @param envioIvaPor
+	 *            the envioIvaPor to set
+	 */
+	public void setEnvioIvaPor(double envioIvaPor) {
+		this.envioIvaPor = envioIvaPor;
+	}
+
+	/**
+	 * @return the envioIvaImp
+	 */
+	public double getEnvioIvaImp() {
+		return envioIvaImp;
+	}
+
+	/**
+	 * @param envioIvaImp
+	 *            the envioIvaImp to set
+	 */
+	public void setEnvioIvaImp(double envioIvaImp) {
+		this.envioIvaImp = envioIvaImp;
 	}
 
 	/**
@@ -339,9 +403,11 @@ public class Factura {
 	@Override
 	public String toString() {
 		return "Factura [idFac=" + idFac + ", compra=" + compra + ", totalSinIvaEnvDescfac=" + totalSinIvaEnvDescfac
-				+ ", descuentoTotal=" + descuentoTotal + ", descuentoImporteTotal=" + descuentoImporteTotal
-				+ ", importeEnvioSinIva=" + importeEnvioSinIva + ", totalSinIvaConDescfac=" + totalSinIvaConDescfac
-				+ ", ivaTotal=" + ivaTotal + ", ivaImporteTotal=" + ivaImporteTotal + ", importeTotal=" + importeTotal
+				+ ", descuentoTotal=" + descuentoTotal + ", descuentoImporteProductos=" + descuentoImporteProductos
+				+ ", descuentoImporteFactura=" + descuentoImporteFactura + ", descuentoImporteTotal="
+				+ descuentoImporteTotal + ", importeEnvioSinIva=" + importeEnvioSinIva + ", envioIvaPor=" + envioIvaPor
+				+ ", envioIvaImp=" + envioIvaImp + ", totalSinIvaConDescfac=" + totalSinIvaConDescfac + ", ivaTotal="
+				+ ivaTotal + ", ivaImporteTotal=" + ivaImporteTotal + ", importeTotal=" + importeTotal
 				+ ", fechaCompra=" + fechaCompra + ", fechaEntrega=" + fechaEntrega + ", observaciones=" + observaciones
 				+ ", creadoPor=" + creadoPor + ", modificadoPor=" + modificadoPor + ", fechaModificacion="
 				+ fechaModificacion + "]";

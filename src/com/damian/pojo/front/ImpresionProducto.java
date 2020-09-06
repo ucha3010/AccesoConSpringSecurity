@@ -4,8 +4,9 @@ public class ImpresionProducto {
 
 	private int idPro;
 	private String producto_nombre;
-	private double porcentajeDescuento;
 	private double precioUnitSinIva;
+	private double porcentajeDescuento;
+	private double precioUnitSinIvaConDesc;
 	private double ivaProducto;
 	private int cantidad;
 	private double precioFinalRecibidoPagado;
@@ -45,6 +46,21 @@ public class ImpresionProducto {
 	}
 
 	/**
+	 * @return the precioUnitSinIva
+	 */
+	public double getPrecioUnitSinIva() {
+		return precioUnitSinIva;
+	}
+
+	/**
+	 * @param precioUnitSinIva
+	 *            the precioUnitSinIva to set
+	 */
+	public void setPrecioUnitSinIva(double precioUnitSinIva) {
+		this.precioUnitSinIva = precioUnitSinIva;
+	}
+
+	/**
 	 * @return the porcentajeDescuento
 	 */
 	public double getPorcentajeDescuento() {
@@ -60,18 +76,18 @@ public class ImpresionProducto {
 	}
 
 	/**
-	 * @return the precioUnitSinIva
+	 * @return the precioUnitSinIvaConDesc
 	 */
-	public double getPrecioUnitSinIva() {
-		return precioUnitSinIva;
+	public double getPrecioUnitSinIvaConDesc() {
+		return precioUnitSinIvaConDesc;
 	}
 
 	/**
-	 * @param precioUnitSinIva
-	 *            the precioUnitSinIva to set
+	 * @param precioUnitSinIvaConDesc
+	 *            the precioUnitSinIvaConDesc to set
 	 */
-	public void setPrecioUnitSinIva(double precioUnitSinIva) {
-		this.precioUnitSinIva = precioUnitSinIva;
+	public void setPrecioUnitSinIvaConDesc(double precioUnitSinIvaConDesc) {
+		this.precioUnitSinIvaConDesc = precioUnitSinIvaConDesc;
 	}
 
 	/**
@@ -141,10 +157,11 @@ public class ImpresionProducto {
 	 */
 	@Override
 	public String toString() {
-		return "ImpresionProducto [idPro=" + idPro + ", producto_nombre=" + producto_nombre + ", porcentajeDescuento="
-				+ porcentajeDescuento + ", precioUnitSinIva=" + precioUnitSinIva + ", ivaProducto=" + ivaProducto
-				+ ", cantidad=" + cantidad + ", precioFinalRecibidoPagado=" + precioFinalRecibidoPagado
-				+ ", producto_observaciones=" + producto_observaciones + "]";
+		return "ImpresionProducto [idPro=" + idPro + ", producto_nombre=" + producto_nombre + ", precioUnitSinIva="
+				+ precioUnitSinIva + ", porcentajeDescuento=" + porcentajeDescuento + ", precioUnitSinIvaConDesc="
+				+ precioUnitSinIvaConDesc + ", ivaProducto=" + ivaProducto + ", cantidad=" + cantidad
+				+ ", precioFinalRecibidoPagado=" + precioFinalRecibidoPagado + ", producto_observaciones="
+				+ producto_observaciones + "]";
 	}
 
 }

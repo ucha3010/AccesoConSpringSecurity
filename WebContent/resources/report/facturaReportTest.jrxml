@@ -63,7 +63,7 @@
 	<parameter name="formaPago_nombre" class="java.lang.String"/>
 	<parameter name="ivaImporteTotal" class="java.lang.Double"/>
 	<parameter name="descuentoTotal" class="java.lang.Double"/>
-	<parameter name="descuentoImporteTotal" class="java.lang.Double"/>
+	<parameter name="descuentoImporteFactura" class="java.lang.Double"/>
 	<parameter name="importeEnvioSinIva" class="java.lang.Double"/>
 	<parameter name="importeTotal" class="java.lang.Double"/>
 	<parameter name="observaciones" class="java.lang.String"/>
@@ -456,7 +456,7 @@
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
-				<text><![CDATA[Desc. sobre factura (]]></text>
+				<text><![CDATA[Desc. sobre prod. (]]></text>
 			</staticText>
 			<textField pattern="#,##0.##%">
 				<reportElement style="sans-10-c" x="415" y="55" width="40" height="20" isPrintWhenDetailOverflows="true" uuid="8ff03c69-03d6-4a0a-b002-dc99b1811c07">
@@ -480,7 +480,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="SansSerif" size="12" isBold="false"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{descuentoImporteTotal}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{descuentoImporteFactura}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement style="sans-10-r" x="360" y="75" width="100" height="20" uuid="6ed508ac-0b91-4850-839e-b5a3d20ed5e8"/>
