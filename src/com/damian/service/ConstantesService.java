@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.dao.DuplicateKeyException;
 
 import com.damian.pojo.Constantes;
+import com.damian.pojo.front.FrontAdministrarConfiguracion;
 
 public interface ConstantesService {
 
@@ -23,5 +24,7 @@ public interface ConstantesService {
 	public int update(Constantes constantes, HttpServletRequest request);
 
 	public int delete(String clave, HttpServletRequest request);
+
+	public FrontAdministrarConfiguracion findAdminConfiguration();
 
 }

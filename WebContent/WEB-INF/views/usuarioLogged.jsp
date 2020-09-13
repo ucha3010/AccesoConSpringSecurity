@@ -78,7 +78,12 @@
 			
 			
 			<div class="row">		
-				<div class="hidden-xs col-sm-2 col-md-3">
+				<div class="col-xs-2 col-sm-2 col-md-3">
+					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+						<a title="<fmt:message key="label.System.configuration" />" href='<c:url value='/administrar/configuracion/find/${usuario.idUsr}' />'>
+							<img src='<c:url value="/resources/imgs/stock.png"/>' class="tamanio_imagen">
+						</a>
+					</sec:authorize>
 				</div>
 				<div class="col-xs-5 col-sm-4 col-md-3">
 					<button type="button" class="btn btn-danger margin-left-5porciento" onclick='location.href="<c:url value="/usuario/logged/changePass/${usuario.idUsr}"/>"'>

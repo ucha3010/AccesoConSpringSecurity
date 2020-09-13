@@ -44,7 +44,7 @@ import com.damian.service.ProductoEmpresaService;
 import com.damian.service.ProductoFacturaService;
 import com.damian.service.ProductoService;
 import com.damian.service.SubcategoriaService;
-import com.damian.utils.Constantes;
+import com.damian.utils.ConstantesLocales;
 import com.damian.utils.Utils;
 
 @Service
@@ -278,12 +278,12 @@ public class ProductoServiceImpl implements ProductoService {
 		factura.setImporteTotal(frontProductoStock.getPrecioFinal());
 		factura.setFechaCompra(new Date());
 		if (frontProductoStock.isCompra()) {
-			factura.setEstado(new Estado(Constantes.AGREGAR_STOCK, null, null));
+			factura.setEstado(new Estado(ConstantesLocales.AGREGAR_STOCK, null, null));
 		} else {
-			factura.setEstado(new Estado(Constantes.QUITAR_STOCK, null, null));
+			factura.setEstado(new Estado(ConstantesLocales.QUITAR_STOCK, null, null));
 		}
 		factura.setObservaciones(frontProductoStock.getObservaciones());
-		factura.setFormaPago(new FormaPago(Constantes.MOVIMIENTO_STOCK, null, null));
+		factura.setFormaPago(new FormaPago(ConstantesLocales.MOVIMIENTO_STOCK, null, null));
 		factura.setCreadoPor(Utils.getLoggedUser(request));
 
 	}
