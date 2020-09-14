@@ -78,10 +78,23 @@
 			
 			
 			<div class="row">		
-				<div class="col-xs-2 col-sm-2 col-md-3">
+				<div class="hidden-xs col-sm-6 col-md-6">
 					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 						<a title="<fmt:message key="label.System.configuration" />" href='<c:url value='/administrar/configuracion/find/${usuario.idUsr}' />'>
-							<img src='<c:url value="/resources/imgs/stock.png"/>' class="tamanio_imagen">
+							<img src='<c:url value="/resources/imgs/engranaje.png"/>' class="tamanio_imagen_100x100">
+						</a>
+						<a title="<fmt:message key="label.System.configuration" />" href='<c:url value='/administrar/configuracion/usuario/${usuario.idUsr}' />'>
+							<img src='<c:url value="/resources/imgs/engranaje_doble_usuario.png"/>' class="tamanio_imagen_100x100">
+						</a>
+					</sec:authorize>
+				</div>	
+				<div class="col-xs-4 hidden-sm hidden-md hidden-lg hidden-xl">
+					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+						<a title="<fmt:message key="label.System.configuration" />" href='<c:url value='/administrar/configuracion/find/${usuario.idUsr}' />'>
+							<img src='<c:url value="/resources/imgs/engranaje.png"/>' class="tamanio_imagen_50x50">
+						</a>
+						<a title="<fmt:message key="label.System.configuration" />" href='<c:url value='/administrar/configuracion/usuario/${usuario.idUsr}' />'>
+							<img src='<c:url value="/resources/imgs/engranaje_doble_usuario.png"/>' class="tamanio_imagen_50x50">
 						</a>
 					</sec:authorize>
 				</div>

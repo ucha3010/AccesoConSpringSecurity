@@ -77,6 +77,16 @@
 	height: 25px;	
 }
 
+.tamanio_imagen_50x50 {
+	width: 50px;
+	height: 50px;	
+}
+
+.tamanio_imagen_100x100 {
+	width: 100px;
+	height: 100px;	
+}
+
 .sin_padding{
 	padding: 0 !important;
 }

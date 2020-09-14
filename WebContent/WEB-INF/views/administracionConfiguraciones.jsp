@@ -13,6 +13,7 @@
 	<title><fmt:message key="label.Category" /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 	
+	<script type="text/javascript" src='<c:url value="/resources/js/validaciones.js" />'></script>
 	<script type="text/javascript">
 		function validar(){
 			restablecer();
@@ -25,6 +26,15 @@
 					nombreRolError.innerHTML = "<fmt:message key='error.field.not.empty' />";
 					nombreRol.style.borderColor="red";
 					validado = false;
+				}
+			}
+			
+			if(validado){
+				var ivaEnvio = document.getElementById('ivaEnvio');
+				ivaEnvio.value = cambiarComaPorPunto(ivaEnvio.value);
+				if (isNaN(ivaEnvio.value)) {
+					document.getElementById('hayError').innerHTML = "<fmt:message key='error.any.field' />: <fmt:message key='label.Vat.delivery' />";
+					return false;					
 				}
 			}
 			
