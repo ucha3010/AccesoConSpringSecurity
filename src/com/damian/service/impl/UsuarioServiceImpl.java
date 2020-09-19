@@ -18,12 +18,14 @@ import com.damian.exceptions.RepeatedUsernameException;
 import com.damian.pojo.DatosPersonales;
 import com.damian.pojo.Direccion;
 import com.damian.pojo.Pais;
+import com.damian.pojo.PreferenciaUsuario;
 import com.damian.pojo.Rol;
 import com.damian.pojo.Usuario;
 import com.damian.pojo.UsuarioEmpresa;
 import com.damian.pojo.UsuarioRol;
 import com.damian.service.DatosPersonalesService;
 import com.damian.service.DireccionService;
+import com.damian.service.PreferenciaUsuarioService;
 import com.damian.service.UsuarioEmpresaService;
 import com.damian.service.UsuarioRolService;
 import com.damian.service.UsuarioService;
@@ -33,25 +35,29 @@ import com.damian.utils.Utils;
 public class UsuarioServiceImpl implements UsuarioService {
 
 	@Autowired
-	private UsuarioDAO usuarioDAO;
-
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-
-	@Autowired
 	private DatosPersonalesService datosPersonalesService;
-
-	@Autowired
-	private UsuarioRolService usuarioRolService;
-
-	@Autowired
-	private UsuarioEmpresaService usuarioEmpresaService;
 
 	@Autowired
 	private DireccionService direccionService;
 
 	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private PreferenciaUsuarioService preferenciaUsuarioService;
+
+	@Autowired
+	private UsuarioDAO usuarioDAO;
+
+	@Autowired
+	private UsuarioEmpresaService usuarioEmpresaService;
+
+	@Autowired
 	private UsuarioOrdenDAO usuarioOrdenDAO;
+
+	@Autowired
+	private UsuarioRolService usuarioRolService;
+
 
 	@Override
 	public Usuario findById(int id) {
@@ -89,6 +95,9 @@ public class UsuarioServiceImpl implements UsuarioService {
 			usuario = findByUsername(usuario.getUsuario());
 			dp.setUsuario(usuario);
 			datosPersonalesService.save(dp, request);
+			PreferenciaUsuario preferenciaUsuario = new PreferenciaUsuario();
+			preferenciaUsuario.setIdPrefUsr(usuario.getIdUsr());
+			preferenciaUsuarioService.save(preferenciaUsuario, request);
 		} else {
 			DatosPersonales dpId = datosPersonalesService.findByUsrId(usuario.getIdUsr());
 			dp.setIdDatosPers(dpId.getIdDatosPers());
@@ -234,6 +243,19 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Override
 	public int countCustomers() {
 		return usuarioDAO.countCustomers();
+	}
+
+	@Override
+	public List<Usuario> findByPublicity(boolean receive) {
+		List<PreferenciaUsuario> preferenciaUsuarioList = preferenciaUsuarioService.findByPublicity(receive);
+		List<Usuario> usuarioList = new ArrayList<>();
+		Usuario usuario = null;
+		for(PreferenciaUsuario pu: preferenciaUsuarioList) {
+			usuario = findById(pu.getIdPrefUsr());
+			usuarioList.add(usuario);
+		}
+		Utils.ordenarPorPrimerApellido(usuarioList);
+		return usuarioList;
 	}
 
 	private void eliminarRolesNoSeleccionados(String[] usuarioRol, Usuario usuario, HttpServletRequest request) {

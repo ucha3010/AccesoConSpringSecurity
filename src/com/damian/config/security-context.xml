@@ -39,6 +39,8 @@
 		<security:intercept-url pattern="/formaPago" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/formaPago/**" access="hasAnyRole({'ROL_ROOT'})" />
 		<security:intercept-url pattern="/foto/**" access="permitAll" />
+		<security:intercept-url pattern="/preferenciaUsuario" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/preferenciaUsuario/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/private/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/producto" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/producto/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
@@ -49,13 +51,22 @@
 		<security:intercept-url pattern="/subcategoria" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/subcategoria/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/usuario" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/usuario/all" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/usuario/all/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/usuario/available/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/usuario/cliente" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/usuario/cliente/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/usuario/delete/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/usuario/deleteUsr/**" access="isAuthenticated()" />		
 		<security:intercept-url pattern="/usuario/filtered/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/usuario/idUsr/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />		
 		<security:intercept-url pattern="/usuario/logged/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/usuario/nuevo" access="permitAll" />
 		<security:intercept-url pattern="/usuario/nuevo/**" access="permitAll" />
+		<security:intercept-url pattern="/usuario/publicity/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/usuario/reset" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/usuario/save" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/usuario/username/**" access="permitAll" />
 		<security:intercept-url pattern="/usuarioEmpresa" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/usuarioEmpresa/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/**" access="denyAll" />

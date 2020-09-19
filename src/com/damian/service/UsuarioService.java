@@ -39,7 +39,9 @@ public interface UsuarioService {
 	public String getColumn(HttpServletRequest request);
 
 	public List<Usuario> findSearchAll(boolean customer);
-	
+
 	public int countCustomers();
+
+	public List<Usuario> findByPublicity(boolean receive);
 
 }

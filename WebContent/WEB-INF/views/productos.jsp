@@ -83,11 +83,11 @@
 					</c:if>
 				</div>
 				<div class="col-sm-3 col-md-2  navbar-right">
-				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/producto/0'/>"'>
-					<fmt:message key="Add.product" />
-				</button>
-			</div>		
-		</div>
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/producto/0'/>"'>
+						<fmt:message key="Add.product" />
+					</button>
+				</div>		
+			</div>
 		</sec:authorize>
 		<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">

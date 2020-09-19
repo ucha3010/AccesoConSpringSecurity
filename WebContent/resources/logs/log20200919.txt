@@ -1,0 +1,183 @@
+Sat Sep 19 12:35:15 CEST 2020 - SAVE [OWN USER] - table:usuario - ModelUsuario [idUsr=0, usuario=jacinta, clave=9cd01588f9f420a45ed97c6938c6668302d4cd7b9c96ae0660f53ee0d3147c8d83bf14c97ce0b699, habilitado=true, fechaCreacion=2020-09-19 12:35:15.389, modificadoPor=OWN USER, fechaModificacion=2020-09-19 12:35:15.405]
+Sat Sep 19 12:35:15 CEST 2020 - SAVE [OWN USER] - table:datospersonales - ModelDatosPersonales [idDatosPers=0, nombre=Jacinta, apellido1=Pichimahuida, apellido2=, sexo=Mujer, fechaNacimiento=Wed Jun 15 00:00:00 CET 1960, nacionalidad_idPais=18, dni=, email=jacinta@gmail.com, telefono=, observaciones=, datospersonales_idUsr=106, modificadoPor=OWN USER, fechaModificacion=2020-09-19 12:35:15.447]
+Sat Sep 19 12:35:15 CEST 2020 - SAVE [OWN USER] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=106, tema=default, botonFavorito=default, recibirPublicidad=true]
+Sat Sep 19 12:35:15 CEST 2020 - SAVE [OWN USER] - table:usuario_rol - ModelUsuarioRol [idUsr=106, idRol=1, fechaCreacion=Sat Sep 19 12:35:15 CEST 2020, creadoPor=OWN USER]
+Sat Sep 19 12:37:35 CEST 2020 - UPDATE [jacinta] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=106, tema=oscuro, botonFavorito=corazon, recibirPublicidad=true]
+Sat Sep 19 12:37:42 CEST 2020 - UPDATE [jacinta] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=106, tema=oscuro, botonFavorito=corazon, recibirPublicidad=false]
+Sat Sep 19 12:43:34 CEST 2020 - UPDATE [jacinta] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=106, tema=oscuro, botonFavorito=corazon, recibirPublicidad=true]
+Sat Sep 19 12:43:53 CEST 2020 - UPDATE [jacinta] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=106, tema=oscuro2, botonFavorito=corazon, recibirPublicidad=true]
+Sat Sep 19 12:46:09 CEST 2020 - UPDATE [jacinta] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=106, tema=oscuro, botonFavorito=corazon, recibirPublicidad=true]
+Sat Sep 19 12:46:32 CEST 2020 - UPDATE [jacinta] - table:datospersonales - ModelDatosPersonales [idDatosPers=81, nombre=Jacinta, apellido1=Pichimahuida, apellido2=, sexo=Mujer, fechaNacimiento=Wed Jun 15 00:00:00 CET 1960, nacionalidad_idPais=17, dni=, email=jacinta@gmail.com, telefono=, observaciones=, datospersonales_idUsr=106, modificadoPor=jacinta, fechaModificacion=2020-09-19 12:46:32.15]
+Sat Sep 19 14:12:54 CEST 2020 - SAVE [OWN USER] - table:usuario - ModelUsuario [idUsr=0, usuario=pascualino, clave=c12a8b273c5beb58ae93d468bcf4730f74aef4295dfcc5f85d8059f464fea908e1ddace8db167b5a, habilitado=true, fechaCreacion=2020-09-19 14:12:54.28, modificadoPor=OWN USER, fechaModificacion=2020-09-19 14:12:54.298]
+Sat Sep 19 14:12:54 CEST 2020 - SAVE [OWN USER] - table:datospersonales - ModelDatosPersonales [idDatosPers=0, nombre=Pascualino, apellido1=Serrano, apellido2=, sexo=Mujer, fechaNacimiento=null, nacionalidad_idPais=0, dni=, email=pascualino@gmail.com, telefono=, observaciones=, datospersonales_idUsr=107, modificadoPor=OWN USER, fechaModificacion=2020-09-19 14:12:54.334]
+Sat Sep 19 14:12:54 CEST 2020 - SAVE [OWN USER] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=107, tema=default, botonFavorito=default, recibirPublicidad=true]
+Sat Sep 19 14:12:54 CEST 2020 - SAVE [OWN USER] - table:usuario_rol - ModelUsuarioRol [idUsr=107, idRol=1, fechaCreacion=Sat Sep 19 14:12:54 CEST 2020, creadoPor=OWN USER]
+Sat Sep 19 14:13:19 CEST 2020 - UPDATE [pascualino] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=107, tema=default, botonFavorito=default, recibirPublicidad=false]
+Sat Sep 19 14:17:06 CEST 2020 - UPDATE [usuario] - table:datospersonales - ModelDatosPersonales [idDatosPers=65, nombre=Usuario, apellido1=Con el Rol, apellido2=De Usuario, sexo=Hombre, fechaNacimiento=Wed Jul 04 00:00:00 CEST 1979, nacionalidad_idPais=1, dni=, email=usuario@gmail.com, telefono=658658659, observaciones=, datospersonales_idUsr=83, modificadoPor=usuario, fechaModificacion=2020-09-19 14:17:06.229]
+Sat Sep 19 14:18:13 CEST 2020 - UPDATE [admin] - table:datospersonales - ModelDatosPersonales [idDatosPers=67, nombre=Administrador, apellido1=Con Rol, apellido2=Admin, sexo=Mujer, fechaNacimiento=Fri Oct 10 00:00:00 CET 1980, nacionalidad_idPais=6, dni=01234567A, email=admin@gmail.com, telefono=600111227, observaciones=Administrador para test, datospersonales_idUsr=85, modificadoPor=admin, fechaModificacion=2020-09-19 14:18:13.873]
+Sat Sep 19 14:18:21 CEST 2020 - UPDATE [admin] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=85, tema=claro, botonFavorito=pato, recibirPublicidad=true]
+Sat Sep 19 14:37:52 CEST 2020 - SAVE [OWN USER] - table:usuario - ModelUsuario [idUsr=0, usuario=evangelina, clave=fcce62337f629a4655de1aab0da8f575878bf7565567b4f5ee4ff669e99af7d60e0e710192131e40, habilitado=true, fechaCreacion=2020-09-19 14:37:52.829, modificadoPor=OWN USER, fechaModificacion=2020-09-19 14:37:52.845]
+Sat Sep 19 14:37:52 CEST 2020 - SAVE [OWN USER] - table:datospersonales - ModelDatosPersonales [idDatosPers=0, nombre=Evangelina, apellido1=Julie, apellido2=, sexo=Mujer, fechaNacimiento=null, nacionalidad_idPais=0, dni=, email=evangelina@gmail.com, telefono=, observaciones=, datospersonales_idUsr=108, modificadoPor=OWN USER, fechaModificacion=2020-09-19 14:37:52.898]
+Sat Sep 19 14:37:52 CEST 2020 - SAVE [OWN USER] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=108, tema=default, botonFavorito=default, recibirPublicidad=true]
+Sat Sep 19 14:37:52 CEST 2020 - SAVE [OWN USER] - table:usuario_rol - ModelUsuarioRol [idUsr=108, idRol=1, fechaCreacion=Sat Sep 19 14:37:52 CEST 2020, creadoPor=OWN USER]
+Sat Sep 19 14:38:46 CEST 2020 - SAVE [admin] - table:usuario - ModelUsuario [idUsr=0, usuario=salome, clave=2e26ba388b157d35ac3cc1bb205509c14f38191d87b4e0bf083cdf371c039acfd5ef7c004537854f, habilitado=true, fechaCreacion=2020-09-19 14:38:46.286, modificadoPor=admin, fechaModificacion=2020-09-19 14:38:46.287]
+Sat Sep 19 14:38:46 CEST 2020 - SAVE [admin] - table:datospersonales - ModelDatosPersonales [idDatosPers=0, nombre=Salomé, apellido1=Arístides, apellido2=, sexo=null, fechaNacimiento=null, nacionalidad_idPais=0, dni=, email=salome@gmail.com, telefono=, observaciones=, datospersonales_idUsr=109, modificadoPor=admin, fechaModificacion=2020-09-19 14:38:46.293]
+Sat Sep 19 14:38:46 CEST 2020 - SAVE [admin] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=109, tema=default, botonFavorito=default, recibirPublicidad=true]
+Sat Sep 19 14:38:46 CEST 2020 - SAVE [admin] - table:usuario_rol - ModelUsuarioRol [idUsr=109, idRol=1, fechaCreacion=Sat Sep 19 14:38:46 CEST 2020, creadoPor=admin]
+Sat Sep 19 14:38:46 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=11, idUsr=85, tabla=usuario, columna=usuario, orden=ASC]
+Sat Sep 19 14:39:04 CEST 2020 - UPDATE [admin] - table:usuario - ModelUsuario [idUsr=109, usuario=salome, clave=2e26ba388b157d35ac3cc1bb205509c14f38191d87b4e0bf083cdf371c039acfd5ef7c004537854f, habilitado=false, fechaCreacion=2020-09-19 14:38:46.0, modificadoPor=admin, fechaModificacion=2020-09-19 14:39:04.234]
+Sat Sep 19 14:39:04 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=11, idUsr=85, tabla=usuario, columna=usuario, orden=ASC]
+Sat Sep 19 14:39:45 CEST 2020 - UPDATE [admin] - table:usuario - ModelUsuario [idUsr=109, usuario=salome, clave=2e26ba388b157d35ac3cc1bb205509c14f38191d87b4e0bf083cdf371c039acfd5ef7c004537854f, habilitado=true, fechaCreacion=2020-09-19 14:38:46.0, modificadoPor=admin, fechaModificacion=2020-09-19 14:39:45.88]
+Sat Sep 19 14:39:45 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=11, idUsr=85, tabla=usuario, columna=usuario, orden=ASC]
+Sat Sep 19 16:56:13 CEST 2020 - DELETE [pepe] - table:datospersonales - DatosPersonales [idDatosPers=74, nombre=Alejandro, apellido1=Magno, apellido2=, sexo=null, fechaNacimiento=null, nacionalidad=Pais [idPais=0, nombreES=null, nombreEN=null, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, foto=null], dni=, email=alejandro@alejandro.com, telefono=, observaciones=, modificadoPor=, fechaModificacion=2020-05-24 01:59:35.0]
+Sat Sep 19 16:56:13 CEST 2020 - DELETE [pepe] - table:usuario_empresa - UsuarioEmpresa [usuario=Usuario [idUsr=92, usuario=mirorol1, clave=b3ad838aca284016747db3f1dfc57ca3c44c4222c38c53e0c5a966fa6e50dc5a2b714153a57442a4, usuarioRol=[], usuarioEmpresa=[], datosPersonales=null, habilitado=true, fotos=null, fechaCreacion=2020-04-23 22:11:09.0, modificadoPor=, fechaModificacion=2020-05-24 02:05:06.0], empresa=Empresa [idEmp=1, nombreComercial=Empresa primera, tipoSociedad=SL, actividad=Venta de producto principal, cif=D70055413, email=empresa.primera@gmail.com, paginaWeb=www.empresaprimera.com, telefono=912222222, fax=912222223, observaciones=, usuarioEmpresa=[], direccionesEmpresa=[], productoEmpresaList=null, fotos=null, modificadoPor=, fechaModificacion=2020-05-24 02:01:07.0], fechaCreacion=2020-05-10, creadoPor=pepe]
+Sat Sep 19 16:56:13 CEST 2020 - DELETE [pepe] - table:usuario_rol - UsuarioRol [usuario=Usuario [idUsr=92, usuario=mirorol1, clave=b3ad838aca284016747db3f1dfc57ca3c44c4222c38c53e0c5a966fa6e50dc5a2b714153a57442a4, usuarioRol=[], usuarioEmpresa=[], datosPersonales=null, habilitado=true, fotos=null, fechaCreacion=2020-04-23 22:11:09.0, modificadoPor=, fechaModificacion=2020-05-24 02:05:06.0], rol=Rol [idRol=1, rol=ROL_CLIENTE, usuarioRol=null, foto=null, modificadoPor=, fechaModificacion=2020-05-24 02:04:03.0], fechaCreacion=2020-04-23, creadoPor=pepe]
+Sat Sep 19 16:56:13 CEST 2020 - DELETE [pepe] - table:usuario - Usuario [idUsr=92, usuario=mirorol1, clave=b3ad838aca284016747db3f1dfc57ca3c44c4222c38c53e0c5a966fa6e50dc5a2b714153a57442a4, usuarioRol=[], usuarioEmpresa=[], datosPersonales=null, habilitado=true, fotos=null, fechaCreacion=2020-04-23 22:11:09.0, modificadoPor=, fechaModificacion=2020-05-24 02:05:06.0]
+Sat Sep 19 16:56:13 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=usuario.usuario, orden=ASC]
+Sat Sep 19 16:58:01 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=usuario.usuario, orden=ASC]
+Sat Sep 19 16:58:44 CEST 2020 - DELETE [pepe] - table:datospersonales - DatosPersonales [idDatosPers=71, nombre=Capo Servicio, apellido1=Numero, apellido2=Diez, sexo=null, fechaNacimiento=1974-06-12, nacionalidad=Pais [idPais=0, nombreES=null, nombreEN=null, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, foto=null], dni=, email=elservicio@servicio.com, telefono=, observaciones=, modificadoPor=, fechaModificacion=2020-05-24 01:59:35.0]
+Sat Sep 19 16:58:44 CEST 2020 - DELETE [pepe] - table:usuario_rol - UsuarioRol [usuario=Usuario [idUsr=89, usuario=servicio10, clave=560387f8a3b50960752ab727a17c11076f1d6da7f88592871606a71e295286563233b20000f325f1, usuarioRol=[], usuarioEmpresa=[], datosPersonales=null, habilitado=true, fotos=null, fechaCreacion=2020-03-22 00:27:24.0, modificadoPor=, fechaModificacion=2020-05-24 02:05:06.0], rol=Rol [idRol=1, rol=ROL_CLIENTE, usuarioRol=null, foto=null, modificadoPor=, fechaModificacion=2020-05-24 02:04:03.0], fechaCreacion=2020-03-22, creadoPor=pepe]
+Sat Sep 19 16:58:44 CEST 2020 - DELETE [pepe] - table:usuario - Usuario [idUsr=89, usuario=servicio10, clave=560387f8a3b50960752ab727a17c11076f1d6da7f88592871606a71e295286563233b20000f325f1, usuarioRol=[], usuarioEmpresa=[], datosPersonales=null, habilitado=true, fotos=null, fechaCreacion=2020-03-22 00:27:24.0, modificadoPor=, fechaModificacion=2020-05-24 02:05:06.0]
+Sat Sep 19 16:58:44 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=usuario.usuario, orden=ASC]
+Sat Sep 19 16:59:55 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=usuario.usuario, orden=ASC]
+Sat Sep 19 17:00:15 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=usuario.usuario, orden=ASC]
+Sat Sep 19 17:00:47 CEST 2020 - DELETE [pepe] - table:datospersonales - DatosPersonales [idDatosPers=64, nombre=Servicío11, apellido1=Servício, apellido2=Ónce, sexo=Mujer, fechaNacimiento=1984-08-25, nacionalidad=Pais [idPais=0, nombreES=null, nombreEN=null, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, foto=null], dni=12345678A, email=servicio11@gmail.com, telefono=600000011, observaciones=Test con muchos acentos para análisis completo, modificadoPor=, fechaModificacion=2020-05-24 01:59:35.0]
+Sat Sep 19 17:00:47 CEST 2020 - DELETE [pepe] - table:usuario_rol - UsuarioRol [usuario=Usuario [idUsr=82, usuario=servicio11, clave=804097c51146ba177cdc406b06e21aef3f5bfafe91341cd1bb08bcd58517a488293c1f3b25c9fe0f, usuarioRol=[], usuarioEmpresa=[], datosPersonales=null, habilitado=true, fotos=null, fechaCreacion=2019-12-09 13:42:37.0, modificadoPor=, fechaModificacion=2020-05-24 02:05:06.0], rol=Rol [idRol=2, rol=ROL_USUARIO, usuarioRol=null, foto=null, modificadoPor=, fechaModificacion=2020-05-24 02:04:03.0], fechaCreacion=2019-12-09, creadoPor=pepe]
+Sat Sep 19 17:00:47 CEST 2020 - DELETE [pepe] - table:usuario - Usuario [idUsr=82, usuario=servicio11, clave=804097c51146ba177cdc406b06e21aef3f5bfafe91341cd1bb08bcd58517a488293c1f3b25c9fe0f, usuarioRol=[], usuarioEmpresa=[], datosPersonales=null, habilitado=true, fotos=null, fechaCreacion=2019-12-09 13:42:37.0, modificadoPor=, fechaModificacion=2020-05-24 02:05:06.0]
+Sat Sep 19 17:00:47 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=usuario.usuario, orden=ASC]
+Sat Sep 19 17:02:36 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=usuario.usuario, orden=ASC]
+Sat Sep 19 17:03:12 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=usuario.usuario, orden=ASC]
+Sat Sep 19 17:03:46 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=usuario.usuario, orden=ASC]
+Sat Sep 19 17:04:39 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=usuario.usuario, orden=ASC]
+Sat Sep 19 17:12:18 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=usuario.usuario, orden=ASC]
+Sat Sep 19 17:12:45 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=usuario.usuario, orden=ASC]
+Sat Sep 19 18:30:54 CEST 2020 - DELETE [admin] - table:categoria - Categoria [idCat=11, nombreES=null, nombreEN=null, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, subcategorias=[], foto=null, modificadoPor=admin, fechaModificacion=2020-09-13 21:57:16.0]
+Sat Sep 19 19:14:03 CEST 2020 - UPDATE [admin] - table:factura - ModelFactura [idFac=173, compra=true, totalSinIvaEnvDescfac=20.0, descuentoTotal=0.0, descuentoImporteProductos=0.0, descuentoImporteFactura=0.0, descuentoImporteTotal=0.0, importeEnvioSinIva=0.0, envioIvaPor=0.0, envioIvaImp=0.0, productosIvaImp=0.0, totalSinIvaConDescfac=20.0, ivaTotal=21.0, ivaImporteTotal=4.2, importeTotal=24.2, fechaCompra=2020-08-31, fechaEntrega=null, idEst=8, observaciones=, idFor=4, creadoPor=admin, idCuo=0, modificadoPor=admin, fechaModificacion=2020-09-19 19:14:03.456]
+Sat Sep 19 19:14:03 CEST 2020 - SAVE [admin] - table:factura_estado - ModelFacturaEstado [id=0, idFac=173, idEst=8, fecha=2020-09-19 19:14:03.494, creadoPor=admin, observaciones=null]
+Sat Sep 19 19:18:10 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=fechaCompra, orden=DESC]
+Sat Sep 19 19:18:17 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=idFac, orden=DESC]
+Sat Sep 19 19:18:18 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=idFac, orden=ASC]
+Sat Sep 19 19:18:26 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=importeFront, orden=DESC]
+Sat Sep 19 19:18:26 CEST 2020 - ERROR [admin] - org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT * FROM factura WHERE idEst = 6 ORDER BY importeFront DESC]; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'importeFront' in 'order clause'
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:234)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1402)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:388)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:446)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:456)
+	at com.damian.dao.impl.FacturaDAOImpl.lista(FacturaDAOImpl.java:216)
+	at com.damian.dao.impl.FacturaDAOImpl.findByIdEstModel(FacturaDAOImpl.java:158)
+	at com.damian.service.impl.FacturaServiceImpl.findByIdEstList(FacturaServiceImpl.java:181)
+	at com.damian.controller.FacturaController.getFilteredEstado(FacturaController.java:71)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:330)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:118)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:84)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:113)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:103)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:113)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter.doFilter(RememberMeAuthenticationFilter.java:146)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:154)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:45)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:199)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:50)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:87)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:192)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:160)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:668)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Unknown column 'importeFront' in 'order clause'
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:377)
+	at com.mysql.jdbc.Util.getInstance(Util.java:360)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:978)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3887)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3823)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2435)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2582)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2526)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2484)
+	at com.mysql.jdbc.StatementImpl.executeQuery(StatementImpl.java:1446)
+	at org.apache.tomcat.dbcp.dbcp2.DelegatingStatement.executeQuery(DelegatingStatement.java:310)
+	at org.apache.tomcat.dbcp.dbcp2.DelegatingStatement.executeQuery(DelegatingStatement.java:310)
+	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:433)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:376)
+	... 80 more
+
+Sat Sep 19 19:18:34 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=idFac, orden=DESC]
+Sat Sep 19 19:19:04 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=idFac, orden=ASC]
+Sat Sep 19 19:19:07 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=importeTotal, orden=DESC]
+Sat Sep 19 19:19:12 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=ivaTotal, orden=DESC]
+Sat Sep 19 19:19:14 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=descuentoTotal, orden=DESC]
+Sat Sep 19 19:19:16 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=fechaCompra, orden=DESC]
+Sat Sep 19 19:19:18 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=compra, orden=DESC]
+Sat Sep 19 19:19:21 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=compra, orden=ASC]
+Sat Sep 19 19:19:24 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=compra, orden=DESC]
+Sat Sep 19 19:19:26 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=compra, orden=ASC]
+Sat Sep 19 19:19:29 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=idFac, orden=DESC]
+Sat Sep 19 19:19:30 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=16, idUsr=85, tabla=factura, columna=idFac, orden=ASC]
+Sat Sep 19 19:19:55 CEST 2020 - UPDATE [admin] - table:factura - ModelFactura [idFac=130, compra=true, totalSinIvaEnvDescfac=0.0, descuentoTotal=0.0, descuentoImporteProductos=0.0, descuentoImporteFactura=0.0, descuentoImporteTotal=0.0, importeEnvioSinIva=0.0, envioIvaPor=0.0, envioIvaImp=0.0, productosIvaImp=0.0, totalSinIvaConDescfac=0.0, ivaTotal=21.0, ivaImporteTotal=28.51, importeTotal=164.28, fechaCompra=2020-07-22, fechaEntrega=null, idEst=5, observaciones=, idFor=4, creadoPor=pepe, idCuo=43, modificadoPor=admin, fechaModificacion=2020-09-19 19:19:55.952]
+Sat Sep 19 19:19:55 CEST 2020 - SAVE [admin] - table:factura_estado - ModelFacturaEstado [id=0, idFac=130, idEst=5, fecha=2020-09-19 19:19:55.955, creadoPor=admin, observaciones=null]
+Sat Sep 19 19:21:02 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=6, idUsr=85, tabla=producto, columna=marca, orden=ASC]
+Sat Sep 19 19:21:04 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=6, idUsr=85, tabla=producto, columna=marca, orden=DESC]
+Sat Sep 19 19:21:06 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=6, idUsr=85, tabla=producto, columna=nombreES, orden=ASC]

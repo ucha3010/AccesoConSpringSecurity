@@ -2,6 +2,9 @@ package com.damian.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -83,9 +86,9 @@ public class Utils {
 		calendar.setTimeInMillis(milliSeconds);
 		return formatter.format(calendar.getTime());
 	}
-	
+
 	public static String rutaHastaProyecto(HttpServletRequest request) {
-		
+
 		// TODO DAMIAN por algún motivo el comando System.getProperty("user.dir") me
 		// está devolviendo la ruta donde está instalado el Eclipse en lugar
 		// de devolver la ruta de workspace (según leí, esa es la ruta que debería
@@ -98,12 +101,12 @@ public class Utils {
 		rutaWorkspace = rutaWorkspace + request.getContextPath().substring(1);
 		// Ruta dentro del proyecto
 		return rutaWorkspace;
-		
+
 	}
 
 	public static String rutaHastaWebContent(HttpServletRequest request) {
 
-		 return rutaHastaProyecto(request) + System.getProperty("file.separator") + "WebContent";
+		return rutaHastaProyecto(request) + System.getProperty("file.separator") + "WebContent";
 	}
 
 	public static String rutaDentroResources(HttpServletRequest request, String carpeta) {
@@ -140,15 +143,15 @@ public class Utils {
 		}
 		return loggedUser;
 	}
-	
+
 	public static String entradaOVacio(String entrada) {
-		return (entrada == null) ? "": entrada;
+		return (entrada == null) ? "" : entrada;
 	}
-	
+
 	public static String siHayDatoAgregoEspacio(String entrada) {
 		return (entradaOVacio(entrada).length() == 0) ? "" : " ";
 	}
-	
+
 	public static String cortaCadena(String cadena, int comienzo, int fin) {
 
 		String salida = "";
@@ -160,6 +163,17 @@ public class Utils {
 			}
 		}
 		return salida;
+	}
+
+	public static void ordenarPorPrimerApellido(List<Usuario> usuarioList) {
+		Collections.sort(usuarioList, new Comparator<Usuario>() {
+
+			@Override
+			public int compare(Usuario u1, Usuario u2) {
+				return new String(u1.getDatosPersonales().getApellido1())
+						.compareToIgnoreCase(new String(u2.getDatosPersonales().getApellido1()));
+			}
+		});
 	}
 
 }

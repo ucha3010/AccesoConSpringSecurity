@@ -1,0 +1,4 @@
+Wed Sep 16 21:31:46 CEST 2020 - UPDATE [admin] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=85, tema=oscuro, botonFavorito=minion, recibirPublicidad=false]
+Wed Sep 16 21:38:05 CEST 2020 - UPDATE [admin] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=85, tema=claro, botonFavorito=perro, recibirPublicidad=true]
+Wed Sep 16 21:44:54 CEST 2020 - UPDATE [admin] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=85, tema=claro, botonFavorito=gato, recibirPublicidad=false]
+Wed Sep 16 21:45:01 CEST 2020 - UPDATE [admin] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=85, tema=claro, botonFavorito=pato, recibirPublicidad=true]

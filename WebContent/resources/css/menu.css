@@ -60,6 +60,18 @@ body {
 	border: 1px solid #F48024;
 }
 
+.dropdown-dam-1 {
+	border: 1px solid #F48024;
+	padding: 7px 15px 6px 15px;
+	border-radius: 4px;
+	background-color: gold;
+	display: inline-block;
+}
+
+.inline-block-dam {
+	display: inline-block;
+}
+
 .margin-right-10px {
 	margin-right: 10px;
 }

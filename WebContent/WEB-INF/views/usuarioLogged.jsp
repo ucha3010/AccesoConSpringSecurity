@@ -83,20 +83,20 @@
 						<a title="<fmt:message key="label.System.configuration" />" href='<c:url value='/administrar/configuracion/find/${usuario.idUsr}' />'>
 							<img src='<c:url value="/resources/imgs/engranaje.png"/>' class="tamanio_imagen_100x100">
 						</a>
-						<a title="<fmt:message key="label.System.configuration" />" href='<c:url value='/administrar/configuracion/usuario/${usuario.idUsr}' />'>
-							<img src='<c:url value="/resources/imgs/engranaje_doble_usuario.png"/>' class="tamanio_imagen_100x100">
-						</a>
 					</sec:authorize>
+					<a title="<fmt:message key="label.User.preferences" />" href='<c:url value='/preferenciaUsuario/${usuario.idUsr}' />'>
+						<img src='<c:url value="/resources/imgs/engranaje_doble_usuario.png"/>' class="tamanio_imagen_100x100">
+					</a>
 				</div>	
 				<div class="col-xs-4 hidden-sm hidden-md hidden-lg hidden-xl">
 					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 						<a title="<fmt:message key="label.System.configuration" />" href='<c:url value='/administrar/configuracion/find/${usuario.idUsr}' />'>
 							<img src='<c:url value="/resources/imgs/engranaje.png"/>' class="tamanio_imagen_50x50">
 						</a>
-						<a title="<fmt:message key="label.System.configuration" />" href='<c:url value='/administrar/configuracion/usuario/${usuario.idUsr}' />'>
-							<img src='<c:url value="/resources/imgs/engranaje_doble_usuario.png"/>' class="tamanio_imagen_50x50">
-						</a>
 					</sec:authorize>
+					<a title="<fmt:message key="label.User.preferences" />" href='<c:url value='/preferenciaUsuario/${usuario.idUsr}' />'>
+						<img src='<c:url value="/resources/imgs/engranaje_doble_usuario.png"/>' class="tamanio_imagen_50x50">
+					</a>
 				</div>
 				<div class="col-xs-5 col-sm-4 col-md-3">
 					<button type="button" class="btn btn-danger margin-left-5porciento" onclick='location.href="<c:url value="/usuario/logged/changePass/${usuario.idUsr}"/>"'>

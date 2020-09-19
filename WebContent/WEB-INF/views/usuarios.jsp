@@ -17,7 +17,7 @@
 	<script type="text/javascript">
 		function confirmDelete(idUsr){
 			if(confirm("<fmt:message key='Delete.message' />")){
-				var url = "<c:url value='/usuario/"+idUsr+"/delete' />";
+				var url = "<c:url value='/usuario/delete/"+idUsr+"' />";
 				location.href=url;
 				return true;
 			}
@@ -82,13 +82,13 @@
 						formulario.addEventListener('keyup', filtrarAdmin);
 					</script>
 				</div>
-				<div class="hidden-xs col-sm-3 col-md-6">
+				<div class="hidden-xs col-sm-1">
 					<div class="dropdown collapse">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-3 col-md-2">
+				<div class="col-sm-2">
 					<c:if test="${not empty usuario_agregado}">
 						<span style="color: green;">
 							<fmt:message key="User.added" />
@@ -100,8 +100,20 @@
 						</span>
 					</c:if>
 				</div>
-				<div class="col-sm-3 col-md-2  navbar-right">
-					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/0'/>"'>
+				<div class="col-sm-6 col-md-7 navbar-right">				
+					<div class="dropdown inline-block-dam">
+						<button class="btn dropdown-toggle dropdown-dam-1" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							<fmt:message key="label.Receive.publicity" />
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				            <li><a href="<c:url value='/usuario/publicity/true'/>"><fmt:message key="label.Yes" /></a></li>
+				            <li><a href="<c:url value='/usuario/publicity/false'/>"><fmt:message key="label.No" /></a></li>
+						</ul>
+					</div>
+				
+
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/idUsr/0'/>"'>
 						<fmt:message key="label.Add.user" />
 					</button>
 				</div>		
@@ -139,7 +151,7 @@
 					    <tr title='<fmt:message key="label.Creation.date" />: <fmt:formatDate value="${usuario.fechaCreacion}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.idcard" />: <c:out value="${usuario.datosPersonales.dni}" />&#xA;<fmt:message key="label.Sex" />: <c:out value="${usuario.datosPersonales.sexo}" />&#xA;<fmt:message key="label.Nationality" />: <c:out value="${usuario.datosPersonales.nacionalidad[nameColSelect]}" />&#xA;<c:out value="${usuario.datosPersonales.observaciones}" />'>
 							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 								<td class="extraAdmin-td">
-									<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/usuario/${usuario.idUsr}' />"'>
+									<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/usuario/idUsr/${usuario.idUsr}' />"'>
 										<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
 									</a>
 									<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${usuario.idUsr})">
@@ -186,7 +198,7 @@
 										<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="tamanio_imagen">
 									</a>
 								</sec:authorize>
-								<a title="<fmt:message key="Companies" />" href='<c:url value='/usuarioEmpresa/usuario/${usuario.idUsr}' />'>
+								<a title="<fmt:message key="Companies" />" href='<c:url value='/usuarioEmpresa/usuario/idUsr/${usuario.idUsr}' />'>
 									<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
 								</a>
 								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">

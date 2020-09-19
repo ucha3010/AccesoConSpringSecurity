@@ -205,7 +205,7 @@
 								<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccion/${usuario.idUsr}' />'>
 									<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="tamanio_imagen">
 								</a>
-								<a title="<fmt:message key="Companies" />" href='<c:url value='/usuarioEmpresa/usuario/${usuario.idUsr}' />'>
+								<a title="<fmt:message key="Companies" />" href='<c:url value='/usuarioEmpresa/usuario/idUsr/${usuario.idUsr}' />'>
 									<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
 								</a>
 								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">

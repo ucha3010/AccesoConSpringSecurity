@@ -59,6 +59,11 @@
 	cursor: pointer;
 }
 
+.divTablaSinScroll {
+	width: max-content;
+	margin: auto;
+}
+
 .divTablaSinScroll thead th { 
 	position: sticky; 
 	top: 50px; 

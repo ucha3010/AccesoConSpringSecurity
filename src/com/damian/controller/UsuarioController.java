@@ -72,7 +72,7 @@ public class UsuarioController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/usuario/{idUsr}")
+	@RequestMapping("/usuario/idUsr/{idUsr}")
 	public ModelAndView getUser(ModelAndView modelAndView, @PathVariable("idUsr") int idUsr,
 			@ModelAttribute("usuario") Usuario usuario, final BindingResult br) {
 
@@ -198,13 +198,23 @@ public class UsuarioController {
 		return "redirect:/usuario/logged/" + usuario.getIdUsr();
 	}
 
-	@RequestMapping("/usuario/{idUsr}/delete")
+	@RequestMapping("/usuario/delete/{idUsr}")
 	public String deleteUser(@PathVariable("idUsr") int idUsr, RedirectAttributes ra, HttpServletRequest request) {
 
 		usuarioService.delete(idUsr, request);
 		ra.addFlashAttribute("usuario_eliminado", "usuario_eliminado");
 
 		return "redirect:/usuario/all/" + usuarioService.getColumn(request) + "/0/100";
+
+	}
+
+	@RequestMapping("/usuario/deleteUsr/{idUsr}")
+	public String deleteUserByUser(@PathVariable("idUsr") int idUsr, RedirectAttributes ra, HttpServletRequest request) {
+
+		usuarioService.delete(idUsr, request);
+		ra.addFlashAttribute("usuario_eliminado", "usuario_eliminado");
+
+		return "redirect:/";
 
 	}
 
@@ -223,6 +233,16 @@ public class UsuarioController {
 			HttpServletRequest request) {
 		usuarioService.reset(idUsr, request);
 		return "redirect:/usuario/all/" + usuarioService.getColumn(request) + "/0/100";
+	}
+
+	@RequestMapping("/usuario/publicity/{receive}")
+	public ModelAndView getPublicity(ModelAndView modelAndView, @PathVariable("receive") boolean receive, HttpServletRequest request) {
+		
+		modelAndView.addObject("usuarios", usuarioService.findByPublicity(receive));
+		modelAndView.addObject("quieren_publicidad", receive);
+		modelAndView.addObject("estoy", "usuariosRecibirPublicidad");
+		modelAndView.setViewName("usuariosRecibirPublicidad");
+		return modelAndView;
 	}
 
 	private void fillLoggedUser(ModelAndView modelAndView, int idUsr) {
