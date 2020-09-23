@@ -139,6 +139,11 @@
   display: block;
 }
 
+.dropdown-menu-dam {
+	min-width: auto;
+	cursor: pointer;
+}
+
 .padding-5-25-dam {
 	padding: 5px 25px;
 }

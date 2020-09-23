@@ -46,6 +46,11 @@
 				campos[i].style.borderColor="#ced4da";
 			}
 		}
+		
+		function selectFavorito(dato,clave) {
+			document.getElementById("imagenPrincipalFavoritos").src = '<c:url value="/resources/imgs/favoritos/' + dato + '.png"/>';
+			document.getElementById("hiddenBotonFavorito").innerHTML = '<input id="botonFavorito" name="botonFavorito" type="hidden" value="' + dato + '"/>';
+		}
 	</script>
 </head>
 <body>
@@ -81,20 +86,25 @@
 					</div>
 				</c:if>
 			</div>
-			<div class="row">		
-				<div class="hidden-xs col-sm-1">
+			
+			<div class="row">
+				<div class="col-xs-4">
 				</div>
-				<div class="col-xs-12 col-sm-4">
-					<label for="tema"><fmt:message key="label.Theme" /></label> 
-					<sf:input path="tema" class="form-control" id="tema" />
-					<span id="temaError" name="errorSpan"></span>
-				</div>
-				<div class="col-xs-12 col-sm-4">
-					<label for="botonFavorito"><fmt:message key="label.Favourite.button" /></label> 
-					<sf:input path="botonFavorito" class="form-control" id="botonFavorito" />
-					<span id="botonFavoritoError" name="errorSpan"></span>
+				<div class="col-xs-4">
+				    <div class="dropdown dropdown-menu-dam">
+				        <div class="dropdown-toggle" data-toggle="dropdown">
+				        	<img id="imagenPrincipalFavoritos" src='<c:url value="/resources/imgs/favoritos/${preferenciaUsuario.botonFavorito}.png"/>' class="tamanio_imagen_100x100">
+				        	<span class="caret"></span>
+			        	</div>
+				        <ul class="dropdown-menu">
+					        <c:forEach items="${favoritos}" var="favorito">
+					            <li onclick="selectFavorito('${favorito.nombre}')"><img src='<c:url value="/resources/imgs/favoritos/${favorito.nombre}.png"/>' class="tamanio_imagen_100x100"></li>
+				            </c:forEach>
+				        </ul>
+				    </div>
+				    <div id="hiddenBotonFavorito"><sf:hidden path="botonFavorito" value="${botonFavorito}" /></div>
 				</div>	
-				<div class="col-xs-12 col-sm-4">
+				<div class="col-xs-4">
 					<div class="checkbox">
 						<label>
 							<sf:checkbox path="recibirPublicidad" /><fmt:message key="label.Receive.publicity" />
@@ -102,11 +112,169 @@
 					</div>
 				</div>
 			</div>
+			
+			<div class="row">
+				<div class="col-xs-3 hidden-sm hidden-md hidden-lg hidden-xl">
+				</div>
+				<div class="col-xs-8 col-sm-4">
+					<div class="temamuestra tema01fondopantalla">
+						<div class="row margin-tb-5px">
+							<div class="col-xs-1">
+							</div>
+							<div class="col-xs-1">
+								<div class="radio">
+									<label for="tema01">
+										<sf:radiobutton id="tema01" name="customRadioTema01" class="custom-control-input" path="tema" value="default" />
+									</label>
+								</div>
+							</div>							
+							<div class="col-xs-8">
+								<div class="well well-sm text-center h2 tema01titulo"><fmt:message key="label.Title" /></div>
+							</div>		
+							<div class="col-xs-1">
+							</div>		
+						</div>
+						<div class="row margin-tb-5px">
+							<div class="col-xs-2 col-sm-3">
+							</div>
+							<div class="col-xs-2 col-sm-1">
+								<button type="button" class="btn tema01botonresto"><fmt:message key="label.Others" /></button>
+							</div>
+							<div class="col-xs-3 col-sm-2 col-md-3">
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn tema01botonagregar"><fmt:message key="label.Add" /></button>
+							</div>
+						</div>
+						<div class="row margin-tb-5px tematamanioletra">
+							<fmt:message key="label.Rest" />
+						</div>
+						<div class="row margin-tb-5px">
+							<div class="col-xs-3 col-sm-2 col-md-3">
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn tema01botonenviar"><fmt:message key="Send" /></button>
+							</div>
+							<div class="col-xs-1 col-md-1">
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn tema01botoncancelar"><fmt:message key="Return" /></button>
+							</div>
+							<div class="col-xs-3 col-sm-5 col-md-4">
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-xs-3 hidden-sm hidden-md hidden-lg hidden-xl">
+				</div>
+				<div class="col-xs-8 col-sm-4">
+					<div class="temamuestra tema02fondopantalla">
+						<div class="row margin-tb-5px">
+							<div class="col-xs-1">
+							</div>
+							<div class="col-xs-1">
+								<div class="radio">
+									<label for="tema02">
+										<sf:radiobutton id="tema02" name="customRadioTema02" class="custom-control-input" path="tema" value="red" />
+									</label>
+								</div>
+							</div>							
+							<div class="col-xs-8">
+								<div class="well well-sm text-center h2 tema02titulo"><fmt:message key="label.Title" /></div>
+							</div>		
+							<div class="col-xs-1">
+							</div>		
+						</div>
+						<div class="row margin-tb-5px">
+							<div class="col-xs-2 col-sm-3">
+							</div>
+							<div class="col-xs-2 col-sm-1">
+								<button type="button" class="btn tema02botonresto"><fmt:message key="label.Others" /></button>
+							</div>
+							<div class="col-xs-3 col-sm-2 col-md-3">
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn tema02botonagregar"><fmt:message key="label.Add" /></button>
+							</div>
+						</div>
+						<div class="row margin-tb-5px tematamanioletra">
+							<fmt:message key="label.Rest" />
+						</div>
+						<div class="row margin-tb-5px">
+							<div class="col-xs-3 col-sm-2 col-md-3">
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn tema02botonenviar"><fmt:message key="Send" /></button>
+							</div>
+							<div class="col-xs-1 col-md-1">
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn tema02botoncancelar"><fmt:message key="Return" /></button>
+							</div>
+							<div class="col-xs-3 col-sm-5 col-md-4">
+							</div>
+						</div>
+					</div>
+				</div>
+								
+				<div class="col-xs-3 hidden-sm hidden-md hidden-lg hidden-xl">
+				</div>
+				<div class="col-xs-8 col-sm-4">
+					<div class="temamuestra tema03fondopantalla">
+						<div class="row margin-tb-5px">
+							<div class="col-xs-1">
+							</div>
+							<div class="col-xs-1">
+								<div class="radio">
+									<label for="tema03">
+										<sf:radiobutton id="tema03" name="customRadioTema03" class="custom-control-input" path="tema" value="blue" />
+									</label>
+								</div>
+							</div>							
+							<div class="col-xs-8">
+								<div class="well well-sm text-center h2 tema03titulo"><fmt:message key="label.Title" /></div>
+							</div>		
+							<div class="col-xs-1">
+							</div>		
+						</div>
+						<div class="row margin-tb-5px">
+							<div class="col-xs-2 col-sm-3">
+							</div>
+							<div class="col-xs-2 col-sm-1">
+								<button type="button" class="btn tema03botonresto"><fmt:message key="label.Others" /></button>
+							</div>
+							<div class="col-xs-3 col-sm-2 col-md-3">
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn tema03botonagregar"><fmt:message key="label.Add" /></button>
+							</div>
+						</div>
+						<div class="row margin-tb-5px tematamanioletra">
+							<fmt:message key="label.Rest" />
+						</div>
+						<div class="row margin-tb-5px">
+							<div class="col-xs-3 col-sm-2 col-md-3">
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn tema03botonenviar"><fmt:message key="Send" /></button>
+							</div>
+							<div class="col-xs-1 col-md-1">
+							</div>
+							<div class="col-xs-2">
+								<button type="button" class="btn tema03botoncancelar"><fmt:message key="Return" /></button>
+							</div>
+							<div class="col-xs-3 col-sm-5 col-md-4">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>			
 			<br/>
 			<div class="row">	
-				<div class="hidden-xs col-sm-4">
+				<div class="col-xs-4">
 				</div>
-				<div class="col-xs-12 col-sm-8">
+				<div class="col-xs-8">
 					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
 					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/usuario/logged/${preferenciaUsuario.idPrefUsr}' />"'><fmt:message key="Return" /></button>
 					<span id="hayError" name="errorSpan" style="color:red"></span>

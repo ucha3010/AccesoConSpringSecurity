@@ -1,0 +1,8 @@
+Sun Sep 20 17:32:28 CEST 2020 - UPDATE [admin] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=85, tema=red, botonFavorito=pato, recibirPublicidad=true]
+Sun Sep 20 17:32:48 CEST 2020 - UPDATE [admin] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=85, tema=default, botonFavorito=pato, recibirPublicidad=true]
+Sun Sep 20 19:50:11 CEST 2020 - UPDATE [admin] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=85, tema=default, botonFavorito=rabbit,pato, recibirPublicidad=true]
+Sun Sep 20 19:50:51 CEST 2020 - UPDATE [admin] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=85, tema=default, botonFavorito=default,rabbit,pato, recibirPublicidad=true]
+Sun Sep 20 19:51:20 CEST 2020 - UPDATE [admin] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=85, tema=red, botonFavorito=cat,default,rabbit,pato, recibirPublicidad=true]
+Sun Sep 20 19:51:55 CEST 2020 - UPDATE [admin] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=85, tema=red, botonFavorito=rabbit, recibirPublicidad=true]
+Sun Sep 20 19:52:13 CEST 2020 - UPDATE [admin] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=85, tema=default, botonFavorito=default, recibirPublicidad=true]
+Sun Sep 20 22:12:34 CEST 2020 - UPDATE [admin] - table:usuarioorden - ModelUsuarioOrden [id=11, idUsr=85, tabla=usuario, columna=datosPersonales.nombre, orden=ASC]

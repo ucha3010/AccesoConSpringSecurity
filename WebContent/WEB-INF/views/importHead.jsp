@@ -5,3 +5,4 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/tablas.css'/>" rel="stylesheet" type="text/css" />
+	<link href="<c:url value='/resources/css/temas.css'/>" rel="stylesheet" type="text/css" />

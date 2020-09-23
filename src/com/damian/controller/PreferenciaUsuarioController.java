@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.pojo.PreferenciaUsuario;
+import com.damian.service.BotonFavoritoService;
 import com.damian.service.PreferenciaUsuarioService;
 
 @Controller
@@ -21,6 +22,9 @@ public class PreferenciaUsuarioController {
 
 	@Autowired
 	private PreferenciaUsuarioService preferenciaUsuarioService;
+
+	@Autowired
+	private BotonFavoritoService botonFavoritoService;
 
 	@RequestMapping("/preferenciaUsuario")
 	public ModelAndView getAll(ModelAndView modelAndView) {
@@ -31,7 +35,7 @@ public class PreferenciaUsuarioController {
 
 	@RequestMapping("/preferenciaUsuario/{idPrefUsr}")
 	public ModelAndView getPreferenciaUsuario(ModelAndView modelAndView, @PathVariable("idPrefUsr") int idPrefUsr) {
-
+		modelAndView.addObject("favoritos", botonFavoritoService.findAllFront());
 		modelAndView.addObject("preferenciaUsuario", preferenciaUsuarioService.findById(idPrefUsr));
 		modelAndView.setViewName("preferenciaUsuario");
 		return modelAndView;

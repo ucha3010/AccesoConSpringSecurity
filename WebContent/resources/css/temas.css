@@ -1,0 +1,131 @@
+.temamuestra {
+    text-align: center;
+	border: 1px solid #216f25;
+	padding: 0.25rem;
+    border-radius: 2rem;
+	font-weight: 500;
+	font-size: 2rem;
+	margin: 5px;
+}
+
+.tematamanioletra {
+	font-weight: 300;
+	font-size: 14px;	
+}
+
+.margin-tb-5px {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.padding-top-9-rem {
+	padding-top: 9rem;
+}
+
+/**************************** tema01 ******************************************/
+
+.tema01titulo {	
+	color: #495057;
+	background-color: #f5f5f5;
+}
+
+.tema01botonenviar {	
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #F48024;
+}
+
+.tema01botoncancelar {	
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #F48024;
+}
+
+.tema01botonagregar {	
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #F48024;
+}
+
+.tema01botonresto {	
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #F48024;
+}
+
+.tema01fondopantalla {
+	color: #495057;
+	background-color: #fff;
+}
+
+/**************************** tema02 ******************************************/
+
+.tema02titulo {	
+	color: #44583f;
+	background-color: #ebfae7;
+}
+
+.tema02botonenviar {	
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #F48024;
+}
+
+.tema02botoncancelar {	
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #F48024;
+}
+
+.tema02botonagregar {	
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #F48024;
+}
+
+.tema02botonresto {	
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #F48024;
+}
+
+.tema02fondopantalla {
+	color: #495057;
+	background-color: #fff;
+}
+
+/**************************** tema03 ******************************************/
+
+.tema03titulo {	
+	color: #101c85;
+	background-color: #e9e4fa;
+}
+
+.tema03botonenviar {	
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #F48024;
+}
+
+.tema03botoncancelar {	
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #F48024;
+}
+
+.tema03botonagregar {	
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #F48024;
+}
+
+.tema03botonresto {	
+	color: #495057;
+	background-color: #fff;
+	border: 1px solid #F48024;
+}
+
+.tema03fondopantalla {
+	color: #495057;
+	background-color: #fff;
+}

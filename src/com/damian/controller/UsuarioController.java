@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -95,6 +97,12 @@ public class UsuarioController {
 		fillLoggedUser(modelAndView, idUsr);
 		modelAndView.setViewName("usuarioLogged");
 		return modelAndView;
+	}
+
+	@RequestMapping("/usuario/logged")
+	public ModelAndView getLogged(ModelAndView modelAndView) {
+		int idUsr = idUserLogged(modelAndView);
+		return getLoggedUser(modelAndView, idUsr);
 	}
 
 	@RequestMapping("/usuario/logged/changePass/{idUsr}")
@@ -260,6 +268,24 @@ public class UsuarioController {
 		modelAndView.addObject("paises", paisService.findAll());
 		modelAndView.addObject("usuario", usuario);
 		modelAndView.addObject("estoy", "usuario");
+	}
+	
+	private int idUserLogged(ModelAndView model) {
+		Usuario usuario = new Usuario();
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(!authentication.getName().equals("anonymousUser")) {
+			usuario = usuarioService.findByUsername(authentication.getName());
+			model.addObject("idUsrLogged", usuario.getIdUsr());
+			model.addObject("nameUsrLogged", usuario.getUsuario());
+			List<Foto> fotos = fotoService.findByIdUsr(usuario.getIdUsr());
+			for (Foto f : fotos) {
+				if (f.isPrincipal()) {
+					model.addObject("prinPicUsr", f.getNombre());
+					break;
+				}
+			}
+		}
+		return usuario.getIdUsr();
 	}
 
 }

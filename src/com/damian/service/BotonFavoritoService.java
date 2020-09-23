@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.BotonFavorito;
+import com.damian.pojo.front.FrontBotonFavorito;
 
 public interface BotonFavoritoService {
 
@@ -20,5 +21,7 @@ public interface BotonFavoritoService {
 	public int delete(int id, HttpServletRequest request) throws NotEmptyException;
 
 	public int getMaxId();
+
+	public List<FrontBotonFavorito> findAllFront();
 
 }

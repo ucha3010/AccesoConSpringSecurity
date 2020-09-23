@@ -1,5 +1,6 @@
 package com.damian.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import com.damian.dao.BotonFavoritoDAO;
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.BotonFavorito;
 import com.damian.pojo.PreferenciaUsuario;
+import com.damian.pojo.front.FrontBotonFavorito;
 import com.damian.service.BotonFavoritoService;
 import com.damian.service.PreferenciaUsuarioService;
 
@@ -63,6 +65,20 @@ public class BotonFavoritoServiceImpl implements BotonFavoritoService {
 	@Override
 	public int getMaxId() {
 		return botonFavoritoDAO.getMaxId();
+	}
+
+	@Override
+	public List<FrontBotonFavorito> findAllFront() {
+		List<BotonFavorito> botonFavoritoList = findAll();
+		List<FrontBotonFavorito> frontBotonFavoritoList = new ArrayList<FrontBotonFavorito>();
+		FrontBotonFavorito fbf = null;
+		for(BotonFavorito bf: botonFavoritoList) {
+			fbf = new FrontBotonFavorito();
+			fbf.setNombre(bf.getNombre());
+			fbf.setCodigoHTML("<img src='<c:url value=\"/resources/imgs/favoritos/" + bf.getNombre() + ".png\"/>' class=\"tamanio_imagen_50x50\">");
+			frontBotonFavoritoList.add(fbf);
+		}
+		return frontBotonFavoritoList;
 	}
 
 }
