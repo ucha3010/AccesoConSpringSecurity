@@ -14,7 +14,7 @@
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 	
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<c:import url="/WEB-INF/views/menu.jsp" />
 
 	<h1>error.jsp</h1>

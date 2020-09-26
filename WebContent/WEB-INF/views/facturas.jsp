@@ -75,10 +75,10 @@
 		
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="label.Bills" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Bills" /></div>
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<div class="row">
 			<div class="hidden-xs col-sm-3">
@@ -343,10 +343,9 @@
 				</ul>
 			</div>
 		</div>
-		
-		<footer>
-			<c:import url="/WEB-INF/views/importFooter.jsp" />
-		</footer>
 	</div>
+	<footer>
+		<c:import url="/WEB-INF/views/importFooter.jsp" />
+	</footer>
 </body>
 </html>

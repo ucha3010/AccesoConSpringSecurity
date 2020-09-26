@@ -45,16 +45,16 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<c:if test="${direccion.idDir != 0}">
-			<div class="well well-sm text-center h2">
+			<div class="well well-sm text-center h2 ${prefUsr.tema}titulo">
 				<c:out value="${direccion.datosPersonales.nombre}" /> <c:out value="${direccion.datosPersonales.apellido1}" /> <c:out value="${direccion.datosPersonales.apellido2}" />
 			</div>
 		</c:if>
 		<c:if test="${direccion.idDir == 0}">
-			<div class="well well-sm text-center h2"><fmt:message key="Add.address" /></div>
+			<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="Add.address" /></div>
 		</c:if>
 		<sf:form method="post" action="${pageContext.request.contextPath}/direccion/save/${direccion.datosPersonales.usuario.idUsr}" modelAttribute="direccion" onsubmit="return validar()">
 			<c:if test="${direccion.idDir != 0}">
@@ -142,8 +142,8 @@
 				<div class="hidden-xs col-sm-4">
 				</div>
 				<div class="col-xs-12 col-sm-8">
-					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="${pageContext.request.contextPath}/direccion/${direccion.datosPersonales.usuario.idUsr}"'><fmt:message key="Cancel" /></button>
+					<button type="submit" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botonguardar"><fmt:message key="Save" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botoncancelar" onclick='location.href="${pageContext.request.contextPath}/direccion/${direccion.datosPersonales.usuario.idUsr}"'><fmt:message key="Cancel" /></button>
 					<span id="hayError" name="errorSpan" style="color:red"></span>
 				</div>
 			</div>

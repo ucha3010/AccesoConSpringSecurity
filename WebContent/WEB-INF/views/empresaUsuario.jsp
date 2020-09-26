@@ -24,10 +24,10 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="label.users.belong" /> <c:out value="${empresa.nombreComercial}" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.users.belong" /> <c:out value="${empresa.nombreComercial}" /></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">		
 				<div class="hidden-xs col-sm-3">
@@ -41,8 +41,8 @@
 				            		<sf:option value="${usuarioFor.idUsr}" label="${nombreAp}"/>
 				            	</c:forEach>
 				        	</sf:select>
-							<button type="submit" class="btn fondo-c0c0c0 border-color-dam">
-								<fmt:message key="label.New.user" />
+							<button type="submit" class="btn fondo-c0c0c0 border-color-dam ${prefUsr.tema}botonagregar">
+								<fmt:message key="New.user" />
 							</button>
 							<c:if test="${error}">
 								<span><fmt:message key="label.User.already.asigned" /> (<c:out value="${existia}"></c:out>)</span>

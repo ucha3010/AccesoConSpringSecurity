@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -20,9 +21,11 @@ import com.damian.pojo.front.ImpresionFactura;
 import com.damian.service.CuotaDetalleService;
 import com.damian.service.EstadoService;
 import com.damian.service.FacturaService;
+import com.damian.service.IndexService;
 import com.damian.service.PaginacionService;
 
 @Controller
+@SessionAttributes({ "resultado", "estoy", "errorUsuario", "idUsrLogged", "nameUsrLogged", "prinPicUsr", "prefUsr" })
 public class FacturaController {
 
 	@Autowired
@@ -35,12 +38,16 @@ public class FacturaController {
 	private EstadoService estadoService;
 
 	@Autowired
+	private IndexService indexService;
+
+	@Autowired
 	private PaginacionService paginacionService;
 
 	@RequestMapping("/factura/all/{column}/{paginaInicio}/{totalPaginas}")
 	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
 			@PathVariable("paginaInicio") int paginaInicio, @PathVariable("totalPaginas") int totalPaginas,
 			HttpServletRequest request) {
+		indexService.idUserLogged(modelAndView);
 		List<Factura> facturas = facturaService.findSearchAll();
 		modelAndView.addObject("facturas", facturaService.findAll(column, paginaInicio, totalPaginas, request));
 		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, "factura"));

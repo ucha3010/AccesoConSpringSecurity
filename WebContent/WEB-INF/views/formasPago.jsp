@@ -24,10 +24,10 @@
 		}
 	</script>
 </head>
-<body>
-	<div class="container-fluid">
+<body class="${prefUsr.tema}fondopantalla">
+	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="label.Payment.methods" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Payment.methods" /></div>
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<sec:authorize access="hasAnyRole('ROL_ROOT')">
 			<div class="row">
@@ -51,7 +51,7 @@
 					</c:if>
 				</div>
 				<div class="col-xs-12 col-sm-6">
-					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/formaPago/0'/>"'>
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonagregar" onclick='location.href="<c:url value='/formaPago/0'/>"'>
 						<fmt:message key="Add.formaPago" />
 					</button>
 				</div>	
@@ -94,10 +94,9 @@
 			<div class="hidden-xs col-sm-2 col-md-3">
 			</div>
 		</div>
-		
-		<footer>
-			<c:import url="/WEB-INF/views/importFooter.jsp" />
-		</footer>
 	</div>
+	<footer>
+		<c:import url="/WEB-INF/views/importFooter.jsp" />
+	</footer>
 </body>
 </html>

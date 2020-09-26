@@ -65,14 +65,14 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<c:if test="${empresa.idEmp != 0}">
-			<div class="well well-sm text-center h2"><c:out value="${empresa.nombreComercial}"></c:out></div>
+			<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><c:out value="${empresa.nombreComercial}"></c:out></div>
 		</c:if>
 		<c:if test="${empresa.idEmp == 0}">
-			<div class="well well-sm text-center h2"><fmt:message key="Add.company" /></div>
+			<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="Add.company" /></div>
 		</c:if>
 		<sf:form method="post" action="${pageContext.request.contextPath}/empresa/save" modelAttribute="empresa" onsubmit="return validar()">
 			<c:if test="${empresa.idEmp != 0}">
@@ -171,8 +171,8 @@
 				<div class="hidden-xs col-sm-4">
 				</div>
 				<div class="col-xs-12 col-sm-8">
-					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/empresa/all/null/0/100' />"'><fmt:message key="Cancel" /></button>
+					<button type="submit" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botonguardar"><fmt:message key="Save" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botoncancelar" onclick='location.href="<c:url value='/empresa/all/null/0/100' />"'><fmt:message key="Cancel" /></button>
 				</div>
 			</div>
 		</sf:form>

@@ -53,10 +53,10 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="label.User.preferences" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.User.preferences" /></div>
 
 		<sf:form method="post" action="${pageContext.request.contextPath}/preferenciaUsuario/update" modelAttribute="preferenciaUsuario" onsubmit="return validar()">
 			<sf:hidden path="idPrefUsr"/>
@@ -117,7 +117,7 @@
 				<div class="col-xs-3 hidden-sm hidden-md hidden-lg hidden-xl">
 				</div>
 				<div class="col-xs-8 col-sm-4">
-					<div class="temamuestra tema01fondopantalla">
+					<div class="temamuestra defaultfondopantalla">
 						<div class="row margin-tb-5px">
 							<div class="col-xs-1">
 							</div>
@@ -129,7 +129,7 @@
 								</div>
 							</div>							
 							<div class="col-xs-8">
-								<div class="well well-sm text-center h2 tema01titulo"><fmt:message key="label.Title" /></div>
+								<div class="well well-sm text-center h2 defaulttitulo"><fmt:message key="label.Title" /></div>
 							</div>		
 							<div class="col-xs-1">
 							</div>		
@@ -138,12 +138,12 @@
 							<div class="col-xs-2 col-sm-3">
 							</div>
 							<div class="col-xs-2 col-sm-1">
-								<button type="button" class="btn tema01botonresto"><fmt:message key="label.Others" /></button>
+								<button type="button" class="btn defaultbotonresto"><fmt:message key="label.Others" /></button>
 							</div>
 							<div class="col-xs-3 col-sm-2 col-md-3">
 							</div>
 							<div class="col-xs-2">
-								<button type="button" class="btn tema01botonagregar"><fmt:message key="label.Add" /></button>
+								<button type="button" class="btn defaultbotonagregar"><fmt:message key="label.Add" /></button>
 							</div>
 						</div>
 						<div class="row margin-tb-5px tematamanioletra">
@@ -153,12 +153,12 @@
 							<div class="col-xs-3 col-sm-2 col-md-3">
 							</div>
 							<div class="col-xs-2">
-								<button type="button" class="btn tema01botonenviar"><fmt:message key="Send" /></button>
+								<button type="button" class="btn defaultbotonguardar"><fmt:message key="Save" /></button>
 							</div>
 							<div class="col-xs-1 col-md-1">
 							</div>
 							<div class="col-xs-2">
-								<button type="button" class="btn tema01botoncancelar"><fmt:message key="Return" /></button>
+								<button type="button" class="btn defaultbotoncancelar"><fmt:message key="Return" /></button>
 							</div>
 							<div class="col-xs-3 col-sm-5 col-md-4">
 							</div>
@@ -176,7 +176,7 @@
 							<div class="col-xs-1">
 								<div class="radio">
 									<label for="tema02">
-										<sf:radiobutton id="tema02" name="customRadioTema02" class="custom-control-input" path="tema" value="red" />
+										<sf:radiobutton id="tema02" name="customRadioTema02" class="custom-control-input" path="tema" value="tema02" />
 									</label>
 								</div>
 							</div>							
@@ -205,7 +205,7 @@
 							<div class="col-xs-3 col-sm-2 col-md-3">
 							</div>
 							<div class="col-xs-2">
-								<button type="button" class="btn tema02botonenviar"><fmt:message key="Send" /></button>
+								<button type="button" class="btn tema02botonguardar"><fmt:message key="Save" /></button>
 							</div>
 							<div class="col-xs-1 col-md-1">
 							</div>
@@ -228,7 +228,7 @@
 							<div class="col-xs-1">
 								<div class="radio">
 									<label for="tema03">
-										<sf:radiobutton id="tema03" name="customRadioTema03" class="custom-control-input" path="tema" value="blue" />
+										<sf:radiobutton id="tema03" name="customRadioTema03" class="custom-control-input" path="tema" value="tema03" />
 									</label>
 								</div>
 							</div>							
@@ -257,7 +257,7 @@
 							<div class="col-xs-3 col-sm-2 col-md-3">
 							</div>
 							<div class="col-xs-2">
-								<button type="button" class="btn tema03botonenviar"><fmt:message key="Send" /></button>
+								<button type="button" class="btn tema03botonguardar"><fmt:message key="Save" /></button>
 							</div>
 							<div class="col-xs-1 col-md-1">
 							</div>
@@ -275,8 +275,8 @@
 				<div class="col-xs-4">
 				</div>
 				<div class="col-xs-8">
-					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/usuario/logged/${preferenciaUsuario.idPrefUsr}' />"'><fmt:message key="Return" /></button>
+					<button type="submit" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botonguardar"><fmt:message key="Save" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botoncancelar" onclick='location.href="<c:url value='/usuario/logged/${preferenciaUsuario.idPrefUsr}' />"'><fmt:message key="Return" /></button>
 					<span id="hayError" name="errorSpan" style="color:red"></span>
 				</div>
 			</div>

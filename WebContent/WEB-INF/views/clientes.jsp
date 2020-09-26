@@ -68,10 +68,10 @@
 	</script>
 	
 </head>
-<body>
-	<div class="container-fluid">
+<body class="${prefUsr.tema}fondopantalla">
+	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="label.Customers" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Customers" /></div>
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
@@ -101,8 +101,8 @@
 					</c:if>
 				</div>
 				<div class="col-sm-3 col-md-2  navbar-right">
-					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/cliente/0'/>"'>
-						<fmt:message key="label.Add.user" />
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonagregar" onclick='location.href="<c:url value='/cliente/0'/>"'>
+						<fmt:message key="Add.user" />
 					</button>
 				</div>		
 			</div>
@@ -205,7 +205,7 @@
 								<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccion/${usuario.idUsr}' />'>
 									<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="tamanio_imagen">
 								</a>
-								<a title="<fmt:message key="Companies" />" href='<c:url value='/usuarioEmpresa/usuario/idUsr/${usuario.idUsr}' />'>
+								<a title="<fmt:message key="Companies" />" href='<c:url value='/usuarioEmpresa/usuario/${usuario.idUsr}' />'>
 									<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
 								</a>
 								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">

@@ -68,10 +68,10 @@
 	</script>
 	
 </head>
-<body>
-	<div class="container-fluid">
+<body class="${prefUsr.tema}fondopantalla">
+	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="label.Users" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Users" /></div>
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
@@ -102,19 +102,19 @@
 				</div>
 				<div class="col-sm-6 col-md-7 navbar-right">				
 					<div class="dropdown inline-block-dam">
-						<button class="btn dropdown-toggle dropdown-dam-1" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						<button class="btn dropdown-toggle dropdown-dam-1 ${prefUsr.tema}botonresto" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 							<fmt:message key="label.Receive.publicity" />
 							<span class="caret"></span>
 						</button>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						<ul class="dropdown-menu ${prefUsr.tema}botonresto" aria-labelledby="dropdownMenu1">
 				            <li><a href="<c:url value='/usuario/publicity/true'/>"><fmt:message key="label.Yes" /></a></li>
 				            <li><a href="<c:url value='/usuario/publicity/false'/>"><fmt:message key="label.No" /></a></li>
 						</ul>
 					</div>
 				
 
-					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/usuario/idUsr/0'/>"'>
-						<fmt:message key="label.Add.user" />
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonagregar" onclick='location.href="<c:url value='/usuario/idUsr/0'/>"'>
+						<fmt:message key="Add.user" />
 					</button>
 				</div>		
 			</div>
@@ -198,7 +198,7 @@
 										<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="tamanio_imagen">
 									</a>
 								</sec:authorize>
-								<a title="<fmt:message key="Companies" />" href='<c:url value='/usuarioEmpresa/usuario/idUsr/${usuario.idUsr}' />'>
+								<a title="<fmt:message key="Companies" />" href='<c:url value='/usuarioEmpresa/usuario/${usuario.idUsr}' />'>
 									<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
 								</a>
 								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">

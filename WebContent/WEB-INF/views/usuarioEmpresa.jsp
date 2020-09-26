@@ -24,10 +24,10 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="label.companies.belongs.1" /> <c:out value="${usuario.datosPersonales.nombre}" /> <c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /> <fmt:message key="label.companies.belongs.2" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.companies.belongs.1" /> <c:out value="${usuario.datosPersonales.nombre}" /> <c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /> <fmt:message key="label.companies.belongs.2" /></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">		
 				<div class="hidden-xs col-sm-3">
@@ -38,7 +38,7 @@
 				        	<sf:select path="campo" class="form-control-dam">
 				            	<sf:options items="${empresas}" itemValue="idEmp" itemLabel="nombreComercial" />
 				        	</sf:select>
-							<button type="submit" class="btn fondo-c0c0c0 border-color-dam">
+							<button type="submit" class="btn fondo-c0c0c0 border-color-dam ${prefUsr.tema}botonagregar">
 								<fmt:message key="Add.company" />
 							</button>
 							<c:if test="${error}">

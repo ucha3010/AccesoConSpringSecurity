@@ -26,11 +26,11 @@
 	</script>
 	
 </head>
-<body>		
+<body class="${prefUsr.tema}fondopantalla">		
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
-		<div class="well well-sm text-center h2">
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo">
 			<fmt:message key="label.Bill.id" />: <c:out value="${factura.idFac}" />
 			<br>
 			<fmt:message key="label.Date" />: <fmt:formatDate value="${factura.fechaCompra}" pattern="dd/MM/yyyy"/>

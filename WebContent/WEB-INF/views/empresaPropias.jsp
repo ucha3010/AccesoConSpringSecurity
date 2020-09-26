@@ -25,11 +25,11 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
-		<div class="well well-sm text-center h2"><fmt:message key="Own.company" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="Own.company" /></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
 				<div class="hidden-xs col-sm-5 col-md-8">
@@ -47,7 +47,7 @@
 					</c:if>
 				</div>
 				<div class="col-sm-3 col-md-2 navbar-right">
-					<button type="button" class="btn fondo-c0c0c0 ml-1 border-color-dam" onclick='location.href="<c:url value='/empresaPropia/0'/>"'>
+					<button type="button" class="btn fondo-c0c0c0 ml-1 border-color-dam ${prefUsr.tema}botonagregar" onclick='location.href="<c:url value='/empresaPropia/0'/>"'>
 						<fmt:message key="Add.company" />
 					</button>
 				</div>		
@@ -66,7 +66,7 @@
 						<th><fmt:message key="label.Email" /></th>
 						<th><fmt:message key="label.Phone" /></th>
 						<th><fmt:message key="label.Fax" /></th>
-						<th class="extraAdmin-th cursor-text"><fmt:message key="label.Extras" /></th>
+						<th class="extraAdmin-th cursor-text"><fmt:message key="label.Principal" /></th>
 					</tr>
 				</thead>
 				<tbody>

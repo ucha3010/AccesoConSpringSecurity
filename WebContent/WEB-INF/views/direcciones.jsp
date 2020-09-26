@@ -24,7 +24,7 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
@@ -36,7 +36,7 @@
 				<div class="hidden-xs col-sm-3">
 				</div>
 				<div class="col-xs-12 col-sm-3">
-					<button class="btn fondo-c0c0c0 border-color-dam margin-top-20" onclick='location.href="<c:url value='/direccion/formulario/0/${usuario.datosPersonales.idDatosPers}'/>"'>
+					<button class="btn fondo-c0c0c0 border-color-dam margin-top-20 ${prefUsr.tema}botonagregar" onclick='location.href="<c:url value='/direccion/formulario/0/${usuario.datosPersonales.idDatosPers}'/>"'>
 						<fmt:message key="Add.address" />
 					</button>
 				</div>		

@@ -32,10 +32,10 @@
 		}
 	</script>
 </head>
-<body>
-	<div class="container-fluid">
+<body class="${prefUsr.tema}fondopantalla">
+	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="label.Categories.and.subcategories" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Categories.and.subcategories" /></div>
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
 			<div class="row">
@@ -72,10 +72,10 @@
 					</c:if>
 				</div>
 				<div class="col-xs-12 col-sm-6">
-					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/subcategoria/0'/>"'>
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonagregar" onclick='location.href="<c:url value='/subcategoria/0'/>"'>
 						<fmt:message key="Add.subcategory" />
 					</button>
-					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/categoria/0'/>"'>
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonagregar" onclick='location.href="<c:url value='/categoria/0'/>"'>
 						<fmt:message key="Add.category" />
 					</button>
 				</div>		
@@ -179,10 +179,9 @@
 			<div class="hidden-xs hidden-sm hidden-md col-lg-2">
 			</div>
 		</div>
-		
-		<footer>
-			<c:import url="/WEB-INF/views/importFooter.jsp" />
-		</footer>
 	</div>
+	<footer>
+		<c:import url="/WEB-INF/views/importFooter.jsp" />
+	</footer>
 </body>
 </html>

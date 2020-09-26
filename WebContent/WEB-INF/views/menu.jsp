@@ -66,7 +66,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<sec:authorize access="!isAuthenticated()">
 						<li class="btn-info border-color-dam">
-							<a class="menu-style" href="<c:url value='/usuario/nuevo'/>"><fmt:message key="label.New.user" /></a>
+							<a class="menu-style" href="<c:url value='/usuario/nuevo'/>"><fmt:message key="New.user" /></a>
 						</li>
 						<li class="btn-success border-color-dam">
 							<c:if test="${sessionScope.estoy != null}">

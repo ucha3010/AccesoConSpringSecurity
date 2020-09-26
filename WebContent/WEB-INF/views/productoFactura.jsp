@@ -14,11 +14,11 @@
 	<title><fmt:message key="label.Bills" /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
-		<div class="well well-sm text-center h2"><c:out value="${producto[nameColSelect]}" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><c:out value="${producto[nameColSelect]}" /></div>
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="divTablaSinScroll">

@@ -51,10 +51,10 @@
 		}
 	</script>
 </head>
-<body>
-	<div class="container-fluid">
+<body class="${prefUsr.tema}fondopantalla">
+	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="Products" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="Products" /></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
 				<div class="hidden-xs col-sm-3 col-md-2">
@@ -83,7 +83,7 @@
 					</c:if>
 				</div>
 				<div class="col-sm-3 col-md-2  navbar-right">
-					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/producto/0'/>"'>
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonagregar" onclick='location.href="<c:url value='/producto/0'/>"'>
 						<fmt:message key="Add.product" />
 					</button>
 				</div>		

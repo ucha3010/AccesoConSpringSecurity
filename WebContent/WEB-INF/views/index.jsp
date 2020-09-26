@@ -13,11 +13,11 @@
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<c:if test="${not empty usuario_creado}">
-			
+		
 			<div class="row">
 				<div class="col-xs-2 col-sm-3">
 				</div>
@@ -38,6 +38,28 @@
 				<h1>Index</h1>
 			</div>
 		</div>
+		
+<!-- 		pruebas fondo botones desde acá -->
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Categories.and.subcategories" /></div>
+		
+		<div class="row">	
+			<div class="hidden-xs col-sm-4">
+			</div>
+			<div class="col-xs-12 col-sm-8">
+				<a href="#" class="btn btn-danger btn-lg ${prefUsr.tema}botonresto" data-toggle="modal"><fmt:message key='label.Bill.next.days' /></a>
+				<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonagregar"><fmt:message key="Add.category" /></button>
+			</div>
+		</div>
+	
+		<div class="row">	
+			<div class="hidden-xs col-sm-4">
+			</div>
+			<div class="col-xs-12 col-sm-8">
+				<button type="button" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botonguardar"><fmt:message key="Save" /></button>
+				<button type="button" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botoncancelar"><fmt:message key="Cancel" /></button>
+			</div>
+		</div>
+<!-- 		pruebas fondo botones hasta acá -->
 	
 		<div class="row">
 <!-- 			xs, sm, md y lg hacen referencia al tamaño del dispositivo donde se muestra -->

@@ -232,11 +232,11 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<fmt:message key="language.name" var="nameColSelect"/>
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2">
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo">
 			<fmt:message key="label.Add.remove.stock" />
 			<br>
 			<fmt:message key="label.Product.description" />: <c:out value="${frontProductoStock[nameColSelect]}" />
@@ -338,8 +338,8 @@
 					<div class="hidden-xs col-sm-2">
 					</div>
 					<div class="col-xs-12 col-sm-10">
-						<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-						<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/producto/all/null/0/100' />"'><fmt:message key="Cancel" /></button>
+						<button type="submit" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botonguardar"><fmt:message key="Save" /></button>
+						<button type="button" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botoncancelar" onclick='location.href="<c:url value='/producto/all/null/0/100' />"'><fmt:message key="Cancel" /></button>
 						<span id="precioFinalError" name="errorSpan"></span>
 					</div>
 				</div>

@@ -21,22 +21,6 @@
 			document.getElementById("observaciones").value = document.getElementById("observaciones" + numero).value;
 			return true;
 		}
-		
-// 		function actualizaEstado(idFac) {
-// 			var valSelected = document.getElementById("estadoId" + idFac);
-// 			var url = "<c:url value='/factura/status/"+idFac+"/" + valSelected.value + "' />";
-// 			location.href=url;
-			
-// 		}
-		
-		
-// 		function cambioTamanio(elemento){
-// 			$(elemento).on('input', function() {
-// 				var scroll_height = $(elemento).get(0).scrollHeight;
-
-// 				$(elemento).css('height', scroll_height + 'px');
-// 			});
-// 		}
 		             
 		$(document)
 	    .one('focus.autoExpand', 'textarea.autoExpand', function(){
@@ -54,7 +38,7 @@
 		
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
@@ -98,7 +82,7 @@
 										<td class="text-center"><fmt:formatDate value="${fe.fecha}" pattern="dd/MM/yyyy HH:mm:ss"/></td>
 										<td class="text-center"><c:out value="${fe.creadoPor}" /></td>
 										<td class="text-center"><textarea id="observaciones${sizeCount}" name="fe.observaciones" rows='1' data-min-rows='1' class='autoExpand'><c:out value="${fe.observaciones}" /></textarea></td>
-										<td><button type="submit" class="btn btn-primary" onclick="enviarCambio(${fe.id},${sizeCount})"><fmt:message key="label.Update" /></button></td>
+										<td><button type="submit" class="btn btn-primary ${prefUsr.tema}botonresto" onclick="enviarCambio(${fe.id},${sizeCount})"><fmt:message key="label.Update" /></button></td>
 								    </tr>
 								    <c:set var="sizeCount" value="${sizeCount + 1}" scope="page"/>
 								</c:forEach>

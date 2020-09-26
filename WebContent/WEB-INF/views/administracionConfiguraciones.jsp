@@ -57,28 +57,40 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="label.System.configuration" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.System.configuration" /></div>
 
 		<sf:form method="post" action="${pageContext.request.contextPath}/administrar/configuracion/save" modelAttribute="frontAdministrarConfiguracion" onsubmit="return validar()">
 			<c:if test="${frontAdministrarConfiguracion.idUsr != 0}">
 				<sf:hidden path="idUsr"/>
 			</c:if>
 			<div class="row">
-				<div class="col-xs-12 text-center">
-					<c:if test="${not empty adminConfig_save}">
-						<span style="color: green;">
+				<c:if test="${not empty adminConfig_save}">
+					<div class="col-xs-2 col-sm-3">
+					</div>
+					<div class="col-xs-8 col-sm-6">
+						<div class="alert alert-success">
+							<button class="close" data-dismiss="alert"><span>&times;</span></button>
 							<fmt:message key="label.Change.done.success" />
-						</span>
-					</c:if>
-					<c:if test="${not empty adminConfig_no_save}">
-						<span style="color: red;">
+						</div>					
+					</div>
+					<div class="col-xs-2 col-sm-3">
+					</div>
+				</c:if>
+				<c:if test="${not empty adminConfig_no_save}">
+					<div class="col-xs-2 col-sm-3">
+					</div>
+					<div class="col-xs-8 col-sm-6">
+						<div class="alert alert-danger">
+							<button class="close" data-dismiss="alert"><span>&times;</span></button>
 							<fmt:message key="label.Change.not.done.success" />
-						</span>
-					</c:if>
-				</div>
+						</div>					
+					</div>
+					<div class="col-xs-2 col-sm-3">
+					</div>
+				</c:if>
 			</div>
 			<div class="row">		
 				<div class="hidden-xs col-sm-1">
@@ -99,8 +111,8 @@
 				<div class="hidden-xs col-sm-4">
 				</div>
 				<div class="col-xs-12 col-sm-8">
-					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/usuario/logged/${frontAdministrarConfiguracion.idUsr}' />"'><fmt:message key="Return" /></button>
+					<button type="submit" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botonguardar"><fmt:message key="Save" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botoncancelar" onclick='location.href="<c:url value='/usuario/logged/${frontAdministrarConfiguracion.idUsr}' />"'><fmt:message key="Return" /></button>
 					<span id="hayError" name="errorSpan" style="color:red"></span>
 				</div>
 			</div>

@@ -24,11 +24,11 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
-		<div class="well well-sm text-center h2"><c:out value="${empresa.nombreComercial}"></c:out></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><c:out value="${empresa.nombreComercial}"></c:out></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">		
 				<div class="hidden-xs col-sm-3">
@@ -42,7 +42,7 @@
 				            		<sf:option value="${producto.idPro}" label="${nombreProducto}"/>
 				            	</c:forEach>
 				        	</sf:select>
-							<button type="submit" class="btn fondo-c0c0c0 border-color-dam">
+							<button type="submit" class="btn fondo-c0c0c0 border-color-dam ${prefUsr.tema}botonagregar">
 								<fmt:message key="Add.product" />
 							</button>
 							<c:if test="${error}">

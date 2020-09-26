@@ -7,7 +7,7 @@
 	<title>Index 3</title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<c:import url="/WEB-INF/views/menu.jsp" />
 	<h1>Index 3</h1>
 
