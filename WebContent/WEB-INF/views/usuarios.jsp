@@ -42,7 +42,7 @@
 			const texto = normalizado(formulario.value.toLowerCase());
 			resultado.innerHTML = '';
 			if(texto === ''){
-				$(".collapse").collapse('hide');
+				$(".resultadosBusqueda").collapse('hide');
 			} else {
 				<c:forEach items="${buscarusuarios}" var="usu" varStatus="status">
 					var username = normalizado('${usu.usuario}');
@@ -57,7 +57,7 @@
 						}
 					}
 				</c:forEach>
-				$(".collapse").collapse('show');
+				$(".resultadosBusqueda").collapse('show');
 			}
 		}	
 		function ordenaTabla(numCol,actual,total){
@@ -75,15 +75,15 @@
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
-				<div class="hidden-xs col-sm-3 col-md-2">
+				<div class="col-sm-3 col-md-2">
 					<input type="text" id="formulario" class="form-control">
 					<script>
 						const formulario = document.querySelector('#formulario');
 						formulario.addEventListener('keyup', filtrarAdmin);
 					</script>
 				</div>
-				<div class="hidden-xs col-sm-1">
-					<div class="dropdown collapse">
+				<div class="col-sm-1">
+					<div class="dropdown collapse resultadosBusqueda">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>

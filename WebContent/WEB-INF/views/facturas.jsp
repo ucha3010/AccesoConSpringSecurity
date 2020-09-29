@@ -38,7 +38,7 @@
 			const texto = normalizado(formulario.value.toLowerCase());
 			resultado.innerHTML = '';
 			if(texto === ''){
-				$(".collapse").collapse('hide');
+				$(".resultadosBusqueda").collapse('hide');
 			} else {
 				<c:forEach items="${buscarfacturas}" var="fac" varStatus="status">
 					var idNum = ${fac.idFac};
@@ -51,7 +51,7 @@
 						resultado.innerHTML += "<a href=\"<c:url value='/factura/filtered/${fac.idFac}' />\"><fmt:message key="label.Bill.id" />: ${fac.idFac} // <fmt:message key='label.Date' />: "+fechaString+" // <fmt:message key='label.Total.amount' />: ${fac.importeTotal}</a>";
 					}
 				</c:forEach>
-				$(".collapse").collapse('show');
+				$(".resultadosBusqueda").collapse('show');
 			}
 		}
 		
@@ -81,20 +81,20 @@
 		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Bills" /></div>
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<div class="row">
-			<div class="hidden-xs col-sm-3">
+			<div class="col-xs-12 col-sm-3">
 				<input type="text" id="formulario" class="form-control">
 				<script>
 					const formulario = document.querySelector('#formulario');
 					formulario.addEventListener('keyup', filtrar);
 				</script>
 			</div>
-			<div class="hidden-xs col-sm-3">
-				<div class="dropdown collapse">
+			<div class="col-xs-3">
+				<div class="dropdown collapse resultadosBusqueda">
 					<div class="dropdown-content" id="resultado">
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-12 col-sm-3">
+			<div class="col-xs-6 col-sm-3">
 				<c:if test="${not empty factura_eliminado}">
 					<span style="color: green;">
 						<fmt:message key="Bill.deleted" />

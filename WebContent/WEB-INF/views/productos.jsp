@@ -29,7 +29,7 @@
 			const texto = normalizado(formulario.value.toLowerCase());
 			resultado.innerHTML = '';
 			if(texto === ''){
-				$(".collapse").collapse('hide');
+				$(".resultadosBusqueda").collapse('hide');
 			} else {
 				<c:forEach items="${buscarproductos}" var="pro" varStatus="status">
 					var marca = normalizado('${pro.marca}');
@@ -41,7 +41,7 @@
 						resultado.innerHTML += "<a href=\"<c:url value='/producto/filtered/${pro.idPro}' />\">${pro.marca} ${pro.modelo} ${pro.precioVenta} ${pro[nameColSelect]}</a>";
 					}
 				</c:forEach>
-				$(".collapse").collapse('show');
+				$(".resultadosBusqueda").collapse('show');
 			}
 		}
 		function ordenaTabla(numCol,actual,total){
@@ -57,15 +57,15 @@
 		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="Products" /></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
-				<div class="hidden-xs col-sm-3 col-md-2">
+				<div class="col-sm-3 col-md-2">
 					<input type="text" id="formulario" class="form-control">
 					<script>
 						const formulario = document.querySelector('#formulario');
 						formulario.addEventListener('keyup', filtrar);
 					</script>
 				</div>
-				<div class="hidden-xs col-sm-2 col-md-4">
-					<div class="dropdown collapse">
+				<div class="col-sm-2 col-md-4">
+					<div class="dropdown collapse resultadosBusqueda">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
@@ -91,15 +91,15 @@
 		</sec:authorize>
 		<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
-				<div class="hidden-xs col-sm-3 col-md-2">
+				<div class="col-sm-3 col-md-2">
 					<input type="text" id="formulario" class="form-control">
 					<script>
 						const formulario = document.querySelector('#formulario');
 						formulario.addEventListener('keyup', filtrar);
 					</script>
 				</div>
-				<div class="hidden-xs col-sm-3 col-md-6">
-					<div class="dropdown collapse">
+				<div class="col-sm-3 col-md-6">
+					<div class="dropdown collapse resultadosBusqueda">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>

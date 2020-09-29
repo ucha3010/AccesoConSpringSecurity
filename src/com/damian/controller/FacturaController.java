@@ -78,6 +78,7 @@ public class FacturaController {
 		modelAndView.addObject("facturas", facturaService.findByIdEstList(idEst, column, request));
 		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, "factura"));
 		modelAndView.addObject("estados", estadoService.findAll());
+		modelAndView.addObject("estadoActual", estadoService.findByIdModel(idEst));
 		modelAndView.addObject("idEst", idEst);
 		modelAndView.addObject("estoy", "filteredEstado");
 		modelAndView.setViewName("facturasFilteredEstado");

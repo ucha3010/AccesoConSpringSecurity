@@ -39,6 +39,7 @@
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Bills" /> <c:out value="${estadoActual[nameColSelect]}" /></div>
 		<div class="row">
 			<div class="col-xs-12">
 				<c:if test="${not empty factura_eliminado}">

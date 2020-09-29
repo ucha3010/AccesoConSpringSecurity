@@ -53,52 +53,128 @@
 				</div>		
 			</div>
 		</sec:authorize>
-		<div class="divTablaSinScroll">
-			<table class="table table-striped">
-				<thead>
-					<tr class="cursor-pointer">
-						<c:set var="count" value="0" scope="page" />
-						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-							<th class="extraAdmin-th cursor-text"></th>
-						</sec:authorize>
-						<th><fmt:message key="label.Company.name" /></th>
-						<th><fmt:message key="label.vat" /></th>
-						<th><fmt:message key="label.Email" /></th>
-						<th><fmt:message key="label.Phone" /></th>
-						<th><fmt:message key="label.Fax" /></th>
-						<th class="extraAdmin-th cursor-text"><fmt:message key="label.Principal" /></th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${empresaPropias}" var="empresaPropia">
-					    <tr title='<fmt:message key='${empresaPropia.direccionEmpresaPropia.tipoVia}' />&#x20;<c:out value="${empresaPropia.direccionEmpresaPropia.nombreVia}" />&#x20;<c:out value="${empresaPropia.direccionEmpresaPropia.numero}" />&#x20;<c:out value="${empresaPropia.direccionEmpresaPropia.resto}" />&#xA;(<c:out value="${empresaPropia.direccionEmpresaPropia.cp}" />) <c:out value="${empresaPropia.direccionEmpresaPropia.ciudad}" />&#xA;<c:out value="${empresaPropia.direccionEmpresaPropia.provincia}" />&#xA;<c:out value="${empresaPropia.direccionEmpresaPropia.pais[nameColSelect]}" />'>
-							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-								<td class="extraAdmin-td">
-									<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/empresaPropia/${empresaPropia.idPropia}' />"'>
-										<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
-									</a>
-									<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${empresaPropia.idPropia})">
-										<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-									</a>
+		
+		<div class="row">
+			<div class="hidden-xs col-sm-12">
+				<div class="divTablaSinScroll">
+					<table class="table table-striped">
+						<thead>
+							<tr class="cursor-pointer">
+								<c:set var="count" value="0" scope="page" />
+								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+									<th class="extraAdmin-th cursor-text"></th>
+								</sec:authorize>
+								<th><fmt:message key="label.Company.name" /></th>
+								<th><fmt:message key="label.vat" /></th>
+								<th><fmt:message key="label.Email" /></th>
+								<th><fmt:message key="label.Phone" /></th>
+								<th><fmt:message key="label.Fax" /></th>
+								<th class="extraAdmin-th cursor-text"><fmt:message key="label.Principal" /></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${empresaPropias}" var="empresaPropia">
+							    <tr title='<fmt:message key='${empresaPropia.direccionEmpresaPropia.tipoVia}' />&#x20;<c:out value="${empresaPropia.direccionEmpresaPropia.nombreVia}" />&#x20;<c:out value="${empresaPropia.direccionEmpresaPropia.numero}" />&#x20;<c:out value="${empresaPropia.direccionEmpresaPropia.resto}" />&#xA;(<c:out value="${empresaPropia.direccionEmpresaPropia.cp}" />) <c:out value="${empresaPropia.direccionEmpresaPropia.ciudad}" />&#xA;<c:out value="${empresaPropia.direccionEmpresaPropia.provincia}" />&#xA;<c:out value="${empresaPropia.direccionEmpresaPropia.pais[nameColSelect]}" />'>
+									<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+										<td class="extraAdmin-td">
+											<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/empresaPropia/${empresaPropia.idPropia}' />"'>
+												<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+											</a>
+											<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${empresaPropia.idPropia})">
+												<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+											</a>
+										</td>
+									</sec:authorize>
+									<td><c:out value="${empresaPropia.razonSocial}" /></td>
+									<td><c:out value="${empresaPropia.cif}" /></td>
+									<td><c:out value="${empresaPropia.email}" /></td>	
+									<td><c:out value="${empresaPropia.telefono}" /></td>
+									<td><c:out value="${empresaPropia.fax}" /></td>
+									<td class="extraAdmin-td">
+										<c:if test="${empresaPropia.facturacion}">
+											<img src='<c:url value="/resources/imgs/true.png"/>' class="tamanio_imagen">
+										</c:if>
+										<c:if test="${not empresaPropia.facturacion}">
+											<img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/empresaPropia/available/${empresaPropia.idPropia}' />"'>
+										</c:if>
+									</td>
+							    </tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<table class="table table-striped">
+					<tbody>
+						<c:forEach items="${empresaPropias}" var="empresaPropia">
+						    <tr href="#ventana${empresaPropia.idPropia}" class="thumbnail" data-toggle="modal">
+								<td><c:out value="${empresaPropia.razonSocial}" /></td>
+								<td>
+									<c:if test="${empresaPropia.facturacion}">
+										<img src='<c:url value="/resources/imgs/true.png"/>' class="tamanio_imagen">
+									</c:if>
+									<c:if test="${not empresaPropia.facturacion}">
+										<img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/empresaPropia/available/${empresaPropia.idPropia}' />"'>
+									</c:if>
 								</td>
-							</sec:authorize>
-							<td><c:out value="${empresaPropia.razonSocial}" /></td>
-							<td><c:out value="${empresaPropia.cif}" /></td>
-							<td><c:out value="${empresaPropia.email}" /></td>	
-							<td><c:out value="${empresaPropia.telefono}" /></td>
-							<td><c:out value="${empresaPropia.fax}" /></td>
-							<td class="extraAdmin-td">
-								<c:if test="${empresaPropia.facturacion}">
-									<img src='<c:url value="/resources/imgs/true.png"/>' class="tamanio_imagen">
-								</c:if>
-								<c:if test="${not empresaPropia.facturacion}">
-									<img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/empresaPropia/available/${empresaPropia.idPropia}' />"'>
-								</c:if>
-							</td>
-					    </tr>
-					</c:forEach>
-				</tbody>
-			</table>
+								<td><c:out value="${empresaPropia.cif}" /></td>
+						    </tr>
+						    
+							<div class="modal fade" id="ventana${empresaPropia.idPropia}">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											<h4 class="modal-title justify-content-center"><c:out value="${empresaPropia.razonSocial}" /></h4>
+										</div>
+										<div class="modal-body">
+							            	<div class="col-xs-4">								
+												<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">	
+									            	<div class="col-xs-6">
+														<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/empresaPropia/${empresaPropia.idPropia}' />"' class="cursor-pointer">
+															<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+														</a>
+													</div>
+										            <div class="col-xs-6">
+														<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${empresaPropia.idPropia})" class="cursor-pointer">
+															<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+														</a>	
+													</div>									
+												</sec:authorize>
+											</div>	
+								            <div class="col-xs-8">
+											</div>
+											<div class="height50"></div>
+											<p><fmt:message key="label.Company.name" />: <c:out value="${empresaPropia.razonSocial}" />
+												<c:if test="${empresaPropia.facturacion}">
+													<img src='<c:url value="/resources/imgs/true.png"/>' class="tamanio_imagen">
+												</c:if>
+												<c:if test="${not empresaPropia.facturacion}">
+													<img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/empresaPropia/available/${empresaPropia.idPropia}' />"'>
+												</c:if>
+											</p>
+											<p><fmt:message key="label.vat" />: <c:out value="${empresaPropia.cif}" /></p>
+											<p><fmt:message key="label.Email" />: <c:out value="${empresaPropia.email}" /></p>
+											<p><fmt:message key="label.Phone" />: <c:out value="${empresaPropia.telefono}" /></p>
+											<p><fmt:message key="label.Fax" />: <c:out value="${empresaPropia.fax}" /></p>
+											<p><fmt:message key="label.Address" />:</p>
+											<p><fmt:message key='${empresaPropia.direccionEmpresaPropia.tipoVia}' /> <c:out value="${empresaPropia.direccionEmpresaPropia.nombreVia}" /> <c:out value="${empresaPropia.direccionEmpresaPropia.numero}" /></p>
+											<p><c:out value="${empresaPropia.direccionEmpresaPropia.resto}" /></p>
+											<p>(<c:out value="${empresaPropia.direccionEmpresaPropia.cp}" />) <c:out value="${empresaPropia.direccionEmpresaPropia.ciudad}" /></p>
+											<p><c:out value="${empresaPropia.direccionEmpresaPropia.provincia}" /></p>
+											<p><c:out value="${empresaPropia.direccionEmpresaPropia.pais[nameColSelect]}" /></p>
+										</div>
+									</div>
+								</div>
+							</div>
+					    </c:forEach>
+				    </tbody>
+				</table>
+			</div>
 		</div>
 		
 		<footer>
