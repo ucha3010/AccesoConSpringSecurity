@@ -113,6 +113,25 @@ public class FacturaController {
 
 	}
 
+	@RequestMapping("/factura/delete/filteredEstado/{idFac}/{idEst}/{column}/{paginaInicio}/{totalPaginas}")
+	public String deleteFacturaFilteredEstado(ModelAndView modelAndView, @PathVariable("idFac") int idFac, @PathVariable("idEst") int idEst,
+			@PathVariable("column") String column, @PathVariable("paginaInicio") int paginaInicio,
+			@PathVariable("totalPaginas") int totalPaginas, RedirectAttributes ra, HttpServletRequest request) {
+
+		try {
+			int cantidad = facturaService.delete(idFac, request);
+			if (cantidad == 0) {
+				ra.addFlashAttribute("factura_stock_negativo", "factura_stock_negativo");
+			} else {
+				ra.addFlashAttribute("factura_eliminado", "factura_eliminado");
+			}
+		} catch (NotEmptyException e) {
+			ra.addFlashAttribute("factura_asociado", "factura_asociado");
+		}
+		return "redirect:/factura/filteredEstado/" + idEst + "/" + column + "/" + paginaInicio + "/" + totalPaginas;
+
+	}
+
 	@RequestMapping("/factura/status/{idFac}/{idEst}/{column}/{paginaInicio}/{totalPaginas}/{from}/{idEstView}")
 	public ModelAndView changeStatus(ModelAndView modelAndView, @PathVariable("idFac") int idFac,
 			@PathVariable("idEst") int idEst, @PathVariable("column") String column,

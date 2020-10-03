@@ -81,10 +81,8 @@
 				</div>		
 			</div>
 		</sec:authorize>
-		<div class="form-row">
-			<div class="hidden-xs hidden-sm hidden-md col-lg-2">
-			</div>
-			<div class="col-xs-12 col-lg-8">
+		<div class="row">
+			<div class="hidden-xs col-sm-12 col-md-12">
 				<div class="divTablaSinScroll">
 					<table class="table table-striped">
 						<thead>
@@ -176,12 +174,109 @@
 					</table>
 				</div>
 			</div>
-			<div class="hidden-xs hidden-sm hidden-md col-lg-2">
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<table class="table table-striped">
+					<tbody>
+						<c:set var="bgColor" value="color-orange" scope="page" />
+						<c:forEach items="${categorias}" var="categoria">
+							<c:choose>
+							    <c:when test="${bgColor == 'color-orange'}">
+									<c:set var="bgColor" value="color-green" scope="page" />
+							    </c:when>   
+							    <c:when test="${bgColor == 'color-green'}">
+									<c:set var="bgColor" value="color-orange" scope="page" />
+							    </c:when> 
+							    <c:otherwise>
+							    </c:otherwise>
+							</c:choose>
+							<c:set var="subcategorias" value="${categoria.subcategorias}" scope="page" />
+							<c:if test="${empty subcategorias}">
+					    		<tr href="#ventana${categoria.idCat}" class="thumbnail" data-toggle="modal">
+									<td class ="width-100 ${bgColor}"><c:out value="${categoria[nameColSelect]}" /></td>
+									<td class ="width-100"></td>
+									<td class ="width-100"></td>
+					    		</tr>
+							</c:if>
+							<c:set var="repetido" value="false" scope="page" />
+							<c:forEach items="${subcategorias}" var="subcategoria">
+								<c:set var="productos" value="${subcategoria.productos}" scope="page" />
+					    		<tr href="#ventana${categoria.idCat}" class="thumbnail" data-toggle="modal">
+								    <c:if test="${repetido}">
+									    <td class ="width-100"></td>
+										<td class ="min-width-100 ${bgColor}"><c:out value="${subcategoria[nameColSelect]}" /></td>
+										<td class ="width-150 color-blue">
+											<c:if test="${not empty subcategoria.productos}">
+												<fmt:message key="Has.products" />
+											</c:if>
+										</td>
+									</c:if>
+								    <c:if test="${not repetido}">
+										<td class ="width-100 ${bgColor}"><c:out value="${categoria[nameColSelect]}" /></td>
+										<td class ="min-width-100 ${bgColor}"><c:out value="${subcategoria[nameColSelect]}" /></td>
+										<td class ="width-150 color-blue">
+											<c:if test="${not empty subcategoria.productos}">
+												<fmt:message key="Has.products" />
+											</c:if>
+										</td>
+										<c:set var="repetido" value="true" scope="page" />
+									</c:if>
+								</tr>
+							</c:forEach>
+						    
+							<div class="modal fade" id="ventana${categoria.idCat}">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											<h4 class="modal-title justify-content-center">
+											<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/categoria/${categoria.idCat}' />"' class="cursor-pointer">
+												<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+											</a>
+											<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${categoria.idCat})" class="cursor-pointer">
+												<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+											</a>
+											<c:out value="${categoria[nameColSelect]}" /></h4>
+										</div>
+										<div class="modal-body">
+											<div class="height50"></div>
+											<c:forEach items="${subcategorias}" var="subcategoria">
+												<p>
+													<sec:authorize access="hasAnyRole('ROL_ROOT','ROL_ADMIN')">
+														<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/subcategoria/${subcategoria.idSub}' />"' class="cursor-pointer">
+															<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+														</a>
+														<a title="<fmt:message key='Delete' />" onclick="return confirmDeleteSub(${subcategoria.idSub})" class="cursor-pointer">
+															<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+														</a>
+													</sec:authorize>
+													<c:out value="${subcategoria[nameColSelect]}" />
+													<c:set var="productos" value="${subcategoria.productos}" scope="page" />
+													<c:if test="${not empty subcategoria.productos}">
+														<select name="selectProducto" class="border-radius-dam">
+															<c:forEach items="${productos}" var="producto">
+																<option value="${producto.idPro}"><c:out value="${producto[nameColSelect]}" /></option>
+															</c:forEach>
+														</select>
+													</c:if>
+												</p>
+											</c:forEach>
+										</div>
+									</div>
+								</div>
+							</div>
+					    </c:forEach>
+
+				    </tbody>
+				</table>
 			</div>
 		</div>
+		
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
 	</div>
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
 </body>
 </html>

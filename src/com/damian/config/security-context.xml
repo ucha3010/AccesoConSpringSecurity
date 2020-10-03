@@ -65,6 +65,7 @@
 		<security:intercept-url pattern="/usuario/nuevo/**" access="permitAll" />
 		<security:intercept-url pattern="/usuario/publicity/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/usuario/reset" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/usuario/reset/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/usuario/save" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/usuario/username/**" access="permitAll" />
 		<security:intercept-url pattern="/usuarioEmpresa" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />

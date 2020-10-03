@@ -16,26 +16,10 @@
 <body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<c:if test="${not empty usuario_creado}">
-		
-			<div class="row">
-				<div class="col-xs-2 col-sm-3">
-				</div>
-				<div class="col-xs-8 col-sm-6">
-					<div class="alert alert-success">
-						<button class="close" data-dismiss="alert"><span>&times;</span></button>
-						<fmt:message key="label.user.successfully.created" />
-					</div>					
-				</div>
-				<div class="col-xs-2 col-sm-3">
-				</div>
-			</div>
-		</c:if>	
-		
 		
 		<div class="row">
 			<div class="col-md-12">
-				<h1>Index</h1>
+				<h1>Nueva página</h1>
 			</div>
 		</div>
 

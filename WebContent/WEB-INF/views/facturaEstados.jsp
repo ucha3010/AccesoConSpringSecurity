@@ -21,6 +21,12 @@
 			document.getElementById("observaciones").value = document.getElementById("observaciones" + numero).value;
 			return true;
 		}
+		
+		function enviarCambioXS(id,numero){
+			document.getElementById("id").value = id;
+			document.getElementById("observaciones").value = document.getElementById("observacionesXS" + numero).value;
+			return true;
+		}
 		             
 		$(document)
 	    .one('focus.autoExpand', 'textarea.autoExpand', function(){
@@ -39,7 +45,7 @@
 	</script>
 </head>
 <body class="${prefUsr.tema}fondopantalla">
-	<div class="container-fluid">
+	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<div class="row">
@@ -57,14 +63,14 @@
 			</div>		
 		</div>
 		<div class="row">
+			<sf:form method="post" action="${pageContext.request.contextPath}/facturaEstado/update/observaciones" modelAttribute="facturaEstado">
+				<sf:hidden path="id"/>
+				<sf:hidden path="observaciones"/>
 			<div class="hidden-xs col-sm-1">
 			</div>
-			<div class="col-xs-12 col-sm-10">
+			<div class="hidden-xs col-sm-10">
 				<div class="divTablaSinScroll">
 					<table class="table table-striped">
-						<sf:form method="post" action="${pageContext.request.contextPath}/facturaEstado/update/observaciones" modelAttribute="facturaEstado">
-							<sf:hidden path="id"/>
-							<sf:hidden path="observaciones"/>
 							<thead>
 								<tr>
 									<th class="text-center"><fmt:message key="label.state" /></th>
@@ -87,15 +93,37 @@
 								    <c:set var="sizeCount" value="${sizeCount + 1}" scope="page"/>
 								</c:forEach>
 							</tbody>
-						</sf:form>
 					</table>
 				</div>
 			</div>
+			<div class="hidden-xs col-sm-1">
+			</div>
+			
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<table class="table table-striped">
+					<tbody>
+						<c:set var="sizeCountXS" value="0" scope="page" />
+						<c:forEach items="${facturaEstados}" var="fe">
+						    <tr>
+								<td class="text-center"><c:out value="${fe.estado[nameColSelect]}" /></td>
+								<td class="text-center"><fmt:formatDate value="${fe.fecha}" pattern="dd/MM/yyyy HH:mm:ss"/></td>
+								<td class="text-center"><c:out value="${fe.creadoPor}" /></td>
+							</tr>
+							<tr>
+								<td class="text-center"><textarea id="observacionesXS${sizeCountXS}" name="fe.observaciones" rows='1' data-min-rows='1' class='autoExpand'><c:out value="${fe.observaciones}" /></textarea></td>
+								<td><button type="submit" class="btn btn-primary ${prefUsr.tema}botonresto" onclick="enviarCambioXS(${fe.id},${sizeCountXS})"><fmt:message key="label.Update" /></button></td>
+						    </tr>
+						    <c:set var="sizeCountXS" value="${sizeCountXS + 1}" scope="page"/>
+					    </c:forEach>
+				    </tbody>
+				</table>
+			</div>
+			</sf:form>
 		</div>
-	</div>
 	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
+	</div>
 </body>
 </html>

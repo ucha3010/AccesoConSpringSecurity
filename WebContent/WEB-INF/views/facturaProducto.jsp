@@ -27,7 +27,7 @@
 	
 </head>
 <body class="${prefUsr.tema}fondopantalla">		
-	<div class="container-fluid">
+	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo">
@@ -140,10 +140,10 @@
 				</table>
 			</c:if>
 		</div>
-	</div>
 	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
+	</div>
 </body>
 </html>

@@ -20,7 +20,7 @@
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><c:out value="${producto[nameColSelect]}" /></div>
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="hidden-xs col-sm-12">
 				<div class="divTablaSinScroll">
 					<table class="table table-striped">
 						<thead>
@@ -56,10 +56,65 @@
 				</div>
 			</div>
 		</div>
-	</div>
+		
+		<div class="row">
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<table class="table table-striped">
+					<tbody>
+						<c:forEach items="${productoFacturas}" var="productoFactura">
+						    <tr href="#ventana${productoFactura.factura.idFac}" class="thumbnail" data-toggle="modal">
+								<td class="text-center"><c:out value="${productoFactura.factura.idFac}" /></td>
+								<c:if test="${productoFactura.factura.compra}">
+									<td class="text-center"><fmt:message key="label.Purchase" /></td>
+								</c:if>
+								<c:if test="${not productoFactura.factura.compra}">
+									<td class="text-center"><fmt:message key="label.Sale" /></td>
+								</c:if>
+								<td class="text-center"><fmt:formatDate value="${productoFactura.factura.fechaCompra}" pattern="dd/MM/yyyy"/></td>
+								<td class="text-right"><fmt:formatNumber type="currency" value="${productoFactura.factura.importeTotal}" /></td>
+						    </tr>
+						    
+							<div class="modal fade" id="ventana${productoFactura.factura.idFac}">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											<h4 class="modal-title justify-content-center"><fmt:message key="label.Bill.id" />: <c:out value="${productoFactura.factura.idFac}" /></h4>
+										</div>
+										<div class="modal-body">
+							            	<div class="col-xs-2">	
+												<a title="<fmt:message key="Products" />" href='<c:url value='/productoFactura/factura/${productoFactura.factura.idFac}' />'>
+													<img src='<c:url value="/resources/imgs/factura.png"/>' class="margin-left-5porciento width-35">
+												</a>
+											</div>	
+								            <div class="col-xs-10">
+											</div>
+											<div class="height50"></div>
+											<p><fmt:message key="label.Purchase.Sale" />: 
+												<c:if test="${productoFactura.factura.compra}">
+													<fmt:message key="label.Purchase" />
+												</c:if>
+												<c:if test="${not productoFactura.factura.compra}">
+													<fmt:message key="label.Sale" />
+												</c:if>
+											</p>
+											<p><fmt:message key="label.date.purchase" />: <fmt:formatDate value="${productoFactura.factura.fechaCompra}" pattern="dd/MM/yyyy"/></p>
+											<p><fmt:message key="label.Total.amount" />: <fmt:formatNumber type="currency" value="${productoFactura.factura.importeTotal}" /></p>
+											<p><fmt:message key="label.units" />: <c:out value="${productoFactura.cantidad}" /></p>
+											<p><fmt:message key="label.Observations" />: <c:out value="${productoFactura.observaciones}" /></p>
+										</div>
+									</div>
+								</div>
+							</div>
+					    </c:forEach>
+				    </tbody>
+				</table>
+			</div>
+		</div>
 	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+		<footer>
+			<c:import url="/WEB-INF/views/importFooter.jsp" />
+		</footer>
+	</div>
 </body>
 </html>
