@@ -101,6 +101,18 @@ body {
 	background-color: #fff;
 }
 
+.botonesindex {
+	border-radius: 18px;
+	text-align: center;
+	padding: 5px;
+	width: 95%;
+	cursor: pointer;
+}
+
+.botonesindex:hover {
+	opacity: 80%;
+}
+
 /*Genéricos**********************************************/
 
 button:hover{
@@ -122,4 +134,49 @@ button:hover{
 
 .bg-white {
 	background-color: white;
+}
+
+.border-radius-10 {
+	border-radius: 10px;
+}
+
+.border-radius-15 {
+	border-radius: 15px;
+}
+
+.separacion10 {
+	height: 10px;
+}
+
+.separacion20 {
+	height: 20px;
+}
+
+.padding9 {
+	padding: 9px;
+}
+
+.height27 {
+	height: 27px;
+}
+
+.speechPublicitario {
+	text-align: center;
+	font-size: 16px;
+}
+
+.item-center {
+	text-align: -webkit-center;
+}
+
+.changeitem {
+	bottom: -15px;
+}
+
+.changeitem li {
+	background-color: orange;
+}
+
+.changeitem .active {
+	background-color: blue;
 }

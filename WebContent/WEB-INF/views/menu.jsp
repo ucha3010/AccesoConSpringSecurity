@@ -92,7 +92,7 @@
 								</a>
 							</span>
 						</li>
-						<li class="btn-danger">
+						<li class="btn-danger border-radius-10">
 							<a class="menu-style" href="<c:url value='/logout' />"><span class="glyphicon glyphicon-off"></span></a>
 						</li>
 					</sec:authorize>
@@ -111,7 +111,7 @@
 								</a>
 							</span>
 						</li>
-						<li class="btn-danger">
+						<li class="btn-danger border-radius-10">
 							<a class="menu-style" href="<c:url value='/logout' />"><span class="glyphicon glyphicon-off"></span></a>
 						</li>
 					</sec:authorize>
@@ -132,4 +132,5 @@
 			
 		</div>
 	</nav>
+	<div class="separacion10"></div>
 </header>

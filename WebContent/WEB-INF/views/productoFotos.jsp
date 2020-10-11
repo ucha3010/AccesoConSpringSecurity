@@ -136,10 +136,17 @@
 			</div>
 		
 		</sf:form>
-		
-		<footer>
-			<c:import url="/WEB-INF/views/importFooter.jsp" />
-		</footer>
+	</div>
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
 	</div>
 </body>
 </html>
