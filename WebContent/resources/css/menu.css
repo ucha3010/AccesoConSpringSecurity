@@ -163,6 +163,7 @@ button:hover{
 .speechPublicitario {
 	text-align: center;
 	font-size: 16px;
+	padding: 40px;
 }
 
 .item-center {
@@ -179,4 +180,11 @@ button:hover{
 
 .changeitem .active {
 	background-color: blue;
+}
+
+.titulossecundarios {
+	padding: 30px;
+	color: #333;
+	font-size: 27px;
+	text-transform: uppercase;
 }

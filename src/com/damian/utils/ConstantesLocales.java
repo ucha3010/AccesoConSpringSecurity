@@ -13,6 +13,8 @@ public class ConstantesLocales {
 
 	public static final String IVA_ENVIO = "ivaEnvio";
 
+	public static final String SPEECH = "speech";
+
 	public static final List<String> CLAVES_CONFIG_ADMIN = Arrays.asList(IVA_ENVIO);
 
 }

@@ -21,6 +21,7 @@ import com.damian.pojo.Constantes;
 import com.damian.pojo.front.FrontAdministrarConfiguracion;
 import com.damian.service.ConstantesService;
 import com.damian.utils.ConstantesLocales;
+import com.mysql.jdbc.StringUtils;
 
 @Controller
 public class AdministracionController {
@@ -53,6 +54,12 @@ public class AdministracionController {
 			constantes = new Constantes();
 			constantes.setClave(ConstantesLocales.IVA_ENVIO);
 			constantes.setValorDouble(frontAdministrarConfiguracion.getIvaEnvio());
+			constantesList.add(constantes);
+		}
+		if (!StringUtils.isNullOrEmpty(frontAdministrarConfiguracion.getSpeech())) {
+			constantes = new Constantes();
+			constantes.setClave(ConstantesLocales.SPEECH);
+			constantes.setValorText(frontAdministrarConfiguracion.getSpeech());
 			constantesList.add(constantes);
 		}
 		try {

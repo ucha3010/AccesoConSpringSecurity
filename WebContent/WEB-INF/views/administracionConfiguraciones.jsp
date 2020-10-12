@@ -100,11 +100,11 @@
 					<sf:input path="ivaEnvio" class="form-control" id="ivaEnvio" />
 					<span id="ivaEnvioError" name="errorSpan"></span>
 				</div>
-<!-- 				<div class="col-xs-12 col-sm-5"> -->
-<%-- 					<label for="nombreEN"><fmt:message key="Category.name.english" /></label>  --%>
-<%-- 					<sf:input path="nombreEN" class="form-control" id="nombreCategoriaEN" /> --%>
-<!-- 					<span id="nombreCategoriaENError" name="errorSpan"></span> -->
-<!-- 				</div>	 -->
+				<div class="col-xs-12 col-sm-5">
+					<label for="speech"><fmt:message key="label.Commercial.speech" /></label>
+					<sf:textarea path="speech" type="text" class="form-control" id="speech" />
+					<span id="speechError" name="errorSpan"></span>
+				</div>	
 			</div>
 			<br/>
 			<div class="row">	
@@ -117,10 +117,18 @@
 				</div>
 			</div>
 		</sf:form>
-		
-		<footer>
-			<c:import url="/WEB-INF/views/importFooter.jsp" />
-		</footer>
+	</div>
+	
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
 	</div>
 </body>
 </html>

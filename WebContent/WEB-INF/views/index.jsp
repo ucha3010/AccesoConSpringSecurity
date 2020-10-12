@@ -175,7 +175,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="speechPublicitario">
-					La tienda que tiene los productos que estás necesitando
+					<c:out value="${speech.valorText}"></c:out>
 				</div>
 			</div>
 		</div>
@@ -225,6 +225,87 @@
 			</div>
 		</div>
 	
+		<div class="titulossecundarios"><fmt:message key="label.Offers" /></div>
+	
+		<div class="row">
+			<div class="hidden-xs col-sm-12">
+				<div class="col-sm-2">
+					Producto 1
+				</div>
+				<div class="col-sm-1">
+				</div>
+				<div class="col-sm-2">
+					Producto 2
+				</div>
+				<div class="col-sm-1">
+				</div>
+				<div class="col-sm-2">
+					Producto 3
+				</div>
+				<div class="col-sm-1">
+				</div>
+				<div class="col-sm-2">
+					Ver más
+				</div>
+				<div class="col-sm-1">
+				</div>
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="col-xs-5">
+					Producto 1
+				</div>
+				<div class="col-xs-1">
+				</div>
+				<div class="col-xs-5">
+					Producto 2
+				</div>
+				<div class="col-xs-1">
+				</div>
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="separacion10"></div>
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="col-xs-5">
+					Producto 3
+				</div>
+				<div class="col-xs-1">
+				</div>
+				<div class="col-xs-5">
+					Ver más
+				</div>
+				<div class="col-xs-1">
+				</div>
+			</div>
+		</div>
+	
+		<div class="titulossecundarios"><fmt:message key="label.Most.popular.products" /></div>
+	
+		<div class="row">
+			<div class="hidden-xs col-sm-12">
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="separacion10"></div>
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+			</div>
+		</div>
+	
+		<div class="titulossecundarios"><fmt:message key="label.New.stock" /></div>
+	
+		<div class="row">
+			<div class="hidden-xs col-sm-12">
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="separacion10"></div>
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+			</div>
+		</div>
 	
 	
 	

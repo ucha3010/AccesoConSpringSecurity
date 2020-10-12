@@ -4,6 +4,7 @@ public class FrontAdministrarConfiguracion {
 
 	private int idUsr;
 	private double ivaEnvio;
+	private String speech;
 
 	public FrontAdministrarConfiguracion() {
 
@@ -39,14 +40,26 @@ public class FrontAdministrarConfiguracion {
 		this.ivaEnvio = ivaEnvio;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/**
+	 * @return the speech
+	 */
+	public String getSpeech() {
+		return speech;
+	}
+
+	/**
+	 * @param speech the speech to set
+	 */
+	public void setSpeech(String speech) {
+		this.speech = speech;
+	}
+
+	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "FrontAdministrarConfiguracion [idUsr=" + idUsr + ", ivaEnvio=" + ivaEnvio + "]";
+		return "FrontAdministrarConfiguracion [idUsr=" + idUsr + ", ivaEnvio=" + ivaEnvio + ", speech=" + speech + "]";
 	}
 
 }

@@ -10,13 +10,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.damian.pojo.Foto;
 import com.damian.pojo.Usuario;
+import com.damian.service.ConstantesService;
 import com.damian.service.FotoService;
 import com.damian.service.IndexService;
 import com.damian.service.PreferenciaUsuarioService;
 import com.damian.service.UsuarioService;
+import com.damian.utils.ConstantesLocales;
 
 @Service
 public class IndexServiceImpl implements IndexService {
+
+	@Autowired
+	private ConstantesService constantesService;
 
 	@Autowired
 	private FotoService fotoService;
@@ -31,6 +36,7 @@ public class IndexServiceImpl implements IndexService {
 	public ModelAndView manageIndex(ModelAndView model) {
 
 		idUserLogged(model);
+		model.addObject(ConstantesLocales.SPEECH, constantesService.findByClave(ConstantesLocales.SPEECH));
 		model.addObject("estoy", "index");
 		model.setViewName("index");
 		return model;
