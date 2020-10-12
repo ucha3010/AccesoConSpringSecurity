@@ -19,23 +19,27 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.pojo.Rol;
 import com.damian.pojo.UsuarioRol;
+import com.damian.service.IndexService;
 import com.damian.service.RolService;
 import com.damian.service.UsuarioRolService;
 import com.damian.valid.SpringFormGroup;
 
 @Controller
-@SessionAttributes({ "resultado" }) // los atributos que pueden mantenerse en sesión y verse en distintas
-									// páginas
+@SessionAttributes({ "resultado", "estoy", "errorUsuario", "idUsrLogged", "nameUsrLogged", "prinPicUsr", "prefUsr" })
 public class RolController {
 
 	@Autowired
 	private RolService rolService;
 
 	@Autowired
+	private IndexService indexService;
+
+	@Autowired
 	private UsuarioRolService usuarioRolService;
 
 	@RequestMapping("/rol")
 	public ModelAndView getAll(ModelAndView modelAndView) {
+		indexService.idUserLogged(modelAndView);
 		modelAndView.addObject("roles", rolService.findAll());
 		modelAndView.setViewName("roles");
 		return modelAndView;

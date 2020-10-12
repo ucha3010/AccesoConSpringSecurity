@@ -42,7 +42,7 @@
 			const texto = normalizado(formulario.value.toLowerCase());
 			resultado.innerHTML = '';
 			if(texto === ''){
-				$(".collapse").collapse('hide');
+				$(".resultadosBusqueda").collapse('hide');
 			} else {
 				<c:forEach items="${buscarusuarios}" var="usu" varStatus="status">
 					var username = normalizado('${usu.usuario}');
@@ -57,7 +57,7 @@
 						}
 					}
 				</c:forEach>
-				$(".collapse").collapse('show');
+				$(".resultadosBusqueda").collapse('show');
 			}
 		}	
 		function ordenaTabla(numCol,actual,total){
@@ -68,22 +68,22 @@
 	</script>
 	
 </head>
-<body>
-	<div class="container-fluid">
+<body class="${prefUsr.tema}fondopantalla">
+	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="label.Customers" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Customers" /></div>
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
-				<div class="hidden-xs col-sm-3 col-md-2">
+				<div class="col-sm-3 col-md-2">
 					<input type="text" id="formulario" class="form-control">
 					<script>
 						const formulario = document.querySelector('#formulario');
 						formulario.addEventListener('keyup', filtrarAdmin);
 					</script>
 				</div>
-				<div class="hidden-xs col-sm-3 col-md-6">
-					<div class="dropdown collapse">
+				<div class="col-sm-3 col-md-6">
+					<div class="dropdown collapse resultadosBusqueda">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
@@ -101,23 +101,23 @@
 					</c:if>
 				</div>
 				<div class="col-sm-3 col-md-2  navbar-right">
-					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/cliente/0'/>"'>
-						<fmt:message key="label.Add.user" />
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonagregar" onclick='location.href="<c:url value='/cliente/0'/>"'>
+						<fmt:message key="Add.user" />
 					</button>
 				</div>		
 			</div>
 		</sec:authorize>
 		<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
-				<div class="hidden-xs col-sm-3 col-md-2">
+				<div class="col-sm-3 col-md-2">
 					<input type="text" id="formulario" class="form-control">
 					<script>
 						const formulario = document.querySelector('#formulario');
 						formulario.addEventListener('keyup', filtrar);
 					</script>
 				</div>
-				<div class="hidden-xs col-sm-3 col-md-6">
-					<div class="dropdown collapse">
+				<div class="col-sm-3 col-md-6">
+					<div class="dropdown collapse resultadosBusqueda">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
@@ -128,96 +128,191 @@
 				</div>
 			</div>
 		</sec:authorize>
-		<div class="divTablaSinScroll">
-			<table class="table table-striped">
-				<thead>
-					<tr class="cursor-pointer">
-						<c:set var="count" value="0" scope="page" />
-						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-							<th class="extraAdmin-th cursor-text"></th>
-						</sec:authorize>
-						<th <c:if test="${usuarios.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Username" /></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th <c:if test="${usuarios.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th <c:if test="${usuarios.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Name" /></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th <c:if test="${usuarios.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Lastname" /></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th <c:if test="${usuarios.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Birthdate" /></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th <c:if test="${usuarios.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Email" /></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th <c:if test="${usuarios.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Phone" /></th>
-						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-							<th class="cursor-text"><fmt:message key="label.Roles" /></th>
-						</sec:authorize>
-						<th class="extraAdmin-th cursor-text"><fmt:message key="label.Extras" /></th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${usuarios}" var="usuario">
-					    <tr title='<fmt:message key="label.Creation.date" />: <fmt:formatDate value="${usuario.fechaCreacion}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.idcard" />: <c:out value="${usuario.datosPersonales.dni}" />&#xA;<fmt:message key="label.Sex" />: <c:out value="${usuario.datosPersonales.sexo}" />&#xA;<fmt:message key="label.Nationality" />: <c:out value="${usuario.datosPersonales.nacionalidad[nameColSelect]}" />&#xA;<c:out value="${usuario.datosPersonales.observaciones}" />'>
-							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-								<td class="extraAdmin-td">
-									<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/cliente/${usuario.idUsr}' />"'>
-										<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
-									</a>
-									<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${usuario.idUsr})">
-										<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-									</a>
-								</td>
-							</sec:authorize>
-							<td><c:out value="${usuario.usuario}" /></td>
-							
-							<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-								<c:if test="${usuario.habilitado}">
-									<td><img src='<c:url value="/resources/imgs/true.png"/>' class="tamanio_imagen"></td>
-								</c:if>
-								<c:if test="${not usuario.habilitado}">
-									<td><img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen"></td>
-								</c:if>
-							</sec:authorize>
-							
-							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-								<c:if test="${usuario.habilitado}">
-									<td><img src='<c:url value="/resources/imgs/true.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/cliente/available/${usuario.idUsr}' />"'></td>
-								</c:if>
-								<c:if test="${not usuario.habilitado}">
-									<td><img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/cliente/available/${usuario.idUsr}' />"'></td>
-								</c:if>
-							</sec:authorize>
-							
-							<td><c:out value="${usuario.datosPersonales.nombre}" /></td>
-							<td><c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /></td>	
-							<td><fmt:formatDate value="${usuario.datosPersonales.fechaNacimiento}" pattern="dd/MM/yyyy"/></td>		
-							<td><c:out value="${usuario.datosPersonales.email}" /></td>
-							<td><c:out value="${usuario.datosPersonales.telefono}" /></td>
-							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-								<c:set var="userRoles" value="${usuario.usuarioRol}" scope="page" />
-								<td>
-									<c:forEach items="${userRoles}" var="roles">
-										<span class="colorFondo${roles.rol.idRol}"><c:out value="${roles.rol.rol}" /></span><br/>
-									</c:forEach>
-								</td>
-							</sec:authorize>
-							<td class="extraAdmin-td">
-								<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccion/${usuario.idUsr}' />'>
-									<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="tamanio_imagen">
-								</a>
-								<a title="<fmt:message key="Companies" />" href='<c:url value='/usuarioEmpresa/usuario/idUsr/${usuario.idUsr}' />'>
-									<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
-								</a>
+		
+		<div class="row">
+			<div class="hidden-xs hidden-sm col-md-12">
+				<div class="divTablaSinScroll">
+					<table class="table table-striped">
+						<thead>
+							<tr class="cursor-pointer">
+								<c:set var="count" value="0" scope="page" />
 								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-									<a title="<fmt:message key="Pass.reset" />" onclick="return confirmReset(${usuario.idUsr})">
-										<img src='<c:url value="/resources/imgs/pass_reset.png"/>' class="tamanio_imagen">
-									</a>
+									<th class="extraAdmin-th cursor-text"></th>
 								</sec:authorize>
-							</td>
-					    </tr>
-					</c:forEach>
-				</tbody>
-			</table>
+								<th <c:if test="${usuarios.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Username" /></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th <c:if test="${usuarios.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th <c:if test="${usuarios.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Name" /></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th <c:if test="${usuarios.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Lastname" /></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th <c:if test="${usuarios.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Birthdate" /></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th <c:if test="${usuarios.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Email" /></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th <c:if test="${usuarios.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Phone" /></th>
+								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+									<th class="cursor-text"><fmt:message key="label.Roles" /></th>
+								</sec:authorize>
+								<th class="extraAdmin-th cursor-text"><fmt:message key="label.Extras" /></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${usuarios}" var="usuario">
+							    <tr title='<fmt:message key="label.Creation.date" />: <fmt:formatDate value="${usuario.fechaCreacion}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.idcard" />: <c:out value="${usuario.datosPersonales.dni}" />&#xA;<fmt:message key="label.Sex" />: <c:out value="${usuario.datosPersonales.sexo}" />&#xA;<fmt:message key="label.Nationality" />: <c:out value="${usuario.datosPersonales.nacionalidad[nameColSelect]}" />&#xA;<c:out value="${usuario.datosPersonales.observaciones}" />'>
+							    
+									<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+										<td class="extraAdmin-td">
+											<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/cliente/${usuario.idUsr}' />"'>
+												<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+											</a>
+											<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${usuario.idUsr})">
+												<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+											</a>
+										</td>
+									</sec:authorize>
+									<td><c:out value="${usuario.usuario}" /></td>
+									
+									<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+										<c:if test="${usuario.habilitado}">
+											<td><img src='<c:url value="/resources/imgs/true.png"/>' class="tamanio_imagen"></td>
+										</c:if>
+										<c:if test="${not usuario.habilitado}">
+											<td><img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen"></td>
+										</c:if>
+									</sec:authorize>
+									
+									<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+										<c:if test="${usuario.habilitado}">
+											<td><img src='<c:url value="/resources/imgs/true.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/cliente/available/${usuario.idUsr}' />"'></td>
+										</c:if>
+										<c:if test="${not usuario.habilitado}">
+											<td><img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/cliente/available/${usuario.idUsr}' />"'></td>
+										</c:if>
+									</sec:authorize>
+									
+									<td><c:out value="${usuario.datosPersonales.nombre}" /></td>
+									<td><c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /></td>	
+									<td><fmt:formatDate value="${usuario.datosPersonales.fechaNacimiento}" pattern="dd/MM/yyyy"/></td>		
+									<td><c:out value="${usuario.datosPersonales.email}" /></td>
+									<td><c:out value="${usuario.datosPersonales.telefono}" /></td>
+									<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+										<c:set var="userRoles" value="${usuario.usuarioRol}" scope="page" />
+										<td>
+											<c:forEach items="${userRoles}" var="roles">
+												<span class="colorFondo${roles.rol.idRol}"><c:out value="${roles.rol.rol}" /></span><br/>
+											</c:forEach>
+										</td>
+									</sec:authorize>
+									<td class="extraAdmin-td">
+										<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccion/${usuario.idUsr}' />'>
+											<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="tamanio_imagen">
+										</a>
+										<a title="<fmt:message key="Companies" />" href='<c:url value='/usuarioEmpresa/usuario/${usuario.idUsr}' />'>
+											<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
+										</a>
+										<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+											<a title="<fmt:message key="Pass.reset" />" onclick="return confirmReset(${usuario.idUsr})">
+												<img src='<c:url value="/resources/imgs/pass_reset.png"/>' class="tamanio_imagen">
+											</a>
+										</sec:authorize>
+									</td>
+							    </tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 hidden-md hidden-lg hidden-xl">
+				<table class="table table-striped">
+					<tbody>
+						<c:forEach items="${usuarios}" var="usuario">
+						    <tr href="#ventana${usuario.idUsr}" class="thumbnail" data-toggle="modal">
+						    	<td><c:out value="${usuario.usuario}" /></td>
+							
+								<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+									<c:if test="${usuario.habilitado}">
+										<td><img src='<c:url value="/resources/imgs/true.png"/>' class="tamanio_imagen"></td>
+									</c:if>
+									<c:if test="${not usuario.habilitado}">
+										<td><img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen"></td>
+									</c:if>
+								</sec:authorize>
+								
+								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+									<c:if test="${usuario.habilitado}">
+										<td><img src='<c:url value="/resources/imgs/true.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/cliente/available/${usuario.idUsr}' />"'></td>
+									</c:if>
+									<c:if test="${not usuario.habilitado}">
+										<td><img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/cliente/available/${usuario.idUsr}' />"'></td>
+									</c:if>
+								</sec:authorize>
+								
+								<td><c:out value="${usuario.datosPersonales.nombre}" /></td>
+								<td><c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /></td>
+						    </tr>
+						    
+							<div class="modal fade" id="ventana${usuario.idUsr}">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											<h4 class="modal-title justify-content-center"><c:out value="${usuario.datosPersonales.nombre}" /> <c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" /></h4>
+										</div>
+										<div class="modal-body">
+							            	<div class="col-xs-4">								
+												<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">	
+									            	<div class="col-xs-6">									
+														<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/cliente/${usuario.idUsr}' />"' class="cursor-pointer">
+															<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+														</a>
+													</div>
+										            <div class="col-xs-6">
+														<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${usuario.idUsr})" class="cursor-pointer">
+															<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+														</a>	
+													</div>									
+												</sec:authorize>
+											</div>	
+								            <div class="col-xs-2">
+												<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccion/${usuario.idUsr}' />'>
+													<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="tamanio_imagen">
+												</a>
+											</div>
+								            <div class="col-xs-2">
+												<a title="<fmt:message key="Companies" />" href='<c:url value='/usuarioEmpresa/usuario/${usuario.idUsr}' />'>
+													<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
+												</a>
+											</div>
+								            <div class="col-xs-4">
+												<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+													<a title="<fmt:message key="Pass.reset" />" onclick="return confirmReset(${usuario.idUsr})" class="cursor-pointer">
+														<img src='<c:url value="/resources/imgs/pass_reset.png"/>' class="tamanio_imagen">
+													</a>
+												</sec:authorize>
+											</div>
+											<div class="height50"></div>
+								            <p><fmt:message key="label.Username" />: <c:out value="${usuario.usuario}" /></p>
+								            <p><fmt:message key="label.Birthdate" />: <fmt:formatDate value="${usuario.datosPersonales.fechaNacimiento}" pattern="dd/MM/yyyy"/></p>
+								            <p><fmt:message key="label.Email" />: <c:out value="${usuario.datosPersonales.email}" /></p>
+								            <p><fmt:message key="label.Phone" />: <c:out value="${usuario.datosPersonales.telefono}" /></p>
+								            <p><fmt:message key="label.Creation.date" />: <fmt:formatDate value="${usuario.fechaCreacion}" pattern="dd/MM/yyyy"/></p>
+								            <p><fmt:message key="label.idcard" />: <c:out value="${usuario.datosPersonales.dni}" /></p>
+								            <p><fmt:message key="label.Sex" />: <c:out value="${usuario.datosPersonales.sexo}" /></p>
+								            <p><fmt:message key="label.Nationality" />: <c:out value="${usuario.datosPersonales.nacionalidad[nameColSelect]}" /></p>
+								            <p><c:out value="${usuario.datosPersonales.observaciones}" /></p>
+										</div>
+									</div>
+								</div>
+							</div>
+					    </c:forEach>
+				    </tbody>
+				</table>
+			</div>
 		</div>
 		
 		<!-- PAGINACION -->
@@ -258,10 +353,17 @@
 				</ul>
 			</div>
 		</div>
-		
-		<footer>
-			<c:import url="/WEB-INF/views/importFooter.jsp" />
-		</footer>
+	</div>
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
 	</div>
 </body>
 </html>

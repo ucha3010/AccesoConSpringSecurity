@@ -22,38 +22,38 @@
 	padding-top: 9rem;
 }
 
-/**************************** tema01 ******************************************/
+/**************************** default ******************************************/
 
-.tema01titulo {	
-	color: #495057;
-	background-color: #f5f5f5;
+.defaulttitulo {	
+	color: #000000;
+	background-color: #bcd2e2;
 }
 
-.tema01botonenviar {	
-	color: #495057;
-	background-color: #fff;
+.defaultbotonguardar {	
+	color: #f0f0ff;
+	background-color: #2d5cff;
 	border: 1px solid #F48024;
 }
 
-.tema01botoncancelar {	
-	color: #495057;
-	background-color: #fff;
+.defaultbotoncancelar {	
+	color: #000000;
+	background-color: #e5e5e5;
 	border: 1px solid #F48024;
 }
 
-.tema01botonagregar {	
-	color: #495057;
-	background-color: #fff;
+.defaultbotonagregar {	
+	color: #f0f0ff;
+	background-color: #2d5cff;
 	border: 1px solid #F48024;
 }
 
-.tema01botonresto {	
-	color: #495057;
-	background-color: #fff;
+.defaultbotonresto {	
+	color: #f0f0ff;
+	background-color: #006a9d;
 	border: 1px solid #F48024;
 }
 
-.tema01fondopantalla {
+.defaultfondopantalla {
 	color: #495057;
 	background-color: #fff;
 }
@@ -61,71 +61,71 @@
 /**************************** tema02 ******************************************/
 
 .tema02titulo {	
-	color: #44583f;
-	background-color: #ebfae7;
+	color: #000000;
+	background-color: #f2fdf4;
 }
 
-.tema02botonenviar {	
-	color: #495057;
-	background-color: #fff;
-	border: 1px solid #F48024;
+.tema02botonguardar {	
+	color: #000000;
+	background-color: #00ce77;
+	border: 1px solid #ff00ff;
 }
 
 .tema02botoncancelar {	
-	color: #495057;
-	background-color: #fff;
+	color: #000000;
+	background-color: #dafe49;
 	border: 1px solid #F48024;
 }
 
 .tema02botonagregar {	
-	color: #495057;
-	background-color: #fff;
+	color: #000000;
+	background-color: #00ce77;
 	border: 1px solid #F48024;
 }
 
 .tema02botonresto {	
-	color: #495057;
-	background-color: #fff;
+	color: #000000;
+	background-color: #bee4e4;
 	border: 1px solid #F48024;
 }
 
 .tema02fondopantalla {
-	color: #495057;
-	background-color: #fff;
+	color: #000000;
+	background-color: #d1fec5;
 }
 
 /**************************** tema03 ******************************************/
 
 .tema03titulo {	
 	color: #101c85;
-	background-color: #e9e4fa;
+	background-color: #f0edfc;
 }
 
-.tema03botonenviar {	
-	color: #495057;
-	background-color: #fff;
+.tema03botonguardar {	
+	color: #0c145f;
+	background-color: #64ffff;
 	border: 1px solid #F48024;
 }
 
 .tema03botoncancelar {	
-	color: #495057;
-	background-color: #fff;
+	color: #0c145f;
+	background-color: #ffa6ff;
 	border: 1px solid #F48024;
 }
 
 .tema03botonagregar {	
-	color: #495057;
-	background-color: #fff;
+	color: #0c145f;
+	background-color: #64ffff;
 	border: 1px solid #F48024;
 }
 
 .tema03botonresto {	
-	color: #495057;
-	background-color: #fff;
+	color: #fdfbff;
+	background-color: #b062ff;
 	border: 1px solid #F48024;
 }
 
 .tema03fondopantalla {
 	color: #495057;
-	background-color: #fff;
+	background-color: #dcdafe;
 }

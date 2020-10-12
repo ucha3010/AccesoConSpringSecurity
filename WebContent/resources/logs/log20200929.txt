@@ -1,0 +1,2 @@
+Tue Sep 29 21:43:27 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=1, idUsr=1, tabla=factura, columna=fechaCompra, orden=DESC]
+Tue Sep 29 22:42:25 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=datosPersonales.nombre, orden=ASC]

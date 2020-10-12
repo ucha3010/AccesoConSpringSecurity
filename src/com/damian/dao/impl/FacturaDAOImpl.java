@@ -22,6 +22,7 @@ import com.damian.dao.UsuarioDAO;
 import com.damian.dao.UsuarioOrdenDAO;
 import com.damian.dao.model.ModelFactura;
 import com.damian.pojo.Factura;
+import com.damian.service.EstadoService;
 import com.damian.utils.LocalLogger;
 import com.damian.utils.Utils;
 
@@ -42,6 +43,9 @@ public class FacturaDAOImpl implements FacturaDAO {
 
 	@Autowired
 	private ConverterFactura converterFactura;
+
+	@Autowired
+	private EstadoService estadoService;
 
 	@Autowired
 	private UsuarioDAO usuarioDAO;
@@ -191,11 +195,13 @@ public class FacturaDAOImpl implements FacturaDAO {
 
 	@Override
 	public List<Factura> findSearchAll() {
-		List<ModelFactura> mfList = jdbcTemplate.query("SELECT idFac, fechaCompra, importeTotal FROM " + TABLA,
+		List<ModelFactura> mfList = jdbcTemplate.query("SELECT idFac, fechaCompra, importeTotal, idEst FROM " + TABLA,
 				BeanPropertyRowMapper.newInstance(ModelFactura.class));
 		List<Factura> fList = new ArrayList<>();
 		for (ModelFactura mf : mfList) {
-			fList.add(converterFactura.convert(mf));
+			Factura f = converterFactura.convert(mf);
+			f.setEstado(estadoService.findByIdModel(mf.getIdEst()));
+			fList.add(f);
 		}
 		return fList;
 	}

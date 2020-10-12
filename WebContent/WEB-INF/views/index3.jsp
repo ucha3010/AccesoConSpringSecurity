@@ -7,7 +7,7 @@
 	<title>Index 3</title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<c:import url="/WEB-INF/views/menu.jsp" />
 	<h1>Index 3</h1>
 
@@ -62,10 +62,17 @@
                 <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
                 <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
             </table>
-        </div>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+	</div>
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
+	</div>
 </body>
 </html>

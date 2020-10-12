@@ -6,3 +6,5 @@
 	<link href="<c:url value='/resources/css/menu.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/tablas.css'/>" rel="stylesheet" type="text/css" />
 	<link href="<c:url value='/resources/css/temas.css'/>" rel="stylesheet" type="text/css" />
+	<link href="<c:url value='/resources/css/footer.css'/>" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

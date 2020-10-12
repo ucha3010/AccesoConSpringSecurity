@@ -21,12 +21,12 @@ import com.damian.pojo.Empresa;
 import com.damian.pojo.EmpresaPropia;
 import com.damian.service.EmpresaPropiaService;
 import com.damian.service.EmpresaService;
+import com.damian.service.IndexService;
 import com.damian.service.PaginacionService;
 import com.damian.valid.SpringFormGroup;
 
 @Controller
-@SessionAttributes({ "resultado" }) // los atributos que pueden mantenerse en sesión y verse en distintas
-									// páginas
+@SessionAttributes({ "resultado", "estoy", "errorUsuario", "idUsrLogged", "nameUsrLogged", "prinPicUsr", "prefUsr" })
 public class EmpresaController {
 
 	@Autowired
@@ -36,12 +36,16 @@ public class EmpresaController {
 	private EmpresaPropiaService empresaPropiaService;
 
 	@Autowired
+	private IndexService indexService;
+
+	@Autowired
 	private PaginacionService paginacionService;
 
 	@RequestMapping("/empresa/all/{column}/{paginaInicio}/{totalPaginas}")
 	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
 			@PathVariable("paginaInicio") int paginaInicio, @PathVariable("totalPaginas") int totalPaginas,
 			HttpServletRequest request) {
+		indexService.idUserLogged(modelAndView);
 		modelAndView.addObject("empresas", empresaService.findAll(column, paginaInicio, totalPaginas, request));
 		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, "empresa"));
 		modelAndView.addObject("buscarempresas", empresaService.findSearchAll());

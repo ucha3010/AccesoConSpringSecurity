@@ -81,16 +81,16 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<c:if test="${usuario.idUsr != 0}">
-			<div class="well well-sm text-center h2">
+			<div class="well well-sm text-center h2 ${prefUsr.tema}titulo">
 				<c:out value="${usuario.datosPersonales.nombre}" /> <c:out value="${usuario.datosPersonales.apellido1}" /> <c:out value="${usuario.datosPersonales.apellido2}" />
 			</div>
 		</c:if>
 		<c:if test="${usuario.idUsr == 0}">
-			<div class="well well-sm text-center h2"><fmt:message key="label.Add.user" /></div>
+			<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="Add.user" /></div>
 		</c:if>
 		<sf:form method="post" action="${pageContext.request.contextPath}/cliente/save" modelAttribute="usuario" onsubmit="return validar()">
 			<div class="row">		
@@ -292,16 +292,23 @@
 				<div class="hidden-xs col-sm-4">
 				</div>
 				<div class="col-xs-12 col-sm-8">
-					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value="/cliente/all/null/null/0/100"/>"'><fmt:message key="Cancel" /></button>
+					<button type="submit" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botonguardar"><fmt:message key="Save" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botoncancelar" onclick='location.href="<c:url value="/cliente/all/null/null/0/100"/>"'><fmt:message key="Cancel" /></button>
 					<span id="hayError" name="errorSpan" style="color:red"></span>
 				</div>
 			</div>
 		</sf:form>
-		
-		<footer>
-			<c:import url="/WEB-INF/views/importFooter.jsp" />
-		</footer>
+	</div>
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
 	</div>
 </body>
 </html>

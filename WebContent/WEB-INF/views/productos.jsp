@@ -29,7 +29,7 @@
 			const texto = normalizado(formulario.value.toLowerCase());
 			resultado.innerHTML = '';
 			if(texto === ''){
-				$(".collapse").collapse('hide');
+				$(".resultadosBusqueda").collapse('hide');
 			} else {
 				<c:forEach items="${buscarproductos}" var="pro" varStatus="status">
 					var marca = normalizado('${pro.marca}');
@@ -41,7 +41,7 @@
 						resultado.innerHTML += "<a href=\"<c:url value='/producto/filtered/${pro.idPro}' />\">${pro.marca} ${pro.modelo} ${pro.precioVenta} ${pro[nameColSelect]}</a>";
 					}
 				</c:forEach>
-				$(".collapse").collapse('show');
+				$(".resultadosBusqueda").collapse('show');
 			}
 		}
 		function ordenaTabla(numCol,actual,total){
@@ -51,21 +51,21 @@
 		}
 	</script>
 </head>
-<body>
-	<div class="container-fluid">
+<body class="${prefUsr.tema}fondopantalla">
+	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="Products" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="Products" /></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
-				<div class="hidden-xs col-sm-3 col-md-2">
+				<div class="col-sm-3 col-md-2">
 					<input type="text" id="formulario" class="form-control">
 					<script>
 						const formulario = document.querySelector('#formulario');
 						formulario.addEventListener('keyup', filtrar);
 					</script>
 				</div>
-				<div class="hidden-xs col-sm-2 col-md-4">
-					<div class="dropdown collapse">
+				<div class="col-sm-2 col-md-4">
+					<div class="dropdown collapse resultadosBusqueda">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
@@ -83,7 +83,7 @@
 					</c:if>
 				</div>
 				<div class="col-sm-3 col-md-2  navbar-right">
-					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam" onclick='location.href="<c:url value='/producto/0'/>"'>
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonagregar" onclick='location.href="<c:url value='/producto/0'/>"'>
 						<fmt:message key="Add.product" />
 					</button>
 				</div>		
@@ -91,15 +91,15 @@
 		</sec:authorize>
 		<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
-				<div class="hidden-xs col-sm-3 col-md-2">
+				<div class="col-sm-3 col-md-2">
 					<input type="text" id="formulario" class="form-control">
 					<script>
 						const formulario = document.querySelector('#formulario');
 						formulario.addEventListener('keyup', filtrar);
 					</script>
 				</div>
-				<div class="hidden-xs col-sm-3 col-md-6">
-					<div class="dropdown collapse">
+				<div class="col-sm-3 col-md-6">
+					<div class="dropdown collapse resultadosBusqueda">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
@@ -110,92 +110,202 @@
 				</div>
 			</div>
 		</sec:authorize>
-		<div class="divTablaSinScroll">
-			<table class="table table-striped">
-				<thead>
-					<tr class="cursor-pointer">
-						<c:set var="count" value="0" scope="page" />
-						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-							<th class="extraAdmin-th cursor-text"></th>
-						</sec:authorize>
-						<th <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Product.description" /></th>
-						<th class="min-width-60"></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if> class="text-center"><fmt:message key="label.state" /></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.brand" /></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.model" /></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th colspan="2" class="text-center min-width-160" <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.salePrice" /></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th class="text-center" <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.units" /></th>
-						<th class="min-width-160 cursor-text zindex-100"><fmt:message key="label.Extras" /></th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${productos}" var="producto">
-					    <tr title='<fmt:message key="label.purchase.price" />: <fmt:formatNumber type="currency" value="${producto.precioCompra}" />&#xA;<fmt:message key="label.Serial.number" />: <c:out value="${producto.serie}" />&#xA;<fmt:message key="label.location" />: <c:out value="${producto.ubicacion}" />&#xA;<fmt:message key="label.send" />: <c:out value="${producto.enviar}" />&#xA;<fmt:message key="label.salable" />: <c:out value="${producto.vendible}" />&#xA;<fmt:message key="label.warranty.months" />: <c:out value="${producto.mesesGarantia}" />&#xA;<fmt:message key="label.weigth" />: <c:out value="${producto.peso}" />&#xA;<fmt:message key="label.volume" />: <c:out value="${producto.volumen}" />&#xA;<fmt:message key="label.Category" />: <c:out value="${producto.subcategoria.categoria[nameColSelect]}" />&#xA;<fmt:message key="label.Subcategory" />: <c:out value="${producto.subcategoria[nameColSelect]}" />'>
-							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-								<td class="extraAdmin-td">
-									<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/producto/${producto.idPro}' />"'>
-										<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
-									</a>
-									<sec:authorize access="hasAnyRole('ROL_ROOT')">
-										<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${producto.idPro})">
-											<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-										</a>
-									</sec:authorize>
-								</td>
-							</sec:authorize>
-							<td><c:out value="${producto[nameColSelect]}" /></td>
-							<td>
-								<c:if test="${(not empty producto.fotos)}">
-									<c:forEach items="${producto.fotos}" var="fotoPerfil">
-										<c:if test="${fotoPerfil.principal}">
-											<a href="#foto${producto.idPro}" class="thumbnail" data-toggle="modal">
-												<img src='<c:url value="/resources/imgs/productos/${producto.idPro}/${fotoPerfil.nombre}"/>' class="width-50">
+		
+		<div class="row">
+			<div class="hidden-xs hidden-sm col-md-12">
+				<div class="divTablaSinScroll">
+					<table class="table table-striped">
+						<thead>
+							<tr class="cursor-pointer">
+								<c:set var="count" value="0" scope="page" />
+								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+									<th class="extraAdmin-th cursor-text"></th>
+								</sec:authorize>
+								<th <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Product.description" /></th>
+								<th class="min-width-60"></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if> class="text-center"><fmt:message key="label.state" /></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.brand" /></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.model" /></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th colspan="2" class="text-center min-width-160" <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.salePrice" /></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th class="text-center" <c:if test="${productos.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.units" /></th>
+								<th class="min-width-160 cursor-text zindex-100"><fmt:message key="label.Extras" /></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${productos}" var="producto">
+							    <tr title='<fmt:message key="label.purchase.price" />: <fmt:formatNumber type="currency" value="${producto.precioCompra}" />&#xA;<fmt:message key="label.Serial.number" />: <c:out value="${producto.serie}" />&#xA;<fmt:message key="label.location" />: <c:out value="${producto.ubicacion}" />&#xA;<fmt:message key="label.send" />: <c:out value="${producto.enviar}" />&#xA;<fmt:message key="label.salable" />: <c:out value="${producto.vendible}" />&#xA;<fmt:message key="label.warranty.months" />: <c:out value="${producto.mesesGarantia}" />&#xA;<fmt:message key="label.weigth" />: <c:out value="${producto.peso}" />&#xA;<fmt:message key="label.volume" />: <c:out value="${producto.volumen}" />&#xA;<fmt:message key="label.Category" />: <c:out value="${producto.subcategoria.categoria[nameColSelect]}" />&#xA;<fmt:message key="label.Subcategory" />: <c:out value="${producto.subcategoria[nameColSelect]}" />'>
+									<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+										<td class="extraAdmin-td">
+											<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/producto/${producto.idPro}' />"'>
+												<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
 											</a>
-											<div class="modal fade" id="foto${producto.idPro}">
-												<div class="modal-dialog">
-													<div class="modal-content">
-														<div class="modal-header">
-															<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-															<h4 class="modal-title"><img src='<c:url value="/resources/imgs/productos/${producto.idPro}/${fotoPerfil.nombre}"/>' class="justify-content-center"></h4>
+											<sec:authorize access="hasAnyRole('ROL_ROOT')">
+												<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${producto.idPro})">
+													<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+												</a>
+											</sec:authorize>
+										</td>
+									</sec:authorize>
+									<td><c:out value="${producto[nameColSelect]}" /></td>
+									<td>
+										<c:if test="${(not empty producto.fotos)}">
+											<c:forEach items="${producto.fotos}" var="fotoPerfil">
+												<c:if test="${fotoPerfil.principal}">
+													<a href="#foto${producto.idPro}" class="thumbnail" data-toggle="modal">
+														<img src='<c:url value="/resources/imgs/productos/${producto.idPro}/${fotoPerfil.nombre}"/>' class="width-50">
+													</a>
+													<div class="modal fade" id="foto${producto.idPro}">
+														<div class="modal-dialog">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+																	<h4 class="modal-title"><img src='<c:url value="/resources/imgs/productos/${producto.idPro}/${fotoPerfil.nombre}"/>' class="justify-content-center"></h4>
+																</div>
+															</div>
 														</div>
 													</div>
-												</div>
-											</div>
+												</c:if>
+											</c:forEach>
 										</c:if>
-									</c:forEach>
+									</td>
+									<c:if test="${producto.estado == 'ACTIVE' }">
+										<td class="text-center"><span class="color-green"><fmt:message key="${producto.estado}" /></span></td>
+									</c:if>
+									<c:if test="${producto.estado == 'INACTIVE' }">
+										<td class="text-center"><span class="color-red"><fmt:message key="${producto.estado}" /></span></td>
+									</c:if>
+									<c:if test="${producto.estado == 'DISCONTINUED' }">
+										<td class="text-center"><span class="color-blue"><fmt:message key="${producto.estado}" /></span></td>
+									</c:if>
+									<td><c:out value="${producto.marca}" /></td>
+									<td><c:out value="${producto.modelo}" /></td>	
+									<td class="text-right"><fmt:formatNumber type="currency" value="${producto.precioVenta}" /></td>
+									<td class="width-35"></td>
+									<td class="text-center"><c:out value="${producto.unidades}" /></td>
+									<td class="extraAdmin-td">
+										<a title="<fmt:message key='label.Pictures' />" href='<c:url value='/foto/producto/${producto.idPro}' />'>
+											<span class="glyphicon glyphicon-picture tamanio_imagen zindex-1"></span>
+										</a>
+										<a title="<fmt:message key="Companies" />" href='<c:url value='/productoEmpresa/producto/${producto.idPro}' />'>
+											<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
+										</a>
+										<a title="<fmt:message key="label.Bills" />" href='<c:url value='/productoFactura/producto/${producto.idPro}' />'>
+											<img src='<c:url value="/resources/imgs/factura.png"/>' class="tamanio_imagen">
+										</a>
+										<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+											<a title="<fmt:message key="label.Add.remove.stock" />" href='<c:url value='/producto/stock/${producto.idPro}' />'>
+												<img src='<c:url value="/resources/imgs/stock.png"/>' class="tamanio_imagen">
+											</a>
+										</sec:authorize>
+									</td>
+							    </tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 hidden-md hidden-lg hidden-xl">
+				<table class="table table-striped">
+					<tbody>
+							<c:forEach items="${productos}" var="producto">
+						    <tr href="#ventana${producto.idPro}" class="thumbnail" data-toggle="modal">
+								<td><c:out value="${producto[nameColSelect]}" /></td>
+								<c:if test="${producto.estado == 'ACTIVE' }">
+									<td class="text-center"><span class="color-green"><fmt:message key="${producto.estado}" /></span></td>
 								</c:if>
-							</td>
-							<td class="text-center"><fmt:message key="${producto.estado}" /></td>
-							<td><c:out value="${producto.marca}" /></td>
-							<td><c:out value="${producto.modelo}" /></td>	
-							<td class="text-right"><fmt:formatNumber type="currency" value="${producto.precioVenta}" /></td>
-							<td class="width-35"></td>
-							<td class="text-center"><c:out value="${producto.unidades}" /></td>
-							<td class="extraAdmin-td">
-								<a title="<fmt:message key='label.Pictures' />" href='<c:url value='/foto/producto/${producto.idPro}' />'>
-									<span class="glyphicon glyphicon-picture tamanio_imagen zindex-1"></span>
-								</a>
-								<a title="<fmt:message key="Companies" />" href='<c:url value='/productoEmpresa/producto/${producto.idPro}' />'>
-									<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
-								</a>
-								<a title="<fmt:message key="label.Bills" />" href='<c:url value='/productoFactura/producto/${producto.idPro}' />'>
-									<img src='<c:url value="/resources/imgs/factura.png"/>' class="tamanio_imagen">
-								</a>
-								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-									<a title="<fmt:message key="label.Add.remove.stock" />" href='<c:url value='/producto/stock/${producto.idPro}' />'>
-										<img src='<c:url value="/resources/imgs/stock.png"/>' class="tamanio_imagen">
-									</a>
-								</sec:authorize>
-							</td>
-					    </tr>
-					</c:forEach>
-				</tbody>
-			</table>
+								<c:if test="${producto.estado == 'INACTIVE' }">
+									<td class="text-center"><span class="color-red"><fmt:message key="${producto.estado}" /></span></td>
+								</c:if>
+								<c:if test="${producto.estado == 'DISCONTINUED' }">
+									<td class="text-center"><span class="color-blue"><fmt:message key="${producto.estado}" /></span></td>
+								</c:if>
+								<td class="text-center"><c:out value="${producto.unidades}" /></td>
+						    </tr>
+						    
+							<div class="modal fade" id="ventana${producto.idPro}">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											<h4 class="modal-title justify-content-center"><c:out value="${producto[nameColSelect]}" /></h4>
+										</div>
+										<div class="modal-body">
+							            	<div class="col-xs-4">								
+												<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">	
+									            	<div class="col-xs-6">
+														<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/producto/${producto.idPro}' />"' class="cursor-pointer">
+															<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+														</a>								
+													</div>
+										            <div class="col-xs-6">
+														<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${producto.idPro})" class="cursor-pointer">
+															<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+														</a>	
+													</div>									
+												</sec:authorize>
+											</div>
+								            <div class="col-xs-2">	
+												<a title="<fmt:message key='label.Pictures' />" href='<c:url value='/foto/producto/${producto.idPro}' />'>
+													<span class="glyphicon glyphicon-picture tamanio_imagen zindex-1"></span>
+												</a>
+											</div>
+								            <div class="col-xs-2">
+												<a title="<fmt:message key="Companies" />" href='<c:url value='/productoEmpresa/producto/${producto.idPro}' />'>
+													<img src='<c:url value="/resources/imgs/empresa.png"/>' class="tamanio_imagen">
+												</a>
+											</div>
+								            <div class="col-xs-2">
+												<a title="<fmt:message key="label.Bills" />" href='<c:url value='/productoFactura/producto/${producto.idPro}' />'>
+													<img src='<c:url value="/resources/imgs/factura.png"/>' class="tamanio_imagen">
+												</a>
+											</div>
+								            <div class="col-xs-2">
+												<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+													<a title="<fmt:message key="label.Add.remove.stock" />" href='<c:url value='/producto/stock/${producto.idPro}' />'>
+														<img src='<c:url value="/resources/imgs/stock.png"/>' class="tamanio_imagen">
+													</a>
+												</sec:authorize>
+											</div>
+											<div class="height50"></div>
+											<c:if test="${producto.estado == 'ACTIVE' }">
+												<p><fmt:message key="label.state" />: <span class="color-green"><fmt:message key="${producto.estado}" /></span></p>
+											</c:if>
+											<c:if test="${producto.estado == 'INACTIVE' }">
+												<p><fmt:message key="label.state" />: <span class="color-red"><fmt:message key="${producto.estado}" /></span></p>
+											</c:if>
+											<c:if test="${producto.estado == 'DISCONTINUED' }">
+												<p><fmt:message key="label.state" />: <span class="color-blue"><fmt:message key="${producto.estado}" /></span></p>
+											</c:if>
+											<p><fmt:message key="label.brand" />: <c:out value="${producto.marca}" /></p>
+											<p><fmt:message key="label.model" />: <c:out value="${producto.modelo}" /></p>
+											<p><fmt:message key="label.salePrice" />: <fmt:formatNumber type="currency" value="${producto.precioVenta}" /></p>
+											<p><fmt:message key="label.units" />: <c:out value="${producto.unidades}" /></p>
+											<p><fmt:message key="label.purchase.price" />: <fmt:formatNumber type="currency" value="${producto.precioCompra}" /></p>
+											<p><fmt:message key="label.Serial.number" />: <c:out value="${producto.serie}" /></p>
+											<p><fmt:message key="label.location" />: <c:out value="${producto.ubicacion}" /></p>
+											<p><fmt:message key="label.send" />: <c:out value="${producto.enviar}" /></p>
+											<p><fmt:message key="label.salable" />: <c:out value="${producto.vendible}" /></p>
+											<p><fmt:message key="label.warranty.months" />: <c:out value="${producto.mesesGarantia}" /></p>
+											<p><fmt:message key="label.weigth" />: <c:out value="${producto.peso}" /></p>
+											<p><fmt:message key="label.volume" />: <c:out value="${producto.volumen}" /></p>
+											<p><fmt:message key="label.Category" />: <c:out value="${producto.subcategoria.categoria[nameColSelect]}" /></p>
+											<p><fmt:message key="label.Subcategory" />: <c:out value="${producto.subcategoria[nameColSelect]}" /></p>
+										</div>
+									</div>
+								</div>
+							</div>
+					    </c:forEach>
+				    </tbody>
+				</table>
+			</div>
 		</div>
 
 		<!-- PAGINACION -->
@@ -236,10 +346,17 @@
 				</ul>
 			</div>
 		</div>
-		
-		<footer>
-			<c:import url="/WEB-INF/views/importFooter.jsp" />
-		</footer>
+	</div>
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
 	</div>
 </body>
 </html>

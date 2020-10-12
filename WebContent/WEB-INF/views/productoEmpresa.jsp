@@ -24,11 +24,11 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
-		<div class="well well-sm text-center h2"><c:out value="${producto[nameColSelect]}"></c:out></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><c:out value="${producto[nameColSelect]}"></c:out></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">		
 				<div class="hidden-xs col-sm-3">
@@ -41,7 +41,7 @@
 				            		<sf:option value="${empresa.idEmp}" label="${empresa.nombreComercial}"/>
 				            	</c:forEach>
 				        	</sf:select>
-							<button type="submit" class="btn fondo-c0c0c0 border-color-dam">
+							<button type="submit" class="btn fondo-c0c0c0 border-color-dam ${prefUsr.tema}botonagregar">
 								<fmt:message key="Add.company" />
 							</button>
 							<c:if test="${error}">
@@ -84,9 +84,16 @@
 			</div>
 		</div>
 	</div>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
+	</div>
 </body>
 </html>

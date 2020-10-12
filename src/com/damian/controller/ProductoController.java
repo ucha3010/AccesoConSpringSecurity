@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -17,10 +18,12 @@ import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Producto;
 import com.damian.pojo.front.FrontProductoStock;
 import com.damian.service.CategoriaService;
+import com.damian.service.IndexService;
 import com.damian.service.PaginacionService;
 import com.damian.service.ProductoService;
 
 @Controller
+@SessionAttributes({ "resultado", "estoy", "errorUsuario", "idUsrLogged", "nameUsrLogged", "prinPicUsr", "prefUsr" })
 public class ProductoController {
 
 	@Autowired
@@ -30,12 +33,16 @@ public class ProductoController {
 	private CategoriaService categoriaService;
 
 	@Autowired
+	private IndexService indexService;
+
+	@Autowired
 	private PaginacionService paginacionService;
 
 	@RequestMapping("/producto/all/{column}/{paginaInicio}/{totalPaginas}")
 	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
 			@PathVariable("paginaInicio") int paginaInicio, @PathVariable("totalPaginas") int totalPaginas,
 			HttpServletRequest request) {
+		indexService.idUserLogged(modelAndView);
 		modelAndView.addObject("productos", productoService.findAll(column, paginaInicio, totalPaginas, request));
 		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, "producto"));
 		modelAndView.addObject("buscarproductos", productoService.findSearchAll());

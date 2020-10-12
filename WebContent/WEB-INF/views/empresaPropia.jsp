@@ -65,14 +65,14 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<c:if test="${empresaPropia.idPropia != 0}">
-			<div class="well well-sm text-center h2"><c:out value="${empresaPropia.razonSocial}"></c:out></div>
+			<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><c:out value="${empresaPropia.razonSocial}"></c:out></div>
 		</c:if>
 		<c:if test="${empresaPropia.idPropia == 0}">
-			<div class="well well-sm text-center h2"><fmt:message key="Add.company" /></div>
+			<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="Add.company" /></div>
 		</c:if>
 		<sf:form method="post" action="${pageContext.request.contextPath}/empresaPropia/save" modelAttribute="empresaPropia" onsubmit="return validar()">
 			<c:if test="${empresaPropia.idPropia != 0}">
@@ -254,15 +254,22 @@
 				<div class="hidden-xs col-sm-4">
 				</div>
 				<div class="col-xs-12 col-sm-8">
-					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/empresaPropia' />"'><fmt:message key="Cancel" /></button>
+					<button type="submit" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botonguardar"><fmt:message key="Save" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botoncancelar" onclick='location.href="<c:url value='/empresaPropia' />"'><fmt:message key="Cancel" /></button>
 				</div>
 			</div>
 		</sf:form>
-		
-		<footer>
-			<c:import url="/WEB-INF/views/importFooter.jsp" />
-		</footer>
+	</div>
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
 	</div>
 </body>
 </html>

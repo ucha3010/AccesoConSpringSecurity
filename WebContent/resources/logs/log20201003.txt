@@ -1,0 +1,213 @@
+Sat Oct 03 18:11:30 CEST 2020 - UPDATE [pepe] - table:subcategoria - ModelSubcategoria [idSub=3, nombreES=Ordenador portátil Intel i8, nombreEN=Laptop Intel i8, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, idCat=1, modificadoPor=pepe, fechaModificacion=2020-10-03 18:11:30.771]
+Sat Oct 03 18:12:11 CEST 2020 - SAVE [pepe] - table:subcategoria - ModelSubcategoria [idSub=0, nombreES=Palanca de cambios, nombreEN=Palanca de cambios, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, idCat=7, modificadoPor=pepe, fechaModificacion=2020-10-03 18:12:11.905]
+Sat Oct 03 18:12:21 CEST 2020 - DELETE [pepe] - table:subcategoria - Subcategoria [idSub=23, nombreES=Palanca de cambios, nombreEN=Palanca de cambios, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, categoria=Categoria [idCat=7, nombreES=Coches, nombreEN=Cars, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, subcategorias=null, foto=null, modificadoPor=, fechaModificacion=2020-05-24 01:57:37.0], productos=[], foto=null, modificadoPor=pepe, fechaModificacion=2020-10-03 18:12:11.0]
+Sat Oct 03 18:12:36 CEST 2020 - SAVE [pepe] - table:categoria - ModelCategoria [idCat=0, nombreES=Para borrar b, nombreEN=To remove b, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, modificadoPor=pepe, fechaModificacion=2020-10-03 18:12:36.436]
+Sat Oct 03 18:13:00 CEST 2020 - SAVE [pepe] - table:subcategoria - ModelSubcategoria [idSub=0, nombreES=fff, nombreEN=fff, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, idCat=13, modificadoPor=pepe, fechaModificacion=2020-10-03 18:13:00.408]
+Sat Oct 03 18:13:24 CEST 2020 - DELETE [pepe] - table:subcategoria - Subcategoria [idSub=24, nombreES=fff, nombreEN=fff, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, categoria=Categoria [idCat=13, nombreES=Para borrar b, nombreEN=To remove b, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, subcategorias=null, foto=null, modificadoPor=pepe, fechaModificacion=2020-10-03 18:12:36.0], productos=[], foto=null, modificadoPor=pepe, fechaModificacion=2020-10-03 18:13:00.0]
+Sat Oct 03 18:13:30 CEST 2020 - DELETE [pepe] - table:categoria - Categoria [idCat=13, nombreES=Para borrar b, nombreEN=To remove b, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, subcategorias=[], foto=null, modificadoPor=pepe, fechaModificacion=2020-10-03 18:12:36.0]
+Sat Oct 03 18:48:10 CEST 2020 - DELETE [pepe] - table:subcategoria - Subcategoria [idSub=10, nombreES=Cargadores de móvil, nombreEN=Mobile chargers, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, categoria=Categoria [idCat=1, nombreES=Aparatos electrónicos, nombreEN=Electronic devices, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, subcategorias=null, foto=null, modificadoPor=pepe, fechaModificacion=2020-10-02 20:53:37.0], productos=[], foto=null, modificadoPor=, fechaModificacion=2020-05-24 02:04:37.0]
+Sat Oct 03 18:48:39 CEST 2020 - SAVE [pepe] - table:subcategoria - ModelSubcategoria [idSub=0, nombreES=Cargadores de móvil, nombreEN=Mobile chargers, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, idCat=1, modificadoPor=pepe, fechaModificacion=2020-10-03 18:48:39.149]
+Sat Oct 03 18:59:25 CEST 2020 - UPDATE [pepe] - table:usuario - ModelUsuario [idUsr=106, usuario=jacinta, clave=7203e0fc30969ab463ad5dd6f1531867a4d500808be0ef7250735f2852c12efc9cb36636e8ad770b, habilitado=true, fechaCreacion=2020-09-19 12:35:15.0, modificadoPor=pepe, fechaModificacion=2020-10-03 18:59:25.417]
+Sat Oct 03 18:59:25 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=datosPersonales.nombre, orden=ASC]
+Sat Oct 03 19:00:09 CEST 2020 - UPDATE [pepe] - table:datospersonales - ModelDatosPersonales [idDatosPers=81, nombre=Jacinta, apellido1=Pichimahuida, apellido2=, sexo=Mujer, fechaNacimiento=Wed Jun 15 00:00:00 CET 1960, nacionalidad_idPais=17, dni=, email=jacintap@gmail.com, telefono=614614614, observaciones=, datospersonales_idUsr=106, modificadoPor=pepe, fechaModificacion=2020-10-03 19:00:09.251]
+Sat Oct 03 19:00:09 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=datosPersonales.nombre, orden=ASC]
+Sat Oct 03 19:00:34 CEST 2020 - DELETE [pepe] - table:datospersonales - DatosPersonales [idDatosPers=60, nombre=Servicio8, apellido1=Servicio, apellido2=Seis, sexo=Hombre, fechaNacimiento=2008-08-08, nacionalidad=Pais [idPais=0, nombreES=null, nombreEN=null, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, foto=null], dni=, email=servicio8@gmail.com, telefono=, observaciones=Observaciones8, modificadoPor=, fechaModificacion=2020-05-24 01:59:35.0]
+Sat Oct 03 19:00:34 CEST 2020 - DELETE [pepe] - table:usuario_rol - UsuarioRol [usuario=Usuario [idUsr=78, usuario=servicio8, clave=7a49b2bd8000984ca974d275d95c9365d7d52da9f6b6e4f5bdc95f3f1cbccbb45df26a358885de89, usuarioRol=[], usuarioEmpresa=[], datosPersonales=null, habilitado=true, fotos=null, fechaCreacion=2019-12-04 22:59:26.0, modificadoPor=, fechaModificacion=2020-05-24 02:05:06.0], rol=Rol [idRol=2, rol=ROL_USUARIO, usuarioRol=null, foto=null, modificadoPor=, fechaModificacion=2020-05-24 02:04:03.0], fechaCreacion=2019-12-04, creadoPor=pepe]
+Sat Oct 03 19:00:34 CEST 2020 - DELETE [pepe] - table:usuario - Usuario [idUsr=78, usuario=servicio8, clave=7a49b2bd8000984ca974d275d95c9365d7d52da9f6b6e4f5bdc95f3f1cbccbb45df26a358885de89, usuarioRol=[], usuarioEmpresa=[], datosPersonales=null, habilitado=true, fotos=null, fechaCreacion=2019-12-04 22:59:26.0, modificadoPor=, fechaModificacion=2020-05-24 02:05:06.0]
+Sat Oct 03 19:00:34 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=datosPersonales.nombre, orden=ASC]
+Sat Oct 03 19:00:51 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=datosPersonales.nombre, orden=ASC]
+Sat Oct 03 19:00:57 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=datosPersonales.nombre, orden=ASC]
+Sat Oct 03 19:08:46 CEST 2020 - UPDATE [pepe] - table:direccion - ModelDireccion [idDir=16, tipoVia=road.Street, nombreVia=Américo Castro, numero=100, resto=2ºB, cp=28050, provincia=Madrid, ciudad=Madrid, pais_idPais=1, idDatosPers=32, modificadoPor=pepe, fechaModificacion=2020-10-03 19:08:46.294]
+Sat Oct 03 19:10:02 CEST 2020 - SAVE [pepe] - table:direccion - ModelDireccion [idDir=0, tipoVia=road.Road, nombreVia=Valencia, numero=km 176, resto=, cp=31261, provincia=Cuenca, ciudad=Pozo grande, pais_idPais=1, idDatosPers=32, modificadoPor=pepe, fechaModificacion=2020-10-03 19:10:02.638]
+Sat Oct 03 19:10:09 CEST 2020 - DELETE [pepe] - table:direccion - Direccion [idDir=27, tipoVia=road.Road, nombreVia=Valencia, numero=km 176, resto=, cp=31261, provincia=Cuenca, ciudad=Pozo grande, pais=Pais [idPais=1, nombreES=España, nombreEN=Spain, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, foto=null], datosPersonales=DatosPersonales [idDatosPers=32, nombre=Damián, apellido1=Usheff, apellido2=Vellianitis, sexo=Hombre, fechaNacimiento=1976-10-30, nacionalidad=Pais [idPais=0, nombreES=No informado, nombreEN=Not selected, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, foto=null], dni=12345678A, email=damian@damian.com, telefono=698765435, observaciones=Observaciones para ser guardadas en base de datos, modificadoPor=, fechaModificacion=2020-05-24 01:59:35.0], modificadoPor=pepe, fechaModificacion=2020-10-03 19:10:02.0]
+Sat Oct 03 19:14:18 CEST 2020 - UPDATE [pepe] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=1, tema=tema03, botonFavorito=default, recibirPublicidad=false]
+Sat Oct 03 19:15:15 CEST 2020 - UPDATE [pepe] - table:factura_estado - ModelFacturaEstado [id=244, idFac=175, idEst=6, fecha=2020-10-01 22:34:14.0, creadoPor=pepe, observaciones=Trama llena]
+Sat Oct 03 19:33:54 CEST 2020 - UPDATE [admin] - table:factura - ModelFactura [idFac=68, compra=true, totalSinIvaEnvDescfac=0.0, descuentoTotal=0.0, descuentoImporteProductos=0.0, descuentoImporteFactura=0.0, descuentoImporteTotal=0.0, importeEnvioSinIva=0.0, envioIvaPor=0.0, envioIvaImp=0.0, productosIvaImp=0.0, totalSinIvaConDescfac=0.0, ivaTotal=21.0, ivaImporteTotal=0.0, importeTotal=0.0, fechaCompra=2020-07-01, fechaEntrega=null, idEst=5, observaciones=, idFor=4, creadoPor=pepe, idCuo=24, modificadoPor=admin, fechaModificacion=2020-10-03 19:33:54.605]
+Sat Oct 03 19:33:54 CEST 2020 - SAVE [admin] - table:factura_estado - ModelFacturaEstado [id=0, idFac=68, idEst=5, fecha=2020-10-03 19:33:54.658, creadoPor=admin, observaciones=null]
+Sat Oct 03 19:50:30 CEST 2020 - ERROR [pepe] - org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "undefined"
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:131)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:124)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:161)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:131)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:330)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:118)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:84)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:113)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:103)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:113)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter.doFilter(RememberMeAuthenticationFilter.java:146)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:154)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:45)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:199)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:50)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:87)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:192)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:160)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:668)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.NumberFormatException: For input string: "undefined"
+	at java.lang.NumberFormatException.forInputString(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at java.lang.Integer.valueOf(Unknown Source)
+	at org.springframework.util.NumberUtils.parseNumber(NumberUtils.java:210)
+	at org.springframework.beans.propertyeditors.CustomNumberEditor.setAsText(CustomNumberEditor.java:115)
+	at org.springframework.beans.TypeConverterDelegate.doConvertTextValue(TypeConverterDelegate.java:466)
+	at org.springframework.beans.TypeConverterDelegate.doConvertValue(TypeConverterDelegate.java:439)
+	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:192)
+	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:99)
+	at org.springframework.beans.TypeConverterSupport.doConvert(TypeConverterSupport.java:73)
+	at org.springframework.beans.TypeConverterSupport.convertIfNecessary(TypeConverterSupport.java:52)
+	at org.springframework.validation.DataBinder.convertIfNecessary(DataBinder.java:692)
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:123)
+	... 71 more
+
+Sat Oct 03 19:51:06 CEST 2020 - ERROR [pepe] - org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "undefined"
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:131)
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:124)
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:161)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:131)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:866)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:330)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:118)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:84)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:113)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:103)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:113)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter.doFilter(RememberMeAuthenticationFilter.java:146)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:154)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:45)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:199)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:50)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:87)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:192)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:160)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:668)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.NumberFormatException: For input string: "undefined"
+	at java.lang.NumberFormatException.forInputString(Unknown Source)
+	at java.lang.Integer.parseInt(Unknown Source)
+	at java.lang.Integer.valueOf(Unknown Source)
+	at org.springframework.util.NumberUtils.parseNumber(NumberUtils.java:210)
+	at org.springframework.beans.propertyeditors.CustomNumberEditor.setAsText(CustomNumberEditor.java:115)
+	at org.springframework.beans.TypeConverterDelegate.doConvertTextValue(TypeConverterDelegate.java:466)
+	at org.springframework.beans.TypeConverterDelegate.doConvertValue(TypeConverterDelegate.java:439)
+	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:192)
+	at org.springframework.beans.TypeConverterDelegate.convertIfNecessary(TypeConverterDelegate.java:99)
+	at org.springframework.beans.TypeConverterSupport.doConvert(TypeConverterSupport.java:73)
+	at org.springframework.beans.TypeConverterSupport.convertIfNecessary(TypeConverterSupport.java:52)
+	at org.springframework.validation.DataBinder.convertIfNecessary(DataBinder.java:692)
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:123)
+	... 71 more
+
+Sat Oct 03 19:53:18 CEST 2020 - UPDATE [pepe] - table:producto - ModelProducto [idPro=6, nombreES=Estantería de madera color roble, nombreEN=Oak wood shelving, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, unidades=409, precioVenta=45.0, precioCompra=32.0, marca=Ikea, modelo=, serie=, ubicacion=, estado=ACTIVE, partida=null, fechaCompra=null, enviar=false, vendible=true, mesesGarantia=6.0, peso=0.0, volumen=0.0, idSub=17, modificadoPor=pepe, fechaModificacion=2020-10-03 19:53:17.298]
+Sat Oct 03 19:53:18 CEST 2020 - DELETE [pepe] - table:producto_factura - ProductoFactura [cantidad=2, ivaProducto=21.0, ivaImporteTotal=0.0, descuentoPor=0.0, descuentoImporteTotal=0.0, precioUnitSinIva=61.98, precioUnitSinIvaConDesc=0.0, precioUnitario=0.0, precioFinalSinIva=0.0, precioFinalRecibidoPagado=0.0, observaciones=null, modificadoPor=, fechaModificacion=2020-05-24 02:03:38.0]
+Sat Oct 03 19:53:18 CEST 2020 - DELETE [pepe] - table:factura_estado - FacturaEstado [id=102, factura=Factura [idFac=88, compra=false, totalSinIvaEnvDescfac=0.0, descuentoTotal=0.0, descuentoImporteProductos=0.0, descuentoImporteFactura=0.0, descuentoImporteTotal=0.0, importeEnvioSinIva=0.0, envioIvaPor=0.0, envioIvaImp=0.0, productosIvaImp=0.0, totalSinIvaConDescfac=0.0, ivaTotal=0.0, ivaImporteTotal=0.0, importeTotal=0.0, fechaCompra=null, fechaEntrega=null, observaciones=null, creadoPor=null, modificadoPor=null, fechaModificacion=null], estado=Estado [idEst=6, nombreES=null, nombreEN=null, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, facturas=null, foto=null, modificadoPor=null, fechaModificacion=null], fecha=2020-03-16 23:18:40.0, creadoPor=pepe, observaciones=null]
+Sat Oct 03 19:53:26 CEST 2020 - DELETE [pepe] - table:factura - Factura [idFac=88, compra=true, totalSinIvaEnvDescfac=0.0, descuentoTotal=0.0, descuentoImporteProductos=0.0, descuentoImporteFactura=0.0, descuentoImporteTotal=0.0, importeEnvioSinIva=0.0, envioIvaPor=0.0, envioIvaImp=0.0, productosIvaImp=0.0, totalSinIvaConDescfac=0.0, ivaTotal=21.0, ivaImporteTotal=26.03, importeTotal=150.0, fechaCompra=2020-03-16, fechaEntrega=null, observaciones=, creadoPor=pepe, modificadoPor=, fechaModificacion=2020-05-24 02:02:04.0]
+Sat Oct 03 19:55:27 CEST 2020 - UPDATE [pepe] - table:producto - ModelProducto [idPro=1, nombreES=TV Sanyo 15 pulgadas, nombreEN=TV Sanyo 15 inches, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, unidades=8, precioVenta=150.0, precioCompra=115.35, marca=Sanyo, modelo=HR15, serie=12345678, ubicacion=Pasillo 3, estado=ACTIVE, partida=null, fechaCompra=2019-12-22, enviar=true, vendible=true, mesesGarantia=12.0, peso=20.0, volumen=0.016, idSub=1, modificadoPor=pepe, fechaModificacion=2020-10-03 19:55:27.416]
+Sat Oct 03 19:55:27 CEST 2020 - DELETE [pepe] - table:producto_factura - ProductoFactura [cantidad=1, ivaProducto=21.0, ivaImporteTotal=0.0, descuentoPor=0.0, descuentoImporteTotal=0.0, precioUnitSinIva=200.0, precioUnitSinIvaConDesc=0.0, precioUnitario=0.0, precioFinalSinIva=0.0, precioFinalRecibidoPagado=0.0, observaciones=null, modificadoPor=, fechaModificacion=2020-05-24 02:03:38.0]
+Sat Oct 03 19:55:27 CEST 2020 - DELETE [pepe] - table:factura_estado - FacturaEstado [id=8, factura=Factura [idFac=9, compra=false, totalSinIvaEnvDescfac=0.0, descuentoTotal=0.0, descuentoImporteProductos=0.0, descuentoImporteFactura=0.0, descuentoImporteTotal=0.0, importeEnvioSinIva=0.0, envioIvaPor=0.0, envioIvaImp=0.0, productosIvaImp=0.0, totalSinIvaConDescfac=0.0, ivaTotal=0.0, ivaImporteTotal=0.0, importeTotal=0.0, fechaCompra=null, fechaEntrega=null, observaciones=null, creadoPor=null, modificadoPor=null, fechaModificacion=null], estado=Estado [idEst=7, nombreES=null, nombreEN=null, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, facturas=null, foto=null, modificadoPor=null, fechaModificacion=null], fecha=2020-01-18 12:05:49.0, creadoPor=admin, observaciones=null]
+Sat Oct 03 19:55:27 CEST 2020 - DELETE [pepe] - table:factura_estado - FacturaEstado [id=141, factura=Factura [idFac=9, compra=false, totalSinIvaEnvDescfac=0.0, descuentoTotal=0.0, descuentoImporteProductos=0.0, descuentoImporteFactura=0.0, descuentoImporteTotal=0.0, importeEnvioSinIva=0.0, envioIvaPor=0.0, envioIvaImp=0.0, productosIvaImp=0.0, totalSinIvaConDescfac=0.0, ivaTotal=0.0, ivaImporteTotal=0.0, importeTotal=0.0, fechaCompra=null, fechaEntrega=null, observaciones=null, creadoPor=null, modificadoPor=null, fechaModificacion=null], estado=Estado [idEst=1, nombreES=null, nombreEN=null, nombrePT=null, nombreFR=null, nombreIT=null, nombreGE=null, nombreCA=null, nombreEU=null, facturas=null, foto=null, modificadoPor=null, fechaModificacion=null], fecha=2020-05-09 20:06:14.0, creadoPor=pepe, observaciones=null]
+Sat Oct 03 19:55:27 CEST 2020 - DELETE [pepe] - table:factura - Factura [idFac=9, compra=false, totalSinIvaEnvDescfac=0.0, descuentoTotal=0.0, descuentoImporteProductos=0.0, descuentoImporteFactura=0.0, descuentoImporteTotal=0.0, importeEnvioSinIva=0.0, envioIvaPor=0.0, envioIvaImp=0.0, productosIvaImp=0.0, totalSinIvaConDescfac=0.0, ivaTotal=21.0, ivaImporteTotal=42.0, importeTotal=242.0, fechaCompra=2020-03-28, fechaEntrega=null, observaciones=, creadoPor=admin, modificadoPor=, fechaModificacion=2020-05-24 02:02:04.0]

@@ -4,20 +4,22 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.pojo.PreferenciaUsuario;
 import com.damian.service.BotonFavoritoService;
+import com.damian.service.IndexService;
 import com.damian.service.PreferenciaUsuarioService;
 
 @Controller
+@SessionAttributes({ "resultado", "estoy", "errorUsuario", "idUsrLogged", "nameUsrLogged", "prinPicUsr", "prefUsr" })
 public class PreferenciaUsuarioController {
 
 	@Autowired
@@ -25,6 +27,9 @@ public class PreferenciaUsuarioController {
 
 	@Autowired
 	private BotonFavoritoService botonFavoritoService;
+
+	@Autowired
+	private IndexService indexService;
 
 	@RequestMapping("/preferenciaUsuario")
 	public ModelAndView getAll(ModelAndView modelAndView) {
@@ -35,6 +40,7 @@ public class PreferenciaUsuarioController {
 
 	@RequestMapping("/preferenciaUsuario/{idPrefUsr}")
 	public ModelAndView getPreferenciaUsuario(ModelAndView modelAndView, @PathVariable("idPrefUsr") int idPrefUsr) {
+		indexService.idUserLogged(modelAndView);
 		modelAndView.addObject("favoritos", botonFavoritoService.findAllFront());
 		modelAndView.addObject("preferenciaUsuario", preferenciaUsuarioService.findById(idPrefUsr));
 		modelAndView.setViewName("preferenciaUsuario");
@@ -43,7 +49,7 @@ public class PreferenciaUsuarioController {
 
 	@RequestMapping(value = { "/preferenciaUsuario/update" }, method = RequestMethod.POST)
 	public String savePreferenciaUsuario(@ModelAttribute("preferenciaUsuario") PreferenciaUsuario preferenciaUsuario,
-			BindingResult result, Model model, RedirectAttributes ra, HttpServletRequest request) {
+			BindingResult result, ModelAndView modelAndView, RedirectAttributes ra, HttpServletRequest request) {
 		if (result.hasErrors()) {
 			// System.out.println(result.getAllErrors());
 			// return "preferenciaUsuario";

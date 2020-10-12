@@ -192,6 +192,14 @@
 	width: 50px;
 }
 
+.width-60{
+	width: 60px;
+}
+
+.width-70{
+	width: 70px;
+}
+
 .width-100{
 	width: 100px;
 }
@@ -202,6 +210,10 @@
 
 .width-150{
 	width: 150px;
+}
+
+.width-auto {
+	width: auto;
 }
 
 .w-70{
@@ -263,4 +275,28 @@
 
 .d-none {
 	display: none;
+}
+
+.height50 {
+	height: 50px;
+}
+
+.height100 {
+	height: 100px;
+}
+
+.color-green {
+	color: green;
+}
+
+.color-red {
+	color: red;
+}
+
+.color-blue {
+	color: blue;
+}
+
+.color-orange {
+	color: orange;
 }

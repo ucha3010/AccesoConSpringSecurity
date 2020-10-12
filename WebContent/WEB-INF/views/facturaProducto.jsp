@@ -26,11 +26,11 @@
 	</script>
 	
 </head>
-<body>		
-	<div class="container-fluid">
+<body class="${prefUsr.tema}fondopantalla">		
+	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
-		<div class="well well-sm text-center h2">
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo">
 			<fmt:message key="label.Bill.id" />: <c:out value="${factura.idFac}" />
 			<br>
 			<fmt:message key="label.Date" />: <fmt:formatDate value="${factura.fechaCompra}" pattern="dd/MM/yyyy"/>
@@ -141,9 +141,16 @@
 			</c:if>
 		</div>
 	</div>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
+	</div>
 </body>
 </html>

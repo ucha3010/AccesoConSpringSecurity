@@ -5,8 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -24,19 +22,21 @@ import com.damian.exceptions.RepeatedUsernameException;
 import com.damian.pojo.Foto;
 import com.damian.pojo.Usuario;
 import com.damian.service.FotoService;
+import com.damian.service.IndexService;
 import com.damian.service.PaginacionService;
 import com.damian.service.PaisService;
 import com.damian.service.RolService;
 import com.damian.service.impl.UsuarioServiceImpl;
 
 @Controller
-@SessionAttributes({ "resultado", "estoy", "roles", "prinPicUsr" }) // los atributos que pueden mantenerse en sesión y
-																	// verse en
-// distintas páginas
+@SessionAttributes({ "resultado", "estoy", "roles", "errorUsuario", "idUsrLogged", "nameUsrLogged",  "prinPicUsr", "prefUsr" })
 public class UsuarioController {
 
 	@Autowired
 	private FotoService fotoService;
+
+	@Autowired
+	private IndexService indexService;
 
 	@Autowired
 	private PaginacionService paginacionService;
@@ -54,6 +54,7 @@ public class UsuarioController {
 	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
 			@PathVariable("order") String order, @PathVariable("paginaInicio") int paginaInicio,
 			@PathVariable("totalPaginas") int totalPaginas, HttpServletRequest request) {
+		indexService.idUserLogged(modelAndView);
 		modelAndView.addObject("usuarios", usuarioService.findAll(column, order, paginaInicio, totalPaginas, request));
 		modelAndView.addObject("buscarusuarios", usuarioService.findSearchAll(false));
 		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, "usuario"));
@@ -101,7 +102,7 @@ public class UsuarioController {
 
 	@RequestMapping("/usuario/logged")
 	public ModelAndView getLogged(ModelAndView modelAndView) {
-		int idUsr = idUserLogged(modelAndView);
+		int idUsr = indexService.idUserLogged(modelAndView);
 		return getLoggedUser(modelAndView, idUsr);
 	}
 
@@ -217,7 +218,8 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/usuario/deleteUsr/{idUsr}")
-	public String deleteUserByUser(@PathVariable("idUsr") int idUsr, RedirectAttributes ra, HttpServletRequest request) {
+	public String deleteUserByUser(@PathVariable("idUsr") int idUsr, RedirectAttributes ra,
+			HttpServletRequest request) {
 
 		usuarioService.delete(idUsr, request);
 		ra.addFlashAttribute("usuario_eliminado", "usuario_eliminado");
@@ -244,8 +246,9 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/usuario/publicity/{receive}")
-	public ModelAndView getPublicity(ModelAndView modelAndView, @PathVariable("receive") boolean receive, HttpServletRequest request) {
-		
+	public ModelAndView getPublicity(ModelAndView modelAndView, @PathVariable("receive") boolean receive,
+			HttpServletRequest request) {
+
 		modelAndView.addObject("usuarios", usuarioService.findByPublicity(receive));
 		modelAndView.addObject("quieren_publicidad", receive);
 		modelAndView.addObject("estoy", "usuariosRecibirPublicidad");
@@ -268,24 +271,6 @@ public class UsuarioController {
 		modelAndView.addObject("paises", paisService.findAll());
 		modelAndView.addObject("usuario", usuario);
 		modelAndView.addObject("estoy", "usuario");
-	}
-	
-	private int idUserLogged(ModelAndView model) {
-		Usuario usuario = new Usuario();
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if(!authentication.getName().equals("anonymousUser")) {
-			usuario = usuarioService.findByUsername(authentication.getName());
-			model.addObject("idUsrLogged", usuario.getIdUsr());
-			model.addObject("nameUsrLogged", usuario.getUsuario());
-			List<Foto> fotos = fotoService.findByIdUsr(usuario.getIdUsr());
-			for (Foto f : fotos) {
-				if (f.isPrincipal()) {
-					model.addObject("prinPicUsr", f.getNombre());
-					break;
-				}
-			}
-		}
-		return usuario.getIdUsr();
 	}
 
 }

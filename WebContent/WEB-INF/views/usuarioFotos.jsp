@@ -24,10 +24,10 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2">
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo">
 			<fmt:message key="label.Pictures.of" /> <c:out value="${usuario.usuario}" />
 		</div>
 		<c:if test="${not empty foto_agregada}">
@@ -84,7 +84,7 @@
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<label for="fotoUsuario"><fmt:message key="label.Select.file" /></label>
-					<input type="file" class="form-control-file form-control" id="fotoUsuario" name="file" />
+					<input type="file" class="form-control-file form-control ${prefUsr.tema}botonresto" id="fotoUsuario" name="file" />
 				</div>
 				<div class="hidden-xs col-sm-3">
 				</div>
@@ -127,18 +127,25 @@
 				<div class="hidden-xs col-sm-3">
 				</div>
 				<div class="col-xs-12 col-sm-6">
-					<button class="btn btn-default" type="button" onclick='location.href="<c:url value="/usuario/logged/${usuario.idUsr}"/>"'><fmt:message key="label.Back" /></button>
-					<button class="btn btn-success" type="submit" <c:if test="${fotos.size() == 4 }">disabled</c:if>><fmt:message key="Send" /></button>
+					<button class="btn btn-success ${prefUsr.tema}botonguardar" type="submit" <c:if test="${fotos.size() == 4 }">disabled</c:if>><fmt:message key="Save" /></button>
+					<button class="btn btn-default ${prefUsr.tema}botoncancelar" type="button" onclick='location.href="<c:url value="/usuario/logged/${usuario.idUsr}"/>"'><fmt:message key="label.Back" /></button>
 				</div>
 				<div class="hidden-xs col-sm-3">
 				</div>
 			</div>
 		
 		</sf:form>
-		
-		<footer>
-			<c:import url="/WEB-INF/views/importFooter.jsp" />
-		</footer>
+	</div>
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
 	</div>
 </body>
 </html>

@@ -69,6 +69,8 @@ public class ConstantesServiceImpl implements ConstantesService {
 		FrontAdministrarConfiguracion frontAdministrarConfiguracion = new FrontAdministrarConfiguracion();
 		Constantes constante = findByClave(ConstantesLocales.IVA_ENVIO);
 		frontAdministrarConfiguracion.setIvaEnvio(constante.getValorDouble());
+		constante = findByClave(ConstantesLocales.SPEECH);
+		frontAdministrarConfiguracion.setSpeech(constante.getValorText());
 
 		return frontAdministrarConfiguracion;
 	}

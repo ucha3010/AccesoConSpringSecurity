@@ -28,7 +28,7 @@
 			const texto = normalizado(formulario.value.toLowerCase());
 			resultado.innerHTML = '';
 			if(texto === ''){
-				$(".collapse").collapse('hide');
+				$(".resultadosBusqueda").collapse('hide');
 			} else {
 				<c:forEach items="${buscarempresas}" var="emp" varStatus="status">
 					var nombre = normalizado('${emp.nombreComercial}');
@@ -38,7 +38,7 @@
 						resultado.innerHTML += "<a href=\"<c:url value='/empresa/filtered/${emp.idEmp}' />\">${emp.nombreComercial} ${emp.cif} ${emp.email}</a>";
 					}
 				</c:forEach>
-				$(".collapse").collapse('show');
+				$(".resultadosBusqueda").collapse('show');
 			}
 		}
 		function ordenaTabla(numCol,actual,total){
@@ -48,21 +48,21 @@
 		}
 	</script>
 </head>
-<body>
-	<div class="container-fluid">
+<body class="${prefUsr.tema}fondopantalla">
+	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
-		<div class="well well-sm text-center h2"><fmt:message key="Companies" /></div>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="Companies" /></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
-				<div class="hidden-xs col-sm-3 col-md-2">
+				<div class="col-sm-3 col-md-2">
 					<input type="text" id="formulario" class="form-control">
 					<script>
 						const formulario = document.querySelector('#formulario');
 						formulario.addEventListener('keyup', filtrar);
 					</script>
 				</div>
-				<div class="hidden-xs col-sm-2 col-md-4">
-					<div class="dropdown collapse">
+				<div class="col-sm-2 col-md-4">
+					<div class="dropdown collapse resultadosBusqueda">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
@@ -92,7 +92,7 @@
 					</c:if>
 				</div>
 				<div class="col-sm-3 col-md-2  navbar-right">
-					<button type="button" class="btn fondo-c0c0c0 ml-1 border-color-dam" onclick='location.href="<c:url value='/empresa/0'/>"'>
+					<button type="button" class="btn fondo-c0c0c0 ml-1 border-color-dam ${prefUsr.tema}botonagregar" onclick='location.href="<c:url value='/empresa/0'/>"'>
 						<fmt:message key="Add.company" />
 					</button>
 				</div>		
@@ -100,15 +100,15 @@
 		</sec:authorize>
 		<sec:authorize access="!hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
-				<div class="hidden-xs col-sm-3 col-md-2">
+				<div class="col-sm-3 col-md-2">
 					<input type="text" id="formulario" class="form-control">
 					<script>
 						const formulario = document.querySelector('#formulario');
 						formulario.addEventListener('keyup', filtrar);
 					</script>
 				</div>
-				<div class="hidden-xs col-sm-3 col-md-6">
-					<div class="dropdown collapse">
+				<div class="col-sm-3 col-md-6">
+					<div class="dropdown collapse resultadosBusqueda">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
@@ -119,59 +119,130 @@
 				</div>
 			</div>
 		</sec:authorize>
-		<div class="divTablaSinScroll">
-			<table class="table table-striped">
-				<thead>
-					<tr class="cursor-pointer">
-						<c:set var="count" value="0" scope="page" />
-						<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-							<th class="extraAdmin-th cursor-text"></th>
-						</sec:authorize>
-						<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Company.name" /></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.vat" /></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Email" /></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Phone" /></th>
-						<c:set var="count" value="${count + 1}" scope="page"/>
-						<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Fax" /></th>
-						<th class="extraAdmin-th cursor-text"><fmt:message key="label.Extras" /></th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${empresas}" var="empresa">
-					    <tr title='<fmt:message key="label.Limited.company" />: <c:out value="${empresa.tipoSociedad}" />&#xA;<fmt:message key="label.Activity" />: <c:out value="${empresa.actividad}" />&#xA;<fmt:message key="label.Web.page" />: <c:out value="${empresa.paginaWeb}" />&#xA;<c:out value="${empresa.observaciones}" />'>
-							<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
-								<td class="extraAdmin-td">
-									<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/empresa/${empresa.idEmp}' />"'>
-										<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
-									</a>
-									<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${empresa.idEmp})">
-										<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-									</a>
-								</td>
-							</sec:authorize>
-							<td><c:out value="${empresa.nombreComercial}" /></td>
-							<td><c:out value="${empresa.cif}" /></td>
-							<td><c:out value="${empresa.email}" /></td>	
-							<td><c:out value="${empresa.telefono}" /></td>
-							<td><c:out value="${empresa.fax}" /></td>
-							<td class="extraAdmin-td">
-								<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccionEmpresa/${empresa.idEmp}' />'>
-									<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="tamanio_imagen">
-								</a>
-								<a title="<fmt:message key="label.Workers" />" href='<c:url value='/usuarioEmpresa/empresa/${empresa.idEmp}' />'>
-									<img src='<c:url value="/resources/imgs/usuarios.png"/>' class="tamanio_imagen">
-								</a>
-								<a title="<fmt:message key="Products" />" href='<c:url value='/productoEmpresa/empresa/${empresa.idEmp}' />'>
-									<img src='<c:url value="/resources/imgs/productos.png"/>' class="tamanio_imagen">
-								</a>
-							</td>
-					    </tr>
-					</c:forEach>
-				</tbody>
-			</table>
+		
+		<div class="row">
+			<div class="hidden-xs hidden-sm col-md-12">
+				<div class="divTablaSinScroll">
+					<table class="table table-striped">
+						<thead>
+							<tr class="cursor-pointer">
+								<c:set var="count" value="0" scope="page" />
+								<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+									<th class="extraAdmin-th cursor-text"></th>
+								</sec:authorize>
+								<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Company.name" /></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.vat" /></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Email" /></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Phone" /></th>
+								<c:set var="count" value="${count + 1}" scope="page"/>
+								<th <c:if test="${empresas.size() > 1}">onclick="ordenaTabla(${count},${paginacion.actual},${paginacion.registrosPorPagina})"</c:if>><fmt:message key="label.Fax" /></th>
+								<th class="extraAdmin-th cursor-text"><fmt:message key="label.Extras" /></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${empresas}" var="empresa">
+							    <tr title='<fmt:message key="label.Limited.company" />: <c:out value="${empresa.tipoSociedad}" />&#xA;<fmt:message key="label.Activity" />: <c:out value="${empresa.actividad}" />&#xA;<fmt:message key="label.Web.page" />: <c:out value="${empresa.paginaWeb}" />&#xA;<c:out value="${empresa.observaciones}" />'>
+									<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+										<td class="extraAdmin-td">
+											<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/empresa/${empresa.idEmp}' />"'>
+												<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+											</a>
+											<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${empresa.idEmp})">
+												<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+											</a>
+										</td>
+									</sec:authorize>
+									<td><c:out value="${empresa.nombreComercial}" /></td>
+									<td><c:out value="${empresa.cif}" /></td>
+									<td><c:out value="${empresa.email}" /></td>	
+									<td><c:out value="${empresa.telefono}" /></td>
+									<td><c:out value="${empresa.fax}" /></td>
+									<td class="extraAdmin-td">
+										<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccionEmpresa/${empresa.idEmp}' />'>
+											<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="tamanio_imagen">
+										</a>
+										<a title="<fmt:message key="label.Workers" />" href='<c:url value='/usuarioEmpresa/empresa/${empresa.idEmp}' />'>
+											<img src='<c:url value="/resources/imgs/usuarios.png"/>' class="tamanio_imagen">
+										</a>
+										<a title="<fmt:message key="Products" />" href='<c:url value='/productoEmpresa/empresa/${empresa.idEmp}' />'>
+											<img src='<c:url value="/resources/imgs/productos.png"/>' class="tamanio_imagen">
+										</a>
+									</td>
+							    </tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 hidden-md hidden-lg hidden-xl">
+				<table class="table table-striped">
+					<tbody>
+						<c:forEach items="${empresas}" var="empresa">
+						    <tr href="#ventana${empresa.idEmp}" class="thumbnail" data-toggle="modal">
+								<td><c:out value="${empresa.nombreComercial}" /></td>
+								<td><c:out value="${empresa.cif}" /></td>
+						    </tr>
+						    
+							<div class="modal fade" id="ventana${empresa.idEmp}">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											<h4 class="modal-title justify-content-center"><c:out value="${empresa.nombreComercial}" /></h4>
+										</div>
+										<div class="modal-body">
+							            	<div class="col-xs-4">								
+												<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">	
+									            	<div class="col-xs-6">
+														<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/empresa/${empresa.idEmp}' />"' class="cursor-pointer">
+															<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
+														</a>								
+													</div>
+										            <div class="col-xs-6">
+														<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${empresa.idEmp})" class="cursor-pointer">
+															<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+														</a>	
+													</div>									
+												</sec:authorize>
+											</div>	
+								            <div class="col-xs-2">
+												<a title="<fmt:message key="label.Addresses" />" href='<c:url value='/direccionEmpresa/${empresa.idEmp}' />'>
+													<img src='<c:url value="/resources/imgs/domicilio.png"/>' class="tamanio_imagen">
+												</a>
+											</div>
+								            <div class="col-xs-2">
+												<a title="<fmt:message key="label.Workers" />" href='<c:url value='/usuarioEmpresa/empresa/${empresa.idEmp}' />'>
+													<img src='<c:url value="/resources/imgs/usuarios.png"/>' class="tamanio_imagen">
+												</a>
+											</div>
+								            <div class="col-xs-4">
+												<a title="<fmt:message key="Products" />" href='<c:url value='/productoEmpresa/empresa/${empresa.idEmp}' />'>
+													<img src='<c:url value="/resources/imgs/productos.png"/>' class="tamanio_imagen">
+												</a>
+											</div>
+											<div class="height50"></div>
+											<p><fmt:message key="label.vat" />: <c:out value="${empresa.cif}" /></p>
+											<p><fmt:message key="label.Email" />: <c:out value="${empresa.email}" /></p>
+											<p><fmt:message key="label.Phone" />: <c:out value="${empresa.telefono}" /></p>
+											<p><fmt:message key="label.Fax" />: <c:out value="${empresa.fax}" /></p>
+											<p><fmt:message key="label.Limited.company" />: <c:out value="${empresa.tipoSociedad}" /></p>
+											<p><fmt:message key="label.Activity" />: <c:out value="${empresa.actividad}" /></p>
+											<p><fmt:message key="label.Web.page" />: <c:out value="${empresa.paginaWeb}" /></p>
+											<p><c:out value="${empresa.observaciones}" /></p>
+										</div>
+									</div>
+								</div>
+							</div>
+					    </c:forEach>
+				    </tbody>
+				</table>
+			</div>
 		</div>
 		
 		<!-- PAGINACION -->
@@ -212,10 +283,17 @@
 				</ul>
 			</div>
 		</div>
-		
-		<footer>
-			<c:import url="/WEB-INF/views/importFooter.jsp" />
-		</footer>
+	</div>
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
 	</div>
 </body>
 </html>

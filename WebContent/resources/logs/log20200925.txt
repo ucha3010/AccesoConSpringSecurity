@@ -1,0 +1,6 @@
+Fri Sep 25 16:17:29 CEST 2020 - SAVE [pepe] - table:producto_empresa - ModelProductoEmpresa [idPro=4, idEmp=1, fechaCreacion=Fri Sep 25 16:17:29 CEST 2020, creadoPor=pepe]
+Fri Sep 25 17:19:51 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=datosPersonales.nombre, orden=ASC]
+Fri Sep 25 17:20:36 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=datosPersonales.nombre, orden=ASC]
+Fri Sep 25 17:20:43 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=datosPersonales.nombre, orden=ASC]
+Fri Sep 25 17:31:01 CEST 2020 - UPDATE [pepe] - table:usuarioorden - ModelUsuarioOrden [id=13, idUsr=1, tabla=usuario, columna=datosPersonales.nombre, orden=ASC]
+Fri Sep 25 17:43:50 CEST 2020 - UPDATE [pepe] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=1, tema=tema03, botonFavorito=default, recibirPublicidad=false]

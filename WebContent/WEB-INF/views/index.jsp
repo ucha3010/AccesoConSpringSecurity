@@ -9,15 +9,15 @@
 
 <html>
 <head>
-	<title>Company</title>
+	<title><fmt:message key='Company.name' /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<c:if test="${not empty usuario_creado}">
-			
+		
 			<div class="row">
 				<div class="col-xs-2 col-sm-3">
 				</div>
@@ -34,99 +34,293 @@
 		
 		
 		<div class="row">
-			<div class="col-md-12">
-				<h1>Index</h1>
+			<div class="hidden-xs col-sm-12">
+				<div class="col-sm-4 col-md-3">
+				    <select class="form-control">
+				      <option>Todas las categorías</option>
+				      <option>2</option>
+				      <option>3</option>
+				      <option>4</option>
+				      <option>5</option>
+				    </select>
+				</div>
+				<div class="col-sm-6 col-md-7">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="<fmt:message key='label.Search' />" id="buscar"/>
+						<div class="input-group-btn">
+							<button class="btn btn-primary padding9" type="submit">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-1">
+					<img src='<c:url value="/resources/imgs/favoritos/default.png"/>' class="tamanio_imagen cursor-pointer">
+				</div>
+				<div class="col-sm-1">
+					<img src='<c:url value="/resources/imgs/carrito.png"/>' class="height27 cursor-pointer">
+				</div>
 			</div>
-		</div>
-	
-		<div class="row">
-<!-- 			xs, sm, md y lg hacen referencia al tamaño del dispositivo donde se muestra -->
-			<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-				<a href='<c:url value="/about"/>'>Acerca de</a><br/>	
-				<a href='<c:url value="/index2"/>'>Index2</a>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="col-xs-2">
+				</div>
+				<div class="col-xs-4">
+					<img src='<c:url value="/resources/imgs/favoritos/default.png"/>' class="tamanio_imagen cursor-pointer">
+				</div>
+				<div class="col-xs-4">
+					<img src='<c:url value="/resources/imgs/carrito.png"/>' class="height27 cursor-pointer">
+				</div>
+				<div class="col-xs-2">
+				</div>
 			</div>
-			<div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">	
-				Atributos del Model: <c:out value="${mensaje}" /><br/>
-				Atributos en Session (estoy): <c:out value="${sessionScope.estoy}" /><br/>
-				Atributos en Session (resultado): <c:out value="${sessionScope.resultado}" /><br/>
-				Atributos en Session (nombre): <c:out value="${sessionScope.nombre}" /><br/>
-				Atributos en Session (valor): <c:out value="${sessionScope.valor}" />
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="col-xs-6">
+				    <select class="form-control">
+				      <option>Todas las categorías</option>
+				      <option>2</option>
+				      <option>3</option>
+				      <option>4</option>
+				      <option>5</option>
+				    </select>
+				</div>
+				<div class="col-xs-6">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="<fmt:message key='label.Search' />" id="buscar"/>
+						<div class="input-group-btn">
+							<button class="btn btn-primary padding9" type="submit">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		
+		<div class="separacion10"></div>
+	
 		<div class="row">
-			<div class="color1 col-md-2">
-				<h1>Fondo</h1>
+			<div class="hidden-xs col-sm-12">
+				<div class="hidden-xs col-sm-2">
+					<div class="botonesindex defaultbotonresto ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/footer/findyourstore'/>"'>
+						<fmt:message key="label.Find.your.strore" />
+					</div>
+				</div>
+				<div class="hidden-xs col-sm-2">
+					<div class="botonesindex defaultbotonresto ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/footer/membersclub'/>"'>
+						<fmt:message key="label.Members.club" />
+					</div>
+				</div>
+				<div class="hidden-xs col-sm-2">
+					<div class="botonesindex defaultbotonresto ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/footer/shipments'/>"'>
+						<fmt:message key="label.Shipments" />
+					</div>
+				</div>
+				<div class="hidden-xs col-sm-2">
+					<div class="botonesindex defaultbotonresto ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/footer/brands'/>"'>
+						<fmt:message key="label.Brands" />
+					</div>
+				</div>
+				<div class="hidden-xs col-sm-2">
+					<div class="botonesindex defaultbotonresto ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/footer/Frequentquestions'/>"'>
+						<fmt:message key="label.Frequent.questions" />
+					</div>
+				</div>
+				<div class="hidden-xs col-sm-2">
+					<div class="botonesindex defaultbotonresto ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/footer/contact'/>"'>
+						<fmt:message key="label.Contact" />
+					</div>
+				</div>
 			</div>
-			<div class="col-md-2">
-				<h1>Fondo</h1>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="col-xs-4">
+					<div class="botonesindex defaultbotonresto ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/footer/findyourstore'/>"'>
+						<fmt:message key="label.Find.your.strore" />
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="botonesindex defaultbotonresto ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/footer/membersclub'/>"'>
+						<fmt:message key="label.Members.club" />
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="botonesindex defaultbotonresto ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/footer/shipments'/>"'>
+						<fmt:message key="label.Shipments" />
+					</div>
+				</div>
 			</div>
-			<div class="color1 col-md-2">
-				<h1>Fondo</h1>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="separacion10"></div>
 			</div>
-			<div class="col-md-2">
-				<h1>Fondo</h1>
-			</div>
-			<div class="color1 col-md-2">
-				<h1>Fondo</h1>
-			</div>
-			<div class="col-md-2">
-				<h1>Fondo</h1>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="col-xs-4">
+					<div class="botonesindex defaultbotonresto ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/footer/brands'/>"'>
+						<fmt:message key="label.Brands" />
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="botonesindex defaultbotonresto ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/footer/Frequentquestions'/>"'>
+						<fmt:message key="label.Frequent.questions" />
+					</div>
+				</div>
+				<div class="col-xs-4">
+					<div class="botonesindex defaultbotonresto ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/footer/contact'/>"'>
+						<fmt:message key="label.Contact" />
+					</div>
+				</div>
 			</div>
 		</div>
 		
-		<br/>
-		<br/>
-		<h2>Datos del formulario de Admin.jsp</h2>
-		<c:out value="${adminForm}"></c:out><br/>
-		<br/>
-		<br/>
-		<br/>Datos
-		<br/>
-		<br/>
-	     <h3>Campo language: <c:out value="${language}" /></h3>
+		<div class="separacion20"></div>
 	
-	     <fmt:message key="msg.greeting" /><br />
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="speechPublicitario">
+					<c:out value="${speech.valorText}"></c:out>
+				</div>
+			</div>
+		</div>
+		
+		<div class="separacion10"></div>
 	
-	     <h3><fmt:message key="label.Numbers" /></h3>
-	     
-	     <c:set var="numero" value="125678.4309" />
-	     
-	     <fmt:message key="label.Number" />: <fmt:formatNumber value="${numero}" type="number"/><br />
-	     <fmt:message key="label.Currency" />: <fmt:formatNumber value="${numero}" type="currency"/><br />
-	     <fmt:message key="label.Percent" />: <fmt:formatNumber value="${numero}" type="percent"/><br />
-		<button class="btn btn-primary">Botón</button>
-		<br/>
-		<br/>
-		<br/>Datos
-		<br/>
-		<br/>
-		<br/>Datos
-		<br/>
-		<br/>
-		<br/>Datos
-		<br/>
-		<br/>
-		<br/>Datos
-		<br/>
-		<br/>
-		<br/>Datos
-		<br/>
-		<br/>
-		<br/>Datos
-		<br/>
-		<br/>
-		<br/>Datos
-		<br/>
-		<br/>
-		<br/>Datos
-		<br/>
-		<br/>
-		<br/>Datos
+		<div class="row">
+			<div class="col-xs-12">
+				<div id="principalCarrousel" class="carousel slide" data-ride="carousel">
+					<!-- Indicators -->
+					<ol class="carousel-indicators changeitem">
+						<li data-target="#principalCarrousel" data-slide-to="0" class="active"></li>
+						<li data-target="#principalCarrousel" data-slide-to="1"></li>
+						<li data-target="#principalCarrousel" data-slide-to="2"></li>
+						<li data-target="#principalCarrousel" data-slide-to="3"></li>
+					</ol>
+					
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner">
+						<div class="item item-center active">
+							<img src='<c:url value="/resources/imgs/ofertas.png"/>' alt="">
+						</div>
+						
+						<div class="item item-center">
+							<img src='<c:url value="/resources/imgs/publicidad.png"/>' alt="">
+						</div>
+						
+						<div class="item item-center">
+							<img src='<c:url value="/resources/imgs/catalogo.jpg"/>' alt="">
+						</div>
+						
+						<div class="item item-center">
+							<img src='<c:url value="/resources/imgs/masvendidos.jpg"/>' alt="">
+						</div>
+					</div>
+					
+					<!-- Left and right controls -->
+					<a class="left carousel-control" href="#principalCarrousel" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left"></span>
+						<span class="sr-only">Previous</span>
+					</a>
+					<a class="right carousel-control" href="#principalCarrousel" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right"></span>
+						<span class="sr-only">Next</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	
+		<div class="titulossecundarios"><fmt:message key="label.Offers" /></div>
+	
+		<div class="row">
+			<div class="hidden-xs col-sm-12">
+				<div class="col-sm-2">
+					Producto 1
+				</div>
+				<div class="col-sm-1">
+				</div>
+				<div class="col-sm-2">
+					Producto 2
+				</div>
+				<div class="col-sm-1">
+				</div>
+				<div class="col-sm-2">
+					Producto 3
+				</div>
+				<div class="col-sm-1">
+				</div>
+				<div class="col-sm-2">
+					Ver más
+				</div>
+				<div class="col-sm-1">
+				</div>
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="col-xs-5">
+					Producto 1
+				</div>
+				<div class="col-xs-1">
+				</div>
+				<div class="col-xs-5">
+					Producto 2
+				</div>
+				<div class="col-xs-1">
+				</div>
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="separacion10"></div>
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="col-xs-5">
+					Producto 3
+				</div>
+				<div class="col-xs-1">
+				</div>
+				<div class="col-xs-5">
+					Ver más
+				</div>
+				<div class="col-xs-1">
+				</div>
+			</div>
+		</div>
+	
+		<div class="titulossecundarios"><fmt:message key="label.Most.popular.products" /></div>
+	
+		<div class="row">
+			<div class="hidden-xs col-sm-12">
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="separacion10"></div>
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+			</div>
+		</div>
+	
+		<div class="titulossecundarios"><fmt:message key="label.New.stock" /></div>
+	
+		<div class="row">
+			<div class="hidden-xs col-sm-12">
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+				<div class="separacion10"></div>
+			</div>
+			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+			</div>
+		</div>
+	
+	
+	
 	</div>
-
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+	
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
+	</div>
 </body>
 </html>

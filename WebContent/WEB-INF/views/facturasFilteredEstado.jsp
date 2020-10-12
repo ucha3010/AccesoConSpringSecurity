@@ -15,9 +15,9 @@
 	
 	<script type="text/javascript" src='<c:url value="/resources/js/utiles.js" />'></script>
 	<script type="text/javascript">
-		function confirmDelete(idFac){
+		function confirmDelete(idFac,idEst){
 			if(confirm("<fmt:message key='Delete.message' />")){
-				var url = "<c:url value='/factura/delete/"+idFac+"' />";
+				var url = "<c:url value='/factura/delete/filteredEstado/"+idFac+"/"+idEst+"/null/${paginacion.actual}/${paginacion.registrosPorPagina}' />";
 				location.href=url;
 				return true;
 			}
@@ -28,6 +28,11 @@
 			var url = "<c:url value='/factura/status/"+idFac+"/" + valSelected.value + "/null/${paginacion.actual}/${paginacion.registrosPorPagina}/facturasFilteredEstado/${idEst}	' />";
 			location.href=url;
 		}
+		function actualizaEstadoXS(idFac, numPagina, cantRegistros) {
+			var valSelected = document.getElementById("estadoIdXS" + idFac);
+			var url = "<c:url value='/factura/status/"+idFac+"/" + valSelected.value + "/null/${paginacion.actual}/${paginacion.registrosPorPagina}/facturasFilteredEstado/${idEst}' />";
+			location.href=url;
+		}
 		function ordenaTabla(idEst,numCol,actual,total){
 			var columnas = ['idFac','compra','fechaCompra','descuentoTotal','ivaTotal','importeTotal'];
 			var url = "<c:url value='/factura/filteredEstado/"+idEst+"/"+columnas[numCol]+"/"+actual+"/"+total+"' />";
@@ -35,10 +40,11 @@
 		}
 	</script>
 </head>
-<body>
-	<div class="container-fluid">
+<body class="${prefUsr.tema}fondopantalla">
+	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<fmt:message key="language.name" var="nameColSelect"/>
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Bills" /> <c:out value="${estadoActual[nameColSelect]}" /></div>
 		<div class="row">
 			<div class="col-xs-12">
 				<c:if test="${not empty factura_eliminado}">
@@ -54,6 +60,7 @@
 			</div>		
 		</div>
 		<div class="row">
+			<div class="hidden-xs hidden-sm col-md-12">
 			<div class="divTablaSinScroll">
 				<table class="table table-striped">
 					<thead>
@@ -82,7 +89,7 @@
 						    <tr title='<fmt:message key="label.Delivery.date" />: <fmt:formatDate value="${factura.fechaEntrega}" pattern="dd/MM/yyyy"/>&#xA;<fmt:message key="label.Observations" />: <c:out value="${factura.observaciones}" />&#xA;<fmt:message key="label.Payment.method" />: <c:out value="${factura.formaPago[nameColSelect]}" />&#xA;<fmt:message key="label.Creator" />: <c:out value="${factura.creadoPor}" />'>
 								<sec:authorize access="hasAnyRole('ROL_ROOT')">
 									<td class="extraAdmin-td">
-										<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${factura.idFac})">
+										<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${factura.idFac},${idEst})">
 											<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
 										</a>
 									</td>
@@ -123,7 +130,98 @@
 				</table>
 			</div>
 		</div>
-	</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 hidden-md hidden-lg hidden-xl">
+				<table class="table table-striped">
+					<tbody>
+						<c:forEach items="${facturas}" var="factura">
+						    <tr href="#ventana${factura.idFac}" class="thumbnail" data-toggle="modal">
+								<td class="text-center"><c:out value="${factura.idFac}" /></td>
+								<c:if test="${factura.compra}">
+									<td class="text-center"><fmt:message key="label.Purchase" /></td>
+								</c:if>
+								<c:if test="${not factura.compra}">
+									<td class="text-center"><fmt:message key="label.Sale" /></td>
+								</c:if>
+								<td class="text-center"><fmt:formatDate value="${factura.fechaCompra}" pattern="dd/MM/yyyy"/></td>
+								<td class="text-right"><fmt:formatNumber type="currency" value="${factura.importeTotal}" /></td>
+								<td class="text-center">
+									<c:forEach items="${estados}" var="est">
+										<c:if test="${factura.estado.idEst == est.idEst}">
+											<c:out value="${est[nameColSelect]}" />
+										</c:if>
+									</c:forEach>
+								</td>
+						    </tr>
+						    
+							<div class="modal fade" id="ventana${factura.idFac}">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+											<h4 class="modal-title justify-content-center"><fmt:message key="label.Bill.id" />: <c:out value="${factura.idFac}" /></h4>
+										</div>
+										<div class="modal-body">
+							            	<div class="col-xs-2">								
+												<sec:authorize access="hasAnyRole('ROL_ROOT')">	
+													<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${factura.idFac},${idEst})" class="cursor-pointer">
+														<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+													</a>											
+												</sec:authorize>
+											</div>	
+								            <div class="col-xs-2">
+												<a title="<fmt:message key="Products" />" href='<c:url value='/productoFactura/factura/${factura.idFac}' />'>
+													<img src='<c:url value="/resources/imgs/factura.png"/>' class="tamanio_imagen">
+												</a>
+											</div>
+								            <div class="col-xs-2">
+												<a title="<fmt:message key="label.State.historical" />" href='<c:url value='/facturaEstado/factura/${factura.idFac}' />'>
+													<img src='<c:url value="/resources/imgs/states.png"/>' class="tamanio_imagen">
+												</a>
+											</div>
+								            <div class="col-xs-2">
+									            <a title="Imprimir" href='<c:url value='/factura/pdf/${factura.idFac}' />' target="_blank">
+													<span class="glyphicon glyphicon-print tamanio_imagen"></span>
+												</a>
+											</div>
+								            <div class="col-xs-4">
+											</div>
+											<div class="height50"></div>
+											<c:if test="${factura.compra}">
+												<p><fmt:message key="label.Purchase.Sale" />: <fmt:message key="label.Purchase" /></p>
+											</c:if>
+											<c:if test="${not factura.compra}">
+												<p><fmt:message key="label.Purchase.Sale" />: <fmt:message key="label.Sale" /></p>
+											</c:if>
+											<p><fmt:message key="label.Date" />: <fmt:formatDate value="${factura.fechaCompra}" pattern="dd/MM/yyyy"/></p>
+											<p><fmt:message key="label.Total.dicount" />: <fmt:formatNumber type="number" value="${factura.descuentoTotal}" minFractionDigits="2" />%</p>
+											<p><fmt:message key="label.Total.vat" />: <fmt:formatNumber type="number" value="${factura.ivaTotal}" minFractionDigits="2" />%</p>
+											<p><fmt:message key="label.Total.amount" />: <fmt:formatNumber type="currency" value="${factura.importeTotal}" /></p>
+											<p>
+												<fmt:message key="label.state.column.name" var="itemSelect"/>
+												<select name="factura.estado.idEst" class="border-radius-dam" id="estadoIdXS${factura.idFac}" onchange="actualizaEstadoXS(${factura.idFac},${paginacion.actual},${paginacion.registrosPorPagina})">
+													<c:forEach items="${estados}" var="est">
+														<option value="${est.idEst}" <c:if test="${factura.estado.idEst == est.idEst}">selected</c:if>>
+															<c:out value="${est[nameColSelect]}" />
+														</option>
+													</c:forEach>
+												</select>
+											</p>
+											<p><fmt:message key="label.Delivery.date" />: <fmt:formatDate value="${factura.fechaEntrega}" pattern="dd/MM/yyyy"/></p>
+											<p><fmt:message key="label.Observations" />: <c:out value="${factura.observaciones}" /></p>
+											<p><fmt:message key="label.Payment.method" />: <c:out value="${factura.formaPago[nameColSelect]}" /></p>
+											<p><fmt:message key="label.Creator" />: <c:out value="${factura.creadoPor}" /></p>
+										</div>
+									</div>
+								</div>
+							</div>
+					    </c:forEach>
+				    </tbody>
+				</table>
+			</div>
+		</div>
 
 		<!-- PAGINACION -->
 		<div class="row">
@@ -163,9 +261,17 @@
 				</ul>
 			</div>
 		</div>
-	
-	<footer>
-		<c:import url="/WEB-INF/views/importFooter.jsp" />
-	</footer>
+	</div>
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
+	</div>
 </body>
 </html>

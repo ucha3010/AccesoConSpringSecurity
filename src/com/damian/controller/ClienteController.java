@@ -17,18 +17,21 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.exceptions.RepeatedUsernameException;
 import com.damian.pojo.Usuario;
+import com.damian.service.IndexService;
 import com.damian.service.PaginacionService;
 import com.damian.service.PaisService;
 import com.damian.service.RolService;
 import com.damian.service.impl.UsuarioServiceImpl;
 
 @Controller
-@SessionAttributes({ "resultado", "estoy", "roles" }) // los atributos que pueden mantenerse en sesión y verse en
-														// distintas páginas
+@SessionAttributes({ "resultado", "estoy", "roles", "errorUsuario", "idUsrLogged", "nameUsrLogged", "prinPicUsr", "prefUsr" }) 
 public class ClienteController {
 
 	@Autowired
 	private UsuarioServiceImpl usuarioService;
+
+	@Autowired
+	private IndexService indexService;
 
 	@Autowired
 	private PaginacionService paginacionService;
@@ -43,6 +46,7 @@ public class ClienteController {
 	public ModelAndView getAll(ModelAndView modelAndView, @PathVariable("column") String column,
 			@PathVariable("order") String order, @PathVariable("paginaInicio") int paginaInicio,
 			@PathVariable("totalPaginas") int totalPaginas, HttpServletRequest request) {
+		indexService.idUserLogged(modelAndView);
 		modelAndView.addObject("roles", rolService.findAll());
 		modelAndView.addObject("usuarios", usuarioService.findCustomers(column, order, paginaInicio, totalPaginas, request));
 		modelAndView.addObject("paginacion", paginacionService.pagination(paginaInicio, totalPaginas, usuarioService.countCustomers()));

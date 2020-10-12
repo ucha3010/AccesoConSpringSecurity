@@ -10,21 +10,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Estado;
 import com.damian.service.EstadoService;
+import com.damian.service.IndexService;
 
 @Controller
+@SessionAttributes({ "resultado", "estoy", "errorUsuario", "idUsrLogged", "nameUsrLogged", "prinPicUsr", "prefUsr" })
 public class EstadoController {
 
 	@Autowired
 	private EstadoService estadoService;
 
+	@Autowired
+	private IndexService indexService;
+
 	@RequestMapping("/estado")
 	public ModelAndView getAll(ModelAndView modelAndView) {
+		indexService.idUserLogged(modelAndView);
 		modelAndView.addObject("estados", estadoService.findAll());
 		modelAndView.setViewName("estados");
 		return modelAndView;

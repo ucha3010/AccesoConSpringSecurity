@@ -13,14 +13,14 @@
 	<title><fmt:message key="label.Receive.publicity" /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />	
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container-fluid">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<c:if test="${(quieren_publicidad)}">
-			<div class="well well-sm text-center h3"><fmt:message key="label.Users.want.receive.publicity" /></div>
+			<div class="well well-sm text-center h3 ${prefUsr.tema}titulo"><fmt:message key="label.Users.want.receive.publicity" /></div>
 		</c:if>
 		<c:if test="${(not quieren_publicidad)}">
-			<div class="well well-sm text-center h3"><fmt:message key="label.Users.dont.want.receive.publicity" /></div>
+			<div class="well well-sm text-center h3 ${prefUsr.tema}titulo"><fmt:message key="label.Users.dont.want.receive.publicity" /></div>
 		</c:if>
 		<fmt:message key="language.name" var="nameColSelect"/>
 		<div class="divTablaSinScroll">
@@ -43,10 +43,17 @@
 				</tbody>
 			</table>
 		</div>
-		
-		<footer>
-			<c:import url="/WEB-INF/views/importFooter.jsp" />
-		</footer>
+	</div>
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
 	</div>
 </body>
 </html>

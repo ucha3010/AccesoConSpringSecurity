@@ -42,14 +42,14 @@
 		}
 	</script>
 </head>
-<body>
+<body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<c:if test="${rol.idRol != 0}">
-			<div class="well well-sm text-center h2"><fmt:message key='Edit' /></div>
+			<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key='Edit' /></div>
 		</c:if>
 		<c:if test="${rol.idRol == 0}">
-			<div class="well well-sm text-center h2"><fmt:message key="Add.rol" /></div>
+			<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="Add.rol" /></div>
 		</c:if>
 		<sf:form method="post" action="${pageContext.request.contextPath}/rol/save" modelAttribute="rol" onsubmit="return validar()">
 			<c:if test="${rol.idRol != 0}">
@@ -71,15 +71,22 @@
 				<div class="hidden-xs col-sm-4">
 				</div>
 				<div class="col-xs-12 col-sm-8">
-					<button type="submit" class="btn btn-primary margin-left-5porciento"><fmt:message key="Send" /></button>
-					<button type="button" class="btn btn-primary margin-left-5porciento" onclick='location.href="<c:url value='/rol' />"'><fmt:message key="Cancel" /></button>
+					<button type="submit" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botonguardar"><fmt:message key="Save" /></button>
+					<button type="button" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botoncancelar" onclick='location.href="<c:url value='/rol' />"'><fmt:message key="Cancel" /></button>
 				</div>
 			</div>
 		</sf:form>
-		
-		<footer>
-			<c:import url="/WEB-INF/views/importFooter.jsp" />
-		</footer>
+	</div>
+	<div class="row">
+		<div class="col-xs-1">
+		</div>
+		<div class="col-xs-10">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
 	</div>
 </body>
 </html>
