@@ -64,13 +64,13 @@
 						formulario.addEventListener('keyup', filtrar);
 					</script>
 				</div>
-				<div class="col-sm-2 col-md-4">
+				<div class="col-sm-1 col-md-3">
 					<div class="dropdown collapse resultadosBusqueda">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-3">
 					<c:if test="${not empty producto_agregado}">
 						<span style="color: green;">
 							<fmt:message key="Product.added" />
@@ -81,6 +81,11 @@
 							<fmt:message key="Product.deleted" />
 						</span>
 					</c:if>
+				</div>
+				<div class="col-sm-2">
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/administrar/ofertas/0'/>"'>
+						Admin ofertas***
+					</button>
 				</div>
 				<div class="col-sm-3 col-md-2  navbar-right">
 					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonagregar" onclick='location.href="<c:url value='/producto/0'/>"'>

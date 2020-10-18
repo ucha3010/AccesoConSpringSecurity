@@ -1,0 +1,305 @@
+Sun Oct 18 01:33:40 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=16, booleanOferta=true, ordenOferta=2, precioSinOferta=0.0, precioConOferta=1.2, fecha=2020-10-18 01:33:40.54, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 01:47:35 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=9, booleanOferta=true, ordenOferta=3, precioSinOferta=2.0, precioConOferta=1.2, fecha=2020-10-18 01:47:35.121, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 01:51:58 CEST 2020 - ERROR [pepe] - org.springframework.dao.DuplicateKeyException: PreparedStatementCallback; SQL [INSERT INTO administracionofertas (idPro, booleanOferta, ordenOferta, precioSinOferta, precioConOferta, fecha, booleanPopular, ordenPopular, booleanNovedades, ordenNovedades, idCam) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)Duplicate entry '14' for key 'PRIMARY'; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '14' for key 'PRIMARY'
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:242)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1402)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:620)
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:850)
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:905)
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:915)
+	at com.damian.dao.impl.AdministracionOfertasDAOImpl.save(AdministracionOfertasDAOImpl.java:107)
+	at com.damian.service.impl.AdministracionOfertasServiceImpl.save(AdministracionOfertasServiceImpl.java:67)
+	at com.damian.controller.AdministracionController.saveOferta(AdministracionController.java:135)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:330)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:118)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:84)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:113)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:103)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:113)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter.doFilter(RememberMeAuthenticationFilter.java:146)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:154)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:45)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:199)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:50)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:87)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:192)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:160)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:668)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '14' for key 'PRIMARY'
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:377)
+	at com.mysql.jdbc.Util.getInstance(Util.java:360)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:971)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3887)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3823)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2435)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2582)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2530)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1907)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2141)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2077)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2062)
+	at org.apache.tomcat.dbcp.dbcp2.DelegatingPreparedStatement.executeUpdate(DelegatingPreparedStatement.java:136)
+	at org.apache.tomcat.dbcp.dbcp2.DelegatingPreparedStatement.executeUpdate(DelegatingPreparedStatement.java:136)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$update$0(JdbcTemplate.java:855)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:605)
+	... 80 more
+
+Sun Oct 18 01:52:39 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=13, booleanOferta=true, ordenOferta=4, precioSinOferta=10.0, precioConOferta=8.0, fecha=2020-10-18 01:52:39.754, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 01:56:07 CEST 2020 - ERROR [pepe] - org.springframework.dao.DuplicateKeyException: PreparedStatementCallback; SQL [INSERT INTO administracionofertas (idPro, booleanOferta, ordenOferta, precioSinOferta, precioConOferta, fecha, booleanPopular, ordenPopular, booleanNovedades, ordenNovedades, idCam) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)Duplicate entry '14' for key 'PRIMARY'; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '14' for key 'PRIMARY'
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:242)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1402)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:620)
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:850)
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:905)
+	at org.springframework.jdbc.core.JdbcTemplate.update(JdbcTemplate.java:915)
+	at com.damian.dao.impl.AdministracionOfertasDAOImpl.save(AdministracionOfertasDAOImpl.java:107)
+	at com.damian.service.impl.AdministracionOfertasServiceImpl.save(AdministracionOfertasServiceImpl.java:67)
+	at com.damian.controller.AdministracionController.saveOferta(AdministracionController.java:135)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:209)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:136)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:877)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:783)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:991)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:974)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:877)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:851)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:330)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:118)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:84)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:113)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:103)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:113)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter.doFilter(RememberMeAuthenticationFilter.java:146)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:154)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:45)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:199)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:110)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:50)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:87)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:342)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:192)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:160)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:357)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:270)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:668)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException: Duplicate entry '14' for key 'PRIMARY'
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:377)
+	at com.mysql.jdbc.Util.getInstance(Util.java:360)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:971)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3887)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3823)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2435)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2582)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2530)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1907)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2141)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2077)
+	at com.mysql.jdbc.PreparedStatement.executeUpdate(PreparedStatement.java:2062)
+	at org.apache.tomcat.dbcp.dbcp2.DelegatingPreparedStatement.executeUpdate(DelegatingPreparedStatement.java:136)
+	at org.apache.tomcat.dbcp.dbcp2.DelegatingPreparedStatement.executeUpdate(DelegatingPreparedStatement.java:136)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$update$0(JdbcTemplate.java:855)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:605)
+	... 80 more
+
+Sun Oct 18 01:58:37 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=14, booleanOferta=true, ordenOferta=5, precioSinOferta=4.0, precioConOferta=3.1, fecha=2020-10-18 01:58:37.689, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:11:59 CEST 2020 - DELETE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=13, booleanOferta=true, ordenOferta=4, precioSinOferta=10.0, precioConOferta=8.0, fecha=2020-10-18 01:52:39.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:12:10 CEST 2020 - DELETE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=14, booleanOferta=true, ordenOferta=5, precioSinOferta=4.0, precioConOferta=3.1, fecha=2020-10-18 01:58:37.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:13:38 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=14, booleanOferta=true, ordenOferta=4, precioSinOferta=4.0, precioConOferta=3.5, fecha=2020-10-18 02:13:38.933, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:13:49 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=5, precioSinOferta=2.5, precioConOferta=2.0, fecha=2020-10-18 02:13:49.283, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:14:50 CEST 2020 - DELETE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=5, precioSinOferta=2.5, precioConOferta=2.0, fecha=2020-10-18 02:13:49.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:14:52 CEST 2020 - DELETE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=9, booleanOferta=true, ordenOferta=3, precioSinOferta=2.0, precioConOferta=1.2, fecha=2020-10-18 01:47:35.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:14:55 CEST 2020 - DELETE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=16, booleanOferta=true, ordenOferta=2, precioSinOferta=0.0, precioConOferta=1.2, fecha=2020-10-18 01:33:40.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:14:57 CEST 2020 - DELETE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=14, booleanOferta=true, ordenOferta=4, precioSinOferta=4.0, precioConOferta=3.5, fecha=2020-10-18 02:13:38.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:15:07 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=1, precioSinOferta=12.0, precioConOferta=10.5, fecha=2020-10-18 02:15:07.637, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:15:57 CEST 2020 - DELETE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=1, precioSinOferta=12.0, precioConOferta=10.5, fecha=2020-10-18 02:15:07.0, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:21:18 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=14, booleanOferta=true, ordenOferta=1, precioSinOferta=4.0, precioConOferta=3.4, fecha=2020-10-18 02:21:18.075, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:21:25 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=2, precioSinOferta=2.5, precioConOferta=2.0, fecha=2020-10-18 02:21:25.078, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:21:35 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=12, booleanOferta=true, ordenOferta=3, precioSinOferta=1.2, precioConOferta=1.0, fecha=2020-10-18 02:21:35.225, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:22:25 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=false, ordenOferta=2, precioSinOferta=2.5, precioConOferta=2.0, fecha=2020-10-18 02:21:25.0, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:22:39 CEST 2020 - DELETE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=12, booleanOferta=true, ordenOferta=3, precioSinOferta=1.2, precioConOferta=1.0, fecha=2020-10-18 02:21:35.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 02:22:58 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=3, precioSinOferta=2.5, precioConOferta=2.1, fecha=2020-10-18 02:22:58.744, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:56:20 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=4, precioSinOferta=12.0, precioConOferta=11.5, fecha=2020-10-18 21:56:19.992, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:56:28 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=9, booleanOferta=true, ordenOferta=5, precioSinOferta=2.0, precioConOferta=1.2, fecha=2020-10-18 21:56:28.39, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:56:37 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=16, booleanOferta=true, ordenOferta=6, precioSinOferta=1.5, precioConOferta=0.95, fecha=2020-10-18 21:56:37.422, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:56:50 CEST 2020 - DELETE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=4, precioSinOferta=12.0, precioConOferta=11.5, fecha=2020-10-18 21:56:19.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:56:50 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=1, precioSinOferta=2.5, precioConOferta=2.1, fecha=2020-10-18 02:22:58.0, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:56:50 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=9, booleanOferta=true, ordenOferta=2, precioSinOferta=2.0, precioConOferta=1.2, fecha=2020-10-18 21:56:28.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:56:50 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=16, booleanOferta=true, ordenOferta=3, precioSinOferta=1.5, precioConOferta=0.95, fecha=2020-10-18 21:56:37.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:58:47 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=4, precioSinOferta=12.0, precioConOferta=11.5, fecha=2020-10-18 21:58:47.875, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:58:55 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=12, booleanOferta=true, ordenOferta=5, precioSinOferta=1.2, precioConOferta=1.0, fecha=2020-10-18 21:58:55.106, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:59:02 CEST 2020 - DELETE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=16, booleanOferta=true, ordenOferta=3, precioSinOferta=1.5, precioConOferta=0.95, fecha=2020-10-18 21:56:37.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:59:02 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=14, booleanOferta=true, ordenOferta=2, precioSinOferta=4.0, precioConOferta=3.4, fecha=2020-10-18 02:21:18.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:59:02 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=9, booleanOferta=true, ordenOferta=3, precioSinOferta=2.0, precioConOferta=1.2, fecha=2020-10-18 21:56:28.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:59:13 CEST 2020 - SAVE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=8, booleanOferta=true, ordenOferta=6, precioSinOferta=12.5, precioConOferta=12.0, fecha=2020-10-18 21:59:13.091, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:59:20 CEST 2020 - DELETE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=14, booleanOferta=true, ordenOferta=2, precioSinOferta=4.0, precioConOferta=3.4, fecha=2020-10-18 02:21:18.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:59:20 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=9, booleanOferta=true, ordenOferta=2, precioSinOferta=2.0, precioConOferta=1.2, fecha=2020-10-18 21:56:28.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:59:20 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=3, precioSinOferta=12.0, precioConOferta=11.5, fecha=2020-10-18 21:58:47.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:59:20 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=12, booleanOferta=true, ordenOferta=4, precioSinOferta=1.2, precioConOferta=1.0, fecha=2020-10-18 21:58:55.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:59:20 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=8, booleanOferta=true, ordenOferta=5, precioSinOferta=12.5, precioConOferta=12.0, fecha=2020-10-18 21:59:13.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:59:26 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=false, ordenOferta=1, precioSinOferta=2.5, precioConOferta=2.1, fecha=2020-10-18 02:22:58.0, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:59:26 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=9, booleanOferta=true, ordenOferta=1, precioSinOferta=2.0, precioConOferta=1.2, fecha=2020-10-18 21:56:28.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:59:26 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=2, precioSinOferta=12.0, precioConOferta=11.5, fecha=2020-10-18 21:58:47.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:59:26 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=12, booleanOferta=true, ordenOferta=3, precioSinOferta=1.2, precioConOferta=1.0, fecha=2020-10-18 21:58:55.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 21:59:26 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=8, booleanOferta=true, ordenOferta=4, precioSinOferta=12.5, precioConOferta=12.0, fecha=2020-10-18 21:59:13.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 22:19:37 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=5, precioSinOferta=2.5, precioConOferta=2.0, fecha=2020-10-18 22:19:37.24, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:03:47 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=3, precioSinOferta=12.0, precioConOferta=11.5, fecha=2020-10-18 21:58:47.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:03:47 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=8, booleanOferta=true, ordenOferta=2, precioSinOferta=12.5, precioConOferta=12.0, fecha=2020-10-18 21:59:13.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:03:47 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=12, booleanOferta=true, ordenOferta=4, precioSinOferta=1.2, precioConOferta=1.0, fecha=2020-10-18 21:58:55.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:04:25 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=8, booleanOferta=true, ordenOferta=3, precioSinOferta=12.5, precioConOferta=12.0, fecha=2020-10-18 21:59:13.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:04:25 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=2, precioSinOferta=2.5, precioConOferta=2.0, fecha=2020-10-18 22:19:37.0, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:04:25 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=4, precioSinOferta=12.0, precioConOferta=11.5, fecha=2020-10-18 21:58:47.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:04:25 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=12, booleanOferta=true, ordenOferta=5, precioSinOferta=1.2, precioConOferta=1.0, fecha=2020-10-18 21:58:55.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:04:42 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=9, booleanOferta=true, ordenOferta=2, precioSinOferta=2.0, precioConOferta=1.2, fecha=2020-10-18 21:56:28.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:04:42 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=1, precioSinOferta=12.0, precioConOferta=11.5, fecha=2020-10-18 21:58:47.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:04:42 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=9, booleanOferta=true, ordenOferta=3, precioSinOferta=2.0, precioConOferta=1.2, fecha=2020-10-18 21:56:28.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:04:42 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=8, booleanOferta=true, ordenOferta=4, precioSinOferta=12.5, precioConOferta=12.0, fecha=2020-10-18 21:59:13.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:16:51 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=2, precioSinOferta=12.0, precioConOferta=11.5, fecha=2020-10-18 21:58:47.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:16:51 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=3, precioSinOferta=2.5, precioConOferta=2.0, fecha=2020-10-18 22:19:37.0, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:16:51 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=9, booleanOferta=true, ordenOferta=4, precioSinOferta=2.0, precioConOferta=1.2, fecha=2020-10-18 21:56:28.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:16:51 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=8, booleanOferta=true, ordenOferta=5, precioSinOferta=12.5, precioConOferta=12.0, fecha=2020-10-18 21:59:13.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:16:51 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=12, booleanOferta=true, ordenOferta=6, precioSinOferta=1.2, precioConOferta=1.0, fecha=2020-10-18 21:58:55.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:16:51 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=9, booleanOferta=true, ordenOferta=1, precioSinOferta=2.0, precioConOferta=1.2, fecha=2020-10-18 21:56:28.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:26 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=0, precioSinOferta=2.5, precioConOferta=2.0, fecha=2020-10-18 22:19:37.0, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:26 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=9, booleanOferta=true, ordenOferta=2, precioSinOferta=2.0, precioConOferta=1.2, fecha=2020-10-18 21:56:28.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:26 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=3, precioSinOferta=12.0, precioConOferta=11.5, fecha=2020-10-18 21:58:47.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:26 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=8, booleanOferta=true, ordenOferta=4, precioSinOferta=12.5, precioConOferta=12.0, fecha=2020-10-18 21:59:13.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:26 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=12, booleanOferta=true, ordenOferta=5, precioSinOferta=1.2, precioConOferta=1.0, fecha=2020-10-18 21:58:55.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:26 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=1, precioSinOferta=2.5, precioConOferta=2.0, fecha=2020-10-18 22:19:37.0, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:41 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=9, booleanOferta=true, ordenOferta=0, precioSinOferta=2.0, precioConOferta=1.2, fecha=2020-10-18 21:56:28.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:41 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=2, precioSinOferta=2.5, precioConOferta=2.0, fecha=2020-10-18 22:19:37.0, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:41 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=3, precioSinOferta=12.0, precioConOferta=11.5, fecha=2020-10-18 21:58:47.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:41 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=8, booleanOferta=true, ordenOferta=4, precioSinOferta=12.5, precioConOferta=12.0, fecha=2020-10-18 21:59:13.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:41 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=12, booleanOferta=true, ordenOferta=5, precioSinOferta=1.2, precioConOferta=1.0, fecha=2020-10-18 21:58:55.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:41 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=9, booleanOferta=true, ordenOferta=1, precioSinOferta=2.0, precioConOferta=1.2, fecha=2020-10-18 21:56:28.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:51 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=0, precioSinOferta=12.0, precioConOferta=11.5, fecha=2020-10-18 21:58:47.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:51 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=3, precioSinOferta=2.5, precioConOferta=2.0, fecha=2020-10-18 22:19:37.0, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:51 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=8, booleanOferta=true, ordenOferta=4, precioSinOferta=12.5, precioConOferta=12.0, fecha=2020-10-18 21:59:13.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:51 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=12, booleanOferta=true, ordenOferta=5, precioSinOferta=1.2, precioConOferta=1.0, fecha=2020-10-18 21:58:55.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:51 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=2, precioSinOferta=12.0, precioConOferta=11.5, fecha=2020-10-18 21:58:47.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:57 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=12, booleanOferta=true, ordenOferta=0, precioSinOferta=1.2, precioConOferta=1.0, fecha=2020-10-18 21:58:55.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:57 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=4, precioSinOferta=2.5, precioConOferta=2.0, fecha=2020-10-18 22:19:37.0, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:57 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=8, booleanOferta=true, ordenOferta=5, precioSinOferta=12.5, precioConOferta=12.0, fecha=2020-10-18 21:59:13.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:22:57 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=12, booleanOferta=true, ordenOferta=3, precioSinOferta=1.2, precioConOferta=1.0, fecha=2020-10-18 21:58:55.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:23:01 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=8, booleanOferta=true, ordenOferta=0, precioSinOferta=12.5, precioConOferta=12.0, fecha=2020-10-18 21:59:13.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:23:01 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=5, precioSinOferta=2.5, precioConOferta=2.0, fecha=2020-10-18 22:19:37.0, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:23:01 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=8, booleanOferta=true, ordenOferta=4, precioSinOferta=12.5, precioConOferta=12.0, fecha=2020-10-18 21:59:13.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:24:47 CEST 2020 - DELETE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=8, booleanOferta=true, ordenOferta=4, precioSinOferta=12.5, precioConOferta=12.0, fecha=2020-10-18 21:59:13.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:24:47 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=10, booleanOferta=true, ordenOferta=1, precioSinOferta=12.0, precioConOferta=11.5, fecha=2020-10-18 21:58:47.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:24:47 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=12, booleanOferta=true, ordenOferta=2, precioSinOferta=1.2, precioConOferta=1.0, fecha=2020-10-18 21:58:55.0, booleanPopular=false, ordenPopular=0, booleanNovedades=false, ordenNovedades=0, idCam=0]
+Sun Oct 18 23:24:47 CEST 2020 - UPDATE [pepe] - table:administracionofertas - AdministracionOfertas [idPro=7, booleanOferta=true, ordenOferta=3, precioSinOferta=2.5, precioConOferta=2.0, fecha=2020-10-18 22:19:37.0, booleanPopular=true, ordenPopular=1, booleanNovedades=false, ordenNovedades=0, idCam=0]

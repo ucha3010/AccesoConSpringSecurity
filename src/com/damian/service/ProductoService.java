@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.damian.exceptions.NotEmptyException;
+import com.damian.pojo.AdministracionOfertas;
 import com.damian.pojo.Producto;
 import com.damian.pojo.front.FrontProductoStock;
 
@@ -29,6 +30,8 @@ public interface ProductoService {
 	public FrontProductoStock fillFrontProductoStock(Producto producto);
 
 	public List<Producto> findSearchAll();
+
+	public void findProductosSinOferta(List<Producto> productos, List<AdministracionOfertas> ofertas);
 
 	public List<Producto> findByIdSubModel(int idSub);
 

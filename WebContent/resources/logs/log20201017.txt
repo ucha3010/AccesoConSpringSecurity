@@ -1,0 +1,2 @@
+Sat Oct 17 21:55:35 CEST 2020 - UPDATE [pepe] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=1, tema=tema02, botonFavorito=default, recibirPublicidad=false]
+Sat Oct 17 21:55:55 CEST 2020 - UPDATE [pepe] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=1, tema=default, botonFavorito=default, recibirPublicidad=false]

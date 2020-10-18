@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.damian.dao.ProductoDAO;
 import com.damian.exceptions.NotEmptyException;
+import com.damian.pojo.AdministracionOfertas;
 import com.damian.pojo.Categoria;
 import com.damian.pojo.Cuota;
 import com.damian.pojo.CuotaDetalle;
@@ -250,6 +251,18 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public List<Producto> findSearchAll() {
 		return productoDAO.findSearchAll();
+	}
+
+	@Override
+	public void findProductosSinOferta(List<Producto> productos, List<AdministracionOfertas> ofertas) {
+		for(AdministracionOfertas ao: ofertas) {
+			for(int i=0; i<productos.size(); i++) {
+				if(productos.get(i).getIdPro() == ao.getIdPro()) {
+					productos.remove(i);
+					break;
+				}
+			}
+		}
 	}
 
 	@Override
