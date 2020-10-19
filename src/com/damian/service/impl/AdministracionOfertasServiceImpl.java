@@ -145,13 +145,18 @@ public class AdministracionOfertasServiceImpl implements AdministracionOfertasSe
 		administracionOfertas.setOrdenOferta(0);
 		administracionOfertasDAO.update(administracionOfertas, request);
 		List<AdministracionOfertas> administracionOfertasList = administracionOfertasDAO
-				.findOrderedByOrdenOfertas(ordenOferta);
-		int nuevoOrden = ordenOferta;
+				.findOrderedByOrdenOfertas(1);
+		int nuevoOrden = 0;
 		if (administracionOfertasList != null && !administracionOfertasList.isEmpty()) {
 			for (AdministracionOfertas ao : administracionOfertasList) {
-				ao.setOrdenOferta(nuevoOrden + 1);
-				administracionOfertasDAO.update(ao, request);
-				nuevoOrden++;
+				if(ao.getIdPro() != idPro) {
+					nuevoOrden++;
+					if(nuevoOrden == ordenOferta) {
+						nuevoOrden++;
+					}
+					ao.setOrdenOferta(nuevoOrden);
+					administracionOfertasDAO.update(ao, request);
+				}
 			}
 		}
 		administracionOfertas.setOrdenOferta(ordenOferta);

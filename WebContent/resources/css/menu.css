@@ -196,3 +196,119 @@ button:hover{
 .nav-item .active {
 	background-color: #9dd09e;
 }
+
+.productoOferta {
+	background-color: #aeb1bf;
+	color: #3305bc;
+	border-radius: 15px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 14px;
+	height: 58px;
+	width: 100%;
+}
+
+.productoOfertaLineas {
+	position: relative;
+	float: left;
+}
+
+/***********************xs*****************************/
+.productoOfertaExtraXS {
+	min-width: 80px;
+}
+
+.productoOfertaNombreXS {
+	min-width: 140px;	
+}
+
+.productoOfertaSinXS {
+	min-width: 60px;	
+	max-width: 70px;
+	color: #9b0000;	
+}
+
+.productoOfertaConXS {
+	min-width: 60px;		
+}
+
+.productoOfertaFechaXS {
+	min-width: 120px;	
+	color: #9b0000;		
+}
+
+/***********************sm*****************************/
+.productoOfertaExtraSM {
+	min-width: 80px;
+}
+
+.productoOfertaNombreSM {
+	min-width: 140px;	
+}
+
+.productoOfertaSinSM {
+	min-width: 60px;	
+	color: #9b0000;		
+}
+
+.productoOfertaConSM {
+	min-width: 60px;		
+}
+
+.productoOfertaFechaSM {
+	min-width: 120px;	
+	color: #9b0000;		
+}
+
+/***********************md*****************************/
+.productoOfertaExtraMD {
+	min-width: 80px;
+}
+
+.productoOfertaNombreMD {
+	min-width: 300px;	
+}
+
+.productoOfertaSinMD {
+	min-width: 60px;	
+	color: #9b0000;		
+}
+
+.productoOfertaConMD {
+	min-width: 60px;		
+}
+
+.productoOfertaFechaMD {
+	min-width: 120px;	
+	color: #9b0000;		
+}
+
+/***********************lg*****************************/
+.productoOfertaExtraLG {
+	min-width: 80px;
+}
+
+.productoOfertaNombreLG {
+	min-width: 430px;	
+}
+
+.productoOfertaSinLG {
+	min-width: 60px;	
+	color: #9b0000;		
+}
+
+.productoOfertaConLG {
+	min-width: 60px;		
+}
+
+.productoOfertaFechaLG {
+	min-width: 120px;	
+	color: #9b0000;		
+}
+
+/*******************************************************/
+.margin-left-5px {
+	margin-left: 5px;
+}

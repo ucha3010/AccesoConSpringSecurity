@@ -7,11 +7,13 @@
 <c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
 <fmt:setLocale value="${language}" />
 <fmt:setBundle basename="com.damian.utils.multilanguage" />
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <html>
 <head>
 	<title><fmt:message key="label.Offers" /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
+	<script type="text/javascript" src='<c:url value="/resources/js/validaciones.js" />'></script>
 	<script type="text/javascript">
 		function confirmDelete(idPro){
 			if(confirm("<fmt:message key='Delete.message' />")){
@@ -24,7 +26,7 @@
 		function actualizaPrecioSinOferta(a) {
 			for(i=0;i<${jproductos}.length;i++) {
 				if(${jproductos}[i].idPro == a.value) {
-					document.getElementById("precioSinOfertaDiv").innerHTML = '<label for="precioSinOferta">Precio sin oferta***</label> <input name="precioSinOferta" class="form-control" id="precioSinOferta" readonly value="' + ${jproductos}[i].precioVenta + '" />';
+					document.getElementById("precioSinOfertaDiv").innerHTML = '<label for="precioSinOferta"><fmt:message key="label.No.offer.price" /></label> <input name="precioSinOferta" class="form-control" id="precioSinOferta" readonly value="' + ${jproductos}[i].precioVenta + '" />';
 				}
 			}
 		}
@@ -32,6 +34,46 @@
 			var url = "<c:url value='/administrar/ofertas/order/"+idPro+"/"+orden.value+"' />";
 			location.href=url;
 			return true;
+		}
+		function validar(){
+			restablecer();
+			var campo = ['precioConOferta'];
+			var validado = true;			
+			for(var i=0; i < campo.length; i++){
+			    var nombreRol = document.getElementById(campo[i]);
+			    var nombreRolError = document.getElementById(campo[i]+'Error');
+				if(nombreRol.value==''){
+					nombreRolError.innerHTML = "<fmt:message key='error.field.not.empty' />";
+					nombreRol.style.borderColor="red";
+					validado = false;
+				}
+			}
+			
+			if(validado){
+				var precioConOferta = document.getElementById('precioConOferta');
+				precioConOferta.value = cambiarComaPorPunto(precioConOferta.value);
+				if (isNaN(precioConOferta.value)) {
+					document.getElementById('hayError').innerHTML = "<fmt:message key='error.any.field' />: <fmt:message key='label.Offer.price' />";
+					return false;					
+				}
+			}
+			
+			if(validado){
+				return true;
+			} else {
+				document.getElementById('hayError').innerHTML = "<fmt:message key='error.any.field' />";
+				return false;
+			}
+		}
+		function restablecer(){
+			var errorSpan = document.getElementsByName('errorSpan');
+			for (var i = 0; i < errorSpan.length; i++) {
+				errorSpan[i].innerHTML='';
+			}
+			var campos = document.getElementsByClassName("form-control");
+			for (var i = 0; i < campos.length; i++) {
+				campos[i].style.borderColor="#ced4da";
+			}
 		}
 	</script>
 
@@ -101,11 +143,11 @@
 			<div class="hidden-xs col-sm-3 col-md-4">
 			</div>
 			<div class="col-xs-12 col-sm-3 col-md-2" id="precioSinOfertaDiv">
-				<label for="precioSinOferta">Precio sin oferta***</label> 
+				<label for="precioSinOferta"><fmt:message key="label.No.offer.price" /></label> 
 				<sf:input path="precioSinOferta" class="form-control" id="precioSinOferta" disabled="true" />
 			</div>
 			<div class="col-xs-12 col-sm-3 col-md-2">
-				<label for="precioConOferta">Precio con oferta***</label> 
+				<label for="precioConOferta"><fmt:message key="label.Offer.price" /></label> 
 				<sf:input path="precioConOferta" class="form-control" id="precioConOferta" />
 				<span id="precioConOfertaError" name="errorSpan"></span>
 			</div>			
@@ -126,27 +168,129 @@
 	<div class="separacion20"></div>
 	
 	<div class="row">
-		<div class="hidden-xs col-sm-2 col-md-3">	
+		<div class="hidden-xs col-sm-2">	
 		</div>
-		<div class="col-xs-12 col-sm-8 col-md-6">
+		<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
         	<c:forEach items="${ofertas}" var="oferta">
-				<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${oferta.idPro})">
-					<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-				</a>
-				
-				<select onchange="ordenarOfertas(${oferta.idPro},this)">
-					<c:forEach items="${listadoSelect}" var="sel">
-						<option value="${sel}" ${sel == oferta.ordenOferta ? 'selected' : ''}>${sel}</option>
-					</c:forEach>
-				</select>
-        		<c:out value="${oferta.producto[nameColSelect]}"></c:out>
-        		<c:out value="${oferta.precioSinOferta}"></c:out>
-        		<c:out value="${oferta.precioConOferta}"></c:out>
-        		<fmt:formatDate value="${oferta.fecha}" pattern="dd/MM/yyyy HH:mm"/>
-        		<br>
+	        	<div class="productoOferta" title="${oferta.producto[nameColSelect]}">
+	        		<div class="productoOfertaLineas productoOfertaExtraXS">
+						<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${oferta.idPro})">
+							<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen cursor-pointer">
+						</a>						
+						<select onchange="ordenarOfertas(${oferta.idPro},this)">
+							<c:forEach items="${listadoSelect}" var="sel">
+								<option value="${sel}" ${sel == oferta.ordenOferta ? 'selected' : ''}>${sel}</option>
+							</c:forEach>
+						</select>
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaNombreXS">
+                		<c:set var="shortProdNombre" value="${fn:substring(oferta.producto[nameColSelect], 0, 20)}" />
+	        			<c:out value="${shortProdNombre}"></c:out>
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaSinXS">
+							<fmt:formatNumber type="currency" value="${oferta.precioSinOferta}" />
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaConXS">
+							<fmt:formatNumber type="currency" value="${oferta.precioConOferta}" />
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaFechaXS">
+		        			<fmt:formatDate value="${oferta.fecha}" pattern="dd/MM/yyyy HH:mm"/>
+					</div>
+        		</div>
+        		<div class="separacion10"></div>
         	</c:forEach>
 		</div>
-		<div class="hidden-xs col-sm-2 col-md-3">	
+		<div class="hidden-xs col-sm-8 hidden-md hidden-lg hidden-xl">
+        	<c:forEach items="${ofertas}" var="oferta">
+	        	<div class="productoOferta" title="${oferta.producto[nameColSelect]}">
+	        		<div class="productoOfertaLineas productoOfertaExtraSM">
+						<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${oferta.idPro})">
+							<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen cursor-pointer">
+						</a>						
+						<select onchange="ordenarOfertas(${oferta.idPro},this)">
+							<c:forEach items="${listadoSelect}" var="sel">
+								<option value="${sel}" ${sel == oferta.ordenOferta ? 'selected' : ''}>${sel}</option>
+							</c:forEach>
+						</select>
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaNombreSM">
+                		<c:set var="shortProdNombre" value="${fn:substring(oferta.producto[nameColSelect], 0, 20)}" />
+	        			<c:out value="${shortProdNombre}"></c:out>
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaSinSM">
+							<fmt:formatNumber type="currency" value="${oferta.precioSinOferta}" />
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaConSM">
+							<fmt:formatNumber type="currency" value="${oferta.precioConOferta}" />
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaFechaSM">
+		        			<fmt:formatDate value="${oferta.fecha}" pattern="dd/MM/yyyy HH:mm"/>
+					</div>
+        		</div>
+        		<div class="separacion10"></div>
+        	</c:forEach>
+		</div>
+		<div class="hidden-xs hidden-sm col-md-8 hidden-lg hidden-xl">
+        	<c:forEach items="${ofertas}" var="oferta">
+	        	<div class="productoOferta" title="${oferta.producto[nameColSelect]}">
+	        		<div class="productoOfertaLineas productoOfertaExtraMD">
+						<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${oferta.idPro})">
+							<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen cursor-pointer">
+						</a>						
+						<select onchange="ordenarOfertas(${oferta.idPro},this)">
+							<c:forEach items="${listadoSelect}" var="sel">
+								<option value="${sel}" ${sel == oferta.ordenOferta ? 'selected' : ''}>${sel}</option>
+							</c:forEach>
+						</select>
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaNombreMD">
+                		<c:set var="shortProdNombre" value="${fn:substring(oferta.producto[nameColSelect], 0, 45)}" />
+	        			<c:out value="${shortProdNombre}"></c:out>
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaSinMD">
+							<fmt:formatNumber type="currency" value="${oferta.precioSinOferta}" />
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaConMD">
+							<fmt:formatNumber type="currency" value="${oferta.precioConOferta}" />
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaFechaMD">
+		        			<fmt:formatDate value="${oferta.fecha}" pattern="dd/MM/yyyy HH:mm"/>
+					</div>
+        		</div>
+        		<div class="separacion10"></div>
+        	</c:forEach>
+		</div>
+		<div class="hidden-xs hidden-sm hidden-md col-lg-8 col-xl-6">
+        	<c:forEach items="${ofertas}" var="oferta">
+	        	<div class="productoOferta" title="${oferta.producto[nameColSelect]}">
+	        		<div class="productoOfertaLineas productoOfertaExtraLG">
+						<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${oferta.idPro})">
+							<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen cursor-pointer">
+						</a>						
+						<select onchange="ordenarOfertas(${oferta.idPro},this)">
+							<c:forEach items="${listadoSelect}" var="sel">
+								<option value="${sel}" ${sel == oferta.ordenOferta ? 'selected' : ''}>${sel}</option>
+							</c:forEach>
+						</select>
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaNombreLG">
+                		<c:set var="shortProdNombre" value="${fn:substring(oferta.producto[nameColSelect], 0, 65)}" />
+	        			<c:out value="${shortProdNombre}"></c:out>
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaSinLG">
+							<fmt:formatNumber type="currency" value="${oferta.precioSinOferta}" />
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaConLG">
+							<fmt:formatNumber type="currency" value="${oferta.precioConOferta}" />
+					</div>
+	        		<div class="productoOfertaLineas productoOfertaFechaLG">
+		        			<fmt:formatDate value="${oferta.fecha}" pattern="dd/MM/yyyy HH:mm"/>
+					</div>
+        		</div>
+        		<div class="separacion10"></div>
+        	</c:forEach>
+		</div>
+		<div class="hidden-xs col-sm-2">	
 		</div>
 	</div>
 	
