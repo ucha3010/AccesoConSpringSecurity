@@ -91,7 +91,8 @@ public class AdministracionOfertasDAOImpl implements AdministracionOfertasDAO {
 	@Override
 	public List<AdministracionOfertas> findByCampania(int idCam, int cantMax) {
 
-		String sql = "SELECT * FROM " + TABLA + " WHERE idCam = " + idCam + " ORDER BY " + KEY + " DESC";
+		
+		String sql = "SELECT * FROM " + TABLA + " WHERE idCam " + (idCam==0?"!":"") + "= " + idCam + " ORDER BY " + KEY + " DESC";
 		if (cantMax > 0) {
 			sql = sql.concat(" LIMIT 1," + cantMax);
 		}

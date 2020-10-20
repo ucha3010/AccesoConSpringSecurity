@@ -31,7 +31,7 @@ public interface ProductoService {
 
 	public List<Producto> findSearchAll();
 
-	public void findProductosSinOferta(List<Producto> productos, List<AdministracionOfertas> ofertas);
+	public void findProductosSinOferta(List<Producto> productos, List<AdministracionOfertas> ofertas, List<AdministracionOfertas> campanias);
 
 	public List<Producto> findByIdSubModel(int idSub);
 

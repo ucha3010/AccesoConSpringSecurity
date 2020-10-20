@@ -172,7 +172,7 @@ public class ProductoDAOImpl implements ProductoDAO {
 	public List<Producto> findSearchAll() {
 		List<ModelProducto> mpList = jdbcTemplate.query(
 				"SELECT idPro, marca, modelo, precioVenta, nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU FROM "
-						+ TABLA,
+						+ TABLA + " WHERE estado = 'ACTIVE'",
 				BeanPropertyRowMapper.newInstance(ModelProducto.class));
 		List<Producto> pList = new ArrayList<>();
 		for (ModelProducto mp : mpList) {

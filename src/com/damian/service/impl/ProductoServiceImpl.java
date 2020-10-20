@@ -254,12 +254,29 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public void findProductosSinOferta(List<Producto> productos, List<AdministracionOfertas> ofertas) {
-		for(AdministracionOfertas ao: ofertas) {
-			for(int i=0; i<productos.size(); i++) {
-				if(productos.get(i).getIdPro() == ao.getIdPro()) {
+	public void findProductosSinOferta(List<Producto> productos, List<AdministracionOfertas> ofertas,
+			List<AdministracionOfertas> campanias) {
+		
+		List<Integer> idProOfertasList = new ArrayList<>();
+		for (AdministracionOfertas ao : ofertas) {
+			idProOfertasList.add(ao.getIdPro());
+		}
+		if (!idProOfertasList.isEmpty()) {
+			for (int i = 0; i < productos.size(); i++) {
+				if (idProOfertasList.contains(productos.get(i).getIdPro())) {
 					productos.remove(i);
-					break;
+				}
+			}
+		}
+
+		List<Integer> idProCampaniasList = new ArrayList<>();
+		for (AdministracionOfertas aoc : campanias) {
+			idProCampaniasList.add(aoc.getIdPro());
+		}
+		if(!idProCampaniasList.isEmpty()) {
+			for (int i = 0; i < productos.size(); i++) {
+				if (idProCampaniasList.contains(productos.get(i).getIdPro())) {
+					productos.remove(i);
 				}
 			}
 		}

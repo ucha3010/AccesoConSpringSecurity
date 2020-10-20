@@ -1,6 +1,5 @@
 package com.damian.controller;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,9 +96,10 @@ public class AdministracionController {
 
 		modelAndView.addObject("administracionOfertas", new AdministracionOfertas());
 		List<AdministracionOfertas> ofertasList = administracionOfertasService.findByOfertas(cantMax);
+		List<AdministracionOfertas> campaniaList = administracionOfertasService.findByCampania(0,0);
 		modelAndView.addObject("ofertas", ofertasList);
 		List<Producto> productos = productoService.findSearchAll();
-		productoService.findProductosSinOferta(productos, ofertasList);
+		productoService.findProductosSinOferta(productos, ofertasList, campaniaList);
 		modelAndView.addObject("productos", productos);
 		String jproductos = new Gson().toJson(productos);
 		modelAndView.addObject("jproductos", jproductos);
@@ -108,38 +108,17 @@ public class AdministracionController {
 		return modelAndView;
 	}
 
-	@RequestMapping("/administrar/ofertas/edit/{idPro}")
-	public ModelAndView editOferta(ModelAndView modelAndView, @PathVariable("idPro") int idPro) {
-
-		modelAndView.addObject("administracionOferta", administracionOfertasService.findById(idPro));
-		modelAndView.setViewName("configuracionOferta");
-		return modelAndView;
-
-	}
-
 	@RequestMapping(value = { "/administrar/ofertas/save" }, method = RequestMethod.POST)
 	public String saveOferta(@ModelAttribute("administracionOferta") AdministracionOfertas administracionOfertas,
 			BindingResult result, Model model, RedirectAttributes ra, HttpServletRequest request) {
 
 		if (administracionOfertasService.save(administracionOfertas, request) > 0) {
+			Producto producto = productoService.findByIdModel(administracionOfertas.getIdPro());
+			producto.setPrecioVenta(administracionOfertas.getPrecioConOferta());
+			productoService.update(producto, request);
 			ra.addFlashAttribute("saveOferta", "exito");
 		} else {
 			ra.addFlashAttribute("noSaveOferta", "no_save");
-		}
-
-		return "redirect:/administrar/ofertas/0";
-	}
-
-	@RequestMapping(value = { "/administrar/ofertas/update" }, method = RequestMethod.POST)
-	public String updateOferta(@ModelAttribute("administracionOferta") AdministracionOfertas administracionOfertas,
-			BindingResult result, Model model, RedirectAttributes ra, HttpServletRequest request) {
-
-		administracionOfertas.setFecha(new Timestamp(System.currentTimeMillis()));
-		if (administracionOfertasService.update(administracionOfertas, request) > 0) {
-			administracionOfertasService.orderByOrdenOfertas(request);
-			ra.addFlashAttribute("updateOferta", "exito");
-		} else {
-			ra.addFlashAttribute("noUpdateOferta", "no_update");
 		}
 
 		return "redirect:/administrar/ofertas/0";
@@ -152,7 +131,7 @@ public class AdministracionController {
 		int realizado = 0;
 		AdministracionOfertas administracionOfertas = administracionOfertasService.findById(idPro);
 		if (administracionOfertas != null) {
-			if (!administracionOfertas.isBooleanNovedades() && !administracionOfertas.isBooleanPopular()) {
+			if (!administracionOfertas.isBooleanNovedades() && !administracionOfertas.isBooleanPopular() && administracionOfertas.getIdCam() == 0) {
 				realizado = administracionOfertasService.delete(idPro, request);
 			} else {
 				administracionOfertas.setBooleanOferta(false);
@@ -160,6 +139,9 @@ public class AdministracionController {
 			}
 
 			if (realizado > 0) {
+				Producto producto = productoService.findByIdModel(idPro);
+				producto.setPrecioVenta(administracionOfertas.getPrecioSinOferta());
+				productoService.update(producto, request);
 				administracionOfertasService.orderByOrdenOfertas(request);
 				ra.addFlashAttribute("removeOferta", "exito");
 			} else {
