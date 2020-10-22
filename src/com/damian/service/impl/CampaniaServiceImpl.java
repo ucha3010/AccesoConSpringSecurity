@@ -48,7 +48,7 @@ public class CampaniaServiceImpl implements CampaniaService {
 		List<AdministracionOfertas> aoList = administracionOfertasService.findByCampania(id, 0);
 		for (AdministracionOfertas ao : aoList) {
 			ao.setIdCam(0);
-			administracionOfertasService.update(ao, request);
+			administracionOfertasService.updateCampania(ao, request);
 		}
 		return campaniaDAO.delete(id, request);
 	}

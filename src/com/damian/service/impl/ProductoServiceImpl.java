@@ -254,32 +254,17 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public void findProductosSinOferta(List<Producto> productos, List<AdministracionOfertas> ofertas,
+	public List<Producto> findProductosSinOferta(List<Producto> productos, List<AdministracionOfertas> ofertas,
 			List<AdministracionOfertas> campanias) {
-		
-		List<Integer> idProOfertasList = new ArrayList<>();
-		for (AdministracionOfertas ao : ofertas) {
-			idProOfertasList.add(ao.getIdPro());
-		}
-		if (!idProOfertasList.isEmpty()) {
-			for (int i = 0; i < productos.size(); i++) {
-				if (idProOfertasList.contains(productos.get(i).getIdPro())) {
-					productos.remove(i);
-				}
-			}
-		}
 
-		List<Integer> idProCampaniasList = new ArrayList<>();
-		for (AdministracionOfertas aoc : campanias) {
-			idProCampaniasList.add(aoc.getIdPro());
-		}
-		if(!idProCampaniasList.isEmpty()) {
-			for (int i = 0; i < productos.size(); i++) {
-				if (idProCampaniasList.contains(productos.get(i).getIdPro())) {
-					productos.remove(i);
-				}
-			}
-		}
+		return new ArrayList<>(reduceProductos(reduceProductos(productos, ofertas), campanias));
+	}
+
+	@Override
+	public List<Producto> findProductosSinPopulares(List<Producto> productos, List<AdministracionOfertas> popularesList) {
+
+		return new ArrayList<>(reduceProductos(productos, popularesList));
+
 	}
 
 	@Override
@@ -449,6 +434,23 @@ public class ProductoServiceImpl implements ProductoService {
 			cuotaDetalleService.save(cuotaDetalle, request);
 		}
 
+	}
+
+	private List<Producto> reduceProductos(List<Producto> productoList, List<AdministracionOfertas> administracionOfertasList) {
+
+		List<Integer> idProList = new ArrayList<>();
+		for (AdministracionOfertas ao : administracionOfertasList) {
+			idProList.add(ao.getIdPro());
+		}
+		List<Producto> productoListOut = new ArrayList<>(productoList);
+		if (!idProList.isEmpty()) {
+			for (int i = 0; i < productoList.size(); i++) {
+				if (idProList.contains(productoList.get(i).getIdPro())) {
+					productoListOut.remove(productoList.get(i));
+				}
+			}
+		}
+		return new ArrayList<>(productoListOut);
 	}
 
 }

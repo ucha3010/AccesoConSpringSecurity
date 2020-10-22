@@ -215,100 +215,20 @@ button:hover{
 	float: left;
 }
 
-/***********************xs*****************************/
-.productoOfertaExtraXS {
-	min-width: 80px;
-}
-
-.productoOfertaNombreXS {
-	min-width: 140px;	
-}
-
-.productoOfertaSinXS {
-	min-width: 60px;	
-	max-width: 70px;
+.productoOfertaSin {
 	color: #9b0000;	
+	text-align: right;
 }
 
-.productoOfertaConXS {
-	min-width: 60px;		
+.productoOfertaCon {
+	text-align: right;	
 }
 
-.productoOfertaFechaXS {
-	min-width: 120px;	
+.productoOfertaFecha {
 	color: #9b0000;		
+	text-align: right;
 }
 
-/***********************sm*****************************/
-.productoOfertaExtraSM {
-	min-width: 80px;
-}
-
-.productoOfertaNombreSM {
-	min-width: 140px;	
-}
-
-.productoOfertaSinSM {
-	min-width: 60px;	
-	color: #9b0000;		
-}
-
-.productoOfertaConSM {
-	min-width: 60px;		
-}
-
-.productoOfertaFechaSM {
-	min-width: 120px;	
-	color: #9b0000;		
-}
-
-/***********************md*****************************/
-.productoOfertaExtraMD {
-	min-width: 80px;
-}
-
-.productoOfertaNombreMD {
-	min-width: 300px;	
-}
-
-.productoOfertaSinMD {
-	min-width: 60px;	
-	color: #9b0000;		
-}
-
-.productoOfertaConMD {
-	min-width: 60px;		
-}
-
-.productoOfertaFechaMD {
-	min-width: 120px;	
-	color: #9b0000;		
-}
-
-/***********************lg*****************************/
-.productoOfertaExtraLG {
-	min-width: 80px;
-}
-
-.productoOfertaNombreLG {
-	min-width: 430px;	
-}
-
-.productoOfertaSinLG {
-	min-width: 60px;	
-	color: #9b0000;		
-}
-
-.productoOfertaConLG {
-	min-width: 60px;		
-}
-
-.productoOfertaFechaLG {
-	min-width: 120px;	
-	color: #9b0000;		
-}
-
-/*******************************************************/
 .margin-left-5px {
 	margin-left: 5px;
 }

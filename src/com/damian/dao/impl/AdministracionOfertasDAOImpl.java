@@ -91,8 +91,8 @@ public class AdministracionOfertasDAOImpl implements AdministracionOfertasDAO {
 	@Override
 	public List<AdministracionOfertas> findByCampania(int idCam, int cantMax) {
 
-		
-		String sql = "SELECT * FROM " + TABLA + " WHERE idCam " + (idCam==0?"!":"") + "= " + idCam + " ORDER BY " + KEY + " DESC";
+		String sql = "SELECT * FROM " + TABLA + " WHERE idCam " + (idCam == 0 ? "!" : "") + "= " + idCam + " ORDER BY "
+				+ KEY + " DESC";
 		if (cantMax > 0) {
 			sql = sql.concat(" LIMIT 1," + cantMax);
 		}
@@ -141,7 +141,7 @@ public class AdministracionOfertasDAOImpl implements AdministracionOfertasDAO {
 	}
 
 	@Override
-	public List<AdministracionOfertas> findOrderedByOrdenOfertas(int ordenOferta) {
+	public List<AdministracionOfertas> findOrderedByOrdenOferta(int ordenOferta) {
 
 		String igual = "";
 		if (ordenOferta > 0) {
@@ -149,6 +149,19 @@ public class AdministracionOfertasDAOImpl implements AdministracionOfertasDAO {
 		}
 		String sql = "SELECT * FROM " + TABLA + " WHERE ordenOferta >" + igual + " " + ordenOferta
 				+ " AND booleanOferta = 1 ORDER BY ordenOferta ASC";
+
+		return lista(sql);
+	}
+
+	@Override
+	public List<AdministracionOfertas> findOrderedByOrdenPopular(int ordenPopular) {
+
+		String igual = "";
+		if (ordenPopular > 0) {
+			igual = "=";
+		}
+		String sql = "SELECT * FROM " + TABLA + " WHERE ordenPopular >" + igual + " " + ordenPopular
+				+ " AND booleanPopular = 1 ORDER BY ordenPopular ASC";
 
 		return lista(sql);
 	}

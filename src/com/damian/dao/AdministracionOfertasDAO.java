@@ -32,6 +32,8 @@ public interface AdministracionOfertasDAO {
 
 	public int delete(int id, HttpServletRequest request);
 
-	public List<AdministracionOfertas> findOrderedByOrdenOfertas(int ordenOferta);
+	public List<AdministracionOfertas> findOrderedByOrdenOferta(int ordenOferta);
+
+	public List<AdministracionOfertas> findOrderedByOrdenPopular(int ordenPopular);
 
 }

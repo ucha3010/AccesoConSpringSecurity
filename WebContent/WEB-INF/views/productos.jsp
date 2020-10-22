@@ -83,8 +83,8 @@
 					</c:if>
 				</div>
 				<div class="col-sm-2">
-					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/administrar/ofertas/0'/>"'>
-						Admin ofertas***
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/administrar/ofertas'/>"'>
+						<fmt:message key="label.Offers.admin" />
 					</button>
 				</div>
 				<div class="col-sm-3 col-md-2  navbar-right">

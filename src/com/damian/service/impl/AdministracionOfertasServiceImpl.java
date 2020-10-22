@@ -35,11 +35,7 @@ public class AdministracionOfertasServiceImpl implements AdministracionOfertasSe
 
 	@Override
 	public List<AdministracionOfertas> findByOfertas(int cantMax) {
-		List<AdministracionOfertas> administracionOfertasList = administracionOfertasDAO.findByOfertas(cantMax);
-		for (AdministracionOfertas ao : administracionOfertasList) {
-			ao.setProducto(productoService.findByIdModel(ao.getIdPro()));
-		}
-		return administracionOfertasList;
+		return fillProducto(administracionOfertasDAO.findByOfertas(cantMax));
 	}
 
 	@Override
@@ -49,7 +45,7 @@ public class AdministracionOfertasServiceImpl implements AdministracionOfertasSe
 
 	@Override
 	public List<AdministracionOfertas> findByProductosPopulares(int cantMax) {
-		return administracionOfertasDAO.findByProductosPopulares(cantMax);
+		return fillProducto(administracionOfertasDAO.findByProductosPopulares(cantMax));
 	}
 
 	@Override
@@ -59,7 +55,7 @@ public class AdministracionOfertasServiceImpl implements AdministracionOfertasSe
 
 	@Override
 	public List<AdministracionOfertas> findByNovedades(int cantMax) {
-		return administracionOfertasDAO.findByNovedades(cantMax);
+		return fillProducto(administracionOfertasDAO.findByNovedades(cantMax));
 	}
 
 	@Override
@@ -73,7 +69,7 @@ public class AdministracionOfertasServiceImpl implements AdministracionOfertasSe
 	}
 
 	@Override
-	public int save(AdministracionOfertas administracionOfertas, HttpServletRequest request) {
+	public int saveOfertas(AdministracionOfertas administracionOfertas, HttpServletRequest request) {
 
 		int realizado = 0;
 		AdministracionOfertas administracionOfertasAux = findById(administracionOfertas.getIdPro());
@@ -95,16 +91,84 @@ public class AdministracionOfertasServiceImpl implements AdministracionOfertasSe
 	}
 
 	@Override
-	public int update(AdministracionOfertas administracionOfertas, HttpServletRequest request) {
-		int realizado = 0;
-		if (!administracionOfertas.isBooleanOferta() && !administracionOfertas.isBooleanPopular()
-				&& !administracionOfertas.isBooleanNovedades() && administracionOfertas.getIdCam() == 0) {
-			realizado = administracionOfertasDAO.delete(administracionOfertas.getIdPro(), request);
-		} else {
-			realizado = administracionOfertasDAO.update(administracionOfertas, request);
-		}
-		orderByOrdenOfertas(request);
+	public int updateOfertas(AdministracionOfertas administracionOfertas, HttpServletRequest request) {
+		int realizado = updateOrDelete(administracionOfertas, request);
+		orderByOrdenOferta(request);
 		return realizado;
+	}
+
+	@Override
+	public int savePopulares(AdministracionOfertas administracionOfertas, HttpServletRequest request) {
+
+		int realizado = 0;
+		AdministracionOfertas administracionOfertasAux = findById(administracionOfertas.getIdPro());
+		administracionOfertas.setBooleanPopular(true);
+		administracionOfertas.setOrdenPopular(getMaxOrdenPopulares() + 1);
+		if (administracionOfertasAux != null) {
+			administracionOfertas.setBooleanOferta(administracionOfertasAux.isBooleanOferta());
+			administracionOfertas.setFecha(administracionOfertasAux.getFecha());
+			administracionOfertas.setOrdenOferta(administracionOfertasAux.getOrdenOferta());
+			administracionOfertas.setPrecioConOferta(administracionOfertasAux.getPrecioConOferta());
+			administracionOfertas.setPrecioSinOferta(administracionOfertasAux.getPrecioSinOferta());
+			administracionOfertas.setBooleanNovedades(administracionOfertasAux.isBooleanNovedades());
+			administracionOfertas.setOrdenNovedades(administracionOfertasAux.getOrdenNovedades());
+			administracionOfertas.setIdCam(administracionOfertasAux.getIdCam());
+			realizado = administracionOfertasDAO.update(administracionOfertas, request);
+		} else {
+			realizado = administracionOfertasDAO.save(administracionOfertas, request);
+		}
+
+		return realizado;
+	}
+
+	@Override
+	public int updatePopulares(AdministracionOfertas administracionOfertas, HttpServletRequest request) {
+		int realizado = updateOrDelete(administracionOfertas, request);
+		orderByOrdenPopular(request);
+		return realizado;
+	}
+
+	@Override
+	public int saveNovedades(AdministracionOfertas administracionOfertas, HttpServletRequest request) {
+
+		int realizado = 0;
+		AdministracionOfertas administracionOfertasAux = findById(administracionOfertas.getIdPro());
+		administracionOfertas.setBooleanNovedades(true);
+		administracionOfertas.setOrdenNovedades(getMaxOrdenNovedades() + 1);
+		if (administracionOfertasAux != null) {
+			administracionOfertas.setBooleanOferta(administracionOfertasAux.isBooleanOferta());
+			administracionOfertas.setFecha(administracionOfertasAux.getFecha());
+			administracionOfertas.setOrdenOferta(administracionOfertasAux.getOrdenOferta());
+			administracionOfertas.setPrecioConOferta(administracionOfertasAux.getPrecioConOferta());
+			administracionOfertas.setPrecioSinOferta(administracionOfertasAux.getPrecioSinOferta());
+			administracionOfertas.setBooleanPopular(administracionOfertasAux.isBooleanPopular());
+			administracionOfertas.setOrdenPopular(administracionOfertasAux.getOrdenPopular());
+			administracionOfertas.setIdCam(administracionOfertasAux.getIdCam());
+			realizado = administracionOfertasDAO.update(administracionOfertas, request);
+		} else {
+			realizado = administracionOfertasDAO.save(administracionOfertas, request);
+		}
+
+		return realizado;
+	}
+
+	@Override
+	public int updateNovedades(AdministracionOfertas administracionOfertas, HttpServletRequest request) {
+		int realizado = updateOrDelete(administracionOfertas, request);
+		// orderByOrdenNovedades(request);
+		return realizado;
+	}
+
+	@Override
+	public int saveCampania(AdministracionOfertas administracionOfertas, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateCampania(AdministracionOfertas administracionOfertas, HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
@@ -113,8 +177,26 @@ public class AdministracionOfertasServiceImpl implements AdministracionOfertasSe
 	}
 
 	@Override
-	public void orderByOrdenOfertas(HttpServletRequest request) {
-		List<AdministracionOfertas> administracionOfertasList = administracionOfertasDAO.findOrderedByOrdenOfertas(0);
+	public List<Integer> listadoSelect(String tipoSeleccion) {
+		int max = 0;
+		if ("oferta".equalsIgnoreCase(tipoSeleccion)) {
+			max = getMaxOrdenOferta();
+		} else if ("popular".equalsIgnoreCase(tipoSeleccion)) {
+			max = getMaxOrdenPopulares();
+		} else if ("novedad".equalsIgnoreCase(tipoSeleccion)) {
+			max = getMaxOrdenNovedades();
+		}
+		List<Integer> listado = new ArrayList<>();
+		for (int i = 1; i <= max; i++) {
+			listado.add(i - 1, i);
+		}
+		return listado;
+	}
+
+	/** Elimino huecos en el orden de numeración */
+	@Override
+	public void orderByOrdenOferta(HttpServletRequest request) {
+		List<AdministracionOfertas> administracionOfertasList = administracionOfertasDAO.findOrderedByOrdenOferta(0);
 		int i = 1;
 		for (AdministracionOfertas ao : administracionOfertasList) {
 			if (ao.getOrdenOferta() > 0) {
@@ -129,29 +211,18 @@ public class AdministracionOfertasServiceImpl implements AdministracionOfertasSe
 	}
 
 	@Override
-	public List<Integer> listadoSelect() {
-		int max = getMaxOrdenOferta();
-		List<Integer> listado = new ArrayList<>();
-		for (int i = 1; i <= max; i++) {
-			listado.add(i - 1, i);
-		}
-		return listado;
-	}
-
-	@Override
-	public void orderOfertas(int idPro, int ordenOferta, HttpServletRequest request) {
+	public void orderOferta(int idPro, int ordenOferta, HttpServletRequest request) {
 
 		AdministracionOfertas administracionOfertas = findById(idPro);
 		administracionOfertas.setOrdenOferta(0);
 		administracionOfertasDAO.update(administracionOfertas, request);
-		List<AdministracionOfertas> administracionOfertasList = administracionOfertasDAO
-				.findOrderedByOrdenOfertas(1);
+		List<AdministracionOfertas> administracionOfertasList = administracionOfertasDAO.findOrderedByOrdenOferta(1);
 		int nuevoOrden = 0;
 		if (administracionOfertasList != null && !administracionOfertasList.isEmpty()) {
 			for (AdministracionOfertas ao : administracionOfertasList) {
-				if(ao.getIdPro() != idPro) {
+				if (ao.getIdPro() != idPro) {
 					nuevoOrden++;
-					if(nuevoOrden == ordenOferta) {
+					if (nuevoOrden == ordenOferta) {
 						nuevoOrden++;
 					}
 					ao.setOrdenOferta(nuevoOrden);
@@ -161,6 +232,66 @@ public class AdministracionOfertasServiceImpl implements AdministracionOfertasSe
 		}
 		administracionOfertas.setOrdenOferta(ordenOferta);
 		administracionOfertasDAO.update(administracionOfertas, request);
+	}
+
+	/** Elimino huecos en el orden de numeración */
+	@Override
+	public void orderByOrdenPopular(HttpServletRequest request) {
+		List<AdministracionOfertas> administracionOfertasList = administracionOfertasDAO.findOrderedByOrdenPopular(0);
+		int i = 1;
+		for (AdministracionOfertas ao : administracionOfertasList) {
+			if (ao.getOrdenPopular() > 0) {
+				if (ao.getOrdenPopular() != i) {
+					ao.setOrdenPopular(i);
+					administracionOfertasDAO.update(ao, request);
+				}
+				i++;
+			}
+		}
+
+	}
+
+	@Override
+	public void orderPopular(int idPro, int ordenPopular, HttpServletRequest request) {
+
+		AdministracionOfertas administracionOfertas = findById(idPro);
+		administracionOfertas.setOrdenPopular(0);
+		administracionOfertasDAO.update(administracionOfertas, request);
+		List<AdministracionOfertas> administracionOfertasList = administracionOfertasDAO.findOrderedByOrdenPopular(1);
+		int nuevoOrden = 0;
+		if (administracionOfertasList != null && !administracionOfertasList.isEmpty()) {
+			for (AdministracionOfertas ao : administracionOfertasList) {
+				if (ao.getIdPro() != idPro) {
+					nuevoOrden++;
+					if (nuevoOrden == ordenPopular) {
+						nuevoOrden++;
+					}
+					ao.setOrdenPopular(nuevoOrden);
+					administracionOfertasDAO.update(ao, request);
+				}
+			}
+		}
+		administracionOfertas.setOrdenPopular(ordenPopular);
+		administracionOfertasDAO.update(administracionOfertas, request);
+	}
+
+	private int updateOrDelete(AdministracionOfertas administracionOfertas, HttpServletRequest request) {
+		int realizado = 0;
+		if (!administracionOfertas.isBooleanOferta() && !administracionOfertas.isBooleanPopular()
+				&& !administracionOfertas.isBooleanNovedades() && administracionOfertas.getIdCam() == 0) {
+			realizado = administracionOfertasDAO.delete(administracionOfertas.getIdPro(), request);
+		} else {
+			realizado = administracionOfertasDAO.update(administracionOfertas, request);
+		}
+		return realizado;
+	}
+
+	private List<AdministracionOfertas> fillProducto(List<AdministracionOfertas> administracionOfertasList) {
+		for (AdministracionOfertas ao : administracionOfertasList) {
+			ao.setProducto(productoService.findByIdModel(ao.getIdPro()));
+		}
+		return administracionOfertasList;
+
 	}
 
 }

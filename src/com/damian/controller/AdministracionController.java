@@ -91,19 +91,22 @@ public class AdministracionController {
 		return "redirect:/administrar/configuracion/find/" + frontAdministrarConfiguracion.getIdUsr();
 	}
 
-	@RequestMapping("/administrar/ofertas/{cantMax}")
-	public ModelAndView getOfertas(ModelAndView modelAndView, @PathVariable("cantMax") int cantMax) {
+	/******************************************************************
+	 * OFERTAS
+	 ******************************************************************/
+
+	@RequestMapping("/administrar/ofertas")
+	public ModelAndView getOfertas(ModelAndView modelAndView) {
 
 		modelAndView.addObject("administracionOfertas", new AdministracionOfertas());
-		List<AdministracionOfertas> ofertasList = administracionOfertasService.findByOfertas(cantMax);
-		List<AdministracionOfertas> campaniaList = administracionOfertasService.findByCampania(0,0);
+		List<AdministracionOfertas> ofertasList = administracionOfertasService.findByOfertas(0);
+		List<AdministracionOfertas> campaniaList = administracionOfertasService.findByCampania(0, 0);
 		modelAndView.addObject("ofertas", ofertasList);
 		List<Producto> productos = productoService.findSearchAll();
-		productoService.findProductosSinOferta(productos, ofertasList, campaniaList);
-		modelAndView.addObject("productos", productos);
+		modelAndView.addObject("productos", productoService.findProductosSinOferta(productos, ofertasList, campaniaList));
 		String jproductos = new Gson().toJson(productos);
 		modelAndView.addObject("jproductos", jproductos);
-		modelAndView.addObject("listadoSelect", administracionOfertasService.listadoSelect());
+		modelAndView.addObject("listadoSelect", administracionOfertasService.listadoSelect("oferta"));
 		modelAndView.setViewName("configuracionOfertas");
 		return modelAndView;
 	}
@@ -112,7 +115,7 @@ public class AdministracionController {
 	public String saveOferta(@ModelAttribute("administracionOferta") AdministracionOfertas administracionOfertas,
 			BindingResult result, Model model, RedirectAttributes ra, HttpServletRequest request) {
 
-		if (administracionOfertasService.save(administracionOfertas, request) > 0) {
+		if (administracionOfertasService.saveOfertas(administracionOfertas, request) > 0) {
 			Producto producto = productoService.findByIdModel(administracionOfertas.getIdPro());
 			producto.setPrecioVenta(administracionOfertas.getPrecioConOferta());
 			productoService.update(producto, request);
@@ -121,7 +124,7 @@ public class AdministracionController {
 			ra.addFlashAttribute("noSaveOferta", "no_save");
 		}
 
-		return "redirect:/administrar/ofertas/0";
+		return "redirect:/administrar/ofertas";
 	}
 
 	@RequestMapping("/administrar/ofertas/delete/{idPro}")
@@ -131,25 +134,26 @@ public class AdministracionController {
 		int realizado = 0;
 		AdministracionOfertas administracionOfertas = administracionOfertasService.findById(idPro);
 		if (administracionOfertas != null) {
-			if (!administracionOfertas.isBooleanNovedades() && !administracionOfertas.isBooleanPopular() && administracionOfertas.getIdCam() == 0) {
+			if (!administracionOfertas.isBooleanNovedades() && !administracionOfertas.isBooleanPopular()
+					&& administracionOfertas.getIdCam() == 0) {
 				realizado = administracionOfertasService.delete(idPro, request);
 			} else {
 				administracionOfertas.setBooleanOferta(false);
-				realizado = administracionOfertasService.update(administracionOfertas, request);
+				realizado = administracionOfertasService.updateOfertas(administracionOfertas, request);
 			}
 
 			if (realizado > 0) {
 				Producto producto = productoService.findByIdModel(idPro);
 				producto.setPrecioVenta(administracionOfertas.getPrecioSinOferta());
 				productoService.update(producto, request);
-				administracionOfertasService.orderByOrdenOfertas(request);
+				administracionOfertasService.orderByOrdenOferta(request);
 				ra.addFlashAttribute("removeOferta", "exito");
 			} else {
 				ra.addFlashAttribute("noRemoveOferta", "no_remove");
 			}
 		}
 
-		return "redirect:/administrar/ofertas/0";
+		return "redirect:/administrar/ofertas";
 
 	}
 
@@ -157,8 +161,74 @@ public class AdministracionController {
 	public String orderOferta(@PathVariable("idPro") int idPro, @PathVariable("ordenOferta") int ordenOferta,
 			RedirectAttributes ra, HttpServletRequest request) {
 
-		administracionOfertasService.orderOfertas(idPro, ordenOferta, request);
-		return "redirect:/administrar/ofertas/0";
+		administracionOfertasService.orderOferta(idPro, ordenOferta, request);
+		return "redirect:/administrar/ofertas";
+
+	}
+
+	/******************************************************************
+	 * PRODUCTOS MÁS POPULARES
+	 ******************************************************************/
+
+	@RequestMapping("/administrar/populares/{cantMax}")
+	public ModelAndView getPopulares(ModelAndView modelAndView, @PathVariable("cantMax") int cantMax) {
+
+		modelAndView.addObject("administracionOfertas", new AdministracionOfertas());
+		List<AdministracionOfertas> popularesList = administracionOfertasService.findByProductosPopulares(cantMax);
+		modelAndView.addObject("populares", popularesList);
+		List<Producto> productos = productoService.findSearchAll();
+		modelAndView.addObject("productos", productoService.findProductosSinPopulares(productos, popularesList));
+		modelAndView.addObject("listadoSelect", administracionOfertasService.listadoSelect("popular"));
+		modelAndView.setViewName("configuracionPopulares");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = { "/administrar/populares/save" }, method = RequestMethod.POST)
+	public String savePopulares(@ModelAttribute("administracionOferta") AdministracionOfertas administracionOfertas,
+			BindingResult result, Model model, RedirectAttributes ra, HttpServletRequest request) {
+
+		if (administracionOfertasService.savePopulares(administracionOfertas, request) > 0) {
+			ra.addFlashAttribute("saveOferta", "exito");
+		} else {
+			ra.addFlashAttribute("noSaveOferta", "no_save");
+		}
+
+		return "redirect:/administrar/populares/0";
+	}
+
+	@RequestMapping("/administrar/populares/delete/{idPro}")
+	public String removePopulares(ModelAndView modelAndView, @PathVariable("idPro") int idPro, RedirectAttributes ra,
+			HttpServletRequest request) {
+
+		int realizado = 0;
+		AdministracionOfertas administracionOfertas = administracionOfertasService.findById(idPro);
+		if (administracionOfertas != null) {
+			if (!administracionOfertas.isBooleanNovedades() && !administracionOfertas.isBooleanOferta()
+					&& administracionOfertas.getIdCam() == 0) {
+				realizado = administracionOfertasService.delete(idPro, request);
+			} else {
+				administracionOfertas.setBooleanPopular(false);
+				realizado = administracionOfertasService.updatePopulares(administracionOfertas, request);
+			}
+
+			if (realizado > 0) {
+				administracionOfertasService.orderByOrdenPopular(request);
+				ra.addFlashAttribute("removeOferta", "exito");
+			} else {
+				ra.addFlashAttribute("noRemoveOferta", "no_remove");
+			}
+		}
+
+		return "redirect:/administrar/populares/0";
+
+	}
+
+	@RequestMapping("/administrar/populares/order/{idPro}/{ordenPopular}")
+	public String orderPopulares(@PathVariable("idPro") int idPro, @PathVariable("ordenPopular") int ordenPopular,
+			RedirectAttributes ra, HttpServletRequest request) {
+
+		administracionOfertasService.orderPopular(idPro, ordenPopular, request);
+		return "redirect:/administrar/populares/0";
 
 	}
 

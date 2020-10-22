@@ -26,16 +26,32 @@ public interface AdministracionOfertasService {
 
 	public List<AdministracionOfertas> findByCampania(int idCam, int cantMax);
 
-	public int save(AdministracionOfertas administracionOfertas, HttpServletRequest request);
+	public int saveOfertas(AdministracionOfertas administracionOfertas, HttpServletRequest request);
 
-	public int update(AdministracionOfertas administracionOfertas, HttpServletRequest request);
+	public int updateOfertas(AdministracionOfertas administracionOfertas, HttpServletRequest request);
+
+	public int savePopulares(AdministracionOfertas administracionOfertas, HttpServletRequest request);
+
+	public int updatePopulares(AdministracionOfertas administracionOfertas, HttpServletRequest request);
+
+	public int saveNovedades(AdministracionOfertas administracionOfertas, HttpServletRequest request);
+
+	public int updateNovedades(AdministracionOfertas administracionOfertas, HttpServletRequest request);
+
+	public int saveCampania(AdministracionOfertas administracionOfertas, HttpServletRequest request);
+
+	public int updateCampania(AdministracionOfertas administracionOfertas, HttpServletRequest request);
 
 	public int delete(int id, HttpServletRequest request);
 
-	public void orderByOrdenOfertas(HttpServletRequest request);
+	public List<Integer> listadoSelect(String tipoSeleccion);
 
-	public List<Integer> listadoSelect();
+	public void orderByOrdenOferta(HttpServletRequest request);
 
-	public void orderOfertas(int idPro, int ordenOferta, HttpServletRequest request);
+	public void orderOferta(int idPro, int ordenOferta, HttpServletRequest request);
+
+	public void orderByOrdenPopular(HttpServletRequest request);
+
+	public void orderPopular(int idPro, int ordenPopular, HttpServletRequest request);
 
 }
