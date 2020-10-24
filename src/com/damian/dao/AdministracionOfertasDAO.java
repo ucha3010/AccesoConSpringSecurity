@@ -36,4 +36,6 @@ public interface AdministracionOfertasDAO {
 
 	public List<AdministracionOfertas> findOrderedByOrdenPopular(int ordenPopular);
 
+	public List<AdministracionOfertas> findOrderedByOrdenNovedades(int ordenNovedades);
+
 }

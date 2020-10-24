@@ -198,7 +198,6 @@ button:hover{
 }
 
 .productoOferta {
-	background-color: #aeb1bf;
 	color: #3305bc;
 	border-radius: 15px;
 	padding-top: 20px;
@@ -231,4 +230,16 @@ button:hover{
 
 .margin-left-5px {
 	margin-left: 5px;
+}
+
+.fondoOferta {
+	background-color: #aeb1bf;	
+}
+
+.fondoPopular {
+	background-color: #a9c8a6;	
+}
+
+.fondoNovedades {
+	background-color: #c89bd2;	
 }

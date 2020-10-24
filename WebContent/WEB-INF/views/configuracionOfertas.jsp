@@ -90,10 +90,10 @@
 						<a class="nav-link active" href="#"><fmt:message key="label.Offers" /></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<c:url value='/administrar/populares/0'/>"><fmt:message key="label.Most.popular.products" /></a>
+						<a class="nav-link" href="<c:url value='/administrar/populares'/>"><fmt:message key="label.Most.popular.products" /></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<c:url value='/'/>"><fmt:message key="label.New.stock" /></a>
+						<a class="nav-link" href="<c:url value='/administrar/novedades'/>"><fmt:message key="label.New.stock" /></a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="<c:url value='/'/>"><fmt:message key='label.Campaigns' /></a>
@@ -108,10 +108,10 @@
 						<a class="nav-link active" href="#"><fmt:message key="label.Offers" /></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<c:url value='/administrar/populares/0'/>"><fmt:message key="label.Most.popular.products" /></a>
+						<a class="nav-link" href="<c:url value='/administrar/populares'/>"><fmt:message key="label.Most.popular.products" /></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<c:url value='/'/>"><fmt:message key="label.New.stock" /></a>
+						<a class="nav-link" href="<c:url value='/administrar/novedades'/>"><fmt:message key="label.New.stock" /></a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="<c:url value='/'/>"><fmt:message key='label.Campaigns' /></a>
@@ -172,7 +172,7 @@
 		</div>
 		<div class="col-xs-12 col-lg-8 col-xl-6">
         	<c:forEach items="${ofertas}" var="oferta">
-	        	<div class="productoOferta" title="${oferta.producto[nameColSelect]}">
+	        	<div class="productoOferta fondoOferta" title="${oferta.producto[nameColSelect]}">
 	        	
 	        	
 	        		<div class="col-xs-3 col-sm-2">

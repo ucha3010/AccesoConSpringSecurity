@@ -34,7 +34,11 @@ public interface ProductoService {
 	public List<Producto> findProductosSinOferta(List<Producto> productos, List<AdministracionOfertas> ofertas,
 			List<AdministracionOfertas> campanias);
 
-	public List<Producto> findProductosSinPopulares(List<Producto> productos, List<AdministracionOfertas> popularesList);
+	public List<Producto> findProductosSinPopulares(List<Producto> productos,
+			List<AdministracionOfertas> popularesList);
+
+	public List<Producto> findProductosSinNovedades(List<Producto> productos,
+			List<AdministracionOfertas> novedadesList);
 
 	public List<Producto> findByIdSubModel(int idSub);
 

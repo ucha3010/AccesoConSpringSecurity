@@ -17,14 +17,14 @@
 	<script type="text/javascript">
 		function confirmDelete(idPro){
 			if(confirm("<fmt:message key='Delete.message' />")){
-				var url = "<c:url value='/administrar/populares/delete/"+idPro+"' />";
+				var url = "<c:url value='/administrar/novedades/delete/"+idPro+"' />";
 				location.href=url;
 				return true;
 			}
 			return false;
 		}
-		function ordenarPopulares(idPro,orden) {
-			var url = "<c:url value='/administrar/populares/order/"+idPro+"/"+orden.value+"' />";
+		function ordenarNovedades(idPro,orden) {
+			var url = "<c:url value='/administrar/novedades/order/"+idPro+"/"+orden.value+"' />";
 			location.href=url;
 			return true;
 		}
@@ -43,10 +43,10 @@
 						<a class="nav-link" href="<c:url value='/administrar/ofertas'/>"><fmt:message key="label.Offers" /></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link active" href="#"><fmt:message key="label.Most.popular.products" /></a>
+						<a class="nav-link" href="<c:url value='/administrar/populares'/>"><fmt:message key="label.Most.popular.products" /></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<c:url value='/administrar/novedades'/>"><fmt:message key="label.New.stock" /></a>
+						<a class="nav-link active" href="<c:url value='#'/>"><fmt:message key="label.New.stock" /></a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="<c:url value='/'/>"><fmt:message key='label.Campaigns' /></a>
@@ -61,10 +61,10 @@
 						<a class="nav-link" href="<c:url value='/administrar/ofertas'/>"><fmt:message key="label.Offers" /></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link active" href="#"><fmt:message key="label.Most.popular.products" /></a>
+						<a class="nav-link" href="<c:url value='/administrar/populares'/>"><fmt:message key="label.Most.popular.products" /></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<c:url value='/administrar/novedades'/>"><fmt:message key="label.New.stock" /></a>
+						<a class="nav-link active" href="<c:url value='#'/>"><fmt:message key="label.New.stock" /></a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="<c:url value='/'/>"><fmt:message key='label.Campaigns' /></a>
@@ -79,7 +79,7 @@
 	<div class="separacion20"></div>
 	
 	
-	<sf:form method="post" action="${pageContext.request.contextPath}/administrar/populares/save" modelAttribute="administracionOfertas">	
+	<sf:form method="post" action="${pageContext.request.contextPath}/administrar/novedades/save" modelAttribute="administracionOfertas">	
 		<div class="row">
 			<div class="hidden-xs col-sm-2 col-md-3">	
 			</div>
@@ -107,26 +107,26 @@
 		<div class="hidden-xs col-sm-2">	
 		</div>
 		<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 col-xl-6">
-        	<c:forEach items="${populares}" var="popular">
-	        	<div class="productoOferta fondoPopular" title="${popular.producto[nameColSelect]}">
+        	<c:forEach items="${novedades}" var="novedad">
+	        	<div class="productoOferta fondoNovedades" title="${novedad.producto[nameColSelect]}">
 	        		<div class="col-xs-3 col-sm-3 col-md-2">
-						<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${popular.idPro})">
+						<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${novedad.idPro})">
 							<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen cursor-pointer">
 						</a>						
-						<select onchange="ordenarPopulares(${popular.idPro},this)">
+						<select onchange="ordenarNovedades(${novedad.idPro},this)">
 							<c:forEach items="${listadoSelect}" var="sel">
-								<option value="${sel}" ${sel == popular.ordenPopular ? 'selected' : ''}>${sel}</option>
+								<option value="${sel}" ${sel == novedad.ordenNovedades ? 'selected' : ''}>${sel}</option>
 							</c:forEach>
 						</select>
 	        		</div>
 	        		<div class="col-xs-9 col-sm-5 col-md-6">
-	        			<c:out value="${popular.producto[nameColSelect]}"></c:out>
+	        			<c:out value="${novedad.producto[nameColSelect]}"></c:out>
 	        		</div>
 	        		<div class="hidden-xs col-sm-2">
-							<c:out value="${popular.producto.marca}" />
+							<c:out value="${novedad.producto.marca}" />
 	        		</div>
 	        		<div class="hidden-xs col-sm-2">
-							<c:out value="${popular.producto.modelo}" />
+							<c:out value="${novedad.producto.modelo}" />
 	        		</div>
         		</div>
         		<div class="separacion10"></div>

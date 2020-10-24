@@ -166,6 +166,19 @@ public class AdministracionOfertasDAOImpl implements AdministracionOfertasDAO {
 		return lista(sql);
 	}
 
+	@Override
+	public List<AdministracionOfertas> findOrderedByOrdenNovedades(int ordenNovedades) {
+
+		String igual = "";
+		if (ordenNovedades > 0) {
+			igual = "=";
+		}
+		String sql = "SELECT * FROM " + TABLA + " WHERE ordenNovedades >" + igual + " " + ordenNovedades
+				+ " AND booleanNovedades = 1 ORDER BY ordenNovedades ASC";
+
+		return lista(sql);
+	}
+
 	private List<AdministracionOfertas> lista(String sql) {
 		List<AdministracionOfertas> aoList = jdbcTemplate.query(sql,
 				BeanPropertyRowMapper.newInstance(AdministracionOfertas.class));

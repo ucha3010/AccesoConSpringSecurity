@@ -261,10 +261,18 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public List<Producto> findProductosSinPopulares(List<Producto> productos, List<AdministracionOfertas> popularesList) {
+	public List<Producto> findProductosSinPopulares(List<Producto> productos,
+			List<AdministracionOfertas> popularesList) {
 
 		return new ArrayList<>(reduceProductos(productos, popularesList));
 
+	}
+
+	@Override
+	public List<Producto> findProductosSinNovedades(List<Producto> productos,
+			List<AdministracionOfertas> novedadesList) {
+
+		return new ArrayList<>(reduceProductos(productos, novedadesList));
 	}
 
 	@Override
@@ -436,7 +444,8 @@ public class ProductoServiceImpl implements ProductoService {
 
 	}
 
-	private List<Producto> reduceProductos(List<Producto> productoList, List<AdministracionOfertas> administracionOfertasList) {
+	private List<Producto> reduceProductos(List<Producto> productoList,
+			List<AdministracionOfertas> administracionOfertasList) {
 
 		List<Integer> idProList = new ArrayList<>();
 		for (AdministracionOfertas ao : administracionOfertasList) {

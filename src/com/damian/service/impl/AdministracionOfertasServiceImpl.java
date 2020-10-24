@@ -183,7 +183,7 @@ public class AdministracionOfertasServiceImpl implements AdministracionOfertasSe
 			max = getMaxOrdenOferta();
 		} else if ("popular".equalsIgnoreCase(tipoSeleccion)) {
 			max = getMaxOrdenPopulares();
-		} else if ("novedad".equalsIgnoreCase(tipoSeleccion)) {
+		} else if ("novedades".equalsIgnoreCase(tipoSeleccion)) {
 			max = getMaxOrdenNovedades();
 		}
 		List<Integer> listado = new ArrayList<>();
@@ -272,6 +272,46 @@ public class AdministracionOfertasServiceImpl implements AdministracionOfertasSe
 			}
 		}
 		administracionOfertas.setOrdenPopular(ordenPopular);
+		administracionOfertasDAO.update(administracionOfertas, request);
+	}
+
+	@Override
+	public void orderByOrdenNovedades(HttpServletRequest request) {
+		List<AdministracionOfertas> administracionOfertasList = administracionOfertasDAO.findOrderedByOrdenNovedades(0);
+		int i = 1;
+		for (AdministracionOfertas ao : administracionOfertasList) {
+			if (ao.getOrdenNovedades() > 0) {
+				if (ao.getOrdenNovedades() != i) {
+					ao.setOrdenNovedades(i);
+					administracionOfertasDAO.update(ao, request);
+				}
+				i++;
+			}
+		}
+
+	}
+
+	@Override
+	public void orderNovedades(int idPro, int ordenNovedades, HttpServletRequest request) {
+
+		AdministracionOfertas administracionOfertas = findById(idPro);
+		administracionOfertas.setOrdenNovedades(0);
+		administracionOfertasDAO.update(administracionOfertas, request);
+		List<AdministracionOfertas> administracionOfertasList = administracionOfertasDAO.findOrderedByOrdenNovedades(1);
+		int nuevoOrden = 0;
+		if (administracionOfertasList != null && !administracionOfertasList.isEmpty()) {
+			for (AdministracionOfertas ao : administracionOfertasList) {
+				if (ao.getIdPro() != idPro) {
+					nuevoOrden++;
+					if (nuevoOrden == ordenNovedades) {
+						nuevoOrden++;
+					}
+					ao.setOrdenNovedades(nuevoOrden);
+					administracionOfertasDAO.update(ao, request);
+				}
+			}
+		}
+		administracionOfertas.setOrdenNovedades(ordenNovedades);
 		administracionOfertasDAO.update(administracionOfertas, request);
 	}
 

@@ -170,11 +170,11 @@ public class AdministracionController {
 	 * PRODUCTOS MÁS POPULARES
 	 ******************************************************************/
 
-	@RequestMapping("/administrar/populares/{cantMax}")
-	public ModelAndView getPopulares(ModelAndView modelAndView, @PathVariable("cantMax") int cantMax) {
+	@RequestMapping("/administrar/populares")
+	public ModelAndView getPopulares(ModelAndView modelAndView) {
 
 		modelAndView.addObject("administracionOfertas", new AdministracionOfertas());
-		List<AdministracionOfertas> popularesList = administracionOfertasService.findByProductosPopulares(cantMax);
+		List<AdministracionOfertas> popularesList = administracionOfertasService.findByProductosPopulares(0);
 		modelAndView.addObject("populares", popularesList);
 		List<Producto> productos = productoService.findSearchAll();
 		modelAndView.addObject("productos", productoService.findProductosSinPopulares(productos, popularesList));
@@ -193,7 +193,7 @@ public class AdministracionController {
 			ra.addFlashAttribute("noSaveOferta", "no_save");
 		}
 
-		return "redirect:/administrar/populares/0";
+		return "redirect:/administrar/populares";
 	}
 
 	@RequestMapping("/administrar/populares/delete/{idPro}")
@@ -219,7 +219,7 @@ public class AdministracionController {
 			}
 		}
 
-		return "redirect:/administrar/populares/0";
+		return "redirect:/administrar/populares";
 
 	}
 
@@ -228,7 +228,73 @@ public class AdministracionController {
 			RedirectAttributes ra, HttpServletRequest request) {
 
 		administracionOfertasService.orderPopular(idPro, ordenPopular, request);
-		return "redirect:/administrar/populares/0";
+		return "redirect:/administrar/populares";
+
+	}
+
+	/******************************************************************
+	 * NOVEDADES
+	 ******************************************************************/
+
+	@RequestMapping("/administrar/novedades")
+	public ModelAndView getNovedades(ModelAndView modelAndView) {
+
+		modelAndView.addObject("administracionOfertas", new AdministracionOfertas());
+		List<AdministracionOfertas> novedadesList = administracionOfertasService.findByNovedades(0);
+		modelAndView.addObject("novedades", novedadesList);
+		List<Producto> productos = productoService.findSearchAll();
+		modelAndView.addObject("productos", productoService.findProductosSinNovedades(productos, novedadesList));
+		modelAndView.addObject("listadoSelect", administracionOfertasService.listadoSelect("novedades"));
+		modelAndView.setViewName("configuracionNovedades");
+		return modelAndView;
+	}
+
+	@RequestMapping(value = { "/administrar/novedades/save" }, method = RequestMethod.POST)
+	public String saveNovedades(@ModelAttribute("administracionOferta") AdministracionOfertas administracionOfertas,
+			BindingResult result, Model model, RedirectAttributes ra, HttpServletRequest request) {
+
+		if (administracionOfertasService.saveNovedades(administracionOfertas, request) > 0) {
+			ra.addFlashAttribute("saveOferta", "exito");
+		} else {
+			ra.addFlashAttribute("noSaveOferta", "no_save");
+		}
+
+		return "redirect:/administrar/novedades";
+	}
+
+	@RequestMapping("/administrar/novedades/delete/{idPro}")
+	public String removeNovedades(ModelAndView modelAndView, @PathVariable("idPro") int idPro, RedirectAttributes ra,
+			HttpServletRequest request) {
+
+		int realizado = 0;
+		AdministracionOfertas administracionOfertas = administracionOfertasService.findById(idPro);
+		if (administracionOfertas != null) {
+			if (!administracionOfertas.isBooleanNovedades() && !administracionOfertas.isBooleanOferta()
+					&& administracionOfertas.getIdCam() == 0) {
+				realizado = administracionOfertasService.delete(idPro, request);
+			} else {
+				administracionOfertas.setBooleanNovedades(false);
+				realizado = administracionOfertasService.updateNovedades(administracionOfertas, request);
+			}
+
+			if (realizado > 0) {
+				administracionOfertasService.orderByOrdenNovedades(request);
+				ra.addFlashAttribute("removeOferta", "exito");
+			} else {
+				ra.addFlashAttribute("noRemoveOferta", "no_remove");
+			}
+		}
+
+		return "redirect:/administrar/novedades";
+
+	}
+
+	@RequestMapping("/administrar/novedades/order/{idPro}/{ordenNovedades}")
+	public String orderNovedades(@PathVariable("idPro") int idPro, @PathVariable("ordenNovedades") int ordenNovedades,
+			RedirectAttributes ra, HttpServletRequest request) {
+
+		administracionOfertasService.orderNovedades(idPro, ordenNovedades, request);
+		return "redirect:/administrar/novedades";
 
 	}
 

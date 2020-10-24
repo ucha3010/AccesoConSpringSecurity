@@ -54,4 +54,8 @@ public interface AdministracionOfertasService {
 
 	public void orderPopular(int idPro, int ordenPopular, HttpServletRequest request);
 
+	public void orderByOrdenNovedades(HttpServletRequest request);
+
+	public void orderNovedades(int idPro, int ordenNovedades, HttpServletRequest request);
+
 }
