@@ -243,3 +243,52 @@ button:hover{
 .fondoNovedades {
 	background-color: #c89bd2;	
 }
+
+/*******************Menú lateral*************************/
+
+#du-sidebar {
+	position: fixed;
+	width: 200px;
+	height: 100%;
+	background: #8a949d;
+	left: -200px;
+	transition: all 500ms linear;
+	z-index: 10;
+}
+
+#du-sidebar.active {
+	left: 0;
+}
+
+#du-sidebar ul li {
+	color: rgba(230, 230, 230, .9);
+	text-align: center;
+	padding: 15px 10px;
+	list-style: none;
+	border-bottom: 1px solid rgba(100, 100, 100, .3);
+}
+
+.du-logo {
+	border-radius: 50%;
+	display: block;
+	margin: 0 auto;
+}
+
+#du-sidebar .du-toggle-btn {
+	position: absolute;
+	left: 150px;
+	top: 200px;
+	cursor: pointer;
+	padding: 5px;
+	border-radius: 0px 0px 2px 2px; 
+}
+
+#du-sidebar .du-toggle-btn span {
+	display: block;
+	width: 40x;
+	text-align: center;
+	font-size: 30px;
+	transform: rotate(-90deg);
+	background-color: #d8e907;
+	font-family: cursive;
+}
