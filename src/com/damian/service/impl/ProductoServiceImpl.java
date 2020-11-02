@@ -276,6 +276,13 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
+	public List<Producto> findProductosSinCampania(List<Producto> productos,
+			List<AdministracionOfertas> productosCampaniaList) {
+
+		return new ArrayList<>(reduceProductos(productos, productosCampaniaList));
+	}
+
+	@Override
 	public List<Producto> findByIdSubModel(int idSub) {
 		return productoDAO.findByIdSubModel(idSub);
 	}

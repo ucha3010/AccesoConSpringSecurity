@@ -40,6 +40,9 @@ public interface ProductoService {
 	public List<Producto> findProductosSinNovedades(List<Producto> productos,
 			List<AdministracionOfertas> novedadesList);
 
+	public List<Producto> findProductosSinCampania(List<Producto> productos,
+			List<AdministracionOfertas> productosCampaniaList);
+
 	public List<Producto> findByIdSubModel(int idSub);
 
 	public int getMaxId();

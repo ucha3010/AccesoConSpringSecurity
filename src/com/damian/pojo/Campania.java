@@ -1,14 +1,20 @@
 package com.damian.pojo;
 
-import java.sql.Timestamp;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Campania {
 
 	private int idCam;
 	private String nombre;
-	private Timestamp fechaInicio;
-	private Timestamp fechaFin;
-	private double descuentoPor;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date fechaInicio;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date fechaFin;
+	private int descuentoPor;
 	private String descripcion;
 
 	public Campania() {
@@ -48,7 +54,7 @@ public class Campania {
 	/**
 	 * @return the fechaInicio
 	 */
-	public Timestamp getFechaInicio() {
+	public Date getFechaInicio() {
 		return fechaInicio;
 	}
 
@@ -56,14 +62,14 @@ public class Campania {
 	 * @param fechaInicio
 	 *            the fechaInicio to set
 	 */
-	public void setFechaInicio(Timestamp fechaInicio) {
+	public void setFechaInicio(Date fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
 	/**
 	 * @return the fechaFin
 	 */
-	public Timestamp getFechaFin() {
+	public Date getFechaFin() {
 		return fechaFin;
 	}
 
@@ -71,14 +77,14 @@ public class Campania {
 	 * @param fechaFin
 	 *            the fechaFin to set
 	 */
-	public void setFechaFin(Timestamp fechaFin) {
+	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 
 	/**
 	 * @return the descuentoPor
 	 */
-	public double getDescuentoPor() {
+	public int getDescuentoPor() {
 		return descuentoPor;
 	}
 
@@ -86,7 +92,7 @@ public class Campania {
 	 * @param descuentoPor
 	 *            the descuentoPor to set
 	 */
-	public void setDescuentoPor(double descuentoPor) {
+	public void setDescuentoPor(int descuentoPor) {
 		this.descuentoPor = descuentoPor;
 	}
 

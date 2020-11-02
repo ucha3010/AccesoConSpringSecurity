@@ -18,4 +18,6 @@ public interface CampaniaService {
 
 	public int delete(int id, HttpServletRequest request);
 
+	public int getMaxId();
+
 }

@@ -49,7 +49,7 @@
 						<a class="nav-link active" href="<c:url value='#'/>"><fmt:message key="label.New.stock" /></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<c:url value='/'/>"><fmt:message key='label.Campaigns' /></a>
+						<a class="nav-link" href="<c:url value='/administrar/campanias/0'/>"><fmt:message key='label.Campaigns' /></a>
 					</li>
 				</ul>
 			</div>
@@ -67,7 +67,7 @@
 						<a class="nav-link active" href="<c:url value='#'/>"><fmt:message key="label.New.stock" /></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<c:url value='/'/>"><fmt:message key='label.Campaigns' /></a>
+						<a class="nav-link" href="<c:url value='/administrar/campanias/0'/>"><fmt:message key='label.Campaigns' /></a>
 					</li>
 				</ul>
 			</div>

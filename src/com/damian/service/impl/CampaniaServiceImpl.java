@@ -34,7 +34,11 @@ public class CampaniaServiceImpl implements CampaniaService {
 
 	@Override
 	public int save(Campania campania, HttpServletRequest request) {
-		return campaniaDAO.save(campania, request);
+		if(campania.getIdCam() > 0) {
+			return campaniaDAO.update(campania, request);
+		} else {
+			return campaniaDAO.save(campania, request);
+		}
 	}
 
 	@Override
@@ -51,6 +55,11 @@ public class CampaniaServiceImpl implements CampaniaService {
 			administracionOfertasService.updateCampania(ao, request);
 		}
 		return campaniaDAO.delete(id, request);
+	}
+
+	@Override
+	public int getMaxId() {
+		return campaniaDAO.getMaxId();
 	}
 
 }

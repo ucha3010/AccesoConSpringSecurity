@@ -89,6 +89,11 @@ public class CampaniaDAOImpl implements CampaniaDAO {
 		return result;
 	}
 
+	@Override
+	public int getMaxId() {
+		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
 	private List<Campania> lista(String sql) {
 		List<Campania> cList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Campania.class));
 		return cList;
@@ -100,7 +105,7 @@ public class CampaniaDAOImpl implements CampaniaDAO {
 		c.setNombre(rs.getString("nombre"));
 		c.setFechaInicio(rs.getTimestamp("fechaInicio"));
 		c.setFechaFin(rs.getTimestamp("fechaFin"));
-		c.setDescuentoPor(rs.getDouble("descuentoPor"));
+		c.setDescuentoPor(rs.getInt("descuentoPor"));
 		c.setDescripcion(rs.getString("descripcion"));
 		return c;
 	}

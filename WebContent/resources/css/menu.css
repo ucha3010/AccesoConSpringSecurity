@@ -244,6 +244,10 @@ button:hover{
 	background-color: #c89bd2;	
 }
 
+.fuente-cursive {
+	font-family: cursive;
+}
+
 /*******************Menú lateral*************************/
 
 #du-sidebar {
@@ -254,6 +258,7 @@ button:hover{
 	left: -200px;
 	transition: all 500ms linear;
 	z-index: 10;
+	top: 120px;
 }
 
 #du-sidebar.active {
@@ -291,4 +296,21 @@ button:hover{
 	transform: rotate(-90deg);
 	background-color: #d8e907;
 	font-family: cursive;
+}
+
+#campanias-arbol {
+	position: fixed;
+	width: 200px;
+	height: 100%;
+	background: #8a949d;
+	left: 0px;
+	top: 120px;
+	}
+
+#campanias-arbol ul li {
+	color: rgba(230, 230, 230, .9);
+	text-align: center;
+	padding: 15px 10px;
+	list-style: none;
+	border-bottom: 1px solid rgba(100, 100, 100, .3);
 }

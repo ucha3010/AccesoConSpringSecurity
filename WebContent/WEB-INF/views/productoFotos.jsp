@@ -71,7 +71,7 @@
 			<div class="hidden-xs col-sm-3">
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				<h4><fmt:message key="label.Add.picture" /> <fmt:message key="label.to" /> <c:out value="${producto[nameColSelect]}" /></h4>
+				<h4><fmt:message key="label.Add.picture" /> <fmt:message key="label.for" /> <c:out value="${producto[nameColSelect]}" /></h4>
 			</div>
 			<div class="hidden-xs col-sm-3">
 			</div>

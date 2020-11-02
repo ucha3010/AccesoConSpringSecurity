@@ -18,4 +18,6 @@ public interface CampaniaDAO {
 
 	public int delete(int id, HttpServletRequest request);
 
+	public int getMaxId();
+
 }
