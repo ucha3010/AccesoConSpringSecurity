@@ -168,6 +168,18 @@
 	<div class="separacion20"></div>
 	
 	<div class="row">
+		<div class="col-xs-1 col-sm-2">	
+		</div>
+		<div class="col-xs-10 col-lg-8 col-xl-6 text-center">
+			<h5><fmt:message key='message.products.offer.campaign' /></h5>
+		</div>
+		<div class="col-xs-1 col-sm-2">
+		</div>
+	</div>
+		
+	<div class="separacion20"></div>
+	
+	<div class="row">
 		<div class="hidden-xs col-sm-2">	
 		</div>
 		<div class="col-xs-12 col-lg-8 col-xl-6">

@@ -20,4 +20,6 @@ public interface CampaniaDAO {
 
 	public int getMaxId();
 
+	public String getCampaignName(Integer idPro);
+
 }

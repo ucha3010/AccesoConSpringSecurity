@@ -110,6 +110,11 @@
 					</div>
 				</div>
 				<div class="col-sm-3 col-md-2">
+					<sec:authorize access="hasAnyRole('ROL_USUARIO')">
+						<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/administrar/ofertas'/>"'>
+							<fmt:message key="label.Offers.admin" />
+						</button>
+					</sec:authorize>
 				</div>
 				<div class="col-sm-3 col-md-2  navbar-right">
 				</div>

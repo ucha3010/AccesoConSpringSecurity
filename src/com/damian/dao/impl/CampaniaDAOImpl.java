@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -62,8 +63,8 @@ public class CampaniaDAOImpl implements CampaniaDAO {
 		} else {
 			String sql = "INSERT INTO " + TABLA
 					+ " (nombre, fechaInicio, fechaFin, descuentoPor, descripcion) VALUES (?, ?, ?, ?, ?)";
-			int result = jdbcTemplate.update(sql, campania.getNombre(), campania.getFechaInicio(), campania.getFechaFin(),
-					campania.getDescuentoPor(), campania.getDescripcion());
+			int result = jdbcTemplate.update(sql, campania.getNombre(), campania.getFechaInicio(),
+					campania.getFechaFin(), campania.getDescuentoPor(), campania.getDescripcion());
 			LocalLogger.save(TABLA, campania, request);
 			return result;
 		}
@@ -73,8 +74,8 @@ public class CampaniaDAOImpl implements CampaniaDAO {
 	public int update(Campania campania, HttpServletRequest request) {
 		String sql = "UPDATE " + TABLA
 				+ " SET nombre=?, fechaInicio=?, fechaFin=?, descuentoPor=?, descripcion=? WHERE " + KEY + "=?";
-		int result = jdbcTemplate.update(sql, campania.getNombre(), campania.getFechaInicio(), campania.getFechaFin(), campania.getDescuentoPor(),
-				campania.getDescripcion(), campania.getIdCam());
+		int result = jdbcTemplate.update(sql, campania.getNombre(), campania.getFechaInicio(), campania.getFechaFin(),
+				campania.getDescuentoPor(), campania.getDescripcion(), campania.getIdCam());
 		LocalLogger.update(TABLA, campania, request);
 		return result;
 	}
@@ -92,6 +93,18 @@ public class CampaniaDAOImpl implements CampaniaDAO {
 	@Override
 	public int getMaxId() {
 		return jdbcTemplate.queryForObject("SELECT MAX(" + KEY + ") FROM " + TABLA, Integer.class);
+	}
+
+	@Override
+	public String getCampaignName(Integer idPro) {
+		String sql = "SELECT C.nombre FROM administracionofertas A, campania C WHERE A.idPro = ? AND A.idCam <> 0 AND A.idCam = C.idCam";
+		String nombre = null;
+		try {
+			nombre = (String) jdbcTemplate.queryForObject(sql, new Integer[] { idPro }, String.class);
+		} catch (EmptyResultDataAccessException r) {
+
+		}
+		return nombre;
 	}
 
 	private List<Campania> lista(String sql) {

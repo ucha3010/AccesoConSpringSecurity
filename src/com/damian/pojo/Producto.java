@@ -42,6 +42,11 @@ public class Producto {
 	private String modificadoPor;
 	private Timestamp fechaModificacion;
 
+	/**
+	 * Sólo usado en administración de campañas
+	 */
+	private String campania;
+
 	public Producto() {
 
 	}
@@ -501,6 +506,21 @@ public class Producto {
 	 */
 	public void setFechaModificacion(Timestamp fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
+	}
+
+	/**
+	 * @return the campania
+	 */
+	public String getCampania() {
+		return campania;
+	}
+
+	/**
+	 * @param campania
+	 *            the campania to set
+	 */
+	public void setCampania(String campania) {
+		this.campania = campania;
 	}
 
 	/*

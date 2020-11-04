@@ -197,6 +197,18 @@
 	<div class="row">
 		<div class="col-xs-2 col-sm-4">
 		</div>
+		<div class="col-xs-9 col-sm-7">
+			<h5><fmt:message key='message.products.offer.campaign' /></h5>
+		</div>
+		<div class="col-xs-1">
+		</div>
+	</div>
+		
+	<div class="separacion20"></div>
+	
+	<div class="row">
+		<div class="col-xs-2 col-sm-4">
+		</div>
 		<div class="col-xs-7 col-sm-6">
 			<h2><c:out value="${campaniaSelect.nombre}"> </c:out>  (<fmt:formatNumber type="number" value="${campaniaSelect.descuentoPor}"/> %)</h2>
 		</div>
@@ -241,7 +253,20 @@
 		<div class="col-xs-6 col-sm-5">
         	<select name="idPro" class="form-control" id="idPro">
 	        	<c:forEach items="${productos}" var="producto">
-	            	<option value="${producto.idPro}">${producto[nameColSelect]}</option>
+	        	
+		        	<c:if test="${not empty producto.campania}">
+		        		<c:set var="fondo" value="nav-link" scope="page"/>
+		        	</c:if> 
+		        	<c:if test="${empty producto.campania}">
+		        		<c:set var="fondo" value="bg-white" scope="page"/>
+		        	</c:if>
+	        	
+	        	
+	            	<option value="${producto.idPro}" class="${fondo}">${producto[nameColSelect]}
+	            		<c:if test="${not empty producto.campania}">
+							(<c:out value="${producto.campania}"/>)
+						</c:if> 
+	            	</option>
             	</c:forEach>
         	</select>
 		</div>

@@ -33,6 +33,8 @@ import com.damian.pojo.ProductoFactura;
 import com.damian.pojo.Subcategoria;
 import com.damian.pojo.front.FrontCuota;
 import com.damian.pojo.front.FrontProductoStock;
+import com.damian.service.AdministracionOfertasService;
+import com.damian.service.CampaniaService;
 import com.damian.service.CategoriaService;
 import com.damian.service.CuotaDetalleService;
 import com.damian.service.CuotaService;
@@ -50,6 +52,12 @@ import com.damian.utils.Utils;
 
 @Service
 public class ProductoServiceImpl implements ProductoService {
+
+	@Autowired
+	private AdministracionOfertasService administracionOfertasService;
+
+	@Autowired
+	private CampaniaService campaniaService;
 
 	@Autowired
 	private CategoriaService categoriaService;
@@ -279,7 +287,23 @@ public class ProductoServiceImpl implements ProductoService {
 	public List<Producto> findProductosSinCampania(List<Producto> productos,
 			List<AdministracionOfertas> productosCampaniaList) {
 
-		return new ArrayList<>(reduceProductos(productos, productosCampaniaList));
+		List<Producto> productosSinCampania = new ArrayList<>(reduceProductos(productos, productosCampaniaList));
+		for (Producto p : productosSinCampania) {
+			p.setCampania(campaniaService.getCampaignName(p.getIdPro()));
+		}
+		List<AdministracionOfertas> productosConOfertaList = administracionOfertasService.findByOfertas(0);
+		List<Integer> idProConOfertaList = new ArrayList<>();
+		for(AdministracionOfertas ao: productosConOfertaList) {
+			idProConOfertaList.add(ao.getIdPro());
+		}
+		List<Producto> productosSinCampaniaNiOferta = new ArrayList<>(productosSinCampania);
+		for(Producto pr: productosSinCampania) {
+			if(idProConOfertaList.contains(pr.getIdPro())) {
+				productosSinCampaniaNiOferta.remove(pr);
+			}
+		}
+
+		return productosSinCampaniaNiOferta;
 	}
 
 	@Override

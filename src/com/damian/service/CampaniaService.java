@@ -20,4 +20,6 @@ public interface CampaniaService {
 
 	public int getMaxId();
 
+	public String getCampaignName(int idPro);
+
 }
