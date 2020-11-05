@@ -8,8 +8,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.damian.pojo.AdministracionOfertas;
 import com.damian.pojo.Foto;
 import com.damian.pojo.Usuario;
+import com.damian.service.AdministracionOfertasService;
 import com.damian.service.ConstantesService;
 import com.damian.service.FotoService;
 import com.damian.service.IndexService;
@@ -21,11 +23,14 @@ import com.damian.utils.ConstantesLocales;
 public class IndexServiceImpl implements IndexService {
 
 	@Autowired
+	private AdministracionOfertasService administracionOfertasService;
+
+	@Autowired
 	private ConstantesService constantesService;
 
 	@Autowired
 	private FotoService fotoService;
-	
+
 	@Autowired
 	private PreferenciaUsuarioService preferenciaUsuarioService;
 
@@ -38,6 +43,18 @@ public class IndexServiceImpl implements IndexService {
 		idUserLogged(model);
 		model.addObject(ConstantesLocales.SPEECH, constantesService.findByClave(ConstantesLocales.SPEECH));
 		model.addObject("estoy", "index");
+
+		List<AdministracionOfertas> aoList = administracionOfertasService.findByOfertas(3);
+		for (AdministracionOfertas ao : aoList) {
+			List<Foto> fotos = fotoService.findByIdPro(ao.getProducto().getIdPro());
+			for(Foto f:fotos) {
+				if(f.isPrincipal()) {
+					ao.getProducto().setNombreFotoPrincipal(f.getNombre());
+				}
+			}
+		}
+		model.addObject("ofertas", aoList);
+
 		model.setViewName("index");
 		return model;
 	}
@@ -66,7 +83,7 @@ public class IndexServiceImpl implements IndexService {
 					break;
 				}
 			}
-			model.addObject("prefUsr",preferenciaUsuarioService.findById(usuario.getIdUsr()));
+			model.addObject("prefUsr", preferenciaUsuarioService.findById(usuario.getIdUsr()));
 		}
 		return usuario.getIdUsr();
 	}

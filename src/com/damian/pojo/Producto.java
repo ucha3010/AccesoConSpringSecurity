@@ -39,6 +39,7 @@ public class Producto {
 	private Subcategoria subcategoria;
 	private List<ProductoFactura> productoFacturaList;
 	private List<Foto> fotos;
+	private String nombreFotoPrincipal; // no en BBDD
 	private String modificadoPor;
 	private Timestamp fechaModificacion;
 
@@ -476,6 +477,21 @@ public class Producto {
 	 */
 	public void setFotos(List<Foto> fotos) {
 		this.fotos = fotos;
+	}
+
+	/**
+	 * @return the nombreFotoPrincipal
+	 */
+	public String getNombreFotoPrincipal() {
+		return nombreFotoPrincipal;
+	}
+
+	/**
+	 * @param nombreFotoPrincipal
+	 *            the nombreFotoPrincipal to set
+	 */
+	public void setNombreFotoPrincipal(String nombreFotoPrincipal) {
+		this.nombreFotoPrincipal = nombreFotoPrincipal;
 	}
 
 	/**

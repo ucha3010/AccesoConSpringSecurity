@@ -11,6 +11,7 @@
 <head>
 	<title><fmt:message key='Company.name' /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
+	<fmt:message key="language.name" var="nameColSelect"/>
 
 </head>
 <body class="${prefUsr.tema}fondopantalla">
@@ -228,55 +229,51 @@
 		<div class="titulossecundarios"><fmt:message key="label.Offers" /></div>
 	
 		<div class="row">
-			<div class="hidden-xs col-sm-12">
-				<div class="col-sm-2">
-					Producto 1
-				</div>
-				<div class="col-sm-1">
-				</div>
-				<div class="col-sm-2">
-					Producto 2
-				</div>
-				<div class="col-sm-1">
-				</div>
-				<div class="col-sm-2">
-					Producto 3
-				</div>
-				<div class="col-sm-1">
-				</div>
-				<div class="col-sm-2">
+			<div class="col-xs-12">
+				<c:set var="count" value="9" scope="page" />
+				<c:forEach items="${ofertas}" var="oferta">
+					<div class="col-xs-3">
+						<c:if test="${(not empty oferta.producto.nombreFotoPrincipal)}">
+							<a title="${oferta.producto[nameColSelect]}" onclick='location.href="<c:url value='/detalle/producto/${oferta.producto.idPro}' />"' class="cursor-pointer">
+								<img src='<c:url value="/resources/imgs/productos/${oferta.producto.idPro}/${oferta.producto.nombreFotoPrincipal}"/>' class="w-100">
+							</a>
+						</c:if>
+					</div>
+					<c:set var="count" value="${count - 3}" scope="page"/>
+				</c:forEach>
+				<div class="col-xs-3">
 					Ver más
 				</div>
-				<div class="col-sm-1">
+				<div class="col-xs-${count} col-sm-${count}">
 				</div>
 			</div>
-			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
-				<div class="col-xs-5">
-					Producto 1
-				</div>
-				<div class="col-xs-1">
-				</div>
-				<div class="col-xs-5">
-					Producto 2
-				</div>
-				<div class="col-xs-1">
-				</div>
-			</div>
-			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
-				<div class="separacion10"></div>
-			</div>
-			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
-				<div class="col-xs-5">
-					Producto 3
-				</div>
-				<div class="col-xs-1">
-				</div>
-				<div class="col-xs-5">
-					Ver más
-				</div>
-				<div class="col-xs-1">
-				</div>
-			</div>
+<!-- 			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl"> -->
+<!-- 				<div class="col-xs-5"> -->
+<!-- 					Producto 1 -->
+<!-- 				</div> -->
+<!-- 				<div class="col-xs-1"> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-xs-5"> -->
+<!-- 					Producto 2 -->
+<!-- 				</div> -->
+<!-- 				<div class="col-xs-1"> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl"> -->
+<!-- 				<div class="separacion10"></div> -->
+<!-- 			</div> -->
+<!-- 			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl"> -->
+<!-- 				<div class="col-xs-5"> -->
+<!-- 					Producto 3 -->
+<!-- 				</div> -->
+<!-- 				<div class="col-xs-1"> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-xs-5"> -->
+<!-- 					Ver más -->
+<!-- 				</div> -->
+<!-- 				<div class="col-xs-1"> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 		</div>
 	
 		<div class="titulossecundarios"><fmt:message key="label.Most.popular.products" /></div>
