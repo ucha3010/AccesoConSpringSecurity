@@ -86,7 +86,7 @@
 				</div>
 				<div class="col-xs-6">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="<fmt:message key='label.Search' />" id="buscar"/>
+						<input type="text" class="form-control" placeholder="<fmt:message key='label.Search' />" id="buscarXS"/>
 						<div class="input-group-btn">
 							<button class="btn btn-primary padding9" type="submit">
 								<span class="glyphicon glyphicon-search"></span>
@@ -188,29 +188,27 @@
 				<div id="principalCarrousel" class="carousel slide" data-ride="carousel">
 					<!-- Indicators -->
 					<ol class="carousel-indicators changeitem">
-						<li data-target="#principalCarrousel" data-slide-to="0" class="active"></li>
-						<li data-target="#principalCarrousel" data-slide-to="1"></li>
-						<li data-target="#principalCarrousel" data-slide-to="2"></li>
-						<li data-target="#principalCarrousel" data-slide-to="3"></li>
+					
+						<c:set var="activeSlide" value="active" scope="page" />
+						<c:set var="contadorSlide" value="0" scope="page" />
+						<c:forEach items="${slide}" var="sl">
+							<li data-target="#principalCarrousel" data-slide-to="${contadorSlide}" class="${activeSlide}"></li>
+							<c:set var="activeSlide" value="" scope="page" />
+							<c:set var="contadorSlide" value="${contadorSlide + 1}" scope="page" />
+						</c:forEach>
 					</ol>
 					
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner">
-						<div class="item item-center active">
-							<img src='<c:url value="/resources/imgs/ofertas.png"/>' alt="">
-						</div>
 						
-						<div class="item item-center">
-							<img src='<c:url value="/resources/imgs/publicidad.png"/>' alt="">
-						</div>
-						
-						<div class="item item-center">
-							<img src='<c:url value="/resources/imgs/catalogo.jpg"/>' alt="">
-						</div>
-						
-						<div class="item item-center">
-							<img src='<c:url value="/resources/imgs/masvendidos.jpg"/>' alt="">
-						</div>
+						<c:set var="activeSlide" value="active" scope="page" />
+						<c:forEach items="${slide}" var="foto">
+							<div class="item item-center ${activeSlide}">
+								<img src='<c:url value="/resources/imgs/slide/0/${foto.nombre}"/>' alt="${foto.descripcion}">
+							</div>
+							<c:set var="activeSlide" value="" scope="page" />
+						</c:forEach>
+
 					</div>
 					
 					<!-- Left and right controls -->
@@ -235,78 +233,126 @@
 					<div class="col-xs-3">
 						<c:if test="${(not empty oferta.producto.nombreFotoPrincipal)}">
 							<a title="${oferta.producto[nameColSelect]}" onclick='location.href="<c:url value='/detalle/producto/${oferta.producto.idPro}' />"' class="cursor-pointer">
-								<img src='<c:url value="/resources/imgs/productos/${oferta.producto.idPro}/${oferta.producto.nombreFotoPrincipal}"/>' class="w-100">
+								<img src='<c:url value="/resources/imgs/productos/${oferta.producto.idPro}/${oferta.producto.nombreFotoPrincipal}"/>' class="w-100 border-radius-10-porciento">
 							</a>
 						</c:if>
 					</div>
 					<c:set var="count" value="${count - 3}" scope="page"/>
 				</c:forEach>
-				<div class="col-xs-3">
-					Ver más
+				<div class="col-xs-1">
+					<div class="fondoOferta border-radius-10-porciento ver-mas">
+						<fmt:message key="label.See.more" />
+					</div>
+				</div>
+				<div class="col-xs-2">
 				</div>
 				<div class="col-xs-${count} col-sm-${count}">
 				</div>
 			</div>
-<!-- 			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl"> -->
-<!-- 				<div class="col-xs-5"> -->
-<!-- 					Producto 1 -->
-<!-- 				</div> -->
-<!-- 				<div class="col-xs-1"> -->
-<!-- 				</div> -->
-<!-- 				<div class="col-xs-5"> -->
-<!-- 					Producto 2 -->
-<!-- 				</div> -->
-<!-- 				<div class="col-xs-1"> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl"> -->
-<!-- 				<div class="separacion10"></div> -->
-<!-- 			</div> -->
-<!-- 			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl"> -->
-<!-- 				<div class="col-xs-5"> -->
-<!-- 					Producto 3 -->
-<!-- 				</div> -->
-<!-- 				<div class="col-xs-1"> -->
-<!-- 				</div> -->
-<!-- 				<div class="col-xs-5"> -->
-<!-- 					Ver más -->
-<!-- 				</div> -->
-<!-- 				<div class="col-xs-1"> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<div class="col-xs-12">
+				<c:set var="count" value="9" scope="page" />
+				<c:forEach items="${ofertas}" var="oferta">
+					<div class="col-xs-3 text-center">
+						<c:if test="${(not empty oferta.producto.nombreFotoPrincipal)}">
+							<c:out value="${oferta.producto[nameColSelect]}"></c:out>
+						</c:if>
+					</div>
+					<c:set var="count" value="${count - 3}" scope="page"/>
+				</c:forEach>
+				<div class="col-xs-3">
+				</div>
+				<div class="col-xs-${count} col-sm-${count}">
+				</div>
+			</div>
 		</div>
 	
 		<div class="titulossecundarios"><fmt:message key="label.Most.popular.products" /></div>
 	
 		<div class="row">
-			<div class="hidden-xs col-sm-12">
+			<div class="col-xs-12">
+				<c:set var="count" value="9" scope="page" />
+				<c:forEach items="${populares}" var="popular">
+					<div class="col-xs-3">
+						<c:if test="${(not empty popular.producto.nombreFotoPrincipal)}">
+							<a title="${popular.producto[nameColSelect]}" onclick='location.href="<c:url value='/detalle/producto/${popular.producto.idPro}' />"' class="cursor-pointer">
+								<img src='<c:url value="/resources/imgs/productos/${popular.producto.idPro}/${popular.producto.nombreFotoPrincipal}"/>' class="w-100 border-radius-10-porciento">
+							</a>
+						</c:if>
+					</div>
+					<c:set var="count" value="${count - 3}" scope="page"/>
+				</c:forEach>
+				<div class="col-xs-1">
+					<div class="fondoPopular border-radius-10-porciento ver-mas">
+						<fmt:message key="label.See.more" />
+					</div>
+				</div>
+				<div class="col-xs-2">
+				</div>
+				<div class="col-xs-${count} col-sm-${count}">
+				</div>
 			</div>
-			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
-			</div>
-			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
-				<div class="separacion10"></div>
-			</div>
-			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+			<div class="col-xs-12">
+				<c:set var="count" value="9" scope="page" />
+				<c:forEach items="${populares}" var="popular">
+					<div class="col-xs-3 text-center">
+						<c:if test="${(not empty popular.producto.nombreFotoPrincipal)}">
+							<c:out value="${popular.producto[nameColSelect]}"></c:out>
+						</c:if>
+					</div>
+					<c:set var="count" value="${count - 3}" scope="page"/>
+				</c:forEach>
+				<div class="col-xs-3">
+				</div>
+				<div class="col-xs-${count} col-sm-${count}">
+				</div>
 			</div>
 		</div>
-	
+		
 		<div class="titulossecundarios"><fmt:message key="label.New.stock" /></div>
 	
 		<div class="row">
-			<div class="hidden-xs col-sm-12">
+			<div class="col-xs-12">
+				<c:set var="count" value="9" scope="page" />
+				<c:forEach items="${novedades}" var="novedad">
+					<div class="col-xs-3">
+						<c:if test="${(not empty novedad.producto.nombreFotoPrincipal)}">
+							<a title="${novedad.producto[nameColSelect]}" onclick='location.href="<c:url value='/detalle/producto/${novedad.producto.idPro}' />"' class="cursor-pointer">
+								<img src='<c:url value="/resources/imgs/productos/${novedad.producto.idPro}/${novedad.producto.nombreFotoPrincipal}"/>' class="w-100 border-radius-10-porciento">
+							</a>
+						</c:if>
+					</div>
+					<c:set var="count" value="${count - 3}" scope="page"/>
+				</c:forEach>
+				<div class="col-xs-1">
+					<div class="fondoNovedades border-radius-10-porciento ver-mas">
+						<fmt:message key="label.See.more" />
+					</div>
+				</div>
+				<div class="col-xs-2">
+				</div>
+				<div class="col-xs-${count} col-sm-${count}">
+				</div>
 			</div>
-			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
-			</div>
-			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
-				<div class="separacion10"></div>
-			</div>
-			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
+			<div class="col-xs-12">
+				<c:set var="count" value="9" scope="page" />
+				<c:forEach items="${novedades}" var="novedad">
+					<div class="col-xs-3 text-center">
+						<c:if test="${(not empty novedad.producto.nombreFotoPrincipal)}">
+							<c:out value="${novedad.producto[nameColSelect]}"></c:out>
+						</c:if>
+					</div>
+					<c:set var="count" value="${count - 3}" scope="page"/>
+				</c:forEach>
+				<div class="col-xs-3">
+				</div>
+				<div class="col-xs-${count} col-sm-${count}">
+				</div>
 			</div>
 		</div>
 	
-	
-	
 	</div>
+		
+	<div class="separacion20"></div>
 	
 	<div class="row">
 		<div class="col-xs-1">

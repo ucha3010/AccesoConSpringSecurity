@@ -61,6 +61,32 @@
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.System.configuration" /></div>
+			<div class="row">	
+				<div class="col-xs-5">
+				</div>	
+				<div class="hidden-xs col-sm-7">
+					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+						<a title="<fmt:message key="label.Pictures.of" /> <fmt:message key="label.slide" />" href='<c:url value='/foto/slide' />'>
+							<img src='<c:url value="/resources/imgs/engranaje.png"/>' class="tamanio_imagen_100x100">
+						</a>
+					</sec:authorize>
+				</div>	
+				<div class="col-xs-7 hidden-sm hidden-md hidden-lg hidden-xl">
+					<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
+						<a title="<fmt:message key="label.Pictures.of" /> <fmt:message key="label.slide" />" href='<c:url value='/foto/slide' />'>
+							<img src='<c:url value="/resources/imgs/engranaje.png"/>' class="tamanio_imagen_50x50">
+						</a>
+					</sec:authorize>
+				</div>
+			</div>
+			<div class="row">	
+				<div class="col-xs-5">
+				</div>	
+				<div class="col-xs-7">
+					<fmt:message key="label.Pictures.of" /> <fmt:message key="label.slide" />
+				</div>
+			</div>
+			<br/>
 
 		<sf:form method="post" action="${pageContext.request.contextPath}/administrar/configuracion/save" modelAttribute="frontAdministrarConfiguracion" onsubmit="return validar()">
 			<c:if test="${frontAdministrarConfiguracion.idUsr != 0}">

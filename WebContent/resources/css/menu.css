@@ -144,6 +144,10 @@ button:hover{
 	border-radius: 15px;
 }
 
+.border-radius-10-porciento {
+	border-radius: 10%;
+}
+
 .separacion10 {
 	height: 10px;
 }
@@ -313,4 +317,15 @@ button:hover{
 	padding: 15px 10px;
 	list-style: none;
 	border-bottom: 1px solid rgba(100, 100, 100, .3);
+}
+
+
+.ver-mas {
+	text-align: center;
+	font-size: 20px;
+	transform: rotate(-90deg);
+	font-family: cursive;
+	width: 8em;
+	padding: 1.5em 0 1.5em 0;
+	margin-top: 3em;
 }

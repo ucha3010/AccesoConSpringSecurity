@@ -20,6 +20,7 @@ import com.damian.pojo.Foto;
 import com.damian.pojo.Producto;
 import com.damian.pojo.Usuario;
 import com.damian.service.FotoService;
+import com.damian.service.IndexService;
 import com.damian.service.ProductoService;
 import com.damian.service.UsuarioService;
 
@@ -30,6 +31,9 @@ public class FotoController {
 
 	@Autowired
 	private FotoService fotoService;
+	
+	@Autowired
+	private IndexService indexService;
 
 	@Autowired
 	private ProductoService productoService;
@@ -78,6 +82,24 @@ public class FotoController {
 
 	}
 
+	@RequestMapping("/foto/slide")
+	public ModelAndView getSlideFotos(ModelAndView modelAndView) {
+
+		int idUsr = indexService.idUserLogged(modelAndView);
+		if(idUsr != 0) {
+			Usuario usuario = new Usuario();
+			usuario.setIdUsr(idUsr);
+			modelAndView.addObject("usuario", usuario);
+			modelAndView.addObject("fotos", fotoService.findBySlide());
+			Foto foto = new Foto();
+			foto.setSlide(true);
+			modelAndView.addObject("foto", foto);
+			modelAndView.setViewName("administrarFotosIndex");
+		}
+		return modelAndView;
+
+	}
+
 	@RequestMapping(value = { "/foto/usuarioLogged/save" }, method = RequestMethod.POST)
 	public String saveUsuario(@RequestParam("file") MultipartFile file, @ModelAttribute("foto") Foto foto,
 			RedirectAttributes ra, HttpServletRequest request) {
@@ -92,6 +114,15 @@ public class FotoController {
 
 		saveFoto(foto, file, request, ra);
 		return "redirect:/foto/producto/" + foto.getProducto().getIdPro();
+	}
+
+	@RequestMapping(value = { "/foto/slide/save" }, method = RequestMethod.POST)
+	public String saveSlide(@RequestParam("file") MultipartFile file, @ModelAttribute("foto") Foto foto,
+			RedirectAttributes ra, HttpServletRequest request) {
+
+		foto.setSlide(true);
+		saveFoto(foto, file, request, ra);
+		return "redirect:/foto/slide";
 	}
 
 	@RequestMapping("/foto/usuarioLogged/delete/{idFot}")
@@ -109,6 +140,15 @@ public class FotoController {
 		Foto foto = fotoService.delete(idFot, request);
 		ra.addFlashAttribute("foto_eliminada", "foto_eliminada");
 		return "redirect:/foto/producto/" + foto.getProducto().getIdPro();
+
+	}
+
+	@RequestMapping("/foto/slide/delete/{idFot}")
+	public String deleteSlide(@PathVariable("idFot") int idFot, RedirectAttributes ra, HttpServletRequest request) {
+
+		fotoService.delete(idFot, request);
+		ra.addFlashAttribute("foto_eliminada", "foto_eliminada");
+		return "redirect:/foto/slide";
 
 	}
 

@@ -60,6 +60,7 @@ public class ConverterFoto {
 		f.setDescripcion(mf.getDescripcion());
 		f.setPeso(mf.getPeso());
 		f.setPrincipal(mf.isPrincipal());
+		f.setSlide(mf.isSlide());
 		f.setExtension(mf.getExtension());
 		f.setFechaCreacion(mf.getFechaCreacion());
 		f.setCreadoPor(mf.getCreadoPor());
@@ -104,6 +105,7 @@ public class ConverterFoto {
 		mf.setDescripcion(f.getDescripcion());
 		mf.setPeso(f.getPeso());
 		mf.setPrincipal(f.isPrincipal());
+		mf.setSlide(f.isSlide());
 		mf.setExtension(f.getExtension());
 		mf.setFechaCreacion(f.getFechaCreacion());
 		mf.setCreadoPor(f.getCreadoPor());

@@ -110,8 +110,6 @@
 	</div>
 		
 	<div class="separacion20"></div>
-	
-		
 		
 	<sf:form method="post" action="${pageContext.request.contextPath}/administrar/campanias/save" modelAttribute="campania" onsubmit="return validar()">	
 		<div class="container">

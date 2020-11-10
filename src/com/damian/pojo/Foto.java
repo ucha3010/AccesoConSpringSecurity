@@ -22,6 +22,7 @@ public class Foto {
 	private String descripcion;
 	private long peso;
 	private boolean principal;
+	private boolean slide;
 	private String extension;
 	private Timestamp fechaCreacion;
 	private String creadoPor;
@@ -280,6 +281,21 @@ public class Foto {
 	}
 
 	/**
+	 * @return the slide
+	 */
+	public boolean isSlide() {
+		return slide;
+	}
+
+	/**
+	 * @param slide
+	 *            the slide to set
+	 */
+	public void setSlide(boolean slide) {
+		this.slide = slide;
+	}
+
+	/**
 	 * @return the extension
 	 */
 	public String getExtension() {
@@ -365,8 +381,8 @@ public class Foto {
 				+ ", empresa=" + empresa + ", categoria=" + categoria + ", subcategoria=" + subcategoria + ", pais="
 				+ pais + ", formaPago=" + formaPago + ", estado=" + estado + ", rol=" + rol + ", nombre=" + nombre
 				+ ", ruta=" + ruta + ", descripcion=" + descripcion + ", peso=" + peso + ", principal=" + principal
-				+ ", extension=" + extension + ", fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor
-				+ ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
+				+ ", slide=" + slide + ", extension=" + extension + ", fechaCreacion=" + fechaCreacion + ", creadoPor="
+				+ creadoPor + ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

@@ -44,16 +44,19 @@ public class IndexServiceImpl implements IndexService {
 		model.addObject(ConstantesLocales.SPEECH, constantesService.findByClave(ConstantesLocales.SPEECH));
 		model.addObject("estoy", "index");
 
-		List<AdministracionOfertas> aoList = administracionOfertasService.findByOfertas(3);
-		for (AdministracionOfertas ao : aoList) {
-			List<Foto> fotos = fotoService.findByIdPro(ao.getProducto().getIdPro());
-			for(Foto f:fotos) {
-				if(f.isPrincipal()) {
-					ao.getProducto().setNombreFotoPrincipal(f.getNombre());
-				}
-			}
-		}
-		model.addObject("ofertas", aoList);
+		model.addObject("slide", fotoService.findBySlide());
+
+		List<AdministracionOfertas> ofertasList = administracionOfertasService.findByOfertas(3);
+		agregarFotos(ofertasList);
+		model.addObject("ofertas", ofertasList);
+
+		List<AdministracionOfertas> popularesList = administracionOfertasService.findByProductosPopulares(3);
+		agregarFotos(popularesList);
+		model.addObject("populares", popularesList);
+
+		List<AdministracionOfertas> novedadesList = administracionOfertasService.findByNovedades(3);
+		agregarFotos(novedadesList);
+		model.addObject("novedades", novedadesList);
 
 		model.setViewName("index");
 		return model;
@@ -86,6 +89,17 @@ public class IndexServiceImpl implements IndexService {
 			model.addObject("prefUsr", preferenciaUsuarioService.findById(usuario.getIdUsr()));
 		}
 		return usuario.getIdUsr();
+	}
+
+	private void agregarFotos(List<AdministracionOfertas> administracionOfertasList) {
+		for (AdministracionOfertas ao : administracionOfertasList) {
+			List<Foto> fotos = fotoService.findByIdPro(ao.getProducto().getIdPro());
+			for(Foto f:fotos) {
+				if(f.isPrincipal()) {
+					ao.getProducto().setNombreFotoPrincipal(f.getNombre());
+				}
+			}
+		}
 	}
 
 }

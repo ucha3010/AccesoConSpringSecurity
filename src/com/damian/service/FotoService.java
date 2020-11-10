@@ -30,6 +30,8 @@ public interface FotoService {
 
 	public List<Foto> findByIdRol(int idRol);
 
+	public List<Foto> findBySlide();
+
 	public int save(Foto foto, MultipartFile file, HttpServletRequest request);
 
 	public int update(Foto foto, HttpServletRequest request);
@@ -39,7 +41,7 @@ public interface FotoService {
 	public int getMaxId();
 
 	public Foto doPrincipal(int idFot, HttpServletRequest request);
-	
+
 	public String principalPictureName(List<Foto> fotos);
 
 }
