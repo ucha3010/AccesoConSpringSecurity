@@ -16,10 +16,69 @@
 <body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Contact" /></div>
 		
 		<div class="row">
 			<div class="col-md-12">
-				<h1><fmt:message key="label.Contact" /></h1>
+				<h3>Teléfono: 900 000 000</h3>
+				<h3>Email: empresa@empresa.com</h3>
+				<h3>Dirección: Avenida Virgen del Cortijo 126 - Madrid</h3>
+				<div class="text-justify">
+					<img src='<c:url value="/resources/imgs/mapa_direccion.jpg"/>'>
+				</div>
+				<p class="text-justify">
+					Suspendisse tempus ac sem nec viverra. Aenean convallis urna at
+					mattis vulputate. Integer rutrum eros ac orci mattis, finibus
+					scelerisque nunc elementum. Nulla id nunc in ligula molestie
+					rhoncus. Nunc non iaculis diam. Quisque sagittis orci lectus, eu
+					aliquam nisl maximus id. Phasellus vel tristique mi. Sed at neque
+					pharetra mi ornare facilisis a sed nunc. Morbi cursus pulvinar dui
+					sed mollis. Ut porta, dolor in rhoncus luctus, metus nisi ultrices
+					magna, vel laoreet metus purus in turpis. Mauris luctus ac neque
+					nec accumsan. Vivamus at maximus lacus, id pharetra nunc. Phasellus
+					consequat malesuada dui nec sodales. Donec consequat erat vel purus
+					pretium pharetra. Maecenas a erat feugiat, rhoncus tellus in,
+					pretium erat. Praesent eu convallis mi, id euismod augue.
+				</p>
+				<p class="text-justify">
+					Vivamus convallis congue pulvinar. Maecenas
+					enim sapien, varius sit amet ex et, consequat porttitor nisi.
+					Aenean sed nunc in tellus condimentum suscipit nec vitae est.
+					Nullam arcu enim, finibus vitae nisl sit amet, viverra sodales
+					nulla. Mauris tincidunt placerat sapien, non mollis nisi suscipit
+					sed. Nulla odio nunc, luctus ut turpis vitae, ultrices cursus
+					justo. Vestibulum vel venenatis nisl. Quisque magna mi, dictum at
+					dui non, eleifend convallis nibh. Nulla eget suscipit erat. Aliquam
+					erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing
+					elit. Curabitur turpis libero, ultrices non leo vitae, aliquam
+					fringilla nibh. Nunc et magna commodo, feugiat erat sed, maximus
+					tellus. Mauris accumsan ultrices dolor eget sollicitudin.
+				</p>
+				<p class="text-justify">
+					Nunc suscipit quis dui sit amet pretium.
+					Quisque consequat sem a elit malesuada fringilla. Nulla ultrices id
+					tellus nec ultrices. Aenean at diam cursus, mollis arcu vel,
+					consequat magna. Morbi ac pretium nulla. Vestibulum sagittis
+					rhoncus dolor, eu condimentum massa condimentum sed. Quisque
+					vehicula laoreet nisl sit amet mollis. Praesent consequat, libero
+					pellentesque vulputate porttitor, nunc leo posuere lectus, quis
+					pretium dui augue sit amet ex. Fusce semper tortor vitae lacus
+					faucibus, vel dignissim quam ultrices. Ut sodales sollicitudin sem,
+					vitae facilisis orci molestie sit amet. Pellentesque sed orci ut
+					libero rhoncus tincidunt et vel risus.
+				</p>
+				<p class="text-justify">
+					Ut sagittis pellentesque turpis et egestas.
+					Vestibulum vestibulum pellentesque tempor. Vestibulum tincidunt
+					dictum metus quis vehicula. Phasellus molestie sit amet enim
+					lobortis rhoncus. Aenean efficitur massa congue quam consequat
+					dignissim. Vestibulum at elit sed ante dictum congue. Duis in erat
+					in diam efficitur scelerisque. Aliquam id varius tellus. Mauris
+					molestie a erat at eleifend. Aliquam ac lectus non mauris
+					condimentum vulputate eget eget enim. Duis egestas sapien vehicula
+					elementum maximus. Vestibulum ante ipsum primis in faucibus orci
+					luctus et ultrices posuere cubilia curae
+				</p>
 			</div>
 		</div>
 	</div>

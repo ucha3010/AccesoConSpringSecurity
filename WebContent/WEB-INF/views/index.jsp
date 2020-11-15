@@ -202,11 +202,15 @@
 					<div class="carousel-inner">
 						
 						<c:set var="activeSlide" value="active" scope="page" />
+						<c:set var="contadorSlide" value="1" scope="page" />
 						<c:forEach items="${slide}" var="foto">
 							<div class="item item-center ${activeSlide}">
-								<img src='<c:url value="/resources/imgs/slide/0/${foto.nombre}"/>' alt="${foto.descripcion}">
+								<a onclick='location.href="<c:url value='/footer/promotion${contadorSlide}' />"'><!-- ESTO HAY QUE PONERLO COMO EN EL FOOTER!!! -->
+									<img src='<c:url value="/resources/imgs/slide/0/${foto.nombre}"/>' alt="${foto.descripcion}">
+								</a>
 							</div>
 							<c:set var="activeSlide" value="" scope="page" />
+							<c:set var="contadorSlide" value="${contadorSlide + 1}" scope="page" />
 						</c:forEach>
 
 					</div>
