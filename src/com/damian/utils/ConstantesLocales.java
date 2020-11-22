@@ -17,4 +17,10 @@ public class ConstantesLocales {
 
 	public static final List<String> CLAVES_CONFIG_ADMIN = Arrays.asList(IVA_ENVIO);
 
+	public static final String USUARIOS = "usuarios";
+
+	public static final String PRODUCTOS = "productos";
+
+	public static final String EMPRESA_PROPIAS = "empresaPropias";
+
 }

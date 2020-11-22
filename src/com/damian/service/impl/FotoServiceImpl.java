@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.damian.dao.FotoDAO;
 import com.damian.pojo.Foto;
 import com.damian.service.FotoService;
+import com.damian.utils.ConstantesLocales;
 import com.damian.utils.Ruta;
 import com.damian.utils.Utils;
 
@@ -43,6 +44,11 @@ public class FotoServiceImpl implements FotoService {
 	@Override
 	public List<Foto> findByIdEmp(int idEmp) {
 		return fotoDAO.findByIdEmp(idEmp);
+	}
+
+	@Override
+	public List<Foto> findByIdPropia(int idPropia) {
+		return fotoDAO.findByIdPropia(idPropia);
 	}
 
 	@Override
@@ -89,13 +95,18 @@ public class FotoServiceImpl implements FotoService {
 		if (foto != null) {
 			if (foto.getUsuario() != null && foto.getUsuario().getIdUsr() != 0) {
 				fotos = findByIdUsr(foto.getUsuario().getIdUsr());
-				llamada = "usuarios";
+				llamada = ConstantesLocales.USUARIOS;
 				id = foto.getUsuario().getIdUsr();
 			}
 			if (foto.getProducto() != null && foto.getProducto().getIdPro() != 0) {
 				id = foto.getProducto().getIdPro();
 				fotos = findByIdPro(id);
-				llamada = "productos";
+				llamada = ConstantesLocales.PRODUCTOS;
+			}
+			if (foto.getEmpresaPropia() != null && foto.getEmpresaPropia().getIdPropia() != 0) {
+				id = foto.getEmpresaPropia().getIdPropia();
+				fotos = findByIdPropia(id);
+				llamada = ConstantesLocales.EMPRESA_PROPIAS;
 			}
 			if (foto.isSlide()) {
 				llamada = "slide";
@@ -163,11 +174,15 @@ public class FotoServiceImpl implements FotoService {
 		if (foto != null) {
 			if (foto.getUsuario() != null && foto.getUsuario().getIdUsr() != 0) {
 				idSalida = foto.getUsuario().getIdUsr();
-				ruta = Ruta("usuarios", idSalida, request);
+				ruta = Ruta(ConstantesLocales.USUARIOS, idSalida, request);
 			}
 			if (foto.getProducto() != null && foto.getProducto().getIdPro() != 0) {
 				idSalida = foto.getProducto().getIdPro();
-				ruta = Ruta("productos", idSalida, request);
+				ruta = Ruta(ConstantesLocales.PRODUCTOS, idSalida, request);
+			}
+			if (foto.getEmpresaPropia() != null && foto.getEmpresaPropia().getIdPropia() != 0) {
+				idSalida = foto.getEmpresaPropia().getIdPropia();
+				ruta = Ruta(ConstantesLocales.EMPRESA_PROPIAS, idSalida, request);
 			}
 			if (foto.isSlide()) {
 				ruta = Ruta("slide", idSalida, request);

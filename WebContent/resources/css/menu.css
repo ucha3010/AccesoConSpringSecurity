@@ -160,6 +160,12 @@ button:hover{
 	padding: 9px;
 }
 
+.paddingEncuentraTienda {
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+	padding-bottom: 0.1em;
+}
+
 .height27 {
 	height: 27px;
 }
@@ -250,6 +256,10 @@ button:hover{
 
 .fuente-cursive {
 	font-family: cursive;
+}
+
+.foncoEncuentraTienda {
+	background-color: #c5d169;
 }
 
 /*******************Menú lateral*************************/

@@ -16,9 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.damian.pojo.EmpresaPropia;
 import com.damian.pojo.Foto;
 import com.damian.pojo.Producto;
 import com.damian.pojo.Usuario;
+import com.damian.service.EmpresaPropiaService;
 import com.damian.service.FotoService;
 import com.damian.service.IndexService;
 import com.damian.service.ProductoService;
@@ -28,6 +30,9 @@ import com.damian.service.UsuarioService;
 @SessionAttributes({ "resultado", "estoy", "roles", "prinPicUsr" })
 
 public class FotoController {
+	
+	@Autowired
+	private EmpresaPropiaService empresaPropiaService;
 
 	@Autowired
 	private FotoService fotoService;
@@ -100,6 +105,19 @@ public class FotoController {
 
 	}
 
+	@RequestMapping("/foto/empresaPropia/{idPropia}")
+	public ModelAndView getEmpresaPropiaFoto(ModelAndView modelAndView, @PathVariable("idPropia") int idPropia) {
+		EmpresaPropia empresaPropia = empresaPropiaService.findById(idPropia);
+		modelAndView.addObject("empresaPropia", empresaPropia);
+		modelAndView.addObject("fotos", fotoService.findByIdPropia(idPropia));
+		Foto foto = new Foto();
+		foto.setEmpresaPropia(empresaPropia);
+		modelAndView.addObject("foto", foto);
+		modelAndView.addObject("estoy", "empresaPropiaFotoUbicacion");
+		modelAndView.setViewName("empresaPropiaFotoUbicacion");
+		return modelAndView;
+	}
+
 	@RequestMapping(value = { "/foto/usuarioLogged/save" }, method = RequestMethod.POST)
 	public String saveUsuario(@RequestParam("file") MultipartFile file, @ModelAttribute("foto") Foto foto,
 			RedirectAttributes ra, HttpServletRequest request) {
@@ -123,6 +141,14 @@ public class FotoController {
 		foto.setSlide(true);
 		saveFoto(foto, file, request, ra);
 		return "redirect:/foto/slide";
+	}
+
+	@RequestMapping(value = { "/foto/empresaPropia/save" }, method = RequestMethod.POST)
+	public String saveFotoEmpresaPropia(@RequestParam("file") MultipartFile file, @ModelAttribute("foto") Foto foto,
+			RedirectAttributes ra, HttpServletRequest request) {
+
+		saveFoto(foto, file, request, ra);
+		return "redirect:/foto/empresaPropia/" + foto.getEmpresaPropia().getIdPropia();
 	}
 
 	@RequestMapping("/foto/usuarioLogged/delete/{idFot}")
@@ -149,6 +175,15 @@ public class FotoController {
 		fotoService.delete(idFot, request);
 		ra.addFlashAttribute("foto_eliminada", "foto_eliminada");
 		return "redirect:/foto/slide";
+
+	}
+
+	@RequestMapping("/foto/empresaPropia/delete/{idFot}")
+	public String deleteEmpresaPropia(@PathVariable("idFot") int idFot, RedirectAttributes ra, HttpServletRequest request) {
+
+		Foto foto = fotoService.delete(idFot, request);
+		ra.addFlashAttribute("foto_eliminada", "foto_eliminada");
+		return "redirect:/foto/empresaPropia/" + foto.getEmpresaPropia().getIdPropia();
 
 	}
 

@@ -16,6 +16,8 @@ public interface FotoDAO {
 
 	public List<Foto> findByIdEmp(int idEmp);
 
+	public List<Foto> findByIdPropia(int idPropia);
+
 	public List<Foto> findByIdCat(int idCat);
 
 	public List<Foto> findByIdSub(int idSub);

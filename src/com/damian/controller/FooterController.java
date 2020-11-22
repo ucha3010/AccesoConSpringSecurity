@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.damian.service.EmpresaPropiaService;
 import com.damian.service.IndexService;
 
 @Controller
@@ -16,6 +17,9 @@ public class FooterController {
 	@Autowired
 	private IndexService indexService;
 
+	@Autowired
+	private EmpresaPropiaService empresaPropiaService;
+
 	@RequestMapping("/footer/aboutus")
 	public ModelAndView getaboutus(ModelAndView modelAndView) throws Exception {
 		return fillModelAndView("aboutus", "footeraboutus", modelAndView);
@@ -23,6 +27,7 @@ public class FooterController {
 
 	@RequestMapping("/footer/findyourstore")
 	public ModelAndView getfindyourstore(ModelAndView modelAndView) throws Exception {
+		modelAndView.addObject("empresaPropias", empresaPropiaService.findAll());
 		return fillModelAndView("findyourstore", "footerfindyourstore", modelAndView);
 	}
 

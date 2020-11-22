@@ -11,6 +11,7 @@ public class Foto {
 	private Usuario usuario;
 	private Producto producto;
 	private Empresa empresa;
+	private EmpresaPropia empresaPropia;
 	private Categoria categoria;
 	private Subcategoria subcategoria;
 	private Pais pais;
@@ -113,6 +114,21 @@ public class Foto {
 	 */
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
+	}
+
+	/**
+	 * @return the empresaPropia
+	 */
+	public EmpresaPropia getEmpresaPropia() {
+		return empresaPropia;
+	}
+
+	/**
+	 * @param empresaPropia
+	 *            the empresaPropia to set
+	 */
+	public void setEmpresaPropia(EmpresaPropia empresaPropia) {
+		this.empresaPropia = empresaPropia;
 	}
 
 	/**
@@ -378,11 +394,12 @@ public class Foto {
 	@Override
 	public String toString() {
 		return "Foto [idFot=" + idFot + ", archivo=" + archivo + ", usuario=" + usuario + ", producto=" + producto
-				+ ", empresa=" + empresa + ", categoria=" + categoria + ", subcategoria=" + subcategoria + ", pais="
-				+ pais + ", formaPago=" + formaPago + ", estado=" + estado + ", rol=" + rol + ", nombre=" + nombre
-				+ ", ruta=" + ruta + ", descripcion=" + descripcion + ", peso=" + peso + ", principal=" + principal
-				+ ", slide=" + slide + ", extension=" + extension + ", fechaCreacion=" + fechaCreacion + ", creadoPor="
-				+ creadoPor + ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
+				+ ", empresa=" + empresa + ", empresaPropia=" + empresaPropia + ", categoria=" + categoria
+				+ ", subcategoria=" + subcategoria + ", pais=" + pais + ", formaPago=" + formaPago + ", estado="
+				+ estado + ", rol=" + rol + ", nombre=" + nombre + ", ruta=" + ruta + ", descripcion=" + descripcion
+				+ ", peso=" + peso + ", principal=" + principal + ", slide=" + slide + ", extension=" + extension
+				+ ", fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor + ", modificadoPor=" + modificadoPor
+				+ ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

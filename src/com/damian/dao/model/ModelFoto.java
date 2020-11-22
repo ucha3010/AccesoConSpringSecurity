@@ -8,6 +8,7 @@ public class ModelFoto {
 	private int idUsr;
 	private int idPro;
 	private int idEmp;
+	private int idPropia;
 	private int idCat;
 	private int idSub;
 	private int idPais;
@@ -95,6 +96,21 @@ public class ModelFoto {
 	 */
 	public void setIdEmp(int idEmp) {
 		this.idEmp = idEmp;
+	}
+
+	/**
+	 * @return the idPropia
+	 */
+	public int getIdPropia() {
+		return idPropia;
+	}
+
+	/**
+	 * @param idPropia
+	 *            the idPropia to set
+	 */
+	public void setIdPropia(int idPropia) {
+		this.idPropia = idPropia;
 	}
 
 	/**
@@ -359,12 +375,12 @@ public class ModelFoto {
 	 */
 	@Override
 	public String toString() {
-		return "ModelFoto [idFot=" + idFot + ", idUsr=" + idUsr + ", idPro=" + idPro + ", idEmp=" + idEmp + ", idCat="
-				+ idCat + ", idSub=" + idSub + ", idPais=" + idPais + ", idFor=" + idFor + ", idEst=" + idEst
-				+ ", idRol=" + idRol + ", nombre=" + nombre + ", ruta=" + ruta + ", descripcion=" + descripcion
-				+ ", peso=" + peso + ", principal=" + principal + ", slide=" + slide + ", extension=" + extension
-				+ ", fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor + ", modificadoPor=" + modificadoPor
-				+ ", fechaModificacion=" + fechaModificacion + "]";
+		return "ModelFoto [idFot=" + idFot + ", idUsr=" + idUsr + ", idPro=" + idPro + ", idEmp=" + idEmp
+				+ ", idPropia=" + idPropia + ", idCat=" + idCat + ", idSub=" + idSub + ", idPais=" + idPais + ", idFor="
+				+ idFor + ", idEst=" + idEst + ", idRol=" + idRol + ", nombre=" + nombre + ", ruta=" + ruta
+				+ ", descripcion=" + descripcion + ", peso=" + peso + ", principal=" + principal + ", slide=" + slide
+				+ ", extension=" + extension + ", fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor
+				+ ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

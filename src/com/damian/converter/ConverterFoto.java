@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import com.damian.dao.model.ModelFoto;
 import com.damian.pojo.Categoria;
 import com.damian.pojo.Empresa;
+import com.damian.pojo.EmpresaPropia;
 import com.damian.pojo.Estado;
 import com.damian.pojo.FormaPago;
 import com.damian.pojo.Foto;
@@ -36,6 +37,9 @@ public class ConverterFoto {
 		}
 		if (mf.getIdEmp() != 0) {
 			f.setEmpresa(new Empresa(mf.getIdEmp()));
+		}
+		if (mf.getIdPropia() != 0) {
+			f.setEmpresaPropia(new EmpresaPropia(mf.getIdPropia()));
 		}
 		if (mf.getIdCat() != 0) {
 			f.setCategoria(new Categoria(mf.getIdCat()));
@@ -81,6 +85,9 @@ public class ConverterFoto {
 		}
 		if (f.getEmpresa() != null) {
 			mf.setIdEmp(f.getEmpresa().getIdEmp());
+		}
+		if (f.getEmpresaPropia() != null) {
+			mf.setIdPropia(f.getEmpresaPropia().getIdPropia());
 		}
 		if (f.getCategoria() != null) {
 			mf.setIdCat(f.getCategoria().getIdCat());
