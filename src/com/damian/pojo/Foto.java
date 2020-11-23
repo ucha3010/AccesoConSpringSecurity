@@ -18,6 +18,7 @@ public class Foto {
 	private FormaPago formaPago;
 	private Estado estado;
 	private Rol rol;
+	private Marca marca;
 	private String nombre;
 	private String ruta;
 	private String descripcion;
@@ -222,6 +223,21 @@ public class Foto {
 	}
 
 	/**
+	 * @return the marca
+	 */
+	public Marca getMarca() {
+		return marca;
+	}
+
+	/**
+	 * @param marca
+	 *            the marca to set
+	 */
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
+	/**
 	 * @return the nombre
 	 */
 	public String getNombre() {
@@ -396,10 +412,10 @@ public class Foto {
 		return "Foto [idFot=" + idFot + ", archivo=" + archivo + ", usuario=" + usuario + ", producto=" + producto
 				+ ", empresa=" + empresa + ", empresaPropia=" + empresaPropia + ", categoria=" + categoria
 				+ ", subcategoria=" + subcategoria + ", pais=" + pais + ", formaPago=" + formaPago + ", estado="
-				+ estado + ", rol=" + rol + ", nombre=" + nombre + ", ruta=" + ruta + ", descripcion=" + descripcion
-				+ ", peso=" + peso + ", principal=" + principal + ", slide=" + slide + ", extension=" + extension
-				+ ", fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor + ", modificadoPor=" + modificadoPor
-				+ ", fechaModificacion=" + fechaModificacion + "]";
+				+ estado + ", rol=" + rol + ", marca=" + marca + ", nombre=" + nombre + ", ruta=" + ruta
+				+ ", descripcion=" + descripcion + ", peso=" + peso + ", principal=" + principal + ", slide=" + slide
+				+ ", extension=" + extension + ", fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor
+				+ ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

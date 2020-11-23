@@ -30,6 +30,8 @@ public interface FotoDAO {
 
 	public List<Foto> findByIdRol(int idRol);
 
+	public List<Foto> findByIdMar(int idMar);
+
 	public List<Foto> findBySlide();
 
 	public int save(Foto foto, HttpServletRequest request);

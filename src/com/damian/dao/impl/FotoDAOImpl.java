@@ -115,6 +115,12 @@ public class FotoDAOImpl implements FotoDAO {
 	}
 
 	@Override
+	public List<Foto> findByIdMar(int idMar) {
+		String sql = "SELECT * FROM " + TABLA + " WHERE idMar=" + idMar;
+		return lista(sql);
+	}
+
+	@Override
 	public List<Foto> findBySlide() {
 		String sql = "SELECT * FROM " + TABLA + " WHERE slide = true";
 		return lista(sql);
@@ -127,14 +133,14 @@ public class FotoDAOImpl implements FotoDAO {
 		} else {
 			ModelFoto mf = converterFoto.convert(foto);
 			String sql = "INSERT INTO " + TABLA
-					+ " (idUsr, idPro, idEmp, idPropia, idCat, idSub, idPais, idFor, idEst, idRol, nombre, ruta, descripcion, peso, principal, "
+					+ " (idUsr, idPro, idEmp, idPropia, idCat, idSub, idPais, idFor, idEst, idRol, idMar, nombre, ruta, descripcion, peso, principal, "
 					+ "slide, extension, fechaCreacion, creadoPor, fechaModificacion, modificadoPor) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			int result = jdbcTemplate.update(sql, mf.getIdUsr(), mf.getIdPro(), mf.getIdEmp(), mf.getIdPropia(),
 					mf.getIdCat(), mf.getIdSub(), mf.getIdPais(), mf.getIdFor(), mf.getIdEst(), mf.getIdRol(),
-					mf.getNombre(), mf.getRuta(), mf.getDescripcion(), mf.getPeso(), mf.isPrincipal(), mf.isSlide(),
-					mf.getExtension(), mf.getFechaCreacion(), mf.getCreadoPor(), mf.getFechaModificacion(),
-					mf.getModificadoPor());
+					mf.getIdMar(), mf.getNombre(), mf.getRuta(), mf.getDescripcion(), mf.getPeso(), mf.isPrincipal(),
+					mf.isSlide(), mf.getExtension(), mf.getFechaCreacion(), mf.getCreadoPor(),
+					mf.getFechaModificacion(), mf.getModificadoPor());
 			LocalLogger.save(TABLA, mf, request);
 			return result;
 		}
@@ -144,13 +150,13 @@ public class FotoDAOImpl implements FotoDAO {
 	public int update(Foto foto, HttpServletRequest request) {
 		ModelFoto mf = converterFoto.convert(foto);
 		String sql = "UPDATE " + TABLA
-				+ " SET idUsr=?, idPro=?, idEmp=?, idPropia=?, idCat=?, idSub=?, idPais=?, idFor=?, idEst=?, idRol=?, nombre=?, ruta=?, descripcion=?, "
+				+ " SET idUsr=?, idPro=?, idEmp=?, idPropia=?, idCat=?, idSub=?, idPais=?, idFor=?, idEst=?, idRol=?, idMar=?, nombre=?, ruta=?, descripcion=?, "
 				+ "peso=?, principal=?, slide=?, extension=?, fechaCreacion=?, creadoPor=?, fechaModificacion=?, modificadoPor=? "
 				+ "WHERE " + KEY + "=?";
 		int result = jdbcTemplate.update(sql, mf.getIdUsr(), mf.getIdPro(), mf.getIdEmp(), mf.getIdPropia(),
 				mf.getIdCat(), mf.getIdSub(), mf.getIdPais(), mf.getIdFor(), mf.getIdEst(), mf.getIdRol(),
-				mf.getNombre(), mf.getRuta(), mf.getDescripcion(), mf.getPeso(), mf.isPrincipal(), mf.isSlide(),
-				mf.getExtension(), mf.getFechaCreacion(), mf.getCreadoPor(), mf.getFechaModificacion(),
+				mf.getIdMar(), mf.getNombre(), mf.getRuta(), mf.getDescripcion(), mf.getPeso(), mf.isPrincipal(),
+				mf.isSlide(), mf.getExtension(), mf.getFechaCreacion(), mf.getCreadoPor(), mf.getFechaModificacion(),
 				mf.getModificadoPor(), mf.getIdFot());
 		LocalLogger.update(TABLA, mf, request);
 		return result;
@@ -193,6 +199,7 @@ public class FotoDAOImpl implements FotoDAO {
 		mf.setIdFor(rs.getInt("idFor"));
 		mf.setIdEst(rs.getInt("idEst"));
 		mf.setIdRol(rs.getInt("idRol"));
+		mf.setIdMar(rs.getInt("idMar"));
 		mf.setNombre(rs.getString("nombre"));
 		mf.setRuta(rs.getString("ruta"));
 		mf.setDescripcion(rs.getString("descripcion"));

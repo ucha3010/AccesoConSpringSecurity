@@ -15,6 +15,7 @@ public class ModelFoto {
 	private int idFor;
 	private int idEst;
 	private int idRol;
+	private int idMar;
 	private String nombre;
 	private String ruta;
 	private String descripcion;
@@ -204,6 +205,21 @@ public class ModelFoto {
 	}
 
 	/**
+	 * @return the idMar
+	 */
+	public int getIdMar() {
+		return idMar;
+	}
+
+	/**
+	 * @param idMar
+	 *            the idMar to set
+	 */
+	public void setIdMar(int idMar) {
+		this.idMar = idMar;
+	}
+
+	/**
 	 * @return the nombre
 	 */
 	public String getNombre() {
@@ -377,10 +393,10 @@ public class ModelFoto {
 	public String toString() {
 		return "ModelFoto [idFot=" + idFot + ", idUsr=" + idUsr + ", idPro=" + idPro + ", idEmp=" + idEmp
 				+ ", idPropia=" + idPropia + ", idCat=" + idCat + ", idSub=" + idSub + ", idPais=" + idPais + ", idFor="
-				+ idFor + ", idEst=" + idEst + ", idRol=" + idRol + ", nombre=" + nombre + ", ruta=" + ruta
-				+ ", descripcion=" + descripcion + ", peso=" + peso + ", principal=" + principal + ", slide=" + slide
-				+ ", extension=" + extension + ", fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor
-				+ ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
+				+ idFor + ", idEst=" + idEst + ", idRol=" + idRol + ", idMar=" + idMar + ", nombre=" + nombre
+				+ ", ruta=" + ruta + ", descripcion=" + descripcion + ", peso=" + peso + ", principal=" + principal
+				+ ", slide=" + slide + ", extension=" + extension + ", fechaCreacion=" + fechaCreacion + ", creadoPor="
+				+ creadoPor + ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

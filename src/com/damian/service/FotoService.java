@@ -32,6 +32,8 @@ public interface FotoService {
 
 	public List<Foto> findByIdRol(int idRol);
 
+	public List<Foto> findByIdMar(int idMar);
+
 	public List<Foto> findBySlide();
 
 	public int save(Foto foto, MultipartFile file, HttpServletRequest request);

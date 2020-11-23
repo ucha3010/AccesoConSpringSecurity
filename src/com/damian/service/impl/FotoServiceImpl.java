@@ -82,6 +82,11 @@ public class FotoServiceImpl implements FotoService {
 	}
 
 	@Override
+	public List<Foto> findByIdMar(int idMar) {
+		return fotoDAO.findByIdMar(idMar);
+	}
+
+	@Override
 	public List<Foto> findBySlide() {
 		return fotoDAO.findBySlide();
 	}
@@ -107,6 +112,11 @@ public class FotoServiceImpl implements FotoService {
 				id = foto.getEmpresaPropia().getIdPropia();
 				fotos = findByIdPropia(id);
 				llamada = ConstantesLocales.EMPRESA_PROPIAS;
+			}
+			if (foto.getMarca() != null && foto.getMarca().getIdMar() != 0) {
+				id = foto.getMarca().getIdMar();
+				fotos = findByIdMar(id);
+				llamada = ConstantesLocales.MARCAS;
 			}
 			if (foto.isSlide()) {
 				llamada = "slide";
@@ -183,6 +193,10 @@ public class FotoServiceImpl implements FotoService {
 			if (foto.getEmpresaPropia() != null && foto.getEmpresaPropia().getIdPropia() != 0) {
 				idSalida = foto.getEmpresaPropia().getIdPropia();
 				ruta = Ruta(ConstantesLocales.EMPRESA_PROPIAS, idSalida, request);
+			}
+			if (foto.getMarca() != null && foto.getMarca().getIdMar() != 0) {
+				idSalida = foto.getMarca().getIdMar();
+				ruta = Ruta(ConstantesLocales.MARCAS, idSalida, request);
 			}
 			if (foto.isSlide()) {
 				ruta = Ruta("slide", idSalida, request);
