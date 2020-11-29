@@ -181,6 +181,19 @@ public class ProductoDAOImpl implements ProductoDAO {
 		return pList;
 	}
 
+	@Override
+	public List<Producto> findAllReducedData() {
+		List<ModelProducto> mpList = jdbcTemplate.query(
+				"SELECT idPro, marca, modelo, precioVenta, nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU FROM "
+						+ TABLA,
+				BeanPropertyRowMapper.newInstance(ModelProducto.class));
+		List<Producto> pList = new ArrayList<>();
+		for (ModelProducto mp : mpList) {
+			pList.add(converterProducto.convert(mp));
+		}
+		return pList;
+	}
+
 	private List<Producto> lista(String sql) {
 		List<ModelProducto> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelProducto.class));
 		List<Producto> eList = new ArrayList<>();

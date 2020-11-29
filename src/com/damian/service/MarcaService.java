@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Marca;
 
 public interface MarcaService {
@@ -14,7 +15,7 @@ public interface MarcaService {
 
 	void save(Marca marca, HttpServletRequest request);
 
-	void delete(int id, HttpServletRequest request);
+	void delete(int id, HttpServletRequest request) throws NotEmptyException;
 
 	List<Marca> findByMarcaNombre(String nombre);
 

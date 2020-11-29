@@ -260,6 +260,11 @@ public class ProductoServiceImpl implements ProductoService {
 	public List<Producto> findSearchAll() {
 		return productoDAO.findSearchAll();
 	}
+	
+	@Override
+	public List<Producto> findAllReducedData() {
+		return productoDAO.findAllReducedData();
+	}
 
 	@Override
 	public List<Producto> findProductosSinOferta(List<Producto> productos, List<AdministracionOfertas> ofertas,

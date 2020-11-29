@@ -30,6 +30,8 @@ public interface ProductoService {
 	public FrontProductoStock fillFrontProductoStock(Producto producto);
 
 	public List<Producto> findSearchAll();
+	
+	public List<Producto> findAllReducedData();
 
 	public List<Producto> findProductosSinOferta(List<Producto> productos, List<AdministracionOfertas> ofertas,
 			List<AdministracionOfertas> campanias);

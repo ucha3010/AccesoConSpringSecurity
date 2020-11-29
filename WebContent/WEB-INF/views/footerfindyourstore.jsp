@@ -44,7 +44,6 @@
 					</div>
 					<div class="col-xs-6">
 						<img class="w-100" src='<c:url value="/resources/imgs/empresaPropias/${empresaPropias[0].idPropia}/${empresaPropias[0].foto.nombre}"/>' alt="mapa" id="fotoMapa">
-<%-- 						<img src='<c:url value="/resources/imgs/slide/0/${foto.nombre}"/>' alt="${foto.descripcion}"> --%>	
 					</div>
 				</div>
 			</div>

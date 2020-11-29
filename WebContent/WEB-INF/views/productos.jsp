@@ -57,20 +57,20 @@
 		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="Products" /></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
-				<div class="col-sm-3 col-md-2">
+				<div class="col-sm-2 col-md-2">
 					<input type="text" id="formulario" class="form-control">
 					<script>
 						const formulario = document.querySelector('#formulario');
 						formulario.addEventListener('keyup', filtrar);
 					</script>
 				</div>
-				<div class="col-sm-1 col-md-3">
+				<div class="col-sm-1 col-md-1">
 					<div class="dropdown collapse resultadosBusqueda">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-3">
+				<div class="col-sm-2">
 					<c:if test="${not empty producto_agregado}">
 						<span style="color: green;">
 							<fmt:message key="Product.added" />
@@ -81,6 +81,11 @@
 							<fmt:message key="Product.deleted" />
 						</span>
 					</c:if>
+				</div>
+				<div class="col-sm-2">
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/marca'/>"'>
+						<fmt:message key="label.Brands" />
+					</button>
 				</div>
 				<div class="col-sm-2">
 					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/administrar/ofertas'/>"'>
@@ -103,20 +108,25 @@
 						formulario.addEventListener('keyup', filtrar);
 					</script>
 				</div>
-				<div class="col-sm-3 col-md-6">
+				<div class="col-sm-2 col-md-3">
 					<div class="dropdown collapse resultadosBusqueda">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-3 col-md-2">
+				<div class="col-sm-2">
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/marca'/>"'>
+						<fmt:message key="label.Brands" />
+					</button>
+				</div>
+				<div class="col-sm-2">
 					<sec:authorize access="hasAnyRole('ROL_USUARIO')">
 						<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/administrar/ofertas'/>"'>
 							<fmt:message key="label.Offers.admin" />
 						</button>
 					</sec:authorize>
 				</div>
-				<div class="col-sm-3 col-md-2  navbar-right">
+				<div class="col-sm-3 navbar-right">
 				</div>
 			</div>
 		</sec:authorize>

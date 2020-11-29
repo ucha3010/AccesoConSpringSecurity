@@ -48,6 +48,7 @@
 		<security:intercept-url pattern="/formaPago" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/formaPago/**" access="hasAnyRole({'ROL_ROOT'})" />
 		<security:intercept-url pattern="/foto/**" access="permitAll" />
+		<security:intercept-url pattern="/marca/**" access="permitAll" />
 		<security:intercept-url pattern="/preferenciaUsuario" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/preferenciaUsuario/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/private/**" access="isAuthenticated()" />
