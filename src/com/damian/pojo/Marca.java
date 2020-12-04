@@ -4,9 +4,15 @@ public class Marca {
 
 	private int idMar;
 	private String nombre;
+	private Foto foto;
 
 	public Marca() {
 
+	}
+
+	public Marca(int idMar) {
+		super();
+		this.idMar = idMar;
 	}
 
 	/**
@@ -37,6 +43,21 @@ public class Marca {
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	/**
+	 * @return the foto
+	 */
+	public Foto getFoto() {
+		return foto;
+	}
+
+	/**
+	 * @param foto
+	 *            the foto to set
+	 */
+	public void setFoto(Foto foto) {
+		this.foto = foto;
 	}
 
 	/*

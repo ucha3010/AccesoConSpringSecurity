@@ -9,6 +9,7 @@ import com.damian.pojo.EmpresaPropia;
 import com.damian.pojo.Estado;
 import com.damian.pojo.FormaPago;
 import com.damian.pojo.Foto;
+import com.damian.pojo.Marca;
 import com.damian.pojo.Pais;
 import com.damian.pojo.Producto;
 import com.damian.pojo.Rol;
@@ -59,6 +60,9 @@ public class ConverterFoto {
 		if (mf.getIdRol() != 0) {
 			f.setRol(new Rol(mf.getIdRol()));
 		}
+		if (mf.getIdMar() != 0) {
+			f.setMarca(new Marca(mf.getIdMar()));
+		}
 		f.setNombre(mf.getNombre());
 		f.setRuta(mf.getRuta());
 		f.setDescripcion(mf.getDescripcion());
@@ -106,6 +110,9 @@ public class ConverterFoto {
 		}
 		if (f.getRol() != null) {
 			mf.setIdRol(f.getRol().getIdRol());
+		}
+		if (f.getMarca() != null) {
+			mf.setIdMar(f.getMarca().getIdMar());
 		}
 		mf.setNombre(f.getNombre());
 		mf.setRuta(f.getRuta());

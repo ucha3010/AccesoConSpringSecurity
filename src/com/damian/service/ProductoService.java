@@ -47,6 +47,9 @@ public interface ProductoService {
 
 	public List<Producto> findByIdSubModel(int idSub);
 
+	public List<Producto> findByMarcaExacta(String nombre);
+	
 	public int getMaxId();
+
 
 }

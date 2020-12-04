@@ -48,6 +48,11 @@ public class Producto {
 	 */
 	private String campania;
 
+	/**
+	 * Sólo usado cuando agrego una marca desde Agregar producto
+	 */
+	private String nombreMarca;
+
 	public Producto() {
 
 	}
@@ -537,6 +542,21 @@ public class Producto {
 	 */
 	public void setCampania(String campania) {
 		this.campania = campania;
+	}
+
+	/**
+	 * @return the nombreMarca
+	 */
+	public String getNombreMarca() {
+		return nombreMarca;
+	}
+
+	/**
+	 * @param nombreMarca
+	 *            the nombreMarca to set
+	 */
+	public void setNombreMarca(String nombreMarca) {
+		this.nombreMarca = nombreMarca;
 	}
 
 	/*

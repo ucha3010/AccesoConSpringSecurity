@@ -69,6 +69,7 @@
 									<th class="extraAdmin-th"></th>
 								</sec:authorize>
 								<th><fmt:message key="label.brand" /></th>
+								<th class="min-width-160 cursor-text zindex-100" colspan="2"><fmt:message key="label.Pictures" /></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -85,6 +86,28 @@
 										</td>
 									</sec:authorize>
 									<td><c:out value="${marca.nombre}" /></td>
+									<td class="extraAdmin-td">
+										<a title="<fmt:message key='label.Pictures' />" href='<c:url value='/foto/marca/${marca.idMar}' />'>
+											<span class="glyphicon glyphicon-picture tamanio_imagen zindex-1"></span>
+										</a>
+									</td>
+									<td class="extraAdmin-td">
+										<c:if test="${(not empty marca.foto)}">
+											<a href="#foto${marca.idMar}" data-toggle="modal">
+												<img src='<c:url value="/resources/imgs/marcas/${marca.idMar}/${marca.foto.nombre}"/>' class="width-50">
+											</a>
+											<div class="modal fade" id="foto${marca.idMar}">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+															<h4 class="modal-title"><img src='<c:url value="/resources/imgs/marcas/${marca.idMar}/${marca.foto.nombre}"/>' class="justify-content-center"></h4>
+														</div>
+													</div>
+												</div>
+											</div>
+										</c:if>
+									</td>
 							    </tr>
 							</c:forEach>
 						</tbody>

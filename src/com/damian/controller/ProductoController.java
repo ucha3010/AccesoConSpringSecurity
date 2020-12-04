@@ -2,6 +2,7 @@ package com.damian.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +16,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.exceptions.NotEmptyException;
+import com.damian.pojo.Marca;
 import com.damian.pojo.Producto;
 import com.damian.pojo.front.FrontProductoStock;
 import com.damian.service.CategoriaService;
 import com.damian.service.IndexService;
+import com.damian.service.MarcaService;
 import com.damian.service.PaginacionService;
 import com.damian.service.ProductoService;
 
@@ -34,6 +37,9 @@ public class ProductoController {
 
 	@Autowired
 	private IndexService indexService;
+
+	@Autowired
+	private MarcaService marcaService;
 
 	@Autowired
 	private PaginacionService paginacionService;
@@ -69,6 +75,7 @@ public class ProductoController {
 		}
 		modelAndView.addObject("producto", producto);
 		modelAndView.addObject("categorias", categoriaService.findAll());
+		modelAndView.addObject("marcas", marcaService.findAll());
 		modelAndView.setViewName("producto");
 		return modelAndView;
 	}
@@ -118,6 +125,22 @@ public class ProductoController {
 
 		productoService.saveProductoStock(frontProductoStock, request);
 		return "redirect:/producto/all/null/0/100";
+	}
+
+	@RequestMapping(value = { "/producto/saveMarca" }, method = RequestMethod.POST)
+	public ModelAndView saveMarca(@ModelAttribute("producto") Producto producto, BindingResult result,
+			ModelAndView modelAndView, RedirectAttributes ra, HttpServletRequest request) {
+
+		if (producto != null && StringUtils.isNotBlank(producto.getNombreMarca())) {
+			Marca marca = new Marca();
+			marca.setNombre(producto.getNombreMarca());
+			marcaService.save(marca, request);
+		}
+		modelAndView.addObject("producto", producto);
+		modelAndView.addObject("categorias", categoriaService.findAll());
+		modelAndView.addObject("marcas", marcaService.findAll());
+		modelAndView.setViewName("producto");
+		return modelAndView;
 	}
 
 }

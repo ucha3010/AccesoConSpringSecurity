@@ -8,6 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.damian.service.EmpresaPropiaService;
 import com.damian.service.IndexService;
+import com.damian.service.MarcaService;
 
 @Controller
 // los atributos que pueden mantenerse en sesión y verse en distintas páginas
@@ -19,6 +20,9 @@ public class FooterController {
 
 	@Autowired
 	private EmpresaPropiaService empresaPropiaService;
+
+	@Autowired
+	private MarcaService marcaService;
 
 	@RequestMapping("/footer/aboutus")
 	public ModelAndView getaboutus(ModelAndView modelAndView) throws Exception {
@@ -68,6 +72,7 @@ public class FooterController {
 
 	@RequestMapping("/footer/brands")
 	public ModelAndView getbrands(ModelAndView modelAndView) throws Exception {
+		modelAndView.addObject("marcas", marcaService.findAll());
 		return fillModelAndView("brands", "footerbrands", modelAndView);
 	}
 

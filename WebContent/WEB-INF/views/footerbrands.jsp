@@ -22,7 +22,20 @@
 				<h1><fmt:message key="label.Brands" /></h1>
 			</div>
 		</div>
+		
+		<div class="row">
+			<div class="col-md-12">
+				<c:forEach items="${marcas}" var="marca">
+					<c:if test="${(not empty marca.foto)}">
+						<a title="${marca.nombre}" onclick='location.href="<c:url value='/......' />"'><!-- TODO DAMIAN poner bien esta ruta cuando lo tenga hecho -->
+							<img src='<c:url value="/resources/imgs/marcas/${marca.idMar}/${marca.foto.nombre}"/>' class="w-20 rounded" alt="${marca.nombre}">
+						</a>
+					</c:if>
+				</c:forEach>
+			</div>
+		</div>
 	</div>
+	
 	<div class="row">
 		<div class="col-xs-1">
 		</div>

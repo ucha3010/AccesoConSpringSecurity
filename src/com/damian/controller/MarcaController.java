@@ -1,7 +1,11 @@
 package com.damian.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.Marca;
-import com.damian.service.MarcaService;
 import com.damian.service.IndexService;
+import com.damian.service.MarcaService;
 
 @Controller
 @SessionAttributes({ "resultado", "estoy", "errorUsuario", "idUsrLogged", "nameUsrLogged", "prinPicUsr", "prefUsr" })
@@ -77,6 +81,17 @@ public class MarcaController {
 		}
 		return "redirect:/marca";
 
+	}
+
+	@RequestMapping("/marca/nombreParcial/{nombre}")
+	public ModelAndView getMarcaByNombre(ModelAndView modelAndView, @PathVariable("nombre") String nombre) {
+		List<Marca> marcaList = new ArrayList<>();
+		if (StringUtils.isNotBlank(nombre)) {
+			marcaList = marcaService.findByMarcaNombre(nombre);
+		}
+		modelAndView.addObject("marcas", marcaList);
+		modelAndView.setViewName("marca");
+		return modelAndView;
 	}
 
 }

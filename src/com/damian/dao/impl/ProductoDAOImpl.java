@@ -194,6 +194,13 @@ public class ProductoDAOImpl implements ProductoDAO {
 		return pList;
 	}
 
+	@Override
+	public List<Producto> findByMarcaExacta(String nombre) {
+		String sql = "SELECT * FROM " + TABLA + " WHERE marca = '" + nombre + "'";
+
+		return lista(sql);
+	}
+
 	private List<Producto> lista(String sql) {
 		List<ModelProducto> mpList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(ModelProducto.class));
 		List<Producto> eList = new ArrayList<>();

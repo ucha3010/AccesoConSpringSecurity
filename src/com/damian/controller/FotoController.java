@@ -18,11 +18,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.pojo.EmpresaPropia;
 import com.damian.pojo.Foto;
+import com.damian.pojo.Marca;
 import com.damian.pojo.Producto;
 import com.damian.pojo.Usuario;
 import com.damian.service.EmpresaPropiaService;
 import com.damian.service.FotoService;
 import com.damian.service.IndexService;
+import com.damian.service.MarcaService;
 import com.damian.service.ProductoService;
 import com.damian.service.UsuarioService;
 
@@ -30,15 +32,18 @@ import com.damian.service.UsuarioService;
 @SessionAttributes({ "resultado", "estoy", "roles", "prinPicUsr" })
 
 public class FotoController {
-	
+
 	@Autowired
 	private EmpresaPropiaService empresaPropiaService;
 
 	@Autowired
 	private FotoService fotoService;
-	
+
 	@Autowired
 	private IndexService indexService;
+
+	@Autowired
+	private MarcaService marcaService;
 
 	@Autowired
 	private ProductoService productoService;
@@ -91,7 +96,7 @@ public class FotoController {
 	public ModelAndView getSlideFotos(ModelAndView modelAndView) {
 
 		int idUsr = indexService.idUserLogged(modelAndView);
-		if(idUsr != 0) {
+		if (idUsr != 0) {
 			Usuario usuario = new Usuario();
 			usuario.setIdUsr(idUsr);
 			modelAndView.addObject("usuario", usuario);
@@ -115,6 +120,19 @@ public class FotoController {
 		modelAndView.addObject("foto", foto);
 		modelAndView.addObject("estoy", "empresaPropiaFotoUbicacion");
 		modelAndView.setViewName("empresaPropiaFotoUbicacion");
+		return modelAndView;
+	}
+
+	@RequestMapping("/foto/marca/{idMar}")
+	public ModelAndView getMarcaFoto(ModelAndView modelAndView, @PathVariable("idMar") int idMar) {
+		Marca marca = marcaService.findById(idMar);
+		modelAndView.addObject("marca", marca);
+		modelAndView.addObject("fotos", fotoService.findByIdMar(idMar));
+		Foto foto = new Foto();
+		foto.setMarca(marca);
+		modelAndView.addObject("foto", foto);
+		modelAndView.addObject("estoy", "marcaFoto");
+		modelAndView.setViewName("marcaFoto");
 		return modelAndView;
 	}
 
@@ -151,6 +169,14 @@ public class FotoController {
 		return "redirect:/foto/empresaPropia/" + foto.getEmpresaPropia().getIdPropia();
 	}
 
+	@RequestMapping(value = { "/foto/marca/save" }, method = RequestMethod.POST)
+	public String saveFotoMarca(@RequestParam("file") MultipartFile file, @ModelAttribute("foto") Foto foto,
+			RedirectAttributes ra, HttpServletRequest request) {
+
+		saveFoto(foto, file, request, ra);
+		return "redirect:/foto/marca/" + foto.getMarca().getIdMar();
+	}
+
 	@RequestMapping("/foto/usuarioLogged/delete/{idFot}")
 	public String deleteUsuario(@PathVariable("idFot") int idFot, RedirectAttributes ra, HttpServletRequest request) {
 
@@ -179,11 +205,21 @@ public class FotoController {
 	}
 
 	@RequestMapping("/foto/empresaPropia/delete/{idFot}")
-	public String deleteEmpresaPropia(@PathVariable("idFot") int idFot, RedirectAttributes ra, HttpServletRequest request) {
+	public String deleteEmpresaPropia(@PathVariable("idFot") int idFot, RedirectAttributes ra,
+			HttpServletRequest request) {
 
 		Foto foto = fotoService.delete(idFot, request);
 		ra.addFlashAttribute("foto_eliminada", "foto_eliminada");
 		return "redirect:/foto/empresaPropia/" + foto.getEmpresaPropia().getIdPropia();
+
+	}
+
+	@RequestMapping("/foto/marca/delete/{idFot}")
+	public String deleteMarca(@PathVariable("idFot") int idFot, RedirectAttributes ra, HttpServletRequest request) {
+
+		Foto foto = fotoService.delete(idFot, request);
+		ra.addFlashAttribute("foto_eliminada", "foto_eliminada");
+		return "redirect:/foto/marca/" + foto.getMarca().getIdMar();
 
 	}
 
@@ -204,7 +240,7 @@ public class FotoController {
 		return "redirect:/foto/producto/" + foto.getProducto().getIdPro();
 
 	}
-	
+
 	private void saveFoto(Foto foto, MultipartFile file, HttpServletRequest request, RedirectAttributes ra) {
 
 		int agregada = 0;
@@ -216,7 +252,7 @@ public class FotoController {
 		} else {
 			ra.addFlashAttribute("foto_agregada", false);
 		}
-		
+
 	}
 
 }

@@ -317,6 +317,11 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
+	public List<Producto> findByMarcaExacta(String nombre) {
+		return productoDAO.findByMarcaExacta(nombre);
+	}
+
+	@Override
 	public int getMaxId() {
 		return productoDAO.getMaxId();
 	}

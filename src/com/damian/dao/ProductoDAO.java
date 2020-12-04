@@ -30,4 +30,6 @@ public interface ProductoDAO {
 	
 	public List<Producto> findAllReducedData();
 
+	public List<Producto> findByMarcaExacta(String nombre);
+
 }
