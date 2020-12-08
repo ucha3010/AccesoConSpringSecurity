@@ -1,0 +1,1 @@
+Tue Dec 08 23:57:09 CET 2020 - UPDATE [pepe] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=1, tema=tema02, botonFavorito=default, recibirPublicidad=false]

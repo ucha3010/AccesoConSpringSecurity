@@ -164,11 +164,12 @@
 											<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/producto/${producto.idPro}' />"'>
 												<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
 											</a>
-											<sec:authorize access="hasAnyRole('ROL_ROOT')">
-												<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${producto.idPro})">
-													<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-												</a>
-											</sec:authorize>
+											<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${producto.idPro})">
+												<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+											</a>
+											<a title="<fmt:message key='label.Filters' />" onclick='location.href="<c:url value='/filtro/nuevo/${producto.idPro}/${paginacion.actual}/${paginacion.registrosPorPagina}' />"' class="cursor-pointer">
+												<img src='<c:url value="/resources/imgs/filtro.png"/>' class="tamanio_imagen">
+											</a>
 										</td>
 									</sec:authorize>
 									<td><c:out value="${producto[nameColSelect]}" /></td>
@@ -260,16 +261,21 @@
 										<div class="modal-body">
 							            	<div class="col-xs-4">								
 												<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">	
-									            	<div class="col-xs-6">
+									            	<div class="col-xs-4">
 														<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/producto/${producto.idPro}' />"' class="cursor-pointer">
 															<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
 														</a>								
 													</div>
-										            <div class="col-xs-6">
+										            <div class="col-xs-4">
 														<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${producto.idPro})" class="cursor-pointer">
 															<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
 														</a>	
-													</div>									
+													</div>	
+										            <div class="col-xs-4">
+														<a title="<fmt:message key='label.Filters' />" onclick='location.href="<c:url value='/filtro/nuevo/${producto.idPro}/${paginacion.actual}/${paginacion.registrosPorPagina}' />"' class="cursor-pointer">
+															<img src='<c:url value="/resources/imgs/filtro.png"/>' class="tamanio_imagen">
+														</a>
+										            </div>								
 												</sec:authorize>
 											</div>
 								            <div class="col-xs-2">	

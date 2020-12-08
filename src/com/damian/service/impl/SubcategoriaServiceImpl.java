@@ -10,14 +10,19 @@ import org.springframework.stereotype.Service;
 
 import com.damian.dao.SubcategoriaDAO;
 import com.damian.exceptions.NotEmptyException;
+import com.damian.pojo.FiltroTitulo;
 import com.damian.pojo.Producto;
 import com.damian.pojo.Subcategoria;
+import com.damian.service.FiltroTituloService;
 import com.damian.service.ProductoService;
 import com.damian.service.SubcategoriaService;
 import com.damian.utils.Utils;
 
 @Service
 public class SubcategoriaServiceImpl implements SubcategoriaService {
+
+	@Autowired
+	private FiltroTituloService filtroTituloService;
 
 	@Autowired
 	private ProductoService productoService;
@@ -63,6 +68,10 @@ public class SubcategoriaServiceImpl implements SubcategoriaService {
 		List<Producto> productoList = productoService.findByIdSubModel(id);
 		if (productoList != null && !productoList.isEmpty()) {
 			throw new NotEmptyException("Tiene asociado productos");
+		}
+		List<FiltroTitulo> filtroTituloList = filtroTituloService.findByIdSubModel(id);
+		if (filtroTituloList != null && !filtroTituloList.isEmpty()) {
+			throw new NotEmptyException("Tiene asociado filtros");
 		}
 		return subcategoriaDAO.delete(id, request);
 	}

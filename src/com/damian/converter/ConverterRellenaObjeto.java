@@ -16,6 +16,8 @@ import com.damian.dao.EmpresaDAO;
 import com.damian.dao.EmpresaPropiaDAO;
 import com.damian.dao.EstadoDAO;
 import com.damian.dao.FacturaDAO;
+import com.damian.dao.FiltroNombreDAO;
+import com.damian.dao.FiltroTituloDAO;
 import com.damian.dao.FormaPagoDAO;
 import com.damian.dao.PaisDAO;
 import com.damian.dao.ProductoDAO;
@@ -35,6 +37,8 @@ import com.damian.dao.model.ModelEmpresa;
 import com.damian.dao.model.ModelEmpresaPropia;
 import com.damian.dao.model.ModelEstado;
 import com.damian.dao.model.ModelFactura;
+import com.damian.dao.model.ModelFiltroNombre;
+import com.damian.dao.model.ModelFiltroTitulo;
 import com.damian.dao.model.ModelFormaPago;
 import com.damian.dao.model.ModelProducto;
 import com.damian.dao.model.ModelRol;
@@ -50,6 +54,8 @@ import com.damian.pojo.Empresa;
 import com.damian.pojo.EmpresaPropia;
 import com.damian.pojo.Estado;
 import com.damian.pojo.Factura;
+import com.damian.pojo.FiltroNombre;
+import com.damian.pojo.FiltroTitulo;
 import com.damian.pojo.FormaPago;
 import com.damian.pojo.Producto;
 import com.damian.pojo.ProductoEmpresa;
@@ -102,6 +108,12 @@ public class ConverterRellenaObjeto {
 
 	@Autowired
 	private FacturaDAO facturaDAO;
+
+	@Autowired
+	private FiltroNombreDAO filtroNombreDAO;
+
+	@Autowired
+	private FiltroTituloDAO filtroTituloDAO;
 
 	@Autowired
 	private FormaPagoDAO formaPagoDAO;
@@ -338,6 +350,20 @@ public class ConverterRellenaObjeto {
 
 		EmpresaPropia empresaPropia = empresaPropiaDAO.findByIdModel(mde.getIdPropia());
 		de.setEmpresaPropia(empresaPropia);
+
+	}
+
+	public void rellenaFiltroNombre(FiltroNombre fn, ModelFiltroNombre mfn) {
+		FiltroTitulo filtroTitulo = filtroTituloDAO.findById(mfn.getIdTitulo());
+		fn.setFiltroTitulo(filtroTitulo);
+
+	}
+
+	public void rellenaFiltroTitulo(FiltroTitulo ft, ModelFiltroTitulo mft) {
+		List<FiltroNombre> filtroNombreList = filtroNombreDAO.findByIdTituloModel(mft.getIdTitulo());
+		ft.setFiltroNombres(filtroNombreList);
+		Subcategoria subcategoria = subcategoriaDAO.findByIdModel(mft.getIdSub());
+		ft.setSubcategoria(subcategoria);
 
 	}
 

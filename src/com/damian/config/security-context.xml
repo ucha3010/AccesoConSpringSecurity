@@ -44,6 +44,7 @@
 		<security:intercept-url pattern="/factura/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/factura/delete/**" access="hasAnyRole({'ROL_ROOT'})" />
 		<security:intercept-url pattern="/facturaEstado/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/filtro/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/footer/**" access="permitAll" />
 		<security:intercept-url pattern="/formaPago" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/formaPago/**" access="hasAnyRole({'ROL_ROOT'})" />
