@@ -12,6 +12,7 @@ public class FiltroNombre {
 	private String nombreGE;
 	private String nombreCA;
 	private String nombreEU;
+	private boolean seleccionado;
 
 	public FiltroNombre() {
 
@@ -165,6 +166,21 @@ public class FiltroNombre {
 	 */
 	public void setNombreEU(String nombreEU) {
 		this.nombreEU = nombreEU;
+	}
+
+	/**
+	 * @return the seleccionado
+	 */
+	public boolean isSeleccionado() {
+		return seleccionado;
+	}
+
+	/**
+	 * @param seleccionado
+	 *            the seleccionado to set
+	 */
+	public void setSeleccionado(boolean seleccionado) {
+		this.seleccionado = seleccionado;
 	}
 
 	/*

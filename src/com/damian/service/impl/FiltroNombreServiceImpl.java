@@ -8,14 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.damian.dao.FiltroNombreDAO;
+import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.FiltroNombre;
+import com.damian.pojo.ProductoFiltro;
 import com.damian.service.FiltroNombreService;
+import com.damian.service.ProductoFiltroService;
 
 @Service
 public class FiltroNombreServiceImpl implements FiltroNombreService {
 
 	@Autowired
 	private FiltroNombreDAO filtroNombreDAO;
+
+	@Autowired
+	private ProductoFiltroService productoFiltroService;
 
 	@Override
 	public List<FiltroNombre> findAll() {
@@ -38,7 +44,12 @@ public class FiltroNombreServiceImpl implements FiltroNombreService {
 	}
 
 	@Override
-	public int delete(int id, HttpServletRequest request) {
+	public int delete(int id, HttpServletRequest request) throws NotEmptyException {
+		
+		List<ProductoFiltro> productoFiltroList = productoFiltroService.findByIdNombre(id);
+		if(productoFiltroList != null && !productoFiltroList.isEmpty()) {
+			throw new NotEmptyException("Filtro utilizado en más de un producto");
+		}
 		return filtroNombreDAO.delete(id, request);
 	}
 

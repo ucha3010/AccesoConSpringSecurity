@@ -168,7 +168,7 @@
 												<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
 											</a>
 											<a title="<fmt:message key='label.Filters' />" onclick='location.href="<c:url value='/filtro/nuevo/${producto.idPro}/${paginacion.actual}/${paginacion.registrosPorPagina}' />"' class="cursor-pointer">
-												<img src='<c:url value="/resources/imgs/filtro.png"/>' class="tamanio_imagen">
+												<img src='<c:url value="/resources/imgs/filtro.jpg"/>' class="tamanio_imagen">
 											</a>
 										</td>
 									</sec:authorize>
@@ -273,7 +273,7 @@
 													</div>	
 										            <div class="col-xs-4">
 														<a title="<fmt:message key='label.Filters' />" onclick='location.href="<c:url value='/filtro/nuevo/${producto.idPro}/${paginacion.actual}/${paginacion.registrosPorPagina}' />"' class="cursor-pointer">
-															<img src='<c:url value="/resources/imgs/filtro.png"/>' class="tamanio_imagen">
+															<img src='<c:url value="/resources/imgs/filtro.jpg"/>' class="tamanio_imagen">
 														</a>
 										            </div>								
 												</sec:authorize>

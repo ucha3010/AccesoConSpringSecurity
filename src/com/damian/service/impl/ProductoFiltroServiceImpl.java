@@ -1,6 +1,7 @@
 package com.damian.service.impl;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class ProductoFiltroServiceImpl implements ProductoFiltroService {
 	}
 
 	@Override
-	public void save(int idPro, int idNombre, HttpServletRequest request) {
+	public int save(int idPro, int idNombre, HttpServletRequest request) {
 
 		Producto producto = new Producto();
 		producto.setIdPro(idPro);
@@ -45,12 +46,12 @@ public class ProductoFiltroServiceImpl implements ProductoFiltroService {
 		productoFiltro.setFiltroNombre(filtroNombre);
 		productoFiltro.setCreadoPor(Utils.getLoggedUser(request));
 		productoFiltro.setFechaCreacion(new Timestamp((new Date()).getTime()));
-		productoFiltroDAO.save(productoFiltro, request);
+		return productoFiltroDAO.save(productoFiltro, request);
 	}
 
 	@Override
-	public void update(ProductoFiltro productoFiltro, HttpServletRequest request) {
-		productoFiltroDAO.update(productoFiltro, request);
+	public int update(ProductoFiltro productoFiltro, HttpServletRequest request) {
+		return productoFiltroDAO.update(productoFiltro, request);
 	}
 
 	@Override
@@ -85,6 +86,34 @@ public class ProductoFiltroServiceImpl implements ProductoFiltroService {
 		ProductoFiltro pf = productoFiltroDAO.findByIdProAndIdNombre(idPro, idNombre);
 		rellenoFiltroTitulo(pf);
 		return pf;
+	}
+
+	@Override
+	public void marcarSeleccionados(List<FiltroTitulo> filtroTitulos, int idPro) {
+		if (filtroTitulos != null && !filtroTitulos.isEmpty()) {
+			List<ProductoFiltro> productoFiltroList = findByIdPro(idPro);
+			List<Integer> idNombres = new ArrayList<>();
+			if (productoFiltroList != null) {
+				for (ProductoFiltro pf : productoFiltroList) {
+					idNombres.add(pf.getFiltroNombre().getIdNombre());
+				}
+			}
+			for (FiltroTitulo ft : filtroTitulos) {
+				if (ft.getFiltroNombres() != null && !ft.getFiltroNombres().isEmpty()) {
+					for (FiltroNombre fn : ft.getFiltroNombres()) {
+						if (idNombres.contains(fn.getIdNombre())) {
+							fn.setSeleccionado(true);
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	@Override
+	public void deleteByIdPro(int idPro) {
+		productoFiltroDAO.deleteByIdPro(idPro);
 	}
 
 	private List<ProductoFiltro> rellenoFiltroTituloList(List<ProductoFiltro> productoFiltros) {

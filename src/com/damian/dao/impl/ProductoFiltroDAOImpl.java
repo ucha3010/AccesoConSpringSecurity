@@ -56,20 +56,24 @@ public class ProductoFiltroDAOImpl implements ProductoFiltroDAO {
 	}
 
 	@Override
-	public void save(ProductoFiltro productoFiltro, HttpServletRequest request) {
+	public int save(ProductoFiltro productoFiltro, HttpServletRequest request) {
 		ModelProductoFiltro mpe = converterProductoFiltro.convert(productoFiltro);
 		String sql = "INSERT INTO " + TABLA + " (idPro, idNombre, fechaCreacion, creadoPor)" + " VALUES (?, ?, ?, ?)";
-		jdbcTemplate.update(sql, mpe.getIdPro(), mpe.getIdNombre(), mpe.getFechaCreacion(), mpe.getCreadoPor());
+		int salida = jdbcTemplate.update(sql, mpe.getIdPro(), mpe.getIdNombre(), mpe.getFechaCreacion(),
+				mpe.getCreadoPor());
 		LocalLogger.save(TABLA, mpe, request);
+		return salida;
 	}
 
 	@Override
-	public void update(ProductoFiltro productoFiltro, HttpServletRequest request) {
+	public int update(ProductoFiltro productoFiltro, HttpServletRequest request) {
 		ModelProductoFiltro mpe = converterProductoFiltro.convert(productoFiltro);
 		String sql = "UPDATE " + TABLA + " SET fechaCreacion=?, creadoPor=? " + "WHERE " + KEY1 + "=? AND " + KEY2
 				+ "=?";
-		jdbcTemplate.update(sql, mpe.getFechaCreacion(), mpe.getCreadoPor(), mpe.getIdPro(), mpe.getIdNombre());
+		int salida = jdbcTemplate.update(sql, mpe.getFechaCreacion(), mpe.getCreadoPor(), mpe.getIdPro(),
+				mpe.getIdNombre());
 		LocalLogger.update(TABLA, mpe, request);
+		return salida;
 	}
 
 	@Override
@@ -131,6 +135,12 @@ public class ProductoFiltroDAOImpl implements ProductoFiltroDAO {
 			}
 
 		});
+	}
+
+	@Override
+	public void deleteByIdPro(int idPro) {
+		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY1 + "=?";
+		jdbcTemplate.update(sql, idPro);
 	}
 
 	private void ordenarPorNombre(List<ProductoFiltro> productoFiltros) {

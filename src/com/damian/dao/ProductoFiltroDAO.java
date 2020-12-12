@@ -10,9 +10,9 @@ public interface ProductoFiltroDAO {
 
 	public List<ProductoFiltro> findAll();
 
-	public void save(ProductoFiltro productoFiltro, HttpServletRequest request);
+	public int save(ProductoFiltro productoFiltro, HttpServletRequest request);
 
-	public void update(ProductoFiltro productoFiltro, HttpServletRequest request);
+	public int update(ProductoFiltro productoFiltro, HttpServletRequest request);
 
 	public void delete(int idPro, int idNombre, HttpServletRequest request);
 
@@ -25,5 +25,7 @@ public interface ProductoFiltroDAO {
 	public List<ProductoFiltro> findByIdNombreModel(int idNombre);
 
 	public ProductoFiltro findByIdProAndIdNombre(int idPro, int idNombre);
+
+	public void deleteByIdPro(int idPro);
 
 }

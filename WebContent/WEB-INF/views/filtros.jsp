@@ -12,6 +12,24 @@
 <head>
 	<title><fmt:message key="label.Filters" /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
+	<script type="text/javascript">
+		function confirmDeleteNombre(id){
+			if(confirm("<fmt:message key='Delete.message' />")){
+				var url = "<c:url value='/filtro/delete/nombre/"+id+"/${frontProductoFiltro.idPro}/${frontProductoFiltro.productoPaginaInicio}/${frontProductoFiltro.productoTotalPaginas}' />";
+				location.href=url;
+				return true;
+			}
+			return false;
+		}
+		function confirmDeleteTitulo(id){
+			if(confirm("<fmt:message key='Delete.message' />")){
+				var url = "<c:url value='/filtro/delete/titulo/"+id+"/${frontProductoFiltro.idPro}/${frontProductoFiltro.productoPaginaInicio}/${frontProductoFiltro.productoTotalPaginas}' />";
+				location.href=url;
+				return true;
+			}
+			return false;
+		}
+	</script>
 </head>
 <body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
@@ -28,7 +46,17 @@
 			<div class="col-xs-12 text-center">
 				<c:if test="${not empty filtro_guardado}">
 					<span style="color: green;">
-						<fmt:message key="Category.added" />
+						<fmt:message key="label.Filter.added" />
+					</span>
+				</c:if>
+				<c:if test="${not empty filtro_eliminado}">
+					<span style="color: green;">
+						<fmt:message key="label.Filter.deleted" />
+					</span>
+				</c:if>
+				<c:if test="${not empty filtro_asociado}">
+					<span style="color: orange;">
+						<fmt:message key="error.Filter.asociated" />
 					</span>
 				</c:if>
 			</div>
@@ -42,37 +70,55 @@
 			<div class="row">		
 				<div class="hidden-xs col-sm-3">
 				</div>
-				<div class="col-xs-12 col-sm-9">
+				<div class="col-xs-12 col-sm-7">
 					<label for="categoria"><fmt:message key="label.Add.filters.title" /></label>
 					<sf:input path="tituloNuevo" class="form-control" />
-				</div>	
+				</div>			
+				<div class="hidden-xs col-sm-2">
+				</div>
 			</div>
 			<div class="row">		
 				<div class="hidden-xs col-sm-3">
 				</div>
-				<div class="col-xs-12 col-sm-9">
+				<div class="col-xs-12 col-sm-7">
 					<label for="categoria"><fmt:message key="label.Add.filter.name" /></label>
 		        	<sf:select path="idTituloNuevo" class="form-control">
 		            	<sf:options items="${filtroTitulos}" itemValue="idTitulo" itemLabel="${nameColSelect}" />
 		        	</sf:select>
 					<sf:input path="nombreNuevo" class="form-control" />
-				</div>	
+				</div>			
+				<div class="hidden-xs col-sm-2">
+				</div>
 			</div>
 		
 			<br/>
 			<hr/>
 			<br/>
 			<div class="row">		
-				<div class="hidden-xs col-sm-3">
+				<div class="col-xs-1 col-sm-3">
 				</div>
-				<div class="col-xs-12 col-sm-9">
+				<div class="col-xs-11 col-sm-9">
 					<c:forEach items="${filtroTitulos}" var="titulo">
 						<div>
 							<label for="etiquetaTitulo"><c:out value="${titulo[nameColSelect]}" /></label>
+							<c:if test="${empty titulo.filtroNombres}">
+								<a title="<fmt:message key='Delete' />" onclick="return confirmDeleteTitulo(${titulo.idTitulo})" class="cursor-pointer">
+									<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+								</a>
+							</c:if>
 						</div>
 						<c:forEach items="${titulo.filtroNombres}" var="nombre">	
 							<div class="checkbox">
-								<label><sf:checkbox path="idNombres" /><c:out value="${nombre[nameColSelect]}" /></label>
+								<label>
+<%-- 									<sf:checkbox path="idNombres" value="${nombre.idNombre}" /> --%>
+									
+									<input type="checkbox" name="idNombres" value="${nombre.idNombre}" id="idNombres${nombre.idNombre}" <c:if test="${nombre.seleccionado}">checked="checked"</c:if> />
+									
+									<c:out value="${nombre[nameColSelect]}" />
+								</label>
+								<a title="<fmt:message key='Delete' />" onclick="return confirmDeleteNombre(${nombre.idNombre})" class="cursor-pointer">
+									<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+								</a>
 							</div>
 						</c:forEach>
 					</c:forEach>

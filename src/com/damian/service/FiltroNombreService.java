@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.FiltroNombre;
 
 public interface FiltroNombreService {
@@ -16,7 +17,7 @@ public interface FiltroNombreService {
 
 	public int update(FiltroNombre filtroNombre, HttpServletRequest request);
 
-	public int delete(int id, HttpServletRequest request);
+	public int delete(int id, HttpServletRequest request) throws NotEmptyException;
 
 	public int getMaxId();
 
