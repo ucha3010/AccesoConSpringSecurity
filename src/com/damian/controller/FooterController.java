@@ -1,11 +1,15 @@
 package com.damian.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.damian.pojo.AdministracionOfertas;
+import com.damian.service.AdministracionOfertasService;
 import com.damian.service.EmpresaPropiaService;
 import com.damian.service.IndexService;
 import com.damian.service.MarcaService;
@@ -16,17 +20,20 @@ import com.damian.service.MarcaService;
 public class FooterController {
 
 	@Autowired
-	private IndexService indexService;
+	private AdministracionOfertasService administracionOfertasService;
 
 	@Autowired
 	private EmpresaPropiaService empresaPropiaService;
+
+	@Autowired
+	private IndexService indexService;
 
 	@Autowired
 	private MarcaService marcaService;
 
 	@RequestMapping("/footer/aboutus")
 	public ModelAndView getaboutus(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("aboutus", "footeraboutus", modelAndView);
+		return fillModelAndView("aboutus", "frontaboutus", modelAndView);
 	}
 
 	@RequestMapping("/private/aboutus")
@@ -37,7 +44,7 @@ public class FooterController {
 	@RequestMapping("/footer/findyourstore")
 	public ModelAndView getfindyourstore(ModelAndView modelAndView) throws Exception {
 		modelAndView.addObject("empresaPropias", empresaPropiaService.findAll());
-		return fillModelAndView("findyourstore", "footerfindyourstore", modelAndView);
+		return fillModelAndView("findyourstore", "frontfindyourstore", modelAndView);
 	}
 
 	@RequestMapping("/private/findyourstore")
@@ -47,7 +54,7 @@ public class FooterController {
 
 	@RequestMapping("/footer/workwithus")
 	public ModelAndView getworkwithus(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("workwithus", "footerworkwithus", modelAndView);
+		return fillModelAndView("workwithus", "frontworkwithus", modelAndView);
 	}
 
 	@RequestMapping("/private/workwithus")
@@ -57,7 +64,7 @@ public class FooterController {
 
 	@RequestMapping("/footer/legal")
 	public ModelAndView getlegal(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("legal", "footerlegal", modelAndView);
+		return fillModelAndView("legal", "frontlegal", modelAndView);
 	}
 
 	@RequestMapping("/private/legal")
@@ -67,7 +74,7 @@ public class FooterController {
 
 	@RequestMapping("/footer/customerreviews")
 	public ModelAndView getcustomerreviews(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("customerreviews", "footercustomerreviews", modelAndView);
+		return fillModelAndView("customerreviews", "frontcustomerreviews", modelAndView);
 	}
 
 	@RequestMapping("/private/customerreviews")
@@ -77,7 +84,7 @@ public class FooterController {
 
 	@RequestMapping("/footer/howtobuy")
 	public ModelAndView gethowtobuy(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("howtobuy", "footerhowtobuy", modelAndView);
+		return fillModelAndView("howtobuy", "fronthowtobuy", modelAndView);
 	}
 
 	@RequestMapping("/private/howtobuy")
@@ -87,7 +94,7 @@ public class FooterController {
 
 	@RequestMapping("/footer/cookiespolicy")
 	public ModelAndView getcookiespolicy(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("cookiespolicy", "footercookiespolicy", modelAndView);
+		return fillModelAndView("cookiespolicy", "frontcookiespolicy", modelAndView);
 	}
 
 	@RequestMapping("/private/cookiespolicy")
@@ -97,7 +104,7 @@ public class FooterController {
 
 	@RequestMapping("/footer/shipments")
 	public ModelAndView getshipments(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("shipments", "footershipments", modelAndView);
+		return fillModelAndView("shipments", "frontshipments", modelAndView);
 	}
 
 	@RequestMapping("/private/shipments")
@@ -107,7 +114,7 @@ public class FooterController {
 
 	@RequestMapping("/footer/giftcard")
 	public ModelAndView getgiftcard(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("giftcard", "footergiftcard", modelAndView);
+		return fillModelAndView("giftcard", "frontgiftcard", modelAndView);
 	}
 
 	@RequestMapping("/private/giftcard")
@@ -118,7 +125,7 @@ public class FooterController {
 	@RequestMapping("/footer/brands")
 	public ModelAndView getbrands(ModelAndView modelAndView) throws Exception {
 		modelAndView.addObject("marcas", marcaService.findAll());
-		return fillModelAndView("brands", "footerbrands", modelAndView);
+		return fillModelAndView("brands", "frontbrands", modelAndView);
 	}
 
 	@RequestMapping("/private/brands")
@@ -128,7 +135,7 @@ public class FooterController {
 
 	@RequestMapping("/footer/membersclub")
 	public ModelAndView getmembersclub(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("membersclub", "footermembersclub", modelAndView);
+		return fillModelAndView("membersclub", "frontmembersclub", modelAndView);
 	}
 
 	@RequestMapping("/private/membersclub")
@@ -138,7 +145,7 @@ public class FooterController {
 
 	@RequestMapping("/footer/contact")
 	public ModelAndView getcontact(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("contact", "footercontact", modelAndView);
+		return fillModelAndView("contact", "frontcontact", modelAndView);
 	}
 
 	@RequestMapping("/private/contact")
@@ -148,7 +155,7 @@ public class FooterController {
 
 	@RequestMapping("/footer/Frequentquestions")
 	public ModelAndView getFrequentquestions(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("Frequentquestions", "footerFrequentquestions", modelAndView);
+		return fillModelAndView("Frequentquestions", "frontfrequentquestions", modelAndView);
 	}
 
 	@RequestMapping("/private/Frequentquestions")
@@ -158,7 +165,7 @@ public class FooterController {
 
 	@RequestMapping("/footer/refund")
 	public ModelAndView getrefund(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("refund", "footerrefund", modelAndView);
+		return fillModelAndView("refund", "frontrefund", modelAndView);
 	}
 
 	@RequestMapping("/private/refund")
@@ -168,7 +175,7 @@ public class FooterController {
 
 	@RequestMapping("/footer/guarantee")
 	public ModelAndView getguarantee(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("guarantee", "footerguarantee", modelAndView);
+		return fillModelAndView("guarantee", "frontguarantee", modelAndView);
 	}
 
 	@RequestMapping("/private/guarantee")
@@ -178,7 +185,12 @@ public class FooterController {
 
 	@RequestMapping("/footer/promotion1")
 	public ModelAndView getpromotion1(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("promotion1", "promotion1", modelAndView);
+		
+		List<AdministracionOfertas> ofertasList = administracionOfertasService.findByOfertas(0);
+		indexService.agregarFotos(ofertasList);
+		modelAndView.addObject("ofertas", ofertasList);
+		
+		return fillModelAndView("promotion1", "frontofertas", modelAndView);
 	}
 
 	@RequestMapping("/private/promotion1")

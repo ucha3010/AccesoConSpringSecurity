@@ -91,11 +91,12 @@ public class IndexServiceImpl implements IndexService {
 		return usuario.getIdUsr();
 	}
 
-	private void agregarFotos(List<AdministracionOfertas> administracionOfertasList) {
+	@Override
+	public void agregarFotos(List<AdministracionOfertas> administracionOfertasList) {
 		for (AdministracionOfertas ao : administracionOfertasList) {
 			List<Foto> fotos = fotoService.findByIdPro(ao.getProducto().getIdPro());
-			for(Foto f:fotos) {
-				if(f.isPrincipal()) {
+			for (Foto f : fotos) {
+				if (f.isPrincipal()) {
 					ao.getProducto().setNombreFotoPrincipal(f.getNombre());
 				}
 			}
