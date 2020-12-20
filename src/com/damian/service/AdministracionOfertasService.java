@@ -58,4 +58,6 @@ public interface AdministracionOfertasService {
 
 	public void orderNovedades(int idPro, int ordenNovedades, HttpServletRequest request);
 
+	public void fillFavoritos(List<AdministracionOfertas> ofertasList, int idUsr);
+
 }

@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.damian.dao.AdministracionOfertasDAO;
 import com.damian.pojo.AdministracionOfertas;
+import com.damian.pojo.Favorito;
 import com.damian.service.AdministracionOfertasService;
+import com.damian.service.FavoritoService;
 import com.damian.service.ProductoService;
 
 @Service
@@ -19,6 +21,9 @@ public class AdministracionOfertasServiceImpl implements AdministracionOfertasSe
 
 	@Autowired
 	private AdministracionOfertasDAO administracionOfertasDAO;
+
+	@Autowired
+	private FavoritoService favoritoService;
 
 	@Autowired
 	private ProductoService productoService;
@@ -329,6 +334,21 @@ public class AdministracionOfertasServiceImpl implements AdministracionOfertasSe
 		}
 		administracionOfertas.setOrdenNovedades(ordenNovedades);
 		administracionOfertasDAO.update(administracionOfertas, request);
+	}
+
+	@Override
+	public void fillFavoritos(List<AdministracionOfertas> administracionOfertasList, int idUsr) {
+		if (administracionOfertasList != null && !administracionOfertasList.isEmpty()) {
+			Favorito favorito;
+			for (AdministracionOfertas ao : administracionOfertasList) {
+				if (ao.getProducto() != null) {
+					favorito = favoritoService.findById(idUsr, ao.getProducto().getIdPro());
+					if (favorito != null && favorito.getIdPro() != 0) {
+						ao.getProducto().setFavorito(true);
+					}
+				}
+			}
+		}
 	}
 
 	private int updateOrDelete(AdministracionOfertas administracionOfertas, HttpServletRequest request) {

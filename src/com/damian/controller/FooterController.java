@@ -185,11 +185,12 @@ public class FooterController {
 
 	@RequestMapping("/footer/promotion1")
 	public ModelAndView getpromotion1(ModelAndView modelAndView) throws Exception {
-		
+
 		List<AdministracionOfertas> ofertasList = administracionOfertasService.findByOfertas(0);
 		indexService.agregarFotos(ofertasList);
+		administracionOfertasService.fillFavoritos(ofertasList, indexService.idUserLogged(modelAndView));
 		modelAndView.addObject("ofertas", ofertasList);
-		
+
 		return fillModelAndView("promotion1", "frontofertas", modelAndView);
 	}
 

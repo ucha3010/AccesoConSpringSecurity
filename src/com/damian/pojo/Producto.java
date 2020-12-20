@@ -40,6 +40,7 @@ public class Producto {
 	private List<ProductoFactura> productoFacturaList;
 	private List<Foto> fotos;
 	private String nombreFotoPrincipal; // no en BBDD
+	private boolean favorito; // no en BBDD
 	private String modificadoPor;
 	private Timestamp fechaModificacion;
 
@@ -497,6 +498,21 @@ public class Producto {
 	 */
 	public void setNombreFotoPrincipal(String nombreFotoPrincipal) {
 		this.nombreFotoPrincipal = nombreFotoPrincipal;
+	}
+
+	/**
+	 * @return the favorito
+	 */
+	public boolean isFavorito() {
+		return favorito;
+	}
+
+	/**
+	 * @param favorito
+	 *            the favorito to set
+	 */
+	public void setFavorito(boolean favorito) {
+		this.favorito = favorito;
 	}
 
 	/**

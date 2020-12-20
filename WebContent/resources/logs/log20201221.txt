@@ -1,0 +1,1 @@
+Mon Dec 21 00:27:47 CET 2020 - UPDATE [usuario] - table:preferenciausuario - ModelPreferenciaUsuario [idPrefUsr=83, tema=default, botonFavorito=cat, recibirPublicidad=true]

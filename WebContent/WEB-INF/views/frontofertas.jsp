@@ -33,19 +33,35 @@
 		
 		
 			<div class="col-xs-3">
-				<c:if test="${(not empty oferta.producto.nombreFotoPrincipal)}">
-					<a title="${oferta.producto[nameColSelect]}" onclick='location.href="<c:url value='/detalle/producto/${oferta.producto.idPro}' />"' class="cursor-pointer">
-						<img src='<c:url value="/resources/imgs/productos/${oferta.producto.idPro}/${oferta.producto.nombreFotoPrincipal}"/>' class="w-100 border-radius-10-porciento">
-					</a>
-					<c:out value="${oferta.precioSinOferta}"></c:out> // 
-					<c:out value="${oferta.precioConOferta}"></c:out> // 
-					<c:out value="${oferta.producto[nameColSelect]}"></c:out>
-<!-- 					TODO DAMIAN falta maquetar esto -->
-				</c:if>
-			</div>
-			<c:set var="count" value="${count + 1}" scope="page"/>
+				<div class="bloqueProducto">
+					<c:if test="${(not empty oferta.producto.nombreFotoPrincipal)}">
+						<div class="nombreProducto">
+							<c:out value="${oferta.producto[nameColSelect]}"/>
+						</div>
+						<c:if test="${oferta.producto.favorito}">
+						<img src='<c:url value="/resources/imgs/favoritos/${prefUsr.botonFavorito}-yes.png"/>' class="tamanio_imagen cursor-pointer">
+						</c:if>
+						<c:if test="${(not oferta.producto.favorito && not empty prefUsr.botonFavorito)}">
+						<img src='<c:url value="/resources/imgs/favoritos/${prefUsr.botonFavorito}-no.png"/>' class="tamanio_imagen cursor-pointer">
+						</c:if>
+						<div class="imagenProducto">
+							<a title="${oferta.producto[nameColSelect]}" onclick='location.href="<c:url value='/detalle/producto/${oferta.producto.idPro}' />"' class="cursor-pointer">
+								<h4 class="precioSinOferta"><fmt:formatNumber type="currency" value="${oferta.precioSinOferta}" /></h4>
+								<h2 class="precioConOferta"><fmt:formatNumber type="currency" value="${oferta.precioConOferta}" /></h2>
+								<img src='<c:url value="/resources/imgs/productos/${oferta.producto.idPro}/${oferta.producto.nombreFotoPrincipal}"/>' class="w-100 border-radius-10-porciento">
+							</a>
+							
+						</div>
+					</c:if>
+				</div>
+				<c:set var="count" value="${count + 1}" scope="page"/>
 		
-		<c:if test="${(count == 4)}">
+ 			<c:if test="${(count < 4)}"><%--cierro el div col-xs-3 --%>
+				</div>
+			</c:if>
+		
+		<c:if test="${(count == 4)}"><%--cierro el div col-xs-3 y el div row--%>
+			</div>
 		</div>
 		<br>
 		</c:if>
@@ -54,7 +70,9 @@
 		</c:forEach>
 		
 		<c:if test="${(count < 4)}">
+			</div>
 		</div>
+		<br>
 		</c:if>
 		
 		

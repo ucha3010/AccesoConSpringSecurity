@@ -244,9 +244,11 @@
 					<c:set var="count" value="${count - 3}" scope="page"/>
 				</c:forEach>
 				<div class="col-xs-1">
-					<div class="fondoOferta border-radius-10-porciento ver-mas">
-						<fmt:message key="label.See.more" />
-					</div>
+					<a class="menu-style footeraccesos" href="<c:url value='/footer/promotion1'/>">
+						<div class="fondoOferta border-radius-10-porciento ver-mas">
+							<fmt:message key="label.See.more" />
+						</div>
+					</a>						
 				</div>
 				<div class="col-xs-2">
 				</div>
@@ -286,9 +288,11 @@
 					<c:set var="count" value="${count - 3}" scope="page"/>
 				</c:forEach>
 				<div class="col-xs-1">
-					<div class="fondoPopular border-radius-10-porciento ver-mas">
-						<fmt:message key="label.See.more" />
-					</div>
+					<a class="menu-style footeraccesos" href="<c:url value='/footer/promotion2'/>">
+						<div class="fondoPopular border-radius-10-porciento ver-mas">
+							<fmt:message key="label.See.more" />
+						</div>
+					</a>
 				</div>
 				<div class="col-xs-2">
 				</div>
@@ -328,9 +332,11 @@
 					<c:set var="count" value="${count - 3}" scope="page"/>
 				</c:forEach>
 				<div class="col-xs-1">
-					<div class="fondoNovedades border-radius-10-porciento ver-mas">
-						<fmt:message key="label.See.more" />
-					</div>
+					<a class="menu-style footeraccesos" href="<c:url value='/footer/promotion3'/>">
+						<div class="fondoNovedades border-radius-10-porciento ver-mas">
+							<fmt:message key="label.See.more" />
+						</div>
+					</a>
 				</div>
 				<div class="col-xs-2">
 				</div>
