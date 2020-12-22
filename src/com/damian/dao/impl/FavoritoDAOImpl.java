@@ -82,9 +82,9 @@ public class FavoritoDAOImpl implements FavoritoDAO {
 	}
 
 	@Override
-	public int delete(int idPro, int idUsr, HttpServletRequest request) {
+	public int delete(int idUsr, int idPro, HttpServletRequest request) {
 
-		Object object = findById(idPro, idUsr);
+		Object object = findById(idUsr, idPro);
 		String sql = "DELETE FROM " + TABLA + " WHERE " + KEY1 + "=? AND " + KEY2 + "=?";
 		int salida = jdbcTemplate.update(sql, idPro, idUsr);
 		LocalLogger.delete(TABLA, object, request);

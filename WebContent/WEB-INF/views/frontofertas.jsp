@@ -39,10 +39,10 @@
 							<c:out value="${oferta.producto[nameColSelect]}"/>
 						</div>
 						<c:if test="${oferta.producto.favorito}">
-						<img src='<c:url value="/resources/imgs/favoritos/${prefUsr.botonFavorito}-yes.png"/>' class="tamanio_imagen cursor-pointer">
+						<img src='<c:url value="/resources/imgs/favoritos/${prefUsr.botonFavorito}-yes.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/favorito/delete/${oferta.producto.idPro}/footer-promotion1' />"'>
 						</c:if>
 						<c:if test="${(not oferta.producto.favorito && not empty prefUsr.botonFavorito)}">
-						<img src='<c:url value="/resources/imgs/favoritos/${prefUsr.botonFavorito}-no.png"/>' class="tamanio_imagen cursor-pointer">
+						<img src='<c:url value="/resources/imgs/favoritos/${prefUsr.botonFavorito}-no.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/favorito/save/${oferta.producto.idPro}/footer-promotion1' />"'>
 						</c:if>
 						<div class="imagenProducto">
 							<a title="${oferta.producto[nameColSelect]}" onclick='location.href="<c:url value='/detalle/producto/${oferta.producto.idPro}' />"' class="cursor-pointer">
