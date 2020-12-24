@@ -12,6 +12,32 @@
 	<title><fmt:message key='Company.name' /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 	<fmt:message key="language.name" var="nameColSelect"/>
+	<script type="text/javascript">
+		function marcarFavorito(idPro, agregar){
+			var url = window.location.href;
+			var n = url.indexOf("?");
+			if(n > 0) {
+				url = url.substring(0,n);
+			}
+			var cadenaSplit = url.split('/');
+			var salida = '';
+			for (var i = 4; i < cadenaSplit.length; i++) {
+				salida = salida + cadenaSplit[i];
+				if(i < cadenaSplit.length-1){
+			    	salida = salida + '-';
+			    }
+			}
+			var voy = '';
+			if(agregar) {
+				voy = "<c:url value='/favorito/save/"+idPro+"/"+salida+"' />";
+			} else {
+				voy = "<c:url value='/favorito/delete/"+idPro+"/"+salida+"' />";
+			}
+			location.href=voy;
+			return true;
+		}
+	
+	</script>
 </head>
 <body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
@@ -39,10 +65,10 @@
 							<c:out value="${oferta.producto[nameColSelect]}"/>
 						</div>
 						<c:if test="${oferta.producto.favorito}">
-						<img src='<c:url value="/resources/imgs/favoritos/${prefUsr.botonFavorito}-yes.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/favorito/delete/${oferta.producto.idPro}/footer-promotion1' />"'>
+						<img src='<c:url value="/resources/imgs/favoritos/${prefUsr.botonFavorito}-yes.png"/>' class="tamanio_imagen cursor-pointer" onclick='marcarFavorito(${oferta.producto.idPro},false)'>
 						</c:if>
 						<c:if test="${(not oferta.producto.favorito && not empty prefUsr.botonFavorito)}">
-						<img src='<c:url value="/resources/imgs/favoritos/${prefUsr.botonFavorito}-no.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/favorito/save/${oferta.producto.idPro}/footer-promotion1' />"'>
+						<img src='<c:url value="/resources/imgs/favoritos/${prefUsr.botonFavorito}-no.png"/>' class="tamanio_imagen cursor-pointer" onclick='marcarFavorito(${oferta.producto.idPro},true)'>
 						</c:if>
 						<div class="imagenProducto">
 							<a title="${oferta.producto[nameColSelect]}" onclick='location.href="<c:url value='/detalle/producto/${oferta.producto.idPro}' />"' class="cursor-pointer">
