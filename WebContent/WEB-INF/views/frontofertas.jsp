@@ -9,7 +9,7 @@
 
 <html>
 <head>
-	<title><fmt:message key='Company.name' /></title>
+	<title><fmt:message key="label.Promotion1" /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 	<fmt:message key="language.name" var="nameColSelect"/>
 	<script type="text/javascript">

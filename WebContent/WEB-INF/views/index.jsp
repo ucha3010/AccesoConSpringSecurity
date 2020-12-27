@@ -12,6 +12,13 @@
 	<title><fmt:message key='Company.name' /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 	<fmt:message key="language.name" var="nameColSelect"/>
+	<script type="text/javascript">
+		function irSubcategoria() {
+			var valSelected = document.getElementById("subcategoriaSelect");
+			var url = "<c:url value='/front/subcategoria/"+valSelected.value+"' />";
+			location.href=url;
+		}
+	</script>
 
 </head>
 <body class="${prefUsr.tema}fondopantalla">
@@ -37,12 +44,17 @@
 		<div class="row">
 			<div class="hidden-xs col-sm-12">
 				<div class="col-sm-4 col-md-3">
-				    <select class="form-control">
-				      <option>Todas las categorías</option>
-				      <option>2</option>
-				      <option>3</option>
-				      <option>4</option>
-				      <option>5</option>
+				    <select class="form-control" id="subcategoriaSelect" onchange="irSubcategoria()">
+				    
+					<c:forEach items="${categorias}" var="categoria">
+						<optgroup label="<c:out value="${categoria[nameColSelect]}" />">
+						
+						<c:forEach items="${categoria.subcategorias}" var="subcategoria">
+							<option value="${subcategoria.idSub}" ><c:out value="${subcategoria[nameColSelect]}" /></option>
+						</c:forEach>
+						
+					</c:forEach>
+						
 				    </select>
 				</div>
 				<div class="col-sm-6 col-md-7">

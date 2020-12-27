@@ -290,6 +290,18 @@
            	</c:forEach>
 		</div>
 	</div>
+		
+	<div class="row">
+		<div class="col-xs-1 col-sm-3">
+		</div>
+		<div class="col-xs-11 col-sm-8">
+			<footer>
+				<c:import url="/WEB-INF/views/importFooter.jsp" />
+			</footer>
+		</div>
+		<div class="col-xs-1">
+		</div>
+	</div>
 	
 	
 	<script src="<c:url value='/resources/js/jquery.js'/>"></script>

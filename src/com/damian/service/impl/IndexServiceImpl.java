@@ -12,6 +12,7 @@ import com.damian.pojo.AdministracionOfertas;
 import com.damian.pojo.Foto;
 import com.damian.pojo.Usuario;
 import com.damian.service.AdministracionOfertasService;
+import com.damian.service.CategoriaService;
 import com.damian.service.ConstantesService;
 import com.damian.service.FotoService;
 import com.damian.service.IndexService;
@@ -24,6 +25,9 @@ public class IndexServiceImpl implements IndexService {
 
 	@Autowired
 	private AdministracionOfertasService administracionOfertasService;
+	
+	@Autowired
+	private CategoriaService categoriaService;
 
 	@Autowired
 	private ConstantesService constantesService;
@@ -57,6 +61,8 @@ public class IndexServiceImpl implements IndexService {
 		List<AdministracionOfertas> novedadesList = administracionOfertasService.findByNovedades(3);
 		agregarFotos(novedadesList);
 		model.addObject("novedades", novedadesList);
+		
+		model.addObject("categorias", categoriaService.findAll());
 
 		model.setViewName("index");
 		return model;

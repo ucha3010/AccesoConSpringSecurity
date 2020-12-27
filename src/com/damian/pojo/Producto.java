@@ -54,6 +54,7 @@ public class Producto {
 	 */
 	private String nombreMarca;
 	private DescripcionProducto descripcionProducto;
+	private double precioConOferta;
 
 	public Producto() {
 
@@ -589,6 +590,21 @@ public class Producto {
 	 */
 	public void setDescripcionProducto(DescripcionProducto descripcionProducto) {
 		this.descripcionProducto = descripcionProducto;
+	}
+
+	/**
+	 * @return the precioConOferta
+	 */
+	public double getPrecioConOferta() {
+		return precioConOferta;
+	}
+
+	/**
+	 * @param precioConOferta
+	 *            the precioConOferta to set
+	 */
+	public void setPrecioConOferta(double precioConOferta) {
+		this.precioConOferta = precioConOferta;
 	}
 
 	/*

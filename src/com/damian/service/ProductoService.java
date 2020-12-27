@@ -14,7 +14,7 @@ public interface ProductoService {
 	public List<Producto> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request);
 
 	public Producto findById(int id);
-	
+
 	public Producto findByIdConFotos(int id);
 
 	public Producto findByIdModel(int id);
@@ -32,7 +32,7 @@ public interface ProductoService {
 	public FrontProductoStock fillFrontProductoStock(Producto producto);
 
 	public List<Producto> findSearchAll();
-	
+
 	public List<Producto> findAllReducedData();
 
 	public List<Producto> findProductosSinOferta(List<Producto> productos, List<AdministracionOfertas> ofertas,
@@ -50,8 +50,9 @@ public interface ProductoService {
 	public List<Producto> findByIdSubModel(int idSub);
 
 	public List<Producto> findByMarcaExacta(String nombre);
-	
+
 	public int getMaxId();
 
+	public void fillFrontSubcategoria(List<Producto> productos);
 
 }

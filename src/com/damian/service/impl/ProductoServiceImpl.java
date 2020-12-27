@@ -138,7 +138,7 @@ public class ProductoServiceImpl implements ProductoService {
 
 		productoDAO.save(producto, request);
 		if (producto.getDescripcionProducto() != null) {
-			if(producto.getIdPro() == 0) {
+			if (producto.getIdPro() == 0) {
 				producto.getDescripcionProducto().setIdPro(getMaxId());
 			} else {
 				producto.getDescripcionProducto().setIdPro(producto.getIdPro());
@@ -352,6 +352,22 @@ public class ProductoServiceImpl implements ProductoService {
 		return productoDAO.getMaxId();
 	}
 
+	@Override
+	public void fillFrontSubcategoria(List<Producto> productos) {
+		if (productos != null) {
+			for (Producto p : productos) {
+				List<Foto> fotos = fotoService.findByIdPro(p.getIdPro());
+				if (fotos != null) {
+					p.setNombreFotoPrincipal(fotoService.principalPictureName(fotos));
+				}
+				AdministracionOfertas administracionOfertas = administracionOfertasService.findById(p.getIdPro());
+				if (administracionOfertas != null) {
+					p.setPrecioConOferta(administracionOfertas.getPrecioConOferta());
+				}
+			}
+		}
+	}
+
 	private void fillFactura(Factura factura, FrontProductoStock frontProductoStock, BigDecimal precioFinalSinIva,
 			BigDecimal ivaImporteTotal, HttpServletRequest request) {
 
@@ -389,7 +405,7 @@ public class ProductoServiceImpl implements ProductoService {
 			if (descripcionProducto != null) {
 				p.setDescripcionProducto(descripcionProducto);
 			} else {
-				p.setDescripcionProducto(new DescripcionProducto());				
+				p.setDescripcionProducto(new DescripcionProducto());
 			}
 		}
 		return salida;
