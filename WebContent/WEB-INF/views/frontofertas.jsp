@@ -89,9 +89,8 @@
 		<c:if test="${(count == 4)}"><%--cierro el div col-xs-3 y el div row--%>
 			</div>
 		</div>
-		<br>
+		<div class="height100"></div>
 		</c:if>
-			
 					
 		</c:forEach>
 		
@@ -101,8 +100,8 @@
 		<br>
 		</c:if>
 		
-		
 	</div>
+	
 	<div class="row">
 		<div class="col-xs-1">
 		</div>

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.damian.exceptions.NotEmptyException;
+import com.damian.pojo.DescripcionProducto;
 import com.damian.pojo.Marca;
 import com.damian.pojo.Producto;
 import com.damian.pojo.front.FrontProductoStock;
@@ -70,6 +71,7 @@ public class ProductoController {
 	@RequestMapping("/producto/{idPro}")
 	public ModelAndView getProducto(ModelAndView modelAndView, @PathVariable("idPro") int idPro) {
 		Producto producto = new Producto();
+		producto.setDescripcionProducto(new DescripcionProducto());
 		if (idPro > 0) {
 			producto = productoService.findById(idPro);
 		}

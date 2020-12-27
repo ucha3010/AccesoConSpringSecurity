@@ -14,6 +14,8 @@ public interface ProductoService {
 	public List<Producto> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request);
 
 	public Producto findById(int id);
+	
+	public Producto findByIdConFotos(int id);
 
 	public Producto findByIdModel(int id);
 

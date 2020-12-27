@@ -227,6 +227,21 @@
 				</div>	
 			</div>
 			<br/>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="descripcionES"><fmt:message key="label.Product.description.spanish" /></label> 
+					<sf:input path="descripcionProducto.nombreES" class="form-control" id="descripcionES" />
+					<span id="descripcionESError" name="errorSpan"></span>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="descripcionEN"><fmt:message key="label.Product.description.english" /></label> 
+					<sf:input path="descripcionProducto.nombreEN" class="form-control" id="descripcionEN" />
+					<span id="descripcionENError" name="errorSpan"></span>
+				</div>	
+			</div>
+			<br/>
 			<div class="row">	
 				<div class="hidden-xs col-sm-4">
 				</div>

@@ -26,6 +26,7 @@
 		<security:intercept-url pattern="/categoria/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/cliente" access="permitAll" />
 		<security:intercept-url pattern="/cliente/**" access="permitAll" />
+		<security:intercept-url pattern="/detalle/**" access="permitAll" />
 		<security:intercept-url pattern="/direccion/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/direccion/delete/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/direccion/formulario/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />

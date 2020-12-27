@@ -20,6 +20,7 @@ import com.damian.pojo.AdministracionOfertas;
 import com.damian.pojo.Categoria;
 import com.damian.pojo.Cuota;
 import com.damian.pojo.CuotaDetalle;
+import com.damian.pojo.DescripcionProducto;
 import com.damian.pojo.DireccionEmpresaPropia;
 import com.damian.pojo.EmpresaPropia;
 import com.damian.pojo.Estado;
@@ -38,6 +39,7 @@ import com.damian.service.CampaniaService;
 import com.damian.service.CategoriaService;
 import com.damian.service.CuotaDetalleService;
 import com.damian.service.CuotaService;
+import com.damian.service.DescripcionProductoService;
 import com.damian.service.EmpresaPropiaService;
 import com.damian.service.FacturaEnviarFacturarService;
 import com.damian.service.FacturaService;
@@ -67,6 +69,9 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
 	private CuotaDetalleService cuotaDetalleService;
+
+	@Autowired
+	private DescripcionProductoService descripcionProductoService;
 
 	@Autowired
 	private EmpresaPropiaService empresaPropiaService;
@@ -108,7 +113,16 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Override
 	public Producto findById(int id) {
-		return productoDAO.findById(id);
+		Producto producto = productoDAO.findById(id);
+		producto.setDescripcionProducto(descripcionProductoService.findById(id));
+		return producto;
+	}
+
+	@Override
+	public Producto findByIdConFotos(int id) {
+		Producto producto = productoDAO.findById(id);
+		producto.setFotos(fotoService.findByIdPro(id));
+		return producto;
 	}
 
 	@Override
@@ -123,6 +137,14 @@ public class ProductoServiceImpl implements ProductoService {
 		producto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		productoDAO.save(producto, request);
+		if (producto.getDescripcionProducto() != null) {
+			if(producto.getIdPro() == 0) {
+				producto.getDescripcionProducto().setIdPro(getMaxId());
+			} else {
+				producto.getDescripcionProducto().setIdPro(producto.getIdPro());
+			}
+			descripcionProductoService.save(producto.getDescripcionProducto(), request);
+		}
 		return productoDAO.getMaxId();
 	}
 
@@ -131,6 +153,9 @@ public class ProductoServiceImpl implements ProductoService {
 
 		producto.setModificadoPor(Utils.getLoggedUser(request));
 		producto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+		if (producto.getDescripcionProducto() != null) {
+			descripcionProductoService.save(producto.getDescripcionProducto(), request);
+		}
 
 		productoDAO.update(producto, request);
 	}
@@ -147,6 +172,7 @@ public class ProductoServiceImpl implements ProductoService {
 				productoEmpresaService.delete(id, p.getEmpresa().getIdEmp(), request);
 			}
 		}
+		descripcionProductoService.delete(id, request);
 		return productoDAO.delete(id, request);
 	}
 
@@ -260,7 +286,7 @@ public class ProductoServiceImpl implements ProductoService {
 	public List<Producto> findSearchAll() {
 		return productoDAO.findSearchAll();
 	}
-	
+
 	@Override
 	public List<Producto> findAllReducedData() {
 		return productoDAO.findAllReducedData();
@@ -298,12 +324,12 @@ public class ProductoServiceImpl implements ProductoService {
 		}
 		List<AdministracionOfertas> productosConOfertaList = administracionOfertasService.findByOfertas(0);
 		List<Integer> idProConOfertaList = new ArrayList<>();
-		for(AdministracionOfertas ao: productosConOfertaList) {
+		for (AdministracionOfertas ao : productosConOfertaList) {
 			idProConOfertaList.add(ao.getIdPro());
 		}
 		List<Producto> productosSinCampaniaNiOferta = new ArrayList<>(productosSinCampania);
-		for(Producto pr: productosSinCampania) {
-			if(idProConOfertaList.contains(pr.getIdPro())) {
+		for (Producto pr : productosSinCampania) {
+			if (idProConOfertaList.contains(pr.getIdPro())) {
 				productosSinCampaniaNiOferta.remove(pr);
 			}
 		}
@@ -359,6 +385,12 @@ public class ProductoServiceImpl implements ProductoService {
 			s.setCategoria(c);
 			p.setSubcategoria(s);
 			p.setFotos(fillFotoPrincipal(p.getIdPro()));
+			DescripcionProducto descripcionProducto = descripcionProductoService.findById(p.getIdPro());
+			if (descripcionProducto != null) {
+				p.setDescripcionProducto(descripcionProducto);
+			} else {
+				p.setDescripcionProducto(new DescripcionProducto());				
+			}
 		}
 		return salida;
 	}
