@@ -25,7 +25,7 @@ public class IndexServiceImpl implements IndexService {
 
 	@Autowired
 	private AdministracionOfertasService administracionOfertasService;
-	
+
 	@Autowired
 	private CategoriaService categoriaService;
 
@@ -61,10 +61,18 @@ public class IndexServiceImpl implements IndexService {
 		List<AdministracionOfertas> novedadesList = administracionOfertasService.findByNovedades(3);
 		agregarFotos(novedadesList);
 		model.addObject("novedades", novedadesList);
-		
-		model.addObject("categorias", categoriaService.findAll());
+
+		chargeDivSearchBar(model);
 
 		model.setViewName("index");
+		return model;
+	}
+
+	@Override
+	public ModelAndView chargeDivSearchBar(ModelAndView model) {
+
+		model.addObject("categorias", categoriaService.findAll());
+
 		return model;
 	}
 

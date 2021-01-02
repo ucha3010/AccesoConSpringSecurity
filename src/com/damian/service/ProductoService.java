@@ -8,6 +8,7 @@ import com.damian.exceptions.NotEmptyException;
 import com.damian.pojo.AdministracionOfertas;
 import com.damian.pojo.Producto;
 import com.damian.pojo.front.FrontProductoStock;
+import com.damian.pojo.front.ObjectSearch;
 
 public interface ProductoService {
 
@@ -54,5 +55,7 @@ public interface ProductoService {
 	public int getMaxId();
 
 	public void fillFrontSubcategoria(List<Producto> productos);
+
+	public List<ObjectSearch> simulateSearchResult(String tagName, String idioma);
 
 }

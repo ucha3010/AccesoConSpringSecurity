@@ -34,6 +34,7 @@ import com.damian.pojo.ProductoFactura;
 import com.damian.pojo.Subcategoria;
 import com.damian.pojo.front.FrontCuota;
 import com.damian.pojo.front.FrontProductoStock;
+import com.damian.pojo.front.ObjectSearch;
 import com.damian.service.AdministracionOfertasService;
 import com.damian.service.CampaniaService;
 import com.damian.service.CategoriaService;
@@ -366,6 +367,62 @@ public class ProductoServiceImpl implements ProductoService {
 				}
 			}
 		}
+	}
+
+	@Override
+	public List<ObjectSearch> simulateSearchResult(String tagName, String idioma) {
+
+		List<Producto> data = findAllReducedData();
+		List<ObjectSearch> result = new ArrayList<>();
+
+		// iterate a list and filter by tagName
+		for (Producto tag : data) {
+
+			switch (idioma) {
+			case "ES":
+				if (tag.getNombreES().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreES()));
+				}
+				break;
+			case "EN":
+				if (tag.getNombreEN().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreEN()));
+				}
+				break;
+			case "CA":
+				if (tag.getNombreCA().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreEN()));
+				}
+				break;
+			case "EU":
+				if (tag.getNombreEU().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreEN()));
+				}
+				break;
+			case "FR":
+				if (tag.getNombreFR().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreEN()));
+				}
+				break;
+			case "GE":
+				if (tag.getNombreGE().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreEN()));
+				}
+				break;
+			case "IT":
+				if (tag.getNombreIT().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreEN()));
+				}
+				break;
+			case "PT":
+				if (tag.getNombrePT().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreEN()));
+				}
+				break;
+			}
+		}
+
+		return result;
 	}
 
 	private void fillFactura(Factura factura, FrontProductoStock frontProductoStock, BigDecimal precioFinalSinIva,

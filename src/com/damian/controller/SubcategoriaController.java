@@ -21,6 +21,7 @@ import com.damian.pojo.Producto;
 import com.damian.pojo.Subcategoria;
 import com.damian.service.CategoriaService;
 import com.damian.service.FiltroTituloService;
+import com.damian.service.IndexService;
 import com.damian.service.ProductoService;
 import com.damian.service.SubcategoriaService;
 
@@ -32,6 +33,9 @@ public class SubcategoriaController {
 
 	@Autowired
 	private FiltroTituloService filtroTituloService;
+
+	@Autowired
+	private IndexService indexService;
 
 	@Autowired
 	private ProductoService productoService;
@@ -91,6 +95,9 @@ public class SubcategoriaController {
 
 	@RequestMapping("/front/subcategoria/{idSub}")
 	public ModelAndView getFrontSubcategoria(ModelAndView modelAndView, @PathVariable("idSub") int idSub) {
+		
+		indexService.idUserLogged(modelAndView);
+		indexService.chargeDivSearchBar(modelAndView);
 
 		Subcategoria subcategoria = subcategoriaService.findByIdModel(idSub);
 		modelAndView.addObject("subcategoria", subcategoria);

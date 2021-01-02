@@ -45,7 +45,14 @@
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><c:out value="${subcategoria[nameColSelect]}"/></div>
 		
-		<div class="separacion20"></div>
+			
+		<div class="row"> <!-- div barra búsqueda -->
+			<div class="col-xs-1 col-sm-3">
+			</div>
+			<div class="col-xs-11 col-sm-9">
+				<c:import url="/WEB-INF/views/divSearchBar.jsp" />
+			</div>
+		</div>
 			
 		<div class="row"> <!-- div row inicio -->
 			<div class="col-xs-1 col-sm-3">
@@ -117,17 +124,17 @@
 			
 		</div> <!-- div row fin -->
 		
-	<div class="row">
-		<div class="col-xs-1 col-sm-3">
+		<div class="row">
+			<div class="col-xs-1 col-sm-3">
+			</div>
+			<div class="col-xs-11 col-sm-8">
+				<footer>
+					<c:import url="/WEB-INF/views/importFooter.jsp" />
+				</footer>
+			</div>
+			<div class="col-xs-1">
+			</div>
 		</div>
-		<div class="col-xs-11 col-sm-8">
-			<footer>
-				<c:import url="/WEB-INF/views/importFooter.jsp" />
-			</footer>
-		</div>
-		<div class="col-xs-1">
-		</div>
-	</div>
 
 
 		<!-- la parte de los filtros -->
@@ -171,8 +178,8 @@
 	</div> <!-- div container fin -->
 	
 	<script src="<c:url value='/resources/js/jquery.js'/>"></script>
-	<script src="<c:url value='/resources/bootstrap-3.4.1-dist/js/bootstrap.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/menu.js'/>" type="text/javascript"></script>
+	<script src="<c:url value='/resources/js/jquery.autocomplete.min.js'/>"></script>
 	
 	
 </body>

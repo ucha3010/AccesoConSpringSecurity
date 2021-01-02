@@ -44,6 +44,8 @@
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Promotion1" /></div>
 		
+		<c:import url="/WEB-INF/views/divSearchBar.jsp" />
+		
 		<c:set var="count" value="0" scope="page" />
 		
 		<c:forEach items="${ofertas}" var="oferta">

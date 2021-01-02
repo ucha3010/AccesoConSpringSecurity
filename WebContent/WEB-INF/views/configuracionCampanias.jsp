@@ -304,8 +304,6 @@
 	</div>
 	
 	
-	<script src="<c:url value='/resources/js/jquery.js'/>"></script>
-	<script src="<c:url value='/resources/bootstrap-3.4.1-dist/js/bootstrap.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/menu.js'/>" type="text/javascript"></script>
 </body>
 </html>

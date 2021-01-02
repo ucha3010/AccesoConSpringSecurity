@@ -10,6 +10,8 @@ public interface IndexService {
 
 	ModelAndView manageIndex(ModelAndView model);
 
+	ModelAndView chargeDivSearchBar(ModelAndView model);
+
 	ModelAndView manageAbout(ModelAndView model, String estoy);
 
 	int idUserLogged(ModelAndView model);

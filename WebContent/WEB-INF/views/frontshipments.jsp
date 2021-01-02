@@ -18,6 +18,8 @@
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Shipments" /></div>
 		
+		<c:import url="/WEB-INF/views/divSearchBar.jsp" />
+		
 		<div class="row">
 			<div class="col-md-12">
 				<p class="text-justify">

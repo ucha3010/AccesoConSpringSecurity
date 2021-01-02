@@ -12,16 +12,9 @@
 	<title><fmt:message key='Company.name' /></title>
 	<c:import url="/WEB-INF/views/importHead.jsp" />
 	<fmt:message key="language.name" var="nameColSelect"/>
-	<script type="text/javascript">
-		function irSubcategoria() {
-			var valSelected = document.getElementById("subcategoriaSelect");
-			var url = "<c:url value='/front/subcategoria/"+valSelected.value+"' />";
-			location.href=url;
-		}
-	</script>
-
 </head>
 <body class="${prefUsr.tema}fondopantalla">
+	
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<c:if test="${not empty usuario_creado}">
@@ -38,78 +31,9 @@
 				<div class="col-xs-2 col-sm-3">
 				</div>
 			</div>
-		</c:if>	
+		</c:if>
 		
-		
-		<div class="row">
-			<div class="hidden-xs col-sm-12">
-				<div class="col-sm-4 col-md-3">
-				    <select class="form-control" id="subcategoriaSelect" onchange="irSubcategoria()">
-				    
-					<c:forEach items="${categorias}" var="categoria">
-						<optgroup label="<c:out value="${categoria[nameColSelect]}" />">
-						
-						<c:forEach items="${categoria.subcategorias}" var="subcategoria">
-							<option value="${subcategoria.idSub}" ><c:out value="${subcategoria[nameColSelect]}" /></option>
-						</c:forEach>
-						
-					</c:forEach>
-						
-				    </select>
-				</div>
-				<div class="col-sm-6 col-md-7">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="<fmt:message key='label.Search' />" id="buscar"/>
-						<div class="input-group-btn">
-							<button class="btn btn-primary padding9" type="submit">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-1">
-					<img src='<c:url value="/resources/imgs/favoritos/default.png"/>' class="tamanio_imagen cursor-pointer">
-				</div>
-				<div class="col-sm-1">
-					<img src='<c:url value="/resources/imgs/carrito.png"/>' class="height27 cursor-pointer">
-				</div>
-			</div>
-			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
-				<div class="col-xs-2">
-				</div>
-				<div class="col-xs-4">
-					<img src='<c:url value="/resources/imgs/favoritos/default.png"/>' class="tamanio_imagen cursor-pointer">
-				</div>
-				<div class="col-xs-4">
-					<img src='<c:url value="/resources/imgs/carrito.png"/>' class="height27 cursor-pointer">
-				</div>
-				<div class="col-xs-2">
-				</div>
-			</div>
-			<div class="col-xs-12 hidden-sm hidden-md hidden-lg hidden-xl">
-				<div class="col-xs-6">
-				    <select class="form-control">
-				      <option>Todas las categorías</option>
-				      <option>2</option>
-				      <option>3</option>
-				      <option>4</option>
-				      <option>5</option>
-				    </select>
-				</div>
-				<div class="col-xs-6">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="<fmt:message key='label.Search' />" id="buscarXS"/>
-						<div class="input-group-btn">
-							<button class="btn btn-primary padding9" type="submit">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="separacion10"></div>
+		<c:import url="/WEB-INF/views/divSearchBar.jsp" />
 	
 		<div class="row">
 			<div class="hidden-xs col-sm-12">

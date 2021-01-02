@@ -16,12 +16,11 @@
 <body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="pagina.nueva" /></div>
+		<c:import url="/WEB-INF/views/divSearchBar.jsp" /> <!-- en controller poner indexService.chargeDivSearchBar(modelAndView); -->
 		
-		<div class="row">
-			<div class="col-md-12">
-				<h1>Nueva página</h1>
-			</div>
-		</div>
+		
+		
 	</div>
 	<div class="row">
 		<div class="col-xs-1">

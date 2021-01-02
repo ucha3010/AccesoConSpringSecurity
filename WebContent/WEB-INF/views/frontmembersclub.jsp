@@ -16,12 +16,10 @@
 <body class="${prefUsr.tema}fondopantalla">
 	<div class="container">
 		<c:import url="/WEB-INF/views/menu.jsp" />
+		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Members.club" /></div>
 		
-		<div class="row">
-			<div class="col-md-12">
-				<h1><fmt:message key="label.Members.club" /></h1>
-			</div>
-		</div>
+		<c:import url="/WEB-INF/views/divSearchBar.jsp" />
+		
 	</div>
 	<div class="row">
 		<div class="col-xs-1">

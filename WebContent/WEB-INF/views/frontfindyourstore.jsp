@@ -24,6 +24,8 @@
 		<c:import url="/WEB-INF/views/menu.jsp" />
 		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="label.Find.your.strore" /></div>
 		
+		<c:import url="/WEB-INF/views/divSearchBar.jsp" />
+		
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="row">

@@ -64,6 +64,7 @@
 		<security:intercept-url pattern="/rol/**" access="hasAnyRole({'ROL_ROOT'})" />
 		<security:intercept-url pattern="/subcategoria" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/subcategoria/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/test/**" access="permitAll" />
 		<security:intercept-url pattern="/usuario" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/usuario/all" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/usuario/all/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />

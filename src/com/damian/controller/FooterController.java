@@ -231,6 +231,7 @@ public class FooterController {
 
 	private ModelAndView fillModelAndView(String estoy, String go, ModelAndView modelAndView) {
 		indexService.idUserLogged(modelAndView);
+		indexService.chargeDivSearchBar(modelAndView);
 		modelAndView.addObject("estoy", estoy);
 		modelAndView.setViewName(go);
 		return modelAndView;
