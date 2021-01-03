@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.damian.dao.FotoDAO;
 import com.damian.pojo.Foto;
 import com.damian.service.FotoService;
+import com.damian.utils.ConstantesLocales;
 import com.damian.utils.Ruta;
 import com.damian.utils.Utils;
 
@@ -43,6 +44,11 @@ public class FotoServiceImpl implements FotoService {
 	@Override
 	public List<Foto> findByIdEmp(int idEmp) {
 		return fotoDAO.findByIdEmp(idEmp);
+	}
+
+	@Override
+	public List<Foto> findByIdPropia(int idPropia) {
+		return fotoDAO.findByIdPropia(idPropia);
 	}
 
 	@Override
@@ -76,6 +82,16 @@ public class FotoServiceImpl implements FotoService {
 	}
 
 	@Override
+	public List<Foto> findByIdMar(int idMar) {
+		return fotoDAO.findByIdMar(idMar);
+	}
+
+	@Override
+	public List<Foto> findBySlide() {
+		return fotoDAO.findBySlide();
+	}
+
+	@Override
 	public int save(Foto foto, MultipartFile file, HttpServletRequest request) {
 
 		List<Foto> fotos = new ArrayList<>();
@@ -84,13 +100,26 @@ public class FotoServiceImpl implements FotoService {
 		if (foto != null) {
 			if (foto.getUsuario() != null && foto.getUsuario().getIdUsr() != 0) {
 				fotos = findByIdUsr(foto.getUsuario().getIdUsr());
-				llamada = "usuarios";
+				llamada = ConstantesLocales.USUARIOS;
 				id = foto.getUsuario().getIdUsr();
 			}
 			if (foto.getProducto() != null && foto.getProducto().getIdPro() != 0) {
 				id = foto.getProducto().getIdPro();
 				fotos = findByIdPro(id);
-				llamada = "productos";
+				llamada = ConstantesLocales.PRODUCTOS;
+			}
+			if (foto.getEmpresaPropia() != null && foto.getEmpresaPropia().getIdPropia() != 0) {
+				id = foto.getEmpresaPropia().getIdPropia();
+				fotos = findByIdPropia(id);
+				llamada = ConstantesLocales.EMPRESA_PROPIAS;
+			}
+			if (foto.getMarca() != null && foto.getMarca().getIdMar() != 0) {
+				id = foto.getMarca().getIdMar();
+				fotos = findByIdMar(id);
+				llamada = ConstantesLocales.MARCAS;
+			}
+			if (foto.isSlide()) {
+				llamada = "slide";
 			}
 		}
 		if (fotos.isEmpty() || fotos.size() < 4) {
@@ -130,6 +159,7 @@ public class FotoServiceImpl implements FotoService {
 			foto.setRuta(ruta.getRutaRelativa());
 			foto.setModificadoPor(Utils.getLoggedUser(request));
 			foto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+			foto.setExtension(getExtension(file.getOriginalFilename()));
 
 			return fotoDAO.save(foto, request);
 		} else {
@@ -154,11 +184,22 @@ public class FotoServiceImpl implements FotoService {
 		if (foto != null) {
 			if (foto.getUsuario() != null && foto.getUsuario().getIdUsr() != 0) {
 				idSalida = foto.getUsuario().getIdUsr();
-				ruta = Ruta("usuarios", idSalida, request);
+				ruta = Ruta(ConstantesLocales.USUARIOS, idSalida, request);
 			}
 			if (foto.getProducto() != null && foto.getProducto().getIdPro() != 0) {
 				idSalida = foto.getProducto().getIdPro();
-				ruta = Ruta("productos", idSalida, request);
+				ruta = Ruta(ConstantesLocales.PRODUCTOS, idSalida, request);
+			}
+			if (foto.getEmpresaPropia() != null && foto.getEmpresaPropia().getIdPropia() != 0) {
+				idSalida = foto.getEmpresaPropia().getIdPropia();
+				ruta = Ruta(ConstantesLocales.EMPRESA_PROPIAS, idSalida, request);
+			}
+			if (foto.getMarca() != null && foto.getMarca().getIdMar() != 0) {
+				idSalida = foto.getMarca().getIdMar();
+				ruta = Ruta(ConstantesLocales.MARCAS, idSalida, request);
+			}
+			if (foto.isSlide()) {
+				ruta = Ruta("slide", idSalida, request);
 			}
 		}
 		if (ruta != null) {
@@ -192,6 +233,7 @@ public class FotoServiceImpl implements FotoService {
 		return foto;
 	}
 
+	@Override
 	public String principalPictureName(List<Foto> fotos) {
 		String nombre = null;
 		for (Foto f : fotos) {
@@ -220,5 +262,14 @@ public class FotoServiceImpl implements FotoService {
 				update(f, request);
 			}
 		}
+	}
+
+	private String getExtension(String originalFilename) {
+
+		String[] ext = originalFilename.split("\\.");
+		if (ext.length > 1) {
+			return ext[ext.length - 1];
+		}
+		return null;
 	}
 }

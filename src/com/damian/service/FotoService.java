@@ -18,6 +18,8 @@ public interface FotoService {
 
 	public List<Foto> findByIdEmp(int idEmp);
 
+	public List<Foto> findByIdPropia(int idPropia);
+
 	public List<Foto> findByIdCat(int idCat);
 
 	public List<Foto> findByIdSub(int idSub);
@@ -30,6 +32,10 @@ public interface FotoService {
 
 	public List<Foto> findByIdRol(int idRol);
 
+	public List<Foto> findByIdMar(int idMar);
+
+	public List<Foto> findBySlide();
+
 	public int save(Foto foto, MultipartFile file, HttpServletRequest request);
 
 	public int update(Foto foto, HttpServletRequest request);
@@ -39,7 +45,7 @@ public interface FotoService {
 	public int getMaxId();
 
 	public Foto doPrincipal(int idFot, HttpServletRequest request);
-	
+
 	public String principalPictureName(List<Foto> fotos);
 
 }

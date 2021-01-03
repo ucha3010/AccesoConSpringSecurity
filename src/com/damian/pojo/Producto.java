@@ -39,8 +39,23 @@ public class Producto {
 	private Subcategoria subcategoria;
 	private List<ProductoFactura> productoFacturaList;
 	private List<Foto> fotos;
+	private String nombreFotoPrincipal; // no en BBDD
+	private boolean favorito; // no en BBDD
 	private String modificadoPor;
 	private Timestamp fechaModificacion;
+
+	/**
+	 * Sólo usado en administración de campañas
+	 */
+	private String campania;
+
+	/**
+	 * Sólo usado cuando agrego una marca desde Agregar producto
+	 */
+	private String nombreMarca;
+	private DescripcionProducto descripcionProducto;
+	private double precioSinOferta;
+	private double precioConOferta;
 
 	public Producto() {
 
@@ -474,6 +489,36 @@ public class Producto {
 	}
 
 	/**
+	 * @return the nombreFotoPrincipal
+	 */
+	public String getNombreFotoPrincipal() {
+		return nombreFotoPrincipal;
+	}
+
+	/**
+	 * @param nombreFotoPrincipal
+	 *            the nombreFotoPrincipal to set
+	 */
+	public void setNombreFotoPrincipal(String nombreFotoPrincipal) {
+		this.nombreFotoPrincipal = nombreFotoPrincipal;
+	}
+
+	/**
+	 * @return the favorito
+	 */
+	public boolean isFavorito() {
+		return favorito;
+	}
+
+	/**
+	 * @param favorito
+	 *            the favorito to set
+	 */
+	public void setFavorito(boolean favorito) {
+		this.favorito = favorito;
+	}
+
+	/**
 	 * @return the modificadoPor
 	 */
 	public String getModificadoPor() {
@@ -501,6 +546,81 @@ public class Producto {
 	 */
 	public void setFechaModificacion(Timestamp fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
+	}
+
+	/**
+	 * @return the campania
+	 */
+	public String getCampania() {
+		return campania;
+	}
+
+	/**
+	 * @param campania
+	 *            the campania to set
+	 */
+	public void setCampania(String campania) {
+		this.campania = campania;
+	}
+
+	/**
+	 * @return the nombreMarca
+	 */
+	public String getNombreMarca() {
+		return nombreMarca;
+	}
+
+	/**
+	 * @param nombreMarca
+	 *            the nombreMarca to set
+	 */
+	public void setNombreMarca(String nombreMarca) {
+		this.nombreMarca = nombreMarca;
+	}
+
+	/**
+	 * @return the descripcionProducto
+	 */
+	public DescripcionProducto getDescripcionProducto() {
+		return descripcionProducto;
+	}
+
+	/**
+	 * @param descripcionProducto
+	 *            the descripcionProducto to set
+	 */
+	public void setDescripcionProducto(DescripcionProducto descripcionProducto) {
+		this.descripcionProducto = descripcionProducto;
+	}
+
+	/**
+	 * @return the precioSinOferta
+	 */
+	public double getPrecioSinOferta() {
+		return precioSinOferta;
+	}
+
+	/**
+	 * @param precioSinOferta
+	 *            the precioSinOferta to set
+	 */
+	public void setPrecioSinOferta(double precioSinOferta) {
+		this.precioSinOferta = precioSinOferta;
+	}
+
+	/**
+	 * @return the precioConOferta
+	 */
+	public double getPrecioConOferta() {
+		return precioConOferta;
+	}
+
+	/**
+	 * @param precioConOferta
+	 *            the precioConOferta to set
+	 */
+	public void setPrecioConOferta(double precioConOferta) {
+		this.precioConOferta = precioConOferta;
 	}
 
 	/*

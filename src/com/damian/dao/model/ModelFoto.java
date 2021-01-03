@@ -8,17 +8,20 @@ public class ModelFoto {
 	private int idUsr;
 	private int idPro;
 	private int idEmp;
+	private int idPropia;
 	private int idCat;
 	private int idSub;
 	private int idPais;
 	private int idFor;
 	private int idEst;
 	private int idRol;
+	private int idMar;
 	private String nombre;
 	private String ruta;
 	private String descripcion;
 	private long peso;
 	private boolean principal;
+	private boolean slide;
 	private String extension;
 	private Timestamp fechaCreacion;
 	private String creadoPor;
@@ -94,6 +97,21 @@ public class ModelFoto {
 	 */
 	public void setIdEmp(int idEmp) {
 		this.idEmp = idEmp;
+	}
+
+	/**
+	 * @return the idPropia
+	 */
+	public int getIdPropia() {
+		return idPropia;
+	}
+
+	/**
+	 * @param idPropia
+	 *            the idPropia to set
+	 */
+	public void setIdPropia(int idPropia) {
+		this.idPropia = idPropia;
 	}
 
 	/**
@@ -187,6 +205,21 @@ public class ModelFoto {
 	}
 
 	/**
+	 * @return the idMar
+	 */
+	public int getIdMar() {
+		return idMar;
+	}
+
+	/**
+	 * @param idMar
+	 *            the idMar to set
+	 */
+	public void setIdMar(int idMar) {
+		this.idMar = idMar;
+	}
+
+	/**
 	 * @return the nombre
 	 */
 	public String getNombre() {
@@ -259,6 +292,21 @@ public class ModelFoto {
 	 */
 	public void setPrincipal(boolean principal) {
 		this.principal = principal;
+	}
+
+	/**
+	 * @return the slide
+	 */
+	public boolean isSlide() {
+		return slide;
+	}
+
+	/**
+	 * @param slide
+	 *            the slide to set
+	 */
+	public void setSlide(boolean slide) {
+		this.slide = slide;
 	}
 
 	/**
@@ -343,12 +391,12 @@ public class ModelFoto {
 	 */
 	@Override
 	public String toString() {
-		return "ModelFoto [idFot=" + idFot + ", idUsr=" + idUsr + ", idPro=" + idPro + ", idEmp=" + idEmp + ", idCat="
-				+ idCat + ", idSub=" + idSub + ", idPais=" + idPais + ", idFor=" + idFor + ", idEst=" + idEst
-				+ ", idRol=" + idRol + ", nombre=" + nombre + ", ruta=" + ruta + ", descripcion=" + descripcion
-				+ ", peso=" + peso + ", principal=" + principal + ", extension=" + extension + ", fechaCreacion="
-				+ fechaCreacion + ", creadoPor=" + creadoPor + ", modificadoPor=" + modificadoPor
-				+ ", fechaModificacion=" + fechaModificacion + "]";
+		return "ModelFoto [idFot=" + idFot + ", idUsr=" + idUsr + ", idPro=" + idPro + ", idEmp=" + idEmp
+				+ ", idPropia=" + idPropia + ", idCat=" + idCat + ", idSub=" + idSub + ", idPais=" + idPais + ", idFor="
+				+ idFor + ", idEst=" + idEst + ", idRol=" + idRol + ", idMar=" + idMar + ", nombre=" + nombre
+				+ ", ruta=" + ruta + ", descripcion=" + descripcion + ", peso=" + peso + ", principal=" + principal
+				+ ", slide=" + slide + ", extension=" + extension + ", fechaCreacion=" + fechaCreacion + ", creadoPor="
+				+ creadoPor + ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}
 
 }

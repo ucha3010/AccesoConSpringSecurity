@@ -69,7 +69,8 @@
 								<th><fmt:message key="label.Email" /></th>
 								<th><fmt:message key="label.Phone" /></th>
 								<th><fmt:message key="label.Fax" /></th>
-								<th class="extraAdmin-th cursor-text"><fmt:message key="label.Principal" /></th>
+								<th class="cursor-text"><fmt:message key="label.Principal" /></th>
+								<th class="extraAdmin-th cursor-text">Ubicación</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -97,6 +98,11 @@
 										<c:if test="${not empresaPropia.facturacion}">
 											<img src='<c:url value="/resources/imgs/false.png"/>' class="tamanio_imagen cursor-pointer" onclick='location.href="<c:url value='/empresaPropia/available/${empresaPropia.idPropia}' />"'>
 										</c:if>
+									</td>
+									<td class="extraAdmin-td">
+										<a title="<fmt:message key='label.Pictures' />" href='<c:url value='/foto/empresaPropia/${empresaPropia.idPropia}' />'>
+											<span class="glyphicon glyphicon-picture tamanio_imagen zindex-1"></span>
+										</a>
 									</td>
 							    </tr>
 							</c:forEach>

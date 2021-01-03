@@ -10,9 +10,14 @@ public class EmpresaPropia {
 	private String email;
 	private boolean facturacion;
 	private DireccionEmpresaPropia direccionEmpresaPropia;
+	private Foto foto;
 
 	public EmpresaPropia() {
 
+	}
+
+	public EmpresaPropia(int idPropia) {
+		this.idPropia = idPropia;
 	}
 
 	/**
@@ -128,11 +133,31 @@ public class EmpresaPropia {
 		this.direccionEmpresaPropia = direccionEmpresaPropia;
 	}
 
+	/**
+	 * @return the foto
+	 */
+	public Foto getFoto() {
+		return foto;
+	}
+
+	/**
+	 * @param foto
+	 *            the foto to set
+	 */
+	public void setFoto(Foto foto) {
+		this.foto = foto;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "EmpresaPropia [idPropia=" + idPropia + ", razonSocial=" + razonSocial + ", cif=" + cif + ", telefono="
 				+ telefono + ", fax=" + fax + ", email=" + email + ", facturacion=" + facturacion
-				+ ", direccionEmpresaPropia=" + direccionEmpresaPropia + "]";
+				+ ", direccionEmpresaPropia=" + direccionEmpresaPropia + ", foto=" + foto + "]";
 	}
 
 }

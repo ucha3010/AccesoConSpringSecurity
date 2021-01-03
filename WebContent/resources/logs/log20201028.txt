@@ -1,0 +1,1 @@
+Wed Oct 28 00:40:05 CET 2020 - SAVE [admin] - table:campania - Campania [idCam=0, nombre=Halloween 2020, fechaInicio=null, fechaFin=null, descuentoPor=10.0, descripcion=Campaña por Halloween]

@@ -74,8 +74,6 @@
 			</c:if>
 			<fmt:message key="Country.item.column" var="itemSelect"/>
 			<fmt:message key="Select.country" var="selectCountry" />
-
-			
 			
 			<div class="row">		
 				<div class="hidden-xs col-sm-6 col-md-6">

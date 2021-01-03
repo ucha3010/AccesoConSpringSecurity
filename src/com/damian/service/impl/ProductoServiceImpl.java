@@ -16,9 +16,11 @@ import org.springframework.stereotype.Service;
 
 import com.damian.dao.ProductoDAO;
 import com.damian.exceptions.NotEmptyException;
+import com.damian.pojo.AdministracionOfertas;
 import com.damian.pojo.Categoria;
 import com.damian.pojo.Cuota;
 import com.damian.pojo.CuotaDetalle;
+import com.damian.pojo.DescripcionProducto;
 import com.damian.pojo.DireccionEmpresaPropia;
 import com.damian.pojo.EmpresaPropia;
 import com.damian.pojo.Estado;
@@ -32,9 +34,13 @@ import com.damian.pojo.ProductoFactura;
 import com.damian.pojo.Subcategoria;
 import com.damian.pojo.front.FrontCuota;
 import com.damian.pojo.front.FrontProductoStock;
+import com.damian.pojo.front.ObjectSearch;
+import com.damian.service.AdministracionOfertasService;
+import com.damian.service.CampaniaService;
 import com.damian.service.CategoriaService;
 import com.damian.service.CuotaDetalleService;
 import com.damian.service.CuotaService;
+import com.damian.service.DescripcionProductoService;
 import com.damian.service.EmpresaPropiaService;
 import com.damian.service.FacturaEnviarFacturarService;
 import com.damian.service.FacturaService;
@@ -51,6 +57,12 @@ import com.damian.utils.Utils;
 public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
+	private AdministracionOfertasService administracionOfertasService;
+
+	@Autowired
+	private CampaniaService campaniaService;
+
+	@Autowired
 	private CategoriaService categoriaService;
 
 	@Autowired
@@ -58,6 +70,9 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
 	private CuotaDetalleService cuotaDetalleService;
+
+	@Autowired
+	private DescripcionProductoService descripcionProductoService;
 
 	@Autowired
 	private EmpresaPropiaService empresaPropiaService;
@@ -99,7 +114,16 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Override
 	public Producto findById(int id) {
-		return productoDAO.findById(id);
+		Producto producto = productoDAO.findById(id);
+		producto.setDescripcionProducto(descripcionProductoService.findById(id));
+		return producto;
+	}
+
+	@Override
+	public Producto findByIdConFotos(int id) {
+		Producto producto = productoDAO.findById(id);
+		producto.setFotos(fotoService.findByIdPro(id));
+		return producto;
 	}
 
 	@Override
@@ -114,6 +138,14 @@ public class ProductoServiceImpl implements ProductoService {
 		producto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
 
 		productoDAO.save(producto, request);
+		if (producto.getDescripcionProducto() != null) {
+			if (producto.getIdPro() == 0) {
+				producto.getDescripcionProducto().setIdPro(getMaxId());
+			} else {
+				producto.getDescripcionProducto().setIdPro(producto.getIdPro());
+			}
+			descripcionProductoService.save(producto.getDescripcionProducto(), request);
+		}
 		return productoDAO.getMaxId();
 	}
 
@@ -122,6 +154,9 @@ public class ProductoServiceImpl implements ProductoService {
 
 		producto.setModificadoPor(Utils.getLoggedUser(request));
 		producto.setFechaModificacion(new Timestamp(System.currentTimeMillis()));
+		if (producto.getDescripcionProducto() != null) {
+			descripcionProductoService.save(producto.getDescripcionProducto(), request);
+		}
 
 		productoDAO.update(producto, request);
 	}
@@ -138,6 +173,7 @@ public class ProductoServiceImpl implements ProductoService {
 				productoEmpresaService.delete(id, p.getEmpresa().getIdEmp(), request);
 			}
 		}
+		descripcionProductoService.delete(id, request);
 		return productoDAO.delete(id, request);
 	}
 
@@ -253,13 +289,154 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
+	public List<Producto> findAllReducedData() {
+		return productoDAO.findAllReducedData();
+	}
+
+	@Override
+	public List<Producto> findProductosSinOferta(List<Producto> productos, List<AdministracionOfertas> ofertas,
+			List<AdministracionOfertas> campanias) {
+
+		return new ArrayList<>(reduceProductos(reduceProductos(productos, ofertas), campanias));
+	}
+
+	@Override
+	public List<Producto> findProductosSinPopulares(List<Producto> productos,
+			List<AdministracionOfertas> popularesList) {
+
+		return new ArrayList<>(reduceProductos(productos, popularesList));
+
+	}
+
+	@Override
+	public List<Producto> findProductosSinNovedades(List<Producto> productos,
+			List<AdministracionOfertas> novedadesList) {
+
+		return new ArrayList<>(reduceProductos(productos, novedadesList));
+	}
+
+	@Override
+	public List<Producto> findProductosSinCampania(List<Producto> productos,
+			List<AdministracionOfertas> productosCampaniaList) {
+
+		List<Producto> productosSinCampania = new ArrayList<>(reduceProductos(productos, productosCampaniaList));
+		for (Producto p : productosSinCampania) {
+			p.setCampania(campaniaService.getCampaignName(p.getIdPro()));
+		}
+		List<AdministracionOfertas> productosConOfertaList = administracionOfertasService.findByOfertas(0);
+		List<Integer> idProConOfertaList = new ArrayList<>();
+		for (AdministracionOfertas ao : productosConOfertaList) {
+			idProConOfertaList.add(ao.getIdPro());
+		}
+		List<Producto> productosSinCampaniaNiOferta = new ArrayList<>(productosSinCampania);
+		for (Producto pr : productosSinCampania) {
+			if (idProConOfertaList.contains(pr.getIdPro())) {
+				productosSinCampaniaNiOferta.remove(pr);
+			}
+		}
+
+		return productosSinCampaniaNiOferta;
+	}
+
+	@Override
 	public List<Producto> findByIdSubModel(int idSub) {
 		return productoDAO.findByIdSubModel(idSub);
 	}
 
 	@Override
+	public List<Producto> findByMarcaExacta(String nombre) {
+		return productoDAO.findByMarcaExacta(nombre);
+	}
+
+	@Override
 	public int getMaxId() {
 		return productoDAO.getMaxId();
+	}
+
+	@Override
+	public void fillFrontSubcategoria(List<Producto> productos) {
+		if (productos != null) {
+			List<Producto> productosAEliminar = new ArrayList<>();
+			for (Producto p : productos) {
+				if (p.getEstado().equalsIgnoreCase(ConstantesLocales.ACTIVE)) {
+					List<Foto> fotos = fotoService.findByIdPro(p.getIdPro());
+					if (fotos != null && !fotos.isEmpty()) {
+						p.setNombreFotoPrincipal(fotoService.principalPictureName(fotos));
+						AdministracionOfertas administracionOfertas = administracionOfertasService
+								.findById(p.getIdPro());
+						if (administracionOfertas != null) {
+							p.setPrecioConOferta(administracionOfertas.getPrecioConOferta());
+							p.setPrecioSinOferta(administracionOfertas.getPrecioSinOferta());
+						}
+					} else {
+						productosAEliminar.add(p);						
+					}
+				} else {
+					productosAEliminar.add(p);
+				}
+			}
+			if (!productosAEliminar.isEmpty()) {
+				for (Producto productoAEliminar : productosAEliminar) {
+					productos.remove(productoAEliminar);
+				}
+			}
+		}
+	}
+
+	@Override
+	public List<ObjectSearch> simulateSearchResult(String tagName, String idioma) {
+
+		List<Producto> data = findAllReducedData();
+		List<ObjectSearch> result = new ArrayList<>();
+
+		// iterate a list and filter by tagName
+		for (Producto tag : data) {
+
+			switch (idioma) {
+			case "ES":
+				if (tag.getNombreES().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreES()));
+				}
+				break;
+			case "EN":
+				if (tag.getNombreEN().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreEN()));
+				}
+				break;
+			case "CA":
+				if (tag.getNombreCA().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreEN()));
+				}
+				break;
+			case "EU":
+				if (tag.getNombreEU().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreEN()));
+				}
+				break;
+			case "FR":
+				if (tag.getNombreFR().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreEN()));
+				}
+				break;
+			case "GE":
+				if (tag.getNombreGE().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreEN()));
+				}
+				break;
+			case "IT":
+				if (tag.getNombreIT().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreEN()));
+				}
+				break;
+			case "PT":
+				if (tag.getNombrePT().toLowerCase().contains(tagName.toLowerCase())) {
+					result.add(new ObjectSearch(tag.getIdPro(), tag.getNombreEN()));
+				}
+				break;
+			}
+		}
+
+		return result;
 	}
 
 	private void fillFactura(Factura factura, FrontProductoStock frontProductoStock, BigDecimal precioFinalSinIva,
@@ -295,6 +472,12 @@ public class ProductoServiceImpl implements ProductoService {
 			s.setCategoria(c);
 			p.setSubcategoria(s);
 			p.setFotos(fillFotoPrincipal(p.getIdPro()));
+			DescripcionProducto descripcionProducto = descripcionProductoService.findById(p.getIdPro());
+			if (descripcionProducto != null) {
+				p.setDescripcionProducto(descripcionProducto);
+			} else {
+				p.setDescripcionProducto(new DescripcionProducto());
+			}
 		}
 		return salida;
 	}
@@ -419,6 +602,24 @@ public class ProductoServiceImpl implements ProductoService {
 			cuotaDetalleService.save(cuotaDetalle, request);
 		}
 
+	}
+
+	private List<Producto> reduceProductos(List<Producto> productoList,
+			List<AdministracionOfertas> administracionOfertasList) {
+
+		List<Integer> idProList = new ArrayList<>();
+		for (AdministracionOfertas ao : administracionOfertasList) {
+			idProList.add(ao.getIdPro());
+		}
+		List<Producto> productoListOut = new ArrayList<>(productoList);
+		if (!idProList.isEmpty()) {
+			for (int i = 0; i < productoList.size(); i++) {
+				if (idProList.contains(productoList.get(i).getIdPro())) {
+					productoListOut.remove(productoList.get(i));
+				}
+			}
+		}
+		return new ArrayList<>(productoListOut);
 	}
 
 }

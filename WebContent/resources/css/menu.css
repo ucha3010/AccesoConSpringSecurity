@@ -144,6 +144,10 @@ button:hover{
 	border-radius: 15px;
 }
 
+.border-radius-10-porciento {
+	border-radius: 10%;
+}
+
 .separacion10 {
 	height: 10px;
 }
@@ -154,6 +158,12 @@ button:hover{
 
 .padding9 {
 	padding: 9px;
+}
+
+.paddingEncuentraTienda {
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+	padding-bottom: 0.1em;
 }
 
 .height27 {
@@ -187,4 +197,145 @@ button:hover{
 	color: #333;
 	font-size: 27px;
 	text-transform: uppercase;
+}
+
+.nav-link {
+	background-color: #e1e1e1;
+}
+
+.nav-item .active {
+	background-color: #9dd09e;
+}
+
+.productoOferta {
+	color: #3305bc;
+	border-radius: 15px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 14px;
+	height: 58px;
+	width: 100%;
+}
+
+.productoOfertaLineas {
+	position: relative;
+	float: left;
+}
+
+.productoOfertaSin {
+	color: #9b0000;	
+	text-align: right;
+}
+
+.productoOfertaCon {
+	text-align: right;	
+}
+
+.productoOfertaFecha {
+	color: #9b0000;		
+	text-align: right;
+}
+
+.margin-left-5px {
+	margin-left: 5px;
+}
+
+.fondoOferta {
+	background-color: #aeb1bf;	
+}
+
+.fondoPopular {
+	background-color: #a9c8a6;	
+}
+
+.fondoNovedades {
+	background-color: #c89bd2;	
+}
+
+.fuente-cursive {
+	font-family: cursive;
+}
+
+.foncoEncuentraTienda {
+	background-color: #c5d169;
+}
+
+/*******************Menú lateral*************************/
+
+#du-sidebar {
+	position: fixed;
+	width: 200px;
+	height: 100%;
+	background: #8a949d;
+	left: -200px;
+	transition: all 500ms linear;
+	z-index: 10;
+	top: 120px;
+}
+
+#du-sidebar.active {
+	left: 0;
+}
+
+#du-sidebar ul li {
+	color: rgba(230, 230, 230, .9);
+	text-align: center;
+	padding: 15px 10px;
+	list-style: none;
+	border-bottom: 1px solid rgba(100, 100, 100, .3);
+}
+
+.du-logo {
+	border-radius: 50%;
+	display: block;
+	margin: 0 auto;
+}
+
+#du-sidebar .du-toggle-btn {
+	position: absolute;
+	left: 160px;
+	top: 200px;
+	cursor: pointer;
+	padding: 5px;
+	border-radius: 0px 0px 2px 2px; 
+}
+
+#du-sidebar .du-toggle-btn span {
+	display: block;
+	width: 40x;
+	text-align: center;
+	font-size: 30px;
+	transform: rotate(-90deg);
+	background-color: #d8e907;
+	font-family: cursive;
+}
+
+#campanias-arbol {
+	position: fixed;
+	width: 200px;
+	height: 100%;
+	background: #8a949d;
+	left: 0px;
+	top: 120px;
+	}
+
+#campanias-arbol ul li {
+	color: rgba(230, 230, 230, .9);
+	text-align: center;
+	padding: 15px 10px;
+	list-style: none;
+	border-bottom: 1px solid rgba(100, 100, 100, .3);
+}
+
+
+.ver-mas {
+	text-align: center;
+	font-size: 20px;
+	transform: rotate(-90deg);
+	font-family: cursive;
+	width: 8em;
+	padding: 1.5em 0 1.5em 0;
+	margin-top: 3em;
 }

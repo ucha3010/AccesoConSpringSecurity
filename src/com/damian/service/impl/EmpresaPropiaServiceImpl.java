@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 import com.damian.dao.EmpresaPropiaDAO;
 import com.damian.pojo.DireccionEmpresaPropia;
 import com.damian.pojo.EmpresaPropia;
+import com.damian.pojo.Foto;
 import com.damian.service.DireccionEmpresaPropiaService;
 import com.damian.service.EmpresaPropiaService;
+import com.damian.service.FotoService;
 
 @Service
 public class EmpresaPropiaServiceImpl implements EmpresaPropiaService {
@@ -20,16 +22,27 @@ public class EmpresaPropiaServiceImpl implements EmpresaPropiaService {
 	private EmpresaPropiaDAO empresaPropiaDAO;
 
 	@Autowired
+	private FotoService fotoService;
+
+	@Autowired
 	private DireccionEmpresaPropiaService direccionEmpresaPropiaService;
 
 	@Override
 	public List<EmpresaPropia> findAll() {
-		return empresaPropiaDAO.findAll();
+		List<EmpresaPropia> empresaPropiaList = empresaPropiaDAO.findAll();
+		for(EmpresaPropia ep: empresaPropiaList) {
+			ep.setDireccionEmpresaPropia(direccionEmpresaPropiaService.findByIdPropiaModel(ep.getIdPropia()).get(0));
+			cargoFoto(ep, ep.getIdPropia());
+		}
+		return empresaPropiaList;
 	}
 
 	@Override
 	public EmpresaPropia findById(int id) {
-		return empresaPropiaDAO.findById(id);
+		EmpresaPropia empresaPropia = empresaPropiaDAO.findById(id);
+		empresaPropia.setDireccionEmpresaPropia(direccionEmpresaPropiaService.findByIdPropiaModel(id).get(0));
+		cargoFoto(empresaPropia, id);
+		return empresaPropia;
 	}
 
 	@Override
@@ -62,10 +75,14 @@ public class EmpresaPropiaServiceImpl implements EmpresaPropiaService {
 
 	@Override
 	public int delete(int id, HttpServletRequest request) {
-		EmpresaPropia empresaPropia = findByIdModel(id);
+		EmpresaPropia empresaPropia = findById(id);
 		if (empresaPropia.getDireccionEmpresaPropia() != null
 				&& empresaPropia.getDireccionEmpresaPropia().getIdDirPropia() != 0) {
 			direccionEmpresaPropiaService.delete(empresaPropia.getDireccionEmpresaPropia().getIdDirPropia(), request);
+		}
+		List<Foto> fotoList = fotoService.findByIdPropia(id);
+		if (fotoList != null && !fotoList.isEmpty()) {
+			fotoService.delete(fotoList.get(0).getIdFot(), request);
 		}
 		int resultado = empresaPropiaDAO.delete(id, request);
 		if (empresaPropia.isFacturacion()) {
@@ -92,6 +109,14 @@ public class EmpresaPropiaServiceImpl implements EmpresaPropiaService {
 	@Override
 	public int getMaxId() {
 		return empresaPropiaDAO.getMaxId();
+	}
+	
+	private void cargoFoto(EmpresaPropia empresaPropia, int idPropia) {
+		List<Foto> fotoList = fotoService.findByIdPropia(idPropia);
+		if (fotoList != null && !fotoList.isEmpty()) {
+			empresaPropia.setFoto(fotoList.get(0));
+		}
+		
 	}
 
 }

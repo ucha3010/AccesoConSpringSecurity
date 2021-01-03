@@ -57,20 +57,20 @@
 		<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="Products" /></div>
 		<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 			<div class="row">
-				<div class="col-sm-3 col-md-2">
+				<div class="col-sm-2 col-md-2">
 					<input type="text" id="formulario" class="form-control">
 					<script>
 						const formulario = document.querySelector('#formulario');
 						formulario.addEventListener('keyup', filtrar);
 					</script>
 				</div>
-				<div class="col-sm-2 col-md-4">
+				<div class="col-sm-1 col-md-1">
 					<div class="dropdown collapse resultadosBusqueda">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-2">
 					<c:if test="${not empty producto_agregado}">
 						<span style="color: green;">
 							<fmt:message key="Product.added" />
@@ -81,6 +81,16 @@
 							<fmt:message key="Product.deleted" />
 						</span>
 					</c:if>
+				</div>
+				<div class="col-sm-2">
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/marca'/>"'>
+						<fmt:message key="label.Brands" />
+					</button>
+				</div>
+				<div class="col-sm-2">
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/administrar/ofertas'/>"'>
+						<fmt:message key="label.Offers.admin" />
+					</button>
 				</div>
 				<div class="col-sm-3 col-md-2  navbar-right">
 					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonagregar" onclick='location.href="<c:url value='/producto/0'/>"'>
@@ -98,15 +108,25 @@
 						formulario.addEventListener('keyup', filtrar);
 					</script>
 				</div>
-				<div class="col-sm-3 col-md-6">
+				<div class="col-sm-2 col-md-3">
 					<div class="dropdown collapse resultadosBusqueda">
 						<div class="dropdown-content" id="resultado">
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-3 col-md-2">
+				<div class="col-sm-2">
+					<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/marca'/>"'>
+						<fmt:message key="label.Brands" />
+					</button>
 				</div>
-				<div class="col-sm-3 col-md-2  navbar-right">
+				<div class="col-sm-2">
+					<sec:authorize access="hasAnyRole('ROL_USUARIO')">
+						<button type="button" class="btn fondo-c0c0c0 float-right ml-1 border-color-dam ${prefUsr.tema}botonresto" onclick='location.href="<c:url value='/administrar/ofertas'/>"'>
+							<fmt:message key="label.Offers.admin" />
+						</button>
+					</sec:authorize>
+				</div>
+				<div class="col-sm-3 navbar-right">
 				</div>
 			</div>
 		</sec:authorize>
@@ -138,17 +158,18 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${productos}" var="producto">
-							    <tr title='<fmt:message key="label.purchase.price" />: <fmt:formatNumber type="currency" value="${producto.precioCompra}" />&#xA;<fmt:message key="label.Serial.number" />: <c:out value="${producto.serie}" />&#xA;<fmt:message key="label.location" />: <c:out value="${producto.ubicacion}" />&#xA;<fmt:message key="label.send" />: <c:out value="${producto.enviar}" />&#xA;<fmt:message key="label.salable" />: <c:out value="${producto.vendible}" />&#xA;<fmt:message key="label.warranty.months" />: <c:out value="${producto.mesesGarantia}" />&#xA;<fmt:message key="label.weigth" />: <c:out value="${producto.peso}" />&#xA;<fmt:message key="label.volume" />: <c:out value="${producto.volumen}" />&#xA;<fmt:message key="label.Category" />: <c:out value="${producto.subcategoria.categoria[nameColSelect]}" />&#xA;<fmt:message key="label.Subcategory" />: <c:out value="${producto.subcategoria[nameColSelect]}" />'>
+							    <tr title='<fmt:message key="label.purchase.price" />: <fmt:formatNumber type="currency" value="${producto.precioCompra}" />&#xA;<fmt:message key="label.Serial.number" />: <c:out value="${producto.serie}" />&#xA;<fmt:message key="label.location" />: <c:out value="${producto.ubicacion}" />&#xA;<fmt:message key="label.send" />: <c:out value="${producto.enviar}" />&#xA;<fmt:message key="label.salable" />: <c:out value="${producto.vendible}" />&#xA;<fmt:message key="label.warranty.months" />: <c:out value="${producto.mesesGarantia}" />&#xA;<fmt:message key="label.weigth" />: <c:out value="${producto.peso}" />&#xA;<fmt:message key="label.volume" />: <c:out value="${producto.volumen}" />&#xA;<fmt:message key="label.Category" />: <c:out value="${producto.subcategoria.categoria[nameColSelect]}" />&#xA;<fmt:message key="label.Subcategory" />: <c:out value="${producto.subcategoria[nameColSelect]}" />&#xA;<fmt:message key="label.Description" />: <c:out value="${producto.descripcionProducto[nameColSelect]}" />'>
 									<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">
 										<td class="extraAdmin-td">
 											<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/producto/${producto.idPro}' />"'>
 												<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
 											</a>
-											<sec:authorize access="hasAnyRole('ROL_ROOT')">
-												<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${producto.idPro})">
-													<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
-												</a>
-											</sec:authorize>
+											<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${producto.idPro})">
+												<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
+											</a>
+											<a title="<fmt:message key='label.Filters' />" onclick='location.href="<c:url value='/filtro/nuevo/${producto.idPro}/${paginacion.actual}/${paginacion.registrosPorPagina}' />"' class="cursor-pointer">
+												<img src='<c:url value="/resources/imgs/filtro.jpg"/>' class="tamanio_imagen">
+											</a>
 										</td>
 									</sec:authorize>
 									<td><c:out value="${producto[nameColSelect]}" /></td>
@@ -240,16 +261,21 @@
 										<div class="modal-body">
 							            	<div class="col-xs-4">								
 												<sec:authorize access="hasAnyRole('ROL_ADMIN','ROL_ROOT')">	
-									            	<div class="col-xs-6">
+									            	<div class="col-xs-4">
 														<a title="<fmt:message key='Edit' />" onclick='location.href="<c:url value='/producto/${producto.idPro}' />"' class="cursor-pointer">
 															<img src='<c:url value="/resources/imgs/editar.png"/>' class="tamanio_imagen">
 														</a>								
 													</div>
-										            <div class="col-xs-6">
+										            <div class="col-xs-4">
 														<a title="<fmt:message key='Delete' />" onclick="return confirmDelete(${producto.idPro})" class="cursor-pointer">
 															<img src='<c:url value="/resources/imgs/borrar.png"/>' class="tamanio_imagen">
 														</a>	
-													</div>									
+													</div>	
+										            <div class="col-xs-4">
+														<a title="<fmt:message key='label.Filters' />" onclick='location.href="<c:url value='/filtro/nuevo/${producto.idPro}/${paginacion.actual}/${paginacion.registrosPorPagina}' />"' class="cursor-pointer">
+															<img src='<c:url value="/resources/imgs/filtro.jpg"/>' class="tamanio_imagen">
+														</a>
+										            </div>								
 												</sec:authorize>
 											</div>
 								            <div class="col-xs-2">	

@@ -1,0 +1,4 @@
+Fri Nov 20 18:42:13 CET 2020 - SAVE [admin] - table:empresapropia - ModelEmpresaPropia [idPropia=0, razonSocial=Company Salamanca, cif=, telefono=, fax=, email=, facturacion=false]
+Fri Nov 20 18:42:13 CET 2020 - SAVE [admin] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=8, tipoVia=road.Street, nombreVia=Sarzuela, numero=2, resto=, cp=34005, provincia=, ciudad=Salamanca, pais_idPais=1, idPropia=8, modificadoPor=admin, fechaModificacion=2020-11-20 18:42:13.541]
+Fri Nov 20 18:43:18 CET 2020 - SAVE [admin] - table:empresapropia - ModelEmpresaPropia [idPropia=0, razonSocial=Company Amería, cif=, telefono=, fax=, email=, facturacion=false]
+Fri Nov 20 18:43:18 CET 2020 - SAVE [admin] - table:direccionempresapropia - ModelDireccionEmpresa [idDirPropia=9, tipoVia=road.Street, nombreVia=Torreón, numero=2, resto=, cp=38006, provincia=, ciudad=Almería, pais_idPais=1, idPropia=9, modificadoPor=admin, fechaModificacion=2020-11-20 18:43:18.657]

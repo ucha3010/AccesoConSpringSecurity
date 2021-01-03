@@ -27,5 +27,9 @@ public interface ProductoDAO {
 	public int getMaxId();
 
 	public List<Producto> findSearchAll();
+	
+	public List<Producto> findAllReducedData();
+
+	public List<Producto> findByMarcaExacta(String nombre);
 
 }

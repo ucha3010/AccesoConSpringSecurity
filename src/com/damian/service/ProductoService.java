@@ -5,14 +5,18 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import com.damian.exceptions.NotEmptyException;
+import com.damian.pojo.AdministracionOfertas;
 import com.damian.pojo.Producto;
 import com.damian.pojo.front.FrontProductoStock;
+import com.damian.pojo.front.ObjectSearch;
 
 public interface ProductoService {
 
 	public List<Producto> findAll(String column, int paginaInicio, int totalPaginas, HttpServletRequest request);
 
 	public Producto findById(int id);
+
+	public Producto findByIdConFotos(int id);
 
 	public Producto findByIdModel(int id);
 
@@ -30,8 +34,28 @@ public interface ProductoService {
 
 	public List<Producto> findSearchAll();
 
+	public List<Producto> findAllReducedData();
+
+	public List<Producto> findProductosSinOferta(List<Producto> productos, List<AdministracionOfertas> ofertas,
+			List<AdministracionOfertas> campanias);
+
+	public List<Producto> findProductosSinPopulares(List<Producto> productos,
+			List<AdministracionOfertas> popularesList);
+
+	public List<Producto> findProductosSinNovedades(List<Producto> productos,
+			List<AdministracionOfertas> novedadesList);
+
+	public List<Producto> findProductosSinCampania(List<Producto> productos,
+			List<AdministracionOfertas> productosCampaniaList);
+
 	public List<Producto> findByIdSubModel(int idSub);
 
+	public List<Producto> findByMarcaExacta(String nombre);
+
 	public int getMaxId();
+
+	public void fillFrontSubcategoria(List<Producto> productos);
+
+	public List<ObjectSearch> simulateSearchResult(String tagName, String idioma);
 
 }

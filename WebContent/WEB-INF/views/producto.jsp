@@ -57,6 +57,12 @@
 				campos[i].style.borderColor="#ced4da";
 			}
 		}
+		function agregarMarcaJS(){
+			var formulario = document.getElementById("formulario");
+			var url = "<c:url value='/producto/saveMarca' />";
+			formulario.action=url;
+        	formulario.submit();
+		}
 	</script>
 </head>
 <body class="${prefUsr.tema}fondopantalla">
@@ -69,7 +75,7 @@
 		<c:if test="${producto.idPro == 0}">
 			<div class="well well-sm text-center h2 ${prefUsr.tema}titulo"><fmt:message key="Add.product" /></div>
 		</c:if>
-		<sf:form method="post" action="${pageContext.request.contextPath}/producto/save" modelAttribute="producto" onsubmit="return validar()">
+		<sf:form method="post" action="${pageContext.request.contextPath}/producto/save" modelAttribute="producto" onsubmit="return validar()" id="formulario">
 			<c:if test="${producto.idPro != 0}">
 				<sf:hidden path="idPro"/>
 				<sf:hidden path="unidades"/>
@@ -115,11 +121,37 @@
 					<sf:input path="precioCompra" class="form-control" id="precioCompra" />
 					<span id="precioCompraError" name="errorSpan"></span>
 				</div>
-				<div class="col-xs-12 col-sm-5">
+				<div class="col-xs-8 col-sm-3">
 					<label for="marca"><fmt:message key="label.brand" /></label> 
-					<sf:input path="marca" class="form-control" id="marca" />
-					<span id="marcaError" name="errorSpan"></span>
+		        	<sf:select path="marca" class="form-control" id="marca">
+		            	<sf:option value="" label="" />
+		            	<c:forEach items="${marcas}" var="marca">
+		            		<sf:option value="${marca.nombre}" label="${marca.nombre}" />
+		            	</c:forEach>
+		        	</sf:select>
 				</div>	
+				<div class="col-xs-4 col-sm-2">
+					<br>
+		        	<a href="#agregarMarca" class="btn btn-default" data-toggle="modal"><fmt:message key="Add.brand" /></a>
+					<div class="modal fade" id="agregarMarca">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title justify-content-center"><fmt:message key="Add.brand" /></h4>
+								</div>
+								<div class="modal-body">
+									<label for="nombreMarca"><fmt:message key="label.Name" /></label>
+									<sf:input path="nombreMarca" class="form-control" id="nombreMarca" />
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botonguardar" onclick="agregarMarcaJS()"><fmt:message key="Save" /></button>
+									<button type="button" class="btn btn-primary margin-left-5porciento ${prefUsr.tema}botoncancelar" data-dismiss="modal"><fmt:message key="Cancel" /></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<br/>
 			<div class="row">		
@@ -192,6 +224,21 @@
 					<label for="mesesGarantia"><fmt:message key="label.warranty.months" /></label> 
 					<sf:input path="mesesGarantia" class="form-control" id="mesesGarantia" />
 					<span id="mesesGarantiaError" name="errorSpan"></span>
+				</div>	
+			</div>
+			<br/>
+			<div class="row">		
+				<div class="hidden-xs col-sm-1">
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="descripcionES"><fmt:message key="label.Product.description.spanish" /></label> 
+					<sf:input path="descripcionProducto.nombreES" class="form-control" id="descripcionES" />
+					<span id="descripcionESError" name="errorSpan"></span>
+				</div>
+				<div class="col-xs-12 col-sm-5">
+					<label for="descripcionEN"><fmt:message key="label.Product.description.english" /></label> 
+					<sf:input path="descripcionProducto.nombreEN" class="form-control" id="descripcionEN" />
+					<span id="descripcionENError" name="errorSpan"></span>
 				</div>	
 			</div>
 			<br/>

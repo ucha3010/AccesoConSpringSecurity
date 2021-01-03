@@ -11,17 +11,20 @@ public class Foto {
 	private Usuario usuario;
 	private Producto producto;
 	private Empresa empresa;
+	private EmpresaPropia empresaPropia;
 	private Categoria categoria;
 	private Subcategoria subcategoria;
 	private Pais pais;
 	private FormaPago formaPago;
 	private Estado estado;
 	private Rol rol;
+	private Marca marca;
 	private String nombre;
 	private String ruta;
 	private String descripcion;
 	private long peso;
 	private boolean principal;
+	private boolean slide;
 	private String extension;
 	private Timestamp fechaCreacion;
 	private String creadoPor;
@@ -115,6 +118,21 @@ public class Foto {
 	}
 
 	/**
+	 * @return the empresaPropia
+	 */
+	public EmpresaPropia getEmpresaPropia() {
+		return empresaPropia;
+	}
+
+	/**
+	 * @param empresaPropia
+	 *            the empresaPropia to set
+	 */
+	public void setEmpresaPropia(EmpresaPropia empresaPropia) {
+		this.empresaPropia = empresaPropia;
+	}
+
+	/**
 	 * @return the categoria
 	 */
 	public Categoria getCategoria() {
@@ -205,6 +223,21 @@ public class Foto {
 	}
 
 	/**
+	 * @return the marca
+	 */
+	public Marca getMarca() {
+		return marca;
+	}
+
+	/**
+	 * @param marca
+	 *            the marca to set
+	 */
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
+	/**
 	 * @return the nombre
 	 */
 	public String getNombre() {
@@ -277,6 +310,21 @@ public class Foto {
 	 */
 	public void setPrincipal(boolean principal) {
 		this.principal = principal;
+	}
+
+	/**
+	 * @return the slide
+	 */
+	public boolean isSlide() {
+		return slide;
+	}
+
+	/**
+	 * @param slide
+	 *            the slide to set
+	 */
+	public void setSlide(boolean slide) {
+		this.slide = slide;
 	}
 
 	/**
@@ -362,9 +410,10 @@ public class Foto {
 	@Override
 	public String toString() {
 		return "Foto [idFot=" + idFot + ", archivo=" + archivo + ", usuario=" + usuario + ", producto=" + producto
-				+ ", empresa=" + empresa + ", categoria=" + categoria + ", subcategoria=" + subcategoria + ", pais="
-				+ pais + ", formaPago=" + formaPago + ", estado=" + estado + ", rol=" + rol + ", nombre=" + nombre
-				+ ", ruta=" + ruta + ", descripcion=" + descripcion + ", peso=" + peso + ", principal=" + principal
+				+ ", empresa=" + empresa + ", empresaPropia=" + empresaPropia + ", categoria=" + categoria
+				+ ", subcategoria=" + subcategoria + ", pais=" + pais + ", formaPago=" + formaPago + ", estado="
+				+ estado + ", rol=" + rol + ", marca=" + marca + ", nombre=" + nombre + ", ruta=" + ruta
+				+ ", descripcion=" + descripcion + ", peso=" + peso + ", principal=" + principal + ", slide=" + slide
 				+ ", extension=" + extension + ", fechaCreacion=" + fechaCreacion + ", creadoPor=" + creadoPor
 				+ ", modificadoPor=" + modificadoPor + ", fechaModificacion=" + fechaModificacion + "]";
 	}

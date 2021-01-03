@@ -16,6 +16,8 @@ public interface FotoDAO {
 
 	public List<Foto> findByIdEmp(int idEmp);
 
+	public List<Foto> findByIdPropia(int idPropia);
+
 	public List<Foto> findByIdCat(int idCat);
 
 	public List<Foto> findByIdSub(int idSub);
@@ -27,6 +29,10 @@ public interface FotoDAO {
 	public List<Foto> findByIdEst(int idEst);
 
 	public List<Foto> findByIdRol(int idRol);
+
+	public List<Foto> findByIdMar(int idMar);
+
+	public List<Foto> findBySlide();
 
 	public int save(Foto foto, HttpServletRequest request);
 

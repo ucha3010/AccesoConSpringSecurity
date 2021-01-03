@@ -5,9 +5,11 @@ import org.springframework.stereotype.Component;
 import com.damian.dao.model.ModelFoto;
 import com.damian.pojo.Categoria;
 import com.damian.pojo.Empresa;
+import com.damian.pojo.EmpresaPropia;
 import com.damian.pojo.Estado;
 import com.damian.pojo.FormaPago;
 import com.damian.pojo.Foto;
+import com.damian.pojo.Marca;
 import com.damian.pojo.Pais;
 import com.damian.pojo.Producto;
 import com.damian.pojo.Rol;
@@ -37,6 +39,9 @@ public class ConverterFoto {
 		if (mf.getIdEmp() != 0) {
 			f.setEmpresa(new Empresa(mf.getIdEmp()));
 		}
+		if (mf.getIdPropia() != 0) {
+			f.setEmpresaPropia(new EmpresaPropia(mf.getIdPropia()));
+		}
 		if (mf.getIdCat() != 0) {
 			f.setCategoria(new Categoria(mf.getIdCat()));
 		}
@@ -55,11 +60,15 @@ public class ConverterFoto {
 		if (mf.getIdRol() != 0) {
 			f.setRol(new Rol(mf.getIdRol()));
 		}
+		if (mf.getIdMar() != 0) {
+			f.setMarca(new Marca(mf.getIdMar()));
+		}
 		f.setNombre(mf.getNombre());
 		f.setRuta(mf.getRuta());
 		f.setDescripcion(mf.getDescripcion());
 		f.setPeso(mf.getPeso());
 		f.setPrincipal(mf.isPrincipal());
+		f.setSlide(mf.isSlide());
 		f.setExtension(mf.getExtension());
 		f.setFechaCreacion(mf.getFechaCreacion());
 		f.setCreadoPor(mf.getCreadoPor());
@@ -81,6 +90,9 @@ public class ConverterFoto {
 		if (f.getEmpresa() != null) {
 			mf.setIdEmp(f.getEmpresa().getIdEmp());
 		}
+		if (f.getEmpresaPropia() != null) {
+			mf.setIdPropia(f.getEmpresaPropia().getIdPropia());
+		}
 		if (f.getCategoria() != null) {
 			mf.setIdCat(f.getCategoria().getIdCat());
 		}
@@ -99,11 +111,15 @@ public class ConverterFoto {
 		if (f.getRol() != null) {
 			mf.setIdRol(f.getRol().getIdRol());
 		}
+		if (f.getMarca() != null) {
+			mf.setIdMar(f.getMarca().getIdMar());
+		}
 		mf.setNombre(f.getNombre());
 		mf.setRuta(f.getRuta());
 		mf.setDescripcion(f.getDescripcion());
 		mf.setPeso(f.getPeso());
 		mf.setPrincipal(f.isPrincipal());
+		mf.setSlide(f.isSlide());
 		mf.setExtension(f.getExtension());
 		mf.setFechaCreacion(f.getFechaCreacion());
 		mf.setCreadoPor(f.getCreadoPor());

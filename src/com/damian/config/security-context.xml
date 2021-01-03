@@ -14,10 +14,19 @@
 		<security:intercept-url pattern="/index2" access="isAuthenticated()" />
 		<security:intercept-url pattern="/index3" access="isAuthenticated()" />
 		<security:intercept-url pattern="/administrar/configuracion/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
+		<security:intercept-url pattern="/administrar/ofertas" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/administrar/ofertas/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/administrar/populares" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/administrar/populares/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/administrar/novedades" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/administrar/novedades/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/administrar/campanias" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/administrar/campanias/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/categoria" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/categoria/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/cliente" access="permitAll" />
 		<security:intercept-url pattern="/cliente/**" access="permitAll" />
+		<security:intercept-url pattern="/detalle/**" access="permitAll" />
 		<security:intercept-url pattern="/direccion/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/direccion/delete/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/direccion/formulario/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
@@ -36,10 +45,14 @@
 		<security:intercept-url pattern="/factura/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/factura/delete/**" access="hasAnyRole({'ROL_ROOT'})" />
 		<security:intercept-url pattern="/facturaEstado/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/favorito/**" access="isAuthenticated()" />
+		<security:intercept-url pattern="/filtro/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/footer/**" access="permitAll" />
 		<security:intercept-url pattern="/formaPago" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/formaPago/**" access="hasAnyRole({'ROL_ROOT'})" />
 		<security:intercept-url pattern="/foto/**" access="permitAll" />
+		<security:intercept-url pattern="/front/**" access="permitAll" />
+		<security:intercept-url pattern="/marca/**" access="permitAll" />
 		<security:intercept-url pattern="/preferenciaUsuario" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/preferenciaUsuario/**" access="isAuthenticated()" />
 		<security:intercept-url pattern="/private/**" access="isAuthenticated()" />
@@ -51,6 +64,7 @@
 		<security:intercept-url pattern="/rol/**" access="hasAnyRole({'ROL_ROOT'})" />
 		<security:intercept-url pattern="/subcategoria" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/subcategoria/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
+		<security:intercept-url pattern="/test/**" access="permitAll" />
 		<security:intercept-url pattern="/usuario" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT','ROL_USUARIO'})" />
 		<security:intercept-url pattern="/usuario/all" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
 		<security:intercept-url pattern="/usuario/all/**" access="hasAnyRole({'ROL_ADMIN','ROL_ROOT'})" />
