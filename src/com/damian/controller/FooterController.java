@@ -187,8 +187,7 @@ public class FooterController {
 	public ModelAndView getpromotion1(ModelAndView modelAndView) throws Exception {
 
 		List<AdministracionOfertas> ofertasList = administracionOfertasService.findByOfertas(0);
-		indexService.agregarFotos(ofertasList);
-		administracionOfertasService.fillFavoritos(ofertasList, indexService.idUserLogged(modelAndView));
+		completaDatosProductos(ofertasList, modelAndView);
 		modelAndView.addObject("ofertas", ofertasList);
 
 		return fillModelAndView("promotion1", "frontofertas", modelAndView);
@@ -201,7 +200,12 @@ public class FooterController {
 
 	@RequestMapping("/footer/promotion2")
 	public ModelAndView getpromotion2(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("promotion2", "promotion2", modelAndView);
+
+		List<AdministracionOfertas> popularesList = administracionOfertasService.findByProductosPopulares(0);
+		completaDatosProductos(popularesList, modelAndView);
+		modelAndView.addObject("populares", popularesList);
+
+		return fillModelAndView("promotion2", "frontpopulares", modelAndView);
 	}
 
 	@RequestMapping("/private/promotion2")
@@ -211,7 +215,12 @@ public class FooterController {
 
 	@RequestMapping("/footer/promotion3")
 	public ModelAndView getpromotion3(ModelAndView modelAndView) throws Exception {
-		return fillModelAndView("promotion3", "promotion3", modelAndView);
+
+		List<AdministracionOfertas> novedadesList = administracionOfertasService.findByNovedades(0);
+		completaDatosProductos(novedadesList, modelAndView);
+		modelAndView.addObject("novedades", novedadesList);
+
+		return fillModelAndView("promotion3", "frontnovedades", modelAndView);
 	}
 
 	@RequestMapping("/private/promotion3")
@@ -227,6 +236,11 @@ public class FooterController {
 	@RequestMapping("/private/promotion4")
 	public ModelAndView getPrivatePromotion4(ModelAndView modelAndView) throws Exception {
 		return getpromotion4(modelAndView);
+	}
+
+	private void completaDatosProductos(List<AdministracionOfertas> administracionOfertasList, ModelAndView modelAndView) {
+		indexService.agregarFotos(administracionOfertasList);
+		administracionOfertasService.fillFavoritos(administracionOfertasList, indexService.idUserLogged(modelAndView));
 	}
 
 	private ModelAndView fillModelAndView(String estoy, String go, ModelAndView modelAndView) {

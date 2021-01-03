@@ -54,6 +54,7 @@ public class Producto {
 	 */
 	private String nombreMarca;
 	private DescripcionProducto descripcionProducto;
+	private double precioSinOferta;
 	private double precioConOferta;
 
 	public Producto() {
@@ -590,6 +591,21 @@ public class Producto {
 	 */
 	public void setDescripcionProducto(DescripcionProducto descripcionProducto) {
 		this.descripcionProducto = descripcionProducto;
+	}
+
+	/**
+	 * @return the precioSinOferta
+	 */
+	public double getPrecioSinOferta() {
+		return precioSinOferta;
+	}
+
+	/**
+	 * @param precioSinOferta
+	 *            the precioSinOferta to set
+	 */
+	public void setPrecioSinOferta(double precioSinOferta) {
+		this.precioSinOferta = precioSinOferta;
 	}
 
 	/**

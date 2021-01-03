@@ -25,4 +25,6 @@ public class ConstantesLocales {
 
 	public static final String MARCAS = "marcas";
 
+	public static final String ACTIVE = "ACTIVE";
+
 }

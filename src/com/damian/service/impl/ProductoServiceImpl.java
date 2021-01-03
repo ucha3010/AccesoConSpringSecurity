@@ -356,14 +356,28 @@ public class ProductoServiceImpl implements ProductoService {
 	@Override
 	public void fillFrontSubcategoria(List<Producto> productos) {
 		if (productos != null) {
+			List<Producto> productosAEliminar = new ArrayList<>();
 			for (Producto p : productos) {
-				List<Foto> fotos = fotoService.findByIdPro(p.getIdPro());
-				if (fotos != null) {
-					p.setNombreFotoPrincipal(fotoService.principalPictureName(fotos));
+				if (p.getEstado().equalsIgnoreCase(ConstantesLocales.ACTIVE)) {
+					List<Foto> fotos = fotoService.findByIdPro(p.getIdPro());
+					if (fotos != null && !fotos.isEmpty()) {
+						p.setNombreFotoPrincipal(fotoService.principalPictureName(fotos));
+						AdministracionOfertas administracionOfertas = administracionOfertasService
+								.findById(p.getIdPro());
+						if (administracionOfertas != null) {
+							p.setPrecioConOferta(administracionOfertas.getPrecioConOferta());
+							p.setPrecioSinOferta(administracionOfertas.getPrecioSinOferta());
+						}
+					} else {
+						productosAEliminar.add(p);						
+					}
+				} else {
+					productosAEliminar.add(p);
 				}
-				AdministracionOfertas administracionOfertas = administracionOfertasService.findById(p.getIdPro());
-				if (administracionOfertas != null) {
-					p.setPrecioConOferta(administracionOfertas.getPrecioConOferta());
+			}
+			if (!productosAEliminar.isEmpty()) {
+				for (Producto productoAEliminar : productosAEliminar) {
+					productos.remove(productoAEliminar);
 				}
 			}
 		}

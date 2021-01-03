@@ -88,7 +88,7 @@
 								<div class="imagenProducto">
 									<a title="${producto[nameColSelect]}" onclick='location.href="<c:url value='/detalle/producto/${producto.idPro}' />"' class="cursor-pointer">
 										<c:if test="${(producto.precioConOferta > 0)}">
-										<h4 class="precioSinOferta"><fmt:formatNumber type="currency" value="${producto.precioVenta}" /></h4>
+										<h4 class="precioSinOferta"><fmt:formatNumber type="currency" value="${producto.precioSinOferta}" /></h4>
 										<h2 class="precioConOferta"><fmt:formatNumber type="currency" value="${producto.precioConOferta}" /></h2>
 										</c:if>
 										<c:if test="${(producto.precioConOferta == 0)}">

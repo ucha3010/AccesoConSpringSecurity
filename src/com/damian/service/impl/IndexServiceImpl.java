@@ -1,5 +1,6 @@
 package com.damian.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,12 +108,22 @@ public class IndexServiceImpl implements IndexService {
 
 	@Override
 	public void agregarFotos(List<AdministracionOfertas> administracionOfertasList) {
+		List<AdministracionOfertas> administracionOfertasAEliminar = new ArrayList<>();
 		for (AdministracionOfertas ao : administracionOfertasList) {
 			List<Foto> fotos = fotoService.findByIdPro(ao.getProducto().getIdPro());
-			for (Foto f : fotos) {
-				if (f.isPrincipal()) {
-					ao.getProducto().setNombreFotoPrincipal(f.getNombre());
+			if(fotos != null && !fotos.isEmpty()) {
+				for (Foto f : fotos) {
+					if (f.isPrincipal()) {
+						ao.getProducto().setNombreFotoPrincipal(f.getNombre());
+					}
 				}
+			} else {
+				administracionOfertasAEliminar.add(ao);
+			}
+		}
+		if(!administracionOfertasAEliminar.isEmpty()) {
+			for(AdministracionOfertas ado: administracionOfertasAEliminar) {
+				administracionOfertasList.remove(ado);
 			}
 		}
 	}

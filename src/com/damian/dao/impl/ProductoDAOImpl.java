@@ -21,6 +21,7 @@ import com.damian.dao.UsuarioDAO;
 import com.damian.dao.UsuarioOrdenDAO;
 import com.damian.dao.model.ModelProducto;
 import com.damian.pojo.Producto;
+import com.damian.utils.ConstantesLocales;
 import com.damian.utils.LocalLogger;
 import com.damian.utils.Utils;
 
@@ -172,7 +173,7 @@ public class ProductoDAOImpl implements ProductoDAO {
 	public List<Producto> findSearchAll() {
 		List<ModelProducto> mpList = jdbcTemplate.query(
 				"SELECT idPro, marca, modelo, precioVenta, nombreES, nombreEN, nombrePT, nombreFR, nombreIT, nombreGE, nombreCA, nombreEU FROM "
-						+ TABLA + " WHERE estado = 'ACTIVE'",
+						+ TABLA + " WHERE estado = '" + ConstantesLocales.ACTIVE + "'",
 				BeanPropertyRowMapper.newInstance(ModelProducto.class));
 		List<Producto> pList = new ArrayList<>();
 		for (ModelProducto mp : mpList) {
