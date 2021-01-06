@@ -99,7 +99,7 @@ public class SubcategoriaController {
 	@RequestMapping("/front/subcategoria/{idSub}")
 	public ModelAndView getFrontSubcategoria(ModelAndView modelAndView, @PathVariable("idSub") int idSub) {
 		
-		indexService.idUserLogged(modelAndView);
+		int idUsr = indexService.idUserLogged(modelAndView);
 		indexService.chargeDivSearchBar(modelAndView);
 
 		Subcategoria subcategoria = subcategoriaService.findByIdModel(idSub);
@@ -109,7 +109,7 @@ public class SubcategoriaController {
 		modelAndView.addObject("filtroTitulos", filtroTitulos);
 
 		List<Producto> productos = productoService.findByIdSubModel(idSub);
-		productoService.fillFrontSubcategoria(productos);
+		productoService.fillFrontSubcategoria(productos, idUsr);
 		modelAndView.addObject("productos", productos);
 
 		modelAndView.addObject("estoy", "front/subcategoria/" + idSub);

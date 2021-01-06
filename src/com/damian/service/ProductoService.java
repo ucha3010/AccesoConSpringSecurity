@@ -54,7 +54,7 @@ public interface ProductoService {
 
 	public int getMaxId();
 
-	public void fillFrontSubcategoria(List<Producto> productos);
+	public void fillFrontSubcategoria(List<Producto> productos, int idUsr);
 
 	public List<ObjectSearch> simulateSearchResult(String tagName, String idioma);
 

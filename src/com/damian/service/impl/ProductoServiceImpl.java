@@ -26,6 +26,7 @@ import com.damian.pojo.EmpresaPropia;
 import com.damian.pojo.Estado;
 import com.damian.pojo.Factura;
 import com.damian.pojo.FacturaEnviarFacturar;
+import com.damian.pojo.Favorito;
 import com.damian.pojo.FormaPago;
 import com.damian.pojo.Foto;
 import com.damian.pojo.Producto;
@@ -44,6 +45,7 @@ import com.damian.service.DescripcionProductoService;
 import com.damian.service.EmpresaPropiaService;
 import com.damian.service.FacturaEnviarFacturarService;
 import com.damian.service.FacturaService;
+import com.damian.service.FavoritoService;
 import com.damian.service.FotoService;
 import com.damian.service.LanguageService;
 import com.damian.service.ProductoEmpresaService;
@@ -82,6 +84,9 @@ public class ProductoServiceImpl implements ProductoService {
 
 	@Autowired
 	private FacturaService facturaService;
+
+	@Autowired
+	private FavoritoService favoritoService;
 
 	@Autowired
 	private FotoService fotoService;
@@ -354,7 +359,7 @@ public class ProductoServiceImpl implements ProductoService {
 	}
 
 	@Override
-	public void fillFrontSubcategoria(List<Producto> productos) {
+	public void fillFrontSubcategoria(List<Producto> productos, int idUsr) {
 		if (productos != null) {
 			List<Producto> productosAEliminar = new ArrayList<>();
 			for (Producto p : productos) {
@@ -373,6 +378,12 @@ public class ProductoServiceImpl implements ProductoService {
 					}
 				} else {
 					productosAEliminar.add(p);
+				}
+				if(idUsr > 0) {
+					Favorito favorito = favoritoService.findById(idUsr, p.getIdPro());
+					if(favorito != null) {
+						p.setFavorito(true);
+					}
 				}
 			}
 			if (!productosAEliminar.isEmpty()) {

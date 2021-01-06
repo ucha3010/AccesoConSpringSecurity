@@ -55,9 +55,9 @@
 		</div>
 			
 		<div class="row"> <!-- div row inicio -->
-			<div class="col-xs-1 col-sm-3">
+			<div class="col-xs-1 col-sm-3 col-lg-2">
 			</div>
-			<div class="col-xs-11 col-sm-9">
+			<div class="col-xs-11 col-sm-9 col-lg-10">
 		
 				<c:set var="count" value="0" scope="page" />
 				
