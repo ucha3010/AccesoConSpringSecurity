@@ -26,7 +26,7 @@
 		</plugins>
 	</build>
 	<properties>
-		<org.springframework.security>3.2.7.RELEASE</org.springframework.security>
+		<org.springframework.security>5.5.7</org.springframework.security>
 		<org.springframework>5.0.7.RELEASE</org.springframework>
 	</properties>
 	<dependencies>
