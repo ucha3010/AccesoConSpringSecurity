@@ -27,7 +27,7 @@
 	</build>
 	<properties>
 		<org.springframework.security>3.2.7.RELEASE</org.springframework.security>
-		<org.springframework>5.0.7.RELEASE</org.springframework>
+		<org.springframework>5.2.21.RELEASE</org.springframework>
 	</properties>
 	<dependencies>
 		<dependency>
